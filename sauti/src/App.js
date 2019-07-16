@@ -12,22 +12,13 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/sessions/all")
+      .get(process.env.REACT_APP_BACKEND_URL)
       .then(res => {
         console.log(res);
         this.setState({
           sessions: res.data[0]
         });
-      }); //staging
-
-    axios
-      .get("https://production-sauti-labs-14.herokuapp.com/sessions/all")
-      .then(res => {
-        console.log(res);
-        this.setState({
-          sessions_production: res.data[1]
-        });
-      }); //production
+      });
   }
 
   render() {
