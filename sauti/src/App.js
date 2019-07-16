@@ -25,16 +25,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Welcome to the Sauti Databank!</h1>
-        <h1>Staging:</h1>
         <h2>{this.state.sessions.id}</h2>
         <h2>{this.state.sessions.language}</h2>
         <h2>{this.state.sessions.product}</h2>
         <h2>{this.state.sessions.country}</h2>
-        <h1>Production:</h1>
-        <h2>{this.state.sessions_production.id}</h2>
-        <h2>{this.state.sessions_production.language}</h2>
-        <h2>{this.state.sessions_production.product}</h2>
-        <h2>{this.state.sessions_production.country}</h2>
       </div>
     );
   }
