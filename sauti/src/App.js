@@ -12,7 +12,7 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get(process.env.REACT_APP_BACKEND_URL)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/sessions/all`)
       .then(res => {
         console.log(res);
         this.setState({
