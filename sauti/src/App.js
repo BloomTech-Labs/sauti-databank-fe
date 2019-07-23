@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Chart from "./Components/Chart/Chart"
 
 class App extends React.Component {
   constructor() {
@@ -25,6 +26,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Welcome to the Sauti Databank!</h1>
+        <Chart />
         <h2>{this.state.sessions.id}</h2>
         <h2>{this.state.sessions.language}</h2>
         <h2>{this.state.sessions.product}</h2>
