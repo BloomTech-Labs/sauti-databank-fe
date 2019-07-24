@@ -27,10 +27,6 @@ class App extends React.Component {
       <div className="App">
         <h1>Welcome to the Sauti Databank!</h1>
         <Chart />
-        <h2>{this.state.sessions.id}</h2>
-        <h2>{this.state.sessions.language}</h2>
-        <h2>{this.state.sessions.product}</h2>
-        <h2>{this.state.sessions.country}</h2>
       </div>
     );
   }
