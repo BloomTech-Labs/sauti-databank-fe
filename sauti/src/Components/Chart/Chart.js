@@ -1,3 +1,6 @@
+// Displays chart based on Nivo's required format
+
+// Requiring dependencies 
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
@@ -9,16 +12,18 @@ import axios from "axios";
 // website examples showcase many properties,
 // you'll often use just a few of them.
 
-// Displays chart based on Nivo's required format
+// Class component to store state 
+// Props to futureproof 
+
 class Chart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [], // Data array Nivo needs to display chart
+      data: [], // Empty array that updates for Nivo to display 
       color: "nivo", // Default chart color
-      sessions: [], // Sessions data pulled from backend
+      sessions: [], // Sessions data will be pulled from backend
       male2017: 0, // Number of male searches for a given product in 2017
-      female2017: 0,
+      female2017: 0, // Setting at zero because updates based on backend data 
       male2018: 0,
       female2018: 0,
       male2019: 0,
@@ -44,6 +49,7 @@ class Chart extends React.Component {
         });
       })
       .then(() => {
+        // Variables need to be set to zero here as well, before we do this.setState 
         let male2017 = 0;
         let female2017 = 0;
         let male2018 = 0;
@@ -55,29 +61,26 @@ class Chart extends React.Component {
         this.state.sessions.map(session => {
           if (session.date.includes("2017")) {
             if (session.gender == "male") {
-              male2017 = male2017 + 1;
+              male2017 += 1;
             } else {
-              female2017 = female2017 + 1;
+              female2017 += 1;
             }
           } else if (session.date.includes("2018")) {
             if (session.gender == "male") {
-              male2018 = male2018 + 1;
+              male2018 += 1;
             } else {
-              female2018 = female2018 + 1;
+              female2018 += 1;
             }
           } else {
             if (session.gender == "male") {
-              male2019 = male2019 + 1;
+              male2019 += 1;
             } else {
-              female2019 = female2019 + 1;
+              female2019 += 1;
             }
           }
         });
 
-        console.log("2017", male2017, female2017)
-        console.log("2018", male2018, female2018)
-        console.log("2019", male2019, female2019)
-
+        // Calculating percentages 
         let total2017 = male2017 + female2017;
         let male2017percent = Math.round((male2017 / total2017) * 100);
         let female2017percent = Math.round((female2017 / total2017) * 100);
@@ -90,8 +93,7 @@ class Chart extends React.Component {
         let male2019percent = Math.round((male2019 / total2019) * 100);
         let female2019percent = Math.round((female2019 / total2019) * 100);
 
-        console.log(male2017percent);
-
+        // Setting state 
         this.setState({
           ...this.state,
           male2017percent: male2017percent,
@@ -101,10 +103,13 @@ class Chart extends React.Component {
           male2019percent: male2019percent,
           female2019percent: female2019percent
         });
+
+        // Calls function that puts data in Nivo's format 
         this.populateChart();
       });
   }
 
+  // Function that formats data in Nivo's format using this.state 
   populateChart = () => {
     let data = [
       {
@@ -129,31 +134,20 @@ class Chart extends React.Component {
         FemaleColor: "hsl(212, 70%, 50%)"
       }
     ];
-    console.log(data);
+    
     this.setState({
       ...this.state,
       data: data
     });
   };
 
-  changeColor = e => {
-    e.preventDefault();
-    let color = "nivo";
-    if (this.state.color == "nivo") {
-      color = "dark2";
-    }
-    this.setState({
-      ...this.state,
-      color: color
-    });
-  };
-
+  // Displays the chart 
   render() {
     return (
       <div className="Chart">
         <ResponsiveBar
-          data={this.state.data}
-          keys={["Male", "Female"]}
+          data={this.state.data} // Data needed 
+          keys={["Male", "Female"]} // Values to display in Y axis 
           indexBy="Year"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
@@ -210,10 +204,10 @@ class Chart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
-        <button onClick={this.changeColor}>Change color!</button>
       </div>
     );
   }
 }
 
+// Exporting 
 export default Chart;
