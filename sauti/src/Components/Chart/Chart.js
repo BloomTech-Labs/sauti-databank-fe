@@ -12,7 +12,7 @@ import axios from "axios";
 // website examples showcase many properties,
 // you'll often use just a few of them.
 
-// Class component to store state 
+// Class component because we need to store state
 // Props to futureproof 
 
 class Chart extends React.Component {
