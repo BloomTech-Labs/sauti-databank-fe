@@ -60,19 +60,21 @@ class Chart extends React.Component {
         // Map over the sessions array to count number of males and females per year
         this.state.sessions.map(session => {
           if (session.date.includes("2017")) {
-            if (session.gender == "male") {
+            if (session.gender === "male") {
               male2017 += 1;
+              // total2017 += 1; Possible way to clean up 
             } else {
               female2017 += 1;
+              // total2017 += 1;
             }
           } else if (session.date.includes("2018")) {
-            if (session.gender == "male") {
+            if (session.gender === "male") {
               male2018 += 1;
             } else {
               female2018 += 1;
             }
           } else {
-            if (session.gender == "male") {
+            if (session.gender === "male") {
               male2019 += 1;
             } else {
               female2019 += 1;
@@ -80,18 +82,25 @@ class Chart extends React.Component {
           }
         });
 
-        // Calculating percentages 
-        let total2017 = male2017 + female2017;
-        let male2017percent = Math.round((male2017 / total2017) * 100);
-        let female2017percent = Math.round((female2017 / total2017) * 100);
+        // Made code more DRY by defining calcTotal and calcPercentage functions
+        const calcTotal = (maleCount, femaleCount) => {
+           let totalCount = maleCount + femaleCount
+           return totalCount
+        }
+        let total2017 = calcTotal(male2017, female2017);
+        let total2018 = calcTotal(male2018, female2018);
+        let total2019 = calcTotal(male2019, female2019);
 
-        let total2018 = male2018 + female2018;
-        let male2018percent = Math.round((male2018 / total2018) * 100);
-        let female2018percent = Math.round((female2018 / total2018) * 100);
+        const calcPercentage = (genderCount, totalCount) => {
+          return Math.round((genderCount / totalCount) * 100);
+        }
 
-        let total2019 = male2019 + female2019;
-        let male2019percent = Math.round((male2019 / total2019) * 100);
-        let female2019percent = Math.round((female2019 / total2019) * 100);
+        let male2017percent = calcPercentage(male2017, total2017);
+        let male2018percent = calcPercentage(male2018, total2018);
+        let male2019percent = calcPercentage(male2019, total2019);
+        let female2017percent = calcPercentage(female2017, total2017);
+        let female2018percent = calcPercentage(female2018, total2018);
+        let female2019percent = calcPercentage(female2019, total2019);
 
         // Setting state 
         this.setState({
