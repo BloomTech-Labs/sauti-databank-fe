@@ -151,6 +151,7 @@ class Chart extends React.Component {
   };
 
   // Displays the chart 
+  // Going to move Responsive Bar into its own component, and render it here, will need to change props
   render() {
     return (
       <div className="Chart">
