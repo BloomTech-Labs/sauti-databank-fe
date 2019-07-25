@@ -41,7 +41,7 @@ class Chart extends React.Component {
   componentDidMount() {
     // Axios call to get sessions data from awesome backend
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/sessions/products/2`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/sessions/products/1`)
       .then(res => {
         console.log(res.data);
         this.setState({
