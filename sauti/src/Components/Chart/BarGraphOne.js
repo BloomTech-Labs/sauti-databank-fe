@@ -93,7 +93,7 @@ class BarGraphOne extends React.Component {
           motionDamping={15}
         />
 
-        <Dropdown options={options} onChange={this.props.genderFilter("Female")} value={defaultOption} placeholder="Select an option" />
+        <Dropdown options={options} onChange={this.props.genderFilter()} value={defaultOption} placeholder="Select an option" />
         
 
         {/* <form className="filter-form">
