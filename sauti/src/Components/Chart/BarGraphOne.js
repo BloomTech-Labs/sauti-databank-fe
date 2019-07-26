@@ -23,16 +23,19 @@ class BarGraphOne extends React.Component {
     //     ));
 
     render(props) {
-      const {data, color} = this.props.state
+      const {data, color, keys} = this.props.state
       const options = [
         'All', 'Male', 'Female'
       ]
       const defaultOption = options[0];
+
+
+
        return (
         <div className="Chart">
         <ResponsiveBar
           data={data} // Data needed 
-          keys={["Male", "Female"]} // Values to display in Y axis 
+          keys={keys}  // Values to display in Y axis 
           indexBy="Year"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
@@ -90,7 +93,7 @@ class BarGraphOne extends React.Component {
           motionDamping={15}
         />
 
-        <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+        <Dropdown options={options} onChange={this.props.genderFilter("Female")} value={defaultOption} placeholder="Select an option" />
         
 
         {/* <form className="filter-form">
