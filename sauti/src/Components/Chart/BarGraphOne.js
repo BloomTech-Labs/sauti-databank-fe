@@ -1,38 +1,69 @@
-import React from 'react';
-// import { useContext } from "react";
-// import { GraphContext } from '../../../context';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css'
+import React from "react";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 import { ResponsiveBar } from "@nivo/bar";
 
-
 class BarGraphOne extends React.Component {
-    constructor(props) {
-     super(props);
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "All",
+      yearValue: "All"
     };
+  }
 
-    // const GenderFilter = ({ gender }) => {
-    //   const context  = useContext(GraphContext);
-    //     const {type} = context;
-    //     const {data, color} = this.props.state
-    //     const types = ["All", "Male", "Female"];
-    //     types = types.map((item, index) => (
-    //       <option key={index} value={item}>
-    //         {item}
-    //       </option>
-    //     ));
+  onSelect = props => {
+    let gender = props.value;
+    this.setState({
+      value: gender
+    });
+    this.props.genderFilter(gender);
+  };
 
-    render(props) {
-      const {data, color} = this.props.state
-      const options = [
-        'All', 'Male', 'Female'
-      ]
-      const defaultOption = options[0];
-       return (
-        <div className="Chart">
+  onSelectYear = props => {
+    let year = props.value;
+    this.setState({
+      ...this.state,
+      yearValue: year
+    });
+    this.props.populateChart(year);
+  };
+
+  render() {
+    const { data, color, keys } = this.props.state;
+    const genderOptions = ["All", "Male", "Female"];
+    const yearOptions = ["All", "2017", "2018", "2019"]
+
+    return (
+      <div className="Chart">
+        <h2>
+          Yearly Maize searches by: {this.state.value.toLowerCase()} traders
+        </h2>
+        <div className="dropdowns-container">
+          <div className="gender-dropdown-container">
+            <h3>Gender:</h3>
+            <Dropdown
+              className="gender-dropdown"
+              options={genderOptions}
+              onChange={this.onSelect}
+              value={this.state.value}
+              placeholder="Select an option"
+            />
+          </div>
+          <div className="years-dropdown-container">
+            <h3>Year:</h3>
+            <Dropdown
+              className="year-dropdown"
+              options={yearOptions}
+              onChange={this.onSelectYear}
+              value={this.state.yearValue}
+              placeholder="Select an option"
+            />
+          </div>
+        </div>
         <ResponsiveBar
-          data={data} // Data needed 
-          keys={["Male", "Female"]} // Values to display in Y axis 
+          data={data} // Data needed
+          keys={keys} // Values to display in Y axis
           indexBy="Year"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
@@ -89,35 +120,9 @@ class BarGraphOne extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
-
-        <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
-        
-
-        {/* <form className="filter-form">
-        {/* select type
-        <div className="form-group">
-          <label htmlFor="type">room type</label>
-          <select
-            name="type"
-            id="type"
-            onChange={handleChange}
-            className="form-control"
-            value={type}
-          >
-            {types}
-          </select>
-        </div>
-        </form>
-        */}
       </div>
-      )
-    }
-
+    );
+  }
 }
-
-
-
-
-
 
 export default BarGraphOne;

@@ -13,11 +13,27 @@ code {
 }
 
 .App {
-  height: 600px;
   width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Chart {
-  height: 600px;
+  height: 500px;
   width: 800px;
+}
+
+.dropdowns-container {
+  display: flex;
+}
+
+.gender-dropdown {
+  width: 150px;
+  margin-right: 50px;
+}
+
+.year-dropdown {
+  width: 150px;
 }
