@@ -35,7 +35,8 @@ class Chart extends React.Component {
       female2018percent: 0,
       male2019percent: 0,
       female2019percent: 0,
-      keys: ["Male", "Female"]
+      keys: ["Male", "Female"],
+      selectedGender: "All"
     };
   }
 
@@ -159,31 +160,60 @@ genderFilter = gender => {
 
 
   // Function that formats data in Nivo's format using this.state 
-  populateChart = () => {
-    let data = [
-      {
-        Year: "2017",
-        Male: this.state.male2017percent,
-        MaleColor: "hsl(65, 70%, 50%)",
-        Female: this.state.female2017percent,
-        FemaleColor: "hsl(212, 70%, 50%)"
-      },
-      {
+  populateChart = (year) => {
+    let data = [];
+
+    if (year === "2017") {
+      data = [
+        {
+          Year: "2017",
+          Male: this.state.male2017percent,
+          MaleColor: "hsl(65, 70%, 50%)",
+          Female: this.state.female2017percent,
+          FemaleColor: "hsl(212, 70%, 50%)"
+        }]
+    } else if (year === "2018") {
+      data = [{
         Year: "2018",
         Male: this.state.male2018percent,
         MaleColor: "hsl(65, 70%, 50%)",
         Female: this.state.female2018percent,
         FemaleColor: "hsl(212, 70%, 50%)"
-      },
-      {
+      }]
+    } else if (year === "2019") {
+      data = [{
         Year: "2019",
         Male: this.state.male2019percent,
         MaleColor: "hsl(65, 70%, 50%)",
         Female: this.state.female2019percent,
         FemaleColor: "hsl(212, 70%, 50%)"
-      }
-    ];
-    
+      }]
+    } else {
+      data = [
+        {
+          Year: "2017",
+          Male: this.state.male2017percent,
+          MaleColor: "hsl(65, 70%, 50%)",
+          Female: this.state.female2017percent,
+          FemaleColor: "hsl(212, 70%, 50%)"
+        },
+        {
+          Year: "2018",
+          Male: this.state.male2018percent,
+          MaleColor: "hsl(65, 70%, 50%)",
+          Female: this.state.female2018percent,
+          FemaleColor: "hsl(212, 70%, 50%)"
+        },
+        {
+          Year: "2019",
+          Male: this.state.male2019percent,
+          MaleColor: "hsl(65, 70%, 50%)",
+          Female: this.state.female2019percent,
+          FemaleColor: "hsl(212, 70%, 50%)"
+        }
+      ]
+    }
+
     this.setState({
       ...this.state,
       data: data
@@ -194,8 +224,9 @@ genderFilter = gender => {
   // Going to move Responsive Bar into its own component, and render it here, will need to change props
   render() {
     return (
-      <BarGraphOne genderFilter={this.genderFilter} state={this.state} /*data={this.state.data} color={this.state.color}*//>
-
+      <div className="Chart-Container"> 
+        <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state} /*data={this.state.data} color={this.state.color}*//>
+      </div>
     );
   }
 }
