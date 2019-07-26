@@ -4,7 +4,7 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
-import BarChartOne from './BarGraphOne.js'
+import BarGraphOne from './BarGraphOne.js'
 
 // Nivo instructions:
 // make sure parent container have a defined height when using
@@ -41,7 +41,8 @@ class Chart extends React.Component {
   componentDidMount() {
     // Axios call to get sessions data from awesome backend
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/sessions/products/1`)
+    // ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
+      .get(`https://staging-sauti-labs-14.herokuapp.com/sessions/products/1`)
       .then(res => {
         console.log(res.data);
         this.setState({
@@ -155,7 +156,7 @@ class Chart extends React.Component {
   // Going to move Responsive Bar into its own component, and render it here, will need to change props
   render() {
     return (
-      <BarChartOne state={this.state} /*data={this.state.data} color={this.state.color}*//>
+      <BarGraphOne state={this.state} /*data={this.state.data} color={this.state.color}*//>
     );
   }
 }
