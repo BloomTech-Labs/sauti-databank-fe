@@ -1,15 +1,34 @@
 import React from 'react';
+// import { useContext } from "react";
+// import { GraphContext } from '../../../context';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css'
 import { ResponsiveBar } from "@nivo/bar";
 
 
 class BarGraphOne extends React.Component {
     constructor(props) {
      super(props);
-    }
+    };
+
+    // const GenderFilter = ({ gender }) => {
+    //   const context  = useContext(GraphContext);
+    //     const {type} = context;
+    //     const {data, color} = this.props.state
+    //     const types = ["All", "Male", "Female"];
+    //     types = types.map((item, index) => (
+    //       <option key={index} value={item}>
+    //         {item}
+    //       </option>
+    //     ));
 
     render(props) {
-        const {data, color} = this.props.state
-      return (
+      const {data, color} = this.props.state
+      const options = [
+        'All', 'Male', 'Female'
+      ]
+      const defaultOption = options[0];
+       return (
         <div className="Chart">
         <ResponsiveBar
           data={data} // Data needed 
@@ -70,6 +89,26 @@ class BarGraphOne extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+
+        <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+        
+
+        {/* <form className="filter-form">
+        {/* select type
+        <div className="form-group">
+          <label htmlFor="type">room type</label>
+          <select
+            name="type"
+            id="type"
+            onChange={handleChange}
+            className="form-control"
+            value={type}
+          >
+            {types}
+          </select>
+        </div>
+        </form>
+        */}
       </div>
       )
     }
