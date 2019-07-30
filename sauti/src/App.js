@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Chart from "./Components/Chart/Chart"
+import Transformation from "./Components/Transformation"
 
 class App extends React.Component {
   constructor() {
@@ -27,6 +28,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Welcome to the Sauti Databank!</h1>
         <Chart />
+        <Transformation />
       </div>
     );
   }
