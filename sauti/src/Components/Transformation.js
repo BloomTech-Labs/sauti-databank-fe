@@ -14,10 +14,10 @@ class Transformation extends React.Component {
   componentDidMount() {
     
     axios
-      // ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
-      .get(`https://staging-sauti-labs-14.herokuapp.com/sessions/real/all`)
+      // For development: ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
+      .get(`https://sa-stage.herokuapp.com/sessions/lance/all`)
       .then(res => {
-        console.log(res.data);
+        // Log to see the response from server: console.log(res.data);
         this.setState({
           ...this.state,
           realData: res.data
@@ -37,17 +37,17 @@ class Transformation extends React.Component {
 
     this.state.realData.map(element => {
       let object = {};
-      object.UserID = element.UserID;
+      object.cell_num = element.cell_num;
       array.push(object);
     });
 
     const distinctUsers = [];
     const map = new Map();
     for (const item of array) { // for each element of the array that contains duplicates
-      if (!map.has(item.UserID)) { //if map does not contain an object with the userid, it includes it and pushes it to result
-        map.set(item.UserID, true);
+      if (!map.has(item.cell_num)) { //if map does not contain an object with the cell_num (userid), it includes it and pushes it to result
+        map.set(item.cell_num, true);
         distinctUsers.push({
-          userid: item.UserID
+          cell_num: item.cell_num
         });
       }
     }
