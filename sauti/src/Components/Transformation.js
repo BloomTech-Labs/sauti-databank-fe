@@ -52,7 +52,8 @@ class Transformation extends React.Component {
         //if map does not contain an object with the cell_num (userid), it includes it and pushes it to result
         map.set(item.cell_num, true);
         distinctUsers.push({
-          cell_num: item.cell_num
+          cell_num: item.cell_num,
+          gender: null //set gender to null inside every object so that every object has a gender property.
         });
       }
     }
@@ -62,31 +63,31 @@ class Transformation extends React.Component {
 
   // Map over session array
   // See if session did gender survey
-  // If did gender survey, get the cell phone number
-  // Then map through distinct User array, and append gender to right cell phone number
+  // Then map through distinct User array, and append gender to user with matching cell phone number
   getGender = () => {
+    let arrayWithGender = this.state.distinctUsers;
+
     this.state.realData.map(element => {
-      
+      let num = element.cell_num;
       if (element.data.includes("Male")) {
-        this.state.distinctUsers.map(user => {
-          if (user.cell_num === element.data.cell_num) {
+        arrayWithGender.map(user => {
+          if (user.cell_num == num) {
             user.gender = "Male";
           }
         });
-      }
-
-      if (element.data.includes("Female")) {
-        this.state.distinctUsers.map(user => {
-          if (user.cell_num === element.data.cell_num) {
+      } else if (element.data.includes("Female")) {
+        arrayWithGender.map(user => {
+          if (user.cell_num == num) {
             user.gender = "Female";
           }
         });
       }
     });
 
-    let arrayWithGender = this.state.distinctUsers;
-    this.setState({...this.state, distinctUsers: arrayWithGender});
-    console.log(this.state.distinctUsers); 
+    console.log(arrayWithGender);
+
+    this.setState({ ...this.state, distinctUsers: arrayWithGender });
+
   };
 
   render() {
