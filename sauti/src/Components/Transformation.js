@@ -7,7 +7,8 @@ class Transformation extends React.Component {
     this.state = {
       realData: [],
       usersArray: [],
-      dataFromLance: []
+      dataFromLance: [], 
+      distinctUsers: []
     };
   }
 
@@ -51,9 +52,12 @@ class Transformation extends React.Component {
         });
       }
     }
-
-    console.log(distinctUsers);
+    this.setState({...this.state, distinctUsers: distinctUsers})
+    // Console log to test: console.log(distinctUsers);
   };
+
+  // Map through array 
+  // Check if sessions with that cell phone number have gender survey answered 
 
   render() {
     return (
