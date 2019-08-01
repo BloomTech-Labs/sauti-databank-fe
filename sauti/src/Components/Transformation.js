@@ -80,7 +80,7 @@ class Transformation extends React.Component {
       }
     }
     this.setState({ ...this.state, distinctUsers: distinctUsers });
-    //console.log(distinctUsers);
+    
   };
 
   // Map over session array
@@ -106,7 +106,7 @@ class Transformation extends React.Component {
       }
     });
 
-    // console.log(arrayWithGender);
+    
 
     this.setState({ ...this.state, distinctUsers: arrayWithGender });
 
@@ -194,7 +194,7 @@ class Transformation extends React.Component {
       }
     });
 
-    // console.log(arrayWithGender);
+    
 
     this.setState({ ...this.state, distinctUsers: arrayWithEducation });
 
@@ -232,11 +232,37 @@ class Transformation extends React.Component {
       }
     });
 
-    // console.log(arrayWithGender);
+    
 
     this.setState({ ...this.state, distinctUsers: arrayWithCrossingFreq });
 
   };
+
+  checkIncomeProduce = () => {
+    let array = this.state.realData;
+    let totalCount = 0;
+    let countYes = 0;
+    let countNo = 0;
+    this.state.realData.map(element => {
+
+      if (element.data.includes("survey-2-produce")) {
+        totalCount += 1;
+      } 
+      
+      if (element.data.includes(`survey-2-produce\";a:1:{i:0;s:3`) || element.data.includes(`survey-2-produce\";a:1:{i:0;s:4`)) {
+        countYes += 1;
+      } 
+      
+      if (element.data.includes(`survey-2-produce\";a:1:{i:0;s:2`)) {
+        countNo += 1;
+      }
+    })
+
+    let totalOtherWay = countYes + countNo;
+
+    console.log("total", totalCount);
+    console.log("total yes no", totalOtherWay);
+  }
 
   // getPrimaryIncome = () => {
   //   let arrayWithPrimaryIncome = this.state.distinctUsers;
@@ -258,7 +284,6 @@ class Transformation extends React.Component {
   //     } 
   //   });
 
-  //   // console.log(arrayWithGender);
 
   //   this.setState({ ...this.state, distinctUsers: arrayWithPrimaryIncome });
 
@@ -303,7 +328,7 @@ class Transformation extends React.Component {
       }
     });
 
-    // console.log(arrayWithGender);
+    
 
     this.setState({ ...this.state, distinctUsers: arrayWithLanguage });
 
@@ -325,7 +350,7 @@ class Transformation extends React.Component {
   })
 
 
-    // console.log(arrayWithGender);
+    
 
     this.setState({ ...this.state, distinctUsers: arrayWithCountry });
 
