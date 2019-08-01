@@ -34,6 +34,9 @@ class Transformation extends React.Component {
       })
       .then(res => {
         this.getEducation();
+      })
+      .then(res => {
+        this.getCrossingFreq();
       });
   }
 
@@ -62,7 +65,7 @@ class Transformation extends React.Component {
           gender: null,
           age: null,//set gender to null inside every object so that every object has a gender property.
           education: null,
-          // crossing_freq: null,
+          crossing_freq: null,
           // primary_income: null,
           // produce: null,
           // language: null,
@@ -84,13 +87,13 @@ class Transformation extends React.Component {
       let num = element.cell_num;
       if (element.data.includes("Male")) {
         arrayWithGender.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.gender = "Male";
           }
         });
       } else if (element.data.includes("Female")) {
         arrayWithGender.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.gender = "Female";
           }
         });
@@ -110,37 +113,37 @@ class Transformation extends React.Component {
       let num = element.cell_num;
       if (element.data.includes("10-20")) {
         arrayWithAge.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.age = "10-20";
           }
         });
       } else if (element.data.includes("20-30")) {
         arrayWithAge.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.age = "20-30";
           }
         });
       } else if (element.data.includes("30-40")) {
         arrayWithAge.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.age = "30-40";
           }
         });
       } else if (element.data.includes("40-50")) {
         arrayWithAge.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.age = "40-50";
           }
         });
       } else if (element.data.includes("50-60")) {
         arrayWithAge.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.age = "50-60";
           }
         });
       } else if (element.data.includes("60-70")) {
         arrayWithAge.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.age = "60-70";
           }
         });
@@ -160,25 +163,25 @@ class Transformation extends React.Component {
       let num = element.cell_num;
       if (element.data.includes("No formal education")) {
         arrayWithEducation.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.education = "No formal education";
           }
         });
       } else if (element.data.includes("Primary")) {
         arrayWithEducation.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.education = "Primary";
           }
         });
       } else if (element.data.includes("Secondary")) {
         arrayWithEducation.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.education = "Secondary";
           }
         });
       } else if (element.data.includes("University/College")) {
         arrayWithEducation.map(user => {
-          if (user.cell_num == num) {
+          if (user.cell_num === num) {
             user.education = "University/College";
           }
         });
@@ -188,6 +191,44 @@ class Transformation extends React.Component {
     // console.log(arrayWithGender);
 
     this.setState({ ...this.state, distinctUsers: arrayWithEducation });
+
+  };
+
+  getCrossingFreq = () => {
+    let arrayWithCrossingFreq = this.state.distinctUsers;
+
+    this.state.realData.map(element => {
+      let num = element.cell_num;
+      if (element.data.includes("Never")) {
+        arrayWithCrossingFreq.map(user => {
+          if (user.cell_num === num) {
+            user.crossing_freq = "Never";
+          }
+        });
+      } else if (element.data.includes("Monthly")) {
+        arrayWithCrossingFreq.map(user => {
+          if (user.cell_num === num) {
+            user.crossing_freq = "Monthly";
+          }
+        });
+      } else if (element.data.includes("Weekly")) {
+        arrayWithCrossingFreq.map(user => {
+          if (user.cell_num === num) {
+            user.crossing_freq = "Weekly";
+          }
+        });
+      } else if (element.data.includes("Daily")) {
+        arrayWithCrossingFreq.map(user => {
+          if (user.cell_num === num) {
+            user.crossing_freq = "Daily";
+          }
+        });
+      }
+    });
+
+    // console.log(arrayWithGender);
+
+    this.setState({ ...this.state, distinctUsers: arrayWithCrossingFreq });
 
   };
 
