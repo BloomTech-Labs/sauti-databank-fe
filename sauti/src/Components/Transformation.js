@@ -309,27 +309,27 @@ class Transformation extends React.Component {
 
   };
   
-  // getCountry = () => {
-  //   let arrayWithCountry = this.state.distinctUsers;
+  getCountry = () => {
+    let arrayWithCountry = this.state.distinctUsers;
 
       
-  //     arrayWithCountry.map(user => {
-  //       let num = arrayWithCountry.cell_num;
-  //   if (num.includes("25400")) {
-  //         user.country_of_residence = "KEN";
-  //   } else if ( num.includes("25600")){
-  //         user.country_of_resident = "UGA"
-  //   } else if (num.includes("25000")) {
-  //         user.country_of_residence = "RWA"
-  //   }
-  // })
+      arrayWithCountry.map(user => {
+        let num = user.cell_num;
+    if (num.includes("25400")) {
+          user.country_of_residence = "KEN";
+    } else if ( num.includes("25600")){
+          user.country_of_residence = "UGA"
+    } else if (num.includes("25000")) {
+          user.country_of_residence = "RWA"
+    }
+  })
 
 
-  //   // console.log(arrayWithGender);
+    // console.log(arrayWithGender);
 
-  //   this.setState({ ...this.state, distinctUsers: arrayWithCountry });
+    this.setState({ ...this.state, distinctUsers: arrayWithCountry });
 
-  // };
+  };
   
 
   render() {
