@@ -37,6 +37,12 @@ class Transformation extends React.Component {
       })
       .then(res => {
         this.getCrossingFreq();
+      })
+      .then(res => {
+        this.getLanguage();
+      })
+      .then(res => {
+        this.getCountry();
       });
   }
 
@@ -68,8 +74,8 @@ class Transformation extends React.Component {
           crossing_freq: null,
           // primary_income: null,
           // produce: null,
-          // language: null,
-          // country_of_residence: null
+          language: null,
+          country_of_residence: null
         });
       }
     }
@@ -231,6 +237,100 @@ class Transformation extends React.Component {
     this.setState({ ...this.state, distinctUsers: arrayWithCrossingFreq });
 
   };
+
+  // getPrimaryIncome = () => {
+  //   let arrayWithPrimaryIncome = this.state.distinctUsers;
+
+  //   this.state.realData.map(element => {
+  //     let num = element.cell_num;
+  //     if (element.data.includes("Yes")) {
+  //       arrayWithPrimaryIncome.map(user => {
+  //         if (user.cell_num === num) {
+  //           user.primary_income = "Yes";
+  //         }
+  //       });
+  //     } else if (element.data.includes("No")) {
+  //       arrayWithPrimaryIncome.map(user => {
+  //         if (user.cell_num === num) {
+  //           user.primary_income = "No";
+  //         }
+  //       });
+  //     } 
+  //   });
+
+  //   // console.log(arrayWithGender);
+
+  //   this.setState({ ...this.state, distinctUsers: arrayWithPrimaryIncome });
+
+  // };
+
+  
+  getLanguage = () => {
+    let arrayWithLanguage = this.state.distinctUsers;
+
+    this.state.realData.map(element => {
+      let num = element.cell_num;
+      if (element.data.includes("English")) {
+        arrayWithLanguage.map(user => {
+          if (user.cell_num === num) {
+            user.language = "English";
+          }
+        });
+      } else if (element.data.includes("Swahili")) {
+        arrayWithLanguage.map(user => {
+          if (user.cell_num === num) {
+            user.language = "Swahili";
+          }
+        });
+      } else if (element.data.includes("Luganda")) {
+        arrayWithLanguage.map(user => {
+          if (user.cell_num === num) {
+            user.language = "Luganda";
+          }
+        });
+      } else if (element.data.includes("Kinyarwanda")) {
+        arrayWithLanguage.map(user => {
+          if (user.cell_num === num) {
+            user.language = "Kinyarwanda";
+          }
+        });
+      } else if (element.data.includes("Lukiga")) {
+        arrayWithLanguage.map(user => {
+          if (user.cell_num === num) {
+            user.language = "Lukiga";
+          }
+        });
+      }
+    });
+
+    // console.log(arrayWithGender);
+
+    this.setState({ ...this.state, distinctUsers: arrayWithLanguage });
+
+  };
+  
+  // getCountry = () => {
+  //   let arrayWithCountry = this.state.distinctUsers;
+
+      
+  //     arrayWithCountry.map(user => {
+  //       let num = arrayWithCountry.cell_num;
+  //   if (num.includes("25400")) {
+  //         user.country_of_residence = "KEN";
+  //   } else if ( num.includes("25600")){
+  //         user.country_of_resident = "UGA"
+  //   } else if (num.includes("25000")) {
+  //         user.country_of_residence = "RWA"
+  //   }
+  // })
+
+
+  //   // console.log(arrayWithGender);
+
+  //   this.setState({ ...this.state, distinctUsers: arrayWithCountry });
+
+  // };
+  
 
   render() {
     return (
