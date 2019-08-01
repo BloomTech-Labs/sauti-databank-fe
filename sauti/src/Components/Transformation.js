@@ -31,6 +31,9 @@ class Transformation extends React.Component {
       })
       .then(res => {
         this.getAge();
+      })
+      .then(res => {
+        this.getEducation();
       });
   }
 
@@ -57,7 +60,13 @@ class Transformation extends React.Component {
         distinctUsers.push({
           cell_num: item.cell_num,
           gender: null,
-          age: null//set gender to null inside every object so that every object has a gender property.
+          age: null,//set gender to null inside every object so that every object has a gender property.
+          education: null,
+          // crossing_freq: null,
+          // primary_income: null,
+          // produce: null,
+          // language: null,
+          // country_of_residence: null
         });
       }
     }
@@ -141,6 +150,44 @@ class Transformation extends React.Component {
     console.log(arrayWithAge);
 
     this.setState({ ...this.state, distinctUsers: arrayWithAge });
+
+  };
+
+  getEducation = () => {
+    let arrayWithEducation = this.state.distinctUsers;
+
+    this.state.realData.map(element => {
+      let num = element.cell_num;
+      if (element.data.includes("No formal education")) {
+        arrayWithEducation.map(user => {
+          if (user.cell_num == num) {
+            user.education = "No formal education";
+          }
+        });
+      } else if (element.data.includes("Primary")) {
+        arrayWithEducation.map(user => {
+          if (user.cell_num == num) {
+            user.education = "Primary";
+          }
+        });
+      } else if (element.data.includes("Secondary")) {
+        arrayWithEducation.map(user => {
+          if (user.cell_num == num) {
+            user.education = "Secondary";
+          }
+        });
+      } else if (element.data.includes("University/College")) {
+        arrayWithEducation.map(user => {
+          if (user.cell_num == num) {
+            user.education = "University/College";
+          }
+        });
+      }
+    });
+
+    // console.log(arrayWithGender);
+
+    this.setState({ ...this.state, distinctUsers: arrayWithEducation });
 
   };
 
