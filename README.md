@@ -4,7 +4,7 @@ You can find the deployed project at: https://production-sauti-databank.netlify.
 
 ## Contributors
 
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
+🚫Test 
 
 |                                       [Cash Globe](https://github.com/cashcoder88)                                        |                                       [Christopher Lopez](https://github.com/numberoneecsstudent)                                        |                                       [Heymi Vanegas](https://github.com/heymiday)                                        |                                       [Jonathan Erlich](https://github.com/)                                        |                                                                              |
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
