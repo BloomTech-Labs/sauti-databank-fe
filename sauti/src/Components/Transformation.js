@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import CrossingFreqChart from 'CrossingFreqChart.js'
 
 class Transformation extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Transformation extends React.Component {
       dataFromLance: [],
       distinctUsers: []
     };
-  }
+  };
 
   componentDidMount() {
     axios
@@ -50,7 +51,7 @@ class Transformation extends React.Component {
       .then(res => {
         this.getCountry();
       });
-  }
+  };
 
   distinct = (value, index, self) => {
     return self.indexOf(value) === index;
@@ -268,7 +269,7 @@ class Transformation extends React.Component {
 
     console.log("total", totalCount);
     console.log("total yes no", totalOtherWay);
-  }
+  };
 
 
 
@@ -420,14 +421,13 @@ class Transformation extends React.Component {
 
   };
   
-
   render() {
-    return (
-      <div className="Transformation">
-        <p>Hola</p>
+    return(
+      <div>
+       <CrossingFreqChart />
       </div>
-    );
-  }
-}
+    )
+  };
+};
 
 export default Transformation;

@@ -12,27 +12,27 @@ class CrossingFreqChart extends React.Component {
     };
   }
 
-  onSelect = props => {
-    let gender = props.value;
-    this.setState({
-      value: gender
-    });
-    this.props.genderFilter(gender);
-  };
+//   onSelect = props => {
+//     let gender = props.value;
+//     this.setState({
+//       value: gender
+//     });
+//     this.props.genderFilter(gender);
+//   };
 
-  onSelectYear = props => {
-    let year = props.value;
-    this.setState({
-      ...this.state,
-      yearValue: year
-    });
-    this.props.populateChart(year);
-  };
+//   onSelectYear = props => {
+//     let year = props.value;
+//     this.setState({
+//       ...this.state,
+//       yearValue: year
+//     });
+//     this.props.populateChart(year);
+//   };
 
   render() {
     const { data, color, keys } = this.props.state;
     const genderOptions = ["All", "Male", "Female"];
-    const yearOptions = ["All", "2017", "2018", "2019"]
+    const yearOptions = ["All", "Daily", "Weekly", "Monthly", "Never"]
 
     return (
       <div className="Chart">

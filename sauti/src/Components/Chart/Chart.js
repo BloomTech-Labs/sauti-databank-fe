@@ -6,6 +6,7 @@ import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
 import BarGraphOne from './BarGraphOne.js'
 import CrossingFreqChart from './CrossingFreqChart.js'
+import Transformation from '../Transformation.js'
 
 // Nivo instructions:
 // make sure parent container have a defined height when using
