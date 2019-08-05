@@ -5,6 +5,7 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
 import BarGraphOne from './BarGraphOne.js'
+import CrossingFreqChart from './CrossingFreqChart.js'
 
 // Nivo instructions:
 // make sure parent container have a defined height when using
@@ -226,6 +227,7 @@ genderFilter = gender => {
     return (
       <div className="Chart-Container"> 
         <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state} /*data={this.state.data} color={this.state.color}*//>
+        {/* <CrossingFreqChart populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}/> */}
       </div>
     );
   }
