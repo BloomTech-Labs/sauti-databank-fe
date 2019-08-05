@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import CrossingFreqChart from 'CrossingFreqChart.js'
+import Chart from './Chart/Chart';
 
 class Transformation extends React.Component {
   constructor(props) {
@@ -424,7 +424,7 @@ class Transformation extends React.Component {
   render() {
     return(
       <div>
-       <CrossingFreqChart />
+       <Chart distinctUsers={this.state.distinctUsers} />
       </div>
     )
   };
