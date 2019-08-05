@@ -222,13 +222,15 @@ genderFilter = gender => {
     });
   };
 
+
+
   // Displays the chart 
   // Going to move Responsive Bar into its own component, and render it here, will need to change props
   render() {
     return (
       <div className="Chart-Container"> 
-        <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state} /*data={this.state.data} color={this.state.color}*//>
-        {/* <CrossingFreqChart populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}/> */}
+        {/* <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}*/}
+        <CrossingFreqChart populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state} distinctUsers={this.props.distinctUsers}/>
       </div>
     );
   }

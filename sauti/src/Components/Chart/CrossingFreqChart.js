@@ -1,6 +1,4 @@
 import React from "react";
-import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
 import { ResponsiveBar } from "@nivo/bar";
 
 class CrossingFreqChart extends React.Component {
@@ -8,9 +6,39 @@ class CrossingFreqChart extends React.Component {
     super(props);
     this.state = {
         value: "All",
-        yearValue: "All"
+        yearValue: "All",
+        data: 
+        [{
+          Frequency: "Daily",
+          Daily: 20,
+          MaleColor: "hsl(65, 70%, 50%)",
+        },
+        {
+          Frequency: "Weekly",
+          Weekly: 30,
+          MaleColor: "hsl(65, 70%, 50%)",
+        },
+        {
+          Frequency: "Monthly",
+          Monthly: 25,
+          MaleColor: "hsl(65, 70%, 50%)",
+        },
+        {
+          Frequency: "Never",
+          Never: 25,
+          MaleColor: "hsl(65, 70%, 50%)",
+        }],
+        keys: ["Daily", "Weekly", "Monthly", "Never"],
+        color: "nivo",
+        dailyPercent: 0,
+        weeklyPercent: 0,
+        monthlyPercent: 0,
+        neverPercent: 0
     };
   }
+
+
+  
 
 //   onSelect = props => {
 //     let gender = props.value;
@@ -29,8 +57,8 @@ class CrossingFreqChart extends React.Component {
 //     this.props.populateChart(year);
 //   };
 
+
   render() {
-    const { data, color, keys } = this.props.state;
     const genderOptions = ["All", "Male", "Female"];
     const yearOptions = ["All", "Daily", "Weekly", "Monthly", "Never"]
 
@@ -40,13 +68,13 @@ class CrossingFreqChart extends React.Component {
           Border Crossing Frequency
         </h2>
         <ResponsiveBar
-          data={data} // Data needed
-          keys={keys} // Values to display in Y axis
-          indexBy="Year"
+          data={this.state.data} // Data needed
+          keys={this.state.keys} // Values to display in Y axis
+          indexBy="Frequency"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
-          groupMode="grouped"
-          colors={{ scheme: color }}
+          groupMode="stacked"
+          colors={{ scheme: this.state.color }}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           maxValue={100}
           axisTop={null}
@@ -55,9 +83,9 @@ class CrossingFreqChart extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Year",
+            legend: "Border Crossing Frequency",
             legendPosition: "middle",
-            legendOffset: 32
+            legendOffset: 30
           }}
           axisLeft={{
             tickSize: 5,
@@ -72,7 +100,7 @@ class CrossingFreqChart extends React.Component {
           labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           legends={[
             {
-              dataFrom: "keys",
+              dataFrom: "frequency",
               anchor: "bottom-right",
               direction: "column",
               justify: false,
