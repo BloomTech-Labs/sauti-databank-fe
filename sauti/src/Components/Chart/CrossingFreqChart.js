@@ -15,12 +15,7 @@ class CrossingFreqChart extends React.Component {
     };
   }
 
-//  getPercentages = () => {
-
-
-//  }
-
-componentDidMount(props) {
+ getPercentages = () => {
     let dailyCount = 0;
     let weeklyCount = 0;
     let monthlyCount = 0;
@@ -51,16 +46,25 @@ componentDidMount(props) {
     let neverPercent = Math.round((neverCount / totalCount) * 100);
     console.log('monthlyPercent', monthlyPercent)
     console.log('monthly count', monthlyCount)
-    
+
     this.setState({
         ...this.state,
         dailyPercent: dailyPercent,
         weeklyPercent: weeklyPercent,
         monthlyPercent: monthlyPercent,
         neverPercent: neverPercent,
+    })
+
+ }
+
+componentDidMount() {
+    
+
+    this.setState({
+        ...this.state,
         data: [
             {   Frequency: "Daily",
-                Daily: this.state.dailyPercent,
+                Daily: 40,
                 DailyColor: "hsl(65, 70%, 50%)",
               },
               {
@@ -80,8 +84,11 @@ componentDidMount(props) {
               }
         ],
     })
+    this.getPercentages();
 
 }
+
+
 
   
   render() {
