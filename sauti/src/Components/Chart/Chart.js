@@ -1,6 +1,7 @@
 // Displays chart based on Nivo's required format
 
 // Requiring dependencies 
+import {Route} from 'react-router-dom';
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
@@ -236,17 +237,20 @@ genderFilter = gender => {
         {/* <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}*/}
         {this.props.distinctUsers ? (
           <div>
-            <CrossingFreqChart
-              populateChart={this.populateChart}
-              genderFilter={this.genderFilter}
+            {/* <Route exact path="/login" render={props => <Login {...props} username={this.state.username} password={this.state.password} submitLogin={this.submitLogin} handleInput={this.handleInput} /> } /> */}
+            <Route exact path="/crossing-frequency-chart" 
+              render={props => 
+              <CrossingFreqChart 
               state={this.state}
-              distinctUsers={this.props.distinctUsers}
-            />
+              distinctUsers={this.props.distinctUsers} /> } 
+              />
 
-            <GenderChart 
+            <Route exact path="/gender-chart" 
+              render={props => 
+              <GenderChart 
               state={this.state}
-              distinctUsers={this.props.distinctUsers}
-            /> 
+              distinctUsers={this.props.distinctUsers} /> } 
+              />
           </div>
         ) : null}
       </div>
