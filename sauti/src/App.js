@@ -45,6 +45,12 @@ class App extends React.Component {
         {this.state.realData.length ?
         <Transformation realData={this.state.realData}/> : null}
         {/* <ComSelTransformation /> */}
+        <Link to="/crossing-frequency-chart">
+          <button>Crossing Frequency Chart</button>
+        </Link>
+        <Link to="/gender-chart">
+          <button>Gender Chart</button>
+        </Link>
       </div>
     );
   }
