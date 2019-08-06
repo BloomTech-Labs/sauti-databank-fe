@@ -39,32 +39,6 @@ getPercentages = () => {
 
      const totalCount = this.getCounts().reduce((a,b) => a + b)
 
-      
-  
-  
-  
-      // // let dailyCount = 0;
-      // // let weeklyCount = 0;
-      // // let monthlyCount = 0;
-      // // let neverCount = 0;
-  
-      
-      // // this.props.distinctUsers.map(element => {
-      // //     if (element.crossing_freq === 'Daily') {
-      // //         dailyCount += 1;
-      // //     }
-      // //     else if(element.crossing_freq === 'Weekly') {
-      // //         weeklyCount += 1;
-      // //     }
-      // //     else if(element.crossing_freq === 'Monthly') {
-      // //         monthlyCount += 1;
-      // //     }
-      // //     else if(element.crossing_freq === 'Never') {
-      // //         neverCount += 1;
-      // //     }
-      // // })
-  
-  
       // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
       let dailyPercent = Math.round((this.getCounts()[0] / totalCount) * 100);
       let weeklyPercent = Math.round((this.getCounts()[1] / totalCount) * 100);
