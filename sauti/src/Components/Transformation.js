@@ -9,7 +9,7 @@ class Transformation extends React.Component {
       realData: [],
       usersArray: [],
       dataFromLance: [],
-      distinctUsers: []
+      distinctUsers: ""
     };
   };
 
@@ -424,7 +424,8 @@ class Transformation extends React.Component {
   render() {
     return(
       <div>
-       <Chart distinctUsers={this.state.distinctUsers} />
+        {this.state.distinctUsers &&
+        <Chart distinctUsers={this.state.distinctUsers} /> }
       </div>
     )
   };
