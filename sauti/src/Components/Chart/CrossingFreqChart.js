@@ -15,8 +15,6 @@ class CrossingFreqChart extends React.Component {
     };
   }
 
-
-
 componentDidMount() {
 
    this.getPercentages()
@@ -84,9 +82,6 @@ getPercentages = () => {
 
   
   render() {
-    // const genderOptions = ["All", "Male", "Female"];
-    // const yearOptions = ["All", "Daily", "Weekly", "Monthly", "Never"]
-
     return (
       <div className="Chart">
         <h2>
