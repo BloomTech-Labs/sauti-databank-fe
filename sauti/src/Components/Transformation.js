@@ -9,48 +9,33 @@ class Transformation extends React.Component {
       realData: [],
       usersArray: [],
       dataFromLance: [],
-      distinctUsers: ""
+      distinctUsers: "",
+      isDoneProcessing: false
     };
   };
 
-  componentDidMount() {
-    axios
-      // For development: ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
-      .get(`https://sa-stage.herokuapp.com/sessions/lance/all`)
-      .then(res => {
-        // Log to see the response from server: console.log(res.data);
-        this.setState({
-          ...this.state,
-          realData: res.data
-        });
-      })
-      .then(res => {
-        this.createUsersArray();
-      })
-      .then(res => {
-        this.getGender();
-      })
-      .then(res => {
-        this.getAge();
-      })
-      .then(res => {
-        this.getEducation();
-      })
-      .then(res => {
-        this.getCrossingFreq();
-      })
-      .then(res => {
-        this.getProduce();
-      })
-      .then(res => {
-        this.getPrimaryIncome();
-      })
-      .then(res => {
-        this.getLanguage();
-      })
-      .then(res => {
-        this.getCountry();
-      });
+  async componentDidMount() {
+        this.setState({isDoneProcessing: false})
+        await this.createUsersArray();
+     
+        await this.getGender();
+     
+        await this.getAge();
+     
+        await this.getEducation();
+      
+        await this.getCrossingFreq();
+     
+        await this.getProduce();
+     
+        await this.getPrimaryIncome();
+     
+        await this.getLanguage();
+     
+        await this.getCountry();
+
+       
+    
   };
 
   distinct = (value, index, self) => {
@@ -60,7 +45,7 @@ class Transformation extends React.Component {
   createUsersArray = () => {
     let array = [];
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let object = {};
       object.cell_num = element.cell_num;
       array.push(object);
@@ -96,7 +81,7 @@ class Transformation extends React.Component {
   getGender = () => {
     let arrayWithGender = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("Male")) {
         arrayWithGender.map(user => {
@@ -122,7 +107,7 @@ class Transformation extends React.Component {
   getAge = () => {
     let arrayWithAge = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("10-20")) {
         arrayWithAge.map(user => {
@@ -163,7 +148,7 @@ class Transformation extends React.Component {
       } 
     });
 
-    console.log(arrayWithAge);
+
 
     this.setState({ ...this.state, distinctUsers: arrayWithAge });
 
@@ -172,7 +157,7 @@ class Transformation extends React.Component {
   getEducation = () => {
     let arrayWithEducation = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("No formal education")) {
         arrayWithEducation.map(user => {
@@ -210,7 +195,7 @@ class Transformation extends React.Component {
   getCrossingFreq = () => {
     let arrayWithCrossingFreq = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("Never")) {
         arrayWithCrossingFreq.map(user => {
@@ -237,11 +222,13 @@ class Transformation extends React.Component {
           }
         });
       }
+
+    
     });
 
     
 
-    this.setState({ ...this.state, distinctUsers: arrayWithCrossingFreq });
+    this.setState({ ...this.state, distinctUsers: arrayWithCrossingFreq, isDoneProcessing: true });
 
   };
 
@@ -276,7 +263,7 @@ class Transformation extends React.Component {
   getProduce = () => {
     let arrayWithProduce = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes(`survey-2-produce\";a:1:{i:0;s:3`) || element.data.includes(`survey-2-produce\";a:1:{i:0;s:4`))  {
         arrayWithProduce.map(user => {
@@ -327,7 +314,7 @@ class Transformation extends React.Component {
 
     let arrayWithPrimaryIncome = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes(`survey-1-primaryincome\";a:1:{i:0;s:3`) || element.data.includes(`survey-1-primaryincome\";a:1:{i:0;s:4`))  {
         arrayWithPrimaryIncome.map(user => {
@@ -358,7 +345,7 @@ class Transformation extends React.Component {
   getLanguage = () => {
     let arrayWithLanguage = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("English")) {
         arrayWithLanguage.map(user => {
@@ -424,8 +411,8 @@ class Transformation extends React.Component {
   render() {
     return(
       <div>
-        {this.state.distinctUsers &&
-        <Chart distinctUsers={this.state.distinctUsers} /> }
+        {this.state.isDoneProcessing ?
+        <Chart distinctUsers={this.state.distinctUsers} /> : null }
       </div>
     )
   };

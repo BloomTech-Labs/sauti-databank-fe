@@ -230,7 +230,8 @@ genderFilter = gender => {
     return (
       <div className="Chart-Container"> 
         {/* <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}*/}
-        <CrossingFreqChart populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state} distinctUsers={this.props.distinctUsers}/>
+        {this.props.distinctUsers ? 
+        <CrossingFreqChart populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state} distinctUsers={this.props.distinctUsers}/>: null}
       </div>
     );
   }

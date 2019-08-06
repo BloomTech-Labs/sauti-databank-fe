@@ -18,88 +18,93 @@ class CrossingFreqChart extends React.Component {
 
 
 componentDidMount() {
-    this.getPercentages();
 
-    this.setState({
-        ...this.state,
-        data: [
-            {   Frequency: "Daily",
-                Daily: this.state.dailyPercent,
-                DailyColor: "hsl(65, 70%, 50%)",
-              },
-              {
-                Frequency: "Weekly",
-                Weekly: this.state.weeklyPercent,
-                WeeklyColor: "hsl(65, 70%, 50%)",
-              },
-              {
-                Frequency: "Monthly",
-                Monthly: this.state.monthlyPercent,
-                MonthlyColor: "hsl(65, 70%, 50%)",
-              },
-              {
-                Frequency: "Never",
-                Never: this.state.neverPercent,
-                NeverColor: "hsl(65, 70%, 50%)",
-              }
-        ],
-    })
-
+   this.getPercentages()
 }
 
-getPercentages =  () => {
+getCounts =   () => {
+
+   let dailyCount =   this.props.distinctUsers.filter(u => u.crossing_freq === "Daily").length;
+ let weeklyCount =   this.props.distinctUsers.filter(u => u.crossing_freq === "Weekly").length;
+ let monthlyCount =  this.props.distinctUsers.filter(u => u.crossing_freq === "Monthly").length;
+  let neverCount =  this.props.distinctUsers.filter(u => u.crossing_freq === "Never").length;
+  return [dailyCount, weeklyCount, monthlyCount, neverCount]
+     
+  }
+
+getPercentages = () => {
     //  const cleanedData = this.props.distinctUsers.filter(u => u.crossing_freq === null)
     // // console.log("CLEAN", cleanedData.length)
     //  console.log("OLD", this.props.distinctUsers)
+
+     const totalCount = this.getCounts().reduce((a,b) => a + b)
+
+      
+  
+  
+  
+      // // let dailyCount = 0;
+      // // let weeklyCount = 0;
+      // // let monthlyCount = 0;
+      // // let neverCount = 0;
+  
+      
+      // // this.props.distinctUsers.map(element => {
+      // //     if (element.crossing_freq === 'Daily') {
+      // //         dailyCount += 1;
+      // //     }
+      // //     else if(element.crossing_freq === 'Weekly') {
+      // //         weeklyCount += 1;
+      // //     }
+      // //     else if(element.crossing_freq === 'Monthly') {
+      // //         monthlyCount += 1;
+      // //     }
+      // //     else if(element.crossing_freq === 'Never') {
+      // //         neverCount += 1;
+      // //     }
+      // // })
+  
+  
+      // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
+      let dailyPercent = Math.round((this.getCounts()[0] / totalCount) * 100);
+      let weeklyPercent = Math.round((this.getCounts()[1] / totalCount) * 100);
+      let monthlyPercent = Math.round((this.getCounts()[2] / totalCount) * 100);
+      let neverPercent = Math.round((this.getCounts()[3] / totalCount) * 100);
     
-    let dailyCount = this.props.distinctUsers.filter(u => u.crossing_freq === "Daily").length;
-    let weeklyCount = this.props.distinctUsers.filter(u => u.crossing_freq === "Weekly").length;
-    let monthlyCount = this.props.distinctUsers.filter(u => u.crossing_freq === "Monthly").length;
-    let neverCount = this.props.distinctUsers.filter(u => u.crossing_freq === "Never").length;
-    let totalCount;
-    console.log('dailyCount', dailyCount)
-    const getTotal = () => {
-        totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-        return totalCount
-    }
+      this.setState({
+          ...this.state,
+          dailyPercent: dailyPercent,
+          weeklyPercent: weeklyPercent,
+          monthlyPercent: monthlyPercent,
+          neverPercent: neverPercent,
+      }, () => {
+        this.setState({
+          ...this.state,
+          data: [
+              {   Frequency: "Daily",
+                  Daily: this.state.dailyPercent,
+                  DailyColor: "hsl(65, 70%, 50%)",
+                },
+                {
+                  Frequency: "Weekly",
+                  Weekly: this.state.weeklyPercent,
+                  WeeklyColor: "hsl(65, 70%, 50%)",
+                },
+                {
+                  Frequency: "Monthly",
+                  Monthly: this.state.monthlyPercent,
+                  MonthlyColor: "hsl(65, 70%, 50%)",
+                },
+                {
+                  Frequency: "Never",
+                  Never: this.state.neverPercent,
+                  NeverColor: "hsl(65, 70%, 50%)",
+                }
+          ],
+      })  
+      })
 
-
-    // let dailyCount = 0;
-    // let weeklyCount = 0;
-    // let monthlyCount = 0;
-    // let neverCount = 0;
-
-    
-    // this.props.distinctUsers.map(element => {
-    //     if (element.crossing_freq === 'Daily') {
-    //         dailyCount += 1;
-    //     }
-    //     else if(element.crossing_freq === 'Weekly') {
-    //         weeklyCount += 1;
-    //     }
-    //     else if(element.crossing_freq === 'Monthly') {
-    //         monthlyCount += 1;
-    //     }
-    //     else if(element.crossing_freq === 'Never') {
-    //         neverCount += 1;
-    //     }
-    // })
-
-
-    // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let dailyPercent = Math.round((weeklyCount / getTotal()) * 100);
-    let weeklyPercent = Math.round((weeklyCount / getTotal()) * 100);
-    let monthlyPercent = Math.round((monthlyCount / getTotal()) * 100);
-    let neverPercent = Math.round((neverCount / getTotal()) * 100);
-    console.log('monthlyPercent', monthlyPercent)
-    console.log('monthly count', monthlyCount)
-    this.setState({
-        ...this.state,
-        dailyPercent: dailyPercent,
-        weeklyPercent: weeklyPercent,
-        monthlyPercent: monthlyPercent,
-        neverPercent: neverPercent,
-    })
+   
 
  }
 

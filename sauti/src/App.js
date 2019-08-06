@@ -9,7 +9,8 @@ class App extends React.Component {
     super();
     this.state = {
       sessions: [],
-      sessions_production: []
+      sessions_production: [],
+      realData: []
     };
   }
 
@@ -22,13 +23,27 @@ class App extends React.Component {
           sessions: res.data[0]
         });
       });
+
+
+      axios
+      // For development: ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
+      .get(`https://sa-stage.herokuapp.com/sessions/lance/all`)
+      .then(res => {
+        // Log to see the response from server: console.log(res.data);
+        this.setState({
+          ...this.state,
+          realData: res.data
+        });
+      })
+      
   }
 
   render() {
     return (
       <div className="App">
         <h1>Welcome to the Sauti Databank!</h1>
-        <Transformation />
+        {this.state.realData.length ?
+        <Transformation realData={this.state.realData}/> : null}
         {/* <ComSelTransformation /> */}
       </div>
     );
