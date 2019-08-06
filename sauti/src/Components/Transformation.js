@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Chart from './Chart/Chart';
 
 class Transformation extends React.Component {
   constructor(props) {
@@ -8,43 +9,34 @@ class Transformation extends React.Component {
       realData: [],
       usersArray: [],
       dataFromLance: [],
-      distinctUsers: []
+      distinctUsers: "",
+      isDoneProcessing: false
     };
-  }
+  };
 
-  componentDidMount() {
-    axios
-      // For development: ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
-      .get(`https://sa-stage.herokuapp.com/sessions/lance/all`)
-      .then(res => {
-        // Log to see the response from server: console.log(res.data);
-        this.setState({
-          ...this.state,
-          realData: res.data
-        });
-      })
-      .then(res => {
-        this.createUsersArray();
-      })
-      .then(res => {
-        this.getGender();
-      })
-      .then(res => {
-        this.getAge();
-      })
-      .then(res => {
-        this.getEducation();
-      })
-      .then(res => {
-        this.getCrossingFreq();
-      })
-      .then(res => {
-        this.getLanguage();
-      })
-      .then(res => {
-        this.getCountry();
-      });
-  }
+  async componentDidMount() {
+        this.setState({isDoneProcessing: false})
+        await this.createUsersArray();
+     
+        await this.getGender();
+     
+        await this.getAge();
+     
+        await this.getEducation();
+      
+        await this.getCrossingFreq();
+     
+        await this.getProduce();
+     
+        await this.getPrimaryIncome();
+     
+        await this.getLanguage();
+     
+        await this.getCountry();
+
+       
+    
+  };
 
   distinct = (value, index, self) => {
     return self.indexOf(value) === index;
@@ -53,7 +45,7 @@ class Transformation extends React.Component {
   createUsersArray = () => {
     let array = [];
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let object = {};
       object.cell_num = element.cell_num;
       array.push(object);
@@ -72,15 +64,15 @@ class Transformation extends React.Component {
           age: null,//set gender to null inside every object so that every object has a gender property.
           education: null,
           crossing_freq: null,
-          // primary_income: null,
-          // produce: null,
+          produce: null,
+          primary_income: null,
           language: null,
           country_of_residence: null
         });
       }
     }
     this.setState({ ...this.state, distinctUsers: distinctUsers });
-    //console.log(distinctUsers);
+    
   };
 
   // Map over session array
@@ -89,7 +81,7 @@ class Transformation extends React.Component {
   getGender = () => {
     let arrayWithGender = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("Male")) {
         arrayWithGender.map(user => {
@@ -106,7 +98,7 @@ class Transformation extends React.Component {
       }
     });
 
-    // console.log(arrayWithGender);
+    
 
     this.setState({ ...this.state, distinctUsers: arrayWithGender });
 
@@ -115,7 +107,7 @@ class Transformation extends React.Component {
   getAge = () => {
     let arrayWithAge = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("10-20")) {
         arrayWithAge.map(user => {
@@ -156,7 +148,7 @@ class Transformation extends React.Component {
       } 
     });
 
-    console.log(arrayWithAge);
+
 
     this.setState({ ...this.state, distinctUsers: arrayWithAge });
 
@@ -165,7 +157,7 @@ class Transformation extends React.Component {
   getEducation = () => {
     let arrayWithEducation = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("No formal education")) {
         arrayWithEducation.map(user => {
@@ -194,7 +186,7 @@ class Transformation extends React.Component {
       }
     });
 
-    // console.log(arrayWithGender);
+    
 
     this.setState({ ...this.state, distinctUsers: arrayWithEducation });
 
@@ -203,7 +195,7 @@ class Transformation extends React.Component {
   getCrossingFreq = () => {
     let arrayWithCrossingFreq = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("Never")) {
         arrayWithCrossingFreq.map(user => {
@@ -230,45 +222,130 @@ class Transformation extends React.Component {
           }
         });
       }
+
+    
     });
 
-    // console.log(arrayWithGender);
+    
 
-    this.setState({ ...this.state, distinctUsers: arrayWithCrossingFreq });
+    this.setState({ ...this.state, distinctUsers: arrayWithCrossingFreq, isDoneProcessing: true });
 
   };
 
-  // getPrimaryIncome = () => {
-  //   let arrayWithPrimaryIncome = this.state.distinctUsers;
+  checkIncomeProduce = () => {
+    let array = this.state.realData;
+    let totalCount = 0;
+    let countYes = 0;
+    let countNo = 0;
+    this.state.realData.map(element => {
 
-  //   this.state.realData.map(element => {
-  //     let num = element.cell_num;
-  //     if (element.data.includes("Yes")) {
-  //       arrayWithPrimaryIncome.map(user => {
-  //         if (user.cell_num === num) {
-  //           user.primary_income = "Yes";
-  //         }
-  //       });
-  //     } else if (element.data.includes("No")) {
-  //       arrayWithPrimaryIncome.map(user => {
-  //         if (user.cell_num === num) {
-  //           user.primary_income = "No";
-  //         }
-  //       });
-  //     } 
-  //   });
+      if (element.data.includes("survey-2-produce")) {
+        totalCount += 1;
+      } 
+      
+      if (element.data.includes(`survey-2-produce\";a:1:{i:0;s:3`) || element.data.includes(`survey-2-produce\";a:1:{i:0;s:4`)) {
+        countYes += 1;
+      } 
+      
+      if (element.data.includes(`survey-2-produce\";a:1:{i:0;s:2`)) {
+        countNo += 1;
+      }
+    })
 
-  //   // console.log(arrayWithGender);
+    let totalOtherWay = countYes + countNo;
 
-  //   this.setState({ ...this.state, distinctUsers: arrayWithPrimaryIncome });
+    console.log("total", totalCount);
+    console.log("total yes no", totalOtherWay);
+  };
 
-  // };
 
+
+  getProduce = () => {
+    let arrayWithProduce = this.state.distinctUsers;
+
+    this.props.realData.map(element => {
+      let num = element.cell_num;
+      if (element.data.includes(`survey-2-produce\";a:1:{i:0;s:3`) || element.data.includes(`survey-2-produce\";a:1:{i:0;s:4`))  {
+        arrayWithProduce.map(user => {
+          if (user.cell_num === num) {
+            user.produce = "Yes";
+          }
+        });
+      } else if (element.data.includes(`survey-2-produce\";a:1:{i:0;s:2`)) {
+        arrayWithProduce.map(user => {
+          if (user.cell_num === num) {
+            user.produce = "No";
+          }
+        });
+      } 
+    });
+
+
+    this.setState({ ...this.state, distinctUsers: arrayWithProduce });
+
+  };
+
+  getProduce = () => {
+    let arrayWithProduce = this.state.distinctUsers;
+
+    this.state.realData.map(element => {
+      let num = element.cell_num;
+      if (element.data.includes(`survey-2-produce\";a:1:{i:0;s:3`) || element.data.includes(`survey-2-produce\";a:1:{i:0;s:4`))  {
+        arrayWithProduce.map(user => {
+          if (user.cell_num === num) {
+            user.produce = "Yes";
+          }
+        });
+      } else if (element.data.includes(`survey-2-produce\";a:1:{i:0;s:2`)) {
+        arrayWithProduce.map(user => {
+          if (user.cell_num === num) {
+            user.produce = "No";
+          }
+        });
+      } 
+    });
+
+
+    this.setState({ ...this.state, distinctUsers: arrayWithProduce });
+
+  };
+
+  getPrimaryIncome = () => {
+
+    let arrayWithPrimaryIncome = this.state.distinctUsers;
+
+    this.props.realData.map(element => {
+      let num = element.cell_num;
+      if (element.data.includes(`survey-1-primaryincome\";a:1:{i:0;s:3`) || element.data.includes(`survey-1-primaryincome\";a:1:{i:0;s:4`))  {
+        arrayWithPrimaryIncome.map(user => {
+          if (user.cell_num === num) {
+            user.primary_income = "Yes";
+          }
+        });
+      } else if (element.data.includes(`survey-1-primaryincome\";a:1:{i:0;s:2`)) {
+        arrayWithPrimaryIncome.map(user => {
+          if (user.cell_num === num) {
+            user.primary_income = "No";
+          }
+        });
+      } 
+    });
+
+
+    this.setState({ ...this.state, distinctUsers: arrayWithPrimaryIncome });
+
+  };
+
+ /*
+ survey-1-primaryincome\";a:1:{i:0;s:3:\"Yes\" survey-1-primaryincome\";a:1:{i:0;s:4:\"Ndio\
+
+ "survey-1-primaryincome\";a:1:{i:0;s:2:\"La\" survey-1-primaryincome\";a:1:{i:0;s:2:\"No\
+ */
   
   getLanguage = () => {
     let arrayWithLanguage = this.state.distinctUsers;
 
-    this.state.realData.map(element => {
+    this.props.realData.map(element => {
       let num = element.cell_num;
       if (element.data.includes("English")) {
         arrayWithLanguage.map(user => {
@@ -303,7 +380,7 @@ class Transformation extends React.Component {
       }
     });
 
-    // console.log(arrayWithGender);
+    
 
     this.setState({ ...this.state, distinctUsers: arrayWithLanguage });
 
@@ -325,20 +402,20 @@ class Transformation extends React.Component {
   })
 
 
-    // console.log(arrayWithGender);
+    
 
     this.setState({ ...this.state, distinctUsers: arrayWithCountry });
 
   };
   
-
   render() {
-    return (
-      <div className="Transformation">
-        <p>Hola</p>
+    return(
+      <div>
+        {this.state.isDoneProcessing ?
+        <Chart distinctUsers={this.state.distinctUsers} /> : null }
       </div>
-    );
-  }
-}
+    )
+  };
+};
 
 export default Transformation;

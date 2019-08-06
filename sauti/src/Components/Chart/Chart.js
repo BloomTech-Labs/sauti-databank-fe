@@ -5,6 +5,8 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
 import BarGraphOne from './BarGraphOne.js'
+import CrossingFreqChart from './CrossingFreqChart.js'
+import Transformation from '../Transformation.js'
 
 // Nivo instructions:
 // make sure parent container have a defined height when using
@@ -220,12 +222,16 @@ genderFilter = gender => {
     });
   };
 
+
+
   // Displays the chart 
   // Going to move Responsive Bar into its own component, and render it here, will need to change props
   render() {
     return (
       <div className="Chart-Container"> 
-        <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state} /*data={this.state.data} color={this.state.color}*//>
+        {/* <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}*/}
+        {this.props.distinctUsers ? 
+        <CrossingFreqChart populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state} distinctUsers={this.props.distinctUsers}/>: null}
       </div>
     );
   }
