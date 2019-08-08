@@ -24,19 +24,23 @@ class EducationChart extends React.Component {
 
 
 componentDidMount() {
-    this.setPercentages();
+  this.getEducationAll();
+
 }
 
 getEducationAll = () => {
     axios
     .get('https://sa-stage.herokuapp.com/users/all/education/all')
     .then(res => {
-        console.log('main', res.data)
+        //console.log('totalCount', res.data.length)
         this.setState({
             ...this.state,
             users: res.data,
             totalCount: res.data.length
         })
+    })
+    .then(res => {
+      this.setPercentages();
     }) 
 
 }
@@ -101,12 +105,11 @@ getNone = () => {
 
 
 
-setPercentages = () => {
-    this.getEducationAll();
-    this.getPrimary();
-    this.getSecondary();
-    this.getUni();
-    this.getNone();
+setPercentages = async () => {
+    await this.getPrimary();
+    await this.getSecondary();
+    await this.getUni();
+    await this.getNone();
     
          const totalCount = this.state.totalCount
             console.log('totalcount', totalCount)
