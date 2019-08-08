@@ -42,7 +42,7 @@ class EducationChart extends React.Component {
 
   getPrimary = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/all/primary")
+      .get("https://sa-stage.herokuapp.com/users/all/education/primary/count")
       .then(res => {
         console.log("primary res count", res.data);
         this.setState({
@@ -62,7 +62,7 @@ class EducationChart extends React.Component {
 
   getSecondary = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/all/secondary")
+      .get("https://sa-stage.herokuapp.com/users/all/education/secondary/count")
       .then(res => {
         this.setState({
           ...this.state,
@@ -78,7 +78,7 @@ class EducationChart extends React.Component {
 
   getUni = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/all/uni")
+      .get("https://sa-stage.herokuapp.com/users/all/education/uni/count")
       .then(res => {
         this.setState({
           ...this.state,
@@ -94,7 +94,7 @@ class EducationChart extends React.Component {
 
   getNone = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/all/none")
+      .get("https://sa-stage.herokuapp.com/users/all/education/none/count")
       .then(res => {
         this.setState({
           ...this.state,
