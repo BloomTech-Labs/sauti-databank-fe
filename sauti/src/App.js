@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-// import Chart from "./Components/Chart/Chart"
-import Transformation from "./Components/Transformation"
+import Chart from "./Components/Chart/Chart"
+// import Transformation from "../Transformation"
 // import ComSelTransformation from "./Components/ComSelTransformation"
 import {Link} from 'react-router-dom';
 
@@ -43,8 +43,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Welcome to the Sauti Databank!</h1>
-        {this.state.realData.length ?
-        <Transformation realData={this.state.realData}/> : null}
+        <Chart /> 
         {/* <ComSelTransformation /> */}
         <div className="link-div">
           <Link to="/crossing-frequency-chart">
