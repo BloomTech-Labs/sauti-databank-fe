@@ -236,10 +236,10 @@ genderFilter = gender => {
     return (
       <div className="Chart-Container">
         {/* <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}*/}
-        {this.props.distinctUsers ? (
+        {/* {this.props.distinctUsers ? ( */}
           <div>
             {/* <Route exact path="/login" render={props => <Login {...props} username={this.state.username} password={this.state.password} submitLogin={this.submitLogin} handleInput={this.handleInput} /> } /> */}
-            <Route exact path="/crossing-frequency-chart" 
+            {/* <Route exact path="/crossing-frequency-chart" 
               render={props => 
               <CrossingFreqChart 
               state={this.state}
@@ -251,7 +251,7 @@ genderFilter = gender => {
               <GenderChart 
               state={this.state}
               distinctUsers={this.props.distinctUsers} /> } 
-              />
+              /> */}
             <Route exact path="/education-chart" 
               render={props => 
               <EducationChart 
@@ -259,7 +259,7 @@ genderFilter = gender => {
               distinctUsers={this.props.distinctUsers} /> } 
               />
           </div>
-        ) : null}
+         {/* ) : null} */}
       </div>
     );
   }
