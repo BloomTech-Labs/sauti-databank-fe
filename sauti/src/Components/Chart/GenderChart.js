@@ -11,22 +11,18 @@ class GenderChart extends React.Component {
       users: [],
       totalCount: 0,
       data: [],
-      keys: ["Primary", "Secondary", "University", "None"],
+      keys: ["Male", "Female"],
       color: "nivo",
-      primaryPercentage: 0,
-      secondaryPercentage: 0,
-      uniPercentage: 0,
-      nonePercentage: 0,
-      primaryCount: 0,
-      secondaryCount: 0,
-      uniCount: 0,
-      noneCount: 0
+      femalePercentage: 0,
+      malePercentage: 0,
+      femaleCount: 0,
+      maleCount: 0,
     };
   }
 
   componentDidMount() {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/all")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/gender/all")
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
@@ -36,71 +32,39 @@ class GenderChart extends React.Component {
             totalCount: res.data.length
           },
           () => {
-            this.getPrimary();
+            this.getGenderFemale();
           }
         );
       })
   }
 
-  getPrimary = () => {
+  getGenderFemale = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/primary/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/gender/female/count")
       .then(res => {
-        console.log("primary res count", res.data);
+        console.log("female res count", res.data);
         this.setState({
           ...this.state,
-          primaryCount: res.data
+          femaleCount: res.data
         },
         () => {
-          this.getSecondary();
+          this.getGenderMale();
         }
         );
-        console.log(this.state.primaryCount);
+        console.log(this.state.femaleCount);
       })
       .catch(err => {
         console.log(err);
       });
   };
 
-  getSecondary = () => {
+  getGenderMale = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/secondary/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/gender/male/count")
       .then(res => {
         this.setState({
           ...this.state,
-          secondaryCount: res.data
-        }, () => {
-          this.getUni();
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getUni = () => {
-    axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/uni/count")
-      .then(res => {
-        this.setState({
-          ...this.state,
-          uniCount: res.data
-        }, () => {
-          this.getNone();
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getNone = () => {
-    axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/none/count")
-      .then(res => {
-        this.setState({
-          ...this.state,
-          noneCount: res.data
+          maleCount: res.data
         }, () => {
           this.setPercentages();
         });
@@ -110,51 +74,34 @@ class GenderChart extends React.Component {
       });
   };
 
+  
   setPercentages = () => {
     const totalCount = this.state.totalCount;
-    console.log("totalcount", totalCount);
-    console.log("primaryCount", this.state.primaryCount);
-    console.log("uniCount", this.state.uniCount)
+    console.log("femalecount", totalCount);
+    console.log("maleCount", this.state.maleCount);
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let primaryPercentage = Math.round((this.state.primaryCount / totalCount) * 100);
-    let secondaryPercentage = Math.round((this.state.secondaryCount / totalCount) * 100);
-    let uniPercentage = Math.round((this.state.uniCount / totalCount) * 100);
-    let nonePercentage = Math.round((this.state.noneCount / totalCount) * 100);
-    console.log(primaryPercentage);
-    console.log(uniPercentage)
+    let femalePercentage = Math.round((this.state.femaleCount / totalCount) * 100);
+    let malePercentage = Math.round((this.state.maleCount / totalCount) * 100);
     this.setState(
       {
         ...this.state,
-        primaryPercentage: primaryPercentage,
-        secondaryPercentage: secondaryPercentage,
-        uniPercentage: uniPercentage,
-        nonePercentage: nonePercentage
+        femalePercentage: femalePercentage,
+        malePercentage: malePercentage
       },
       () => {
-        console.log(this.state.uniPercentage)
-        this.setState({
+         this.setState({
           ...this.state,
           data: [
             {
-              Education: "Primary",
-              Primary: this.state.primaryPercentage,
-              PrimaryColor: "hsl(65, 70%, 50%)"
+              Gender: "Female",
+              Female: this.state.femalePercentage,
+              FemaleColor: "hsl(65, 70%, 50%)"
             },
             {
-              Education: "Secondary",
-              Secondary: this.state.secondaryPercentage,
-              SecondaryColor: "hsl(65, 70%, 50%)"
+              Gender: "Male",
+              Male: this.state.malePercentage,
+              MaleColor: "hsl(65, 70%, 50%)"
             },
-            {
-              Education: "University/College",
-              University: this.state.uniPercentage,
-              UniversityColor: "hsl(65, 70%, 50%)"
-            },
-            {
-              Education: "No Formal Education",
-              None: this.state.nonePercentage,
-              NoneColor: "hsl(65, 70%, 50%)"
-            }
           ]
         });
       }
@@ -164,11 +111,11 @@ class GenderChart extends React.Component {
   render() {
     return (
       <div className="Chart">
-        <h2>Education Level</h2>
+        <h2>Gender</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
-          indexBy="Education"
+          indexBy="Gender"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
           groupMode="stacked"
@@ -181,7 +128,7 @@ class GenderChart extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Education Level",
+            legend: "Gender",
             legendPosition: "middle",
             legendOffset: 30
           }}
