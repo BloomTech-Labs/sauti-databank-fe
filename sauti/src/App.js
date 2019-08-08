@@ -53,6 +53,9 @@ class App extends React.Component {
           <Link to="/gender-chart">
             <button className="link-button-chart">Gender Chart</button>
           </Link>
+          <Link to="/education-chart">
+            <button className="link-button-chart">Education Chart</button>
+          </Link>
         </div>
       </div>
     );

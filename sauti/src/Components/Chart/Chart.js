@@ -11,6 +11,7 @@ import BarGraphOne from './BarGraphOne.js'
 import CrossingFreqChart from './CrossingFreqChart.js'
 import GenderChart from './GenderChart.js'; 
 import Transformation from '../Transformation.js'
+import EducationChart from './EducationChart';
 
 
 // Nivo instructions:
@@ -248,6 +249,12 @@ genderFilter = gender => {
             <Route exact path="/gender-chart" 
               render={props => 
               <GenderChart 
+              state={this.state}
+              distinctUsers={this.props.distinctUsers} /> } 
+              />
+            <Route exact path="/education-chart" 
+              render={props => 
+              <EducationChart 
               state={this.state}
               distinctUsers={this.props.distinctUsers} /> } 
               />
