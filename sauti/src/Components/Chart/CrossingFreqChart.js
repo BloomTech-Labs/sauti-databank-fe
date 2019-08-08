@@ -9,22 +9,22 @@ class CrossingFreqChart extends React.Component {
       users: [],
       totalCount: 0,
       data: [],
-      keys: ["Primary", "Secondary", "University", "None"],
+      keys: ["Daily", "Weekly", "Monthly", "Never"],
       color: "nivo",
-      primaryPercentage: 0,
-      secondaryPercentage: 0,
-      uniPercentage: 0,
-      nonePercentage: 0,
-      primaryCount: 0,
-      secondaryCount: 0,
-      uniCount: 0,
-      noneCount: 0
+      dailyPercentage: 0,
+      weeklyPercentage: 0,
+      monthlyPercentage: 0,
+      neverPercentage: 0,
+      dailyCount: 0,
+      weeklyCount: 0,
+      monthlyCount: 0,
+      neverCount: 0
     };
   }
 
   componentDidMount() {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/all")
+      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/all")
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
@@ -34,41 +34,42 @@ class CrossingFreqChart extends React.Component {
             totalCount: res.data.length
           },
           () => {
-            this.getPrimary();
+            this.getDaily();
           }
         );
       })
   }
 
-  getPrimary = () => {
+  getDaily = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/primary/count")
+      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/daily/count")
       .then(res => {
-        console.log("primary res count", res.data);
+        console.log("daily Count", res.data);
         this.setState({
           ...this.state,
-          primaryCount: res.data
+          dailyCount: res.data
         },
         () => {
-          this.getSecondary();
+          this.getWeekly();
         }
         );
-        console.log(this.state.primaryCount);
+        
       })
       .catch(err => {
         console.log(err);
       });
   };
 
-  getSecondary = () => {
+  getWeekly = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/secondary/count")
+      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/weekly/count")
       .then(res => {
+        console.log("weekly Count", res.data);
         this.setState({
           ...this.state,
-          secondaryCount: res.data
+          weeklyCount: res.data
         }, () => {
-          this.getUni();
+          this.getMonthly();
         });
       })
       .catch(err => {
@@ -76,15 +77,16 @@ class CrossingFreqChart extends React.Component {
       });
   };
 
-  getUni = () => {
+  getMonthly = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/uni/count")
+      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/monthly/count")
       .then(res => {
+        console.log("monthly Count", res.data);
         this.setState({
           ...this.state,
-          uniCount: res.data
+          monthlyCount: res.data
         }, () => {
-          this.getNone();
+          this.getNever();
         });
       })
       .catch(err => {
@@ -92,13 +94,14 @@ class CrossingFreqChart extends React.Component {
       });
   };
 
-  getNone = () => {
+  getNever = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/education/none/count")
+      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/never/count")
       .then(res => {
+        console.log("never Count", res.data);
         this.setState({
           ...this.state,
-          noneCount: res.data
+          neverCount: res.data
         }, () => {
           this.setPercentages();
         });
@@ -110,48 +113,42 @@ class CrossingFreqChart extends React.Component {
 
   setPercentages = () => {
     const totalCount = this.state.totalCount;
-    console.log("totalcount", totalCount);
-    console.log("primaryCount", this.state.primaryCount);
-    console.log("uniCount", this.state.uniCount)
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let primaryPercentage = Math.round((this.state.primaryCount / totalCount) * 100);
-    let secondaryPercentage = Math.round((this.state.secondaryCount / totalCount) * 100);
-    let uniPercentage = Math.round((this.state.uniCount / totalCount) * 100);
-    let nonePercentage = Math.round((this.state.noneCount / totalCount) * 100);
-    console.log(primaryPercentage);
-    console.log(uniPercentage)
+    let dailyPercentage = Math.round((this.state.dailyCount / totalCount) * 100);
+    let weeklyPercentage = Math.round((this.state.weeklyCount / totalCount) * 100);
+    let monthlyPercentage = Math.round((this.state.monthlyCount / totalCount) * 100);
+    let neverPercentage = Math.round((this.state.neverCount / totalCount) * 100);
     this.setState(
       {
         ...this.state,
-        primaryPercentage: primaryPercentage,
-        secondaryPercentage: secondaryPercentage,
-        uniPercentage: uniPercentage,
-        nonePercentage: nonePercentage
+        dailyPercentage: dailyPercentage,
+        weeklyPercentage: weeklyPercentage,
+        monthlyPercentage: monthlyPercentage,
+        neverPercentage: neverPercentage
       },
       () => {
-        console.log(this.state.uniPercentage)
         this.setState({
           ...this.state,
           data: [
             {
-              Education: "Primary",
-              Primary: this.state.primaryPercentage,
-              PrimaryColor: "hsl(65, 70%, 50%)"
+              Frequency: "Daily",
+              Daily: this.state.dailyPercentage,
+              DailyColor: "hsl(65, 70%, 50%)"
             },
             {
-              Education: "Secondary",
-              Secondary: this.state.secondaryPercentage,
-              SecondaryColor: "hsl(65, 70%, 50%)"
+              Frequency: "Weekly",
+              Weekly: this.state.weeklyPercentage,
+              WeeklyColor: "hsl(65, 70%, 50%)"
             },
             {
-              Education: "University/College",
-              University: this.state.uniPercentage,
-              UniversityColor: "hsl(65, 70%, 50%)"
+              Frequency: "Monthly",
+              Monthly: this.state.monthlyPercentage,
+              MonthlyColor: "hsl(65, 70%, 50%)"
             },
             {
-              Education: "No Formal Education",
-              None: this.state.nonePercentage,
-              NoneColor: "hsl(65, 70%, 50%)"
+              Frequency: "Never",
+              Never: this.state.neverPercentage,
+              NeverColor: "hsl(65, 70%, 50%)"
             }
           ]
         });
@@ -162,11 +159,11 @@ class CrossingFreqChart extends React.Component {
   render() {
     return (
       <div className="Chart">
-        <h2>Education Level</h2>
+        <h2>Border Crossing Frequency</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
-          indexBy="Education"
+          indexBy="Frequency"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
           groupMode="stacked"
@@ -179,7 +176,7 @@ class CrossingFreqChart extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Education Level",
+            legend: "Crossing Frequency",
             legendPosition: "middle",
             legendOffset: 30
           }}
