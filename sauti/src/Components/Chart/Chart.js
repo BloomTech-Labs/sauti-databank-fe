@@ -1,12 +1,18 @@
 // Displays chart based on Nivo's required format
 
 // Requiring dependencies 
+import {Route} from 'react-router-dom';
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
+
+// Importing components 
 import BarGraphOne from './BarGraphOne.js'
 import CrossingFreqChart from './CrossingFreqChart.js'
+import GenderChart from './GenderChart.js'; 
 import Transformation from '../Transformation.js'
+import EducationChart from './EducationChart';
+
 
 // Nivo instructions:
 // make sure parent container have a defined height when using
@@ -228,10 +234,32 @@ genderFilter = gender => {
   // Going to move Responsive Bar into its own component, and render it here, will need to change props
   render() {
     return (
-      <div className="Chart-Container"> 
+      <div className="Chart-Container">
         {/* <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}*/}
-        {this.props.distinctUsers ? 
-        <CrossingFreqChart populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state} distinctUsers={this.props.distinctUsers}/>: null}
+        {/* {this.props.distinctUsers ? ( */}
+          <div>
+            {/* <Route exact path="/login" render={props => <Login {...props} username={this.state.username} password={this.state.password} submitLogin={this.submitLogin} handleInput={this.handleInput} /> } /> */}
+            {/* <Route exact path="/crossing-frequency-chart" 
+              render={props => 
+              <CrossingFreqChart 
+              state={this.state}
+              distinctUsers={this.props.distinctUsers} /> } 
+              />
+
+            <Route exact path="/gender-chart" 
+              render={props => 
+              <GenderChart 
+              state={this.state}
+              distinctUsers={this.props.distinctUsers} /> } 
+              /> */}
+            <Route exact path="/education-chart" 
+              render={props => 
+              <EducationChart 
+              state={this.state}
+              distinctUsers={this.props.distinctUsers} /> } 
+              />
+          </div>
+         {/* ) : null} */}
       </div>
     );
   }

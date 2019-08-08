@@ -1,11 +1,8 @@
 # Sauti Databank
 
-You can find the deployed project at: https://production-sauti-databank.netlify.com/ 
+You can find our deployed project at: https://production-sauti-databank.netlify.com/ 
 
 ## Contributors
-
-🚫Test 
-
 |                                       [Cash Globe](https://github.com/cashcoder88)                                        |                                       [Christopher Lopez](https://github.com/numberoneecsstudent)                                        |                                       [Heymi Vanegas](https://github.com/heymiday)                                        |                                       [Jonathan Erlich](https://github.com/joerlop)                                        |
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
 |                      [<img src="https://media.licdn.com/dms/image/C4D03AQEer2eYBWdZCg/profile-displayphoto-shrink_200_200/0?e=1568246400&v=beta&t=iV5UsRP56xr_URJRXVd7RHDBvGnZ0WcGxovaiqQWw-k" width = "200" />](https://github.com/cashcoder88)                       |                      [<img src="https://media.licdn.com/dms/image/C5603AQE3I_Iy93G6Wg/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=2YJ989qTQ0TvcZua4h2_l1SQiR4IAtqLzfy6m8nYUq8" width = "200" />](https://github.com/numberoneecsstudent)                       |                      [<img src="https://media.licdn.com/dms/image/C5603AQGSUs9a5voNnQ/profile-displayphoto-shrink_800_800/0?e=1568851200&v=beta&t=rfQwU0wCag2CJ9fnklkDAvKNJdLF52czMpeUA46wY_w" width = "200" />](https://github.com/heymiday)                       |                      [<img src="https://pbs.twimg.com/profile_images/934076630980595712/wK7wyQn__400x400.jpg" width = "200" />](https://github.com/joerlop)                       |
@@ -33,17 +30,15 @@ You can find the deployed project at: https://production-sauti-databank.netlify.
 
 ## Project Overview
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+- [Trello Board](https://trello.com/b/ycDN2Mzb/labs-14-sauti-databank)
 
 1️⃣ [Product Canvas](🚫add link to product canvas here)
 
 1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
 
-🚫 Replace lorem ipsum with a description of your project
+Sauti is a nonprofit that provides a platform for small traders in East African countries to look up realtime market data. Sauti also collects demographic data on these traders, but, until our Labs project, didn't have a way to visualize that demographic data for researchers. 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Using A, B, and C tools, our team helped Sauti make its data more helpful and useful for economic researchers and policy makers. 
 
 
 ### 4️⃣ Key Features

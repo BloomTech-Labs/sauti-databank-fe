@@ -3,6 +3,7 @@ import axios from "axios";
 // import Chart from "./Components/Chart/Chart"
 import Transformation from "./Components/Transformation"
 // import ComSelTransformation from "./Components/ComSelTransformation"
+import {Link} from 'react-router-dom';
 
 class App extends React.Component {
   constructor() {
@@ -45,6 +46,17 @@ class App extends React.Component {
         {this.state.realData.length ?
         <Transformation realData={this.state.realData}/> : null}
         {/* <ComSelTransformation /> */}
+        <div className="link-div">
+          <Link to="/crossing-frequency-chart">
+            <button className="link-button-chart">Crossing Frequency Chart</button>
+          </Link>
+          <Link to="/gender-chart">
+            <button className="link-button-chart">Gender Chart</button>
+          </Link>
+          <Link to="/education-chart">
+            <button className="link-button-chart">Education Chart</button>
+          </Link>
+        </div>
       </div>
     );
   }

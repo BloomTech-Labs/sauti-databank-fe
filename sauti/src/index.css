@@ -37,3 +37,14 @@ code {
 .year-dropdown {
   width: 150px;
 }
+
+.link-button-chart {
+  margin: 50px;
+  padding: 25px;
+  position: relative;
+}
+
+.link-div {
+  display: flex;
+  margin-top: 50px;
+}
