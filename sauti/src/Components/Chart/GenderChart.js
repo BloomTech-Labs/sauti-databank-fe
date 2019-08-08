@@ -1,81 +1,174 @@
 // Importing dependencies
 import React from 'react'; 
 import { ResponsiveBar } from "@nivo/bar"; 
+import axios from 'axios';
 
 // Creating class for Gender Chart so it can hold state and receive props
 class GenderChart extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            data: [], 
-            keys: ["Male", "Female"], 
-            color: "nivo",
-            femalePercent: 0, 
-            malePercent: 0, 
-        }; 
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      totalCount: 0,
+      data: [],
+      keys: ["Primary", "Secondary", "University", "None"],
+      color: "nivo",
+      primaryPercentage: 0,
+      secondaryPercentage: 0,
+      uniPercentage: 0,
+      nonePercentage: 0,
+      primaryCount: 0,
+      secondaryCount: 0,
+      uniCount: 0,
+      noneCount: 0
+    };
+  }
 
-// When chart renders, call this function to get percentages
-componentDidMount() {
-    this.getPercentages()
-}
+  componentDidMount() {
+    axios
+      .get("https://sa-stage.herokuapp.com/users/all/education/all")
+      .then(res => {
+        //console.log('totalCount', res.data.length)
+        this.setState(
+          {
+            ...this.state,
+            users: res.data,
+            totalCount: res.data.length
+          },
+          () => {
+            this.getPrimary();
+          }
+        );
+      })
+  }
 
-// Filters through props users Array for associated gender and gets array length 
-getCounts = () => {
-
-    // Calculations
-    let femaleCount = this.props.distinctUsers.filter(u => u.gender === "Female").length;
-    let maleCount = this.props.distinctUsers.filter( u => u.gender === "Male").length; 
-    
-    // Output
-    return [femaleCount, maleCount]; 
-}
-
-// Converting counts to percentages 
-getPercentages = () => {
-
-    // Calling counter function, using reduce to create one value from an array 
-    const totalCount = this.getCounts().reduce((a, b) => a + b); 
-
-    // Getting percent of each gender
-    let femalePercent = Math.round((this.getCounts()[0] / totalCount) *100);
-    let malePercent = Math.round((this.getCounts()[1] / totalCount) * 100); 
-
-    // Sending new percentages to state at highest level
-    this.setState({
-        ...this.state, 
-        femalePercent: femalePercent, 
-        malePercent: malePercent, 
-    }, () => {
-        // Setting state a second time to populate data in Nivo table
+  getPrimary = () => {
+    axios
+      .get("https://sa-stage.herokuapp.com/users/all/education/primary/count")
+      .then(res => {
+        console.log("primary res count", res.data);
         this.setState({
-            ...this.state, 
-            data: [
-                {
-                    Gender: "Female", 
-                    Female: this.state.femalePercent, 
-                    FemaleColor: "hsl(65, 70%, 50%)",
-                }, 
-                {
-                    Gender: "Male",
-                    Male: this.state.malePercent,
-                    MaleColor: "hsl(65, 70%, 50%)",
-                },   
-            ],
-        })
-    })
-}
+          ...this.state,
+          primaryCount: res.data
+        },
+        () => {
+          this.getSecondary();
+        }
+        );
+        console.log(this.state.primaryCount);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-render() {
+  getSecondary = () => {
+    axios
+      .get("https://sa-stage.herokuapp.com/users/all/education/secondary/count")
+      .then(res => {
+        this.setState({
+          ...this.state,
+          secondaryCount: res.data
+        }, () => {
+          this.getUni();
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  getUni = () => {
+    axios
+      .get("https://sa-stage.herokuapp.com/users/all/education/uni/count")
+      .then(res => {
+        this.setState({
+          ...this.state,
+          uniCount: res.data
+        }, () => {
+          this.getNone();
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  getNone = () => {
+    axios
+      .get("https://sa-stage.herokuapp.com/users/all/education/none/count")
+      .then(res => {
+        this.setState({
+          ...this.state,
+          noneCount: res.data
+        }, () => {
+          this.setPercentages();
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  setPercentages = () => {
+    const totalCount = this.state.totalCount;
+    console.log("totalcount", totalCount);
+    console.log("primaryCount", this.state.primaryCount);
+    console.log("uniCount", this.state.uniCount)
+    // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
+    let primaryPercentage = Math.round((this.state.primaryCount / totalCount) * 100);
+    let secondaryPercentage = Math.round((this.state.secondaryCount / totalCount) * 100);
+    let uniPercentage = Math.round((this.state.uniCount / totalCount) * 100);
+    let nonePercentage = Math.round((this.state.noneCount / totalCount) * 100);
+    console.log(primaryPercentage);
+    console.log(uniPercentage)
+    this.setState(
+      {
+        ...this.state,
+        primaryPercentage: primaryPercentage,
+        secondaryPercentage: secondaryPercentage,
+        uniPercentage: uniPercentage,
+        nonePercentage: nonePercentage
+      },
+      () => {
+        console.log(this.state.uniPercentage)
+        this.setState({
+          ...this.state,
+          data: [
+            {
+              Education: "Primary",
+              Primary: this.state.primaryPercentage,
+              PrimaryColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Education: "Secondary",
+              Secondary: this.state.secondaryPercentage,
+              SecondaryColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Education: "University/College",
+              University: this.state.uniPercentage,
+              UniversityColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Education: "No Formal Education",
+              None: this.state.nonePercentage,
+              NoneColor: "hsl(65, 70%, 50%)"
+            }
+          ]
+        });
+      }
+    );
+  };
+
+  render() {
     return (
       <div className="Chart">
-        <h2>
-          Trader Gender Ratio 
-        </h2>
+        <h2>Education Level</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
-          indexBy="Gender"
+          indexBy="Education"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
           groupMode="stacked"
@@ -88,7 +181,7 @@ render() {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Gender",
+            legend: "Education Level",
             legendPosition: "middle",
             legendOffset: 30
           }}

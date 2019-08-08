@@ -10,7 +10,7 @@ import axios from "axios";
 import BarGraphOne from './BarGraphOne.js'
 import CrossingFreqChart from './CrossingFreqChart.js'
 import GenderChart from './GenderChart.js'; 
-import Transformation from '../Transformation.js'
+// import Transformation from '../../../Transformation.js/index.js'
 import EducationChart from './EducationChart';
 
 
@@ -238,28 +238,23 @@ genderFilter = gender => {
         {/* <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}*/}
         {/* {this.props.distinctUsers ? ( */}
           <div>
-            {/* <Route exact path="/login" render={props => <Login {...props} username={this.state.username} password={this.state.password} submitLogin={this.submitLogin} handleInput={this.handleInput} /> } /> */}
-            {/* <Route exact path="/crossing-frequency-chart" 
+            <Route exact path="/crossing-frequency-chart" 
               render={props => 
               <CrossingFreqChart 
-              state={this.state}
-              distinctUsers={this.props.distinctUsers} /> } 
+              state={this.state} /> } 
               />
 
             <Route exact path="/gender-chart" 
               render={props => 
               <GenderChart 
-              state={this.state}
-              distinctUsers={this.props.distinctUsers} /> } 
-              /> */}
+              state={this.state} /> } 
+              />
             <Route exact path="/education-chart" 
               render={props => 
               <EducationChart 
-              state={this.state}
-              distinctUsers={this.props.distinctUsers} /> } 
+              state={this.state} /> } 
               />
           </div>
-         {/* ) : null} */}
       </div>
     );
   }
