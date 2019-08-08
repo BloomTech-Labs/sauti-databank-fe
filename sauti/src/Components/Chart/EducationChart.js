@@ -1,171 +1,168 @@
-import React from 'react'; 
-import { ResponsiveBar } from "@nivo/bar"; 
-import axios from 'axios';
+import React from "react";
+import { ResponsiveBar } from "@nivo/bar";
+import axios from "axios";
 
 class EducationChart extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: [],
-            totalCount: 0,
-            data: [],
-            keys: ["Primary", "Secondary", "University/College", "None"],
-            color: 'nivo',
-            primaryPercentage: 0,
-            secondaryPercentage: 0,
-            uniPercentage: 0,
-            nonePercentage: 0,
-            primaryCount: 0,
-            secondaryCount: 0,
-            uniCount: 0,
-            noneCount: 0
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      totalCount: 0,
+      data: [],
+      keys: ["Primary", "Secondary", "University", "None"],
+      color: "nivo",
+      primaryPercentage: 0,
+      secondaryPercentage: 0,
+      uniPercentage: 0,
+      nonePercentage: 0,
+      primaryCount: 0,
+      secondaryCount: 0,
+      uniCount: 0,
+      noneCount: 0
+    };
+  }
 
-
-componentDidMount() {
-  this.getEducationAll();
-
-}
-
-getEducationAll = () => {
+  componentDidMount() {
     axios
-    .get('https://sa-stage.herokuapp.com/users/all/education/all')
-    .then(res => {
+      .get("https://sa-stage.herokuapp.com/users/all/education/all")
+      .then(res => {
         //console.log('totalCount', res.data.length)
-        this.setState({
+        this.setState(
+          {
             ...this.state,
             users: res.data,
             totalCount: res.data.length
-        })
-    })
-    .then(res => {
-      this.setPercentages();
-    }) 
+          },
+          () => {
+            this.getPrimary();
+          }
+        );
+      })
+  }
 
-}
-
-getPrimary = () => {
+  getPrimary = () => {
     axios
-    .get('https://sa-stage.herokuapp.com/users/all/education/all/primary')
-    .then(res => {
-        console.log('primary res count', res.data)
+      .get("https://sa-stage.herokuapp.com/users/all/education/all/primary")
+      .then(res => {
+        console.log("primary res count", res.data);
         this.setState({
-            ...this.state,
-            primaryCount: res.data
-        })
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
+          ...this.state,
+          primaryCount: res.data
+        },
+        () => {
+          this.getSecondary();
+        }
+        );
+        console.log(this.state.primaryCount);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-getSecondary = () => {
+  getSecondary = () => {
     axios
-    .get('https://sa-stage.herokuapp.com/users/all/education/all/secondary')
-    .then(res => {
+      .get("https://sa-stage.herokuapp.com/users/all/education/all/secondary")
+      .then(res => {
         this.setState({
-            ...this.state,
-            secondaryCount: res.data
-        })
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
+          ...this.state,
+          secondaryCount: res.data
+        }, () => {
+          this.getUni();
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-getUni = () => {
+  getUni = () => {
     axios
-    .get('https://sa-stage.herokuapp.com/users/all/education/all/uni')
-    .then(res => {
+      .get("https://sa-stage.herokuapp.com/users/all/education/all/uni")
+      .then(res => {
         this.setState({
-            ...this.state,
-            uniCount: res.data
-        })
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
+          ...this.state,
+          uniCount: res.data
+        }, () => {
+          this.getNone();
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-
-getNone = () => {
+  getNone = () => {
     axios
-    .get('https://sa-stage.herokuapp.com/users/all/education/all/none')
-    .then(res => {
+      .get("https://sa-stage.herokuapp.com/users/all/education/all/none")
+      .then(res => {
         this.setState({
-            ...this.state,
-            noneCount: res.data
-        })
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
+          ...this.state,
+          noneCount: res.data
+        }, () => {
+          this.setPercentages();
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
+  setPercentages = () => {
+    const totalCount = this.state.totalCount;
+    console.log("totalcount", totalCount);
+    console.log("primaryCount", this.state.primaryCount);
+    console.log("uniCount", this.state.uniCount)
+    // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
+    let primaryPercentage = Math.round((this.state.primaryCount / totalCount) * 100);
+    let secondaryPercentage = Math.round((this.state.secondaryCount / totalCount) * 100);
+    let uniPercentage = Math.round((this.state.uniCount / totalCount) * 100);
+    let nonePercentage = Math.round((this.state.noneCount / totalCount) * 100);
+    console.log(primaryPercentage);
+    console.log(uniPercentage)
+    this.setState(
+      {
+        ...this.state,
+        primaryPercentage: primaryPercentage,
+        secondaryPercentage: secondaryPercentage,
+        uniPercentage: uniPercentage,
+        nonePercentage: nonePercentage
+      },
+      () => {
+        console.log(this.state.uniPercentage)
+        this.setState({
+          ...this.state,
+          data: [
+            {
+              Education: "Primary",
+              Primary: this.state.primaryPercentage,
+              PrimaryColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Education: "Secondary",
+              Secondary: this.state.secondaryPercentage,
+              SecondaryColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Education: "University/College",
+              University: this.state.uniPercentage,
+              UniversityColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Education: "No Formal Education",
+              None: this.state.nonePercentage,
+              NoneColor: "hsl(65, 70%, 50%)"
+            }
+          ]
+        });
+      }
+    );
+  };
 
-
-setPercentages = async () => {
-    await this.getPrimary();
-    await this.getSecondary();
-    await this.getUni();
-    await this.getNone();
-    
-         const totalCount = this.state.totalCount
-            console.log('totalcount', totalCount)
-            console.log('primaryCount', this.state.primaryCount)
-          // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-          let primaryPercentage = ((this.state.primaryCount/ totalCount) * 100);
-          let secondaryPercentage = ((this.state.secondaryCount / totalCount) * 100);
-          let uniPercentage = ((this.state.uniCount / totalCount) * 100);
-          let nonePercentage = ((this.state.noneCount / totalCount) * 100);
-            console.log(primaryPercentage)
-          this.setState({
-              ...this.state,
-              primaryPercentage: primaryPercentage,
-              secondaryPercentage: secondaryPercentage,
-              uniPercentage: uniPercentage,
-              nonePercentage: nonePercentage,
-          }, () => {
-            this.setState({
-                ...this.state, 
-                data: [
-                    {
-                        Education: "Primary", 
-                        Primary: this.state.primaryPercentage, 
-                        PrimaryColor: "hsl(65, 70%, 50%)",
-                    }, 
-                    {
-                        Education: "Secondary", 
-                        Secondary: this.state.secondaryPercentage, 
-                        SecondaryColor: "hsl(65, 70%, 50%)",
-                    },
-                    {
-                        Education: "University/College", 
-                        University: this.state.uniPercentage, 
-                        UniversityColor: "hsl(65, 70%, 50%)",
-                    },
-                    {
-                        Education: "No Formal Education", 
-                        None: this.state.nonePercentage, 
-                        NoneColor: "hsl(65, 70%, 50%)",
-                    },    
-                ],
-          })  
-          })
-
-    
-     }
-
-
-
-
-render() {
+  render() {
     return (
       <div className="Chart">
-        <h2>
-          Education Level
-        </h2>
+        <h2>Education Level</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
@@ -228,8 +225,6 @@ render() {
       </div>
     );
   }
-
 }
 
 export default EducationChart;
-
