@@ -28,7 +28,7 @@ class AgeChart extends React.Component {
 
   componentDidMount() {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/age/all")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/all")
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
@@ -46,7 +46,7 @@ class AgeChart extends React.Component {
 
   getTwenties = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/age/group-one/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-one/count")
       .then(res => {
         console.log("Twenties Count", res.data);
         this.setState({
@@ -66,7 +66,7 @@ class AgeChart extends React.Component {
 
   getThirties = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/age/group-two/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-two/count")
       .then(res => {
         console.log("Thirties Count", res.data);
         this.setState({
@@ -82,7 +82,7 @@ class AgeChart extends React.Component {
   };
   getForties = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/age/group-three/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-three/count")
       .then(res => {
         console.log("Forties Count", res.data);
         this.setState({
@@ -99,7 +99,7 @@ class AgeChart extends React.Component {
 
   getTeens = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/age/group-zero/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-zero/count")
       .then(res => {
         console.log("Teens Count", res.data);
         this.setState({
@@ -116,7 +116,7 @@ class AgeChart extends React.Component {
 
   getFifties = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/age/group-four/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-four/count")
       .then(res => {
         console.log("Fifties Count", res.data);
         this.setState({
@@ -133,7 +133,7 @@ class AgeChart extends React.Component {
 
   getSixties = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/age/group-five/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-five/count")
       .then(res => {
         console.log("Sixties Count", res.data);
         this.setState({
