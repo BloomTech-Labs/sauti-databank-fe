@@ -24,7 +24,7 @@ class CrossingFreqChart extends React.Component {
 
   componentDidMount() {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/all")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/all")
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
@@ -42,7 +42,7 @@ class CrossingFreqChart extends React.Component {
 
   getDaily = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/daily/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/daily/count")
       .then(res => {
         console.log("daily Count", res.data);
         this.setState(
@@ -62,7 +62,7 @@ class CrossingFreqChart extends React.Component {
 
   getWeekly = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/weekly/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/weekly/count")
       .then(res => {
         console.log("weekly Count", res.data);
         this.setState(
@@ -83,7 +83,7 @@ class CrossingFreqChart extends React.Component {
   getMonthly = () => {
     axios
       .get(
-        "https://sa-stage.herokuapp.com/users/all/crossingfreq/monthly/count"
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/monthly/count"
       )
       .then(res => {
         console.log("monthly Count", res.data);
@@ -104,7 +104,7 @@ class CrossingFreqChart extends React.Component {
 
   getNever = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/never/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/never/count")
       .then(res => {
         console.log("never Count", res.data);
         this.setState(
