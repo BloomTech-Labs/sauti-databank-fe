@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import axios from 'axios';
+import axios from "axios";
 
 class CrossingFreqChart extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class CrossingFreqChart extends React.Component {
             this.getDaily();
           }
         );
-      })
+      });
   }
 
   getDaily = () => {
@@ -45,15 +45,15 @@ class CrossingFreqChart extends React.Component {
       .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/daily/count")
       .then(res => {
         console.log("daily Count", res.data);
-        this.setState({
-          ...this.state,
-          dailyCount: res.data
-        },
-        () => {
-          this.getWeekly();
-        }
+        this.setState(
+          {
+            ...this.state,
+            dailyCount: res.data
+          },
+          () => {
+            this.getWeekly();
+          }
         );
-        
       })
       .catch(err => {
         console.log(err);
@@ -65,12 +65,15 @@ class CrossingFreqChart extends React.Component {
       .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/weekly/count")
       .then(res => {
         console.log("weekly Count", res.data);
-        this.setState({
-          ...this.state,
-          weeklyCount: res.data
-        }, () => {
-          this.getMonthly();
-        });
+        this.setState(
+          {
+            ...this.state,
+            weeklyCount: res.data
+          },
+          () => {
+            this.getMonthly();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -79,15 +82,20 @@ class CrossingFreqChart extends React.Component {
 
   getMonthly = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/monthly/count")
+      .get(
+        "https://sa-stage.herokuapp.com/users/all/crossingfreq/monthly/count"
+      )
       .then(res => {
         console.log("monthly Count", res.data);
-        this.setState({
-          ...this.state,
-          monthlyCount: res.data
-        }, () => {
-          this.getNever();
-        });
+        this.setState(
+          {
+            ...this.state,
+            monthlyCount: res.data
+          },
+          () => {
+            this.getNever();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -99,12 +107,15 @@ class CrossingFreqChart extends React.Component {
       .get("https://sa-stage.herokuapp.com/users/all/crossingfreq/never/count")
       .then(res => {
         console.log("never Count", res.data);
-        this.setState({
-          ...this.state,
-          neverCount: res.data
-        }, () => {
-          this.setPercentages();
-        });
+        this.setState(
+          {
+            ...this.state,
+            neverCount: res.data
+          },
+          () => {
+            this.setPercentages();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -114,10 +125,18 @@ class CrossingFreqChart extends React.Component {
   setPercentages = () => {
     const totalCount = this.state.totalCount;
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let dailyPercentage = Math.round((this.state.dailyCount / totalCount) * 100);
-    let weeklyPercentage = Math.round((this.state.weeklyCount / totalCount) * 100);
-    let monthlyPercentage = Math.round((this.state.monthlyCount / totalCount) * 100);
-    let neverPercentage = Math.round((this.state.neverCount / totalCount) * 100);
+    let dailyPercentage = Math.round(
+      (this.state.dailyCount / totalCount) * 100
+    );
+    let weeklyPercentage = Math.round(
+      (this.state.weeklyCount / totalCount) * 100
+    );
+    let monthlyPercentage = Math.round(
+      (this.state.monthlyCount / totalCount) * 100
+    );
+    let neverPercentage = Math.round(
+      (this.state.neverCount / totalCount) * 100
+    );
     this.setState(
       {
         ...this.state,
@@ -219,6 +238,17 @@ class CrossingFreqChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+        <p>
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of
+          using Lorem Ipsum is that it has a more-or-less normal distribution of
+          letters, as opposed to using 'Content here, content here', making it
+          look like readable English. Many desktop publishing packages and web
+          page editors now use Lorem Ipsum as their default model text, and a
+          search for 'lorem ipsum' will uncover many web sites still in their
+          infancy. Various versions have evolved over the years, sometimes by
+          accident, sometimes on purpose (injected humour and the like).
+        </p>
       </div>
     );
   }
