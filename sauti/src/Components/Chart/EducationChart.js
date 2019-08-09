@@ -37,7 +37,7 @@ class EducationChart extends React.Component {
             this.getPrimary();
           }
         );
-      })
+      });
   }
 
   getPrimary = () => {
@@ -45,13 +45,14 @@ class EducationChart extends React.Component {
       .get("https://sa-stage.herokuapp.com/users/all/education/primary/count")
       .then(res => {
         console.log("primary res count", res.data);
-        this.setState({
-          ...this.state,
-          primaryCount: res.data
-        },
-        () => {
-          this.getSecondary();
-        }
+        this.setState(
+          {
+            ...this.state,
+            primaryCount: res.data
+          },
+          () => {
+            this.getSecondary();
+          }
         );
         console.log(this.state.primaryCount);
       })
@@ -64,12 +65,15 @@ class EducationChart extends React.Component {
     axios
       .get("https://sa-stage.herokuapp.com/users/all/education/secondary/count")
       .then(res => {
-        this.setState({
-          ...this.state,
-          secondaryCount: res.data
-        }, () => {
-          this.getUni();
-        });
+        this.setState(
+          {
+            ...this.state,
+            secondaryCount: res.data
+          },
+          () => {
+            this.getUni();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -80,12 +84,15 @@ class EducationChart extends React.Component {
     axios
       .get("https://sa-stage.herokuapp.com/users/all/education/uni/count")
       .then(res => {
-        this.setState({
-          ...this.state,
-          uniCount: res.data
-        }, () => {
-          this.getNone();
-        });
+        this.setState(
+          {
+            ...this.state,
+            uniCount: res.data
+          },
+          () => {
+            this.getNone();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -96,12 +103,15 @@ class EducationChart extends React.Component {
     axios
       .get("https://sa-stage.herokuapp.com/users/all/education/none/count")
       .then(res => {
-        this.setState({
-          ...this.state,
-          noneCount: res.data
-        }, () => {
-          this.setPercentages();
-        });
+        this.setState(
+          {
+            ...this.state,
+            noneCount: res.data
+          },
+          () => {
+            this.setPercentages();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -112,14 +122,18 @@ class EducationChart extends React.Component {
     const totalCount = this.state.totalCount;
     console.log("totalcount", totalCount);
     console.log("primaryCount", this.state.primaryCount);
-    console.log("uniCount", this.state.uniCount)
+    console.log("uniCount", this.state.uniCount);
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let primaryPercentage = Math.round((this.state.primaryCount / totalCount) * 100);
-    let secondaryPercentage = Math.round((this.state.secondaryCount / totalCount) * 100);
+    let primaryPercentage = Math.round(
+      (this.state.primaryCount / totalCount) * 100
+    );
+    let secondaryPercentage = Math.round(
+      (this.state.secondaryCount / totalCount) * 100
+    );
     let uniPercentage = Math.round((this.state.uniCount / totalCount) * 100);
     let nonePercentage = Math.round((this.state.noneCount / totalCount) * 100);
     console.log(primaryPercentage);
-    console.log(uniPercentage)
+    console.log(uniPercentage);
     this.setState(
       {
         ...this.state,
@@ -129,7 +143,7 @@ class EducationChart extends React.Component {
         nonePercentage: nonePercentage
       },
       () => {
-        console.log(this.state.uniPercentage)
+        console.log(this.state.uniPercentage);
         this.setState({
           ...this.state,
           data: [
@@ -222,6 +236,17 @@ class EducationChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+        <p>
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of
+          using Lorem Ipsum is that it has a more-or-less normal distribution of
+          letters, as opposed to using 'Content here, content here', making it
+          look like readable English. Many desktop publishing packages and web
+          page editors now use Lorem Ipsum as their default model text, and a
+          search for 'lorem ipsum' will uncover many web sites still in their
+          infancy. Various versions have evolved over the years, sometimes by
+          accident, sometimes on purpose (injected humour and the like).
+        </p>
       </div>
     );
   }

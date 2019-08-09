@@ -1,0 +1,72 @@
+.App {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    .header {
+      height: 100px;
+      width: 1200px;
+      background: #2c2e32;
+      
+      display: flex;
+      align-items: center; 
+
+      h1 {
+        font-size: 24px;
+        color: #ffffff;
+        font-family: Helvetica, sans-serif;
+        margin-left: 20px;
+      }
+    } //header
+
+    .content-container {
+      margin-top: 35px;
+      display: flex;
+      margin-left: 40px;
+      width: 100%;
+
+      .chart-container {
+        width: 75%;
+
+        .Chart {
+
+          h2 {
+            font-size: 24px;
+            font-weight: bold;
+            font-family: Helvetica, sans-serif;
+          }
+
+          p {
+            font-family: Helvetica, sans-serif;
+            font-size: 14px;
+            padding: 30px 40px;
+            line-height: 1.2;
+          }
+        }
+      }
+
+      .dropdown-container {
+        font-family: Helvetica, sans-serif;
+        color: #586060;
+        font-weight: bold;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 25%;
+
+        p {
+          font-size: 14px;
+          margin-bottom: 10px; 
+        }
+
+        .dropdown {
+          width: 250px;
+        }
+      }
+    }
+  }
+}

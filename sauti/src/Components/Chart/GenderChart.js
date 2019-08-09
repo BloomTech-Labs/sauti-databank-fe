@@ -1,7 +1,7 @@
 // Importing dependencies
-import React from 'react'; 
-import { ResponsiveBar } from "@nivo/bar"; 
-import axios from 'axios';
+import React from "react";
+import { ResponsiveBar } from "@nivo/bar";
+import axios from "axios";
 
 // Creating class for Gender Chart so it can hold state and receive props
 class GenderChart extends React.Component {
@@ -16,7 +16,7 @@ class GenderChart extends React.Component {
       femalePercentage: 0,
       malePercentage: 0,
       femaleCount: 0,
-      maleCount: 0,
+      maleCount: 0
     };
   }
 
@@ -35,21 +35,24 @@ class GenderChart extends React.Component {
             this.getGenderFemale();
           }
         );
-      })
+      });
   }
 
   getGenderFemale = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/gender/female/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/gender/female/count"
+      )
       .then(res => {
         console.log("female res count", res.data);
-        this.setState({
-          ...this.state,
-          femaleCount: res.data
-        },
-        () => {
-          this.getGenderMale();
-        }
+        this.setState(
+          {
+            ...this.state,
+            femaleCount: res.data
+          },
+          () => {
+            this.getGenderMale();
+          }
         );
         console.log(this.state.femaleCount);
       })
@@ -60,27 +63,33 @@ class GenderChart extends React.Component {
 
   getGenderMale = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/gender/male/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/gender/male/count"
+      )
       .then(res => {
-        this.setState({
-          ...this.state,
-          maleCount: res.data
-        }, () => {
-          this.setPercentages();
-        });
+        this.setState(
+          {
+            ...this.state,
+            maleCount: res.data
+          },
+          () => {
+            this.setPercentages();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
       });
   };
 
-  
   setPercentages = () => {
     const totalCount = this.state.totalCount;
     console.log("femalecount", totalCount);
     console.log("maleCount", this.state.maleCount);
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let femalePercentage = Math.round((this.state.femaleCount / totalCount) * 100);
+    let femalePercentage = Math.round(
+      (this.state.femaleCount / totalCount) * 100
+    );
     let malePercentage = Math.round((this.state.maleCount / totalCount) * 100);
     this.setState(
       {
@@ -89,7 +98,7 @@ class GenderChart extends React.Component {
         malePercentage: malePercentage
       },
       () => {
-         this.setState({
+        this.setState({
           ...this.state,
           data: [
             {
@@ -101,7 +110,7 @@ class GenderChart extends React.Component {
               Gender: "Male",
               Male: this.state.malePercentage,
               MaleColor: "hsl(65, 70%, 50%)"
-            },
+            }
           ]
         });
       }
@@ -171,6 +180,17 @@ class GenderChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+        <p>
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of
+          using Lorem Ipsum is that it has a more-or-less normal distribution of
+          letters, as opposed to using 'Content here, content here', making it
+          look like readable English. Many desktop publishing packages and web
+          page editors now use Lorem Ipsum as their default model text, and a
+          search for 'lorem ipsum' will uncover many web sites still in their
+          infancy. Various versions have evolved over the years, sometimes by
+          accident, sometimes on purpose (injected humour and the like).
+        </p>
       </div>
     );
   }
