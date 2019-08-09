@@ -10,7 +10,7 @@ class ProduceChart extends React.Component {
       users: [],
       totalCount: 0,
       data: [],
-      keys: ["Male", "Female"],
+      keys: ["Yes", "No"],
       color: "nivo",
       noPercentage: 0,
       yesPercentage: 0,
@@ -86,12 +86,12 @@ class ProduceChart extends React.Component {
           ...this.state,
           data: [
             {
-              Produce: "Yes",
+              Grower: "Yes",
               Yes: this.state.yesPercentage,
               YesColor: "hsl(65, 70%, 50%)"
             },
             {
-              Produce: "No",
+              Grower: "No",
               No: this.state.noPercentage,
               NoColor: "hsl(65, 70%, 50%)"
             },
@@ -104,11 +104,11 @@ class ProduceChart extends React.Component {
   render() {
     return (
       <div className="Chart">
-        <h2>Gender</h2>
+        <h2>Primary Grower of Produce</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
-          indexBy="Produce"
+          indexBy="Grower"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
           groupMode="stacked"
@@ -121,7 +121,7 @@ class ProduceChart extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Produce As Primary Soure Of Income",
+            legend: "Primary Grower Of Produce",
             legendPosition: "middle",
             legendOffset: 30
           }}
@@ -164,6 +164,17 @@ class ProduceChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+        <p>
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of
+          using Lorem Ipsum is that it has a more-or-less normal distribution of
+          letters, as opposed to using 'Content here, content here', making it
+          look like readable English. Many desktop publishing packages and web
+          page editors now use Lorem Ipsum as their default model text, and a
+          search for 'lorem ipsum' will uncover many web sites still in their
+          infancy. Various versions have evolved over the years, sometimes by
+          accident, sometimes on purpose (injected humour and the like).
+        </p>
       </div>
     );
   }
