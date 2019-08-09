@@ -67,7 +67,7 @@ class LanguageChart extends React.Component {
 
   getLanguageKinyarwanda = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/language/kinyarwanda/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/language/kinya/count")
       .then(res => {
         this.setState({
           ...this.state,
