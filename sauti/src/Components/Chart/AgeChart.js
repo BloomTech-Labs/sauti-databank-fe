@@ -9,7 +9,7 @@ class AgeChart extends React.Component {
       users: [],
       totalCount: 0,
       data: [],
-      keys: ["20-30", "30-40", "40-50", "10-20", "50-60", "60-70"],
+      keys: ["Twenties", "Thirties", "Forties", "Teens", "Fifties", "Sixties"],
       color: "nivo",
       twentiesPercentage: 0,
       thirtiesPercentage: 0,
@@ -121,7 +121,7 @@ class AgeChart extends React.Component {
         console.log("Fifties Count", res.data);
         this.setState({
           ...this.state,
-          neverCount: res.data
+          fiftiesCount: res.data
         }, () => {
           this.getSixties();
         });
@@ -138,7 +138,7 @@ class AgeChart extends React.Component {
         console.log("Sixties Count", res.data);
         this.setState({
           ...this.state,
-          neverCount: res.data
+          sixtiesCount: res.data
         }, () => {
           this.setPercentages();
         });
@@ -173,33 +173,33 @@ class AgeChart extends React.Component {
           data: [
             {
               Age: "20-30",
-              Daily: this.state.twentiesPercentage,
-              DailyColor: "hsl(65, 70%, 50%)"
+              Twenties: this.state.twentiesPercentage,
+              TwentiesColor: "hsl(65, 70%, 50%)"
             },
             {
               Age: "30-40",
-              Weekly: this.state.thirtiesPercentage,
-              WeeklyColor: "hsl(65, 70%, 50%)"
+              Thirties: this.state.thirtiesPercentage,
+              ThirtiesColor: "hsl(65, 70%, 50%)"
             },
             {
               Age: "40-50",
-              Monthly: this.state.fortiesPercentage,
-              MonthlyColor: "hsl(65, 70%, 50%)"
+              Forties: this.state.fortiesPercentage,
+              FortiesColor: "hsl(65, 70%, 50%)"
             },
             {
               Age: "10-20",
-              Never: this.state.teensPercentage,
-              NeverColor: "hsl(65, 70%, 50%)"
+              Teens: this.state.teensPercentage,
+              TeensColor: "hsl(65, 70%, 50%)"
             },
             {
               Age: "50-60",
-              Never: this.state.fiftiesPercentage,
-              NeverColor: "hsl(65, 70%, 50%)"
+              Fifties: this.state.fiftiesPercentage,
+              FiftiesColor: "hsl(65, 70%, 50%)"
             },
             {
               Age: "60-70",
-              Never: this.state.sixtiesPercentage,
-              NeverColor: "hsl(65, 70%, 50%)"
+              Sixties: this.state.sixtiesPercentage,
+              SixtiesColor: "hsl(65, 70%, 50%)"
             }
           ]
         });
@@ -210,11 +210,11 @@ class AgeChart extends React.Component {
   render() {
     return (
       <div className="Chart">
-        <h2>Border Crossing Frequency</h2>
+        <h2>Age Demographics</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
-          indexBy="Frequency"
+          indexBy="Age"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
           groupMode="stacked"
@@ -270,6 +270,9 @@ class AgeChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+        <p>
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+        </p>
       </div>
     );
   }

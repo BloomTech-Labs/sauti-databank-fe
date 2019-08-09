@@ -45,7 +45,7 @@ class CrossingFreqChart extends React.Component {
         console.log("Kenya Count", res.data);
         this.setState({
           ...this.state,
-          dailyCount: res.data
+          kenyaCount: res.data
         },
         () => {
           this.getUganda();
@@ -65,7 +65,7 @@ class CrossingFreqChart extends React.Component {
         console.log("weekly Count", res.data);
         this.setState({
           ...this.state,
-          weeklyCount: res.data
+          ugandaCount: res.data
         }, () => {
           this.getRwanda();
         });
@@ -81,7 +81,7 @@ class CrossingFreqChart extends React.Component {
         console.log("weekly Count", res.data);
         this.setState({
           ...this.state,
-          weeklyCount: res.data
+          rwandaCount: res.data
         }, () => {
           this.setPercentages();
         });
@@ -132,11 +132,11 @@ class CrossingFreqChart extends React.Component {
   render() {
     return (
       <div className="Chart">
-        <h2>Border Crossing Frequency</h2>
+        <h2>Country of Origin</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
-          indexBy="Frequency"
+          indexBy="Country"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
           groupMode="stacked"
@@ -192,6 +192,10 @@ class CrossingFreqChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+
+        <p>
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+        </p>
       </div>
     );
   }

@@ -55,10 +55,29 @@ class LanguageChart extends React.Component {
           englishCount: res.data
         },
         () => {
-          this.getLanguageKinyarwanda();
+          this.getLanguageSwahili();
         }
         );
         console.log(this.state.EnglishCount);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  getLanguageSwahili = () => {
+    axios
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/language/swahili/count")
+      .then(res => {
+        console.log("Swahili res count", res.data);
+        this.setState({
+          ...this.state,
+          swahiliCount: res.data
+        },
+        () => {
+          this.getLanguageKinyarwanda();
+        }
+        );
+        console.log(this.state.swahiliCount);
       })
       .catch(err => {
         console.log(err);
@@ -118,13 +137,15 @@ class LanguageChart extends React.Component {
     let swahiliPercentage = Math.round((this.state.swahiliCount / totalCount) * 100);
     let kinyarwandaPercentage = Math.round((this.state.kinyarwandaCount / totalCount) * 100);
     let lugandaPercentage = Math.round((this.state.lugandaCount / totalCount) * 100);
+    let lukigaPercentage = Math.round((this.state.lukigaCount / totalCount) * 100);
     this.setState(
       {
         ...this.state,
         englishPercentage: englishPercentage,
         swahiliPercentage: swahiliPercentage,
         kinyarwandaPercentage: kinyarwandaPercentage,
-        lugandaPercentage: lugandaPercentage
+        lugandaPercentage: lugandaPercentage,
+        lukigaPercentage: lukigaPercentage
       },
       () => {
          this.setState({
@@ -224,6 +245,10 @@ class LanguageChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+
+        <p>
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+        </p>
       </div>
     );
   }
