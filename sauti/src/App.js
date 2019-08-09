@@ -59,12 +59,42 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Education"
       })
+    } else if (option.label == "Age") {
+      this.props.history.push("/age-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Age"
+      })
+    } else if (option.label == "Country") {
+      this.props.history.push("/country-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Country"
+      })
+    } else if (option.label == "Language") {
+      this.props.history.push("/language-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Language"
+      })
+    } else if (option.label == "Primary Income") {
+      this.props.history.push("/primaryincome-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Primary Income"
+      })
+    } else if (option.label == "Produce") {
+      this.props.history.push("/produce-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Produce"
+      })
     }
   };
 
   render() {
     console.log(this.props);
-    const options = ["Gender", "Education", "Crossing Frequency"];
+    const options = ["Gender", "Education", "Crossing Frequency", "Age", "Country", "Primary Income", "Language", "Produce"];
 
     return (
       <div className="App">

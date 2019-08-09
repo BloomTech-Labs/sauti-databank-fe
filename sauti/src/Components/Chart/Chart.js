@@ -12,6 +12,11 @@ import CrossingFreqChart from "./CrossingFreqChart.js";
 import GenderChart from "./GenderChart.js";
 // import Transformation from '../../../Transformation.js/index.js'
 import EducationChart from "./EducationChart";
+import AgeChart from "./AgeChart";
+import CountryChart from "./CountryChart";
+import LanguageChart from "./LanguageChart";
+import PrimaryIncomeChart from "./PrimaryIncomeChart";
+import ProduceChart from "./ProduceChart";
 
 // Nivo instructions:
 // make sure parent container have a defined height when using
@@ -271,6 +276,31 @@ class Chart extends React.Component {
             exact
             path="/education-chart"
             render={props => <EducationChart state={this.state} />}
+          />
+          <Route
+            exact
+            path="/age-chart"
+            render={props => <AgeChart state={this.state} />}
+          />
+          <Route
+            exact
+            path="/country-chart"
+            render={props => <CountryChart state={this.state} />}
+          />
+          <Route
+            exact
+            path="/language-chart"
+            render={props => <LanguageChart state={this.state} />}
+          />
+          <Route
+            exact
+            path="/primaryincome-chart"
+            render={props => <PrimaryIncomeChart state={this.state} />}
+          />
+          <Route
+            exact
+            path="/produce-chart"
+            render={props => <ProduceChart state={this.state} />}
           />
         </div>
       </div>
