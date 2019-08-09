@@ -45,7 +45,7 @@ class CrossingFreqChart extends React.Component {
         console.log("Kenya Count", res.data);
         this.setState({
           ...this.state,
-          dailyCount: res.data
+          kenyaCount: res.data
         },
         () => {
           this.getUganda();
@@ -65,7 +65,7 @@ class CrossingFreqChart extends React.Component {
         console.log("weekly Count", res.data);
         this.setState({
           ...this.state,
-          weeklyCount: res.data
+          ugandaCount: res.data
         }, () => {
           this.getRwanda();
         });
@@ -81,7 +81,7 @@ class CrossingFreqChart extends React.Component {
         console.log("weekly Count", res.data);
         this.setState({
           ...this.state,
-          weeklyCount: res.data
+          rwandaCount: res.data
         }, () => {
           this.setPercentages();
         });
@@ -132,11 +132,11 @@ class CrossingFreqChart extends React.Component {
   render() {
     return (
       <div className="Chart">
-        <h2>Border Crossing Frequency</h2>
+        <h2>Country of Origin</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
-          indexBy="Frequency"
+          indexBy="Country"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
           groupMode="stacked"

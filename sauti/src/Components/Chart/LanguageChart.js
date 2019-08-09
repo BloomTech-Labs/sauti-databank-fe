@@ -55,10 +55,29 @@ class LanguageChart extends React.Component {
           englishCount: res.data
         },
         () => {
-          this.getLanguageKinyarwanda();
+          this.getLanguageSwahili();
         }
         );
         console.log(this.state.EnglishCount);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  getLanguageSwahili = () => {
+    axios
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/language/swahili/count")
+      .then(res => {
+        console.log("Swahili res count", res.data);
+        this.setState({
+          ...this.state,
+          swahiliCount: res.data
+        },
+        () => {
+          this.getLanguageKinyarwanda();
+        }
+        );
+        console.log(this.state.swahiliCount);
       })
       .catch(err => {
         console.log(err);
@@ -118,13 +137,15 @@ class LanguageChart extends React.Component {
     let swahiliPercentage = Math.round((this.state.swahiliCount / totalCount) * 100);
     let kinyarwandaPercentage = Math.round((this.state.kinyarwandaCount / totalCount) * 100);
     let lugandaPercentage = Math.round((this.state.lugandaCount / totalCount) * 100);
+    let lukigaPercentage = Math.round((this.state.lukigaCount / totalCount) * 100);
     this.setState(
       {
         ...this.state,
         englishPercentage: englishPercentage,
         swahiliPercentage: swahiliPercentage,
         kinyarwandaPercentage: kinyarwandaPercentage,
-        lugandaPercentage: lugandaPercentage
+        lugandaPercentage: lugandaPercentage,
+        lukigaPercentage: lukigaPercentage
       },
       () => {
          this.setState({
