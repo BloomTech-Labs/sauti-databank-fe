@@ -15,7 +15,8 @@ class App extends React.Component {
     this.state = {
       sessions: [],
       sessions_production: [],
-      realData: []
+      realData: [],
+      defaultOption: "Gender"
     };
   }
 
@@ -40,21 +41,30 @@ class App extends React.Component {
   }
 
   onSelect = option => {
-    console.log("You selected ", option.label);
-    this.setState({ selected: option });
     if (option.label == "Gender") {
       this.props.history.push("/gender-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Gender"
+      })
     } else if (option.label == "Crossing Frequency") {
       this.props.history.push("/crossing-frequency-chart");
-    } else {
+      this.setState({
+        ...this.state,
+        defaultOption: "Crossing Frequency"
+      })
+    } else if (option.label == "Education") {
       this.props.history.push("/education-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Education"
+      })
     }
   };
 
   render() {
     console.log(this.props);
     const options = ["Gender", "Education", "Crossing Frequency"];
-    const defaultOption = options[2];
 
     return (
       <div className="App">
@@ -74,7 +84,7 @@ class App extends React.Component {
                 className="dropdown"
                 options={options}
                 onChange={this.onSelect}
-                value={defaultOption}
+                value={this.state.defaultOption}
                 placeholder="Select an option"
               />
             </div>
