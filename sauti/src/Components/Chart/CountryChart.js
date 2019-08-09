@@ -22,7 +22,7 @@ class CrossingFreqChart extends React.Component {
 
   componentDidMount() {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/country/all")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/country/all")
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
@@ -40,7 +40,7 @@ class CrossingFreqChart extends React.Component {
 
   getKenya = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/country/kenya/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/country/kenya/count")
       .then(res => {
         console.log("Kenya Count", res.data);
         this.setState({
@@ -60,7 +60,7 @@ class CrossingFreqChart extends React.Component {
 
   getUganda = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/country/uganda/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/country/uganda/count")
       .then(res => {
         console.log("weekly Count", res.data);
         this.setState({
@@ -76,7 +76,7 @@ class CrossingFreqChart extends React.Component {
   };
   getRwanda = () => {
     axios
-      .get("https://sa-stage.herokuapp.com/users/all/country/rwanda/count")
+      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/country/rwanda/count")
       .then(res => {
         console.log("weekly Count", res.data);
         this.setState({
