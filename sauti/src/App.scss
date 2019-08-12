@@ -10,9 +10,9 @@
       height: 100px;
       width: 1200px;
       background: #2c2e32;
-      
+
       display: flex;
-      align-items: center; 
+      align-items: center;
 
       h1 {
         font-size: 24px;
@@ -29,13 +29,13 @@
       width: 100%;
 
       .chart-container {
-        width: 75%;
+        width: calc(75% - 40px);
 
         .Chart {
-
+          height: 500px;
+          
           h2 {
             font-size: 24px;
-            font-weight: bold;
             font-family: Helvetica, sans-serif;
           }
 
@@ -60,11 +60,32 @@
 
         p {
           font-size: 14px;
-          margin-bottom: 10px; 
+          margin-bottom: 10px;
         }
 
         .dropdown {
-          width: 250px;
+          font-size: 18px;
+          font-weight: normal;
+          display: flex;
+          align-items: center;
+        }
+        .myControlClassName {
+          width: 100%;
+
+          padding-top: 26px;
+          padding-bottom: 26px;
+          display: flex;
+          align-items: center;
+        }
+        .myArrowClassName {
+          padding-top: 26px;
+          padding-bottom: 26px;
+        
+        }
+        .Dropdown-arrow {
+          position: absolute;
+          top: 30px;
+          right: 20px;
         }
       }
     }

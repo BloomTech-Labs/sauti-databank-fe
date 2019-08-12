@@ -46,55 +46,64 @@ class App extends React.Component {
       this.setState({
         ...this.state,
         defaultOption: "Gender"
-      })
+      });
     } else if (option.label == "Crossing Frequency") {
       this.props.history.push("/crossing-frequency-chart");
       this.setState({
         ...this.state,
         defaultOption: "Crossing Frequency"
-      })
+      });
     } else if (option.label == "Education") {
       this.props.history.push("/education-chart");
       this.setState({
         ...this.state,
         defaultOption: "Education"
-      })
+      });
     } else if (option.label == "Age") {
       this.props.history.push("/age-chart");
       this.setState({
         ...this.state,
         defaultOption: "Age"
-      })
+      });
     } else if (option.label == "Country") {
       this.props.history.push("/country-chart");
       this.setState({
         ...this.state,
         defaultOption: "Country"
-      })
+      });
     } else if (option.label == "Language") {
       this.props.history.push("/language-chart");
       this.setState({
         ...this.state,
         defaultOption: "Language"
-      })
+      });
     } else if (option.label == "Primary Income") {
       this.props.history.push("/primaryincome-chart");
       this.setState({
         ...this.state,
         defaultOption: "Primary Income"
-      })
+      });
     } else if (option.label == "Produce") {
       this.props.history.push("/produce-chart");
       this.setState({
         ...this.state,
         defaultOption: "Produce"
-      })
+      });
     }
   };
 
   render() {
     console.log(this.props);
-    const options = ["Gender", "Education", "Crossing Frequency", "Age", "Country", "Primary Income", "Language", "Produce"];
+    const options = [
+      "Gender",
+      "Education",
+      "Crossing Frequency",
+      "Age",
+      "Country",
+      "Primary Income",
+      "Language",
+      "Produce"
+    ];
 
     return (
       <div className="App">
@@ -111,6 +120,8 @@ class App extends React.Component {
             <div className="dropdown-container">
               <p>Key Trader Demographics</p>
               <Dropdown
+                controlClassName="myControlClassName"
+                arrowClassName='myArrowClassName'
                 className="dropdown"
                 options={options}
                 onChange={this.onSelect}
