@@ -10,7 +10,7 @@ class CrossingFreqChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Daily", "Weekly", "Monthly", "Never"],
-      color: "nivo",
+      color: "category10",
       dailyPercentage: 0,
       weeklyPercentage: 0,
       monthlyPercentage: 0,
