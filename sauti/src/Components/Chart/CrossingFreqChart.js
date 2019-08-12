@@ -6,6 +6,22 @@ import axios from "axios";
 // Importing Methodology
 import Methodology from '../Methodology/Methodology'; 
 
+// Creating theme for nivo graphs
+const theme = {
+  axis: {
+    legend: {
+      text: {
+        fill: "#3c3e43"
+      },
+      ticks: {
+        line: {
+          stroke: "#595b5f"
+        }
+      }
+    }
+  },
+};
+
 class CrossingFreqChart extends React.Component {
   constructor(props) {
     super(props);
@@ -201,6 +217,7 @@ class CrossingFreqChart extends React.Component {
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
           // Testing: borderWidth = {2}
+          labelFormat= {d => <tspan y={ -15 }>{d}% </tspan>}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           maxValue={100}
           axisTop={null}
@@ -211,7 +228,8 @@ class CrossingFreqChart extends React.Component {
             tickRotation: 0,
             legend: "Crossing Frequency",
             legendPosition: "middle",
-            legendOffset: 30
+            legendOffset: 30, 
+            legendColor: "red", 
           }}
           axisLeft={{
             tickSize: 5,
@@ -220,10 +238,12 @@ class CrossingFreqChart extends React.Component {
             legend: "%",
             legendPosition: "middle",
             legendOffset: -40
+            
           }}
           labelSkipWidth={12}
           labelSkipHeight={12}
-          labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          labelTextColor="black"
+          theme={theme}
           legends={[
             {
               dataFrom: "keys",
