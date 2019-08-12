@@ -2,6 +2,10 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
 
+
+// Importing Methodology
+import Methodology from '../Methodology/Methodology'; 
+
 class CrossingFreqChart extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +22,16 @@ class CrossingFreqChart extends React.Component {
       dailyCount: 0,
       weeklyCount: 0,
       monthlyCount: 0,
-      neverCount: 0
+      neverCount: 0,
+      paragraph: `It is a long established fact that a reader will be distracted by the
+      readable content of a page when looking at its layout. The point of
+      using Lorem Ipsum is that it has a more-or-less normal distribution of
+      letters, as opposed to using 'Content here, content here', making it
+      look like readable English. Many desktop publishing packages and web
+      page editors now use Lorem Ipsum as their default model text, and a
+      search for 'lorem ipsum' will uncover many web sites still in their
+      infancy. Various versions have evolved over the years, sometimes by
+      accident, sometimes on purpose (injected humour and the like).`
     };
   }
 
@@ -187,6 +200,7 @@ class CrossingFreqChart extends React.Component {
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
+          // Testing: borderWidth = {2}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           maxValue={100}
           axisTop={null}
@@ -238,17 +252,7 @@ class CrossingFreqChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
-        <p>
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum is that it has a more-or-less normal distribution of
-          letters, as opposed to using 'Content here, content here', making it
-          look like readable English. Many desktop publishing packages and web
-          page editors now use Lorem Ipsum as their default model text, and a
-          search for 'lorem ipsum' will uncover many web sites still in their
-          infancy. Various versions have evolved over the years, sometimes by
-          accident, sometimes on purpose (injected humour and the like).
-        </p>
+        <Methodology paragraph={this.state.paragraph}/>
       </div>
     );
   }
