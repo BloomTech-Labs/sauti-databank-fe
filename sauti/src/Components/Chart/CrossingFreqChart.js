@@ -263,7 +263,7 @@ class CrossingFreqChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
-        <h2>Methodology Note</h2>
+        <h2 className="method-title">Methodology Note</h2>
         <p>It is a long established fact that a reader will be distracted by the
       readable content of a page when looking at its layout. The point of
       using Lorem Ipsum is that it has a more-or-less normal distribution of
