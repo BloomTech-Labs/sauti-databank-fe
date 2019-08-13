@@ -2,6 +2,41 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
 
+const theme = {
+  //background: "#222222",
+  axis: {
+    // fontSize: "100px",
+    // tickColor: "#eee",
+    ticks: {
+      // line: {
+      //   stroke: "#555555"
+      // },
+      text: {
+        fill: "#595b5f"
+      }
+    },
+    legend: {
+      text: {
+        fill: "#3c3e43"
+      }
+    }
+
+  },
+  labels: {
+    text: {
+      fontSize: "18px",
+      fontWeight: "normal",
+      fontFamily: "Helvetica"
+    }
+  }
+  // Grid Lines
+  // grid: {
+  //   line: {
+  //     stroke: "#555555"
+  //   }
+  // }
+};
+
 class EducationChart extends React.Component {
   constructor(props) {
     super(props);
@@ -185,6 +220,8 @@ class EducationChart extends React.Component {
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
+          labelFormat= {d => <tspan y={ -15 }>{d}% </tspan>}
+          labelForm= {d => <text >{d}% </text>}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           maxValue={100}
           axisTop={null}
@@ -207,7 +244,8 @@ class EducationChart extends React.Component {
           }}
           labelSkipWidth={12}
           labelSkipHeight={12}
-          labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          labelTextColor="black"
+          theme={theme}
           legends={[
             {
               dataFrom: "keys",
@@ -236,6 +274,12 @@ class EducationChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+        <div className="lineCont">
+        <div className="lineOne">
+        <h2 className="method-title">Methodology Note</h2>
+        </div>
+        <div className="lineTwo"></div>
+        </div>
         <p>
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of

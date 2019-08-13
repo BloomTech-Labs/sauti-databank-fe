@@ -2,6 +2,40 @@ import React from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import { ResponsiveBar } from "@nivo/bar";
+const theme = {
+  //background: "#222222",
+  axis: {
+    // fontSize: "100px",
+    // tickColor: "#eee",
+    ticks: {
+      // line: {
+      //   stroke: "#555555"
+      // },
+      text: {
+        fill: "#595b5f"
+      }
+    },
+    legend: {
+      text: {
+        fill: "#3c3e43"
+      }
+    }
+
+  },
+  labels: {
+    text: {
+      fontSize: "18px",
+      fontWeight: "normal",
+      fontFamily: "Helvetica"
+    }
+  }
+  // Grid Lines
+  // grid: {
+  //   line: {
+  //     stroke: "#555555"
+  //   }
+  // }
+};
 
 class BarGraphOne extends React.Component {
   constructor(props) {
