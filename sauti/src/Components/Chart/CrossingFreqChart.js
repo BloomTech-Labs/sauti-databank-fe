@@ -5,7 +5,7 @@ import axios from "axios";
 const theme = {
   //background: "#222222",
   axis: {
-    //fontSize: "14px",
+    // fontSize: "100px",
     // tickColor: "#eee",
     ticks: {
       // line: {
@@ -20,7 +20,15 @@ const theme = {
         fill: "#3c3e43"
       }
     }
+
   },
+  labels: {
+    text: {
+      fontSize: "18px",
+      fontWeight: "normal",
+      fontFamily: "Helvetica"
+    }
+  }
   // Grid Lines
   // grid: {
   //   line: {
@@ -207,7 +215,9 @@ class CrossingFreqChart extends React.Component {
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
           // Testing: borderWidth = {2}
+          // labelFormat={(d3.format(".0f"))}
           labelFormat= {d => <tspan y={ -15 }>{d}% </tspan>}
+          labelForm= {d => <text >{d}% </text>}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           maxValue={100}
           axisTop={null}
@@ -218,16 +228,16 @@ class CrossingFreqChart extends React.Component {
             tickRotation: 0,
             legend: "Crossing Frequency",
             legendPosition: "middle",
-            legendOffset: 45, 
+            legendOffset: 40, 
             legendColor: "red", 
           }}
           axisLeft={{
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "% Percent Of Traders",
+            legend: "Percentage of Traders",
             legendPosition: "middle",
-            legendOffset: -40
+            legendOffset: -50
             
             
           }}
@@ -263,7 +273,12 @@ class CrossingFreqChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
+        <div className="lineCont">
+        <div className="lineOne">
         <h2 className="method-title">Methodology Note</h2>
+        </div>
+        <div className="lineTwo"></div>
+        </div>
         <p>It is a long established fact that a reader will be distracted by the
       readable content of a page when looking at its layout. The point of
       using Lorem Ipsum is that it has a more-or-less normal distribution of
