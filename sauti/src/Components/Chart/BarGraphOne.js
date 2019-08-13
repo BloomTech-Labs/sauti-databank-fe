@@ -25,7 +25,7 @@ const theme = {
   labels: {
     text: {
       fontSize: "18px",
-      fontWeight: "normal",
+      fontWeight: "lighter",
       fontFamily: "Helvetica"
     }
   }
@@ -126,6 +126,7 @@ class BarGraphOne extends React.Component {
           labelSkipWidth={12}
           labelSkipHeight={12}
           labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          theme={theme}
           legends={[
             {
               dataFrom: "keys",

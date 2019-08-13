@@ -24,10 +24,10 @@ const theme = {
   },
   labels: {
     text: {
-      fontSize: "18px",
-      fontWeight: "normal",
-      fontFamily: "Helvetica"
-    }
+      fontSize: "16px",
+      fontWeight: "lighter",
+      fontFamily: "Helvetica",
+          }
   }
   // Grid Lines
   // grid: {
@@ -243,7 +243,7 @@ class CrossingFreqChart extends React.Component {
           }}
           labelSkipWidth={12}
           labelSkipHeight={12}
-          labelTextColor="black"
+          labelTextColor= "black"
           theme={theme}
           legends={[
             {
