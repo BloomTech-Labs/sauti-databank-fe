@@ -1,4 +1,55 @@
 .App {
+  .TopBar {
+    display: flex;
+    background-color: #212121;
+    width: 100vw;
+    height: 75px;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .Sauti-Logo {
+      // background-color: black;
+      font-family: Montserrat;
+      font-size: 30px;
+      font-weight: 1000;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      margin: 20px;
+
+      color: white;
+      margin-left: 40px;
+      text-decoration: none;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+
+      span {
+        color: #eb5e52;
+      }
+    }
+
+    .Navigation {
+      display: flex;
+      justify-content: space-evenly;
+      a {
+        text-decoration: none;
+        color: white;
+        margin-right: 40px;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+      }
+    }
+  }
+
   .main-container {
     display: flex;
     flex-direction: column;
@@ -34,7 +85,6 @@
         .Chart {
           height: 500px;
 
-          
           h2 {
             padding-bottom: 35px;
             font-family: Helvetica;
@@ -46,7 +96,7 @@
             letter-spacing: normal;
             color: #47484a;
           }
-          
+
           .lineCont {
             display: flex;
             padding-bottom: 20px;
@@ -62,7 +112,6 @@
             line-height: normal;
             letter-spacing: normal;
             color: #606368;
-
           }
 
           .lineOne {

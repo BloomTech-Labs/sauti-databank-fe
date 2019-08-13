@@ -28,16 +28,16 @@ class App extends React.Component {
       });
     });
 
-  //   axios
-  //     // For development: ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
-  //     .get(`https://sa-stage.herokuapp.com/sessions/lance/all`)
-  //     .then(res => {
-  //       // Log to see the response from server: console.log(res.data);
-  //       this.setState({
-  //         ...this.state,
-  //         realData: res.data
-  //       });
-  //     });
+    //   axios
+    //     // For development: ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
+    //     .get(`https://sa-stage.herokuapp.com/sessions/lance/all`)
+    //     .then(res => {
+    //       // Log to see the response from server: console.log(res.data);
+    //       this.setState({
+    //         ...this.state,
+    //         realData: res.data
+    //       });
+    //     });
   }
 
   onSelect = option => {
@@ -107,7 +107,23 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>Welcome to the Sauti Databank!</h1>
+        <div className="TopBar">
+          <div className="Sauti-Logo">
+            <a href="http://sautiafrica.org/">
+              <p>
+                Sauti<span>.</span>
+              </p>
+            </a>
+          </div>
+          <div className="Navigation">
+            <a href="http://sautiafrica.org/">HOME</a>
+            <a href="http://sautiafrica.org/our-approach/">ABOUT US</a>
+            <a href="http://sautiafrica.org/information-platform/">SERVICES</a>
+            <a href="http://sautiafrica.org/our-team/">OUR TEAM</a>
+            <a href="http://sautiafrica.org/news/">NEWS & UPDATES</a>
+            <a href="http://sautiafrica.org/contact/">CONTACT US</a>
+          </div>
+        </div>
         <div className="main-container">
           <div className="header">
             <h1>Informal Cross-Border Trade Data</h1>
@@ -121,7 +137,7 @@ class App extends React.Component {
               <p>Key Trader Demographics</p>
               <Dropdown
                 controlClassName="myControlClassName"
-                arrowClassName='myArrowClassName' 
+                arrowClassName="myArrowClassName"
                 className="dropdown"
                 options={options}
                 onChange={this.onSelect}
