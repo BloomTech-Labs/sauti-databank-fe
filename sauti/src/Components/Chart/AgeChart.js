@@ -20,20 +20,20 @@ const theme = {
       text: {
         fill: "#4d4f52",
         fontSize: "1.6rem",
-        fontWeight: "heavy",
+        fontWeight: 550,
         fontFamily: "Helvetica"
       }
     }
   },
   labels: {
     text: {
-      fontSize: "16px",
-      fontWeight: "heavy",
+      fontSize: "1.6rem",
+      fontWeight: 550,
       fontFamily: "Helvetica",
       fill: "#4d4f52",
     }
   }
-  // Grid Lines
+    // Grid Lines
   // grid: {
   //   line: {
   //     stroke: "#555555"
@@ -311,7 +311,7 @@ class AgeChart extends React.Component {
             tickRotation: 0,
             legend: "Age",
             legendPosition: "middle",
-            legendOffset: 42
+            legendOffset: 41
           }}
           axisLeft={{
             tickSize: 5,

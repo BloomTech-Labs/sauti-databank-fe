@@ -12,22 +12,25 @@ const theme = {
       //   stroke: "#555555"
       // },
       text: {
-        fill: "#595b5f",
-        fontSize: "14px"
+        fill: "#4d4f52",
+        fontSize: "1.6rem"
       }
     },
     legend: {
       text: {
-        fill: "#3c3e43",
-        fontSize: "14px"
+        fill: "#4d4f52",
+        fontSize: "1.6rem",
+        fontWeight: 550,
+        fontFamily: "Helvetica"
       }
     }
   },
   labels: {
     text: {
-      fontSize: "16px",
+      fontSize: "1.6rem",
       fontWeight: 550,
-      fontFamily: "Helvetica"
+      fontFamily: "Helvetica",
+      fill: "#4d4f52",
     }
   }
   // Grid Lines
@@ -169,7 +172,7 @@ class ProduceChart extends React.Component {
             tickRotation: 0,
             legend: "Primary Grower Of Produce",
             legendPosition: "middle",
-            legendOffset: 42
+            legendOffset: 41
           }}
           axisLeft={{
             tickSize: 5,
