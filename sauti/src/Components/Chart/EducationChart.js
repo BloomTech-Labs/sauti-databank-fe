@@ -12,19 +12,21 @@ const theme = {
       //   stroke: "#555555"
       // },
       text: {
-        fill: "#595b5f"
+        fill: "#595b5f",
+        fontSize: "14px",
       }
     },
     legend: {
       text: {
-        fill: "#3c3e43"
+        fill: "#3c3e43",
+        fontSize: "14px",
       }
     }
 
   },
   labels: {
     text: {
-      fontSize: "18px",
+      fontSize: "16px",
       fontWeight: "lighter",
       fontFamily: "Helvetica"
     }
@@ -45,7 +47,7 @@ class EducationChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Primary", "Secondary", "University", "None"],
-      color: "nivo",
+      color: "category10",
       primaryPercentage: 0,
       secondaryPercentage: 0,
       uniPercentage: 0,
@@ -232,15 +234,15 @@ class EducationChart extends React.Component {
             tickRotation: 0,
             legend: "Education Level",
             legendPosition: "middle",
-            legendOffset: 30
+            legendOffset: 42
           }}
           axisLeft={{
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "%",
+            legend: "Percentage of Traders",
             legendPosition: "middle",
-            legendOffset: -40
+            legendOffset: -50
           }}
           labelSkipWidth={12}
           labelSkipHeight={12}

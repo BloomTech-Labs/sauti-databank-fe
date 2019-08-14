@@ -12,19 +12,21 @@ const theme = {
       //   stroke: "#555555"
       // },
       text: {
-        fill: "#595b5f"
+        fill: "#595b5f",
+        fontSize: "14px",
       }
     },
     legend: {
       text: {
-        fill: "#3c3e43"
+        fill: "#3c3e43",
+        fontSize: "14px",
       }
     }
 
   },
   labels: {
     text: {
-      fontSize: "18px",
+      fontSize: "16px",
       fontWeight: "lighter",
       fontFamily: "Helvetica"
     }
@@ -45,7 +47,7 @@ class AgeChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Twenties", "Thirties", "Forties", "Teens", "Fifties", "Sixties"],
-      color: "nivo",
+      color: "category10",
       twentiesPercentage: 0,
       thirtiesPercentage: 0,
       fortiesPercentage: 0,
@@ -245,7 +247,7 @@ class AgeChart extends React.Component {
   render() {
     return (
       <div className="Chart">
-        <h2>Age Demographics</h2>
+        <h2>Age</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
@@ -266,15 +268,15 @@ class AgeChart extends React.Component {
             tickRotation: 0,
             legend: "Age",
             legendPosition: "middle",
-            legendOffset: 30
+            legendOffset: 42
           }}
           axisLeft={{
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "%",
+            legend: "Percentage of Traders",
             legendPosition: "middle",
-            legendOffset: -40
+            legendOffset: -50
           }}
           labelSkipWidth={12}
           labelSkipHeight={12}

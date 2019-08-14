@@ -13,19 +13,21 @@ const theme = {
       //   stroke: "#555555"
       // },
       text: {
-        fill: "#595b5f"
+        fill: "#595b5f",
+        fontSize: "14px",
       }
     },
     legend: {
       text: {
-        fill: "#3c3e43"
+        fill: "#3c3e43",
+        fontSize: "14px",
       }
     }
 
   },
   labels: {
     text: {
-      fontSize: "18px",
+      fontSize: "16px",
       fontWeight: "lighter",
       fontFamily: "Helvetica"
     }
@@ -47,7 +49,7 @@ class GenderChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Male", "Female"],
-      color: "nivo",
+      color: "category10",
       femalePercentage: 0,
       malePercentage: 0,
       femaleCount: 0,
@@ -176,15 +178,15 @@ class GenderChart extends React.Component {
             tickRotation: 0,
             legend: "Gender",
             legendPosition: "middle",
-            legendOffset: 30
+            legendOffset: 42
           }}
           axisLeft={{
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "%",
+            legend: "Percentage of Traders",
             legendPosition: "middle",
-            legendOffset: -40
+            legendOffset: -50
           }}
           labelSkipWidth={12}
           labelSkipHeight={12}

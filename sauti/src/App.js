@@ -53,11 +53,11 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Border Crossing Frequency"
       });
-    } else if (option.label === "Education") {
+    } else if (option.label === "Education Level") {
       this.props.history.push("/education-chart");
       this.setState({
         ...this.state,
-        defaultOption: "Education"
+        defaultOption: "Education Level"
       });
     } else if (option.label === "Age") {
       this.props.history.push("/age-chart");
@@ -65,11 +65,11 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Age"
       });
-    } else if (option.label === "Country") {
+    } else if (option.label === "Country of Origin") {
       this.props.history.push("/country-chart");
       this.setState({
         ...this.state,
-        defaultOption: "Country"
+        defaultOption: "Country of Origin"
       });
     } else if (option.label === "Language") {
       this.props.history.push("/language-chart");
@@ -96,10 +96,10 @@ class App extends React.Component {
     console.log(this.props);
     const options = [
       "Gender",
-      "Education",
+      "Education Level",
       "Border Crossing Frequency",
       "Age",
-      "Country",
+      "Country of Origin",
       "Primary Income",
       "Language",
       "Produce"

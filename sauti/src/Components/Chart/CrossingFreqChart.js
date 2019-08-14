@@ -12,12 +12,14 @@ const theme = {
       //   stroke: "#555555"
       // },
       text: {
-        fill: "#595b5f"
+        fill: "#595b5f",
+        fontSize: "14px",
       }
     },
     legend: {
       text: {
-        fill: "#3c3e43"
+        fill: "#3c3e43",
+        fontSize: "14px",
       }
     }
 
