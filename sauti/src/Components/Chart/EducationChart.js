@@ -244,8 +244,8 @@ class EducationChart extends React.Component {
             legendPosition: "middle",
             legendOffset: -50
           }}
-          labelSkipWidth={12}
-          labelSkipHeight={12}
+          labelSkipWidth={0}
+          labelSkipHeight={0}
           labelTextColor="black"
           theme={theme}
           legends={[

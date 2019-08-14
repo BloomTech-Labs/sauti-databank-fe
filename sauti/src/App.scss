@@ -1,3 +1,5 @@
+$greyColor: #4d4f52;
+
 .App {
   .TopBar {
     display: flex;
@@ -54,13 +56,13 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    margin-top: 100px;
+    margin-top: 75px;
     margin-bottom: 100px;
 
     .header {
       height: 75px;
       width: 1200px;
-      background: #2c2e32;
+      background: #212121;
 
       display: flex;
       align-items: center;
@@ -94,12 +96,23 @@
             font-stretch: normal;
             line-height: normal;
             letter-spacing: normal;
-            color: #47484a;
+            color: $greyColor;
           }
 
           .lineCont {
             display: flex;
             padding-bottom: 20px;
+
+            .lineOne {
+              margin-left: 40px;
+              border-bottom: 1px solid #d0d2d6;
+              width: 50%;
+            }
+
+            .lineTwo {
+              border-bottom: 4px solid #d0d2d6;
+              width: 50%;
+            }
           }
 
           .method-title {
@@ -111,17 +124,7 @@
             font-stretch: normal;
             line-height: normal;
             letter-spacing: normal;
-            color: #606368;
-          }
-
-          .lineOne {
-            margin-left: 40px;
-            border-bottom: 1px solid #d0d2d6;
-            width: 50%;
-          }
-          .lineTwo {
-            border-bottom: 4px solid #d0d2d6;
-            width: 50%;
+            color: $greyColor;
           }
 
           p {
@@ -129,14 +132,15 @@
             font-family: Helvetica, sans-serif;
             font-size: 14px;
             line-height: 1.2;
-            color: #524f4f;
+            color: $greyColor;
+            margin-bottom: 50px;
           }
         }
       }
 
       .dropdown-container {
         font-family: Helvetica, sans-serif;
-        color: #586060;
+        color: $greyColor;
         font-weight: bold;
 
         display: flex;
@@ -150,7 +154,8 @@
         }
 
         .dropdown {
-          font-size: 18px;
+          color: $greyColor;
+          font-size: 16px;
           font-weight: normal;
           display: flex;
           align-items: center;

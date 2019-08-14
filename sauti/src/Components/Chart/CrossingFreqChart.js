@@ -12,13 +12,13 @@ const theme = {
       //   stroke: "#555555"
       // },
       text: {
-        fill: "#595b5f",
+        fill: "#4d4f52",
         fontSize: "14px",
       }
     },
     legend: {
       text: {
-        fill: "#3c3e43",
+        fill: "#4d4f52",
         fontSize: "14px",
       }
     }
@@ -27,7 +27,7 @@ const theme = {
   labels: {
     text: {
       fontSize: "16px",
-      fontWeight: 550,
+      fontWeight: "normal",
       fontFamily: "Helvetica",
           }
   }
@@ -38,6 +38,7 @@ const theme = {
   //   }
   // }
 };
+
 class CrossingFreqChart extends React.Component {
   constructor(props) {
     super(props);
@@ -46,7 +47,7 @@ class CrossingFreqChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Daily", "Weekly", "Monthly", "Never"],
-      color: "category10",
+      color: "set3",
       dailyPercentage: 0,
       weeklyPercentage: 0,
       monthlyPercentage: 0,
@@ -243,8 +244,8 @@ class CrossingFreqChart extends React.Component {
             
             
           }}
-          labelSkipWidth={12}
-          labelSkipHeight={12}
+          labelSkipWidth={0}
+          labelSkipHeight={0}
           labelTextColor= "black"
           theme={theme}
           legends={[

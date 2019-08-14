@@ -27,7 +27,7 @@ const theme = {
   labels: {
     text: {
       fontSize: "16px",
-      fontWeight: 550,
+      fontWeight: "normal",
       fontFamily: "Helvetica"
     }
   }
@@ -47,7 +47,7 @@ class AgeChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Twenties", "Thirties", "Forties", "Teens", "Fifties", "Sixties"],
-      color: "category10",
+      color: "nivo",
       twentiesPercentage: 0,
       thirtiesPercentage: 0,
       fortiesPercentage: 0,
@@ -257,6 +257,8 @@ class AgeChart extends React.Component {
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
+          labelSkipHeight={0}
+          labelSkipWidth={0}
           labelFormat= {d => <tspan y={ -15 }>{d}% </tspan>}
           labelForm= {d => <text >{d} % </text>}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
@@ -279,8 +281,6 @@ class AgeChart extends React.Component {
             legendPosition: "middle",
             legendOffset: -50
           }}
-          labelSkipWidth={12}
-          labelSkipHeight={12}
           labelTextColor="black"
           theme={theme}
           legends={[
