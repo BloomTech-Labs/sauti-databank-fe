@@ -63,6 +63,7 @@ class AgeChart extends React.Component {
     };
   }
 
+  
   componentDidMount() {
     axios
       .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/all")
