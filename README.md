@@ -2,6 +2,7 @@
 
 You can find our deployed project at: https://production-sauti-databank.netlify.com/
 
+
 ## Contributors
 
 |                                                                                        [Cash Globe](https://github.com/cashcoder88)                                                                                         |                                                                                     [Christopher Lopez](https://github.com/numberoneecsstudent)                                                                                     |                                                                                       [Heymi Vanegas](https://github.com/heymiday)                                                                                       |                                             [Jonathan Erlich](https://github.com/joerlop)                                              |
@@ -10,11 +11,11 @@ You can find our deployed project at: https://production-sauti-databank.netlify.
 |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/cashcoder88)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/numberoneecsstudent)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/heymiday)                                                                   |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/joerlop)                          |
 |                                            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/cash-globe-1371ab21/)                                             |                                                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/christopher-ro-lopez/)                                                |                                         [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/heymi-vanegas-50b81b182/)                                         |    [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jonathanerlich/)     |
 
-|                                                                [Kimberlee Johnson](https://github.com/kimberleejohnson)                                                                |                                                                                      [Mark La Monica](https://github.com/sauti-databank)                                                                                       |                                                                                      [Victor Gordian](https://github.com/sweetooth101)                                                                                       |                                          [Vijay Das](https://github.com/vijaydas)                                          |
+|                                                                [Kimberlee Johnson](https://github.com/kimberleejohnson)                                                                |                                                                                      [Mark La Monica](https://github.com/sauti-databank)                                                                                       |                                                                                                                                                                            |                                          [Vijay Das](https://github.com/vijaydas)                                          |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://ph-avatars.imgix.net/1142934/original?auto=format&auto=compress&codec=mozjpeg&cs=strip&w=140&h=140&fit=crop" width = "200" />](https://github.com/kimberleejohnson) | [<img src="https://media.licdn.com/dms/image/C5603AQE44grgMc1mpg/profile-displayphoto-shrink_800_800/0?e=1570060800&v=beta&t=S0fxIhnxnlIRf26SM-QFK0agPzrdGz5pyFGlu7g79NE" width = "200" />](https://github.com/sauti-databank) | [<img src="https://media.licdn.com/dms/image/C5603AQH-m0OfN_fbnA/profile-displayphoto-shrink_800_800/0?e=1570060800&v=beta&t=tsabG-h2_dTT0yhd8VhJgOKOIVsaNlN7SDTEx0QD22A" width = "200" />](https://github.com/sweetooth101) |   [<img src="https://avatars2.githubusercontent.com/u/2294505?s=180&v=4" width = "200" />](https://github.com/vijaydas)    |
-|                                             [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/kimberleejohnson)                                              |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sauti-databank)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sweetooth101)                                                                   |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/vijaydas)                    |
-|                           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kimberleejohnson/)                            |                                           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/mark-la-monica-11155b181/)                                            |                                               [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/victor-gordian/)                                                | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/vijaytdas/) |
+| [<img src="https://ph-avatars.imgix.net/1142934/original?auto=format&auto=compress&codec=mozjpeg&cs=strip&w=140&h=140&fit=crop" width = "200" />](https://github.com/kimberleejohnson) | [<img src="https://media.licdn.com/dms/image/C5603AQE44grgMc1mpg/profile-displayphoto-shrink_800_800/0?e=1570060800&v=beta&t=S0fxIhnxnlIRf26SM-QFK0agPzrdGz5pyFGlu7g79NE" width = "200" />](https://github.com/sauti-databank) |  |   [<img src="https://avatars2.githubusercontent.com/u/2294505?s=180&v=4" width = "200" />](https://github.com/vijaydas)    |
+|                                             [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/kimberleejohnson)                                              |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sauti-databank)                                                                   |                                                                                                                                    |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/vijaydas)                    |
+|                           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kimberleejohnson/)                            |                                           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/mark-la-monica-11155b181/)                                            |                                                                                               | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/vijaytdas/) |
 
 <br>
 <br>
@@ -29,9 +30,9 @@ You can find our deployed project at: https://production-sauti-databank.netlify.
 
 - [Trello Board](https://trello.com/b/ycDN2Mzb/labs-14-sauti-databank)
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+1️⃣ [Product Canvas](https://www.notion.so/Feature-Canvas-All-charts-with-UX-design-in-Key-Trader-Demographics-tab-17e9fbd80c1b4a719c125d448491a400)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+1️⃣ [UX Design files](https://app.zeplin.io/project/5d26179fd0a6fc367e0fdc94/screen/5d5307619df85c9b3c2f2469)
 
 Sauti is a nonprofit that provides a platform for small traders in East African countries to look up realtime market data. Sauti also collects demographic data on these traders, but, until our Labs project, didn't have a way to visualize that demographic data for researchers.
 
@@ -39,36 +40,34 @@ Using A, B, and C tools, our team helped Sauti make its data more helpful and us
 
 ### 4️⃣ Key Features
 
-- feature one
-- feature two
-- feature three
-- feature four
-- feature five
+Researcher interested in Sauti Trader Demographic Date is able to see the following Key Demographic Data by selecting through a dropdown menu:
+- Primary Language
+- Country of Residence
+- Age
+- Cross-Border Trade as Primary Source of Income
+- Primary Border Crossing
+- Gender
+- Education
+- Border-Crossing Frequency
+
+
 
 ## 1️⃣ Tech Stack
 
 ### Front end built using:
 
-#### _Front end framework goes here_
+React as it is the current industry standard
+ 
+Nivo is used for our charting library. Since it is built on D3, we have implemented the current industry standard for data visualizations.
 
-🚫 Why did you choose this framework?
+#### Front end deployed to Netlify
 
-- point one
-- point two
-- point three
-- point four
+#### [Back end](https://github.com/sauti-databank/back-end) built using:
 
-🚫List the rest of the front end features and libraries in the same format as the framework above.
-
-#### Front end deployed to `🚫insert service here`
-
-#### [Back end](🚫link to back end repo here) built using:
-
-#### 🚫 back end framework goes here
-
-- point one
-- point two
-- point three
+- Node.js
+- Express
+- KNEX
+- MySQL
 
 🚫 List the rest of the back end end features and libraries in the same format as the framework above
 
