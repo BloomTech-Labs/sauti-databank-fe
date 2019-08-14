@@ -19,7 +19,7 @@ const theme = {
     legend: {
       text: {
         fill: "#4d4f52",
-        fontSize: "14px",
+        fontSize: "1.4rem",
       }
     }
 
@@ -47,7 +47,7 @@ class CrossingFreqChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Daily", "Weekly", "Monthly", "Never"],
-      color: "set3",
+      color: "nivo",
       dailyPercentage: 0,
       weeklyPercentage: 0,
       monthlyPercentage: 0,

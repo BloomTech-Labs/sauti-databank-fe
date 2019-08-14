@@ -49,7 +49,7 @@ class LanguageChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["English", "Swahili", "Kinyarwanda", "Luganda", "Lukiga"],
-      color: "category10",
+      color: "nivo",
       englishPercentage: 0,
       swahiliPercentage: 0,
       kinyarwandaPercentage: 0,

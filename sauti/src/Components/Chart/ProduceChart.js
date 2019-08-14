@@ -47,7 +47,7 @@ class ProduceChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Yes", "No"],
-      color: "category10",
+      color: "nivo",
       noPercentage: 0,
       yesPercentage: 0,
       noCount: 0,

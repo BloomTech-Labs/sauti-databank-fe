@@ -5,14 +5,14 @@ $greyColor: #4d4f52;
     display: flex;
     background-color: #212121;
     width: 100vw;
-    height: 75px;
+    height: 100px;
     align-items: center;
     justify-content: space-evenly;
 
     .Sauti-Logo {
       // background-color: black;
       font-family: Montserrat;
-      font-size: 30px;
+      font-size: 3.0rem;
       font-weight: 1000;
       font-style: normal;
       font-stretch: normal;
@@ -42,7 +42,7 @@ $greyColor: #4d4f52;
         color: white;
         margin-right: 40px;
         font-family: Helvetica;
-        font-size: 12px;
+        font-size: 1.2rem;
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
@@ -60,15 +60,14 @@ $greyColor: #4d4f52;
     margin-bottom: 100px;
 
     .header {
-      height: 75px;
+      height: 88px;
       width: 1200px;
       background: #212121;
-
       display: flex;
       align-items: center;
 
       h1 {
-        font-size: 24px;
+        font-size: 28px;
         color: #ffffff;
         font-family: Helvetica, sans-serif;
         margin-left: 20px;
@@ -86,11 +85,12 @@ $greyColor: #4d4f52;
 
         .Chart {
           height: 500px;
+          //font-size: 62.5%;
 
           h2 {
             padding-bottom: 35px;
             font-family: Helvetica;
-            font-size: 20px;
+            font-size: 2.8rem;
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
@@ -118,7 +118,7 @@ $greyColor: #4d4f52;
           .method-title {
             padding: 50px 40px 20px 0px;
             font-family: Helvetica;
-            font-size: 28px;
+            font-size: 2.8rem;
             font-weight: bold;
             font-style: normal;
             font-stretch: normal;
@@ -130,7 +130,7 @@ $greyColor: #4d4f52;
           p {
             padding: 10px 0px 10px 40px;
             font-family: Helvetica, sans-serif;
-            font-size: 14px;
+            font-size: 1.4rem;
             line-height: 1.2;
             color: $greyColor;
             margin-bottom: 50px;
@@ -149,13 +149,13 @@ $greyColor: #4d4f52;
         width: 25%;
 
         p {
-          font-size: 14px;
+          font-size: 1.4rem;
           margin-bottom: 10px;
         }
 
         .dropdown {
           color: $greyColor;
-          font-size: 16px;
+          font-size: 1.6rem;
           font-weight: normal;
           display: flex;
           align-items: center;

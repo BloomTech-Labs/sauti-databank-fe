@@ -69,19 +69,19 @@ Nivo is used for our charting library. Since it is built on D3, we have implemen
 - KNEX
 - MySQL
 
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
-
 # APIs
 
 ## 2️⃣ Authentication API here
 
-🚫Replace text below with a description of the API
+🚫Placeholder until and unless we set up protected routes
 
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+Check my credentials and let me in.
 
 # 4️⃣ Testing
 
 🚫Document what you used for testing and why
+
+Front end QA document.  All bugs are recorded in GitHub issues.
 
 # 4️⃣ Installation Instructions
 
@@ -102,7 +102,7 @@ Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do 
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
+Please note we have a [code of conduct](https://gist.github.com/PurpleBooth/b24679402957c63ec426). Please follow it in all your interactions with the project.
 
 ## Issue/Bug Request
 
@@ -137,4 +137,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](🚫*link to your backend readme here*) for details on the backend of our project.
+See [Backend Documentation](https://github.com/sauti-databank/back-end) for details on the backend of our project.

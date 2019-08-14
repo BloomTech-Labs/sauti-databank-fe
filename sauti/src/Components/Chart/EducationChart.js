@@ -47,7 +47,7 @@ class EducationChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Primary", "Secondary", "University", "None"],
-      color: "category10",
+      color: "nivo",
       primaryPercentage: 0,
       secondaryPercentage: 0,
       uniPercentage: 0,

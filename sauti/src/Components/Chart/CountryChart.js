@@ -47,7 +47,7 @@ class CrossingFreqChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Kenya", "Uganda", "Rwanda"],
-      color: "category10",
+      color: "nivo",
       kenyaPercentage: 0,
       ugandaPercentage: 0,
       rwandaPercentage: 0,
