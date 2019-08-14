@@ -20,30 +20,6 @@ code {
   align-items: center;
 }
 
-.Chart {
-  height: 500px;
-  width: 800px;
-}
-
-.dropdowns-container {
-  display: flex;
-}
-
-.gender-dropdown {
-  width: 150px;
-  margin-right: 50px;
-}
-
-.year-dropdown {
-  width: 150px;
-}
-
-.link-button-chart {
-  margin: 50px;
-  padding: 25px;
-  position: relative;
-}
-
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)

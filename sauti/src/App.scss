@@ -1,4 +1,55 @@
 .App {
+  .TopBar {
+    display: flex;
+    background-color: #212121;
+    width: 100vw;
+    height: 75px;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .Sauti-Logo {
+      // background-color: black;
+      font-family: Montserrat;
+      font-size: 30px;
+      font-weight: 1000;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      margin: 20px;
+
+      color: white;
+      margin-left: 40px;
+      text-decoration: none;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+
+      span {
+        color: #eb5e52;
+      }
+    }
+
+    .Navigation {
+      display: flex;
+      justify-content: space-evenly;
+      a {
+        text-decoration: none;
+        color: white;
+        margin-right: 40px;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+      }
+    }
+  }
+
   .main-container {
     display: flex;
     flex-direction: column;
@@ -7,12 +58,12 @@
     margin-bottom: 100px;
 
     .header {
-      height: 100px;
+      height: 75px;
       width: 1200px;
       background: #2c2e32;
-      
+
       display: flex;
-      align-items: center; 
+      align-items: center;
 
       h1 {
         font-size: 24px;
@@ -23,27 +74,62 @@
     } //header
 
     .content-container {
-      margin-top: 35px;
+      margin-top: 65px;
       display: flex;
       margin-left: 40px;
       width: 100%;
 
       .chart-container {
-        width: 75%;
+        width: calc(75% - 40px);
 
         .Chart {
+          height: 500px;
 
           h2 {
-            font-size: 24px;
+            padding-bottom: 35px;
+            font-family: Helvetica;
+            font-size: 20px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #47484a;
+          }
+
+          .lineCont {
+            display: flex;
+            padding-bottom: 20px;
+          }
+
+          .method-title {
+            padding: 50px 40px 20px 0px;
+            font-family: Helvetica;
+            font-size: 28px;
             font-weight: bold;
-            font-family: Helvetica, sans-serif;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #606368;
+          }
+
+          .lineOne {
+            margin-left: 40px;
+            border-bottom: 1px solid #d0d2d6;
+            width: 50%;
+          }
+          .lineTwo {
+            border-bottom: 4px solid #d0d2d6;
+            width: 50%;
           }
 
           p {
+            padding: 10px 0px 10px 40px;
             font-family: Helvetica, sans-serif;
             font-size: 14px;
-            padding: 30px 40px;
             line-height: 1.2;
+            color: #524f4f;
           }
         }
       }
@@ -60,11 +146,31 @@
 
         p {
           font-size: 14px;
-          margin-bottom: 10px; 
+          margin-bottom: 10px;
         }
 
         .dropdown {
-          width: 250px;
+          font-size: 18px;
+          font-weight: normal;
+          display: flex;
+          align-items: center;
+        }
+        .myControlClassName {
+          width: 100%;
+
+          padding-top: 15px;
+          padding-bottom: 15px;
+          display: flex;
+          align-items: center;
+        }
+        .myArrowClassName {
+          padding-top: 26px;
+          padding-bottom: 26px;
+        }
+        .Dropdown-arrow {
+          position: absolute;
+          top: 25px;
+          right: 15px;
         }
       }
     }

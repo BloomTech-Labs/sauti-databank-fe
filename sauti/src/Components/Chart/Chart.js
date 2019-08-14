@@ -3,11 +3,11 @@
 // Requiring dependencies
 import { Route } from "react-router-dom";
 import React from "react";
-import { ResponsiveBar } from "@nivo/bar";
+//import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
 
 // Importing components
-import BarGraphOne from "./BarGraphOne.js";
+//import BarGraphOne from "./BarGraphOne.js";
 import CrossingFreqChart from "./CrossingFreqChart.js";
 import GenderChart from "./GenderChart.js";
 // import Transformation from '../../../Transformation.js/index.js'
@@ -33,7 +33,7 @@ class Chart extends React.Component {
     super(props);
     this.state = {
       data: [], // Empty array that updates for Nivo to display
-      color: "nivo", // Default chart color
+      color: "category10", // Default chart color
       sessions: [], // Sessions data will be pulled from backend
       male2017: 0, // Number of male searches for a given product in 2017
       female2017: 0, // Setting at zero because updates based on backend data

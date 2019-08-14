@@ -1,7 +1,43 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
+// Creating theme for nivo graphs
+const theme = {
+  //background: "#222222",
+  axis: {
+    // fontSize: "100px",
+    // tickColor: "#eee",
+    ticks: {
+      // line: {
+      //   stroke: "#555555"
+      // },
+      text: {
+        fill: "#595b5f",
+        fontSize: "14px",
+      }
+    },
+    legend: {
+      text: {
+        fill: "#3c3e43",
+        fontSize: "14px",
+      }
+    }
 
+  },
+  labels: {
+    text: {
+      fontSize: "16px",
+      fontWeight: 550,
+      fontFamily: "Helvetica",
+          }
+  }
+  // Grid Lines
+  // grid: {
+  //   line: {
+  //     stroke: "#555555"
+  //   }
+  // }
+};
 class CrossingFreqChart extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +46,7 @@ class CrossingFreqChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Daily", "Weekly", "Monthly", "Never"],
-      color: "nivo",
+      color: "category10",
       dailyPercentage: 0,
       weeklyPercentage: 0,
       monthlyPercentage: 0,
@@ -21,7 +57,6 @@ class CrossingFreqChart extends React.Component {
       neverCount: 0
     };
   }
-
   componentDidMount() {
     axios
       .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/all")
@@ -39,7 +74,6 @@ class CrossingFreqChart extends React.Component {
         );
       });
   }
-
   getDaily = () => {
     axios
       .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/daily/count")
@@ -59,7 +93,6 @@ class CrossingFreqChart extends React.Component {
         console.log(err);
       });
   };
-
   getWeekly = () => {
     axios
       .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/weekly/count")
@@ -79,7 +112,6 @@ class CrossingFreqChart extends React.Component {
         console.log(err);
       });
   };
-
   getMonthly = () => {
     axios
       .get(
@@ -101,7 +133,6 @@ class CrossingFreqChart extends React.Component {
         console.log(err);
       });
   };
-
   getNever = () => {
     axios
       .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/never/count")
@@ -121,7 +152,6 @@ class CrossingFreqChart extends React.Component {
         console.log(err);
       });
   };
-
   setPercentages = () => {
     const totalCount = this.state.totalCount;
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
@@ -174,7 +204,6 @@ class CrossingFreqChart extends React.Component {
       }
     );
   };
-
   render() {
     return (
       <div className="Chart">
@@ -187,6 +216,10 @@ class CrossingFreqChart extends React.Component {
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
+          // Testing: borderWidth = {2}
+          // labelFormat={(d3.format(".0f"))}
+          labelFormat= {d => <tspan y={ -15 }>{d}% </tspan>}
+          labelForm= {d => <text >{d}% </text>}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           maxValue={100}
           axisTop={null}
@@ -197,19 +230,23 @@ class CrossingFreqChart extends React.Component {
             tickRotation: 0,
             legend: "Crossing Frequency",
             legendPosition: "middle",
-            legendOffset: 30
+            legendOffset: 40, 
+            legendColor: "red", 
           }}
           axisLeft={{
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "%",
+            legend: "Percentage of Traders",
             legendPosition: "middle",
-            legendOffset: -40
+            legendOffset: -50
+            
+            
           }}
           labelSkipWidth={12}
           labelSkipHeight={12}
-          labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          labelTextColor= "black"
+          theme={theme}
           legends={[
             {
               dataFrom: "keys",
@@ -238,20 +275,23 @@ class CrossingFreqChart extends React.Component {
           motionStiffness={90}
           motionDamping={15}
         />
-        <p>
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum is that it has a more-or-less normal distribution of
-          letters, as opposed to using 'Content here, content here', making it
-          look like readable English. Many desktop publishing packages and web
-          page editors now use Lorem Ipsum as their default model text, and a
-          search for 'lorem ipsum' will uncover many web sites still in their
-          infancy. Various versions have evolved over the years, sometimes by
-          accident, sometimes on purpose (injected humour and the like).
-        </p>
+        <div className="lineCont">
+        <div className="lineOne">
+        <h2 className="method-title">Methodology Note</h2>
+        </div>
+        <div className="lineTwo"></div>
+        </div>
+        <p>It is a long established fact that a reader will be distracted by the
+      readable content of a page when looking at its layout. The point of
+      using Lorem Ipsum is that it has a more-or-less normal distribution of
+      letters, as opposed to using 'Content here, content here', making it
+      look like readable English. Many desktop publishing packages and web
+      page editors now use Lorem Ipsum as their default model text, and a
+      search for 'lorem ipsum' will uncover many web sites still in their
+      infancy. Various versions have evolved over the years, sometimes by
+      accident, sometimes on purpose (injected humour and the like).</p>
       </div>
     );
   }
 }
-
 export default CrossingFreqChart;
