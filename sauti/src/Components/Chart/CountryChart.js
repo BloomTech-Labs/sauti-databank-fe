@@ -27,7 +27,7 @@ const theme = {
   labels: {
     text: {
       fontSize: "16px",
-      fontWeight: "lighter",
+      fontWeight: 550,
       fontFamily: "Helvetica"
     }
   }
@@ -169,7 +169,7 @@ class CrossingFreqChart extends React.Component {
   render() {
     return (
       <div className="Chart">
-        <h2>Country of Origin</h2>
+        <h2>Country of Residence</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis

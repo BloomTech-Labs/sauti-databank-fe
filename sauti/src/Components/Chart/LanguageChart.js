@@ -28,7 +28,7 @@ const theme = {
   labels: {
     text: {
       fontSize: "16px",
-      fontWeight: "lighter",
+      fontWeight: 550,
       fontFamily: "Helvetica"
     }
   }

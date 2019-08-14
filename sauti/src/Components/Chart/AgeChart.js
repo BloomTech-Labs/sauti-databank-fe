@@ -27,7 +27,7 @@ const theme = {
   labels: {
     text: {
       fontSize: "16px",
-      fontWeight: "lighter",
+      fontWeight: 550,
       fontFamily: "Helvetica"
     }
   }
@@ -258,7 +258,7 @@ class AgeChart extends React.Component {
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
           labelFormat= {d => <tspan y={ -15 }>{d}% </tspan>}
-          labelForm= {d => <text >{d}% </text>}
+          labelForm= {d => <text >{d} % </text>}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           maxValue={100}
           axisTop={null}

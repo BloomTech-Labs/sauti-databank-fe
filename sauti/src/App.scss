@@ -58,7 +58,7 @@
     margin-bottom: 100px;
 
     .header {
-      height: 100px;
+      height: 75px;
       width: 1200px;
       background: #2c2e32;
 
@@ -158,8 +158,8 @@
         .myControlClassName {
           width: 100%;
 
-          padding-top: 26px;
-          padding-bottom: 26px;
+          padding-top: 15px;
+          padding-bottom: 15px;
           display: flex;
           align-items: center;
         }
@@ -169,8 +169,8 @@
         }
         .Dropdown-arrow {
           position: absolute;
-          top: 30px;
-          right: 20px;
+          top: 25px;
+          right: 15px;
         }
       }
     }

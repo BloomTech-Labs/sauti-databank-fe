@@ -65,11 +65,11 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Age"
       });
-    } else if (option.label === "Country of Origin") {
+    } else if (option.label === "Country of Residence") {
       this.props.history.push("/country-chart");
       this.setState({
         ...this.state,
-        defaultOption: "Country of Origin"
+        defaultOption: "Country of Residence"
       });
     } else if (option.label === "Language") {
       this.props.history.push("/language-chart");
@@ -99,7 +99,7 @@ class App extends React.Component {
       "Education Level",
       "Border Crossing Frequency",
       "Age",
-      "Country of Origin",
+      "Country of Residence",
       "Primary Income",
       "Language",
       "Produce"
