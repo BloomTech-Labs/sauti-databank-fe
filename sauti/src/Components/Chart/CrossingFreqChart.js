@@ -225,7 +225,7 @@ class CrossingFreqChart extends React.Component {
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
           indexBy="Frequency"
-          margin={{ top: 50, right: 130, bottom: 60, left: 60 }}
+          margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
@@ -243,7 +243,7 @@ class CrossingFreqChart extends React.Component {
             tickRotation: 0,
             legend: "Crossing Frequency",
             legendPosition: "middle",
-            legendOffset: 50,
+            legendOffset: 65,
             legendColor: "red"
           }}
           axisLeft={{
@@ -252,7 +252,7 @@ class CrossingFreqChart extends React.Component {
             tickRotation: 0,
             legend: "Percentage of Traders",
             legendPosition: "middle",
-            legendOffset: -50
+            legendOffset: -70
           }}
           labelSkipWidth={0}
           labelSkipHeight={0}
