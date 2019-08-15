@@ -41,6 +41,7 @@ const theme = {
   // }
 };
 
+
 class CrossingFreqChart extends React.Component {
   constructor(props) {
     super(props);

@@ -50,7 +50,7 @@ class GenderChart extends React.Component {
       users: [],
       totalCount: 0,
       data: [],
-      keys: ["Male", "Female"],
+      keys: ["Female", "Male"],
       color: "nivo",
       femalePercentage: 0,
       malePercentage: 0,
