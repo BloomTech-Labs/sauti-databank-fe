@@ -288,7 +288,7 @@ class AgeChart extends React.Component {
   };
 
   render() {
-    
+
     return (
       <div className="Chart">
         <h2>Age</h2>
@@ -296,7 +296,7 @@ class AgeChart extends React.Component {
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
           indexBy="Age"
-          margin={{ top: 50, right: 130, bottom: 60, left: 60 }}
+          margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
@@ -314,7 +314,7 @@ class AgeChart extends React.Component {
             tickRotation: 0,
             legend: "Age",
             legendPosition: "middle",
-            legendOffset: 50
+            legendOffset: 65
           }}
           axisLeft={{
             tickSize: 5,
@@ -322,7 +322,7 @@ class AgeChart extends React.Component {
             tickRotation: 0,
             legend: "Percentage of Traders",
             legendPosition: "middle",
-            legendOffset: -50
+            legendOffset: -70
           }}
           labelTextColor="black"
           theme={theme}
