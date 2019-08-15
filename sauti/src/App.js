@@ -21,6 +21,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.getDropDownDefault();
+
     axios.get(`${process.env.REACT_APP_BACKEND_URL}/sessions/all`).then(res => {
       console.log(res);
       this.setState({
@@ -38,6 +40,51 @@ class App extends React.Component {
     //         realData: res.data
     //       });
     //     });
+  }
+
+  getDropDownDefault(pathname = this.props.history.location.pathname) {
+
+    if (pathname === "/gender-chart" || pathname === "/") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Gender"
+      });
+    } else if (pathname === "/crossing-frequency-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Border Crossing Frequency"
+      });
+    } else if (pathname === "/education-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Education Level"
+      });
+    } else if (pathname === "/age-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Age"
+      });
+    } else if (pathname === "/country-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Country of Residence"
+      });
+    } else if (pathname === "/language-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Language"
+      });
+    } else if (pathname === "/primaryincome-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Primary Income"
+      });
+    } else if (pathname === "/produce-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Produce"
+      });
+    }
   }
 
   onSelect = option => {
@@ -130,7 +177,7 @@ class App extends React.Component {
           </div>
           <div className="content-container">
             <div className="chart-container">
-              <Chart />
+              <Chart getDropDownDefault={this.getDropDownDefault.bind(this)}/>
             </div>
             {/* <ComSelTransformation /> */}
             <div className="dropdown-container">

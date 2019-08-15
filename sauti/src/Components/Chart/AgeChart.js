@@ -66,6 +66,8 @@ class AgeChart extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getDropDownDefault(this.props.pathname);
+
     axios
       .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/all")
       .then(res => {
@@ -286,6 +288,7 @@ class AgeChart extends React.Component {
   };
 
   render() {
+    
     return (
       <div className="Chart">
         <h2>Age</h2>
