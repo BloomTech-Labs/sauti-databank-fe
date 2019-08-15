@@ -146,7 +146,8 @@ $greyColor: #4d4f52;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        width: 25%;
+        width: calc(25% - 40px);
+        margin-right: 40px;
 
         p {
           font-size: 1.4rem;
