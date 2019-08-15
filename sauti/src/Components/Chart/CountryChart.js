@@ -60,6 +60,8 @@ class CrossingFreqChart extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getDropDownDefault(this.props.pathname);
+    
     axios
       .get("https://staging-sauti-labs-14.herokuapp.com/users/all/country/all")
       .then(res => {
