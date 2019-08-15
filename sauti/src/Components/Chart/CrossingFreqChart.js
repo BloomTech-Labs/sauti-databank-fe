@@ -30,7 +30,7 @@ const theme = {
       fontSize: "1.6rem",
       fontWeight: 550,
       fontFamily: "Helvetica",
-      fill: "#4d4f52",
+      fill: "#4d4f52"
     }
   }
   // Grid Lines
@@ -40,6 +40,7 @@ const theme = {
   //   }
   // }
 };
+
 
 class CrossingFreqChart extends React.Component {
   constructor(props) {
@@ -61,8 +62,12 @@ class CrossingFreqChart extends React.Component {
     };
   }
   componentDidMount() {
+    this.props.getDropDownDefault(this.props.pathname);
+    
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/all")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/all"
+      )
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
@@ -79,7 +84,9 @@ class CrossingFreqChart extends React.Component {
   }
   getDaily = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/daily/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/daily/count"
+      )
       .then(res => {
         console.log("daily Count", res.data);
         this.setState(
@@ -98,7 +105,9 @@ class CrossingFreqChart extends React.Component {
   };
   getWeekly = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/weekly/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/weekly/count"
+      )
       .then(res => {
         console.log("weekly Count", res.data);
         this.setState(
@@ -138,7 +147,9 @@ class CrossingFreqChart extends React.Component {
   };
   getNever = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/never/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/never/count"
+      )
       .then(res => {
         console.log("never Count", res.data);
         this.setState(
@@ -215,14 +226,14 @@ class CrossingFreqChart extends React.Component {
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
           indexBy="Frequency"
-          margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+          margin={{ top: 50, right: 130, bottom: 60, left: 60 }}
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
           // Testing: borderWidth = {2}
           // labelFormat={(d3.format(".0f"))}
-          labelFormat= {d => <tspan y={ -15 }>{d}% </tspan>}
-          labelForm= {d => <text >{d}% </text>}
+          labelFormat={d => <tspan y={-15}>{d}% </tspan>}
+          labelForm={d => <text>{d}% </text>}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           maxValue={100}
           axisTop={null}
@@ -233,8 +244,8 @@ class CrossingFreqChart extends React.Component {
             tickRotation: 0,
             legend: "Crossing Frequency",
             legendPosition: "middle",
-            legendOffset: 40, 
-            legendColor: "red", 
+            legendOffset: 50,
+            legendColor: "red"
           }}
           axisLeft={{
             tickSize: 5,
@@ -243,37 +254,40 @@ class CrossingFreqChart extends React.Component {
             legend: "Percentage of Traders",
             legendPosition: "middle",
             legendOffset: -50
-            
-            
           }}
           labelSkipWidth={0}
           labelSkipHeight={0}
-          labelTextColor= "black"
+          labelTextColor="black"
           theme={theme}
+<<<<<<< HEAD
           tooltip={({ id, value}) => (
             <strong style={{color: "#000000", fontSize: "15px", fontFamily: "Helvetica"}}>
                 {id}: {value}%
             </strong>
         )}
+=======
+>>>>>>> 063170133dfdf176d8e9c04adcd523cf6bcaebba
           animate={true}
           motionStiffness={90}
           motionDamping={15}
         />
         <div className="lineCont">
-        <div className="lineOne">
-        <h2 className="method-title">Methodology Note</h2>
+          <div className="lineOne">
+            <h2 className="method-title">Methodology Note</h2>
+          </div>
+          <div className="lineTwo" />
         </div>
-        <div className="lineTwo"></div>
-        </div>
-        <p>It is a long established fact that a reader will be distracted by the
-      readable content of a page when looking at its layout. The point of
-      using Lorem Ipsum is that it has a more-or-less normal distribution of
-      letters, as opposed to using 'Content here, content here', making it
-      look like readable English. Many desktop publishing packages and web
-      page editors now use Lorem Ipsum as their default model text, and a
-      search for 'lorem ipsum' will uncover many web sites still in their
-      infancy. Various versions have evolved over the years, sometimes by
-      accident, sometimes on purpose (injected humour and the like).</p>
+        <p>
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of
+          using Lorem Ipsum is that it has a more-or-less normal distribution of
+          letters, as opposed to using 'Content here, content here', making it
+          look like readable English. Many desktop publishing packages and web
+          page editors now use Lorem Ipsum as their default model text, and a
+          search for 'lorem ipsum' will uncover many web sites still in their
+          infancy. Various versions have evolved over the years, sometimes by
+          accident, sometimes on purpose (injected humour and the like).
+        </p>
       </div>
     );
   }

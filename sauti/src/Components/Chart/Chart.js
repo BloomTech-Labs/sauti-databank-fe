@@ -259,48 +259,103 @@ class Chart extends React.Component {
           <Route
             exact
             path="/crossing-frequency-chart"
-            render={props => <CrossingFreqChart state={this.state} />}
+            render={props => (
+              <CrossingFreqChart
+                pathname={"/crossing-frequency-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
           />
 
           <Route
             exact
             path="/gender-chart"
-            render={props => <GenderChart state={this.state} />}
+            render={props => (
+              <GenderChart
+                pathname={"/gender-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
           />
           <Route
             exact
             path="/"
-            render={props => <GenderChart state={this.state} />}
+            render={props => (
+              <GenderChart
+              pathname={"/"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
           />
           <Route
             exact
             path="/education-chart"
-            render={props => <EducationChart state={this.state} />}
+            render={props => (
+              <EducationChart
+                pathname={"/education-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
           />
           <Route
             exact
             path="/age-chart"
-            render={props => <AgeChart state={this.state} />}
+            render={props => (
+              <AgeChart
+              pathname={"/age-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
           />
           <Route
             exact
             path="/country-chart"
-            render={props => <CountryChart state={this.state} />}
+            render={props => (
+              <CountryChart
+              pathname={"/country-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
           />
           <Route
             exact
             path="/language-chart"
-            render={props => <LanguageChart state={this.state} />}
+            render={props => (
+              <LanguageChart
+              pathname={"/language-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
           />
           <Route
             exact
             path="/primaryincome-chart"
-            render={props => <PrimaryIncomeChart state={this.state} />}
+            render={props => (
+              <PrimaryIncomeChart
+              pathname={"/primaryincome-chart"}
+                routerProps={props}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
           />
           <Route
             exact
             path="/produce-chart"
-            render={props => <ProduceChart state={this.state} />}
+            render={props => (
+              <ProduceChart
+              pathname={"/produce-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
           />
         </div>
       </div>

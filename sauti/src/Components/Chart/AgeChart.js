@@ -66,6 +66,8 @@ class AgeChart extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getDropDownDefault(this.props.pathname);
+
     axios
       .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/all")
       .then(res => {
@@ -286,6 +288,7 @@ class AgeChart extends React.Component {
   };
 
   render() {
+    
     return (
       <div className="Chart">
         <h2>Age</h2>
@@ -293,7 +296,7 @@ class AgeChart extends React.Component {
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
           indexBy="Age"
-          margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+          margin={{ top: 50, right: 130, bottom: 60, left: 60 }}
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
@@ -311,7 +314,7 @@ class AgeChart extends React.Component {
             tickRotation: 0,
             legend: "Age",
             legendPosition: "middle",
-            legendOffset: 41
+            legendOffset: 50
           }}
           axisLeft={{
             tickSize: 5,
@@ -323,6 +326,7 @@ class AgeChart extends React.Component {
           }}
           labelTextColor="black"
           theme={theme}
+<<<<<<< HEAD
           legends={[
             {
               dataFrom: "keys",
@@ -352,6 +356,8 @@ class AgeChart extends React.Component {
                 {id}: {value}%
             </strong>
         )}
+=======
+>>>>>>> 063170133dfdf176d8e9c04adcd523cf6bcaebba
           animate={true}
           motionStiffness={90}
           motionDamping={15}
