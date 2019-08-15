@@ -30,17 +30,17 @@ You can find our deployed project at: https://production-sauti-databank.netlify.
 
 - [Trello Board](https://trello.com/b/ycDN2Mzb/labs-14-sauti-databank)
 
-1️⃣ [Product Canvas](https://www.notion.so/Feature-Canvas-All-charts-with-UX-design-in-Key-Trader-Demographics-tab-17e9fbd80c1b4a719c125d448491a400)
+- [Product Canvas](https://www.notion.so/Feature-Canvas-All-charts-with-UX-design-in-Key-Trader-Demographics-tab-17e9fbd80c1b4a719c125d448491a400)
 
-1️⃣ [UX Design files](https://app.zeplin.io/project/5d26179fd0a6fc367e0fdc94/screen/5d5307619df85c9b3c2f2469)
+- [UX Design files](https://app.zeplin.io/project/5d26179fd0a6fc367e0fdc94/screen/5d5307619df85c9b3c2f2469)
 
-Sauti is a nonprofit that provides a platform for small traders in East African countries to look up realtime market data. Sauti also collects demographic data on these traders, but, until our Labs project, didn't have a way to visualize that demographic data for researchers.
+Sauti is a nonprofit that provides a platform for small traders in East African countries to look up realtime market data. Sauti also collects demographic data on these traders, but, until our Labs project, they didn't have a way to visualize that demographic data for researchers.
 
-Using A, B, and C tools, our team helped Sauti make its data more helpful and useful for economic researchers and policy makers.
+Using [React](https://reactjs.org/), the [react-dropdown library](https://www.npmjs.com/package/react-dropdown), [Nivo](https://nivo.rocks/) (built for React data visualization, on top of d3js),and [Sass](https://sass-lang.com/) on the front-end, our team helped Sauti make its data more helpful and useful for economic researchers and policy makers.
 
-### 4️⃣ Key Features
+### Key Features
 
-Researcher interested in Sauti Trader Demographic Date is able to see the following Key Demographic Data by selecting through a dropdown menu:
+A researcher interested in the Sauti Databank is able to see the following Key Demographic Data across all traders by selecting through a dropdown menu:
 - Primary Language
 - Country of Residence
 - Age
@@ -50,59 +50,50 @@ Researcher interested in Sauti Trader Demographic Date is able to see the follow
 - Education
 - Border-Crossing Frequency
 
+## Tech Stack
 
+### Front-end built using:
 
-## 1️⃣ Tech Stack
+- [React](https://reactjs.org/): Currently industry standard for web applications, using React let us manage displaying large amounts of data effectively by implementing Components. 
+- [react-dropdown library](https://www.npmjs.com/package/react-dropdown): Helped us use an existing library for making the dropdown beautiful so that we could focus instead on the business logic and data that differentiates Sauti in the nonprofit space. 
+- [Nivo](https://nivo.rocks/): Built specifically for React and ontop of d3js, Nivo provided the functionality we needed and thorough documentation to make it possible to complete our project within deadline. 
+- [Sass](https://sass-lang.com/): A CSS compiler helped us iterate more quickly on styling with the efficient use of nesting. 
 
-### Front end built using:
+#### Front-end deployed to [Netlify](https://production-sauti-databank.netlify.com/).
 
-React as it is the current industry standard
- 
-Nivo is used for our charting library. Since it is built on D3, we have implemented the current industry standard for data visualizations.
-
-#### Front end deployed to Netlify
-
-#### [Back end](https://github.com/sauti-databank/back-end) built using:
+#### [Back-end](https://github.com/sauti-databank/back-end) built using:
 
 - Node.js
 - Express
 - KNEX
 - MySQL
 
+Read our back-end [documentation](https://github.com/sauti-databank/back-end/blob/master/README.md) for more on our reasoning behind choosing these tools. 
+
 # APIs
 
-## 2️⃣ Authentication API here
+## Authentication 
 
-🚫Placeholder until and unless we set up protected routes
+🚫Placeholder: Protected routes were not a priority for Sauti at the time of our first release (August 2019). 
 
-Check my credentials and let me in.
+# Testing
 
-# 4️⃣ Testing
+We tested the site in Chrome and Firefox thoroughly, and reported seven issues (and counting!) as Github Issues. 
 
-🚫Document what you used for testing and why
+# Installation Instructions
 
-Front end QA document.  All bugs are recorded in GitHub issues.
-
-# 4️⃣ Installation Instructions
-
-* After cloning or pulling repository for the first time, run "npm install" in the app directory called /sauti.
-* Run "yarn start" in /sauti directory to start react app
+* After cloning or pulling repository for the first time, run "yarn install" in the app directory called /sauti.
+* Run "yarn start" in /sauti directory to start react app.
 
 
 ## Other Scripts
 
-🚫replace these examples with your own
-
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+* build - creates a build of the application
+* test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
 
 # Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
-
-Please note we have a [code of conduct](https://gist.github.com/PurpleBooth/b24679402957c63ec426). Please follow it in all your interactions with the project.
 
 ## Issue/Bug Request
 
