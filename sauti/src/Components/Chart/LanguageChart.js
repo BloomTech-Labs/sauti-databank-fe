@@ -260,6 +260,11 @@ class LanguageChart extends React.Component {
           labelSkipHeight={0}
           labelTextColor="black"
           theme={theme}
+          tooltip={({ id, value}) => (
+            <strong style={{color: "#000000", fontSize: "15px", fontFamily: "Helvetica"}}>
+                {id}: {value}%
+            </strong>
+        )}
           animate={true}
           motionStiffness={90}
           motionDamping={15}
