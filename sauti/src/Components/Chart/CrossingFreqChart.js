@@ -259,14 +259,11 @@ class CrossingFreqChart extends React.Component {
           labelSkipHeight={0}
           labelTextColor="black"
           theme={theme}
-<<<<<<< HEAD
           tooltip={({ id, value}) => (
             <strong style={{color: "#000000", fontSize: "15px", fontFamily: "Helvetica"}}>
                 {id}: {value}%
             </strong>
         )}
-=======
->>>>>>> 063170133dfdf176d8e9c04adcd523cf6bcaebba
           animate={true}
           motionStiffness={90}
           motionDamping={15}
