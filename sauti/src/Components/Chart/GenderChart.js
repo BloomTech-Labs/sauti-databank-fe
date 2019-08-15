@@ -13,23 +13,25 @@ const theme = {
       //   stroke: "#555555"
       // },
       text: {
-        fill: "#595b5f",
-        fontSize: "14px",
+        fill: "#4d4f52",
+        fontSize: "1.6rem"
       }
     },
     legend: {
       text: {
-        fill: "#3c3e43",
-        fontSize: "14px",
+        fill: "#4d4f52",
+        fontSize: "1.6rem",
+        fontWeight: 550,
+        fontFamily: "Helvetica"
       }
     }
-
   },
   labels: {
     text: {
-      fontSize: "16px",
+      fontSize: "1.6rem",
       fontWeight: 550,
-      fontFamily: "Helvetica"
+      fontFamily: "Helvetica",
+      fill: "#4d4f52",
     }
   }
   // Grid Lines
@@ -49,7 +51,7 @@ class GenderChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Male", "Female"],
-      color: "category10",
+      color: "nivo",
       femalePercentage: 0,
       malePercentage: 0,
       femaleCount: 0,
@@ -178,7 +180,7 @@ class GenderChart extends React.Component {
             tickRotation: 0,
             legend: "Gender",
             legendPosition: "middle",
-            legendOffset: 42
+            legendOffset: 41
           }}
           axisLeft={{
             tickSize: 5,

@@ -13,23 +13,25 @@ const theme = {
       // },
       text: {
         fill: "#4d4f52",
-        fontSize: "14px",
+        fontSize: "1.6rem"
       }
     },
     legend: {
       text: {
         fill: "#4d4f52",
-        fontSize: "14px",
+        fontSize: "1.6rem",
+        fontWeight: 550,
+        fontFamily: "Helvetica"
       }
     }
-
   },
   labels: {
     text: {
-      fontSize: "16px",
-      fontWeight: "normal",
+      fontSize: "1.6rem",
+      fontWeight: 550,
       fontFamily: "Helvetica",
-          }
+      fill: "#4d4f52",
+    }
   }
   // Grid Lines
   // grid: {
@@ -47,7 +49,7 @@ class CrossingFreqChart extends React.Component {
       totalCount: 0,
       data: [],
       keys: ["Daily", "Weekly", "Monthly", "Never"],
-      color: "set3",
+      color: "nivo",
       dailyPercentage: 0,
       weeklyPercentage: 0,
       monthlyPercentage: 0,
@@ -248,31 +250,7 @@ class CrossingFreqChart extends React.Component {
           labelSkipHeight={0}
           labelTextColor= "black"
           theme={theme}
-          legends={[
-            {
-              dataFrom: "keys",
-              anchor: "bottom-right",
-              direction: "column",
-              justify: false,
-              translateX: 120,
-              translateY: 0,
-              itemsSpacing: 2,
-              itemWidth: 100,
-              itemHeight: 20,
-              itemDirection: "left-to-right",
-              itemOpacity: 0.85,
-              symbolSize: 20,
-              effects: [
-                {
-                  on: "hover",
-                  style: {
-                    itemOpacity: 1
-                  }
-                }
-              ]
-            }
-          ]}
-          animate={true}
+                   animate={true}
           motionStiffness={90}
           motionDamping={15}
         />
