@@ -1,6 +1,45 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import axios from 'axios';
+import axios from "axios";
+
+const theme = {
+  //background: "#222222",
+  axis: {
+    // fontSize: "100px",
+    // tickColor: "#eee",
+    ticks: {
+      // line: {
+      //   stroke: "#555555"
+      // },
+      text: {
+        fill: "#4d4f52",
+        fontSize: "1.6rem"
+      }
+    },
+    legend: {
+      text: {
+        fill: "#4d4f52",
+        fontSize: "1.6rem",
+        fontWeight: 550,
+        fontFamily: "Helvetica"
+      }
+    }
+  },
+  labels: {
+    text: {
+      fontSize: "1.6rem",
+      fontWeight: 550,
+      fontFamily: "Helvetica",
+      fill: "#4d4f52",
+    }
+  }
+    // Grid Lines
+  // grid: {
+  //   line: {
+  //     stroke: "#555555"
+  //   }
+  // }
+};
 
 class AgeChart extends React.Component {
   constructor(props) {
@@ -27,6 +66,8 @@ class AgeChart extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getDropDownDefault(this.props.pathname);
+
     axios
       .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/all")
       .then(res => {
@@ -41,23 +82,25 @@ class AgeChart extends React.Component {
             this.getTwenties();
           }
         );
-      })
+      });
   }
 
   getTwenties = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-one/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-one/count"
+      )
       .then(res => {
         console.log("Twenties Count", res.data);
-        this.setState({
-          ...this.state,
-          twentiesCount: res.data
-        },
-        () => {
-          this.getThirties();
-        }
+        this.setState(
+          {
+            ...this.state,
+            twentiesCount: res.data
+          },
+          () => {
+            this.getThirties();
+          }
         );
-        
       })
       .catch(err => {
         console.log(err);
@@ -66,15 +109,20 @@ class AgeChart extends React.Component {
 
   getThirties = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-two/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-two/count"
+      )
       .then(res => {
         console.log("Thirties Count", res.data);
-        this.setState({
-          ...this.state,
-          thirtiesCount: res.data
-        }, () => {
-          this.getForties();
-        });
+        this.setState(
+          {
+            ...this.state,
+            thirtiesCount: res.data
+          },
+          () => {
+            this.getForties();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -82,15 +130,20 @@ class AgeChart extends React.Component {
   };
   getForties = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-three/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-three/count"
+      )
       .then(res => {
         console.log("Forties Count", res.data);
-        this.setState({
-          ...this.state,
-          fortiesCount: res.data
-        }, () => {
-          this.getTeens();
-        });
+        this.setState(
+          {
+            ...this.state,
+            fortiesCount: res.data
+          },
+          () => {
+            this.getTeens();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -99,15 +152,20 @@ class AgeChart extends React.Component {
 
   getTeens = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-zero/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-zero/count"
+      )
       .then(res => {
         console.log("Teens Count", res.data);
-        this.setState({
-          ...this.state,
-          teensCount: res.data
-        }, () => {
-          this.getFifties();
-        });
+        this.setState(
+          {
+            ...this.state,
+            teensCount: res.data
+          },
+          () => {
+            this.getFifties();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -116,15 +174,20 @@ class AgeChart extends React.Component {
 
   getFifties = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-four/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-four/count"
+      )
       .then(res => {
         console.log("Fifties Count", res.data);
-        this.setState({
-          ...this.state,
-          fiftiesCount: res.data
-        }, () => {
-          this.getSixties();
-        });
+        this.setState(
+          {
+            ...this.state,
+            fiftiesCount: res.data
+          },
+          () => {
+            this.getSixties();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -133,15 +196,20 @@ class AgeChart extends React.Component {
 
   getSixties = () => {
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-five/count")
+      .get(
+        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-five/count"
+      )
       .then(res => {
         console.log("Sixties Count", res.data);
-        this.setState({
-          ...this.state,
-          sixtiesCount: res.data
-        }, () => {
-          this.setPercentages();
-        });
+        this.setState(
+          {
+            ...this.state,
+            sixtiesCount: res.data
+          },
+          () => {
+            this.setPercentages();
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -151,12 +219,24 @@ class AgeChart extends React.Component {
   setPercentages = () => {
     const totalCount = this.state.totalCount;
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let twentiesPercentage = Math.round((this.state.twentiesCount / totalCount) * 100);
-    let thirtiesPercentage = Math.round((this.state.thirtiesCount / totalCount) * 100);
-    let fortiesPercentage = Math.round((this.state.thirtiesCount / totalCount) * 100);
-    let teensPercentage = Math.round((this.state.teensCount / totalCount) * 100);
-    let fiftiesPercentage = Math.round((this.state.fiftiesCount / totalCount) * 100);
-    let sixtiesPercentage = Math.round((this.state.sixtiesCount / totalCount) * 100);
+    let twentiesPercentage = Math.round(
+      (this.state.twentiesCount / totalCount) * 100
+    );
+    let thirtiesPercentage = Math.round(
+      (this.state.thirtiesCount / totalCount) * 100
+    );
+    let fortiesPercentage = Math.round(
+      (this.state.thirtiesCount / totalCount) * 100
+    );
+    let teensPercentage = Math.round(
+      (this.state.teensCount / totalCount) * 100
+    );
+    let fiftiesPercentage = Math.round(
+      (this.state.fiftiesCount / totalCount) * 100
+    );
+    let sixtiesPercentage = Math.round(
+      (this.state.sixtiesCount / totalCount) * 100
+    );
     this.setState(
       {
         ...this.state,
@@ -208,17 +288,22 @@ class AgeChart extends React.Component {
   };
 
   render() {
+    
     return (
       <div className="Chart">
-        <h2>Age Demographics</h2>
+        <h2>Age</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
           indexBy="Age"
-          margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+          margin={{ top: 50, right: 130, bottom: 60, left: 60 }}
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
+          labelSkipHeight={0}
+          labelSkipWidth={0}
+          labelFormat={d => <tspan y={-15}>{d}% </tspan>}
+          labelForm={d => <text>{d} % </text>}
           borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           maxValue={100}
           axisTop={null}
@@ -229,49 +314,38 @@ class AgeChart extends React.Component {
             tickRotation: 0,
             legend: "Age",
             legendPosition: "middle",
-            legendOffset: 30
+            legendOffset: 50
           }}
           axisLeft={{
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "%",
+            legend: "Percentage of Traders",
             legendPosition: "middle",
-            legendOffset: -40
+            legendOffset: -50
           }}
-          labelSkipWidth={12}
-          labelSkipHeight={12}
-          labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-          legends={[
-            {
-              dataFrom: "keys",
-              anchor: "bottom-right",
-              direction: "column",
-              justify: false,
-              translateX: 120,
-              translateY: 0,
-              itemsSpacing: 2,
-              itemWidth: 100,
-              itemHeight: 20,
-              itemDirection: "left-to-right",
-              itemOpacity: 0.85,
-              symbolSize: 20,
-              effects: [
-                {
-                  on: "hover",
-                  style: {
-                    itemOpacity: 1
-                  }
-                }
-              ]
-            }
-          ]}
+          labelTextColor="black"
+          theme={theme}
           animate={true}
           motionStiffness={90}
           motionDamping={15}
         />
+        <div className="lineCont">
+          <div className="lineOne">
+            <h2 className="method-title">Methodology Note</h2>
+          </div>
+          <div className="lineTwo" />
+        </div>
         <p>
-        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of
+          using Lorem Ipsum is that it has a more-or-less normal distribution of
+          letters, as opposed to using 'Content here, content here', making it
+          look like readable English. Many desktop publishing packages and web
+          page editors now use Lorem Ipsum as their default model text, and a
+          search for 'lorem ipsum' will uncover many web sites still in their
+          infancy. Various versions have evolved over the years, sometimes by
+          accident, sometimes on purpose (injected humour and the like).
         </p>
       </div>
     );
