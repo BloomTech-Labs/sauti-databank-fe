@@ -149,7 +149,7 @@ class PrimaryIncomeChart extends React.Component {
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
           indexBy="Primary_Income"
-          margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+          margin={{ top: 50, right: 130, bottom: 60, left: 60 }}
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
@@ -165,7 +165,7 @@ class PrimaryIncomeChart extends React.Component {
             tickRotation: 0,
             legend: "Cross Border Trade As Primary Soure Of Income",
             legendPosition: "middle",
-            legendOffset: 41
+            legendOffset: 50
           }}
           axisLeft={{
             tickSize: 5,
