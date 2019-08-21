@@ -32,48 +32,21 @@ class PrimaryIncomeChart extends React.Component {
         this.setState({
             ...this.state,
             users: res.data,
-            totalCount: res.data.length
+            totalCount: res.data.length,
+            yesCount: res.data.reduce(function(n, user) {
+              return n + (user.primary_income === "Yes")
+            }, 0),
+            noCount: res.data.reduce(function(n, user) {
+              return n + (user.primary_income === "No")
+            }, 0)
           },
           () => {
-            this.getPrimaryIncomeYes();
+            this.setPercentages();
           }
         );
       })
   }
 
-  getPrimaryIncomeYes = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/primary-income/yes/count")
-      .then(res => {
-        this.setState({
-          ...this.state,
-          yesCount: res.data
-        },
-        () => {
-          this.getPrimaryIncomeNo();
-        }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getPrimaryIncomeNo = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/primary-income/no/count")
-      .then(res => {
-        this.setState({
-          ...this.state,
-          noCount: res.data
-        }, () => {
-          this.setPercentages();
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
   
   setPercentages = () => {
