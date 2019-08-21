@@ -4,7 +4,6 @@ import axios from "axios";
 import theme from '../../Constants/Theme.js'
 
 
-
 class AgeChart extends React.Component {
   constructor(props) {
     super(props);
