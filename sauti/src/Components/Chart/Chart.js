@@ -7,7 +7,6 @@ import React from "react";
 import axios from "axios";
 
 // Importing components
-//import BarGraphOne from "./BarGraphOne.js";
 import CrossingFreqChart from "./CrossingFreqChart.js";
 import GenderChart from "./GenderChart.js";
 // import Transformation from '../../../Transformation.js/index.js'
@@ -253,8 +252,6 @@ class Chart extends React.Component {
   render() {
     return (
       <div className="Chart-Container">
-        {/* <BarGraphOne populateChart={this.populateChart} genderFilter={this.genderFilter} state={this.state}*/}
-        {/* {this.props.distinctUsers ? ( */}
         <div>
           <Route
             exact

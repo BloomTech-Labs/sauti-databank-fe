@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import Chart from "./Components/Chart/Chart";
 // import Transformation from "../Transformation"
-// import ComSelTransformation from "./Components/ComSelTransformation"
 import "./App.scss";
 
 import Dropdown from "react-dropdown";
@@ -179,7 +178,6 @@ class App extends React.Component {
             <div className="chart-container">
               <Chart getDropDownDefault={this.getDropDownDefault.bind(this)}/>
             </div>
-            {/* <ComSelTransformation /> */}
             <div className="dropdown-container">
               <p>Key Trader Demographics</p>
               <Dropdown
