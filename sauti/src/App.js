@@ -178,7 +178,6 @@ class App extends React.Component {
             <div className="chart-container">
               <Chart getDropDownDefault={this.getDropDownDefault.bind(this)}/>
             </div>
-            {/* <ComSelTransformation /> */}
             <div className="dropdown-container">
               <p>Key Trader Demographics</p>
               <Dropdown
