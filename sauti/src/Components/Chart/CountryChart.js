@@ -34,67 +34,25 @@ class CountryChart extends React.Component {
           {
             ...this.state,
             users: res.data,
-            totalCount: res.data.length
+            totalCount: res.data.length,
+            kenyaPercentage: res.data.reduce(function(n, user) {
+              return n + (user.country_of_residence === "KEN")
+            }, 0),
+            ugandaPercentage: res.data.reduce(function(n, user) {
+              return n + (user.country_of_residence === "UGA")
+            }, 0),
+            rwandaPercentage: res.data.reduce(function(n, user) {
+              return n + (user.country_of_residence === "RWA")
+            }, 0)
           },
           () => {
-            this.getKenya();
+            this.setPercentages();
           }
         );
       })
   }
 
-  getKenya = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/country/kenya/count")
-      .then(res => {
-        console.log("Kenya Count", res.data);
-        this.setState({
-          ...this.state,
-          kenyaCount: res.data
-        },
-        () => {
-          this.getUganda();
-        }
-        );
-        
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
-  getUganda = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/country/uganda/count")
-      .then(res => {
-        console.log("weekly Count", res.data);
-        this.setState({
-          ...this.state,
-          ugandaCount: res.data
-        }, () => {
-          this.getRwanda();
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  getRwanda = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/country/rwanda/count")
-      .then(res => {
-        console.log("weekly Count", res.data);
-        this.setState({
-          ...this.state,
-          rwandaCount: res.data
-        }, () => {
-          this.setPercentages();
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
   setPercentages = () => {
     const totalCount = this.state.totalCount;
