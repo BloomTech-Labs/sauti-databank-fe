@@ -33,9 +33,17 @@ class GenderChart extends React.Component {
           {
             ...this.state,
             users: res.data,
-            totalCount: res.data.length
+            totalCount: res.data.length,
+            femaleCount: res.data.reduce(function(n, user) {
+              return n + (user.gender === "Female")
+            }, 0),
+            maleCount: res.data.reduce(function(n, user) {
+              return n + (user.gender === "Male")
+            }, 0)
           },
           () => {
+            console.log('Female Count New Method', this.state.femaleCount)
+            console.log('Male Count New Method', this.state.maleCount)
             this.getGenderFemale();
           }
         );
@@ -88,7 +96,7 @@ class GenderChart extends React.Component {
 
   setPercentages = () => {
     const totalCount = this.state.totalCount;
-    console.log("femalecount", totalCount);
+    console.log("totalCount", totalCount);
     console.log("maleCount", this.state.maleCount);
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
     let femalePercentage = Math.round(
