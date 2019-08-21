@@ -39,99 +39,31 @@ class LanguageChart extends React.Component {
           {
             ...this.state,
             users: res.data,
-            totalCount: res.data.length
+            totalCount: res.data.length,
+            englishCount: res.data.reduce(function(n, user) {
+              return n + (user.language === "English")
+            }, 0),
+            swahiliCount: res.data.reduce(function(n, user) {
+              return n + (user.language === "Swahili")
+            }, 0),
+            kinyarwandaCount: res.data.reduce(function(n, user) {
+              return n + (user.language === "Kinyarwanda")
+            }, 0),
+            lugandaCount: res.data.reduce(function(n, user) {
+              return n + (user.language === "Luganda")
+            }, 0),
+            lukigaCount: res.data.reduce(function(n, user) {
+              return n + (user.language === "Lukiga")
+            }, 0),
           },
           () => {
-            this.getLanguageEnglish();
+            this.setPercentages();
           }
         );
       })
   }
 
-  getLanguageEnglish = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/language/english/count")
-      .then(res => {
-        console.log("english res count", res.data);
-        this.setState({
-          ...this.state,
-          englishCount: res.data
-        },
-        () => {
-          this.getLanguageSwahili();
-        }
-        );
-        console.log(this.state.EnglishCount);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  getLanguageSwahili = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/language/swahili/count")
-      .then(res => {
-        console.log("Swahili res count", res.data);
-        this.setState({
-          ...this.state,
-          swahiliCount: res.data
-        },
-        () => {
-          this.getLanguageKinyarwanda();
-        }
-        );
-        console.log(this.state.swahiliCount);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
-  getLanguageKinyarwanda = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/language/kinya/count")
-      .then(res => {
-        this.setState({
-          ...this.state,
-          kinyarwandaCount: res.data
-        }, () => {
-          this.getLanguageLuganda();
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  getLanguageLuganda = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/language/luganda/count")
-      .then(res => {
-        this.setState({
-          ...this.state,
-          lugandaCount: res.data
-        }, () => {
-          this.getLanguageLukiga();
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  getLanguageLukiga = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/language/lukiga/count")
-      .then(res => {
-        this.setState({
-          ...this.state,
-          lukigaCount: res.data
-        }, () => {
-          this.setPercentages();
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
   
   setPercentages = () => {
     const totalCount = this.state.totalCount;
