@@ -35,13 +35,13 @@ class CountryChart extends React.Component {
             ...this.state,
             users: res.data,
             totalCount: res.data.length,
-            kenyaPercentage: res.data.reduce(function(n, user) {
+            kenyaCount: res.data.reduce(function(n, user) {
               return n + (user.country_of_residence === "KEN")
             }, 0),
-            ugandaPercentage: res.data.reduce(function(n, user) {
+            ugandaCount: res.data.reduce(function(n, user) {
               return n + (user.country_of_residence === "UGA")
             }, 0),
-            rwandaPercentage: res.data.reduce(function(n, user) {
+            rwandaCount: res.data.reduce(function(n, user) {
               return n + (user.country_of_residence === "RWA")
             }, 0)
           },
