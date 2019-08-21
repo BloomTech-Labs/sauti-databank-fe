@@ -5,7 +5,6 @@ import theme from '../../Constants/Theme.js'
 // Creating theme for nivo graphs
 
 
-
 class CrossingFreqChart extends React.Component {
   constructor(props) {
     super(props);
