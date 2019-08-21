@@ -44,55 +44,55 @@ class GenderChart extends React.Component {
           () => {
             console.log('Female Count New Method', this.state.femaleCount)
             console.log('Male Count New Method', this.state.maleCount)
-            this.getGenderFemale();
+            this.setPercentages();
           }
         );
       });
   }
 
-  getGenderFemale = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/gender/female/count"
-      )
-      .then(res => {
-        console.log("female res count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            femaleCount: res.data
-          },
-          () => {
-            this.getGenderMale();
-          }
-        );
-        console.log(this.state.femaleCount);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  // getGenderFemale = () => {
+  //   axios
+  //     .get(
+  //       "https://staging-sauti-labs-14.herokuapp.com/users/all/gender/female/count"
+  //     )
+  //     .then(res => {
+  //       console.log("female res count", res.data);
+  //       this.setState(
+  //         {
+  //           ...this.state,
+  //           femaleCount: res.data
+  //         },
+  //         () => {
+  //           this.getGenderMale();
+  //         }
+  //       );
+  //       console.log(this.state.femaleCount);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
-  getGenderMale = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/gender/male/count"
-      )
-      .then(res => {
-        this.setState(
-          {
-            ...this.state,
-            maleCount: res.data
-          },
-          () => {
-            this.setPercentages();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  // getGenderMale = () => {
+  //   axios
+  //     .get(
+  //       "https://staging-sauti-labs-14.herokuapp.com/users/all/gender/male/count"
+  //     )
+  //     .then(res => {
+  //       this.setState(
+  //         {
+  //           ...this.state,
+  //           maleCount: res.data
+  //         },
+  //         () => {
+  //           
+  //         }
+  //       );
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   setPercentages = () => {
     const totalCount = this.state.totalCount;
