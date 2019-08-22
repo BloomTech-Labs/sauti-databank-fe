@@ -39,145 +39,33 @@ class AgeChart extends React.Component {
           {
             ...this.state,
             users: res.data,
-            totalCount: res.data.length
-          },
-          () => {
-            this.getTwenties();
-          }
-        );
-      });
-  }
-
-  getTwenties = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-one/count"
-      )
-      .then(res => {
-        console.log("Twenties Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            twentiesCount: res.data
-          },
-          () => {
-            this.getThirties();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getThirties = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-two/count"
-      )
-      .then(res => {
-        console.log("Thirties Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            thirtiesCount: res.data
-          },
-          () => {
-            this.getForties();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  getForties = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-three/count"
-      )
-      .then(res => {
-        console.log("Forties Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            fortiesCount: res.data
-          },
-          () => {
-            this.getTeens();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getTeens = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-zero/count"
-      )
-      .then(res => {
-        console.log("Teens Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            teensCount: res.data
-          },
-          () => {
-            this.getFifties();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getFifties = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-four/count"
-      )
-      .then(res => {
-        console.log("Fifties Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            fiftiesCount: res.data
-          },
-          () => {
-            this.getSixties();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getSixties = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/age/group-five/count"
-      )
-      .then(res => {
-        console.log("Sixties Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            sixtiesCount: res.data
+            totalCount: res.data.length,
+            twentiesCount: res.data.reduce(function(n, user) {
+              return n + (user.age === "10-20")
+            }, 0),
+            thirtiesCount: res.data.reduce(function(n, user) {
+              return n + (user.age === "20-30")
+            }, 0),
+            fortiesCount: res.data.reduce(function(n, user) {
+              return n + (user.age === "30-40")
+            }, 0),
+            teensCount: res.data.reduce(function(n, user) {
+              return n + (user.age === "40-50")
+            }, 0),
+            fiftiesCount: res.data.reduce(function(n, user) {
+              return n + (user.age === "50-60")
+            }, 0),
+            sixtiesCount: res.data.reduce(function(n, user) {
+              return n + (user.age === "60-70")
+            }, 0)
           },
           () => {
             this.setPercentages();
           }
         );
-      })
-      .catch(err => {
-        console.log(err);
       });
-  };
+  }
+
 
   setPercentages = () => {
     const totalCount = this.state.totalCount;

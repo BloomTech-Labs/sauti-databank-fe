@@ -36,92 +36,27 @@ class EducationChart extends React.Component {
           {
             ...this.state,
             users: res.data,
-            totalCount: res.data.length
-          },
-          () => {
-            this.getPrimary();
-          }
-        );
-      });
-  }
-
-  getPrimary = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/education/primary/count")
-      .then(res => {
-        console.log("primary res count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            primaryCount: res.data
-          },
-          () => {
-            this.getSecondary();
-          }
-        );
-        console.log(this.state.primaryCount);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getSecondary = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/education/secondary/count")
-      .then(res => {
-        this.setState(
-          {
-            ...this.state,
-            secondaryCount: res.data
-          },
-          () => {
-            this.getUni();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getUni = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/education/uni/count")
-      .then(res => {
-        this.setState(
-          {
-            ...this.state,
-            uniCount: res.data
-          },
-          () => {
-            this.getNone();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getNone = () => {
-    axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/education/none/count")
-      .then(res => {
-        this.setState(
-          {
-            ...this.state,
-            noneCount: res.data
+            totalCount: res.data.length,
+            primaryCount: res.data.reduce(function(n, user) {
+              return n + (user.education === "Primary")
+            }, 0),
+            secondaryCount: res.data.reduce(function(n, user) {
+              return n + (user.education === "Secondary")
+            }, 0),
+            uniCount: res.data.reduce(function(n, user) {
+              return n + (user.education === "University/College")
+            }, 0),
+            noneCount: res.data.reduce(function(n, user) {
+              return n + (user.education === "No formal education")
+            }, 0),
           },
           () => {
             this.setPercentages();
           }
         );
-      })
-      .catch(err => {
-        console.log(err);
       });
-  };
+  }
+
 
   setPercentages = () => {
     const totalCount = this.state.totalCount;

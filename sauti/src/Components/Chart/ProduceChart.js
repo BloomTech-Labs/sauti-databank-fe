@@ -32,56 +32,21 @@ class ProduceChart extends React.Component {
           {
             ...this.state,
             users: res.data,
-            totalCount: res.data.length
-          },
-          () => {
-            this.getProduceYes();
-          }
-        );
-      });
-  }
-
-  getProduceYes = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/produce/yes/count"
-      )
-      .then(res => {
-        this.setState(
-          {
-            ...this.state,
-            yesCount: res.data
-          },
-          () => {
-            this.getProduceNo();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getProduceNo = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/produce/no/count"
-      )
-      .then(res => {
-        this.setState(
-          {
-            ...this.state,
-            noCount: res.data
+            totalCount: res.data.length,
+            yesCount: res.data.reduce(function(n, user) {
+              return n + (user.primary_income === "Yes")
+            }, 0),
+            noCount: res.data.reduce(function(n, user) {
+              return n + (user.primary_income === "No")
+            }, 0)
           },
           () => {
             this.setPercentages();
           }
         );
-      })
-      .catch(err => {
-        console.log(err);
       });
-  };
+  }
+
 
   setPercentages = () => {
     const totalCount = this.state.totalCount;

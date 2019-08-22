@@ -37,98 +37,27 @@ class CrossingFreqChart extends React.Component {
           {
             ...this.state,
             users: res.data,
-            totalCount: res.data.length
-          },
-          () => {
-            this.getDaily();
-          }
-        );
-      });
-  }
-  getDaily = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/daily/count"
-      )
-      .then(res => {
-        console.log("daily Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            dailyCount: res.data
-          },
-          () => {
-            this.getWeekly();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  getWeekly = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/weekly/count"
-      )
-      .then(res => {
-        console.log("weekly Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            weeklyCount: res.data
-          },
-          () => {
-            this.getMonthly();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  getMonthly = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/monthly/count"
-      )
-      .then(res => {
-        console.log("monthly Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            monthlyCount: res.data
-          },
-          () => {
-            this.getNever();
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  getNever = () => {
-    axios
-      .get(
-        "https://staging-sauti-labs-14.herokuapp.com/users/all/crossingfreq/never/count"
-      )
-      .then(res => {
-        console.log("never Count", res.data);
-        this.setState(
-          {
-            ...this.state,
-            neverCount: res.data
+            totalCount: res.data.length,
+            dailyCount: res.data.reduce(function(n, user) {
+              return n + (user.crossing_freq === "Daily")
+            }, 0),
+            weeklyCount: res.data.reduce(function(n, user) {
+              return n + (user.crossing_freq === "Weekly")
+            }, 0),
+            monthlyCount: res.data.reduce(function(n, user) {
+              return n + (user.crossing_freq === "Monthly")
+            }, 0),
+            neverCount: res.data.reduce(function(n, user) {
+              return n + (user.crossing_freq === "Never")
+            }, 0),
           },
           () => {
             this.setPercentages();
           }
         );
-      })
-      .catch(err => {
-        console.log(err);
       });
-  };
+  }
+
   setPercentages = () => {
     const totalCount = this.state.totalCount;
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
