@@ -25,7 +25,7 @@ class ProduceChart extends React.Component {
     this.props.getDropDownDefault(this.props.pathname);
     
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/produce/all")
+    .get(`${process.env.REACT_APP_BE_URL}/produce/all`)
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(

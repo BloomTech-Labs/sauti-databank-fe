@@ -4,7 +4,7 @@
 import { Route } from "react-router-dom";
 import React from "react";
 //import { ResponsiveBar } from "@nivo/bar";
-import axios from "axios";
+//import axios from "axios";
 
 // Importing components
 import CrossingFreqChart from "./CrossingFreqChart.js";
