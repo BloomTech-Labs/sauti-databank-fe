@@ -26,7 +26,7 @@ class GenderChart extends React.Component {
     this.props.getDropDownDefault(this.props.pathname);
     
     axios
-      .get("https://staging-sauti-labs-14.herokuapp.com/users/all/gender/all")
+    .get(`${process.env.REACT_APP_BE_URL}/gender/all`)
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
