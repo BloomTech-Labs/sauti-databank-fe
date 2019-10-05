@@ -118,57 +118,39 @@ class DocumentsInfoChart extends React.Component {
                     ...this.state,
                     data: [
                         {
-                            Commodity: "Import Permit",
+                            Documentation: "Import Permit",
                             ImportPermit: this.state.Import_Permit_Percentage,
                             ImportPermitColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Commodity: " Clothes and Shoes (New)",
-                            ClothesNew: this.state.Clothes_and_shoes_Percentage_New,
-                            ClothesNewColor: "hsl(65, 70%, 50%)"
+                            Documentation: "National ID /Card Passport",
+                            NationalIDCardPassport: this.state.National_ID_Card_Passport_Percentage,
+                            NationalIDCardPassportColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Commodity: " Clothes and Shoes (Used)",
-                            ClothesUsed: this.state.Clothes_and_shoes_Percentage_Used,
-                            ClothesUsedColor: "hsl(65, 70%, 50%)"
+                            Documentation: "Simplified Certificate Of Origin Percentage",
+                            SimplifiedCertOfOrigin: this.state.Simplified_Certificate_Of_Origin_Percentage,
+                            SimplifiedCertOfOriginColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Commodity: " Rice_Processed",
-                            Rice_Processed: this.state.Rice_Processed_Percentage,
-                            Rice_ProcessedColor: "hsl(65, 70%, 50%)"
+                            Documentation: "Yellow Fever Card",
+                            YellowFeverCard: this.state.Yellow_Fever_Card_Percentage,
+                            YellowFeverCardColor: "hsl(65, 70%, 50%)"
                         }, {
-                            Commodity: "Cosmetics",
-                            Cosmetics: this.state.Cosmetics_Percentage,
-                            CosmeticsColor: "hsl(65, 70%, 50%)"
+                            Documentation: "Valid Invoice",
+                            ValidInvoice: this.state.Valid_Invoice_Percentage,
+                            ValidInvoiceColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Commodity: "Millet",
-                            Millet: this.state.Millet_Percentage,
-                            MilletColor: "hsl(65, 70%, 50%)"
+                            Documentation: "Import Entry Declaration Form",
+                            ImportEntryDeclarationForm: this.state.Import_Entry_Declaration_Form_Percentage,
+                            ImportEntryDeclarationFormColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Commodity: "Bananas_Matoke",
-                            Bananas_Matoke: this.state.Bananas_Matoke_Percentage,
-                            Bananas_MatokeColor: "hsl(65, 70%, 50%)"
-                        }, {
-                            Commodity: "Oranges_Percentage",
-                            Oranges: this.state.Oranges_Percentage,
-                            OrangesColor: "hsl(65, 70%, 50%)"
-                        },
-                        {
-                            Commodity: "Tomatoes",
-                            Tomatoes: this.state.Tomatoes_Percentage,
-                            TomatoesColor: "hsl(65, 70%, 50%)"
-                        },
-                        {
-                            Commodity: "Maize_Flour",
-                            Maize_Flour: this.state.Maize_Flour_Percentage,
-                            Maize_FlourColor: "hsl(65, 70%, 50%)"
-                        }, {
-                            Commodity: "Avocado",
-                            Avocado: this.state.Avocado_Percentage,
-                            AvocadoColor: "hsl(65, 70%, 50%)"
-                        },
+                            Commodity: "Phytosanitary Certificate",
+                            PhytosanitaryCert: this.state.Phytosanitary_Certificate_Percentage,
+                            PhytosanitaryCertColor: "hsl(65, 70%, 50%)"
+                        }, 
                     ]
                 });
             }
@@ -178,11 +160,11 @@ class DocumentsInfoChart extends React.Component {
     render() {
         return (
             <div className="Chart">
-                <h2>Most Requested Procedures for Commodities</h2>
+                <h2>Most Requested Document Information for Procedures</h2>
                 <ResponsiveBar
                     data={this.state.data} // Data needed
                     keys={this.state.keys} // Values to display in Y axis
-                    indexBy="Commodities"
+                    indexBy="Documents"
                     margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
                     padding={0.3}
                     groupMode="stacked"
@@ -197,7 +179,7 @@ class DocumentsInfoChart extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: "Commodities",
+                        legend: "Documents",
                         legendPosition: "middle",
                         legendOffset: 65
                     }}
@@ -205,7 +187,7 @@ class DocumentsInfoChart extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: "Percentage of Commodities",
+                        legend: "Percentage of Documents",
                         legendPosition: "middle",
                         legendOffset: -70
                     }}
