@@ -83,8 +83,33 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Produce"
       });
-    }
-  }
+    } else if (pathname === "/Commodities-chart") {
+        this.setState({
+          ...this.state,
+          defaultOption: "Most Requested Procedures Commodities"
+        });
+    } else if (pathname === "/Commodity-Categories-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Most Requested Procedure Commodity Categories"
+      });
+    } else if (pathname === "/Destination-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Requested Procedures for Destination (Imports to:)"
+      });
+    } else if (pathname === "/Document-Information-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Most Requested Document Information for Procedures"
+      });
+    } else if (pathname === "/Agency-Information-chart") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Most Requested Agency Information for Procedures"
+      });
+}
+}
 
   onSelect = option => {
     if (option.label === "Gender") {
@@ -135,7 +160,37 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Produce"
       });
-    }
+    } else if (option.label === "Most Requested Procedures Commodities") {
+      this.props.history.push("/Commodities-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Most Requested Procedures Commodities"
+      });
+    } else if (option.label === "Most Requested Procedure Commodity Categories") {
+      this.props.history.push("/Commodity-Categories-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Most Requested Procedure Commodity Categories"
+      });
+    } else if (option.label === "Requested Procedures for Destination (Imports to:)") {
+      this.props.history.push("/Destination-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Requested Procedures for Destination (Imports to:)"
+      });
+    } else if (option.label === "Most Requested Document Information for Procedures") {
+      this.props.history.push("/Document-Information-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Most Requested Document Information for Procedures"
+      });
+    } else if (option.label === "Most Requested Agency Information for Procedures") {
+      this.props.history.push("/Agency-Information-chart");
+      this.setState({
+        ...this.state,
+        defaultOption: "Most Requested Agency Information for Procedures"
+      });
+  }
   };
 
   render() {
@@ -148,7 +203,12 @@ class App extends React.Component {
       "Country of Residence",
       "Primary Income",
       "Language",
-      "Produce"
+      "Produce",
+      "Most Requested Procedures Commodities",
+      "Most Requested Procedure Commodity Categories",
+      "Requested Procedures for Destination (Imports to:)",
+      "Most Requested Document Information for Procedures",
+      "Most Requested Agency Information for Procedures"
     ];
 
     return (
