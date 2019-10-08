@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from 'axios';
-import theme from '../../Constants/Theme.js'
+import theme from '../../../Constants/Theme'
 
 
 
@@ -27,7 +27,7 @@ class ProceduresDestChart extends React.Component {
         this.props.getDropDownDefault(this.props.pathname);
 
         axios
-            .get(`${process.env.REACT_APP_BE_URL}/country/all`)
+            .get(`https://staging-sauti-labs-14.herokuapp.com/dest-info`)
             .then(res => {
                 //console.log('totalCount', res.data.length)
                 this.setState(
@@ -36,10 +36,10 @@ class ProceduresDestChart extends React.Component {
                         users: res.data,
                         totalCount: res.data.length,
                         KEN_Count: res.data.reduce(function (n, user) {
-                            return n + (user.country_of_residence === "KEN")
+                            return n + (user.request_value === "KEN")
                         }, 0),
                         UGA_Count: res.data.reduce(function (n, user) {
-                            return n + (user.country_of_residence === "UGA")
+                            return n + (user.request_value === "UGA")
                         }, 0),
                     },
                     () => {
