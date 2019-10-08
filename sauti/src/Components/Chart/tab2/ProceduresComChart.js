@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
-import theme from "../../Constants/Theme.js";
+import theme from "../../../Constants/Theme";
 
 class ProceduresComChart extends React.Component {
   constructor(props) {
@@ -56,84 +56,90 @@ class ProceduresComChart extends React.Component {
     this.props.getDropDownDefault(this.props.pathname);
 
     // Hard work put to backend will change axios calls
-    axios.get(`${process.env.REACT_APP_BE_URL}/country/all`).then(res => {
-      //console.log('totalCount', res.data.length)
-      this.setState(
-        {
-          ...this.state,
-          users: res.data,
-          totalCount: res.data.length,
-          Maize_Count: res.data.reduce(function(n, user) {
-            return n + (user.country_of_residence === "KEN");
-          }, 0),
-        Clothes_and_shoes_new_Count: res.data.reduce(function(n, user) {
-            return n + (user.country_of_residence === "UGA");
-          }, 0),
-        Clothes_and_shoes_used_Count: res.data.reduce(function(n, user) {
-            return n + (user.country_of_residence === "RWA");
-          }, 0),
-        Rice_Processed_Count: res.data.reduce(function (n, user) {
-                  return n + (user.country_of_residence === "RWA");
-              }, 0),
-        Cosmetics_Count: res.data.reduce(function (n, user) {
-                  return n + (user.country_of_residence === "RWA");
-              }, 0),
-        Millet_Count: res.data.reduce(function (n, user) {
-                  return n + (user.country_of_residence === "RWA");
-              }, 0),  
-        Bananas_Matoke_Count: res.data.reduce(function(n, user) {
-                return n + (user.country_of_residence === "UGA");
-              }, 0),  
-        Oranges_Count: res.data.reduce(function(n, user) {
-                return n + (user.country_of_residence === "UGA");
-              }, 0),  
-        Tomatoes_Count: res.data.reduce(function(n, user) {
-                return n + (user.country_of_residence === "UGA");
-              }, 0), 
-         Maize_Flour_Count: res.data.reduce(function(n, user) {
-                return n + (user.country_of_residence === "UGA");
-              }, 0),
-        Avocado_Count: res.data.reduce(function(n, user) {
-                return n + (user.country_of_residence === "UGA");
-              }, 0),
-        },
-        () => {
-          this.setPercentages();
-        }
-      );
-    });
+    axios
+      .get(`https://staging-sauti-labs-14.herokuapp.com/procedure-com`)
+      .then(res => {
+        //console.log('totalCount', res.data.length)
+        this.setState(
+          {
+            ...this.state,
+            users: res.data,
+            totalCount: res.data.length,
+            Maize_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Maize");
+            }, 0),
+            Clothes_and_shoes_new_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Clothes and Shoes (New)");
+            }, 0),
+            Clothes_and_shoes_used_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Clothes and Shoes (Used)");
+            }, 0),
+            Rice_Processed_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Rice - Processed");
+            }, 0),
+            Cosmetics_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Cosmetics");
+            }, 0),
+            Millet_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Millet");
+            }, 0),
+            Bananas_Matoke_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Bananas - Matoke");
+            }, 0),
+            Oranges_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Oranges");
+            }, 0),
+            Tomatoes_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Tomatoes");
+            }, 0),
+            Maize_Flour_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Maize Flour");
+            }, 0),
+            Avocado_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Avocado");
+            }, 0)
+          },
+          () => {
+            this.setPercentages();
+          }
+        );
+      });
   }
 
   setPercentages = () => {
     const totalCount = this.state.totalCount;
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-      let Maize_Percentage = Math.round(
+    let Maize_Percentage = Math.round(
       (this.state.Maize_Count / totalCount) * 100
     );
-      let Clothes_and_shoes_Percentage_New = Math.round(
-    (this.state.Clothes_and_shoes_new_Count / totalCount) * 100
+    let Clothes_and_shoes_Percentage_New = Math.round(
+      (this.state.Clothes_and_shoes_new_Count / totalCount) * 100
     );
-      let Clothes_and_shoes_Percentage_Used = Math.round(
-    (this.state.Clothes_and_shoes_used_Count / totalCount) * 100
-      ); let Rice_Processed_Percentage= Math.round(
-    (this.state.Rice_Processed_Count / totalCount) * 100
-      ); let Cosmetics_Percentage = Math.round(
-    (this.state.Cosmetics_Count / totalCount) * 100
-      ); let Millet_Percentage = Math.round(
-    (this.state.Millet_Count / totalCount) * 100
+    let Clothes_and_shoes_Percentage_Used = Math.round(
+      (this.state.Clothes_and_shoes_used_Count / totalCount) * 100
     );
-    let 
-    Bananas_Matoke_Count = Math.round(
+    let Rice_Processed_Percentage = Math.round(
+      (this.state.Rice_Processed_Count / totalCount) * 100
+    );
+    let Cosmetics_Percentage = Math.round(
+      (this.state.Cosmetics_Count / totalCount) * 100
+    );
+    let Millet_Percentage = Math.round(
+      (this.state.Millet_Count / totalCount) * 100
+    );
+    let Bananas_Matoke_Percentage = Math.round(
       (this.state.Bananas_Matoke_Count / totalCount) * 100
-    ); let Oranges_Percentage = Math.round(
+    );
+    let Oranges_Percentage = Math.round(
       (this.state.Oranges_Count / totalCount) * 100
     );
     let Tomatoes_Percentage = Math.round(
       (this.state.Tomatoes_Count / totalCount) * 100
-      
-    ); let Maize_Flour_Percentage = Math.round(
+    );
+    let Maize_Flour_Percentage = Math.round(
       (this.state.Maize_Flour_Count / totalCount) * 100
-    ); let Avocado_Percentage = Math.round(
+    );
+    let Avocado_Percentage = Math.round(
       (this.state.Avocado_Count / totalCount) * 100
     );
     this.setState(
@@ -161,52 +167,55 @@ class ProceduresComChart extends React.Component {
               MaizeColor: "hsl(65, 70%, 50%)"
             },
             {
-                Commodity: " Clothes and Shoes (New)",
-                ClothesNew: this.state.Clothes_and_shoes_Percentage_New,
+              Commodity: " Clothes and Shoes (New)",
+              ClothesNew: this.state.Clothes_and_shoes_Percentage_New,
               ClothesNewColor: "hsl(65, 70%, 50%)"
             },
             {
               Commodity: " Clothes and Shoes (Used)",
               ClothesUsed: this.state.Clothes_and_shoes_Percentage_Used,
-            ClothesUsedColor: "hsl(65, 70%, 50%)"
-          },
+              ClothesUsedColor: "hsl(65, 70%, 50%)"
+            },
             {
-             Commodity: " Rice_Processed",
-      Rice_Processed: this.state.Rice_Processed_Percentage,
-      Rice_ProcessedColor: "hsl(65, 70%, 50%)"
-            },{
-             Commodity: "Cosmetics",
+              Commodity: " Rice_Processed",
+              Rice_Processed: this.state.Rice_Processed_Percentage,
+              Rice_ProcessedColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Commodity: "Cosmetics",
               Cosmetics: this.state.Cosmetics_Percentage,
               CosmeticsColor: "hsl(65, 70%, 50%)"
             },
             {
-                Commodity: "Millet",
-                Millet: this.state.Millet_Percentage,
-                MilletColor: "hsl(65, 70%, 50%)"
+              Commodity: "Millet",
+              Millet: this.state.Millet_Percentage,
+              MilletColor: "hsl(65, 70%, 50%)"
             },
             {
-                Commodity: "Bananas_Matoke",
-                Bananas_Matoke: this.state.Bananas_Matoke_Percentage,
-                Bananas_MatokeColor: "hsl(65, 70%, 50%)"
-            },{
-              Commodity: "Oranges_Percentage",
+              Commodity: "Bananas_Matoke",
+              Bananas_Matoke: this.state.Bananas_Matoke_Percentage,
+              Bananas_MatokeColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Commodity: "Oranges",
               Oranges: this.state.Oranges_Percentage,
               OrangesColor: "hsl(65, 70%, 50%)"
             },
             {
-                Commodity: "Tomatoes",
-                Tomatoes: this.state.Tomatoes_Percentage,
-                TomatoesColor: "hsl(65, 70%, 50%)"
+              Commodity: "Tomatoes",
+              Tomatoes: this.state.Tomatoes_Percentage,
+              TomatoesColor: "hsl(65, 70%, 50%)"
             },
             {
-                Commodity: "Maize_Flour",
-                Maize_Flour: this.state.Maize_Flour_Percentage,
-                Maize_FlourColor: "hsl(65, 70%, 50%)"
-            },{
+              Commodity: "Maize_Flour",
+              Maize_Flour: this.state.Maize_Flour_Percentage,
+              Maize_FlourColor: "hsl(65, 70%, 50%)"
+            },
+            {
               Commodity: "Avocado",
               Avocado: this.state.Avocado_Percentage,
               AvocadoColor: "hsl(65, 70%, 50%)"
-            },
+            }
           ]
         });
       }
@@ -216,11 +225,11 @@ class ProceduresComChart extends React.Component {
   render() {
     return (
       <div className="Chart">
-            <h2>Most Requested Procedures for Commodities</h2>
+        <h2>Most Requested Procedures for Commodities</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
-          indexBy="Commodities"
+          indexBy="Commodity"
           margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
           padding={0.3}
           groupMode="stacked"

@@ -17,6 +17,12 @@ import LanguageChart from "./LanguageChart";
 import PrimaryIncomeChart from "./PrimaryIncomeChart";
 import ProduceChart from "./ProduceChart";
 
+
+
+import ProceduresComChart from './tab2/ProceduresComChart'
+import DestinationChart from './tab2/ProceduresDestChart'
+import Agency_info from './tab2/AgencyInfoChart'
+import ProceduresComCatChart from './tab2/ProceduresComCatChart'
 // Nivo instructions:
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -154,6 +160,57 @@ class Chart extends React.Component {
             render={props => (
               <ProduceChart
               pathname={"/produce-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          />
+
+{/* ///////////////////////////////////Tab2////////////////// */}
+<Route
+            exact
+            path="/Agency-Information-chart"
+            render={props => (
+              <Agency_info
+              pathname={"/Agency-Information-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          />
+
+
+<Route
+            exact
+            path="/Destination-chart"
+            render={props => (
+              <DestinationChart
+              pathname={"/Destination-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          />
+
+<Route
+            exact
+            path="/Commodities-chart"
+            render={props => (
+              <ProceduresComChart
+              pathname={"/Commodities-chart"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          />
+
+
+<Route
+            exact
+            path="/Commodity-Categories-chart"
+            render={props => (
+              <ProceduresComCatChart
+              pathname={"/Commodity-Categories-chart"}
                 getDropDownDefault={this.props.getDropDownDefault}
                 state={this.state}
               />

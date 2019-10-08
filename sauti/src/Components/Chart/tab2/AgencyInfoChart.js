@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
-import theme from "../../Constants/Theme.js";
+import theme from "../../../Constants/Theme";
 
 class AgencyInfoChart extends React.Component {
     constructor(props) {
@@ -50,39 +50,39 @@ class AgencyInfoChart extends React.Component {
         this.props.getDropDownDefault(this.props.pathname);
 
         // Hard work put to backend will change axios calls
-        axios.get(`${process.env.REACT_APP_BE_URL}/country/all`).then(res => {
-            //console.log('totalCount', res.data.length)
+        axios.get(`https://staging-sauti-labs-14.herokuapp.com/agency-info`).then(res => {
+            console.log('totalCount', res.data)
             this.setState(
                 {
                     ...this.state,
                     users: res.data,
                     totalCount: res.data.length,
                     Clearing_Agent_Count: res.data.reduce(function (n, user) {
-                        return n + (user.country_of_residence === "KEN");
+                        return n + (user.request_value === "Clearing Agent");
                     }, 0),
                     COMESA_Trade_Information_Desk_Office_Count: res.data.reduce(function (n, user) {
-                        return n + (user.country_of_residence === "UGA");
+                        return n + (user.request_value === "COMESA Trade Information Desk Office (TIDO)");
                     }, 0),
                     Kenya_National_Chamber_of_Commerce_and_Industry_Count: res.data.reduce(function (n, user) {
-                        return n + (user.country_of_residence === "RWA");
+                        return n + (user.request_value === "Kenya National Chamber of Commerce & Industry (KNCCI)");
                     }, 0),
                      Ministry_of_Agriculture_Animal_Industry_and_Fisheries_Count: res.data.reduce(function (n, user) {
-                        return n + (user.country_of_residence === "RWA");
+                        return n + (user.request_value === "Ministry of Agriculture Animal Industry & Fisheries (MAAIF)");
                     }, 0),
                     Uganda_Police_Dpts_Count: res.data.reduce(function (n, user) {
-                        return n + (user.country_of_residence === "RWA");
+                        return n + (user.request_value === "Uganda Police Departments");
                     }, 0),
                     Kenya_Plant_Health_Inspectorate_Services_Count: res.data.reduce(function (n, user) {
-                        return n + (user.country_of_residence === "RWA");
+                        return n + (user.request_value === "Kenya Plant Health Inspectorate Service (KEPHIS)");
                     }, 0),
                     Kenya_Revenue_Authority_Count: res.data.reduce(function (n, user) {
-                        return n + (user.country_of_residence === "UGA");
+                        return n + (user.request_value === "Kenya Revenue Authority");
                     }, 0),
                     PORT_Health_Count: res.data.reduce(function (n, user) {
-                        return n + (user.country_of_residence === "UGA");
+                        return n + (user.request_value === "PORT Health");
                     }, 0),
                     Uganda_Revenue_Authority_Count: res.data.reduce(function (n, user) {
-                        return n + (user.country_of_residence === "UGA");
+                        return n + (user.request_value === "Uganda Revenue Authority");
                     }, 0),
                 },
                 () => {
@@ -95,6 +95,8 @@ class AgencyInfoChart extends React.Component {
     setPercentages = () => {
         const totalCount = this.state.totalCount;
         // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
+        console.log("total",totalCount)
+        console.log('here',this.state.Clearing_Agent_Count,'portlll')
         let Clearing_Agent_Percentage = Math.round(
             (this.state.Clearing_Agent_Count / totalCount) * 100
         );
@@ -110,14 +112,14 @@ class AgencyInfoChart extends React.Component {
         ); let Kenya_Plant_Health_Inspectorate_Services_Percentage = Math.round(
             (this.state.Kenya_Plant_Health_Inspectorate_Services_Count / totalCount) * 100
         );
-        let
-            Kenya_Revenue_Authority_Percentage = Math.round(
+        
+          let  Kenya_Revenue_Authority_Percentage = Math.round(
                 (this.state.Kenya_Revenue_Authority_Count / totalCount) * 100
             );
-            PORT_Health_Percentage = Math.round(
+         let PORT_Health_Percentage = Math.round(
             (this.state.PORT_Health_Count / totalCount) * 100
         );
-        Uganda_Revenue_Authority_Percentage = Math.round(
+      let  Uganda_Revenue_Authority_Percentage = Math.round(
             (this.state.Uganda_Revenue_Authority_Count / totalCount) * 100
         );
         this.setState(
@@ -188,13 +190,14 @@ class AgencyInfoChart extends React.Component {
     };
 
     render() {
-        return (
+        console.log(this.state.data,'here')
+        return  (
             <div className="Chart">
                 <h2>Most Requested Agency Information for Procedures</h2>
                 <ResponsiveBar
-                    data={this.state.data} // Data needed
+                    data={ this.state.data} // Data needed
                     keys={this.state.keys} // Values to display in Y axis
-                    indexBy="Agency Info"
+                    indexBy="Documentation"
                     margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
                     padding={0.3}
                     groupMode="stacked"
@@ -209,7 +212,7 @@ class AgencyInfoChart extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: "Agency Info",
+                        legend: "Documentation",
                         legendPosition: "middle",
                         legendOffset: 65
                     }}

@@ -93,6 +93,7 @@ class CountryChart extends React.Component {
   };
 
   render() {
+    console.log(this.state.data)
     return (
       <div className="Chart">
         <h2>Country of Residence</h2>
