@@ -12,15 +12,15 @@ class ProceduresComChart extends React.Component {
       data: [],
       keys: [
         "Maize",
-        "Clothes and Shoes (New)",
-        "Clothes and Shoes (Used)",
-        "Rice - Processed",
+        "Clothes_New",
+        "Clothes_Used",
+        "Rice_Processed",
         "Cosmetics",
         "Millet",
-        "Bananas - Matoke",
+        "Bananas_Matoke",
         "Oranges",
         "Tomatoes",
-        "Maize Flour",
+        "Maize_Flour",
         "Avocado"
       ],
       color: "nivo",
@@ -167,17 +167,17 @@ class ProceduresComChart extends React.Component {
               MaizeColor: "hsl(65, 70%, 50%)"
             },
             {
-              Commodity: " Clothes and Shoes (New)",
-              ClothesNew: this.state.Clothes_and_shoes_Percentage_New,
+              Commodity: "Appareal(New)",
+              Clothes_New: this.state.Clothes_and_shoes_Percentage_New,
               ClothesNewColor: "hsl(65, 70%, 50%)"
             },
             {
-              Commodity: " Clothes and Shoes (Used)",
-              ClothesUsed: this.state.Clothes_and_shoes_Percentage_Used,
+              Commodity: " Appareal(Used)",
+              Clothes_Used: this.state.Clothes_and_shoes_Percentage_Used,
               ClothesUsedColor: "hsl(65, 70%, 50%)"
             },
             {
-              Commodity: " Rice_Processed",
+              Commodity: "Rice",
               Rice_Processed: this.state.Rice_Processed_Percentage,
               Rice_ProcessedColor: "hsl(65, 70%, 50%)"
             },
@@ -192,7 +192,7 @@ class ProceduresComChart extends React.Component {
               MilletColor: "hsl(65, 70%, 50%)"
             },
             {
-              Commodity: "Bananas_Matoke",
+              Commodity: "Bananas",
               Bananas_Matoke: this.state.Bananas_Matoke_Percentage,
               Bananas_MatokeColor: "hsl(65, 70%, 50%)"
             },
@@ -207,7 +207,7 @@ class ProceduresComChart extends React.Component {
               TomatoesColor: "hsl(65, 70%, 50%)"
             },
             {
-              Commodity: "Maize_Flour",
+              Commodity: "M_Flour",
               Maize_Flour: this.state.Maize_Flour_Percentage,
               Maize_FlourColor: "hsl(65, 70%, 50%)"
             },
@@ -230,8 +230,8 @@ class ProceduresComChart extends React.Component {
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
           indexBy="Commodity"
-          margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
-          padding={0.3}
+          margin={{ top: 50, right: 5, bottom: 75, left: 5 }}
+          padding={0.1}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}
           labelFormat={d => <tspan y={-15}>{d}% </tspan>}

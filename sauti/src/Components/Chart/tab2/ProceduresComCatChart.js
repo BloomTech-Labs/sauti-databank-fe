@@ -12,15 +12,15 @@ class ProceduresComCatChart extends React.Component {
       data: [],
       keys: [
         "Cereals",
-        "Clothing and Shoes",
+        "Clothing",
         "Fruits",
         "Vegetables",
         "Legumes",
-        "Livestock and Live Products ",
+        "Livestock_Products",
         "Cosmetics",
-        "Poultry, Bees, and Thier Products",
+        "Poultry_Bees",
         "Pulses",
-        "Fish Products",
+        "Fish",
         "Tubers"
       ],
       color: "nivo",
@@ -82,7 +82,7 @@ class ProceduresComCatChart extends React.Component {
               return n + (user.request_value === "Legumes");
             }, 0),
             Livestock_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Livestock");
+              return n + (user.request_value === "Livestock & Livestock Products");
             }, 0),
             Cosmetics_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "Cosmetics");
@@ -174,8 +174,8 @@ class ProceduresComCatChart extends React.Component {
               CerealsColor: "hsl(65, 70%, 50%)"
             },
             {
-              CommodityCategory: "Clothing and Shoes",
-              ClothingAndShoes: this.state.Clothing_and_shoes_Percentage,
+              CommodityCategory: "Appareal",
+              Clothing: this.state.Clothing_and_shoes_Percentage,
               ClothingAndShoesColor: "hsl(65, 70%, 50%)"
             },
             {
@@ -194,8 +194,8 @@ class ProceduresComCatChart extends React.Component {
               LegumesColor: "hsl(65, 70%, 50%)"
             },
             {
-              CommodityCategory: "Livestock and Live Products",
-              LivestockAndLiveProducts: this.state
+              CommodityCategory: "Live",
+              Livestock_Products: this.state
                 .Livestock_and_live_Products_Percentage,
               LivestockAndLiveProductsColor: "hsl(65, 70%, 50%)"
             },
@@ -205,8 +205,8 @@ class ProceduresComCatChart extends React.Component {
               CosmeticsColor: "hsl(65, 70%, 50%)"
             },
             {
-              CommodityCategory: "Poultry, Bees and Thier Products",
-              PoultryBeesAndThierProducts: this.state
+              CommodityCategory: "Poultry/ Bees",
+              Poultry_Bees: this.state
                 .Poultry_Bees_and_Thier_Products_Percentage,
               PoultryBeesAndThierProductsColor: "hsl(65, 70%, 50%)"
             },
@@ -216,8 +216,8 @@ class ProceduresComCatChart extends React.Component {
               PulsesColor: "hsl(65, 70%, 50%)"
             },
             {
-              CommodityCategory: "Fish Products",
-              FishProducts: this.state.Fish_Products_Percentage,
+              CommodityCategory: "Fish",
+              Fish: this.state.Fish_Products_Percentage,
               FishProductsColor: "hsl(65, 70%, 50%)"
             },
             {
