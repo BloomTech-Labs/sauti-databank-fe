@@ -11,7 +11,7 @@ const theme = {
         // },
         text: {
           fill: "#4d4f52",
-          fontSize: "1.6rem"
+          fontSize: "1.1rem"
         }
       },
       legend: {
