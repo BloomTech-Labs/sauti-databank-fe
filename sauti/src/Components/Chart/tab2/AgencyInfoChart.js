@@ -2,7 +2,6 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
 import theme from "../../../Constants/Theme";
-
 class AgencyInfoChart extends React.Component {
     constructor(props) {
         super(props);
@@ -11,193 +10,190 @@ class AgencyInfoChart extends React.Component {
             totalCount: 0,
             data: [],
             keys: [
-                "Clearing Agent",
-                "COMESA Trade Information Desk Office (TIDO)",
-                "Kenya National Chamber of Commerce and Industry (KNCCI)",
-                "Ministry of Agriculture Animal Industry and Fisheries (MAAIF)",
-                "Uganda Police Dpts",
-                "Kenya Plant Health Inspectorate Services (KEPHIS)",
-                "Kenya Revenue Authority (KRA)",
-                "PORT Health",
-                "Uganda Revenue Authority (URA)"
+                "Clearing_Agent",
+                "TIDO",
+                "KNCCI",
+                "MAAIF",
+                "UGA_Police",
+                "KEPHIS",
+                "KRA",
+                "Bureau",
+                "URA"
             ],
             color: "nivo",
             // Percentages
             Clearing_Agent_Percentage: 0,
-            COMESA_Trade_Information_Desk_Office_Percentage: 0,
-            Kenya_National_Chamber_of_Commerce_and_Industry_Percentage: 0,
-            Ministry_of_Agriculture_Animal_Industry_and_Fisheries_Percentage: 0,
+            TIDO_Percentage: 0,
+            KNCCI_Percentage: 0,
+            MAAIF_Percentage: 0,
             Uganda_Police_Dpts_Percentage: 0,
-            Kenya_Plant_Health_Inspectorate_Services_Percentage: 0,
-            Kenya_Revenue_Authority_Percentage: 0,
-            PORT_Health_Percentage: 0,
-            Uganda_Revenue_Authority_Percentage: 0,
-
+            KEPHIS_Percentage: 0,
+            KRA_Percentage: 0,
+            Bureau_Percentage: 0,
+            URA_Percentage: 0,
             //  Count
             Clearing_Agent_Count: 0,
-            COMESA_Trade_Information_Desk_Office_Count: 0,
-            Kenya_National_Chamber_of_Commerce_and_Industry_Count: 0,
-            Ministry_of_Agriculture_Animal_Industry_and_Fisheries_Count: 0,
+            TIDO_Count: 0,
+            KNCCI_Count: 0,
+            MAAIF_Count: 0,
             Uganda_Police_Dpts_Count: 0,
-            Kenya_Plant_Health_Inspectorate_Services_Count: 0,
-            Kenya_Revenue_Authority_Count: 0,
-            PORT_Health_Count: 0,
-            Uganda_Revenue_Authority_Count: 0,
+            KEPHIS_Count: 0,
+            KRA_Count: 0,
+            Bureau_Count: 0,
+            URA_Count: 0,
         };
     }
-
     componentDidMount() {
         this.props.getDropDownDefault(this.props.pathname);
-
         // Hard work put to backend will change axios calls
-        axios.get(`https://staging-sauti-labs-14.herokuapp.com/agency-info`).then(res => {
-            console.log('totalCount', res.data)
-            this.setState(
-                {
-                    ...this.state,
-                    users: res.data,
-                    totalCount: res.data.length,
-                    Clearing_Agent_Count: res.data.reduce(function (n, user) {
-                        return n + (user.request_value === "Clearing Agent");
-                    }, 0),
-                    COMESA_Trade_Information_Desk_Office_Count: res.data.reduce(function (n, user) {
-                        return n + (user.request_value === "COMESA Trade Information Desk Office (TIDO)");
-                    }, 0),
-                    Kenya_National_Chamber_of_Commerce_and_Industry_Count: res.data.reduce(function (n, user) {
-                        return n + (user.request_value === "Kenya National Chamber of Commerce & Industry (KNCCI)");
-                    }, 0),
-                     Ministry_of_Agriculture_Animal_Industry_and_Fisheries_Count: res.data.reduce(function (n, user) {
-                        return n + (user.request_value === "Ministry of Agriculture Animal Industry & Fisheries (MAAIF)");
-                    }, 0),
-                    Uganda_Police_Dpts_Count: res.data.reduce(function (n, user) {
-                        return n + (user.request_value === "Uganda Police Departments");
-                    }, 0),
-                    Kenya_Plant_Health_Inspectorate_Services_Count: res.data.reduce(function (n, user) {
-                        return n + (user.request_value === "Kenya Plant Health Inspectorate Service (KEPHIS)");
-                    }, 0),
-                    Kenya_Revenue_Authority_Count: res.data.reduce(function (n, user) {
-                        return n + (user.request_value === "Kenya Revenue Authority");
-                    }, 0),
-                    PORT_Health_Count: res.data.reduce(function (n, user) {
-                        return n + (user.request_value === "PORT Health");
-                    }, 0),
-                    Uganda_Revenue_Authority_Count: res.data.reduce(function (n, user) {
-                        return n + (user.request_value === "Uganda Revenue Authority");
-                    }, 0),
-                },
-                () => {
-                    this.setPercentages();
-                }
-            );
-        });
+        axios
+            .get(`https://staging-sauti-labs-14.herokuapp.com/agency-info`)
+            .then(res => {
+                //console.log('totalCount', res.data.length)
+                this.setState(
+                    {
+                        ...this.state,
+                        users: res.data,
+                        totalCount: res.data.length,
+                        Clearing_Agent_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Clearing Agent");
+                        }, 0),
+                        TIDO_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "COMESA Trade Information Desk Office (TIDO)");
+                        }, 0),
+                        KNCCI_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Kenya National Chamber of Commerce & Industry (KNCCI)");
+                        }, 0),
+                        MAAIF_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Ministry of Agriculture Animal Industry & Fisheries (MAAIF)");
+                        }, 0),
+                        Uganda_Police_Dpts_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Uganda Police Departments");
+                        }, 0),
+                        KEPHIS_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Kenya Plant Health Inspectorate Service (KEPHIS)");
+                        }, 0),
+                        KRA_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Kenya Revenue Authority (KRA)");
+                        }, 0),
+                        Bureau_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Kenya Bureau of Standards (KEBS)");
+                        }, 0),
+                        URA_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Uganda Revenue Authority (URA)");
+                        }, 0), 
+                    },
+                    () => {
+                        this.setPercentages();
+                    }
+                );
+            })
     }
-
     setPercentages = () => {
         const totalCount = this.state.totalCount;
         // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-        console.log("total",totalCount)
-        console.log('here',this.state.Clearing_Agent_Count,'portlll')
         let Clearing_Agent_Percentage = Math.round(
             (this.state.Clearing_Agent_Count / totalCount) * 100
         );
-        let COMESA_Trade_Information_Desk_Office_Percentage = Math.round(
-            (this.state.COMESA_Trade_Information_Desk_Office_Count / totalCount) * 100
+        let TIDO_Percentage = Math.round(
+            (this.state.TIDO_Count / totalCount) * 100
         );
-        let Kenya_National_Chamber_of_Commerce_and_Industry_Percentage = Math.round(
-            (this.state.Kenya_National_Chamber_of_Commerce_and_Industry_Count / totalCount) * 100
-        ); let Ministry_of_Agriculture_Animal_Industry_and_Fisheries_Percentage = Math.round(
-            (this.state.Ministry_of_Agriculture_Animal_Industry_and_Fisheries_Count / totalCount) * 100
-        ); let Uganda_Police_Dpts_Percentage = Math.round(
+        let KNCCI_Percentage = Math.round(
+            (this.state.KNCCI_Count / totalCount) * 100
+        );
+        let MAAIF_Percentage = Math.round(
+            (this.state.MAAIF_Count / totalCount) * 100
+        );
+        let Uganda_Police_Dpts_Percentage = Math.round(
             (this.state.Uganda_Police_Dpts_Count / totalCount) * 100
-        ); let Kenya_Plant_Health_Inspectorate_Services_Percentage = Math.round(
-            (this.state.Kenya_Plant_Health_Inspectorate_Services_Count / totalCount) * 100
         );
-        
-          let  Kenya_Revenue_Authority_Percentage = Math.round(
-                (this.state.Kenya_Revenue_Authority_Count / totalCount) * 100
-            );
-         let PORT_Health_Percentage = Math.round(
-            (this.state.PORT_Health_Count / totalCount) * 100
+        let KEPHIS_Percentage = Math.round(
+            (this.state.KEPHIS_Count / totalCount) * 100
         );
-      let  Uganda_Revenue_Authority_Percentage = Math.round(
-            (this.state.Uganda_Revenue_Authority_Count / totalCount) * 100
+        let KRA_Percentage = Math.round(
+            (this.state.KRA_Count / totalCount) * 100
+        );
+        let Bureau_Percentage = Math.round(
+            (this.state.Bureau_Count / totalCount) * 100
+        );
+        let URA_Percentage = Math.round(
+            (this.state.URA_Count / totalCount) * 100
         );
         this.setState(
             {
                 ...this.state,
                 Clearing_Agent_Percentage: Clearing_Agent_Percentage,
-                COMESA_Trade_Information_Desk_Office_Percentage: COMESA_Trade_Information_Desk_Office_Percentage,
-                Kenya_National_Chamber_of_Commerce_and_Industry_Percentage: Kenya_National_Chamber_of_Commerce_and_Industry_Percentage,
-                Ministry_of_Agriculture_Animal_Industry_and_Fisheries_Percentage: Ministry_of_Agriculture_Animal_Industry_and_Fisheries_Percentage,
+                TIDO_Percentage: TIDO_Percentage,
+                KNCCI_Percentage: KNCCI_Percentage,
+                MAAIF_Percentage: MAAIF_Percentage,
                 Uganda_Police_Dpts_Percentage: Uganda_Police_Dpts_Percentage,
-                Kenya_Plant_Health_Inspectorate_Services_Percentage: Kenya_Plant_Health_Inspectorate_Services_Percentage,
-                Kenya_Revenue_Authority_Percentage: Kenya_Revenue_Authority_Percentage,
-                PORT_Health_Percentage: PORT_Health_Percentage,
-                Uganda_Revenue_Authority_Percentage: Uganda_Revenue_Authority_Percentage,
+                KEPHIS_Percentage: KEPHIS_Percentage,
+                KRA_Percentage: KRA_Percentage,
+                Bureau_Percentage: Bureau_Percentage,
+                URA_Percentage: URA_Percentage,
             },
             () => {
                 this.setState({
                     ...this.state,
                     data: [
                         {
-                            Documentation: "Clearing Agent",
-                            ClearingAgent: this.state.Clearing_Agent_Percentage,
-                            ClearingAgentColor: "hsl(65, 70%, 50%)"
+                            Info: "C Agent",
+                            Clearing_Agent: this.state.Clearing_Agent_Percentage,
+                            AgentColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Documentation: "COMESA Trade Information Desk Office",
-                            COMESATradeInfo: this.state.COMESA_Trade_Information_Desk_Office_Percentage,
-                            COMESATradeInfoColor: "hsl(65, 70%, 50%)"
+                            Info: "TIDO",
+                            TIDO: this.state.TIDO_Percentage,
+                            TIDOColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Documentation: "Kenya National Chamber of Commerce and Industry",
-                            KenyaNationalChamberofCommerceAndIndustry: this.state.Kenya_National_Chamber_of_Commerce_and_Industry_Percentage,
-                            KenyaNationalChamberofCommerceAndIndustrColor: "hsl(65, 70%, 50%)"
+                            Info: "KNCCI",
+                            KNCCI: this.state.KNCCI_Percentage,
+                            KNCCIColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Documentation: "Ministry of Agriculture Animal Industry and Fisheries",
-                            MinistryOfAgricultureAnimalIndustryAndFisheries: this.state.Ministry_of_Agriculture_Animal_Industry_and_Fisheries_Percentage,
-                            MinistryOfAgricultureAnimalIndustryAndFisheriesColor: "hsl(65, 70%, 50%)"
-                        }, {
-                            Documentation: "Uganda_Police_Dpts",
-                            UgandaPoliceDpts: this.state.Uganda_Police_Dpts_Percentage,
-                            UgandaPoliceDptsColor: "hsl(65, 70%, 50%)"
+                            Info: "MAAIF",
+                            MAAIF: this.state.MAAIF_Percentage,
+                            MAAIFColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Documentation: "Kenya Plant Health Inspectorate Services",
-                            KenyaPlantHealthInspectorateServices: this.state.Kenya_Plant_Health_Inspectorate_Services_Percentage,
-                            KenyaPlantHealthInspectorateServicesColor: "hsl(65, 70%, 50%)"
+                            Info: "UGA Pol",
+                            UGA_Police: this.state.Uganda_Police_Dpts_Percentage,
+                            UGA_PoliceColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Commodity: "Kenya Revenue Authority",
-                            KenyaRevenueAuthority: this.state.Kenya_Revenue_Authority_Percentage,
-                            KenyaRevenueAuthorityColor: "hsl(65, 70%, 50%)"
+                            Info: "KEPHIS",
+                            KEPHIS: this.state.KEPHIS_Percentage,
+                            KEPHISColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Commodity: "PORT Health",
-                            PORTHealth: this.state.PORT_Health_Percentage,
-                            PORTHealthColor: "hsl(65, 70%, 50%)"
+                            Info: "KRA",
+                            KRA: this.state.KRA_Percentage,
+                            KRAColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Commodity: "Uganda Revenue Authority",
-                            UgandaRevenueAuthority: this.state.Uganda_Revenue_Authority_Percentage,
-                            UgandaRevenueAuthorityColor: "hsl(65, 70%, 50%)"
+                            Info: "KEBS",
+                            Bureau: this.state.Bureau_Percentage,
+                            BureauColor: "hsl(65, 70%, 50%)"
+                        },
+                        {
+                            Info: "URA",
+                            URA: this.state.URA_Percentage,
+                            URAColor: "hsl(65, 70%, 50%)"
                         },
                     ]
                 });
             }
         );
     };
-
     render() {
-        console.log(this.state.data,'here')
-        return  (
+        return (
             <div className="Chart">
                 <h2>Most Requested Agency Information for Procedures</h2>
                 <ResponsiveBar
-                    data={ this.state.data} // Data needed
+                    data={this.state.data} // Data needed
                     keys={this.state.keys} // Values to display in Y axis
-                    indexBy="Documentation"
+                    indexBy="Info"
                     margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
                     padding={0.3}
                     groupMode="stacked"
@@ -212,7 +208,7 @@ class AgencyInfoChart extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: "Documentation",
+                        legend: "Agency Information",
                         legendPosition: "middle",
                         legendOffset: 65
                     }}
@@ -220,7 +216,7 @@ class AgencyInfoChart extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: "Percentage of Agency Info",
+                        legend: "Percentage of Agency Information",
                         legendPosition: "middle",
                         legendOffset: -70
                     }}
@@ -264,5 +260,9 @@ class AgencyInfoChart extends React.Component {
         );
     }
 }
-
 export default AgencyInfoChart;
+
+
+
+
+
