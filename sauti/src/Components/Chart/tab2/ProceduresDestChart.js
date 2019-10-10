@@ -12,7 +12,7 @@ class ProceduresDestChart extends React.Component {
             users: [],
             totalCount: 0,
             data: [],
-            keys: ["KEN", "UGA"],
+            keys: ["Kenya", "Uganda"],
             color: "nivo",
             // Percentages
             KEN_Percentage: 0,
@@ -68,12 +68,12 @@ class ProceduresDestChart extends React.Component {
                     data: [
                         {
                             Destination: "KEN",
-                            KEN: this.state.KEN_Percentage,
+                            Kenya: this.state.KEN_Percentage,
                             KENColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Destination: "UGA",
-                            UGA: this.state.UGA_Percentage,
+                            Uganda: this.state.UGA_Percentage,
                             UGAColor: "hsl(65, 70%, 50%)",
                         },
                     
