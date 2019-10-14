@@ -19,11 +19,16 @@ import ProduceChart from "./ProduceChart";
 
 
 
-import ProceduresComChart from './tab2/ProceduresComChart'
-import DestinationChart from './tab2/ProceduresDestChart'
-import Agency_info from './tab2/AgencyInfoChart'
-import ProceduresComCatChart from './tab2/ProceduresComCatChart'
-import DocumentChart from './tab2/DocumentsInfoChart'
+import ProceduresComChart from './tab2/ProceduresComChart';
+import DestinationChart from './tab2/ProceduresDestChart';
+import Agency_info from './tab2/AgencyInfoChart';
+import ProceduresComCatChart from './tab2/ProceduresComCatChart';
+import DocumentChart from './tab2/DocumentsInfoChart';
+
+import DestinationCountryChart from './tab3/DestinationCountryChart';
+import DestinationMarketChart from './tab3/DestinationMarketChart';
+import TradersGoodsChart from './tab3/TradersGoodsChart';
+
 // Nivo instructions:
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -230,11 +235,50 @@ class Chart extends React.Component {
               />
             )}
           />
+
+<Route
+            exact
+            path="/traders-goods"
+            render={props => (
+              <TradersGoodsChart
+                pathname={"/traders-goods"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          /> 
+
+<Route
+            exact
+            path="/dest-country"
+            render={props => (
+              <DestinationCountryChart
+                pathname={"/dest-country"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          /> 
+
+<Route
+            exact
+            path="/dest-market"
+            render={props => (
+              <DestinationMarketChart
+                pathname={"/dest-market"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          /> 
+
         </div>
       </div>
     );
   }
 }
+
+
 
 // Exporting
 export default Chart;
