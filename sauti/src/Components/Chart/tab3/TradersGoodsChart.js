@@ -4,22 +4,21 @@ import axios from 'axios';
 import theme from '../../../Constants/Theme'
 
 
-
-class ProceduresDestChart extends React.Component {
+class TradersGoodsChart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             users: [],
             totalCount: 0,
             data: [],
-            keys: ["Kenya", "Uganda"],
+            keys: ["EAC", "Outside_EAC"],
             color: "nivo",
             // Percentages
-            KEN_Percentage: 0,
-            UGA_Percentage: 0,
+            EAC_Percentage: 0,
+            OutsideEAC_Percentage: 0,
             // Counts
-            KEN_Count: 0,
-            UGA_Count: 0 
+            EAC_Count: 0,
+            OutsideEAC_Count: 0
         };
     }
 
@@ -27,7 +26,7 @@ class ProceduresDestChart extends React.Component {
         this.props.getDropDownDefault(this.props.pathname);
 
         axios
-            .get(`https://staging-sauti-labs-14.herokuapp.com/dest-info`)
+            .get(`https://staging-sauti-labs-14.herokuapp.com/traders_goods`)
             .then(res => {
                 //console.log('totalCount', res.data.length)
                 this.setState(
@@ -35,11 +34,11 @@ class ProceduresDestChart extends React.Component {
                         ...this.state,
                         users: res.data,
                         totalCount: res.data.length,
-                        KEN_Count: res.data.reduce(function (n, user) {
-                            return n + (user.request_value === "KEN")
+                        EAC_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "EAC")
                         }, 0),
-                        UGA_Count: res.data.reduce(function (n, user) {
-                            return n + (user.request_value === "UGA")
+                        OutsideEAC_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Outside EAC")
                         }, 0),
                     },
                     () => {
@@ -54,29 +53,29 @@ class ProceduresDestChart extends React.Component {
     setPercentages = () => {
         const totalCount = this.state.totalCount;
         // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-        let KEN_Percentage = Math.round((this.state.KEN_Count / totalCount) * 100);
-        let UGA_Percentage = Math.round((this.state.UGA_Count / totalCount) * 100);
+        let EAC_Percentage = Math.round((this.state.EAC_Count / totalCount) * 100);
+        let OutsideEAC_Percentage = Math.round((this.state.OutsideEAC_Count / totalCount) * 100);
         this.setState(
             {
                 ...this.state,
-                KEN_Percentage: KEN_Percentage,
-                UGA_Percentage: UGA_Percentage,
+                EAC_Percentage: EAC_Percentage,
+                OutsideEAC_Percentage: OutsideEAC_Percentage,
             },
             () => {
                 this.setState({
                     ...this.state,
                     data: [
                         {
-                            Destination: "KEN",
-                            Kenya: this.state.KEN_Percentage,
-                            KENColor: "hsl(65, 70%, 50%)"
+                            Origin: "EAC",
+                            EAC: this.state.EAC_Percentage,
+                            EACColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Destination: "UGA",
-                            Uganda: this.state.UGA_Percentage,
-                            UGAColor: "hsl(65, 70%, 50%)",
+                            Origin: "Outside_EAC",
+                            OutsideEAC: this.state.OutsideEAC_Percentage,
+                            OutsideEACColor: "hsl(65, 70%, 50%)",
                         },
-                    
+
                     ]
                 });
             }
@@ -86,11 +85,11 @@ class ProceduresDestChart extends React.Component {
     render() {
         return (
             <div className="Chart">
-                <h2>Requested Procedures for Destination (Imports to:)</h2>
+                <h2>Origin of Traders' Goods</h2>
                 <ResponsiveBar
                     data={this.state.data} // Data needed
                     keys={this.state.keys} // Values to display in Y axis
-                    indexBy="Destination"
+                    indexBy="Origin"
                     margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
                     padding={0.3}
                     groupMode="stacked"
@@ -105,7 +104,7 @@ class ProceduresDestChart extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: "Destination (Imports To)",
+                        legend: "Origin",
                         legendPosition: "middle",
                         legendOffset: 65
                     }}
@@ -113,7 +112,7 @@ class ProceduresDestChart extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: "Percentage of Destination",
+                        legend: "Percentage of Origin",
                         legendPosition: "middle",
                         legendOffset: -70
                     }}
@@ -127,40 +126,30 @@ class ProceduresDestChart extends React.Component {
             </strong>
                     )}
 
-
-
-
-
-
                     legends={[
-            {
-                dataFrom: 'keys',
-                anchor: 'bottom-right',
-                direction: 'column',
-                justify: false,
-                translateX: 120,
-                translateY: 0,
-                itemsSpacing: 2,
-                itemWidth: 100,
-                itemHeight: 20,
-                itemDirection: 'left-to-right',
-                itemOpacity: 0.85,
-                symbolSize: 20,
-                effects: [
-                    {
-                        on: 'hover',
-                        style: {
-                            itemOpacity: 1
+                        {
+                            dataFrom: 'keys',
+                            anchor: 'bottom-right',
+                            direction: 'column',
+                            justify: false,
+                            translateX: 120,
+                            translateY: 0,
+                            itemsSpacing: 2,
+                            itemWidth: 100,
+                            itemHeight: 20,
+                            itemDirection: 'left-to-right',
+                            itemOpacity: 0.85,
+                            symbolSize: 20,
+                            effects: [
+                                {
+                                    on: 'hover',
+                                    style: {
+                                        itemOpacity: 1
+                                    }
+                                }
+                            ]
                         }
-                    }
-                ]
-            }
-        ]}
-
-
-
-
-
+                    ]}
 
 
                     animate={true}
@@ -181,4 +170,4 @@ class ProceduresDestChart extends React.Component {
     }
 }
 
-export default ProceduresDestChart;
+export default TradersGoodsChart;

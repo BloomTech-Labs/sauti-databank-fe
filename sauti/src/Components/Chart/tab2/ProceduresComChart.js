@@ -12,8 +12,8 @@ class ProceduresComChart extends React.Component {
       data: [],
       keys: [
         "Maize",
-        "Clothes_New",
-        "Clothes_Used",
+        "Clothes_and_Shoes_New",
+        "Clothes_and_Shoes_Used",
         "Rice_Processed",
         "Cosmetics",
         "Millet",
@@ -167,13 +167,13 @@ class ProceduresComChart extends React.Component {
               MaizeColor: "hsl(65, 70%, 50%)"
             },
             {
-              Commodity: "Appareal(New)",
-              Clothes_New: this.state.Clothes_and_shoes_Percentage_New,
+              Commodity: "(New)",
+              Clothes_and_Shoes_New: this.state.Clothes_and_shoes_Percentage_New,
               ClothesNewColor: "hsl(65, 70%, 50%)"
             },
             {
-              Commodity: " Appareal(Used)",
-              Clothes_Used: this.state.Clothes_and_shoes_Percentage_Used,
+              Commodity: "(Used)",
+              Clothes_and_Shoes_Used: this.state.Clothes_and_shoes_Percentage_Used,
               ClothesUsedColor: "hsl(65, 70%, 50%)"
             },
             {
@@ -230,7 +230,7 @@ class ProceduresComChart extends React.Component {
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
           indexBy="Commodity"
-          margin={{ top: 50, right: 5, bottom: 75, left: 5 }}
+          margin={{ top: 50, right: 195, bottom: 75, left: 80 }}
           padding={0.1}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}

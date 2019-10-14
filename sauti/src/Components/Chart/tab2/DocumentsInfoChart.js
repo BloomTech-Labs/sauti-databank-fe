@@ -12,10 +12,10 @@ class DocumentsInfoChart extends React.Component {
       data: [],
       keys: [
         "Import_Permit",
-        "Simplified_Certificate",
+        "Simplified_Certificate_of_Origin",
         "Yellow_Fever_Card",
+        "National_ID_Card_Passport",
         "Bill_of_Lading",
-        "National_ID_Card",
         "Phytosanitary_Certificate"
       ],
       color: "nivo",
@@ -94,10 +94,10 @@ class DocumentsInfoChart extends React.Component {
       (this.state.Bill_of_Lading_Count / totalCount) * 100
     );
     let National_ID_Card_Percentage = Math.round(
-      (this.state.National_ID_Card_Percentage / totalCount) * 100
+      (this.state.National_ID_Card_Count / totalCount) * 100
     );
     let Phytosanitary_Certificate_Percentage = Math.round(
-      (this.state.National_ID_Card_Percentage / totalCount) * 100
+      (this.state.Phytosanitary_Certificate_Count / totalCount) * 100
     );
     this.setState(
       {
@@ -120,7 +120,7 @@ class DocumentsInfoChart extends React.Component {
             },
             {
               Destination: "Simplified ",
-              Simplified_Certificate: this.state
+              Simplified_Certificate_of_Origin: this.state
                 .Simplified_Certificate_Percentage,
               UGAColor: "hsl(65, 70%, 50%)"
             },
@@ -136,7 +136,7 @@ class DocumentsInfoChart extends React.Component {
             },
             {
               Destination: "National ",
-              National_ID_Card: this.state.National_ID_Card_Percentage,
+              National_ID_Card_Passport: this.state.National_ID_Card_Percentage,
               UGAColor: "hsl(65, 70%, 50%)"
             },
             {
@@ -160,7 +160,7 @@ class DocumentsInfoChart extends React.Component {
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
           indexBy="Destination"
-          margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
+          margin={{ top: 50, right: 300, bottom: 75, left: 80 }}
           padding={0.3}
           groupMode="stacked"
           colors={{ scheme: this.state.color }}

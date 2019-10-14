@@ -11,14 +11,14 @@ class AgencyInfoChart extends React.Component {
             data: [],
             keys: [
                 "Clearing_Agent",
-                "TIDO",
-                "KNCCI",
-                "MAAIF",
-                "UGA_Police",
-                "KEPHIS",
-                "KRA",
-                "Bureau",
-                "URA"
+                "COMESA_Trade_Information_Desk_Office",
+                "KEN_National_Chamber_of_Commerce_And_Industry",
+                "Ministry_of_Agriculture_Animal_Industry_And_Fisheries",
+                "Uganda_Police_Departments",
+                "Kenya_Plant_Health_Inspectorate_Service",
+                "Kenya_Revenue_Authority",
+                "Kenya_Bureau_of_Standards",
+                "Uganda_Revenue_Authority"
             ],
             color: "nivo",
             // Percentages
@@ -143,42 +143,42 @@ class AgencyInfoChart extends React.Component {
                         },
                         {
                             Info: "TIDO",
-                            TIDO: this.state.TIDO_Percentage,
+                            COMESA_Trade_Information_Desk_Office: this.state.TIDO_Percentage,
                             TIDOColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Info: "KNCCI",
-                            KNCCI: this.state.KNCCI_Percentage,
+                            KEN_National_Chamber_of_Commerce_And_Industry: this.state.KNCCI_Percentage,
                             KNCCIColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Info: "MAAIF",
-                            MAAIF: this.state.MAAIF_Percentage,
+                            Ministry_of_Agriculture_Animal_Industry_And_Fisheries: this.state.MAAIF_Percentage,
                             MAAIFColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Info: "UGA Pol",
-                            UGA_Police: this.state.Uganda_Police_Dpts_Percentage,
+                            Uganda_Police_Departments: this.state.Uganda_Police_Dpts_Percentage,
                             UGA_PoliceColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Info: "KEPHIS",
-                            KEPHIS: this.state.KEPHIS_Percentage,
+                            Kenya_Plant_Health_Inspectorate_Service: this.state.KEPHIS_Percentage,
                             KEPHISColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Info: "KRA",
-                            KRA: this.state.KRA_Percentage,
+                            Kenya_Revenue_Authority: this.state.KRA_Percentage,
                             KRAColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Info: "KEBS",
-                            Bureau: this.state.Bureau_Percentage,
+                            Kenya_Bureau_of_Standards: this.state.Bureau_Percentage,
                             BureauColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Info: "URA",
-                            URA: this.state.URA_Percentage,
+                            Uganda_Revenue_Authority: this.state.URA_Percentage,
                             URAColor: "hsl(65, 70%, 50%)"
                         },
                     ]
@@ -194,7 +194,7 @@ class AgencyInfoChart extends React.Component {
                     data={this.state.data} // Data needed
                     keys={this.state.keys} // Values to display in Y axis
                     indexBy="Info"
-                    margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
+                    margin={{ top: 50, right: 300, bottom: 75, left: 80 }}
                     padding={0.3}
                     groupMode="stacked"
                     colors={{ scheme: this.state.color }}
@@ -243,10 +243,10 @@ class AgencyInfoChart extends React.Component {
                 anchor: 'bottom-right',
                 direction: 'column',
                 justify: false,
-                translateX: 120,
+                translateX: 650,
                 translateY: 0,
                 itemsSpacing: 2,
-                itemWidth: 100,
+                itemWidth: 650,
                 itemHeight: 20,
                 itemDirection: 'left-to-right',
                 itemOpacity: 0.85,
