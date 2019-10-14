@@ -40,7 +40,7 @@ class App extends React.Component {
     //       });
     //     });
   }
-
+  
   getDropDownDefault(pathname = this.props.history.location.pathname) {
 
     if (pathname === "/gender-chart" || pathname === "/") {
@@ -190,6 +190,25 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Most Requested Agency Information for Procedures"
       });
+    } else if (option.label === "Origin of Traders' Goods") {
+      this.props.history.push("/traders-goods");
+      this.setState({
+        ...this.state,
+        defaultOption: "Origin of Traders' Goods"
+      });
+    } else if (option.label === "Final Destination Country") {
+      this.props.history.push("/dest-country");
+      this.setState({
+        ...this.state,
+        defaultOption: "Final Destination Country"
+      });
+    } else if (option.label === "Final Destination Market") {
+      this.props.history.push("/dest-market");
+      this.setState({
+        ...this.state,
+        defaultOption: "Final Destination Market"
+      });
+   
   }
   };
 
@@ -208,7 +227,11 @@ class App extends React.Component {
       "Most Requested Procedure Commodity Categories",
       "Requested Procedures for Destination (Imports to:)",
       "Most Requested Document Information for Procedures",
-      "Most Requested Agency Information for Procedures"
+      "Most Requested Agency Information for Procedures",
+      "Origin of Traders' Goods",
+      "Final Destination Country",
+      "Final Destination Market"
+
     ];
 
     return (
