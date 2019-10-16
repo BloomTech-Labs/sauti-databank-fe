@@ -40,9 +40,8 @@ class App extends React.Component {
     //       });
     //     });
   }
-  
-  getDropDownDefault(pathname = this.props.history.location.pathname) {
 
+  getDropDownDefault(pathname = this.props.history.location.pathname) {
     if (pathname === "/gender-chart" || pathname === "/") {
       this.setState({
         ...this.state,
@@ -84,10 +83,10 @@ class App extends React.Component {
         defaultOption: "Produce"
       });
     } else if (pathname === "/Commodities-chart") {
-        this.setState({
-          ...this.state,
-          defaultOption: "Most Requested Procedures Commodities"
-        });
+      this.setState({
+        ...this.state,
+        defaultOption: "Most Requested Procedures Commodities"
+      });
     } else if (pathname === "/Commodity-Categories-chart") {
       this.setState({
         ...this.state,
@@ -108,8 +107,23 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Most Requested Agency Information for Procedures"
       });
-}
-}
+    } else if (pathname === "/top-commodity") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Tab3 top-commodity"
+      });
+    } else if (pathname === "/top-commodity-categories") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Tab3 top-commodity-categories"
+      });
+    } else if (pathname === "/exchange_rate_direction") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Tab3 Exchange_Rate_Direction"
+      });
+    }
+  }
 
   onSelect = option => {
     if (option.label === "Gender") {
@@ -166,25 +180,33 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Most Requested Procedures Commodities"
       });
-    } else if (option.label === "Most Requested Procedure Commodity Categories") {
+    } else if (
+      option.label === "Most Requested Procedure Commodity Categories"
+    ) {
       this.props.history.push("/Commodity-Categories-chart");
       this.setState({
         ...this.state,
         defaultOption: "Most Requested Procedure Commodity Categories"
       });
-    } else if (option.label === "Requested Procedures for Destination (Imports to:)") {
+    } else if (
+      option.label === "Requested Procedures for Destination (Imports to:)"
+    ) {
       this.props.history.push("/Destination-chart");
       this.setState({
         ...this.state,
         defaultOption: "Requested Procedures for Destination (Imports to:)"
       });
-    } else if (option.label === "Most Requested Document Information for Procedures") {
+    } else if (
+      option.label === "Most Requested Document Information for Procedures"
+    ) {
       this.props.history.push("/Document-Information-chart");
       this.setState({
         ...this.state,
         defaultOption: "Most Requested Document Information for Procedures"
       });
-    } else if (option.label === "Most Requested Agency Information for Procedures") {
+    } else if (
+      option.label === "Most Requested Agency Information for Procedures"
+    ) {
       this.props.history.push("/Agency-Information-chart");
       this.setState({
         ...this.state,
@@ -208,8 +230,25 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Final Destination Market"
       });
-   
-  }
+    } else if (option.label === "Tab3 top-commodity") {
+      this.props.history.push("/top-commodity");
+      this.setState({
+        ...this.state,
+        defaultOption: "Tab3 top-commodity"
+      });
+    } else if (option.label === "Tab3 top-commodity-categories") {
+      this.props.history.push("/top-commodity-categories");
+      this.setState({
+        ...this.state,
+        defaultOption: "Tab3 top-commodity-categories"
+      });
+    } else if (option.label === "Tab3 Exchange_Rate_Direction") {
+      this.props.history.push("/exchange_rate_direction");
+      this.setState({
+        ...this.state,
+        defaultOption: "Tab3 Exchange_Rate_Direction"
+      });
+    }
   };
 
   render() {
@@ -230,8 +269,10 @@ class App extends React.Component {
       "Most Requested Agency Information for Procedures",
       "Origin of Traders' Goods",
       "Final Destination Country",
-      "Final Destination Market"
-
+      "Final Destination Market",
+      "Tab3 top-commodity",
+      "Tab3 top-commodity-categories",
+      "Tab3 Exchange_Rate_Direction"
     ];
 
     return (
@@ -259,7 +300,7 @@ class App extends React.Component {
           </div>
           <div className="content-container">
             <div className="chart-container">
-              <Chart getDropDownDefault={this.getDropDownDefault.bind(this)}/>
+              <Chart getDropDownDefault={this.getDropDownDefault.bind(this)} />
             </div>
             <div className="dropdown-container">
               <p>Key Trader Demographics</p>

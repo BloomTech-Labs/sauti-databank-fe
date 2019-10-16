@@ -11,14 +11,14 @@ class TopCommodityCategories extends React.Component {
       totalCount: 0,
       data: [],
       keys: [
-        "Cereals-Maize ",
+        "Cereals_Maize ",
         "Beans",
-        "Cereals-Other ",
-        "Seeds&Nuts",
+        "Cereals_Other ",
+        "Seeds_Nuts",
         "Fruits",
-        "Cereals-Rice",
+        "Cereals_Rice",
         "AnimalProducts",
-        "Roots&Tubers",
+        "Roots_Tubers",
         "Vegetables",
         "Peas",
         "Other"
@@ -167,49 +167,49 @@ class TopCommodityCategories extends React.Component {
           data: [
             {
               Origin: "Beans",
-              EAC: this.state.Beans_Percentage,
+              Beans: this.state.Beans_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "OCereals_Maize",
-              OutsideEAC: this.state.Cereals_Maize_Percentage,
+              Origin: "Cereals_Maize",
+              Cereals_Maize: this.state.Cereals_Maize_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
             },    {
               Origin: "Seeds&Nuts",
-              EAC: this.state.Seeds_Nuts_Percentage,
+              Seeds_Nuts: this.state.Seeds_Nuts_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
               Origin: "Fruits",
-              OutsideEAC: this.state.Fruits_Percentage,
+              Fruits: this.state.Fruits_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
             }, {
               Origin: "Cereals_Other",
-              EAC: this.state.Cereals_Other_Percentage,
+              Cereals_Other: this.state.Cereals_Other_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             }, {
-              Origin: " Animal_Products",
-              EAC: this.state.Animal_Products_Percentage,
+              Origin: "Animal_Products",
+              Animal_Products: this.state.Animal_Products_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             }, {
               Origin: "Cereals_Rice",
-              EAC: this.state.Cereals_Rice_Percentage,
+              Cereals_Rice: this.state.Cereals_Rice_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             }, {
               Origin: "Roots_Tubers",
-              EAC: this.state.Roots_Tubers_Percentage,
+              Roots_Tubers: this.state.Roots_Tubers_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             }, {
               Origin: "Vegetables",
-              EAC: this.state.Vegetables_Percentage,
+              Vegetables: this.state.Vegetables_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             }, {
               Origin: "Peas",
-              EAC: this.state.Peas_Percentage,
+              Peas: this.state.Peas_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             }, {
               Origin: "Other",
-              EAC: this.state.Other_Percentage,
+            Other: this.state.Other_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
           ]

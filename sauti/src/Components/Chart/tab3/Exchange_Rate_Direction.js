@@ -27,14 +27,14 @@ class TopCommodityCategories extends React.Component {
       // Percentages
       UGX_KES_Percentage: 0,
       KES_UGX_Percentage: 0,
-USD_KES_Percentage: 0,
+      USD_KES_Percentage: 0,
       RWF_UGX_Percentage: 0,
       UGX_RWF_Percentage: 0,
       USD_RWF_Percentage: 0,
       KES_TZS_Percentage: 0,
-       KES_USD_Percentage: 0,
+      KES_USD_Percentage: 0,
       KES_RWF_Percentage: 0,
-     
+
       TZS_KES_Percentage: 0,
       RWF_USD_Percentage: 0,
 
@@ -57,7 +57,7 @@ USD_KES_Percentage: 0,
     this.props.getDropDownDefault(this.props.pathname);
 
     axios
-      .get(`https://staging-sauti-labs-14.herokuapp.com/top-cat`)
+      .get(`https://staging-sauti-labs-14.herokuapp.com/exchange-rate`)
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
@@ -109,57 +109,64 @@ USD_KES_Percentage: 0,
   setPercentages = () => {
     const totalCount = this.state.totalCount;
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let  UGX_KES_Percentage = Math.round((this.state.UGX_KES_Percentage/ totalCount) * 100);
-
+    let UGX_KES_Percentage = Math.round(
+      (this.state.UGX_KES_Percentage / totalCount) * 100
+    );
 
     let KES_UGX_Percentage = Math.round(
       (this.state.KES_UGX_Count / totalCount) * 100
     );
 
-
-
-    let RWF_UGX_Percentage= Math.round((this.state.RWF_UGX_Count / totalCount) * 100);
+    let RWF_UGX_Percentage = Math.round(
+      (this.state.RWF_UGX_Count / totalCount) * 100
+    );
 
     let UGX_RWF_Percentage = Math.round(
       (this.state.UGX_RWF_Count / totalCount) * 100
     );
 
-
-    let USD_KES_Percentage = Math.round((this.state.USD_KES_Count / totalCount) * 100);
+    let USD_KES_Percentage = Math.round(
+      (this.state.USD_KES_Count / totalCount) * 100
+    );
 
     let KES_TZS_Percentage = Math.round(
-      (this.state.KES_TZS_Count/ totalCount) * 100
+      (this.state.KES_TZS_Count / totalCount) * 100
     );
 
-    let  USD_RWF_Percentage = Math.round((this.state.USD_RWF_Count / totalCount) * 100);
+    let USD_RWF_Percentage = Math.round(
+      (this.state.USD_RWF_Count / totalCount) * 100
+    );
 
-    let KES_RWF_Percentage= Math.round(
+    let KES_RWF_Percentage = Math.round(
       (this.state.KES_RWF_Count / totalCount) * 100
     );
-    
-    
-    let KES_USD_Percentage = Math.round((this.state.KES_USD_Percentage/ totalCount) * 100);
+
+    let KES_USD_Percentage = Math.round(
+      (this.state.KES_USD_Percentage / totalCount) * 100
+    );
 
     let TZS_KES_Percentage = Math.round(
-      (this.state.TZS_KES_Count/ totalCount) * 100
+      (this.state.TZS_KES_Count / totalCount) * 100
     );
-    let RWF_USD_Percentage = Math.round((this.state.RWF_USD_Count/ totalCount) * 100);
-   
+    let RWF_USD_Percentage = Math.round(
+      (this.state.RWF_USD_Count / totalCount) * 100
+    );
+
     this.setState(
       {
         ...this.state,
         UGX_KES_Percentage: UGX_KES_Percentage,
-        KES_UGX_Percentage:KES_UGX_Percentage,
-  
+        KES_UGX_Percentage: KES_UGX_Percentage,
+
         RWF_UGX_Percentage: RWF_UGX_Percentage,
         UGX_RWF_Percentage: UGX_RWF_Percentage,
         USD_KES_Percentage: USD_KES_Percentage,
         KES_TZS_Percentage: KES_TZS_Percentage,
-        USD_RWF_Percentage:USD_RWF_Percentage,
+        USD_RWF_Percentage: USD_RWF_Percentage,
         KES_RWF_Percentage: KES_RWF_Percentage,
         KES_USD_Percentage: KES_USD_Percentage,
         TZS_KES_Percentage: TZS_KES_Percentage,
-        RWF_USD_Percentage: RWF_USD_Percentage,
+        RWF_USD_Percentage: RWF_USD_Percentage
       },
       () => {
         this.setState({
@@ -171,47 +178,55 @@ USD_KES_Percentage: 0,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "OKES_UGX",
-              OutsideEAC: this.state.KES_UGX_Percentage,
+              Origin: "KES_UGX",
+              KES_UGX: this.state.KES_UGX_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
-            },    {
+            },
+            {
               Origin: "RWF_UGX",
-              EAC: this.state.RWF_UGX_Percentage,
+              RWF_UGX: this.state.RWF_UGX_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
               Origin: "UGX_RWF",
-              OutsideEAC: this.state.UGX_RWF_Percentage,
+              UGX_RWF: this.state.UGX_RWF_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
-            }, {
+            },
+            {
               Origin: "USD_KES",
-              EAC: this.state.USD_KES_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: " KES_TZS",
-              EAC: this.state.KES_TZS_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "USD_RWF",
-              EAC: this.state.USD_RWF_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "KES_RWF",
-              EAC: this.state.KES_RWF_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "KES_USD",
-              EAC: this.state.KES_USD_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "TZS_KES",
-              EAC: this.state.TZS_KES_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "RWF_USD",
-              EAC: this.state.RWF_USD_Percentage,
+              USD_KES: this.state.USD_KES_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
+            {
+              Origin: "KES_TZS",
+              KES_TZS: this.state.KES_TZS_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "USD_RWF",
+              USD_RWF: this.state.USD_RWF_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "KES_RWF",
+              KES_RWF: this.state.KES_RWF_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "KES_USD",
+              KES_USD: this.state.KES_USD_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "TZS_KES",
+              TZS_KES: this.state.TZS_KES_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "RWF_USD",
+              RWF_USD: this.state.RWF_USD_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            }
           ]
         });
       }
@@ -219,6 +234,7 @@ USD_KES_Percentage: 0,
   };
 
   render() {
+    console.log(this.state.KES_UGX_Percentage)
     return (
       <div className="Chart">
         <h2>Origin of Traders' Goods</h2>

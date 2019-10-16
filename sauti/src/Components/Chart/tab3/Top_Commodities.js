@@ -11,38 +11,39 @@ class TopCommodity extends React.Component {
       totalCount: 0,
       data: [],
       keys: [
-        "Dry_Maize ",
-        "Mixed_Beans ",
-        "Yellow_Beans  ",
-        "Beans_Rosecoco ",
-        "Ground_Nuts ",
-        "Millet_Grain ",
-        "Green_Gram ",
-        "Red_Beans ",
+        "Dry_Maize",
+        "Mixed_Beans",
+        "Yellow_Beans",
+        "Beans_Rosecoco",
+        "Ground_Nuts",
+        "Millet_Grain",
+        "Green_Gram",
+        "Red_Beans",
         "Rice",
-        "Eggs ",
-        "Soya_Beans"
+        "Eggs",
+        "Soya_Beans",
+        "Seeds_Nuts"
       ],
       color: "nivo",
       // Percentages
       Mixed_Beans_Percentage: 0,
       Dry_Maize_Percentage: 0,
 
-     Yellow_Beans_Percentage: 0,
-     Beans_Rosecoco_Percentage: 0,
+      Yellow_Beans_Percentage: 0,
+      Beans_Rosecoco_Percentage: 0,
       Ground_Nuts_Percentage: 0,
-      
+
       Green_Gram_Percentage: 0,
       Millet_Grain_Percentage: 0,
       Red_Beans_Percentage: 0,
       Rice_Percentage: 0,
       Eggs_Percentage: 0,
       Soya_Beans_Percentage: 0,
-
+      Seeds_Nuts_Percentage: 0,
       // Counts
       Dry_Maize_Count: 0,
       Mixed_Beans_Count: 0,
-     Yellow_Beans_Count: 0,
+      Yellow_Beans_Count: 0,
       Ground_Nuts_Count: 0,
       Beans_Rosecoco_Count: 0,
       Green_Gram_Count: 0,
@@ -50,7 +51,8 @@ class TopCommodity extends React.Component {
       Red_Beans_Count: 0,
       Rice_Count: 0,
       Eggs_Count: 0,
-      Soya_Beans_Count: 0
+      Soya_Beans_Count: 0,
+      Seeds_Nuts_Count: 0
     };
   }
 
@@ -58,37 +60,37 @@ class TopCommodity extends React.Component {
     this.props.getDropDownDefault(this.props.pathname);
 
     axios
-      .get(`https://staging-sauti-labs-14.herokuapp.com/top-cat`)
+      .get(`https://staging-sauti-labs-14.herokuapp.com/top-com`)
       .then(res => {
-        //console.log('totalCount', res.data.length)
+        console.log("totalCount", res.data.length);
         this.setState(
           {
             ...this.state,
             users: res.data,
             totalCount: res.data.length,
             Dry_Maize_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Dry Maize ");
+              return n + (user.request_value === "Dry Maize");
             }, 0),
             Mixed_Beans_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "Mixed Beans");
             }, 0),
             Beans_Rosecoco_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Beans Rosecoco ");
+              return n + (user.request_value === "Beans Rosecoco");
             }, 0),
-           Yellow_Beans_Count: res.data.reduce(function(n, user) {
+            Yellow_Beans_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "Yellow Beans");
             }, 0),
             Ground_Nuts_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "Ground Nuts");
             }, 0),
             Green_Gram_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Green Gram ");
+              return n + (user.request_value === "Green Gram");
             }, 0),
             Millet_Grain_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Millet Grain ");
+              return n + (user.request_value === "Millet Grain");
             }, 0),
             Red_Beans_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Red Beans ");
+              return n + (user.request_value === "Red Beans");
             }, 0),
             Rice_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "Rice");
@@ -98,6 +100,9 @@ class TopCommodity extends React.Component {
             }, 0),
             Soya_Beans_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "Soya_Beans");
+            }, 0),
+            Seeds_Nuts_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Seeds & Nuts");
             }, 0)
           },
           () => {
@@ -110,57 +115,67 @@ class TopCommodity extends React.Component {
   setPercentages = () => {
     const totalCount = this.state.totalCount;
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let  Mixed_Beans_Percentage = Math.round((this.state.Mixed_Beans_Percentage/ totalCount) * 100);
-
+    let Mixed_Beans_Percentage = Math.round(
+      (this.state.Mixed_Beans_Count / totalCount) * 100
+    );
 
     let Dry_Maize_Percentage = Math.round(
       (this.state.Dry_Maize_Count / totalCount) * 100
     );
 
-
-
-    letYellow_Beans_Percentage= Math.round((this.state.Seeds_Nuts_Count / totalCount) * 100);
+    let Yellow_Beans_Percentage = Math.round(
+      (this.state.Seeds_Nuts_Count / totalCount) * 100
+    );
 
     let Ground_Nuts_Percentage = Math.round(
       (this.state.Ground_Nuts_Count / totalCount) * 100
     );
 
-
-    let Beans_Rosecoco_Percentage = Math.round((this.state.Beans_Rosecoco_Count / totalCount) * 100);
+    let Beans_Rosecoco_Percentage = Math.round(
+      (this.state.Beans_Rosecoco_Count / totalCount) * 100
+    );
 
     let Green_Gram_Percentage = Math.round(
-      (this.state.Green_Gram_Count/ totalCount) * 100
+      (this.state.Green_Gram_Count / totalCount) * 100
     );
 
-    let  Millet_Grain_Percentage = Math.round((this.state.Millet_Grain_Count / totalCount) * 100);
+    let Millet_Grain_Percentage = Math.round(
+      (this.state.Millet_Grain_Count / totalCount) * 100
+    );
 
-    let Red_Beans_Percentage= Math.round(
+    let Red_Beans_Percentage = Math.round(
       (this.state.Red_Beans_Count / totalCount) * 100
     );
-    
-    
-    let Rice_Percentage = Math.round((this.state.Rice_Percentage/ totalCount) * 100);
+
+    let Rice_Percentage = Math.round(
+      (this.state.Rice_Percentage / totalCount) * 100
+    );
 
     let Eggs_Percentage = Math.round(
-      (this.state.Eggs_Count/ totalCount) * 100
+      (this.state.Eggs_Count / totalCount) * 100
     );
-    let Soya_Beans_Percentage = Math.round((this.state.Soya_Beans_Count/ totalCount) * 100);
-   
+    let Soya_Beans_Percentage = Math.round(
+      (this.state.Soya_Beans_Count / totalCount) * 100
+    );
+    let Seeds_Nuts_Percentage = Math.round(
+      (this.state.Seeds_Nuts_Count / totalCount) * 100
+    );
+
     this.setState(
       {
         ...this.state,
         Mixed_Beans_Percentage: Mixed_Beans_Percentage,
-        Dry_Maize_Percentage:Dry_Maize_Percentage,
-  
-       Yellow_Beans_Percentage:Yellow_Beans_Percentage,
+        Dry_Maize_Percentage: Dry_Maize_Percentage,
+        Seeds_Nuts: Seeds_Nuts_Percentage,
+        Yellow_Beans_Percentage: Yellow_Beans_Percentage,
         Ground_Nuts_Percentage: Ground_Nuts_Percentage,
         Beans_Rosecoco_Percentage: Beans_Rosecoco_Percentage,
         Green_Gram_Percentage: Green_Gram_Percentage,
-        Millet_Grain_Percentage:Millet_Grain_Percentage,
+        Millet_Grain_Percentage: Millet_Grain_Percentage,
         Red_Beans_Percentage: Red_Beans_Percentage,
         Rice_Percentage: Rice_Percentage,
         Eggs_Percentage: Eggs_Percentage,
-        Soya_Beans_Percentage: Soya_Beans_Percentage,
+        Soya_Beans_Percentage: Soya_Beans_Percentage
       },
       () => {
         this.setState({
@@ -168,51 +183,59 @@ class TopCommodity extends React.Component {
           data: [
             {
               Origin: "Mixed_Beans",
-              EAC: this.state.Mixed_Beans_Percentage,
+              Mixed_Beans: this.state.Mixed_Beans_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "ODry_Maize",
-              OutsideEAC: this.state.Dry_Maize_Percentage,
+              Origin: "Dry_Maize",
+              Dry_Maize: this.state.Dry_Maize_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
-            },    {
+            },
+            {
               Origin: "Seeds&Nuts",
-              EAC: this.state.Seeds_Nuts_Percentage,
+              Seeds_Nuts: this.state.Seeds_Nuts_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
               Origin: "Ground_Nuts",
-              OutsideEAC: this.state.Ground_Nuts_Percentage,
+              Ground_Nuts: this.state.Ground_Nuts_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
-            }, {
+            },
+            {
               Origin: "Beans_Rosecoco",
-              EAC: this.state.Beans_Rosecoco_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: " Green_Gram",
-              EAC: this.state.Green_Gram_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Millet_Grain",
-              EAC: this.state.Millet_Grain_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Red_Beans",
-              EAC: this.state.Red_Beans_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Rice",
-              EAC: this.state.Rice_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Eggs",
-              EAC: this.state.Eggs_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Soya_Beans",
-              EAC: this.state.Soya_Beans_Percentage,
+              Beans_Rosecoco: this.state.Beans_Rosecoco_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
+            {
+              Origin: "Green_Gram",
+              Green_Gram: this.state.Green_Gram_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "Millet_Grain",
+              Millet_Grain: this.state.Millet_Grain_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "Red_Beans",
+              Red_Beans: this.state.Red_Beans_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "Rice",
+              Rice: this.state.Rice_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "Eggs",
+              Eggs: this.state.Eggs_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            },
+            {
+              Origin: "Soya_Beans",
+              Soya_Beans: this.state.Soya_Beans_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            }
           ]
         });
       }
@@ -220,6 +243,7 @@ class TopCommodity extends React.Component {
   };
 
   render() {
+    console.log(this.state.Eggs_Percentage, "here");
     return (
       <div className="Chart">
         <h2>Origin of Traders' Goods</h2>

@@ -28,7 +28,9 @@ import DocumentChart from './tab2/DocumentsInfoChart';
 import DestinationCountryChart from './tab3/DestinationCountryChart';
 import DestinationMarketChart from './tab3/DestinationMarketChart';
 import TradersGoodsChart from './tab3/TradersGoodsChart';
-
+import TopCommodityCategories from './tab3/TopCommodityCategories'
+import Exchange_Rate_Direction from './tab3/Exchange_Rate_Direction'
+import TopCommodity from './tab3/Top_Commodities'
 // Nivo instructions:
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -271,6 +273,48 @@ class Chart extends React.Component {
               />
             )}
           /> 
+
+
+
+<Route
+            exact
+            path="/top-commodity"
+            render={props => (
+              <TopCommodity
+                pathname={"/top-commodity"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          /> 
+
+<Route
+            exact
+            path="/top-commodity-categories"
+            render={props => (
+              <TopCommodityCategories
+                pathname={"/top-commodity-categories"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          /> 
+
+
+<Route
+            exact
+            path="/exchange_rate_direction"
+            render={props => (
+              <Exchange_Rate_Direction
+                pathname={"/exchange_rate_direction"}
+                getDropDownDefault={this.props.getDropDownDefault}
+                state={this.state}
+              />
+            )}
+          /> 
+
+
+
 
         </div>
       </div>

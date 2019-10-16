@@ -177,7 +177,7 @@ class DestinationCountryChart extends React.Component {
     };
 
     render() {
-        console.log(this.state.Yellow_Fever_Card_Percentage);
+        
         return (
             <div className="Chart">
                 <h2> Final Destination Country</h2>

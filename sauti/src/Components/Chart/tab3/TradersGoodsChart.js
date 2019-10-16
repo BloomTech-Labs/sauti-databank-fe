@@ -26,7 +26,7 @@ class TradersGoodsChart extends React.Component {
         this.props.getDropDownDefault(this.props.pathname);
 
         axios
-            .get(`https://staging-sauti-labs-14.herokuapp.com/traders_goods`)
+            .get(`https://staging-sauti-labs-14.herokuapp.com/traders-goods`)
             .then(res => {
                 //console.log('totalCount', res.data.length)
                 this.setState(
@@ -38,7 +38,7 @@ class TradersGoodsChart extends React.Component {
                             return n + (user.request_value === "EAC")
                         }, 0),
                         OutsideEAC_Count: res.data.reduce(function (n, user) {
-                            return n + (user.request_value === "Outside EAC")
+                            return n + (user.request_value === "OutsideEAC")
                         }, 0),
                     },
                     () => {
@@ -72,7 +72,7 @@ class TradersGoodsChart extends React.Component {
                         },
                         {
                             Origin: "Outside_EAC",
-                            OutsideEAC: this.state.OutsideEAC_Percentage,
+                            Outside_EAC: this.state.OutsideEAC_Percentage,
                             OutsideEACColor: "hsl(65, 70%, 50%)",
                         },
 
