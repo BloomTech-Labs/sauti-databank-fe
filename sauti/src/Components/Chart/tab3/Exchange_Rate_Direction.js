@@ -234,7 +234,7 @@ class TopCommodityCategories extends React.Component {
   };
 
   render() {
-    console.log(this.state.KES_UGX_Percentage)
+    console.log(this.state.KES_USD_Percentage)
     return (
       <div className="Chart">
         <h2>Origin of Traders' Goods</h2>

@@ -110,7 +110,7 @@ class TopCommodityCategories extends React.Component {
     const totalCount = this.state.totalCount;
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
     let Beans_Percentage = Math.round(
-      (this.state.Beans_Percentage / totalCount) * 100
+      (this.state.Beans_Count / totalCount) * 100
     );
 
     let Cereals_Maize_Percentage = Math.round(
@@ -142,7 +142,7 @@ class TopCommodityCategories extends React.Component {
     );
 
     let Vegetables_Percentage = Math.round(
-      (this.state.Vegetables_Percentage / totalCount) * 100
+      (this.state.Vegetables_Count / totalCount) * 100
     );
 
     let Peas_Percentage = Math.round(
@@ -199,7 +199,7 @@ class TopCommodityCategories extends React.Component {
             },
             {
               Origin: "Animal",
-              Animal_Products: this.state.Animal_Products_Percentage,
+              AnimalProducts: this.state.Animal_Products_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
@@ -234,6 +234,7 @@ class TopCommodityCategories extends React.Component {
   };
 
   render() {
+    console.log(this.state.Other_Percentage)
     return (
       <div className="Chart">
         <h2>Origin of Traders' Goods</h2>

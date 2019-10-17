@@ -22,7 +22,8 @@ class TopCommodity extends React.Component {
         "Rice",
         "Eggs",
         "Soya_Beans",
-        "Seeds_Nuts"
+        "Sunflower_Seed"
+        
       ],
       color: "nivo",
       // Percentages
@@ -39,7 +40,7 @@ class TopCommodity extends React.Component {
       Rice_Percentage: 0,
       Eggs_Percentage: 0,
       Soya_Beans_Percentage: 0,
-      Seeds_Nuts_Percentage: 0,
+      Sunflower_Seed_Percentage: 0,
       // Counts
       Dry_Maize_Count: 0,
       Mixed_Beans_Count: 0,
@@ -52,7 +53,7 @@ class TopCommodity extends React.Component {
       Rice_Count: 0,
       Eggs_Count: 0,
       Soya_Beans_Count: 0,
-      Seeds_Nuts_Count: 0
+      Sunflower_Seed_Count: 0
     };
   }
 
@@ -99,10 +100,10 @@ class TopCommodity extends React.Component {
               return n + (user.request_value === "Eggs");
             }, 0),
             Soya_Beans_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Soya_Beans");
+              return n + (user.request_value === "Soya Beans" );
             }, 0),
-            Seeds_Nuts_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Seeds & Nuts");
+            Sunflower_Seed_Count: res.data.reduce(function(n, user) {
+              return n + (user.request_value === "Sunflower Seed");
             }, 0)
           },
           () => {
@@ -124,7 +125,7 @@ class TopCommodity extends React.Component {
     );
 
     let Yellow_Beans_Percentage = Math.round(
-      (this.state.Seeds_Nuts_Count / totalCount) * 100
+      (this.state.Yellow_Beans_Count / totalCount) * 100
     );
 
     let Ground_Nuts_Percentage = Math.round(
@@ -157,8 +158,8 @@ class TopCommodity extends React.Component {
     let Soya_Beans_Percentage = Math.round(
       (this.state.Soya_Beans_Count / totalCount) * 100
     );
-    let Seeds_Nuts_Percentage = Math.round(
-      (this.state.Seeds_Nuts_Count / totalCount) * 100
+    let Sunflower_Seed_Percentage = Math.round(
+      (this.state.Sunflower_Seed_Count / totalCount) * 100
     );
 
     this.setState(
@@ -166,7 +167,7 @@ class TopCommodity extends React.Component {
         ...this.state,
         Mixed_Beans_Percentage: Mixed_Beans_Percentage,
         Dry_Maize_Percentage: Dry_Maize_Percentage,
-        Seeds_Nuts: Seeds_Nuts_Percentage,
+        Sunflower_Seed_Percentage: Sunflower_Seed_Percentage,
         Yellow_Beans_Percentage: Yellow_Beans_Percentage,
         Ground_Nuts_Percentage: Ground_Nuts_Percentage,
         Beans_Rosecoco_Percentage:Beans_Rosecoco_Percentage,
@@ -192,12 +193,12 @@ class TopCommodity extends React.Component {
               OutsideEACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "S & N",
-              Seeds_Nuts: this.state.Seeds_Nuts_Percentage,
+              Origin: "S & F",
+              Sunflower_Seed: this.state.Sunflower_Seed_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Ground_Nuts",
+              Origin: "G_N",
               Ground_Nuts: this.state.Ground_Nuts_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
             },
@@ -243,7 +244,7 @@ class TopCommodity extends React.Component {
   };
 
   render() {
-    console.log(this.state.Eggs_Percentage, "here");
+    console.log(this.state.Sunflower_Seed_Percentage, "here");
     return (
       <div className="Chart">
         <h2>Origin of Traders' Goods</h2>
