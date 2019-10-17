@@ -13,7 +13,7 @@ class TopCommodityCategories extends React.Component {
       keys: [
         "KES_UGX",
         "UGX_KES",
-        "USD_KES  ",
+        "USD_KES",
         "RWF_UGX",
         "UGX_RWF",
         "KES_RWF",
@@ -81,7 +81,7 @@ class TopCommodityCategories extends React.Component {
               return n + (user.request_value === "UGX->RWF");
             }, 0),
             KES_TZS_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "KES->TZS ");
+              return n + (user.request_value === "KES->TZS");
             }, 0),
             USD_RWF_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "USD->RWF");
@@ -93,10 +93,10 @@ class TopCommodityCategories extends React.Component {
               return n + (user.request_value === "KES->USD");
             }, 0),
             TZS_KES_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "TZS->KES ");
+              return n + (user.request_value === "TZS->KES");
             }, 0),
             RWF_USD_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "RWF->USD ");
+              return n + (user.request_value === "RWF->USD");
             }, 0)
           },
           () => {
@@ -174,7 +174,7 @@ class TopCommodityCategories extends React.Component {
           data: [
             {
               Origin: "UGX_KES",
-              EAC: this.state.UGX_KES_Percentage,
+              UGX_KES: this.state.UGX_KES_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {

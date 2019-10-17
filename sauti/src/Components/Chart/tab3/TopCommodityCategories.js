@@ -11,9 +11,9 @@ class TopCommodityCategories extends React.Component {
       totalCount: 0,
       data: [],
       keys: [
-        "Cereals_Maize ",
+        "Cereals_Maize",
         "Beans",
-        "Cereals_Other ",
+        "Cereals_Other",
         "Seeds_Nuts",
         "Fruits",
         "Cereals_Rice",
@@ -109,57 +109,64 @@ class TopCommodityCategories extends React.Component {
   setPercentages = () => {
     const totalCount = this.state.totalCount;
     // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-    let  Beans_Percentage = Math.round((this.state.Beans_Percentage/ totalCount) * 100);
-
+    let Beans_Percentage = Math.round(
+      (this.state.Beans_Percentage / totalCount) * 100
+    );
 
     let Cereals_Maize_Percentage = Math.round(
       (this.state.Cereals_Maize_Count / totalCount) * 100
     );
 
-
-
-    let Seeds_Nuts_Percentage= Math.round((this.state.Seeds_Nuts_Count / totalCount) * 100);
+    let Seeds_Nuts_Percentage = Math.round(
+      (this.state.Seeds_Nuts_Count / totalCount) * 100
+    );
 
     let Fruits_Percentage = Math.round(
       (this.state.Fruits_Count / totalCount) * 100
     );
 
-
-    let Cereals_Other_Percentage = Math.round((this.state.Cereals_Other_Count / totalCount) * 100);
+    let Cereals_Other_Percentage = Math.round(
+      (this.state.Cereals_Other_Count / totalCount) * 100
+    );
 
     let Animal_Products_Percentage = Math.round(
-      (this.state.Animal_Products_Count/ totalCount) * 100
+      (this.state.Animal_Products_Count / totalCount) * 100
     );
 
-    let  Cereals_Rice_Percentage = Math.round((this.state.Cereals_Rice_Count / totalCount) * 100);
+    let Cereals_Rice_Percentage = Math.round(
+      (this.state.Cereals_Rice_Count / totalCount) * 100
+    );
 
-    let Roots_Tubers_Percentage= Math.round(
+    let Roots_Tubers_Percentage = Math.round(
       (this.state.Roots_Tubers_Count / totalCount) * 100
     );
-    
-    
-    let Vegetables_Percentage = Math.round((this.state.Vegetables_Percentage/ totalCount) * 100);
+
+    let Vegetables_Percentage = Math.round(
+      (this.state.Vegetables_Percentage / totalCount) * 100
+    );
 
     let Peas_Percentage = Math.round(
-      (this.state.Peas_Count/ totalCount) * 100
+      (this.state.Peas_Count / totalCount) * 100
     );
-    let Other_Percentage = Math.round((this.state.Other_Count/ totalCount) * 100);
-   
+    let Other_Percentage = Math.round(
+      (this.state.Other_Count / totalCount) * 100
+    );
+
     this.setState(
       {
         ...this.state,
         Beans_Percentage: Beans_Percentage,
-        Cereals_Maize_Percentage:Cereals_Maize_Percentage,
-  
+        Cereals_Maize_Percentage: Cereals_Maize_Percentage,
+
         Seeds_Nuts_Percentage: Seeds_Nuts_Percentage,
         Fruits_Percentage: Fruits_Percentage,
         Cereals_Other_Percentage: Cereals_Other_Percentage,
         Animal_Products_Percentage: Animal_Products_Percentage,
-        Cereals_Rice_Percentage:Cereals_Rice_Percentage,
+        Cereals_Rice_Percentage: Cereals_Rice_Percentage,
         Roots_Tubers_Percentage: Roots_Tubers_Percentage,
         Vegetables_Percentage: Vegetables_Percentage,
         Peas_Percentage: Peas_Percentage,
-        Other_Percentage: Other_Percentage,
+        Other_Percentage: Other_Percentage
       },
       () => {
         this.setState({
@@ -171,11 +178,12 @@ class TopCommodityCategories extends React.Component {
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Cereals_Maize",
+              Origin: "C_Maize",
               Cereals_Maize: this.state.Cereals_Maize_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
-            },    {
-              Origin: "Seeds&Nuts",
+            },
+            {
+              Origin: "S & N",
               Seeds_Nuts: this.state.Seeds_Nuts_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
@@ -183,35 +191,42 @@ class TopCommodityCategories extends React.Component {
               Origin: "Fruits",
               Fruits: this.state.Fruits_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Cereals_Other",
+            },
+            {
+              Origin: "C_Other",
               Cereals_Other: this.state.Cereals_Other_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Animal_Products",
+            },
+            {
+              Origin: "Animal",
               Animal_Products: this.state.Animal_Products_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Cereals_Rice",
+            },
+            {
+              Origin: "C_Rice",
               Cereals_Rice: this.state.Cereals_Rice_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Roots_Tubers",
+            },
+            {
+              Origin: "Roots",
               Roots_Tubers: this.state.Roots_Tubers_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Vegetables",
+            },
+            {
+              Origin: "Veg",
               Vegetables: this.state.Vegetables_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
-            }, {
+            },
+            {
               Origin: "Peas",
               Peas: this.state.Peas_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
-            }, {
-              Origin: "Other",
-            Other: this.state.Other_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
             },
+            {
+              Origin: "Other",
+              Other:this.state.Other_Percentage,
+              EACColor: "hsl(65, 70%, 50%)"
+            }
           ]
         });
       }

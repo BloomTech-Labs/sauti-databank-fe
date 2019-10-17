@@ -148,7 +148,7 @@ class TopCommodity extends React.Component {
     );
 
     let Rice_Percentage = Math.round(
-      (this.state.Rice_Percentage / totalCount) * 100
+      (this.state.Rice_Count / totalCount) * 100
     );
 
     let Eggs_Percentage = Math.round(
@@ -169,20 +169,20 @@ class TopCommodity extends React.Component {
         Seeds_Nuts: Seeds_Nuts_Percentage,
         Yellow_Beans_Percentage: Yellow_Beans_Percentage,
         Ground_Nuts_Percentage: Ground_Nuts_Percentage,
-        Beans_Rosecoco_Percentage: Beans_Rosecoco_Percentage,
+        Beans_Rosecoco_Percentage:Beans_Rosecoco_Percentage,
         Green_Gram_Percentage: Green_Gram_Percentage,
         Millet_Grain_Percentage: Millet_Grain_Percentage,
         Red_Beans_Percentage: Red_Beans_Percentage,
         Rice_Percentage: Rice_Percentage,
         Eggs_Percentage: Eggs_Percentage,
-        Soya_Beans_Percentage: Soya_Beans_Percentage
+        Soya_Beans_Percentage:Soya_Beans_Percentage
       },
       () => {
         this.setState({
           ...this.state,
           data: [
             {
-              Origin: "Mixed_Beans",
+              Origin: "Mixed_B",
               Mixed_Beans: this.state.Mixed_Beans_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
@@ -192,7 +192,7 @@ class TopCommodity extends React.Component {
               OutsideEACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Seeds&Nuts",
+              Origin: "S & N",
               Seeds_Nuts: this.state.Seeds_Nuts_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
@@ -202,22 +202,22 @@ class TopCommodity extends React.Component {
               OutsideEACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Beans_Rosecoco",
+              Origin: "Beans_R",
               Beans_Rosecoco: this.state.Beans_Rosecoco_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Green_Gram",
+              Origin: "G_Gram",
               Green_Gram: this.state.Green_Gram_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Millet_Grain",
+              Origin: "M_Grain",
               Millet_Grain: this.state.Millet_Grain_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Red_Beans",
+              Origin: "R_Beans",
               Red_Beans: this.state.Red_Beans_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
@@ -232,7 +232,7 @@ class TopCommodity extends React.Component {
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Soya_Beans",
+              Origin: "S_Beans",
               Soya_Beans: this.state.Soya_Beans_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             }
