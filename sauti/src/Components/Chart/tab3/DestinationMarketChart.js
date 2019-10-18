@@ -25,7 +25,7 @@ class DestinationMarketChart extends React.Component {
             ],
             color: "nivo",
             // Percentages
-            Musia_Percentage: 0,
+            Busia_Percentage: 0,
             Eldoret_Percentage: 0,
             Kampala_Percentage: 0,
             Kisumu_Percentage: 0,
@@ -38,7 +38,7 @@ class DestinationMarketChart extends React.Component {
             Bugiri_Market_Percentage: 0,
 
             //  Count
-            Musia_Count: 0,
+            Busia_Count: 0,
             Eldoret_Count: 0,
             Kampala_Count: 0,
             Kisumu_Count: 0,
@@ -65,8 +65,8 @@ class DestinationMarketChart extends React.Component {
                         ...this.state,
                         users: res.data,
                         totalCount: res.data.length,
-                        Musia_Count: res.data.reduce(function (n, user) {
-                            return n + (user.request_value === "Musia");
+                        Busia_Count: res.data.reduce(function (n, user) {
+                            return n + (user.request_value === "Busia");
                         }, 0),
                         Eldoret_Count: res.data.reduce(function (n, user) {
                             return n + (user.request_value === "Eldoret");
@@ -109,8 +109,8 @@ class DestinationMarketChart extends React.Component {
     setPercentages = () => {
         const totalCount = this.state.totalCount;
         // let totalCount = dailyCount + weeklyCount + monthlyCount + neverCount;
-        let Musia_Percentage = Math.round(
-            (this.state.Musia_Count / totalCount) * 100
+        let Busia_Percentage = Math.round(
+            (this.state.Busia_Count / totalCount) * 100
         );
         let Eldoret_Percentage = Math.round(
             (this.state.Eldoret_Count / totalCount) * 100
@@ -145,7 +145,7 @@ class DestinationMarketChart extends React.Component {
         this.setState(
             {
                 ...this.state,
-                Musia_Percentage: Musia_Percentage,
+                Busia_Percentage: Busia_Percentage,
                 Eldoret_Percentage: Eldoret_Percentage,
                 Kampala_Percentage: Kampala_Percentage,
                 Kisumu_Percentage: Kisumu_Percentage,

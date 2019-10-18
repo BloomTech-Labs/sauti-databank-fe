@@ -122,6 +122,16 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Tab3 Exchange_Rate_Direction"
       });
+    } else if (pathname === "/dest-country") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Final Destination Country"
+      });
+    } else if (pathname === "/dest-market") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Final Destination Market"
+      });
     }
   }
 
