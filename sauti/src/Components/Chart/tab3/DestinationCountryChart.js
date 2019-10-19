@@ -16,7 +16,6 @@ class DestinationCountryChart extends React.Component {
                 "RWA",
                 "TZA",
                 "SSD",
-                "MWI",
                 "BDI",
                 "DRC"
             ],
@@ -27,7 +26,6 @@ class DestinationCountryChart extends React.Component {
             RWA_Percentage: 0,
             TZA_Percentage: 0,
             SSD_Percentage: 0,
-            MWI_Percentage: 0,
             BDI_Percentage: 0,
             DRC_Percentage: 0,
 
@@ -37,7 +35,6 @@ class DestinationCountryChart extends React.Component {
             RWA_Count: 0,
             TZA_Count: 0,
             SSD_Count: 0,
-            MWI_Count: 0,
             BDI_Count: 0,
             DRC_Count: 0,
         };
@@ -54,29 +51,26 @@ class DestinationCountryChart extends React.Component {
                     {
                         ...this.state,
                         users: res.data,
-                        totalCount: res.data.length,
-                        UGA_Count: res.data.reduce(function (n, user) {
+                        totalCount: res.data[0].length,
+                        UGA_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "UGA");
                         }, 0),
-                        KEN_Count: res.data.reduce(function (n, user) {
+                        KEN_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "KEN");
                         }, 0),
-                        RWA_Count: res.data.reduce(function (n, user) {
+                        RWA_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "RWA");
                         }, 0),
-                        TZA_Count: res.data.reduce(function (n, user) {
+                        TZA_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "TZA");
                         }, 0),
-                        SSD_Count: res.data.reduce(function (n, user) {
+                        SSD_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "SSD");
                         }, 0),
-                        MWI_Count: res.data.reduce(function (n, user) {
-                            return n + (user.request_value === "MWI");
-                        }, 0),
-                        BDI_Count: res.data.reduce(function (n, user) {
+                        BDI_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "BDI");
                         }, 0),
-                        DRC_Count: res.data.reduce(function (n, user) {
+                        DRC_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "DRC");
                         }, 0),
                     },
@@ -110,10 +104,6 @@ class DestinationCountryChart extends React.Component {
             (this.state.SSD_Count / totalCount) * 100
         );
 
-        let MWI_Percentage = Math.round(
-            (this.state.MWI_Count / totalCount) * 100
-        );
-
         let BDI_Percentage = Math.round(
             (this.state.BDI_Count / totalCount) * 100
         );
@@ -131,7 +121,6 @@ class DestinationCountryChart extends React.Component {
                 RWA_Percentage: RWA_Percentage,
                 TZA_Percentage: TZA_Percentage,
                 SSD_Percentage: SSD_Percentage,
-                MWI_Percentage: MWI_Percentage,
                 BDI_Percentage: BDI_Percentage,
                 DRC_Percentage: DRC_Percentage,
             },
@@ -163,11 +152,6 @@ class DestinationCountryChart extends React.Component {
                             Destination: "SSD",
                             SSD: this.state.SSD_Percentage,
                             SSDColor: "hsl(65, 70%, 50%)"
-                        },
-                        {
-                            Destination: "MWI",
-                            MWI: this.state.MWI_Percentage,
-                            MWIColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Destination: "BDI",

@@ -64,38 +64,38 @@ class DestinationMarketChart extends React.Component {
                     {
                         ...this.state,
                         users: res.data,
-                        totalCount: res.data.length,
-                        Busia_Count: res.data.reduce(function (n, user) {
+                        totalCount: res.data[0].length,
+                        Busia_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Busia");
                         }, 0),
-                        Eldoret_Count: res.data.reduce(function (n, user) {
+                        Eldoret_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Eldoret");
                         }, 0),
-                        Kampala_Count: res.data.reduce(function (n, user) {
+                        Kampala_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Kampala");
                         }, 0),
-                        Kisumu_Count: res.data.reduce(function (n, user) {
+                        Kisumu_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Kisumu");
                         }, 0),
-                        Nairobi_Count: res.data.reduce(function (n, user) {
+                        Nairobi_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Nairobi");
                         }, 0),
-                        Kitale_Count: res.data.reduce(function (n, user) {
+                        Kitale_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Kitale");
                         }, 0),
-                        Iganga_Count: res.data.reduce(function (n, user) {
+                        Iganga_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Iganga");
                         }, 0),
-                        Kabale_Count: res.data.reduce(function (n, user) {
+                        Kabale_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Kabale");
                         }, 0),
-                        Bujumbura_Count: res.data.reduce(function (n, user) {
+                        Bujumbura_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Bujumbura");
                         }, 0),
-                        Mbale_Count: res.data.reduce(function (n, user) {
+                        Mbale_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Mbale");
                         }, 0),
-                        Bugiri_Market_Count: res.data.reduce(function (n, user) {
+                        Bugiri_Market_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "Bugiri Market");
                         }, 0)
                     },
