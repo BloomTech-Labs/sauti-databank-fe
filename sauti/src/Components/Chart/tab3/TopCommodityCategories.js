@@ -21,7 +21,6 @@ class TopCommodityCategories extends React.Component {
         "Roots_Tubers",
         "Vegetables",
         "Peas",
-        "Other"
       ],
       color: "nivo",
       // Percentages
@@ -36,7 +35,7 @@ class TopCommodityCategories extends React.Component {
       Roots_Tubers_Percentage: 0,
       Vegetables_Percentage: 0,
       Peas_Percentage: 0,
-      Other_Percentage: 0,
+     
 
       // Counts
       Cereals_Maize_Count: 0,
@@ -49,7 +48,7 @@ class TopCommodityCategories extends React.Component {
       Roots_Tubers_Count: 0,
       Vegetables_Count: 0,
       Peas_Count: 0,
-      Other_Count: 0
+     
     };
   }
 
@@ -95,9 +94,6 @@ class TopCommodityCategories extends React.Component {
             Peas_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "Peas");
             }, 0),
-            Other_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Other");
-            }, 0)
           },
           () => {
             this.setPercentages();
@@ -148,9 +144,6 @@ class TopCommodityCategories extends React.Component {
     let Peas_Percentage = Math.round(
       (this.state.Peas_Count / totalCount) * 100
     );
-    let Other_Percentage = Math.round(
-      (this.state.Other_Count / totalCount) * 100
-    );
 
     this.setState(
       {
@@ -166,7 +159,6 @@ class TopCommodityCategories extends React.Component {
         Roots_Tubers_Percentage: Roots_Tubers_Percentage,
         Vegetables_Percentage: Vegetables_Percentage,
         Peas_Percentage: Peas_Percentage,
-        Other_Percentage: Other_Percentage
       },
       () => {
         this.setState({
@@ -222,11 +214,6 @@ class TopCommodityCategories extends React.Component {
               Peas: this.state.Peas_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
-            {
-              Origin: "Other",
-              Other:this.state.Other_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            }
           ]
         });
       }
@@ -237,7 +224,7 @@ class TopCommodityCategories extends React.Component {
     console.log(this.state.Other_Percentage)
     return (
       <div className="Chart">
-        <h2>Origin of Traders' Goods</h2>
+        <h2>Top Commodity Categories</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
@@ -256,7 +243,7 @@ class TopCommodityCategories extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Origin",
+            legend: "Commodity",
             legendPosition: "middle",
             legendOffset: 65
           }}
@@ -264,7 +251,7 @@ class TopCommodityCategories extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Percentage of Origin",
+            legend: "Percentage of Commodity",
             legendPosition: "middle",
             legendOffset: -70
           }}

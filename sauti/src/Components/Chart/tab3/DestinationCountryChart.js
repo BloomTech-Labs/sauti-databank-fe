@@ -14,31 +14,29 @@ class DestinationCountryChart extends React.Component {
                 "UGA",
                 "KEN",
                 "RWA",
-                "BDI",
                 "TZA",
-                "DRC",
                 "SSD",
-                "MWI"
+                "BDI",
+                "DRC"
             ],
             color: "nivo",
             // Percentages
             UGA_Percentage: 0,
             KEN_Percentage: 0,
             RWA_Percentage: 0,
-            BDI_Percentage: 0,
             TZA_Percentage: 0,
-            DRC_Percentage: 0,
             SSD_Percentage: 0,
-            MWI_Percentage: 0,
+            BDI_Percentage: 0,
+            DRC_Percentage: 0,
+
             // Counts
             UGA_Count: 0,
             KEN_Count: 0,
             RWA_Count: 0,
-            BDI_Count: 0,
             TZA_Count: 0,
-            DRC_Count: 0,
             SSD_Count: 0,
-            MWI_Count: 0,
+            BDI_Count: 0,
+            DRC_Count: 0,
         };
     }
 
@@ -48,36 +46,33 @@ class DestinationCountryChart extends React.Component {
         axios
             .get(`https://staging-sauti-labs-14.herokuapp.com/dest-country`)
             .then(res => {
-                //console.log('totalCount', res.data.length)
+                console.log("totalCount", res.data.length);
                 this.setState(
                     {
                         ...this.state,
                         users: res.data,
-                        totalCount: res.data.length,
-                        UGA_Count: res.data.reduce(function (n, user) {
+                        totalCount: res.data[0].length,
+                        UGA_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "UGA");
                         }, 0),
-                        KEN_Count: res.data.reduce(function (n, user) {
-                            return  n + (user.request_value === "KEN");
+                        KEN_Count: res.data[0].reduce(function (n, user) {
+                            return n + (user.request_value === "KEN");
                         }, 0),
-                        RWA_Count: res.data.reduce(function (n, user) {
+                        RWA_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "RWA");
                         }, 0),
-                        BDI_Count: res.data.reduce(function (n, user) {
-                            return n + (user.request_value === "BDI");
-                        }, 0),
-                        TZA_Count: res.data.reduce(function (n, user) {
+                        TZA_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "TZA");
                         }, 0),
-                        DRC_Count: res.data.reduce(function (n, user) {
-                            return n + (user.request_value === "DRC");
-                        }, 0),
-                        SSD_Count: res.data.reduce(function (n, user) {
+                        SSD_Count: res.data[0].reduce(function (n, user) {
                             return n + (user.request_value === "SSD");
                         }, 0),
-                        MWI_Count: res.data.reduce(function (n, user) {
-                            return n + (user.request_value === "MWI");
-                        }, 0)
+                        BDI_Count: res.data[0].reduce(function (n, user) {
+                            return n + (user.request_value === "BDI");
+                        }, 0),
+                        DRC_Count: res.data[0].reduce(function (n, user) {
+                            return n + (user.request_value === "DRC");
+                        }, 0),
                     },
                     () => {
                         this.setPercentages();
@@ -92,27 +87,31 @@ class DestinationCountryChart extends React.Component {
         let UGA_Percentage = Math.round(
             (this.state.UGA_Count / totalCount) * 100
         );
+
         let KEN_Percentage = Math.round(
             (this.state.KEN_Count / totalCount) * 100
         );
+
         let RWA_Percentage = Math.round(
             (this.state.RWA_Count / totalCount) * 100
         );
-        let BDI_Percentage = Math.round(
-            (this.state.BDI_Count / totalCount) * 100
-        );
+
         let TZA_Percentage = Math.round(
             (this.state.TZA_Count / totalCount) * 100
         );
-        let DRC_Percentage = Math.round(
-            (this.state.DRC_Count / totalCount) * 100
-        );
+
         let SSD_Percentage = Math.round(
             (this.state.SSD_Count / totalCount) * 100
         );
-        let MWI_Percentage = Math.round(
-            (this.state.MWI_Count / totalCount) * 100
+
+        let BDI_Percentage = Math.round(
+            (this.state.BDI_Count / totalCount) * 100
         );
+
+        let DRC_Percentage = Math.round(
+            (this.state.DRC_Count / totalCount) * 100
+        );
+
 
         this.setState(
             {
@@ -120,11 +119,10 @@ class DestinationCountryChart extends React.Component {
                 UGA_Percentage: UGA_Percentage,
                 KEN_Percentage: KEN_Percentage,
                 RWA_Percentage: RWA_Percentage,
-                BDI_Percentage: BDI_Percentage,
                 TZA_Percentage: TZA_Percentage,
-                DRC_Percentage: DRC_Percentage,
                 SSD_Percentage: SSD_Percentage,
-                MWI_Percentage: MWI_Percentage,
+                BDI_Percentage: BDI_Percentage,
+                DRC_Percentage: DRC_Percentage,
             },
             () => {
                 this.setState({
@@ -146,19 +144,9 @@ class DestinationCountryChart extends React.Component {
                             RWAColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Destination: "BDI",
-                            BDI: this.state.BDI_Percentage,
-                            BDIColor: "hsl(65, 70%, 50%)"
-                        },
-                        {
                             Destination: "TZA",
                             TZA: this.state.TZA_Percentage,
                             TZAColor: "hsl(65, 70%, 50%)"
-                        },
-                        {
-                            Destination: "DRC",
-                            DRC: this.state.DRC_Percentage,
-                            DRCColor: "hsl(65, 70%, 50%)"
                         },
                         {
                             Destination: "SSD",
@@ -166,10 +154,15 @@ class DestinationCountryChart extends React.Component {
                             SSDColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Destination: "MWI",
-                            MWI: this.state.MWI_Percentage,
-                            MWIColor: "hsl(65, 70%, 50%)"
-                        }
+                            Destination: "BDI",
+                            BDI: this.state.BDI_Percentage,
+                            BDIColor: "hsl(65, 70%, 50%)"
+                        },
+                        {
+                            Origin: "DRC",
+                            DRC: this.state.DRC_Percentage,
+                            DRCColor: "hsl(65, 70%, 50%)"     
+                        },
                     ]
                 });
             }
@@ -177,15 +170,15 @@ class DestinationCountryChart extends React.Component {
     };
 
     render() {
-        
+        // console.log(this.state.Sunflower_Seed_Percentage, "here");
         return (
             <div className="Chart">
-                <h2> Final Destination Country</h2>
+                <h2>Final Destination Country</h2>
                 <ResponsiveBar
                     data={this.state.data} // Data needed
                     keys={this.state.keys} // Values to display in Y axis
                     indexBy="Destination"
-                    margin={{ top: 50, right: 300, bottom: 75, left: 80 }}
+                    margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
                     padding={0.3}
                     groupMode="stacked"
                     colors={{ scheme: this.state.color }}
@@ -207,7 +200,7 @@ class DestinationCountryChart extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: "Percentage of Destination",
+                        legend: "Percentage of destination",
                         legendPosition: "middle",
                         legendOffset: -70
                     }}
@@ -226,24 +219,23 @@ class DestinationCountryChart extends React.Component {
                             {id}: {value}%
             </strong>
                     )}
-
                     legends={[
                         {
-                            dataFrom: 'keys',
-                            anchor: 'bottom-right',
-                            direction: 'column',
+                            dataFrom: "keys",
+                            anchor: "bottom-right",
+                            direction: "column",
                             justify: false,
                             translateX: 120,
                             translateY: 0,
                             itemsSpacing: 2,
                             itemWidth: 100,
                             itemHeight: 20,
-                            itemDirection: 'left-to-right',
+                            itemDirection: "left-to-right",
                             itemOpacity: 0.85,
                             symbolSize: 20,
                             effects: [
                                 {
-                                    on: 'hover',
+                                    on: "hover",
                                     style: {
                                         itemOpacity: 1
                                     }
@@ -251,7 +243,6 @@ class DestinationCountryChart extends React.Component {
                             ]
                         }
                     ]}
-
                     animate={true}
                     motionStiffness={90}
                     motionDamping={15}

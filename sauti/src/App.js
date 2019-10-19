@@ -110,17 +110,27 @@ class App extends React.Component {
     } else if (pathname === "/top-commodity") {
       this.setState({
         ...this.state,
-        defaultOption: "Tab3 top-commodity"
+        defaultOption: "Top Commodity"
       });
     } else if (pathname === "/top-commodity-categories") {
       this.setState({
         ...this.state,
-        defaultOption: "Tab3 top-commodity-categories"
+        defaultOption: "Top Commodity Categories"
       });
     } else if (pathname === "/exchange_rate_direction") {
       this.setState({
         ...this.state,
-        defaultOption: "Tab3 Exchange_Rate_Direction"
+        defaultOption: "Exchange Rate Direction"
+      });
+    } else if (pathname === "/dest-country") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Final Destination Country"
+      });
+    } else if (pathname === "/dest-market") {
+      this.setState({
+        ...this.state,
+        defaultOption: "Final Destination Market"
       });
     }
   }
@@ -230,23 +240,23 @@ class App extends React.Component {
         ...this.state,
         defaultOption: "Final Destination Market"
       });
-    } else if (option.label === "Tab3 top-commodity") {
+    } else if (option.label === "Top Commodity") {
       this.props.history.push("/top-commodity");
       this.setState({
         ...this.state,
-        defaultOption: "Tab3 top-commodity"
+        defaultOption: "Top Commodity"
       });
-    } else if (option.label === "Tab3 top-commodity-categories") {
+    } else if (option.label === "Top Commodity Categories") {
       this.props.history.push("/top-commodity-categories");
       this.setState({
         ...this.state,
-        defaultOption: "Tab3 top-commodity-categories"
+        defaultOption: "Top Commodity Categories"
       });
-    } else if (option.label === "Tab3 Exchange_Rate_Direction") {
+    } else if (option.label === "Exchange Rate Direction") {
       this.props.history.push("/exchange_rate_direction");
       this.setState({
         ...this.state,
-        defaultOption: "Tab3 Exchange_Rate_Direction"
+        defaultOption: "Exchange Rate Direction"
       });
     }
   };
@@ -270,9 +280,9 @@ class App extends React.Component {
       "Origin of Traders' Goods",
       "Final Destination Country",
       "Final Destination Market",
-      "Tab3 top-commodity",
-      "Tab3 top-commodity-categories",
-      "Tab3 Exchange_Rate_Direction"
+      "Top Commodity",
+      "Top Commodity Categories",
+      "Exchange Rate Direction"
     ];
 
     return (

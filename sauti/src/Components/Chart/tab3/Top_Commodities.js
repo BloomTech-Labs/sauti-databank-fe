@@ -22,7 +22,7 @@ class TopCommodity extends React.Component {
         "Rice",
         "Eggs",
         "Soya_Beans",
-        "Sunflower_Seed"
+        
         
       ],
       color: "nivo",
@@ -102,9 +102,6 @@ class TopCommodity extends React.Component {
             Soya_Beans_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "Soya Beans" );
             }, 0),
-            Sunflower_Seed_Count: res.data.reduce(function(n, user) {
-              return n + (user.request_value === "Sunflower Seed");
-            }, 0)
           },
           () => {
             this.setPercentages();
@@ -158,16 +155,12 @@ class TopCommodity extends React.Component {
     let Soya_Beans_Percentage = Math.round(
       (this.state.Soya_Beans_Count / totalCount) * 100
     );
-    let Sunflower_Seed_Percentage = Math.round(
-      (this.state.Sunflower_Seed_Count / totalCount) * 100
-    );
 
     this.setState(
       {
         ...this.state,
         Mixed_Beans_Percentage: Mixed_Beans_Percentage,
         Dry_Maize_Percentage: Dry_Maize_Percentage,
-        Sunflower_Seed_Percentage: Sunflower_Seed_Percentage,
         Yellow_Beans_Percentage: Yellow_Beans_Percentage,
         Ground_Nuts_Percentage: Ground_Nuts_Percentage,
         Beans_Rosecoco_Percentage:Beans_Rosecoco_Percentage,
@@ -176,67 +169,64 @@ class TopCommodity extends React.Component {
         Red_Beans_Percentage: Red_Beans_Percentage,
         Rice_Percentage: Rice_Percentage,
         Eggs_Percentage: Eggs_Percentage,
-        Soya_Beans_Percentage:Soya_Beans_Percentage
+        Soya_Beans_Percentage: Soya_Beans_Percentage,
       },
       () => {
         this.setState({
           ...this.state,
           data: [
             {
-              Origin: "Mixed_B",
+              Commodity: "Mixed_B",
               Mixed_Beans: this.state.Mixed_Beans_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Dry_Maize",
+              Commodity: "Dry_Maize",
               Dry_Maize: this.state.Dry_Maize_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
             },
+          
             {
-              Origin: "S & F",
-              Sunflower_Seed: this.state.Sunflower_Seed_Percentage,
-              EACColor: "hsl(65, 70%, 50%)"
-            },
-            {
-              Origin: "G_N",
+              Commodity: "G_N",
               Ground_Nuts: this.state.Ground_Nuts_Percentage,
               OutsideEACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Beans_R",
+              Commodity: "Beans_R",
               Beans_Rosecoco: this.state.Beans_Rosecoco_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "G_Gram",
+              Commodity: "G_Gram",
               Green_Gram: this.state.Green_Gram_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "M_Grain",
+              Commodity: "M_Grain",
               Millet_Grain: this.state.Millet_Grain_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "R_Beans",
+              Commodity: "R_Beans",
               Red_Beans: this.state.Red_Beans_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Rice",
+              Commodity: "Rice",
               Rice: this.state.Rice_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "Eggs",
+              Commodity: "Eggs",
               Eggs: this.state.Eggs_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
             },
             {
-              Origin: "S_Beans",
+              Commodity: "S_Beans",
               Soya_Beans: this.state.Soya_Beans_Percentage,
               EACColor: "hsl(65, 70%, 50%)"
-            }
+            },
+
           ]
         });
       }
@@ -244,14 +234,14 @@ class TopCommodity extends React.Component {
   };
 
   render() {
-    console.log(this.state.Sunflower_Seed_Percentage, "here");
+    // console.log(this.state.Sunflower_Seed_Percentage, "here");
     return (
       <div className="Chart">
-        <h2>Origin of Traders' Goods</h2>
+        <h2>Top Commodity</h2>
         <ResponsiveBar
           data={this.state.data} // Data needed
           keys={this.state.keys} // Values to display in Y axis
-          indexBy="Origin"
+          indexBy="Commodity"
           margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
           padding={0.3}
           groupMode="stacked"
@@ -266,7 +256,7 @@ class TopCommodity extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Origin",
+            legend: "Commodity",
             legendPosition: "middle",
             legendOffset: 65
           }}
@@ -274,7 +264,7 @@ class TopCommodity extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Percentage of Origin",
+            legend: "Percentage of Commodity",
             legendPosition: "middle",
             legendOffset: -70
           }}
