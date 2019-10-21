@@ -44,7 +44,7 @@ class DestinationCountryChart extends React.Component {
         this.props.getDropDownDefault(this.props.pathname);
 
         axios
-            .get(`https://staging-sauti-labs-14.herokuapp.com/dest-country`)
+            .get(`${process.env.REACT_APP_BACKEND_URL}/dest-country`)
             .then(res => {
                 console.log("totalCount", res.data.length);
                 this.setState(

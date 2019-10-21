@@ -32,7 +32,7 @@ class AgeChart extends React.Component {
     this.props.getDropDownDefault(this.props.pathname);
 
     axios
-      .get(`${process.env.REACT_APP_BE_URL}/age/all`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/users/all/age/all`)
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
