@@ -159,7 +159,7 @@ class DestinationCountryChart extends React.Component {
                             BDIColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Origin: "DRC",
+                            Destination: "DRC",
                             DRC: this.state.DRC_Percentage,
                             DRCColor: "hsl(65, 70%, 50%)"     
                         },
