@@ -29,7 +29,7 @@ class EducationChart extends React.Component {
     this.props.getDropDownDefault(this.props.pathname);
     
     axios
-    .get(`${process.env.REACT_APP_BE_URL}/education/all`)
+    .get(`${process.env.REACT_APP_BACKEND_URL}/users/all/education/all`)
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(

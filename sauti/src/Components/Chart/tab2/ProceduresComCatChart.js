@@ -32,7 +32,7 @@ class ProceduresComCatChart extends React.Component {
       Legumes_Percentage: 0,
       Livestock_and_live_Products_Percentage: 0,
       Cosmetics_Percentage: 0,
-      Poultry_Bees_and_Thier_Products_Percentage: 0,
+      Poultry_Bees_and_Their_Products_Percentage: 0,
       Pulses_Percentage: 0,
       Fish_Products_Percentage: 0,
       Tubers_Percentage: 0,
@@ -45,7 +45,7 @@ class ProceduresComCatChart extends React.Component {
       Legumes_Count: 0,
       Livestock_and_live_Product_Count: 0,
       Cosmetics_Count: 0,
-      Poultry_Bees_and_Thier_Products_Count: 0,
+      Poultry_Bees_and_Their_Products_Count: 0,
       Pulses_Count: 0,
       Fish_Products_Count: 0,
       Tubers_Count: 0
@@ -57,7 +57,7 @@ class ProceduresComCatChart extends React.Component {
 
     // Hard work put to backend will change axios calls
     axios
-      .get(`https://staging-sauti-labs-14.herokuapp.com/commodity-cat`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/commodity-cat`)
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(
@@ -87,7 +87,7 @@ class ProceduresComCatChart extends React.Component {
             Cosmetics_Count: res.data.reduce(function(n, user) {
               return n + (user.request_value === "Cosmetics");
             }, 0),
-            Poultry_Bees_and_Thier_Products_Count: res.data.reduce(function(
+            Poultry_Bees_and_Their_Products_Count: res.data.reduce(function(
               n,
               user
             ) {
@@ -137,8 +137,8 @@ class ProceduresComCatChart extends React.Component {
     let Cosmetics_Percentage = Math.round(
       (this.state.Cosmetics_Count / totalCount) * 100
     );
-    let Poultry_Bees_and_Thier_Products_Percentage = Math.round(
-      (this.state.Poultry_Bees_and_Thier_Products_Count / totalCount) * 100
+    let Poultry_Bees_and_Their_Products_Percentage = Math.round(
+      (this.state.Poultry_Bees_and_Their_Products_Count / totalCount) * 100
     );
     let Pulses_Percentage = Math.round(
       (this.state.Pulses_Count / totalCount) * 100
@@ -159,7 +159,7 @@ class ProceduresComCatChart extends React.Component {
         Legumes_Percentage: Legumes_Percentage,
         Livestock_and_live_Products_Percentage: Livestock_and_live_Products_Percentage,
         Cosmetics_Percentage: Cosmetics_Percentage,
-        Poultry_Bees_and_Thier_Products_Percentage: Poultry_Bees_and_Thier_Products_Percentage,
+        Poultry_Bees_and_Their_Products_Percentage: Poultry_Bees_and_Their_Products_Percentage,
         Pulses_Percentage: Pulses_Percentage,
         Fish_Products_Percentage: Fish_Products_Percentage,
         Tubers_Percentage: Tubers_Percentage
@@ -174,7 +174,7 @@ class ProceduresComCatChart extends React.Component {
               CerealsColor: "hsl(65, 70%, 50%)"
             },
             {
-              CommodityCategory: "Appareal",
+              CommodityCategory: "Apparel",
               Clothing_and_Shoes: this.state.Clothing_and_shoes_Percentage,
               ClothingAndShoesColor: "hsl(65, 70%, 50%)"
             },
@@ -207,8 +207,8 @@ class ProceduresComCatChart extends React.Component {
             {
               CommodityCategory: "Poul/Bees",
               Poultry_Bees_and_Their_Products: this.state
-                .Poultry_Bees_and_Thier_Products_Percentage,
-              PoultryBeesAndThierProductsColor: "hsl(65, 70%, 50%)"
+                .Poultry_Bees_and_Their_Products_Percentage,
+              PoultryBeesAndTheirProductsColor: "hsl(65, 70%, 50%)"
             },
             {
               CommodityCategory: "Pulses",

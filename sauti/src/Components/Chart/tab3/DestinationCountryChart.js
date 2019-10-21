@@ -44,7 +44,7 @@ class DestinationCountryChart extends React.Component {
         this.props.getDropDownDefault(this.props.pathname);
 
         axios
-            .get(`https://staging-sauti-labs-14.herokuapp.com/dest-country`)
+            .get(`${process.env.REACT_APP_BACKEND_URL}/dest-country`)
             .then(res => {
                 console.log("totalCount", res.data.length);
                 this.setState(
@@ -159,7 +159,7 @@ class DestinationCountryChart extends React.Component {
                             BDIColor: "hsl(65, 70%, 50%)"
                         },
                         {
-                            Origin: "DRC",
+                            Destination: "DRC",
                             DRC: this.state.DRC_Percentage,
                             DRCColor: "hsl(65, 70%, 50%)"     
                         },

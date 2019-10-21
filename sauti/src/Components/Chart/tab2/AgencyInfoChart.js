@@ -47,7 +47,7 @@ class AgencyInfoChart extends React.Component {
         this.props.getDropDownDefault(this.props.pathname);
         // Hard work put to backend will change axios calls
         axios
-            .get(`https://staging-sauti-labs-14.herokuapp.com/agency-info`)
+            .get(`${process.env.REACT_APP_BACKEND_URL}/agency-info`)
             .then(res => {
                 //console.log('totalCount', res.data.length)
                 this.setState(
