@@ -57,7 +57,7 @@ class ProceduresComCatChart extends React.Component {
 
     // Hard work put to backend will change axios calls
     axios
-      .get(`https://staging-sauti-labs-14.herokuapp.com/commodity-cat`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/commodity-cat`)
       .then(res => {
         //console.log('totalCount', res.data.length)
         this.setState(

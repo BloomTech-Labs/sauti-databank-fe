@@ -39,7 +39,7 @@ class DocumentsInfoChart extends React.Component {
 	componentDidMount() {
 		this.props.getDropDownDefault(this.props.pathname);
 
-		axios.get(`${process.env.REACT_APP_BACKEND_URL}info-pro`).then(res => {
+		axios.get(`${process.env.REACT_APP_BACKEND_URL}/info-pro`).then(res => {
 			//console.log('totalCount', res.data.length)
 			this.setState(
 				{
