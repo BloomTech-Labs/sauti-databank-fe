@@ -5,7 +5,39 @@ You can find our deployed project at: https://production-sauti-databank.netlify.
 
 ## Contributors
 
-|                                                                                        [Cash Globe](https://github.com/cashcoder88)                                                                                         |                                                                                     [Christopher Lopez](https://github.com/numberoneecsstudent)                                                                                     |                                                                                       [Heymi Vanegas](https://github.com/heymiday)                                                                                       |                                             [Jonathan Erlich](https://github.com/joerlop)                                              |
+
+
+
+
+
+|                                                                                        [Jason Aviles](https://github.com/jason-aviles)                                                                                         |                                                                                     [Elise Spain](https://github.com/espain16)                                                                                     |                                                                                       [Gregory L Jordan Sr](https://github.com/GregJordanSr)                                                                                       |                                             [Melanie Harris](https://github.com/Melanie-Harris)                                              |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://media.licdn.com/dms/image/C4E03AQGW5_9B4Z0uZA/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=HhdMeap2Gpp1amR8N20qMMIaYFbz0KGRMS7PdXo2tP0" width = "200" />](https://github.com/jason-aviles) | [<img src="https://media.licdn.com/dms/image/C5603AQFK7Hbn1gzm1g/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=IXpSpz316hm86pHNv_mUJQskuSzwdgxlyWdxlVz7abM" width = "200" />](https://github.com/espain16) | [<img src="https://media.licdn.com/dms/image/C4E03AQE3leVQXkNpXA/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=5zFP6YYLhKaiL0jLsnOt_5sdlspGfQqP5qF02o7i5d0" width = "200" />](https://github.com/GregJordanSr) | [<img src="https://media.licdn.com/dms/image/C5603AQFjc02Ygy56HQ/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=lFL_kpepMUSaTvH37rWPT-arvOnI2sq1YlXeuxiErFI" width = "200" />](https://github.com/Melanie-Harris) |
+|                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jason-aviles)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/espain16)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/GregJordanSr)                                                                   |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Melanie-Harris)                          |
+|                                            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jason-aviles/)                                             |                                                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/elisespain/)                                                |                                         [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/gregoryljordansr/)                                         |    [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/melanieharris-mba/)     |
+
+
+
+
+
+|                                                                                        [Azra Panjwani](https://github.com/azrap)                                                                                         |                                                                                 
+| :------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://media.licdn.com/dms/image/C5603AQFKH36IsDysng/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=rDWFIzU32PYd_56EckOQp0YLejpOfP0VoObVGS5760M" width = "200" />](https://github.com/azrap)  |
+|                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/azrap)                                                                   |                                                                                                                                   |                                                                                                                               |                                                 |
+|                                            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/azrapanjwani/)                                             |                                                                                               |           
+
+
+
+
+
+
+
+
+
+
+
+
+|                                                                                        [Cash Globe](https://github.com/cashcoder88)                                                                                         |                                                                                     [	Christopher Lopez](https://github.com/numberoneecsstudent)                                                                                     |                                                                                       [Heymi Vanegas](https://github.com/heymiday)                                                                                       |                                             [Jonathan Erlich](https://github.com/joerlop)                                              |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
 | [<img src="https://media.licdn.com/dms/image/C4D03AQEer2eYBWdZCg/profile-displayphoto-shrink_200_200/0?e=1568246400&v=beta&t=iV5UsRP56xr_URJRXVd7RHDBvGnZ0WcGxovaiqQWw-k" width = "200" />](https://github.com/cashcoder88) | [<img src="https://media.licdn.com/dms/image/C5603AQE3I_Iy93G6Wg/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=2YJ989qTQ0TvcZua4h2_l1SQiR4IAtqLzfy6m8nYUq8" width = "200" />](https://github.com/numberoneecsstudent) | [<img src="https://media.licdn.com/dms/image/C5603AQGSUs9a5voNnQ/profile-displayphoto-shrink_800_800/0?e=1568851200&v=beta&t=rfQwU0wCag2CJ9fnklkDAvKNJdLF52czMpeUA46wY_w" width = "200" />](https://github.com/heymiday) | [<img src="https://pbs.twimg.com/profile_images/934076630980595712/wK7wyQn__400x400.jpg" width = "200" />](https://github.com/joerlop) |
 |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/cashcoder88)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/numberoneecsstudent)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/heymiday)                                                                   |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/joerlop)                          |
@@ -49,6 +81,17 @@ A researcher interested in the Sauti Databank is able to see the following Key D
 - Gender
 - Education
 - Border-Crossing Frequency
+- Most Requested Procedures Commodity 
+- Most Requested Procedures Commodity Categories
+- Requested Procedures for Destination (Imports to:)
+- Most Requested Documents Information for Procedures
+- Most Requested Agency Information for Procedures
+- Origin of Traders' Goods
+- Final Destination Country 
+- Final Destination Market 
+- Top Commodity
+- Top Commodity Categories
+- Exchange Rate Direction
 
 ## Tech Stack
 
