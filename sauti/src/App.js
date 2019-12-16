@@ -3,6 +3,7 @@ import axios from "axios";
 import Chart from "./Components/Chart/Chart";
 // import Transformation from "../Transformation"
 import "./App.scss";
+import './index.css'
 
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
@@ -22,14 +23,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getDropDownDefault();
+    // this.getDropDownDefault();
 
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/sessions/all`).then(res => {
-      console.log(res);
-      this.setState({
-        sessions: res.data[0]
-      });
-    });
+    // axios.get(`${process.env.REACT_APP_BACKEND_URL}/sessions/all`).then(res => {
+    //   console.log(res);
+    //   this.setState({
+    //     sessions: res.data[0]
+    //   });
+    // });
 
     //   axios
     //     // For development: ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
@@ -43,99 +44,101 @@ class App extends React.Component {
     //     });
   }
 
-  getDropDownDefault(pathname = this.props.history.location.pathname) {
-    if (pathname === "/gender-chart" || pathname === "/") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Gender"
-      });
-    } else if (pathname === "/crossing-frequency-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Border Crossing Frequency"
-      });
-    } else if (pathname === "/education-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Education Level"
-      });
-    } else if (pathname === "/age-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Age"
-      });
-    } else if (pathname === "/country-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Country of Residence"
-      });
-    } else if (pathname === "/language-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Language"
-      });
-    } else if (pathname === "/primaryincome-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Primary Income"
-      });
-    } else if (pathname === "/produce-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Produce"
-      });
-    } else if (pathname === "/Commodities-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Most Requested Procedures Commodities"
-      });
-    } else if (pathname === "/Commodity-Categories-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Most Requested Procedure Commodity Categories"
-      });
-    } else if (pathname === "/Destination-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Requested Procedures for Destination (Imports to:)"
-      });
-    } else if (pathname === "/Document-Information-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Most Requested Document Information for Procedures"
-      });
-    } else if (pathname === "/Agency-Information-chart") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Most Requested Agency Information for Procedures"
-      });
-    } else if (pathname === "/top-commodity") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Top Commodity"
-      });
-    } else if (pathname === "/top-commodity-categories") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Top Commodity Categories"
-      });
-    } else if (pathname === "/exchange_rate_direction") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Exchange Rate Direction"
-      });
-    } else if (pathname === "/dest-country") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Final Destination Country"
-      });
-    } else if (pathname === "/dest-market") {
-      this.setState({
-        ...this.state,
-        defaultOption: "Final Destination Market"
-      });
-    }
-  }
+
+  /// NO LONGER FUNCTIONAL DUE TO NOT USING ROUTES ANYMORE
+  // getDropDownDefault(pathname = this.props.history.location.pathname) {
+  //   if (pathname === "/gender-chart" || pathname === "/") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Gender"
+  //     });
+  //   } else if (pathname === "/crossing-frequency-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Border Crossing Frequency"
+  //     });
+  //   } else if (pathname === "/education-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Education Level"
+  //     });
+  //   } else if (pathname === "/age-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Age"
+  //     });
+  //   } else if (pathname === "/country-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Country of Residence"
+  //     });
+  //   } else if (pathname === "/language-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Language"
+  //     });
+  //   } else if (pathname === "/primaryincome-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Primary Income"
+  //     });
+  //   } else if (pathname === "/produce-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Produce"
+  //     });
+  //   } else if (pathname === "/Commodities-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Most Requested Procedures Commodities"
+  //     });
+  //   } else if (pathname === "/Commodity-Categories-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Most Requested Procedure Commodity Categories"
+  //     });
+  //   } else if (pathname === "/Destination-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Requested Procedures for Destination (Imports to:)"
+  //     });
+  //   } else if (pathname === "/Document-Information-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Most Requested Document Information for Procedures"
+  //     });
+  //   } else if (pathname === "/Agency-Information-chart") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Most Requested Agency Information for Procedures"
+  //     });
+  //   } else if (pathname === "/top-commodity") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Top Commodity"
+  //     });
+  //   } else if (pathname === "/top-commodity-categories") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Top Commodity Categories"
+  //     });
+  //   } else if (pathname === "/exchange_rate_direction") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Exchange Rate Direction"
+  //     });
+  //   } else if (pathname === "/dest-country") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Final Destination Country"
+  //     });
+  //   } else if (pathname === "/dest-market") {
+  //     this.setState({
+  //       ...this.state,
+  //       defaultOption: "Final Destination Market"
+  //     });
+  //   }
+  // }
 
   // onSelect = option => {
   //   if (option.label === "Gender") {
@@ -264,6 +267,8 @@ class App extends React.Component {
   // };
 
   render() {
+
+    // probably needs to be a component
     const options = [
       "Gender",
       "Education Level",
@@ -312,12 +317,14 @@ class App extends React.Component {
             <h1>Informal Cross-Border Trade Data</h1>
           </div>
           <div className="content-container">
-            <div className="chart-container" style={{height: '500px'}}>
+            <div className="chart-container">
               {/* <Chart getDropDownDefault={this.getDropDownDefault.bind(this)} /> */}
               <Queries />
             </div>
             <div className="dropdown-container">
               <p>Key Trader Demographics</p>
+
+              {/* probably will not use current dropdown */}
               <Dropdown
                 controlClassName="myControlClassName"
                 arrowClassName="myArrowClassName"

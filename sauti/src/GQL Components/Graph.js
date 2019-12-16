@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { ResponsiveBar } from "@nivo/bar"
+import './temp.css'
+
+const firstLetterUpper = word => {
+    let split = word.split("")
+    split[0].toUpperCase()
+    let joined = split.join('')
+    return joined
+}
 
 const Graph = props => {
-console.log(props.chartData)
+console.log(props.keys)
+console.log(props.data)
         return (
            <div className="Graph-Container">
               <ResponsiveBar
                 data={props.data}
-                  keys={[ 'Primary', 'Secondary', 'University/College', 'No formal education', 'No Response']}
-                indexBy="gender"
-                groupMode={"grouped"}
+                keys={props.keys}
+                indexBy={props.indexBy}
+                groupMode={"grouped"} // Possibly add toggle selector to change group mode.
                 margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
                 padding={0.3}
                 colors={{ scheme: 'nivo' }}
@@ -20,7 +29,7 @@ console.log(props.chartData)
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'Gender',
+                    legend: firstLetterUpper(props.indexBy),
                     legendPosition: 'middle',
                     legendOffset: 32
                 }}
@@ -28,7 +37,7 @@ console.log(props.chartData)
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'food',
+                    legend: 'Quantity', // Possibly toggle percentage or number in future release
                     legendPosition: 'middle',
                     legendOffset: -40
                 }}
