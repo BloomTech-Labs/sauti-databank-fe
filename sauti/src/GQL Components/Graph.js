@@ -9,6 +9,19 @@ const firstLetterUpper = word => {
     return joined
 }
 
+const getMaxValue = data => {
+    let max = 0
+    data.forEach(obj => {
+        let values = Object.values(obj)
+        values = values.map(i => parseInt(i, 10)).filter(item => Number(item) === item)
+        let possMax = Math.max(...values)
+        if(possMax > max && possMax < 1000){
+            max = possMax
+        }
+    })
+    return max
+}
+
 const Graph = props => {
 // console.log(props.keys)
 // console.log(props.data)
@@ -21,6 +34,8 @@ const Graph = props => {
                 groupMode={"grouped"} // Possibly add toggle selector to change group mode.
                 margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
                 padding={0.3}
+                innerPadding={0}
+                maxValue={getMaxValue(props.data)}
                 colors={{ scheme: 'nivo' }}
                 borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
                 axisTop={null}
