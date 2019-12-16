@@ -10,8 +10,8 @@ const firstLetterUpper = word => {
 }
 
 const Graph = props => {
-console.log(props.keys)
-console.log(props.data)
+// console.log(props.keys)
+// console.log(props.data)
         return (
            <div className="Graph-Container">
               <ResponsiveBar
