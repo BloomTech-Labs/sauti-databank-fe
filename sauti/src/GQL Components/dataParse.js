@@ -16,7 +16,7 @@ const getIndex = (data, indexBy) => {
     // [{gender: male}, {gender: female}, {gender: null},]
 }
 
-const setCrossedItems = (data, keys, crossFilter, indexBy) => {
+const setCrossedItems = (data, keys, crossFilter, indexBy, withoutNulls = true) => {
     const keysArr = [];
     let crossFilterKeysArr = [];
 
@@ -54,8 +54,33 @@ const setCrossedItems = (data, keys, crossFilter, indexBy) => {
     keys.forEach(obj => obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response"));
     crossFilterKeysArr = crossFilterKeysArr.map(key => key === null ? "No Response" : key);
 
+    // IF TRUE WILL REMOVE NULL RESPONSES
+    if(withoutNulls === true) {
+    crossFilterWithoutNulls(keys, crossFilterKeysArr, indexBy)
+    }
+
+    crossFilterKeysArr = crossFilterKeysArr.sort()
+
+    console.log('keys', keys)
+    console.log('crossfilter', crossFilterKeysArr)
+
     return { keys, crossFilterKeysArr, indexBy };
 };
+
+const crossFilterWithoutNulls = (keys, crossFilterKeysArr, indexBy) => {
+    
+    crossFilterKeysArr = crossFilterKeysArr.filter(item => item !== "No Response")
+
+    keys.forEach((obj, index) => {
+      delete obj["No Response"]
+
+      if (Object.values(obj).includes("No Response")){
+          keys.splice(index, 1)
+      }
+    })
+
+    return { keys, crossFilterKeysArr, indexBy }
+}
 
 const setItem = (data, keys, indexBy) => {
     const arr = [];
