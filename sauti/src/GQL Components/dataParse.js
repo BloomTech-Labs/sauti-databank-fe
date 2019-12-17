@@ -1,8 +1,8 @@
-const dataParse = (indexBy, data, crossFilter) => {
+const dataParse = (indexBy, data, crossFilter, allowNulls) => {
     const keys = getIndex(data, indexBy)
     // setItem(data, keys, "education", "gender")
 
-    return setCrossedItems(data, keys, crossFilter, indexBy)
+    return setCrossedItems(data, keys, crossFilter, indexBy, allowNulls)
 }
 
 const getIndex = (data, indexBy) => {
@@ -16,7 +16,7 @@ const getIndex = (data, indexBy) => {
     // [{gender: male}, {gender: female}, {gender: null},]
 }
 
-const setCrossedItems = (data, keys, crossFilter, indexBy, withoutNulls = true) => {
+const setCrossedItems = (data, keys, crossFilter, indexBy, allowNulls) => {
     const keysArr = [];
     let crossFilterKeysArr = [];
 
@@ -55,7 +55,7 @@ const setCrossedItems = (data, keys, crossFilter, indexBy, withoutNulls = true) 
     crossFilterKeysArr = crossFilterKeysArr.map(key => key === null ? "No Response" : key);
 
     // IF TRUE WILL REMOVE NULL RESPONSES
-    if(withoutNulls === true) {
+    if(allowNulls === false) {
     crossFilterWithoutNulls(keys, crossFilterKeysArr, indexBy)
     }
 

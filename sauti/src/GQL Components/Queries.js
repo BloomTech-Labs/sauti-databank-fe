@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks"
 import { gql } from "apollo-boost";
 import Graph from "./Graph"
@@ -16,14 +16,19 @@ const TRADERS_QUERY = gql`
     }
 `;
 
-const GetData = () => {
+const GetData = props => {
+
+    useEffect(() => {
+        
+    }, [props.index])
+
     const [variables, setVariables] = useState({});
     const { loading, error, data } = useQuery(TRADERS_QUERY, { variables });
 
     if (loading)  return <h1> Loading... </h1>
 
     console.log(data)
-    const chartData = dataParse("gender", data.tradersUsers, "education"); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+    const chartData = dataParse("gender", data.tradersUsers, "education", props.allowNulls); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
     return (
         <div>

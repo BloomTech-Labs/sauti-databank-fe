@@ -12,16 +12,17 @@ import { withRouter } from "react-router-dom";
 import Queries from "./GQL Components/Queries";
 
 const App = () => {
-  const [defaultOption, setDefaultOption] = useState("Select a Chart");
-  const [input, setInput] = useState("");
+  const [index, setIndex] = useState("Gender");
+  const [crossFilter, setCrossFilter] = useState("");
+  const [allowNulls, setAllowNulls] = useState(true);
 
   const onChange = event => {
-    setInput(event.target.value);
+    setIndex(event.target.value);
   };
 
-  const onSubmit = event => {
-    event.preventDefault();
-    setDefaultOption(input);
+  const onSubmit = e => {
+    e.preventDefault();
+    setCrossFilter(e.target.value);
   };
 
   return (
@@ -33,11 +34,11 @@ const App = () => {
         </div>
         <div className="content-container">
           <div className="chart-container">
-            <Queries />
+            <Queries index={index} crossFilter={crossFilter} allowNulls={allowNulls} />
           </div>
             <div className="dropdown-container">
               <p>Choose Index</p>
-              <FilterForm />
+              <FilterForm onChange={onChange} onSubmit={onSubmit} index={index} setIndex={setIndex} setCrossFilter={setCrossFilter} />
               {/* <Dropdown
                 controlClassName="myControlClassName"
                 arrowClassName="myArrowClassName"
