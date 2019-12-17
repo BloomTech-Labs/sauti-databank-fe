@@ -12,6 +12,7 @@ const TRADERS_QUERY = gql`
             age
             gender
             education
+            produce
         }
     }
 `;
@@ -34,11 +35,6 @@ const GetData = props => {
         <div>
             <Graph data={chartData.keys} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} />
             <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
-            {/* {
-                data.tradersUsers.map(trader => (
-                    console.log(trader)
-                ))
-            } */}
         </div>
     )
 }

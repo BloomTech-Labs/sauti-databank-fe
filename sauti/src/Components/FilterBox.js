@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.scss'
 
 import styled from 'styled-components';
@@ -18,33 +18,33 @@ const OptionContainer = styled.div`
 export default function FilterForm(props) {
   console.log('this is props', props);
 
+  const [isChecked, setIsChecked] = useState(false);
+
   useEffect(() => {
-    console.log('props index', props.index)
-  }, [props.index]);
+    props.setAllowNulls(isChecked)
+  }, [isChecked]);
 
     const options = [
         {label: "Gender", value: "gender"},
         {label: "Education Level", value: "education"},
-        "Border Crossing Frequency",
-        "Age",
-        "Country of Residence",
-        "Primary Income",
-        "Language",
-        "Produce",
-        "Most Requested Procedures Commodities",
-        "Most Requested Procedure Commodity Categories",
-        "Requested Procedures for Destination (Imports to:)",
-        "Most Requested Document Information for Procedures",
-        "Most Requested Agency Information for Procedures",
-        "Origin of Traders' Goods",
-        "Final Destination Country",
-        "Final Destination Market",
-        "Top Commodity",
-        "Top Commodity Categories",
-        "Exchange Rate Direction"
+        {label: "Border Crossing Frequency", value: "crossing_freq"},
+        {label: "Age", value: "age"},
+        {label: "Country of Residence", value: "country_of_residence"},
+        {label: "Primary Income", value: "primary_income"},
+        {label: "Language", value: "language"},
+        {label: "Produce", value: "produce"},
+        {label: "Most Requested Procedures Commodities", value: ""},
+        {label: "Most Requested Procedure Commodity Categories", value: ""},
+        {label: "Requested Procedures for Destination (Imports to:)", value: ""},
+        {label: "Most Requested Document Information for Procedures", value: ""},
+        {label: "Most Requested Agency Information for Procedures", value: ""},
+        {label: "Origin of Traders' Goods", value: ""},
+        {label: "Final Destination Country", value: ""},
+        {label: "Final Destination Market", value: ""},
+        {label: "Top Commodity", value: ""},
+        {label: "Top Commodity Categories", value: ""},
+        {label: "Exchange Rate Direction", value: ""}
       ];
-
-      // const handleCheck = label => label === crossFilter ? setCrossFilter("") : setCrossFilter(label);
 
     return (
         <div className="dropdown-container">
@@ -62,6 +62,12 @@ export default function FilterForm(props) {
                 placeholder="Select an option"
               />
 
+                <input 
+                name="allowNulls"
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+                /> Allow Nulls
 
               {options.filter(option => option.value !== props.index).map(option => {
                 console.log('label', option.label)
