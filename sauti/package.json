@@ -16,7 +16,7 @@
     "react-dropdown": "^1.6.4",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -5,6 +5,7 @@ import "./index.css";
 import Navbar from "./Components/Navbar";
 import Options from "./Constants/Options";
 import Dropdown from "react-dropdown";
+import FilterForm from './GQL Components/FilterBox'
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 
@@ -34,21 +35,22 @@ const App = () => {
           <div className="chart-container">
             <Queries />
           </div>
-          <div className="dropdown-container">
-            <p>Key Trader Demographics</p>
-            <Dropdown
-              controlClassName="myControlClassName"
-              arrowClassName="myArrowClassName"
-              className="dropdown"
-              options={Options}
-              onChange={onSubmit}
-              value={defaultOption}
-              placeholder="Select an option"
-            />
+            <div className="dropdown-container">
+              <p>Choose Index</p>
+              <FilterForm />
+              {/* <Dropdown
+                controlClassName="myControlClassName"
+                arrowClassName="myArrowClassName"
+                className="dropdown"
+                options={options}
+                onChange={this.onSelect}
+                value={this.state.defaultOption}
+                placeholder="Select an option"
+              /> */}
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
