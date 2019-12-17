@@ -18,17 +18,16 @@ const TRADERS_QUERY = gql`
 
 const GetData = () => {
     const [variables, setVariables] = useState({});
-    const { loading, error, data } = useQuery(TRADERS_QUERY, {
-        variables: variables
-    });
+    const { loading, error, data } = useQuery(TRADERS_QUERY, { variables });
 
     if (loading)  return <h1> Loading... </h1>
 
-    const chartData = dataParse("gender", data.tradersUsers);
+    console.log(data)
+    const chartData = dataParse("gender", data.tradersUsers, "education"); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
     return (
         <div>
-            <Graph data={chartData} />
+            <Graph data={chartData.keys} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} />
             <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
             {/* {
                 data.tradersUsers.map(trader => (
