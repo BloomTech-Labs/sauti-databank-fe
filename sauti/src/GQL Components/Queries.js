@@ -23,7 +23,7 @@ const GetData = () => {
     if (loading)  return <h1> Loading... </h1>
 
     console.log(data)
-    const chartData = dataParse("gender", data.tradersUsers, "education"); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+    const chartData = dataParse("gender", data.tradersUsers, "age"); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
     return (
         <div>
