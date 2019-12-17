@@ -12,7 +12,7 @@ import { withRouter } from "react-router-dom";
 import Queries from "./GQL Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState("Gender");
+  const [index, setIndex] = useState("gender");
   const [crossFilter, setCrossFilter] = useState("");
   const [allowNulls, setAllowNulls] = useState(true);
 

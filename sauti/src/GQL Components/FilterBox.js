@@ -16,14 +16,15 @@ const OptionContainer = styled.div`
 `
 
 export default function FilterForm(props) {
+  console.log('this is props', props);
 
   useEffect(() => {
-    console.log(props.index)
+    console.log('props index', props.index)
   }, [props.index]);
 
     const options = [
-        "Gender",
-        "Education Level",
+        {label: "Gender", value: "gender"},
+        {label: "Education Level", value: "education"},
         "Border Crossing Frequency",
         "Age",
         "Country of Residence",
@@ -53,20 +54,24 @@ export default function FilterForm(props) {
                 arrowClassName="myArrowClassName"
                 className="dropdown"
                 options={options}
-                onChange={e => props.setIndex(e.target.value)}
+                onChange={e => {
+                  props.setIndex(e.value)
+                  console.log('event', e.value)
+                }}
                 value={props.index}
                 placeholder="Select an option"
               />
 
 
-              {options.filter(option => option !== props.index).map(option => {
+              {options.filter(option => option.value !== props.index).map(option => {
+                console.log('label', option.label)
                   return (      
                     <OptionContainer>
                       <input
                       type="radio"
                       name="CrossFilter"
-                      value={option}
-                      /><FilterOption>{`${option}`}</FilterOption>
+                      value={option.label}
+                  /><FilterOption>{option.label}</FilterOption>
                     </OptionContainer>
                     )
                   })}

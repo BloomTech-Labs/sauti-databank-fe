@@ -28,7 +28,7 @@ const GetData = props => {
     if (loading)  return <h1> Loading... </h1>
 
     console.log(data)
-    const chartData = dataParse("gender", data.tradersUsers, "education", props.allowNulls); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+    const chartData = dataParse(props.index, data.tradersUsers, props.crossFilter, props.allowNulls); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
     return (
         <div>
