@@ -5,6 +5,7 @@ import Chart from "./Components/Chart/Chart";
 import "./App.scss";
 
 import Dropdown from "react-dropdown";
+import FilterForm from './GQL Components/FilterBox'
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 
@@ -313,8 +314,9 @@ class App extends React.Component {
               <Chart getDropDownDefault={this.getDropDownDefault.bind(this)} />
             </div>
             <div className="dropdown-container">
-              <p>Key Trader Demographics</p>
-              <Dropdown
+              <p>Choose Index</p>
+              <FilterForm />
+              {/* <Dropdown
                 controlClassName="myControlClassName"
                 arrowClassName="myArrowClassName"
                 className="dropdown"
@@ -322,7 +324,7 @@ class App extends React.Component {
                 onChange={this.onSelect}
                 value={this.state.defaultOption}
                 placeholder="Select an option"
-              />
+              /> */}
             </div>
           </div>
         </div>
