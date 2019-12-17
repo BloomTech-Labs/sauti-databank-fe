@@ -6,8 +6,8 @@ import Graph from "./Graph"
 import dataParse from "./dataParse";
 
 const TRADERS_QUERY = gql`
-   query getUsers($age: String){
-        tradersUsers(age: $age) {
+   query getUsers{
+        tradersUsers{
             id
             age
             gender
