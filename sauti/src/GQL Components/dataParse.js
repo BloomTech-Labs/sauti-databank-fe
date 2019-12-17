@@ -54,6 +54,7 @@ const setCrossedItems = (data, keys, crossFilter, indexBy, withoutNulls = true) 
     keys.forEach(obj => obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response"));
     crossFilterKeysArr = crossFilterKeysArr.map(key => key === null ? "No Response" : key);
 
+    // IF TRUE WILL REMOVE NULL RESPONSES
     if(withoutNulls === true) {
     crossFilterWithoutNulls(keys, crossFilterKeysArr, indexBy)
     }
