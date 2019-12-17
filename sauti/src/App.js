@@ -1,7 +1,4 @@
 import React, { Component, useState } from "react";
-// import axios from "axios";
-// import Chart from "./Components/Chart/Chart";
-// import Transformation from "../Transformation"
 import "./App.scss";
 import "./index.css";
 
@@ -16,39 +13,6 @@ import Queries from "./GQL Components/Queries";
 const App = () => {
   const [defaultOption, setDefaultOption] = useState("Select a Chart");
   const [input, setInput] = useState("");
-
-  // class App extends React.Component {
-  //   constructor() {
-  //     super();
-  //     this.state = {
-  //       sessions: [],
-  //       sessions_production: [],
-  //       realData: [],
-  //       defaultOption: "Select a Chart"
-  //     };
-  //   }
-
-  //   componentDidMount() {
-  // this.getDropDownDefault();
-  // axios.get(`${process.env.REACT_APP_BACKEND_URL}/sessions/all`).then(res => {
-  //   console.log(res);
-  //   this.setState({
-  //     sessions: res.data[0]
-  //   });
-  // });
-  //   axios
-  //     // For development: ${process.env.REACT_APP_BACKEND_URL}/sessions/products/1
-  //     .get(`https://sa-stage.herokuapp.com/sessions/lance/all`)
-  //     .then(res => {
-  //       // Log to see the response from server: console.log(res.data);
-  //       this.setState({
-  //         ...this.state,
-  //         realData: res.data
-  //       });
-  //     });
-  // }
-
-  // render() {
 
   const onChange = event => {
     setInput(event.target.value);
@@ -68,12 +32,10 @@ const App = () => {
         </div>
         <div className="content-container">
           <div className="chart-container">
-            {/* <Chart getDropDownDefault={this.getDropDownDefault.bind(this)} /> */}
             <Queries />
           </div>
           <div className="dropdown-container">
             <p>Key Trader Demographics</p>
-
             <Dropdown
               controlClassName="myControlClassName"
               arrowClassName="myArrowClassName"
@@ -83,23 +45,11 @@ const App = () => {
               value={defaultOption}
               placeholder="Select an option"
             />
-
-            {/* class component dropdown */}
-            {/* <Dropdown
-                controlClassName="myControlClassName"
-                arrowClassName="myArrowClassName"
-                className="dropdown"
-                options={options}
-                onChange={this.onSelect}
-                value={this.state.defaultOption}
-                placeholder="Select an option"
-              /> */}
           </div>
         </div>
       </div>
     </div>
   );
 };
-// }
 
 export default withRouter(App);
