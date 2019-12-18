@@ -2,13 +2,6 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar"
 import './temp.css'
 
-const firstLetterUpper = word => {
-    let split = word.split("")
-    split[0].toUpperCase()
-    let joined = split.join('')
-    return joined
-}
-
 const getMaxValue = data => {
     let max = 0
     data.forEach(obj => {
@@ -44,7 +37,7 @@ console.log(props.data)
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: firstLetterUpper(props.indexBy),
+                    legend: props.label,
                     legendPosition: 'middle',
                     legendOffset: 32
                 }}
@@ -56,8 +49,8 @@ console.log(props.data)
                     legendPosition: 'middle',
                     legendOffset: -40
                 }}
-                labelSkipWidth={12}
-                labelSkipHeight={12}
+                labelSkipWidth={0}
+                labelSkipHeight={0}
                 labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
                 legends={[
                     {

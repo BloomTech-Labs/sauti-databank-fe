@@ -31,14 +31,14 @@ const GetData = props => {
     if(props.crossFilter !== ""){
     return (
         <div>
-            <Graph data={chartData.keys} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} />
+            <Graph data={chartData.keys} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label}/>
             <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
         </div>
     )
     } else {
         return (
             <div>
-                <Graph data={chartData.keys} keys={chartData.arr} indexBy={chartData.indexBy} />
+                <Graph data={chartData.keys} keys={chartData.arr} indexBy={chartData.indexBy} label={props.label}/>
                 <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
             </div>
         )
