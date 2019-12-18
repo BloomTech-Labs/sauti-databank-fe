@@ -7,10 +7,19 @@ import dataParse from "./dataParse";
 
 
 const GetData = props => {
-
+    
     useEffect(() => {
         
     }, [props.index])
+    
+    const TRADERS_QUERY = gql`
+       query getUsers{
+            ${props.query}{
+                ${props.index}
+                ${props.crossFilter}
+            }
+        }
+    `;
 
     const TRADERS_QUERY = gql`
     query getUsers{

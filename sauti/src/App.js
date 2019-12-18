@@ -13,7 +13,7 @@ const App = () => {
   const [index, setIndex] = useState("gender");
   const [crossFilter, setCrossFilter] = useState("");
   const [allowNulls, setAllowNulls] = useState(true);
-  const [query, setQuery] = useState('tradersData')
+  const [query, setQuery] = useState("tradersData");
 
   const onChange = event => {
     setIndex(event.target.value);
@@ -24,6 +24,8 @@ const App = () => {
     setCrossFilter(e.target.value);
   };
 
+  console.log(query)
+
   return (
     <div className="App">
       <Navbar />
@@ -33,7 +35,7 @@ const App = () => {
         </div>
         <div className="content-container">
           <div className="chart-container">
-            <Queries index={index} crossFilter={crossFilter} allowNulls={allowNulls} />
+            <Queries index={index} crossFilter={crossFilter} allowNulls={allowNulls} query={query} />
           </div>
             <div className="dropdown-container">
               <p>Choose Index</p>
@@ -44,7 +46,8 @@ const App = () => {
                 setIndex={setIndex} 
                 setCrossFilter={setCrossFilter} 
                 setAllowNulls={setAllowNulls} 
-                setQuery={setQuery} />
+                setQuery={setQuery}  
+              />
             </div>
           </div>
         </div>
