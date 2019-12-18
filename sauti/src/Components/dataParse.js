@@ -2,6 +2,7 @@ import graphLabels from './graphLabels'
 
 const dataParse = (indexBy, data, crossFilter) => {
     const dataStructure = graphLabels[`${indexBy}`].structure
+
     // setItem(data, keys, "education", "gender")
     if(crossFilter !== ""){
     return setCrossedItems(data, dataStructure, crossFilter, indexBy)
@@ -95,7 +96,7 @@ const setItem = (data, dataStructure, indexBy) => {
     arr.forEach((key, index) => {
         // Gets every trader at the index where it equals the value in the arr
        const filtered = data.filter(trader => trader[`${indexBy}`] === key).length
-        console.log('key for loop', key)
+
        dataStructure[index] = {
             ...dataStructure[index],
             [`${arr[index]}`]: filtered
