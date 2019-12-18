@@ -1,8 +1,11 @@
 const dataParse = (indexBy, data, crossFilter, allowNulls) => {
     const keys = getIndex(data, indexBy)
     // setItem(data, keys, "education", "gender")
-    
+    if(crossFilter !== ""){
     return setCrossedItems(data, keys, crossFilter, indexBy, allowNulls)
+    } else {
+    return setItem(data, keys, indexBy, allowNulls)
+    }
 }
 
 const getIndex = (data, indexBy) => {
@@ -82,8 +85,8 @@ const crossFilterWithoutNulls = (keys, crossFilterKeysArr, indexBy) => {
     return { keys, crossFilterKeysArr, indexBy }
 }
 
-const setItem = (data, keys, indexBy) => {
-    const arr = [];
+const setItem = (data, keys, indexBy, allowNulls) => {
+    let arr = [];
 
     // Puts each value from key:value pair into an array
     // ['Female', 'Male', null]
@@ -93,13 +96,29 @@ const setItem = (data, keys, indexBy) => {
     arr.forEach((key, index) => {
         // Gets every trader at the index where it equals the value in the arr
        const filtered = data.filter(trader => trader[`${indexBy}`] === key).length
-
+        console.log('key for loop', key)
        keys[index] = {
             ...keys[index],
             [`${arr[index]}`]: filtered
         }
     })
-    return keys;
-};
+
+    keys.forEach(obj => {
+        obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response")
+        if(obj[null]){
+        obj["No Response"] = obj[null]
+        delete obj[null] 
+        }
+    });
+    
+
+    arr = arr.map(item => item === null ? "No Response" : item);
+
+    if(allowNulls === false) {
+        crossFilterWithoutNulls(keys, arr, indexBy)
+        }
+    
+    return { keys, arr, indexBy} ;
+}
 
 export default dataParse
