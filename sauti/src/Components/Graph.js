@@ -15,7 +15,7 @@ const getMaxValue = data => {
         let values = Object.values(obj)
         values = values.map(i => parseInt(i, 10)).filter(item => Number(item) === item)
         let possMax = Math.max(...values)
-        if(possMax > max && possMax < 1000){
+        if(possMax > max){
             max = possMax
         }
     })

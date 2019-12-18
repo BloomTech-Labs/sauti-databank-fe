@@ -25,8 +25,14 @@ export default function FilterForm(props) {
   }, [isChecked]);
 
     const options = [
-        {label: "Gender", value: "gender"},
-        {label: "Education Level", value: "education"},
+        {label: "Gender", value: {
+          index: "gender",
+          query: "tradersUsers"
+        }},
+        {label: "Education Level", value: {
+          index: "education",
+          query: "tradersUsers"
+        }},
         {label: "Border Crossing Frequency", value: "crossing_freq"},
         {label: "Age", value: "age"},
         {label: "Country of Residence", value: "country_of_residence"},
@@ -55,8 +61,9 @@ export default function FilterForm(props) {
                 className="dropdown"
                 options={options}
                 onChange={e => {
-                  props.setIndex(e.value)
-                  console.log('event', e.value)
+                  props.setIndex(e.value.index)
+                  props.setQuery(e.value.query)
+                  console.log('event', e.value.index)
                 }}
                 value={props.index}
                 placeholder="Select an option"
