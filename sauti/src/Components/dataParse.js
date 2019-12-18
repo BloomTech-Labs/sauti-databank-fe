@@ -1,7 +1,7 @@
 const dataParse = (indexBy, data, crossFilter, allowNulls) => {
     const keys = getIndex(data, indexBy)
     // setItem(data, keys, "education", "gender")
-
+    
     return setCrossedItems(data, keys, crossFilter, indexBy, allowNulls)
 }
 
