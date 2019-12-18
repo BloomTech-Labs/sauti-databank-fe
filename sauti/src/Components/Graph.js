@@ -1,6 +1,7 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar"
 import './temp.css'
+import graphLabels from './graphLabels'
 
 const getMaxValue = data => {
     let max = 0
@@ -16,13 +17,12 @@ const getMaxValue = data => {
 }
 
 const Graph = props => {
-console.log(props.keys)
 console.log(props.data)
         return (
            <div className="Graph-Container">
               <ResponsiveBar
                 data={props.data}
-                keys={props.keys}
+                keys={graphLabels[`${props.indexBy}`].labels}
                 indexBy={props.indexBy}
                 groupMode={"grouped"} // Possibly add toggle selector to change group mode.
                 margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
