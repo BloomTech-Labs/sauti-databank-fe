@@ -21,15 +21,6 @@ const GetData = props => {
         }
     `;
 
-    const TRADERS_QUERY = gql`
-    query getUsers{
-            ${props.query}{
-                ${props.index}
-                ${props.crossFilter}
-            }
-        }
-    `;
-
     const [variables, setVariables] = useState({});
     const { loading, error, data } = useQuery(TRADERS_QUERY, { variables });
 
