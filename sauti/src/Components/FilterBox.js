@@ -33,23 +33,23 @@ export default function FilterForm(props) {
           index: "education",
           query: "tradersUsers"
         }},
-        {label: "Border Crossing Frequency", value: "crossing_freq"},
-        {label: "Age", value: "age"},
-        {label: "Country of Residence", value: "country_of_residence"},
-        {label: "Primary Income", value: "primary_income"},
-        {label: "Language", value: "language"},
-        {label: "Produce", value: "produce"},
-        {label: "Most Requested Procedures Commodities", value: ""},
-        {label: "Most Requested Procedure Commodity Categories", value: ""},
-        {label: "Requested Procedures for Destination (Imports to:)", value: ""},
-        {label: "Most Requested Document Information for Procedures", value: ""},
-        {label: "Most Requested Agency Information for Procedures", value: ""},
-        {label: "Origin of Traders' Goods", value: ""},
-        {label: "Final Destination Country", value: ""},
-        {label: "Final Destination Market", value: ""},
-        {label: "Top Commodity", value: ""},
-        {label: "Top Commodity Categories", value: ""},
-        {label: "Exchange Rate Direction", value: ""}
+        {label: "Border Crossing Frequency", value: {index: "crossing_freq", query: "tradersUsers"}},
+        {label: "Age", value: {index: "age", query: "tradersUsers"}},
+        {label: "Country of Residence", value: {index: "country_of_residence", query: "tradersUsers"}},
+        {label: "Primary Income", value: {index: "primary_income", query: "tradersUsers"}},
+        {label: "Language", value: {index: "language", query: "tradersUsers"}},
+        {label: "Produce", value: {index: "produce", query: "tradersUsers"}},
+        {label: "Most Requested Procedures Commodities", value: {index: "commodity", query: "tradersData"}},
+        {label: "Most Requested Procedure Commodity Categories", value: {index: "", query: "tradersData"}},
+        {label: "Requested Procedures for Destination (Imports to:)", value: {index: "", query: "tradersData"}},
+        {label: "Most Requested Document Information for Procedures", value: {index: "", query: "tradersData"}},
+        {label: "Most Requested Agency Information for Procedures", value: {index: "", query: "tradersData"}},
+        {label: "Origin of Traders' Goods", value: {index: "", query: "tradersData"}},
+        {label: "Final Destination Country", value: {index: "", query: "tradersData"}},
+        {label: "Final Destination Market", value: {index: "", query: "tradersData"}},
+        {label: "Top Commodity", value: {index: "", query: "tradersData"}},
+        {label: "Top Commodity Categories", value: {index: "", query: "tradersData"}},
+        {label: "Exchange Rate Direction", value: {index: "", query: "tradersData"}}
       ];
 
     return (
@@ -63,9 +63,10 @@ export default function FilterForm(props) {
                 onChange={e => {
                   props.setIndex(e.value.index)
                   props.setQuery(e.value.query)
+                  props.setLabel(e.label)
                   console.log('event', e.value.index)
                 }}
-                value={props.index}
+                value={props.label}
                 placeholder="Select an option"
               />
 
