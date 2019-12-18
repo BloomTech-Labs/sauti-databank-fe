@@ -13,6 +13,7 @@ const App = () => {
   const [index, setIndex] = useState("gender");
   const [crossFilter, setCrossFilter] = useState("");
   const [allowNulls, setAllowNulls] = useState(true);
+  const [query, setQuery] = useState('tradersData')
 
   const onChange = event => {
     setIndex(event.target.value);
@@ -36,7 +37,14 @@ const App = () => {
           </div>
             <div className="dropdown-container">
               <p>Choose Index</p>
-              <FilterForm onChange={onChange} onSubmit={onSubmit} index={index} setIndex={setIndex} setCrossFilter={setCrossFilter} setAllowNulls={setAllowNulls} />
+              <FilterForm 
+                onChange={onChange} 
+                onSubmit={onSubmit} 
+                index={index} 
+                setIndex={setIndex} 
+                setCrossFilter={setCrossFilter} 
+                setAllowNulls={setAllowNulls} 
+                setQuery={setQuery} />
             </div>
           </div>
         </div>
