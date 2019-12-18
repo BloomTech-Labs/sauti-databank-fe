@@ -16,7 +16,6 @@ const OptionContainer = styled.div`
 `
 
 export default function FilterForm(props) {
-  console.log('this is props', props);
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -39,7 +38,7 @@ export default function FilterForm(props) {
         {label: "Primary Income", value: {index: "primary_income", query: "tradersUsers"}},
         {label: "Language", value: {index: "language", query: "tradersUsers"}},
         {label: "Produce", value: {index: "produce", query: "tradersUsers"}},
-        {label: "Most Requested Procedures Commodities", value: {index: "commodity", query: "tradersData"}},
+        {label: "Most Requested Procedures Commodities", value: {index: "procedurecommodity", query: "tradersData"}},
         {label: "Most Requested Procedure Commodity Categories", value: {index: "", query: "tradersData"}},
         {label: "Requested Procedures for Destination (Imports to:)", value: {index: "", query: "tradersData"}},
         {label: "Most Requested Document Information for Procedures", value: {index: "", query: "tradersData"}},
@@ -64,7 +63,6 @@ export default function FilterForm(props) {
                   props.setIndex(e.value.index)
                   props.setQuery(e.value.query)
                   props.setLabel(e.label)
-                  console.log('event', e.value.index)
                 }}
                 value={props.label}
                 placeholder="Select an option"
@@ -78,7 +76,6 @@ export default function FilterForm(props) {
                 /> Allow Nulls
 
               {options.filter(option => option.value !== props.index).map(option => {
-                console.log('label', option.label)
                   return (      
                     <OptionContainer>
                       <input

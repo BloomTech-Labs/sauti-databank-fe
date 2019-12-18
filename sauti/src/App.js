@@ -24,9 +24,6 @@ const App = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
-
-  console.log(query)
-
   return (
     <div className="App">
       <Navbar />
