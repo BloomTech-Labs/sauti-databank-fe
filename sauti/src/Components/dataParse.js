@@ -54,8 +54,15 @@ const setCrossedItems = (data, keys, crossFilter, indexBy, allowNulls) => {
     })
 
     // Replaces "null" values with "No Response"
-    keys.forEach(obj => obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response"));
+    // keys.forEach(obj => obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response"));
     crossFilterKeysArr = crossFilterKeysArr.map(key => key === null ? "No Response" : key);
+    keys.forEach(obj => {
+        obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response")
+        if(obj[null]){
+        obj["No Response"] = obj[null]
+        delete obj[null] 
+        }
+    });
 
     // IF TRUE WILL REMOVE NULL RESPONSES
     if(allowNulls === false) {
