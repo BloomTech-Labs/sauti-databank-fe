@@ -11,7 +11,7 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState("gender");
-  const [crossFilter, setCrossFilter] = useState("");
+  const [crossFilter, setCrossFilter] = useState("education");
   const [allowNulls, setAllowNulls] = useState(true);
   const [query, setQuery] = useState("tradersUsers");
   const [label, setLabel] = useState('Gender')
@@ -24,9 +24,6 @@ const App = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
-
-  console.log(query)
-
   return (
     <div className="App">
       <Navbar />
@@ -36,7 +33,7 @@ const App = () => {
         </div>
         <div className="content-container">
           <div className="chart-container">
-            <Queries index={index} crossFilter={crossFilter} allowNulls={allowNulls} query={query} />
+            <Queries index={index} crossFilter={crossFilter} allowNulls={allowNulls} query={query} label={label} />
           </div>
             <div className="dropdown-container">
               <p>Choose Index</p>

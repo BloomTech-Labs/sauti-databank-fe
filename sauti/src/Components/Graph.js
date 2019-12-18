@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ResponsiveBar } from "@nivo/bar"
 import './temp.css'
-
-const firstLetterUpper = word => {
-    let split = word.split("")
-    split[0].toUpperCase()
-    let joined = split.join('')
-    return joined
-}
 
 const getMaxValue = data => {
     let max = 0
@@ -23,8 +16,8 @@ const getMaxValue = data => {
 }
 
 const Graph = props => {
-// console.log(props.keys)
-// console.log(props.data)
+console.log(props.keys)
+console.log(props.data)
         return (
            <div className="Graph-Container">
               <ResponsiveBar
@@ -32,7 +25,7 @@ const Graph = props => {
                 keys={props.keys}
                 indexBy={props.indexBy}
                 groupMode={"grouped"} // Possibly add toggle selector to change group mode.
-                margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+                margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
                 padding={0.3}
                 innerPadding={0}
                 maxValue={getMaxValue(props.data)}
@@ -44,7 +37,7 @@ const Graph = props => {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: firstLetterUpper(props.indexBy),
+                    legend: props.label,
                     legendPosition: 'middle',
                     legendOffset: 32
                 }}
@@ -56,8 +49,8 @@ const Graph = props => {
                     legendPosition: 'middle',
                     legendOffset: -40
                 }}
-                labelSkipWidth={12}
-                labelSkipHeight={12}
+                labelSkipWidth={0}
+                labelSkipHeight={0}
                 labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
                 legends={[
                     {
