@@ -1,20 +1,6 @@
 import React from "react";
-import { ResponsiveBar } from "@nivo/bar"
-import './temp.css'
-
-const getMaxValue = data => {
-    let max = 0
-    data.forEach(obj => {
-        let values = Object.values(obj)
-        values = values.map(i => parseInt(i, 10)).filter(item => Number(item) === item)
-        let possMax = Math.max(...values)
-        if(possMax > max){
-            max = possMax
-        }
-    })
-    
-    return max * 1.1
-}
+import { ResponsiveBar } from "@nivo/bar";
+import "./temp.css";
 
 const Graph = props => {
     console.log(props.data)
@@ -23,12 +9,12 @@ const Graph = props => {
               <ResponsiveBar
                 data={props.data}
                 keys={props.keys}
-                indexBy={props.indexBy}
+                indexBy={props.indexBy === "request_type" ? "request_value" : props.indexBy}
                 groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
                 margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
                 padding={0.3}
                 innerPadding={0}
-                maxValue={getMaxValue(props.data)}
+                maxValue={100}
                 colors={{ scheme: 'nivo' }}
                 borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
                 axisTop={null}
@@ -37,7 +23,10 @@ const Graph = props => {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: props.label,
+                    legend:
+                    props.label +
+                    " (values as percent of total)," +
+                    ` sample size = ${props.sampleSize}`,
                     legendPosition: 'middle',
                     legendOffset: 35
                 }}
@@ -81,7 +70,6 @@ const Graph = props => {
                 motionDamping={15}
             />
            </div>
-        )
-};
+        )}
 
-export default Graph
+export default Graph;
