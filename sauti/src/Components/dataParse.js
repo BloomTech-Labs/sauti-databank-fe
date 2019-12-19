@@ -4,10 +4,10 @@ const dataParse = (indexBy, data, crossFilter) => {
     const dataStructure = graphLabels[`${indexBy}`].structure
 
     // setItem(data, keys, "education", "gender")
-    if(crossFilter !== ""){
-    return setCrossedItems(data, dataStructure, crossFilter, indexBy)
+    if (crossFilter !== "") {
+        return setCrossedItems(data, dataStructure, crossFilter, indexBy)
     } else {
-    return setItem(data, dataStructure, indexBy)
+        return setItem(data, dataStructure, indexBy)
     }
 }
 
@@ -41,7 +41,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     keysArr.forEach((key, index) => {
         // Gets every trader at the index where it equals the value in the keysArr
         const filtered = data.filter(trader => trader[`${indexBy}`] === key)
-        
+
         // Gets every trader at the crossFilter where it equals the value in the crossFilterKeysArr
         // Then pushes into crossFilteredData
         const crossFilteredData = [];
@@ -52,7 +52,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
 
         // Builds the object that will be sent to the graph component
         crossFilteredData.forEach(obj => {
-                return dataStructure[index] = {...dataStructure[index], [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0] } 
+            return dataStructure[index] = { ...dataStructure[index], [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0] }
         })
     })
 
@@ -74,7 +74,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
 };
 
 // const crossFilterWithoutNulls = (keys, crossFilterKeysArr, indexBy) => {
-    
+
 //     crossFilterKeysArr = crossFilterKeysArr.filter(item => item !== "No Response")
 
 //     keys.forEach((obj, index) => {
@@ -92,9 +92,9 @@ const setItem = (data, dataStructure, indexBy) => {
     // For each object in the array, 
     arr.forEach((key, index) => {
         // Gets every trader at the index where it equals the value in the arr
-       const filtered = data.filter(trader => trader[`${indexBy}`] === key).length
+        const filtered = data.filter(trader => trader[`${indexBy}`] === key).length
 
-       dataStructure[index] = {
+        dataStructure[index] = {
             ...dataStructure[index],
             [`${arr[index]}`]: filtered
         }
@@ -107,11 +107,13 @@ const setItem = (data, dataStructure, indexBy) => {
     //     delete obj[null] 
     //     }
     // });
-    
+
 
     // arr = arr.map(item => item === null ? "No Response" : item);
-    
-    return { dataStructure, arr, indexBy} ;
+
+    console.log('dataStructure', dataStructure)
+
+    return { dataStructure, arr, indexBy };
 }
 
 export default dataParse
