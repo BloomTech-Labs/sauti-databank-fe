@@ -14,8 +14,9 @@ const GetData = props => {
 
     const TRADERS_QUERY = gql`
        query getUsers{
-            ${props.query}{
+            ${props.query}(request_type: "procedurecommodity"){
                 ${props.index}
+                request_value
                 ${props.crossFilter}
             }
         }
@@ -26,8 +27,12 @@ console.log("PROPS", props.indexBy)
 
     if (loading)  return <h1> Loading... </h1>
 
+    console.log("queries data", data)
+
     const chartData = dataParse(props.index, data[`${props.query}`], props.crossFilter); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
-    
+   
+
+
     if(props.crossFilter !== ""){
     return (
         <div>
