@@ -26,19 +26,21 @@ const GetData = props => {
 
     if (loading)  return <h1> Loading... </h1>
 
-    console.log(data)
-    const chartData = dataParse(props.index, data[`${props.query}`], props.crossFilter, props.allowNulls); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+    const chartData = dataParse(props.index, data[`${props.query}`], props.crossFilter); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+    
+    console.log("QUERIES", chartData.dataStructure)
+
     if(props.crossFilter !== ""){
     return (
         <div>
-            <Graph data={chartData.keys} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label}/>
+            <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'}/>
             <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
         </div>
     )
     } else {
         return (
             <div>
-                <Graph data={chartData.keys} keys={chartData.arr} indexBy={chartData.indexBy} label={props.label}/>
+                <Graph data={chartData.dataStructure} keys={chartData.arr} indexBy={chartData.indexBy} label={props.label} groupMode={'stacked'}/>
                 <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
             </div>
         )
