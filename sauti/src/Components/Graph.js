@@ -17,12 +17,14 @@ const getMaxValue = data => {
 }
 
 const Graph = props => {
+    console.log('data', props.data)
+    console.log('keys', props.keys)
         return (
            <div className="Graph-Container">
               <ResponsiveBar
                 data={props.data}
                 keys={props.keys}
-                indexBy={props.indexBy}
+                indexBy={props.indexBy === "request_type" ? "request_value" : props.indexBy}
                 groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
                 margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
                 padding={0.3}

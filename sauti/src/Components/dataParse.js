@@ -4,6 +4,7 @@ const dataParse = (indexBy, data, crossFilter) => {
     let dataStructure;
     if (indexBy === "request_type") {
         dataStructure = getIndex(data, indexBy)
+        console.log('beginning data structure', dataStructure)
         return getMostRequested(data, dataStructure, indexBy)
     } else {
         dataStructure = graphLabels[`${indexBy}`].structure;
@@ -120,7 +121,7 @@ const setItem = (data, dataStructure, indexBy) => {
 
     // arr = arr.map(item => item === null ? "No Response" : item);
     
-    return { dataStructure, arr, indexBy} ;
+    return { dataStructure, keys: graphLabels[`${indexBy}`].labels, indexBy}
 }
 
 const getMostRequested = (data, dataStructure, indexBy) => {
@@ -129,7 +130,7 @@ const getMostRequested = (data, dataStructure, indexBy) => {
     // Puts each value from key:value pair into an array
     // ['Female', 'Male', null]
     dataStructure.forEach(obj => arr.push(Object.values(obj)[0]))
-    console.log(arr)
+    
     // For each object in the array, 
     arr.forEach((key, index) => {
         // Gets every trader at the index where it equals the value in the arr
@@ -139,23 +140,17 @@ const getMostRequested = (data, dataStructure, indexBy) => {
             ...dataStructure[index],
             [`${arr[index]}`]: filtered
         }
-
     })
 
     dataStructure = dataStructure.sort((a, b) => (Object.values(a)[1] > Object.values(b)[1]) ? -1 : 1).splice(0, 10);
 
-    // keys.forEach(obj => {
-    //     obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response")
-    //     if(obj[null]){
-    //     obj["No Response"] = obj[null]
-    //     delete obj[null] 
-    //     }
-    // });
+    const keys = dataStructure.map(obj => obj.request_value);
     
 
-    // arr = arr.map(item => item === null ? "No Response" : item);
+
+    console.log('keys', keys)
     console.log("dataparse", dataStructure)
-    return { dataStructure, arr, indexBy} ;
+    return { dataStructure, keys, indexBy} ;
 }
 
 export default dataParse
