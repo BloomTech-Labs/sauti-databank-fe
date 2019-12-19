@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useQuery } from "@apollo/react-hooks"
+import React, { useState, useEffect } from "react";
+import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import Graph from "./Graph"
+import Graph from "./Graph";
 
 import dataParse from "./dataParse";
 
@@ -50,7 +50,7 @@ const GetData = props => {
     } else {
         return (
             <div>
-                <Graph data={chartData.dataStructure} keys={chartData.keys} indexBy={chartData.indexBy} label={props.label} groupMode={'stacked'}/>
+                <Graph data={chartData.dataStructure} keys={chartData.keys} indexBy={chartData.indexBy} label={props.label} groupMode={'stacked'} sampleSize={chartData.sampleSize}/>
                 <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
             </div>
         )

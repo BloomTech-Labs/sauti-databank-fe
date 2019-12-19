@@ -2,10 +2,12 @@ import graphLabels from './graphLabels'
 
 const dataParse = (indexBy, data, crossFilter) => {
     let dataStructure;
+    
     if (indexBy === "request_type") {
         dataStructure = getIndex(data, indexBy)
         console.log('beginning data structure', dataStructure)
         return getMostRequested(data, dataStructure, indexBy)
+
     } else {
         dataStructure = graphLabels[`${indexBy}`].structure;
 
@@ -120,8 +122,26 @@ const setItem = (data, dataStructure, indexBy) => {
     
 
     // arr = arr.map(item => item === null ? "No Response" : item);
+
+    let numberValues = [];
+
+    let sampleSize = 0;
+
+    dataStructure.map(item => {
+        const keyValue = item[`${indexBy}`];
+        numberValues.push(Number(item[keyValue]));
+        sampleSize += Number(item[keyValue]);
+    });
+    console.log("sampleSize", sampleSize);
+    console.log("this", numberValues);
+
+    dataStructure.forEach(obj => {
+        const keyValue = obj[`${indexBy}`];
+        obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
+    });
+    console.log("final dataStructure", dataStructure);
     
-    return { dataStructure, keys: graphLabels[`${indexBy}`].labels, indexBy}
+    return { dataStructure, keys: graphLabels[`${indexBy}`].labels, indexBy, sampleSize}
 }
 
 const getMostRequested = (data, dataStructure, indexBy) => {
