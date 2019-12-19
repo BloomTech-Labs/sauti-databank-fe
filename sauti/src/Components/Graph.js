@@ -17,6 +17,7 @@ const getMaxValue = data => {
 }
 
 const Graph = props => {
+    console.log(props.data)
         return (
            <div className="Graph-Container">
               <ResponsiveBar
