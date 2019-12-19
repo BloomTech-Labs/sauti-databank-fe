@@ -4,7 +4,7 @@ import { gql } from "apollo-boost";
 import Graph from "./Graph"
 
 import dataParse from "./dataParse";
-
+import graphLabels from './graphLabels'
 
 const GetData = props => {
     
@@ -20,25 +20,25 @@ const GetData = props => {
             }
         }
     `;
-
+console.log("PROPS", props.indexBy)
     const [variables, setVariables] = useState({});
     const { loading, error, data } = useQuery(TRADERS_QUERY, { variables });
 
     if (loading)  return <h1> Loading... </h1>
 
-    console.log(data)
-    const chartData = dataParse(props.index, data[`${props.query}`], props.crossFilter, props.allowNulls); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+    const chartData = dataParse(props.index, data[`${props.query}`], props.crossFilter); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+    
     if(props.crossFilter !== ""){
     return (
         <div>
-            <Graph data={chartData.keys} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label}/>
+            <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'}/>
             <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
         </div>
     )
     } else {
         return (
             <div>
-                <Graph data={chartData.keys} keys={chartData.arr} indexBy={chartData.indexBy} label={props.label}/>
+                <Graph data={chartData.dataStructure} keys={graphLabels[`${props.index}`].labels} indexBy={chartData.indexBy} label={props.label} groupMode={'stacked'}/>
                 <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
             </div>
         )

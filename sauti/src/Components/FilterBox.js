@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../App.scss'
 
 import styled from 'styled-components';
@@ -17,11 +17,11 @@ const OptionContainer = styled.div`
 
 export default function FilterForm(props) {
 
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
-  useEffect(() => {
-    props.setAllowNulls(isChecked)
-  }, [isChecked]);
+  // useEffect(() => {
+  //   props.setAllowNulls(isChecked)
+  // }, [isChecked]);
 
     const options = [
         {label: "Gender", value: {
@@ -68,12 +68,12 @@ export default function FilterForm(props) {
                 placeholder="Select an option"
               />
 
-                <input 
+                {/* <input 
                 name="allowNulls"
                 type="checkbox"
                 checked={isChecked}
                 onChange={() => setIsChecked(!isChecked)}
-                /> Allow Nulls
+                /> Allow Nulls */}
 
               {options.filter(option => option.value !== props.index).map(option => {
                   return (      
@@ -89,5 +89,4 @@ export default function FilterForm(props) {
             </form>
         </div>
     )
-
 }
