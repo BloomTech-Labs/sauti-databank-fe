@@ -13,19 +13,19 @@ const getMaxValue = data => {
             max = possMax
         }
     })
-    return max
+    
+    return max * 1.1
 }
 
 const Graph = props => {
-console.log(props.data)
         return (
            <div className="Graph-Container">
               <ResponsiveBar
                 data={props.data}
                 keys={graphLabels[`${props.indexBy}`].labels}
                 indexBy={props.indexBy}
-                groupMode={"grouped"} // Possibly add toggle selector to change group mode.
-                margin={{ top: 50, right: 130, bottom: 75, left: 80 }}
+                groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
+                margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
                 padding={0.3}
                 innerPadding={0}
                 maxValue={getMaxValue(props.data)}
@@ -39,7 +39,7 @@ console.log(props.data)
                     tickRotation: 0,
                     legend: props.label,
                     legendPosition: 'middle',
-                    legendOffset: 32
+                    legendOffset: 35
                 }}
                 axisLeft={{
                     tickSize: 5,
@@ -47,7 +47,7 @@ console.log(props.data)
                     tickRotation: 0,
                     legend: 'Quantity', // Possibly toggle percentage or number in future release
                     legendPosition: 'middle',
-                    legendOffset: -40
+                    legendOffset: -60
                 }}
                 labelSkipWidth={0}
                 labelSkipHeight={0}
