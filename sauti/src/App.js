@@ -3,7 +3,7 @@ import "./App.scss";
 import "./index.css";
 
 import Navbar from "./Components/Navbar";
-import FilterForm from './Components/FilterBox'
+import FilterForm from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 
@@ -15,6 +15,7 @@ const App = () => {
   const [allowNulls, setAllowNulls] = useState(true);
   const [query, setQuery] = useState("tradersUsers");
   const [label, setLabel] = useState('Gender')
+
 
   const onChange = event => {
     setIndex(event.target.value);
@@ -33,31 +34,31 @@ const App = () => {
         </div>
         <div className="content-container">
           <div className="chart-container">
-            <Queries 
-              index={index} 
-              crossFilter={crossFilter} 
-              allowNulls={allowNulls} 
-              query={query} 
+            <Queries
+              index={index}
+              crossFilter={crossFilter}
+              allowNulls={allowNulls}
+              query={query}
               label={label}
             />
           </div>
-            <div className="dropdown-container">
-              <p>Choose Index</p>
-              <FilterForm 
-                onChange={onChange} 
-                onSubmit={onSubmit} 
-                index={index} 
-                setIndex={setIndex} 
-                setCrossFilter={setCrossFilter} 
-                setAllowNulls={setAllowNulls} 
-                setQuery={setQuery}
-                label={label}
-                setLabel={setLabel}  
-              />
-            </div>
+          <div className="dropdown-container">
+            <p>Choose Index</p>
+            <FilterForm
+              onChange={onChange}
+              onSubmit={onSubmit}
+              index={index}
+              setIndex={setIndex}
+              setCrossFilter={setCrossFilter}
+              setAllowNulls={setAllowNulls}
+              setQuery={setQuery}
+              label={label}
+              setLabel={setLabel}
+            />
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
