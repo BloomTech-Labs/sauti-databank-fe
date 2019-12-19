@@ -7,13 +7,14 @@ import Loader from 'react-loader-spinner'
 import dataParse from "./dataParse";
 
 const GetData = props => {
+    console.log('props for queries', props)
     let QUERY;
 
     if (props.index === "request_type") {
     
     QUERY = gql`
         query getData{
-            ${props.query}(request_type: "procedurecommoditycat"){
+            ${props.query}(request_type: ${props.argForQuery}){
                 ${props.index}
                 request_value
                 ${props.crossFilter}
