@@ -1,3 +1,20 @@
 .Graph-Container{
     height:600px;
 }
+
+.loader-container{
+    box-sizing: border-box;
+    height:600px;
+    width: 887px;
+    margin-top: 50;
+    margin-right: 200;
+    margin-bottom: 75;
+    margin-left: 80
+}
+
+.loader{
+    padding-top: 28%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
