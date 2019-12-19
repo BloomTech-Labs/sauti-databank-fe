@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Graph from "./Graph";
+import Loader from 'react-loader-spinner'
 
 import dataParse from "./dataParse";
 
@@ -34,7 +35,16 @@ const GetData = props => {
     const [variables, setVariables] = useState({});
     const { loading, error, data } = useQuery(QUERY, { variables });
     
-    if (loading)  return <h1> Loading... </h1>
+    if (loading)  return (
+        <div className='loader-container'>
+        <Loader
+        className='loader'
+        type='Oval'
+        color='#708090'
+        width={100}
+        timeout={5000}
+         /></div>
+    )
 
     console.log("queries data", data)
 
