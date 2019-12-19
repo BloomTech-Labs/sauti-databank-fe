@@ -5,7 +5,6 @@ const dataParse = (indexBy, data, crossFilter) => {
 
     if (indexBy === "request_type") {
         dataStructure = getIndex(data, indexBy)
-        console.log('beginning data structure', dataStructure)
         return getMostRequested(data, dataStructure, indexBy)
 
     } else {
@@ -79,9 +78,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     //     }
     // });
 
-    console.log('dataStructure', dataStructure)
-    console.log('crossfilter', crossFilterKeysArr)
-
     return { dataStructure, crossFilterKeysArr, indexBy };
 };
 
@@ -132,8 +128,6 @@ const setItem = (data, dataStructure, indexBy) => {
         numberValues.push(Number(item[keyValue]));
         sampleSize += Number(item[keyValue]);
     });
-    console.log("sampleSize", sampleSize);
-    console.log("this", numberValues);
 
     dataStructure.forEach(obj => {
         const keyValue = obj[`${indexBy}`];
@@ -165,12 +159,8 @@ const getMostRequested = (data, dataStructure, indexBy) => {
     dataStructure = dataStructure.sort((a, b) => (Object.values(a)[1] > Object.values(b)[1]) ? -1 : 1).splice(0, 5);
 
     const keys = dataStructure.map(obj => obj.request_value);
-
-
-
-    console.log('keys', keys)
-    console.log("dataparse", dataStructure)
-    return { dataStructure, keys, indexBy };
+    
+    return { dataStructure, keys, indexBy} ;
 }
 
 export default dataParse

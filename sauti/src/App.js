@@ -12,9 +12,9 @@ import Queries from "./Components/Queries";
 const App = () => {
   const [index, setIndex] = useState("gender");
   const [crossFilter, setCrossFilter] = useState("");
-  const [allowNulls, setAllowNulls] = useState(true);
   const [query, setQuery] = useState("tradersUsers");
   const [label, setLabel] = useState('Gender')
+  const [argForQuery, setArgForQuery] = useState('')
 
 
   const onChange = event => {
@@ -37,9 +37,9 @@ const App = () => {
             <Queries
               index={index}
               crossFilter={crossFilter}
-              allowNulls={allowNulls}
               query={query}
               label={label}
+              argForQuery={argForQuery}
             />
           </div>
           <div className="dropdown-container">
@@ -50,10 +50,10 @@ const App = () => {
               index={index}
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
-              setAllowNulls={setAllowNulls}
               setQuery={setQuery}
               label={label}
               setLabel={setLabel}
+              setArgForQuery={setArgForQuery}
             />
           </div>
         </div>
