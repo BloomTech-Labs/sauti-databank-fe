@@ -22,7 +22,7 @@ console.log(props.data)
            <div className="Graph-Container">
               <ResponsiveBar
                 data={props.data}
-                keys={graphLabels[`${props.indexBy}`].labels}
+                keys={props.crossFilter ? props.keys : graphLabels[`${props.indexBy}`].labels}
                 indexBy={props.indexBy}
                 groupMode={"grouped"} // Possibly add toggle selector to change group mode.
                 margin={{ top: 50, right: 130, bottom: 75, left: 80 }}

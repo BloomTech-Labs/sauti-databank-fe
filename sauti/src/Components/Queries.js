@@ -28,12 +28,10 @@ const GetData = props => {
 
     const chartData = dataParse(props.index, data[`${props.query}`], props.crossFilter); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
     
-    console.log("QUERIES", chartData.dataStructure)
-
     if(props.crossFilter !== ""){
     return (
         <div>
-            <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label}/>
+            <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label} crossFilter={props.crossFilter} />
             <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
         </div>
     )
