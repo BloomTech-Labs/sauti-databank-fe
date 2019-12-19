@@ -39,7 +39,6 @@ const App = () => {
               allowNulls={allowNulls} 
               query={query} 
               label={label}
-              crossFilter={crossFilter} 
             />
           </div>
             <div className="dropdown-container">

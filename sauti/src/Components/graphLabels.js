@@ -1,6 +1,6 @@
 const dataOrder ={
     "education": {
-        labels: ['No formal education', 'Primary', 'Secondary', 'University/College'],
+        labels: ['University/College', 'Secondary', 'Primary', 'No formal education'],
         structure: [
             {"education": "No formal education"}, 
             {"education": "Primary"}, 
@@ -16,7 +16,7 @@ const dataOrder ={
         ]
     },
     "crossing_freq": {
-        labels: ['Never', 'Daily', 'Weekly', 'Monthly'],
+        labels: ['Monthly', 'Weekly', 'Daily', 'Never'],
         structure: [
             {"crossing_freq": "Never"}, 
             {"crossing_freq": "Daily"}, 
@@ -25,7 +25,7 @@ const dataOrder ={
         ]
     },
     "age": {
-        labels: ['10-20', '20-30', '30-40', '40-50', '50-60', '60-70'],
+        labels: ['60-70', '50-60', '40-50', '30-40', '20-30', '10-20'],
         structure: [
             {"age": "10-20"}, 
             {"age": "20-30"}, 
@@ -36,7 +36,7 @@ const dataOrder ={
         ]
     },
     "country_of_residence": {
-        labels: ['KEN', 'UGA', 'RWA'],
+        labels: ['RWA', 'UGA', 'KEN'],
         structure: [
             {"country_of_residence": "KEN"}, 
             {"country_of_residence": "UGA"}, 
@@ -51,7 +51,7 @@ const dataOrder ={
         ]
     },
     "language": {
-        labels: ['English', 'Swahili', 'Luganda', 'Kinyarwanda', 'Lukiga'],
+        labels: ['Lukiga', 'Kinyarwanda', 'Luganda', 'Swahili', 'English'],
         structure: [
             {"language": "English"}, 
             {"language": "Swahili"}, 

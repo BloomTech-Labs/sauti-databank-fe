@@ -4,7 +4,7 @@ import { gql } from "apollo-boost";
 import Graph from "./Graph"
 
 import dataParse from "./dataParse";
-
+import graphLabels from './graphLabels'
 
 const GetData = props => {
     
@@ -20,7 +20,7 @@ const GetData = props => {
             }
         }
     `;
-
+console.log("PROPS", props.indexBy)
     const [variables, setVariables] = useState({});
     const { loading, error, data } = useQuery(TRADERS_QUERY, { variables });
 
@@ -31,14 +31,14 @@ const GetData = props => {
     if(props.crossFilter !== ""){
     return (
         <div>
-            <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label} crossFilter={props.crossFilter} groupMode={'grouped'}/>
+            <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'}/>
             <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
         </div>
     )
     } else {
         return (
             <div>
-                <Graph data={chartData.dataStructure} keys={chartData.arr} indexBy={chartData.indexBy} label={props.label} groupMode={'stacked'}/>
+                <Graph data={chartData.dataStructure} keys={graphLabels[`${props.index}`].labels} indexBy={chartData.indexBy} label={props.label} groupMode={'stacked'}/>
                 <button onClick={(e) => !variables.hasOwnProperty("age") ? setVariables({age: "40-50"}) : setVariables({})}>change state</button>
             </div>
         )
