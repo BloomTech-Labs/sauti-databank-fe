@@ -142,7 +142,7 @@ const getMostRequested = (data, dataStructure, indexBy) => {
         }
     })
 
-    dataStructure = dataStructure.sort((a, b) => (Object.values(a)[1] > Object.values(b)[1]) ? -1 : 1).splice(0, 10);
+    dataStructure = dataStructure.sort((a, b) => (Object.values(a)[1] > Object.values(b)[1]) ? -1 : 1).splice(0, 5);
 
     const keys = dataStructure.map(obj => obj.request_value);
     
