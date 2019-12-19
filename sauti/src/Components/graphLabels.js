@@ -1,6 +1,6 @@
 const dataOrder ={
     "education": {
-        labels: ['No formal education', 'Primary', 'Secondary', 'University/College'],
+        labels: ['University/College', 'Secondary', 'Primary', 'No formal education'],
         structure: [
             {"education": "No formal education"}, 
             {"education": "Primary"}, 
@@ -16,7 +16,7 @@ const dataOrder ={
         ]
     },
     "crossing_freq": {
-        labels: ['Never', 'Daily', 'Weekly', 'Monthly'],
+        labels: ['Monthly', 'Weekly', 'Daily', 'Never'],
         structure: [
             {"crossing_freq": "Never"}, 
             {"crossing_freq": "Daily"}, 
@@ -25,12 +25,46 @@ const dataOrder ={
         ]
     },
     "age": {
-        labels: ['Never', 'Daily', 'Weekly', 'Monthly'],
+        labels: ['60-70', '50-60', '40-50', '30-40', '20-30', '10-20'],
         structure: [
-            {"crossing_freq": "Never"}, 
-            {"crossing_freq": "Daily"}, 
-            {"crossing_freq": "Weekly"}, 
-            {"crossing_freq": "Monthly"}, 
+            {"age": "10-20"}, 
+            {"age": "20-30"}, 
+            {"age": "30-40"}, 
+            {"age": "40-50"}, 
+            {"age": "50-60"}, 
+            {"age": "60-70"}, 
+        ]
+    },
+    "country_of_residence": {
+        labels: ['RWA', 'UGA', 'KEN'],
+        structure: [
+            {"country_of_residence": "KEN"}, 
+            {"country_of_residence": "UGA"}, 
+            {"country_of_residence": "RWA"}, 
+        ]
+    },
+    "primary_income": {
+        labels: ['Yes', 'No'],
+        structure: [
+            {"primary_income": "Yes"}, 
+            {"primary_income": "No"}, 
+        ]
+    },
+    "language": {
+        labels: ['Lukiga', 'Kinyarwanda', 'Luganda', 'Swahili', 'English'],
+        structure: [
+            {"language": "English"}, 
+            {"language": "Swahili"}, 
+            {"language": "Luganda"}, 
+            {"language": "Kinyarwanda"}, 
+            {"language": "Lukiga"}, 
+        ]
+    },
+    "produce": {
+        labels: ['Yes', 'No'],
+        structure: [
+            {"produce": "Yes"}, 
+            {"produce": "No"}, 
         ]
     },
 }

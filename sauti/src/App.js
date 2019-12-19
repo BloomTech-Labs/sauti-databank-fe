@@ -33,7 +33,13 @@ const App = () => {
         </div>
         <div className="content-container">
           <div className="chart-container">
-            <Queries index={index} crossFilter={crossFilter} allowNulls={allowNulls} query={query} label={label} />
+            <Queries 
+              index={index} 
+              crossFilter={crossFilter} 
+              allowNulls={allowNulls} 
+              query={query} 
+              label={label}
+            />
           </div>
             <div className="dropdown-container">
               <p>Choose Index</p>

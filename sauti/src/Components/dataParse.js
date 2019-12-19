@@ -29,12 +29,13 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     const keysArr = [];
     let crossFilterKeysArr = [];
 
-    const crossFilterKeys = getIndex(data, crossFilter);
+    const crossFilterKeys = graphLabels[`${crossFilter}`].structure;
+
 
     // Puts each value from key:value pair into an array
     // ['Female', 'Male', null]
     dataStructure.forEach(obj => keysArr.push(Object.values(obj)[0]));
-    crossFilterKeys.forEach(obj => { crossFilterKeysArr.push(Object.values(obj)[0])});
+    crossFilterKeys.forEach(obj => Object.values(obj)[0] !== null && crossFilterKeysArr.push(Object.values(obj)[0]));
 
     // For each object in the array, 
     keysArr.forEach((key, index) => {
@@ -51,11 +52,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
 
         // Builds the object that will be sent to the graph component
         crossFilteredData.forEach(obj => {
-            if ([`${Object.keys(obj)[0]}`][0] === "null") {
-                return dataStructure[index] = {...dataStructure[index], ["No Response"]: [`${Object.values(obj)[0]}`][0] } 
-            } else {
                 return dataStructure[index] = {...dataStructure[index], [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0] } 
-            }
         })
     })
 
@@ -70,7 +67,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     //     }
     // });
 
-    console.log('keys', dataStructure)
+    console.log('dataStructure', dataStructure)
     console.log('crossfilter', crossFilterKeysArr)
 
     return { dataStructure, crossFilterKeysArr, indexBy };
