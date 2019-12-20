@@ -41,7 +41,7 @@ export default function FilterBox(props) {
         {label: "Final Destination Country", value: {index: "request_type", query: "tradersData", arg: 'commoditycountry'}},
         {label: "Final Destination Market", value: {index: "request_type", query: "tradersData", arg: 'commoditymarket'}},
         {label: "Top Commodity", value: {index: "request_type", query: "tradersData", arg: 'commodityproduct'}},
-        {label: "Top Commodity Categories", value: {index: "request_type", query: "tradersData", arg: ' commoditycat'}},
+        {label: "Top Commodity Categories", value: {index: "request_type", query: "tradersData", arg: 'commoditycat'}},
         {label: "Exchange Rate Direction", value: {index: "request_type", query: "tradersData", arg: 'exchangedirection'}}
       ];
 
