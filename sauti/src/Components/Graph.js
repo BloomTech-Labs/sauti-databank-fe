@@ -1,6 +1,5 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import "./temp.css";
 
 const Graph = props => {
     console.log('data', props.data)
