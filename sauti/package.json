@@ -22,13 +22,21 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --watch",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "verbose": true,
+    "transformIgnorePatterns": ["/node_modules/(?!App)"],
+    "testEnvironment": "node"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
 }
