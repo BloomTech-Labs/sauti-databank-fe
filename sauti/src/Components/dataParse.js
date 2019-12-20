@@ -159,6 +159,21 @@ const getMostRequested = (data, dataStructure, indexBy) => {
     dataStructure = dataStructure.sort((a, b) => (Object.values(a)[1] > Object.values(b)[1]) ? -1 : 1).splice(0, 5);
 
     const keys = dataStructure.map(obj => obj.request_value);
+
+
+    let numberValues = [];
+    let sampleSize = 0;
+
+    dataStructure.map(item => {
+        const keyValue = item[`request_value`];
+        numberValues.push(Number(item[keyValue]));
+        sampleSize += Number(item[keyValue]);
+    });
+
+    dataStructure.forEach(obj => {
+        const keyValue = obj[`request_value`];
+        obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
+    });
     
     return { dataStructure, keys, indexBy} ;
 }
