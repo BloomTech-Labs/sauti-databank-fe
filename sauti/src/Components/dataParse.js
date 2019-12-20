@@ -1,14 +1,25 @@
 import graphLabels from './graphLabels'
 
 const dataParse = (indexBy, data, crossFilter) => {
-    const dataStructure = graphLabels[`${indexBy}`].structure
+    let dataStructure;
+
+    if (indexBy === "request_type") {
+        dataStructure = getIndex(data, indexBy)
+        return getMostRequested(data, dataStructure, indexBy)
+
+    } else {
+        dataStructure = graphLabels[`${indexBy}`].structure;
+
+        if (crossFilter !== "") {
+            return setCrossedItems(data, dataStructure, crossFilter, indexBy)
+        } else {
+            return setItem(data, dataStructure, indexBy)
+        }
+    }
+
 
     // setItem(data, keys, "education", "gender")
-    if(crossFilter !== ""){
-    return setCrossedItems(data, dataStructure, crossFilter, indexBy)
-    } else {
-    return setItem(data, dataStructure, indexBy)
-    }
+
 }
 
 
@@ -16,7 +27,7 @@ const dataParse = (indexBy, data, crossFilter) => {
 // NEED TO FIND A WAY TO GET THEM INTO A SPECIFIC ORDER
 const getIndex = (data, indexBy) => {
     // Shrinks objects to one single key:value pair specified by the indexBy
-    const cleanedArr = data.map(item => item = { [`${indexBy}`]: item[`${indexBy}`] })
+    const cleanedArr = data.map(item => item = { [`request_value`]: item[`request_value`] })
 
     // Reduces down to a set of the possible key:value pairs
     const reducedArr = [...new Set(cleanedArr.map(JSON.stringify))].map(JSON.parse)
@@ -41,7 +52,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     keysArr.forEach((key, index) => {
         // Gets every trader at the index where it equals the value in the keysArr
         const filtered = data.filter(trader => trader[`${indexBy}`] === key)
-        
+
         // Gets every trader at the crossFilter where it equals the value in the crossFilterKeysArr
         // Then pushes into crossFilteredData
         const crossFilteredData = [];
@@ -52,7 +63,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
 
         // Builds the object that will be sent to the graph component
         crossFilteredData.forEach(obj => {
-                return dataStructure[index] = {...dataStructure[index], [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0] } 
+            return dataStructure[index] = { ...dataStructure[index], [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0] }
         })
     })
 
@@ -67,14 +78,11 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     //     }
     // });
 
-    console.log('dataStructure', dataStructure)
-    console.log('crossfilter', crossFilterKeysArr)
-
     return { dataStructure, crossFilterKeysArr, indexBy };
 };
 
 // const crossFilterWithoutNulls = (keys, crossFilterKeysArr, indexBy) => {
-    
+
 //     crossFilterKeysArr = crossFilterKeysArr.filter(item => item !== "No Response")
 
 //     keys.forEach((obj, index) => {
@@ -92,9 +100,9 @@ const setItem = (data, dataStructure, indexBy) => {
     // For each object in the array, 
     arr.forEach((key, index) => {
         // Gets every trader at the index where it equals the value in the arr
-       const filtered = data.filter(trader => trader[`${indexBy}`] === key).length
+        const filtered = data.filter(trader => trader[`${indexBy}`] === key).length
 
-       dataStructure[index] = {
+        dataStructure[index] = {
             ...dataStructure[index],
             [`${arr[index]}`]: filtered
         }
@@ -107,11 +115,52 @@ const setItem = (data, dataStructure, indexBy) => {
     //     delete obj[null] 
     //     }
     // });
-    
+
 
     // arr = arr.map(item => item === null ? "No Response" : item);
+
+    let numberValues = [];
+
+    let sampleSize = 0;
+
+    dataStructure.map(item => {
+        const keyValue = item[`${indexBy}`];
+        numberValues.push(Number(item[keyValue]));
+        sampleSize += Number(item[keyValue]);
+    });
+
+    dataStructure.forEach(obj => {
+        const keyValue = obj[`${indexBy}`];
+        obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
+    });
+    console.log("final dataStructure", dataStructure);
+
+    return { dataStructure, keys: graphLabels[`${indexBy}`].labels, indexBy, sampleSize }
+}
+
+const getMostRequested = (data, dataStructure, indexBy) => {
+    let arr = [];
+
+    // Puts each value from key:value pair into an array
+    // ['Female', 'Male', null]
+    dataStructure.forEach(obj => arr.push(Object.values(obj)[0]))
+
+    // For each object in the array, 
+    arr.forEach((key, index) => {
+        // Gets every trader at the index where it equals the value in the arr
+        const filtered = data.filter(value => value[`request_value`] === key).length
+
+        dataStructure[index] = {
+            ...dataStructure[index],
+            [`${arr[index]}`]: filtered
+        }
+    })
+
+    dataStructure = dataStructure.sort((a, b) => (Object.values(a)[1] > Object.values(b)[1]) ? -1 : 1).splice(0, 5);
+
+    const keys = dataStructure.map(obj => obj.request_value);
     
-    return { dataStructure, arr, indexBy} ;
+    return { dataStructure, keys, indexBy} ;
 }
 
 export default dataParse

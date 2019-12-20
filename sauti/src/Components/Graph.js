@@ -1,42 +1,45 @@
 import React from "react";
-import { ResponsiveBar } from "@nivo/bar"
-import './temp.css'
-
-const getMaxValue = data => {
-    let max = 0
-    data.forEach(obj => {
-        let values = Object.values(obj)
-        values = values.map(i => parseInt(i, 10)).filter(item => Number(item) === item)
-        let possMax = Math.max(...values)
-        if(possMax > max){
-            max = possMax
-        }
-    })
-    
-    return max * 1.1
-}
+import { ResponsiveBar } from "@nivo/bar";
+import "./temp.css";
 
 const Graph = props => {
-        return (
-           <div className="Graph-Container">
-              <ResponsiveBar
+    console.log('data', props.data)
+    console.log('keys', props.keys)
+    return (
+        <div className="Graph-Container">
+            <ResponsiveBar
                 data={props.data}
                 keys={props.keys}
-                indexBy={props.indexBy}
+                indexBy={props.indexBy === "request_type" ? "request_value" : props.indexBy}
                 groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
                 margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
                 padding={0.3}
                 innerPadding={0}
-                maxValue={getMaxValue(props.data)}
+                maxValue={100}
                 colors={{ scheme: 'nivo' }}
-                borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
+                borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
                 axisTop={null}
                 axisRight={null}
+                tooltip={({ id, value }) => (
+                    <strong
+                        style={{
+                            color: '#000000',
+                            fontSize: '15px',
+                            fontFamily: 'Helvetica'
+                        }}>
+                        {id}: {value}%
+						</strong>
+                )}
+                labelFormat={d => <tspan y={-15}>{d}% </tspan>}
+                labelForm={d => <text>{d}% </text>}
                 axisBottom={{
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: props.label,
+                    legend:
+                        props.label +
+                        " (values as percent of total)," +
+                        ` sample size = ${props.sampleSize}`,
                     legendPosition: 'middle',
                     legendOffset: 35
                 }}
@@ -50,7 +53,7 @@ const Graph = props => {
                 }}
                 labelSkipWidth={0}
                 labelSkipHeight={0}
-                labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
+                labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
                 legends={[
                     {
                         dataFrom: 'keys',
@@ -79,8 +82,8 @@ const Graph = props => {
                 motionStiffness={90}
                 motionDamping={15}
             />
-           </div>
-        )
-};
+        </div>
+    )
+}
 
-export default Graph
+export default Graph;
