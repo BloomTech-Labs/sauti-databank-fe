@@ -2,8 +2,6 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
 const Graph = props => {
-    console.log('data', props.data)
-    console.log('keys', props.keys)
     return (
         <div className="Graph-Container">
             <ResponsiveBar
