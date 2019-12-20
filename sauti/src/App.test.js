@@ -1,40 +1,41 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 import App from './App';
-import { MockedProvider } from '@apollo/react-testing';
+import { MockedProvider, MockedResponse } from '@apollo/react-testing';
+import {render, cleanup} from '@testing-library/react';
 
+// const mocks = [
+//   {
+//     request: {
+//       query: SOME_QUERY,
+//       variables: { first: 4 }
+//     },
+//     result: {
+//       data: {
+//         dog: {
+//           name: "The Rock"
+//         }
+//       }
+//     }
+//   },
+//   {
+//     request: {
+//       query: SOME_QUERY,
+//       variables: { first: 8}
+//     },
+//     error: new Error("Something went wrong")
+//   }
+// ]
 
-// it('DOES APP RENDER, DAMMIT?!', () => {
-//     ReactDOM.render(
-//         <App />,
-//   document.getElementById("root")
+afterEach(cleanup);
 
-//     );
-//   });
-
-// describe('App', function(){
-//   describe('Rendering of Things in App.js', function(){
-
-    test('DOES APP RENDER?:', () => {
-        ReactDOM.render(
-          <App />
-        );
-    });
-
-//     let container = null;
-//     beforeEach(()=> {
-//       //setup DOM element as render target
-//       container = document.createElement('div');
-//       document.body.appendChild(container);
-//     });
-
-//     afterEach(()=> {
-//       //cleanup on exit
-//       unmountComponentAtNode(container);
-//       container.remove();
-//       container = null;
-//     });
-
-//   })
-// })
-
+test('Renders without crashing:', async () => {
+  const {debug} = render(
+    <MockedProvider >
+      <Router>
+        <App />
+      </Router>
+    </MockedProvider>
+  );
+  debug()
+});
