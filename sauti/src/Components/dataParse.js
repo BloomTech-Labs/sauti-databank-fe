@@ -65,6 +65,8 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
 };
 
 const setItem = (data, dataStructure, indexBy) => {
+    console.log('datastructure', dataStructure)
+    console.log('data', data)
     let arr = [];
 
     // Puts each value from key:value pair into an array
