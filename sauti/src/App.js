@@ -13,8 +13,8 @@ const App = () => {
   const [index, setIndex] = useState("gender");
   const [crossFilter, setCrossFilter] = useState("");
   const [query, setQuery] = useState("tradersUsers");
-  const [label, setLabel] = useState('Gender')
-  const [argForQuery, setArgForQuery] = useState('')
+  const [label, setLabel] = useState("Gender");
+  const [argForQuery, setArgForQuery] = useState("");
 
 
   const onChange = event => {
@@ -25,6 +25,7 @@ const App = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
+
   return (
     <div className="App">
       <Navbar />

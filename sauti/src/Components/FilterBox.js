@@ -15,13 +15,7 @@ const OptionContainer = styled.div`
   align-items: center;
 `
 
-export default function FilterForm(props) {
-
-  // const [isChecked, setIsChecked] = useState(false);
-
-  // useEffect(() => {
-  //   props.setAllowNulls(isChecked)
-  // }, [isChecked]);
+export default function FilterBox(props) {
 
     const options = [
         {label: "Gender", value: {
@@ -71,14 +65,7 @@ export default function FilterForm(props) {
                 placeholder="Select an option"
               />
 
-                {/* <input 
-                name="allowNulls"
-                type="checkbox"
-                checked={isChecked}
-                onChange={() => setIsChecked(!isChecked)}
-                /> Allow Nulls */}
-
-              {options.filter(option => option.value !== props.index).map(option => {
+              {/* {options.filter(option => option.value !== props.index).map(option => {
                   return (      
                     <OptionContainer>
                       <input
@@ -88,7 +75,7 @@ export default function FilterForm(props) {
                   /><FilterOption>{option.label}</FilterOption>
                     </OptionContainer>
                     )
-                  })}
+                  })} */}
             </form>
         </div>
     )
