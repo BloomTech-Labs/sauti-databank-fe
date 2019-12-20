@@ -16,15 +16,10 @@ const dataParse = (indexBy, data, crossFilter) => {
             return setItem(data, dataStructure, indexBy)
         }
     }
-
-
-    // setItem(data, keys, "education", "gender")
-
 }
 
 
 // THESE NEED TO BE IN CORRECT ORDER OR FUNCTION WILL NOT WORK
-// NEED TO FIND A WAY TO GET THEM INTO A SPECIFIC ORDER
 const getIndex = (data, indexBy) => {
     // Shrinks objects to one single key:value pair specified by the indexBy
     const cleanedArr = data.map(item => item = { [`request_value`]: item[`request_value`] })
@@ -66,29 +61,8 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
             return dataStructure[index] = { ...dataStructure[index], [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0] }
         })
     })
-
-    // Replaces "null" values with "No Response"
-    // keys.forEach(obj => obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response"));
-    // crossFilterKeysArr = crossFilterKeysArr.map(key => key === null ? "No Response" : key);
-    // keys.forEach(obj => {
-    //     obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response")   ////////////////////////NEED TO REMOVE NULL RESPONSES
-    //     if(obj[null]){
-    //     obj["No Response"] = obj[null]
-    //     delete obj[null] 
-    //     }
-    // });
-
     return { dataStructure, crossFilterKeysArr, indexBy };
 };
-
-// const crossFilterWithoutNulls = (keys, crossFilterKeysArr, indexBy) => {
-
-//     crossFilterKeysArr = crossFilterKeysArr.filter(item => item !== "No Response")
-
-//     keys.forEach((obj, index) => {
-//       delete obj[null]
-//     return { keys, crossFilterKeysArr, indexBy }
-// }
 
 const setItem = (data, dataStructure, indexBy) => {
     let arr = [];
@@ -108,17 +82,7 @@ const setItem = (data, dataStructure, indexBy) => {
         }
     })
 
-    // keys.forEach(obj => {
-    //     obj[`${indexBy}`] === null && (obj[`${indexBy}`] = "No Response")
-    //     if(obj[null]){
-    //     obj["No Response"] = obj[null]
-    //     delete obj[null] 
-    //     }
-    // });
-
-
-    // arr = arr.map(item => item === null ? "No Response" : item);
-
+    // This block of code transforms from raw numbers to percentages
     let numberValues = [];
 
     let sampleSize = 0;
@@ -133,7 +97,6 @@ const setItem = (data, dataStructure, indexBy) => {
         const keyValue = obj[`${indexBy}`];
         obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
     });
-    console.log("final dataStructure", dataStructure);
 
     return { dataStructure, keys: graphLabels[`${indexBy}`].labels, indexBy, sampleSize }
 }
@@ -160,7 +123,7 @@ const getMostRequested = (data, dataStructure, indexBy) => {
 
     const keys = dataStructure.map(obj => obj.request_value);
 
-
+    // This block of code transforms from raw numbers to percentages
     let numberValues = [];
     let sampleSize = 0;
 
