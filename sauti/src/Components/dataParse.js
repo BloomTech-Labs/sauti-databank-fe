@@ -103,42 +103,54 @@ const setItem = (data, dataStructure, indexBy) => {
 
 const getMostRequested = (data, dataStructure, indexBy) => {
     let arr = [];
-
+    
     // Puts each value from key:value pair into an array
     // ['Female', 'Male', null]
     dataStructure.forEach(obj => arr.push(Object.values(obj)[0]))
-
+    
     // For each object in the array, 
     arr.forEach((key, index) => {
         // Gets every trader at the index where it equals the value in the arr
         const filtered = data.filter(value => value[`request_value`] === key).length
-
+        
         dataStructure[index] = {
             ...dataStructure[index],
             [`${arr[index]}`]: filtered
         }
     })
-
+    
     dataStructure = dataStructure.sort((a, b) => (Object.values(a)[1] > Object.values(b)[1]) ? -1 : 1).splice(0, 5);
-
+    
     const keys = dataStructure.map(obj => obj.request_value);
-
+    
     // This block of code transforms from raw numbers to percentages
     let numberValues = [];
     let sampleSize = 0;
-
+    
     dataStructure.map(item => {
         const keyValue = item[`request_value`];
         numberValues.push(Number(item[keyValue]));
         sampleSize += Number(item[keyValue]);
     });
-
+    
     dataStructure.forEach(obj => {
         const keyValue = obj[`request_value`];
         obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
     });
     
+    console.log("DATA", dataStructure)
     return { dataStructure, keys, indexBy} ;
 }
 
 export default dataParse
+
+// dataStructure.forEach(obj => {
+//     let longValue = obj["request_value"];
+
+//     obj = {
+//         ...obj,
+//         replaceValues[`${longValue}`]: obj[`${longValue}`]
+//     }
+
+//     return obj;
+// })
