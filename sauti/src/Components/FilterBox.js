@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.scss'
+import ReactGa from 'react-ga';
 
 import styled from 'styled-components';
 import Dropdown from 'react-dropdown';
@@ -16,6 +17,13 @@ const OptionContainer = styled.div`
 `
 
 export default function FilterBox(props) {
+  
+  const ClickTracker = (index) => {
+    ReactGA.event({
+      category: 'Option',
+      action: `Clicked a Filter Option: ${index}`
+    })
+  }
 
     const options = [
         {label: "Gender", value: {
