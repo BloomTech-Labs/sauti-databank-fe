@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import "./index.css";
-
+import ReactGa from 'react-ga';
 import Navbar from "./Components/Navbar";
 import FilterForm from "./Components/FilterBox";
 import "react-dropdown/style.css";
@@ -16,6 +16,12 @@ const App = () => {
   const [label, setLabel] = useState("Gender");
   const [argForQuery, setArgForQuery] = useState("");
 
+  useEffect (()=> {
+    ReactGa.initialize('UA-155468784-1')
+    
+    //to report specified pageview:
+    ReactGa.pageview('/')
+  }, []);
 
   const onChange = event => {
     setIndex(event.target.value);

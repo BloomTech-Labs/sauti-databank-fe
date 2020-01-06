@@ -16,6 +16,7 @@
     "react-apollo": "^3.1.3",
     "react-dom": "^16.8.6",
     "react-dropdown": "^1.6.4",
+    "react-ga": "^2.7.0",
     "react-loader-spinner": "^3.1.5",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
@@ -34,10 +35,6 @@
     "defaults"
   ],
   "devDependencies": {
-<<<<<<< HEAD
-    "jest": "^24.9.0"
-=======
     "jest-extended": "^0.11.2"
->>>>>>> 6a53afd211dbbd8252a7543a04ded47b376f8cb7
   }
 }
