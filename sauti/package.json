@@ -34,6 +34,10 @@
     "defaults"
   ],
   "devDependencies": {
+<<<<<<< HEAD
     "jest": "^24.9.0"
+=======
+    "jest-extended": "^0.11.2"
+>>>>>>> 6a53afd211dbbd8252a7543a04ded47b376f8cb7
   }
 }
