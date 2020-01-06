@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.scss'
+import '../App.scss';
 import ReactGa from 'react-ga';
 
 import styled from 'styled-components';
@@ -17,9 +17,9 @@ const OptionContainer = styled.div`
 `
 
 export default function FilterBox(props) {
-  
+
   const ClickTracker = (index) => {
-    ReactGA.event({
+    ReactGa.event({
       category: 'Option',
       action: `Clicked a Filter Option: ${index}`
     })
@@ -65,6 +65,7 @@ export default function FilterBox(props) {
                   props.setIndex(e.value.index)
                   props.setQuery(e.value.query)
                   props.setLabel(e.label)
+                  ClickTracker(e.value.index)
                   if(e.value.arg){
                     props.setArgForQuery(e.value.arg)
                   }
