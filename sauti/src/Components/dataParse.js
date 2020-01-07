@@ -53,7 +53,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     // Gets every trader at the index where it equals the value in the keysArr
     const filtered = data.filter(trader => trader[`${indexBy}`] === key);
 
-    // Gets every trader at the crossFilter where it equals the value in the crossFilterKeysArr
+    // Gets every trader at the crossFilter where it equals the value in the crossFilterKeysArr 
     // Then pushes into crossFilteredData
     const crossFilteredData = [];
     crossFilterKeysArr.forEach((key, index) => {
