@@ -75,29 +75,35 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   console.log('data structure', dataStructure)
 
   //TESTING PERCENTAGES
-
-  //don't know why this is needed?
-  let numberValues = [];
-
-
   // GET SAMPLE SIZE
-  let sampleSize = 0;
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
   //[{gender: "Male", "10-20": 200, "20-30": 150},
   // {gender: "Female", "10-20": 140, "20-30": 100}]
+  let sampleArr = {} // {"Male": 153, "Female": 124}
   dataStructure.map(item => {
     // {gender: "Male", "10-20": 200, "20-30": 150}
     // add values where not indexing by
     console.log('object values', Object.values(item))
+    let sampleSize = 0
+
     //["Male", "130", "100", "34"]
-    Object.values(item).map(item => {
-      if(Number.isInteger(+item)){
-        sampleSize += Number(item)
+    let valuesArr = Object.values(item)
+    valuesArr.map(value => {
+      if(Number.isInteger(+value)){
+        sampleSize += Number(value)
       }
     })
+
+    sampleArr = {
+      ...sampleArr,
+      [`${valuesArr[0]}`]: sampleSize 
+    }
   });
+
+  let totalSampleSize = Object.values(sampleArr).reduce((a,b) => a + b)
+  console.log('sampleArr', sampleArr)
+  console.log('total Sample Size', totalSampleSize)
   
-  console.log('sample size', sampleSize)
   console.log('data structure before 2nd loop', dataStructure)
   //CHANGE VALUES TO PERCENTAGE OF SAMPLE SIZE
   //[{gender: "Male", "10-20": 200, "20-30": 150},
@@ -105,16 +111,14 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   dataStructure.forEach(obj => {
   for(var property in obj){
     if(Number.isInteger(+obj[property])){
-      console.log('this is a number')
-      obj[property] = Math.round((obj[property] / sampleSize) * 100)
+      obj[property] = ((obj[property] / sampleArr[`${obj[indexBy]}`]) * 100).toFixed(1)
     }
   }
-  //obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
 
   console.log('data structure before return', dataStructure)
 
-  return { dataStructure, crossFilterKeysArr, indexBy, sampleSize };
+  return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize};
 };
 
 const setItem = (data, dataStructure, indexBy) => {
