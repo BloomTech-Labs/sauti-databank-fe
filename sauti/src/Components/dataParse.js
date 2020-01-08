@@ -3,9 +3,13 @@ import graphLabels from "./graphLabels";
 const dataParse = (indexBy, data, crossFilter, argForQuery) => {
   let dataStructure;
 
-  if (indexBy === "request_type") {
+  if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
     return getMostRequested(data, dataStructure, indexBy, argForQuery);
+  } 
+  else if(indexBy === "request_type" && crossFilter !== ""){
+    dataStructure = getIndex(data, indexBy)
+    return setCrossedItems(data, dataStructure, crossFilter, indexBy)
   } else {
     dataStructure = graphLabels[`${indexBy}`].structure;
 
@@ -37,7 +41,16 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   const keysArr = [];
   let crossFilterKeysArr = [];
 
-  const crossFilterKeys = graphLabels[`${crossFilter}`].structure;
+
+  // SETS THE KEYS TO BE PREDETERMINED BASED ON WHAT ORDER LANCE WANTS THEM IN
+  // ONLY NEED TO DO THIS FOR CERTAIN ONES, OTHERS NEED TO BE FROM HIGHEST TO LOWEST
+  let crossFilterKeys;
+  // ONLY SET CROSSFILTER KEYS IF THEY ARE SPECIFIED, OTHERWISE, WE DO IT LATER
+  if (graphLabels[`${crossFilter}`].structure){
+   crossFilterKeys = graphLabels[`${crossFilter}`].structure;
+  }
+
+  console.log('cross filter keys', crossFilterKeys)
 
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
@@ -72,7 +85,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     });
   });
 
-  console.log('data structure', dataStructure)
+  console.log('data structure before percentages', dataStructure)
 
   //TESTING PERCENTAGES
   // GET SAMPLE SIZE
@@ -101,10 +114,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   });
 
   let totalSampleSize = Object.values(sampleArr).reduce((a,b) => a + b)
-  console.log('sampleArr', sampleArr)
-  console.log('total Sample Size', totalSampleSize)
-  
-  console.log('data structure before 2nd loop', dataStructure)
+
   //CHANGE VALUES TO PERCENTAGE OF SAMPLE SIZE
   //[{gender: "Male", "10-20": 200, "20-30": 150},
   // {gender: "Female", "10-20": 140, "20-30": 100}]
@@ -116,10 +126,13 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   }
   });
 
+
+  // GET LIST OF OPTIONS TO SEND TO CHECKBOX COMPONENT
   const optionsForCheckbox = Object.keys(dataStructure[0]).slice(1)
 
-  console.log('data structure before return', dataStructure)
-  console.log('options', optionsForCheckbox)
+
+  // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
+  //abbreviateLabels(dataStructure)
 
   return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize, optionsForCheckbox};
 };
