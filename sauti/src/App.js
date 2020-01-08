@@ -11,12 +11,8 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState("gender");
-<<<<<<< HEAD
   const [crossFilter, setCrossFilter] = useState("language");
   const [optionsForCheckbox, setOptions] = useState("age")
-=======
-  const [crossFilter, setCrossFilter] = useState("age");
->>>>>>> 3749090cbf2c75dc2c1634f4391d668c813132e7
   const [query, setQuery] = useState("tradersUsers");
   const [label, setLabel] = useState("Gender");
   const [label2, setLabel2] = useState("");
