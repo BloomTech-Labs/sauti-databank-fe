@@ -3,9 +3,13 @@ import graphLabels from "./graphLabels";
 const dataParse = (indexBy, data, crossFilter, argForQuery) => {
   let dataStructure;
 
-  if (indexBy === "request_type") {
+  if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
     return getMostRequested(data, dataStructure, indexBy, argForQuery);
+  } 
+  else if(indexBy === "request_type" && crossFilter !== ""){
+    dataStructure = getIndex(data, indexBy)
+    return setCrossedItems(data, dataStructure, crossFilter, indexBy)
   } else {
     dataStructure = graphLabels[`${indexBy}`].structure;
 
@@ -35,7 +39,16 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   const keysArr = [];
   let crossFilterKeysArr = [];
 
-  const crossFilterKeys = graphLabels[`${crossFilter}`].structure;
+
+  // SETS THE KEYS TO BE PREDETERMINED BASED ON WHAT ORDER LANCE WANTS THEM IN
+  // ONLY NEED TO DO THIS FOR CERTAIN ONES, OTHERS NEED TO BE FROM HIGHEST TO LOWEST
+  let crossFilterKeys;
+  // ONLY SET CROSSFILTER KEYS IF THEY ARE SPECIFIED, OTHERWISE, WE DO IT LATER
+  if (graphLabels[`${crossFilter}`].structure){
+   crossFilterKeys = graphLabels[`${crossFilter}`].structure;
+  }
+
+  console.log('cross filter keys', crossFilterKeys)
 
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
@@ -51,7 +64,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     // Gets every trader at the index where it equals the value in the keysArr
     const filtered = data.filter(trader => trader[`${indexBy}`] === key);
 
-    // Gets every trader at the crossFilter where it equals the value in the crossFilterKeysArr
+    // Gets every trader at the crossFilter where it equals the value in the crossFilterKeysArr 
     // Then pushes into crossFilteredData
     const crossFilteredData = [];
     crossFilterKeysArr.forEach((key, index) => {
@@ -69,7 +82,57 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
       });
     });
   });
-  return { dataStructure, crossFilterKeysArr, indexBy };
+
+  console.log('data structure before percentages', dataStructure)
+
+  //TESTING PERCENTAGES
+  // GET SAMPLE SIZE
+  // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
+  //[{gender: "Male", "10-20": 200, "20-30": 150},
+  // {gender: "Female", "10-20": 140, "20-30": 100}]
+  let sampleArr = {} // {"Male": 153, "Female": 124}
+  dataStructure.map(item => {
+    // {gender: "Male", "10-20": 200, "20-30": 150}
+    // add values where not indexing by
+    console.log('object values', Object.values(item))
+    let sampleSize = 0
+
+    //["Male", "130", "100", "34"]
+    let valuesArr = Object.values(item)
+    valuesArr.map(value => {
+      if(Number.isInteger(+value)){
+        sampleSize += Number(value)
+      }
+    })
+
+    sampleArr = {
+      ...sampleArr,
+      [`${valuesArr[0]}`]: sampleSize 
+    }
+  });
+
+  let totalSampleSize = Object.values(sampleArr).reduce((a,b) => a + b)
+
+  //CHANGE VALUES TO PERCENTAGE OF SAMPLE SIZE
+  //[{gender: "Male", "10-20": 200, "20-30": 150},
+  // {gender: "Female", "10-20": 140, "20-30": 100}]
+  dataStructure.forEach(obj => {
+  for(var property in obj){
+    if(Number.isInteger(+obj[property])){
+      obj[property] = ((obj[property] / sampleArr[`${obj[indexBy]}`]) * 100).toFixed(1)
+    }
+  }
+  });
+
+
+  // GET LIST OF OPTIONS TO SEND TO CHECKBOX COMPONENT
+  const optionsForCheckbox = Object.keys(dataStructure[0]).slice(1)
+
+
+  // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
+  //abbreviateLabels(dataStructure)
+
+  return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize, optionsForCheckbox};
 };
 
 const setItem = (data, dataStructure, indexBy) => {
@@ -135,12 +198,6 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     };
   });
 
-  dataStructure = dataStructure
-    .sort((a, b) => (Object.values(a)[1] > Object.values(b)[1] ? -1 : 1))
-    .splice(0, 5);
-
-  const keys = dataStructure.map(obj => obj.request_value);
-
   // This block of code transforms from raw numbers to percentages
   let numberValues = [];
   let sampleSize = 0;
@@ -155,7 +212,22 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     const keyValue = obj[`request_value`];
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
-  console.log(dataStructure);
+
+
+  
+
+  dataStructure = dataStructure
+    .sort((a, b) => (Object.values(a)[1] > Object.values(b)[1] ? -1 : 1))
+
+  const keys = dataStructure.map(obj => obj.request_value);
+
+  console.log('data structure before splice', dataStructure)
+
+  dataStructure = dataStructure.splice(0, 7);
+
+  console.log('data structure after', dataStructure)
+
+  
   if (
     argForQuery === "procedurerelevantagency" ||
     argForQuery === "procedurerequireddocument" ||

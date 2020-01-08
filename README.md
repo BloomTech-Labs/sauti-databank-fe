@@ -1,54 +1,25 @@
 # Sauti Databank
 
-You can find our deployed project at: https://production-sauti-databank.netlify.com/
-
+You can find our deployed project at:  https://sauti.now.sh/
 
 ## Contributors
 
-
-
-
-
-
-|                                                                                        [Jason Aviles](https://github.com/jason-aviles)                                                                                         |                                                                                     [Elise Spain](https://github.com/espain16)                                                                                     |                                                                                       [Gregory L Jordan Sr](https://github.com/GregJordanSr)                                                                                       |                                             [Melanie Harris](https://github.com/Melanie-Harris)                                              |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://media.licdn.com/dms/image/C4E03AQGW5_9B4Z0uZA/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=HhdMeap2Gpp1amR8N20qMMIaYFbz0KGRMS7PdXo2tP0" width = "200" />](https://github.com/jason-aviles) | [<img src="https://media.licdn.com/dms/image/C5603AQFK7Hbn1gzm1g/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=IXpSpz316hm86pHNv_mUJQskuSzwdgxlyWdxlVz7abM" width = "200" />](https://github.com/espain16) | [<img src="https://media.licdn.com/dms/image/C4E03AQE3leVQXkNpXA/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=5zFP6YYLhKaiL0jLsnOt_5sdlspGfQqP5qF02o7i5d0" width = "200" />](https://github.com/GregJordanSr) | [<img src="https://media.licdn.com/dms/image/C5603AQFjc02Ygy56HQ/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=lFL_kpepMUSaTvH37rWPT-arvOnI2sq1YlXeuxiErFI" width = "200" />](https://github.com/Melanie-Harris) |
-|                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jason-aviles)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/espain16)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/GregJordanSr)                                                                   |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Melanie-Harris)                          |
-|                                            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jason-aviles/)                                             |                                                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/elisespain/)                                                |                                         [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/gregoryljordansr/)                                         |    [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/melanieharris-mba/)     |
-
-
-
-
-
-|                                                                                        [Azra Panjwani](https://github.com/azrap)                                                                                         |                                                                                 
-| :------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://media.licdn.com/dms/image/C5603AQFKH36IsDysng/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=rDWFIzU32PYd_56EckOQp0YLejpOfP0VoObVGS5760M" width = "200" />](https://github.com/azrap)  |
-|                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/azrap)                                                                   |                                                                                                                                   |                                                                                                                               |                                                 |
-|                                            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/azrapanjwani/)                                             |                                                                                               |           
-
-
-
-
-
-
-
-
-
-
-
-
-|                                                                                        [Cash Globe](https://github.com/cashcoder88)                                                                                         |                                                                                     [	Christopher Lopez](https://github.com/numberoneecsstudent)                                                                                     |                                                                                       [Heymi Vanegas](https://github.com/heymiday)                                                                                       |                                             [Jonathan Erlich](https://github.com/joerlop)                                              |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://media.licdn.com/dms/image/C4D03AQEer2eYBWdZCg/profile-displayphoto-shrink_200_200/0?e=1568246400&v=beta&t=iV5UsRP56xr_URJRXVd7RHDBvGnZ0WcGxovaiqQWw-k" width = "200" />](https://github.com/cashcoder88) | [<img src="https://media.licdn.com/dms/image/C5603AQE3I_Iy93G6Wg/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=2YJ989qTQ0TvcZua4h2_l1SQiR4IAtqLzfy6m8nYUq8" width = "200" />](https://github.com/numberoneecsstudent) | [<img src="https://media.licdn.com/dms/image/C5603AQGSUs9a5voNnQ/profile-displayphoto-shrink_800_800/0?e=1568851200&v=beta&t=rfQwU0wCag2CJ9fnklkDAvKNJdLF52czMpeUA46wY_w" width = "200" />](https://github.com/heymiday) | [<img src="https://pbs.twimg.com/profile_images/934076630980595712/wK7wyQn__400x400.jpg" width = "200" />](https://github.com/joerlop) |
-|                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/cashcoder88)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/numberoneecsstudent)                                                                   |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/heymiday)                                                                   |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/joerlop)                          |
-|                                            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/cash-globe-1371ab21/)                                             |                                                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/christopher-ro-lopez/)                                                |                                         [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/heymi-vanegas-50b81b182/)                                         |    [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jonathanerlich/)     |
-
-|                                                                [Kimberlee Johnson](https://github.com/kimberleejohnson)                                                                |                                                                                      [Mark La Monica](https://github.com/sauti-databank)                                                                                       |                                                                                                                                                                            |                                          [Vijay Das](https://github.com/vijaydas)                                          |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://ph-avatars.imgix.net/1142934/original?auto=format&auto=compress&codec=mozjpeg&cs=strip&w=140&h=140&fit=crop" width = "200" />](https://github.com/kimberleejohnson) | [<img src="https://media.licdn.com/dms/image/C5603AQE44grgMc1mpg/profile-displayphoto-shrink_800_800/0?e=1570060800&v=beta&t=S0fxIhnxnlIRf26SM-QFK0agPzrdGz5pyFGlu7g79NE" width = "200" />](https://github.com/sauti-databank) |  |   [<img src="https://avatars2.githubusercontent.com/u/2294505?s=180&v=4" width = "200" />](https://github.com/vijaydas)    |
-|                                             [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/kimberleejohnson)                                              |                                                                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sauti-databank)                                                                   |                                                                                                                                    |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/vijaydas)                    |
-|                           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kimberleejohnson/)                            |                                           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/mark-la-monica-11155b181/)                                            |                                                                                               | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/vijaytdas/) |
-
+|                                                                               ---                                                                                | ---                                                                                                                        | ---                                                                                                               |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+|                                      <img src="https://avatars1.githubusercontent.com/u/52979795?s=400&v=4" width="200" />                                       | <img src="https://avatars3.githubusercontent.com/u/51310083?s=400&v=4" width="200" />                                      | <img src="https://avatars3.githubusercontent.com/u/53502963?s=400&v=4" width="200" />                             |
+| Dylan Mestyanek [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/dylanmestyanek) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/dylan-mestyanek-593907189/) | Robert Carter [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/Robdowski) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/robert-carter-72824918a/)                                    | Sandra Kimball [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/sandramkimball) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/sandy-kimball-9b7461192/)                     |
+|                                      <img src="https://avatars3.githubusercontent.com/u/50163182?s=400&v=4" width="200" />                                       | <img src="https://avatars0.githubusercontent.com/u/50240571?s=460&v=4" width="200" />)                                     | <img src="https://avatars1.githubusercontent.com/u/7843803?s=400&v=4" width="200" />                              |
+|                                      Len Winkler[<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/LenWinkler) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/lenwinkler/)                                      | Candace Rossi [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/CandaceRossi) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/)                                | Timothy McGowen [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/mcgowent) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/timothymcgowen/)                          |
+|                                      <img src="https://avatars3.githubusercontent.com/u/42799618?s=460&v=4" width="200" />                                       | <img src="https://avatars3.githubusercontent.com/u/48725513?s=460&v=4" width="200" />                                      | ![](https://avatars2.githubusercontent.com/u/40050726?s=460&v=4.png "Logo Title Text 1")                          |
+|                              Jason Aviles [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/jason-aviles) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/jason-aviles/)                              | Elise Spain [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/espain16) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/elisespain/)                            | Gregory L Jordan Sr [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/GregJordanSr) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/gregoryljordansr/) |
+|                                      <img src="https://avatars2.githubusercontent.com/u/47720152?s=460&v=4" width="200" />                                       | <img src="https://avatars2.githubusercontent.com/u/2294505?s=180&v=4" width = "200" />                                     | <img src="https://avatars1.githubusercontent.com/u/1200602?s=400&v=4" width = "200" />                            |
+|                         Melanie Harris [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/Melanie-Harris) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/melanieharris-mba/)                          | Vijay Das [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/vijaydas) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/vijaytdas/)                               | Azra Panjwani [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/azrap) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/azrapanjwani/)                  |
+|                                      <img src="https://avatars1.githubusercontent.com/u/46355406?s=400&v=4" width="200" />                                       | <img src="https://avatars3.githubusercontent.com/u/32531002?s=400&v=4" width="200" />                                      | <img src="https://avatars0.githubusercontent.com/u/48607171?s=400&v=4" width="200" />                             |
+|                            Cash Globe [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/cashcoder88) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/cash-globe-1371ab21/)                            | Christopher Lopez [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/numberoneecsstudent) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/christopher-ro-lopez/) | Heymi Vanegas [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/heymiday) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/heymi-vanegas-50b81b182/)     |
+|
+| <img src="https://avatars1.githubusercontent.com/u/35579235?s=400&v=4" width="200" /> | <img src="https://avatars2.githubusercontent.com/u/28582074?s=400&v=4" width ="200" /> | <img src="https://avatars0.githubusercontent.com/u/41352551?s=400&v=4" width="200" />
+| Jonathan Erlich [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/joerlop) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/jonathanerlich/) | Kimberlee Johnson [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/kimberleejohnson) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/kimberleejohnson/) | Mark La Monica [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/sauti-databank) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/mark-la-monica-11155b181/)
+|
 <br>
 <br>
 
@@ -60,9 +31,11 @@ You can find our deployed project at: https://production-sauti-databank.netlify.
 
 ## Project Overview
 
-- [Trello Board](https://trello.com/b/ycDN2Mzb/labs-14-sauti-databank)
+- [Trello Board](https://trello.com/b/ycDN2Mzb/labs-14-sauti-databank) 
 
-- [Product Canvas](https://www.notion.so/Feature-Canvas-All-charts-with-UX-design-in-Key-Trader-Demographics-tab-17e9fbd80c1b4a719c125d448491a400)
+- [Labs 19 Trello Board](https://trello.com/b/2LXUKk9x/labs-19-sauti-data-bank)
+
+- [Product Canvases](https://www.notion.so/e975f72982c24806a63b4a09840142d1?v=e2ba54cf176244d1b886672103bca454)
 
 - [UX Design files](https://app.zeplin.io/project/5d26179fd0a6fc367e0fdc94/screen/5d5307619df85c9b3c2f2469)
 
@@ -73,6 +46,7 @@ Using [React](https://reactjs.org/), the [react-dropdown library](https://www.np
 ### Key Features
 
 A researcher interested in the Sauti Databank is able to see the following Key Demographic Data across all traders by selecting through a dropdown menu:
+
 - Primary Language
 - Country of Residence
 - Age
@@ -81,14 +55,14 @@ A researcher interested in the Sauti Databank is able to see the following Key D
 - Gender
 - Education
 - Border-Crossing Frequency
-- Most Requested Procedures Commodity 
+- Most Requested Procedures Commodity
 - Most Requested Procedures Commodity Categories
 - Requested Procedures for Destination (Imports to:)
 - Most Requested Documents Information for Procedures
 - Most Requested Agency Information for Procedures
 - Origin of Traders' Goods
-- Final Destination Country 
-- Final Destination Market 
+- Final Destination Country
+- Final Destination Market
 - Top Commodity
 - Top Commodity Categories
 - Exchange Rate Direction
@@ -97,10 +71,11 @@ A researcher interested in the Sauti Databank is able to see the following Key D
 
 ### Front-end built using:
 
-- [React](https://reactjs.org/): Currently industry standard for web applications, using React let us manage displaying large amounts of data effectively by implementing Components. 
-- [react-dropdown library](https://www.npmjs.com/package/react-dropdown): Helped us use an existing library for making the dropdown beautiful so that we could focus instead on the business logic and data that differentiates Sauti in the nonprofit space. 
-- [Nivo](https://nivo.rocks/): Built specifically for React and ontop of d3js, Nivo provided the functionality we needed and thorough documentation to make it possible to complete our project within deadline. 
-- [Sass](https://sass-lang.com/): A CSS compiler helped us iterate more quickly on styling with the efficient use of nesting. 
+- [React](https://reactjs.org/): Currently industry standard for web applications, using React let us manage displaying large amounts of data effectively by implementing Components.
+- [react-dropdown library](https://www.npmjs.com/package/react-dropdown): Helped us use an existing library for making the dropdown beautiful so that we could focus instead on the business logic and data that differentiates Sauti in the nonprofit space.
+- [Nivo](https://nivo.rocks/): Built specifically for React and ontop of d3js, Nivo provides easily-used graph functionality to display accurate dipiction of the data being analyzed.
+- [Apollo](https://www.apollographql.com/): Built to interact with GraphQL backend API's well, Apollo is the platform that enables us to write queries that specify back-end requests which retreives data for smooth transitions in crossfiltration. We utilize Apollo-Boost wrapper for easy interaction between React front-end components and GraphQL back-end. 
+- [Sass](https://sass-lang.com/): A CSS compiler helped us iterate more quickly on styling with the efficient use of nesting.
 
 #### Front-end deployed to [Netlify](https://production-sauti-databank.netlify.com/).
 
@@ -109,30 +84,33 @@ A researcher interested in the Sauti Databank is able to see the following Key D
 - Node.js
 - Express
 - KNEX
+- GraphQL
 - MySQL
 
-Read our back-end [documentation](https://github.com/sauti-databank/back-end/blob/master/README.md) for more on our reasoning behind choosing these tools. 
+Our reasoning behind using the above tools for the back-end build is to make cross-filtering easy and efficient. Alongside Node and Express for operation set up, we are using the GraphQL framework which is a query manipulation language that requests specific data from the database using one single API endpoint.
 
 # APIs
 
-## Authentication 
+Please see Back-end documentation
 
-🚫Placeholder: Protected routes were not a priority for Sauti at the time of our first release (August 2019). 
+
+## Authentication
+
+🚫Placeholder: Protected routes were not a priority for Sauti at the time of our first release (August 2019).
 
 # Testing
 
-We tested the site in Chrome and Firefox thoroughly, and reported seven issues (and counting!) as Github Issues. 
+We tested the site in Chrome and Firefox thoroughly, and reported seven issues (and counting!) as Github Issues.
 
 # Installation Instructions
 
-* After cloning or pulling repository for the first time, run "yarn install" in the app directory called /sauti.
-* Run "yarn start" in /sauti directory to start react app.
-
+- After cloning or pulling repository for the first time, run "yarn install" in the app directory called /sauti.
+- Run "yarn start" in /sauti directory to start react app.
 
 ## Other Scripts
 
-* build - creates a build of the application
-* test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+- build - creates a build of the application
+- test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
 
 # Contributing
 
