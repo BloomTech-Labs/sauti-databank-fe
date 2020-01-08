@@ -11,14 +11,23 @@ const FilterOption = styled.p`
   font-size: 1rem;
 `
 
-const OptionContainer = styled.div`
+const Options = styled.div`
   display: flex;
   align-items: center;
+
 `
+const OptionContainer = styled.div`
+  max-height: 40vh;
+  overflow-x: scroll;
+  margi: 10px 0;
+`;
 
 export default function FilterBox(props) {
 
+  const handleSubmit = e => {
+    e.preventDefault();
 
+  }
   const ClickTracker = (index) => {
     ReactGa.event({
       category: 'Option',
@@ -67,6 +76,7 @@ export default function FilterBox(props) {
                   props.setQuery(e.value.query)
                   props.setLabel(e.label)
                   ClickTracker(e.value.index)
+                  console.log('arg menu 1', props.arg)
                   if(e.value.arg){
                     props.setArgForQuery(e.value.arg)
                   }
@@ -74,19 +84,22 @@ export default function FilterBox(props) {
                 value={props.label}
                 placeholder="Select an option"
               />
+              
 
               {/* Second Dropdown Menu */}
-              {props.setIndex !== null && (
+              {props.arg !== null && (
               <Dropdown
                 controlClassName="myControlClassName"
                 arrowClassName="myArrowClassName"
                 className="dropdown"
-                options={options}
+                // Find way to render without the prev. set Index:
+                options={options.filter(option=>option.label !== props.index)}
                 onChange={e => {
-                  props.setIndex2(e.value.index2)
+                  props.setCrossFilter(e.value.crossFilter)
                   props.setQuery(e.value.query)
                   props.setLabel2(e.label2)
                   ClickTracker(e.value.index2)
+                  console.log('argForQuery', props.argForQuery)
                   if(e.value.arg){
                     props.setArgForQuery(e.value.arg)
                   }
@@ -94,18 +107,27 @@ export default function FilterBox(props) {
                 value={props.label2}
                 placeholder="Select second option"
               />)}
-              
-              {options.filter(option => option.value !== props.index).map(option => {
-                  return (      
-                    <OptionContainer>
+
+              {/* Options Checklist: renders when 2nd dropdown is selected */}
+
+                {props.arg !== "" && (  
+                <OptionContainer>
+                  {(options.filter(option => option.value !== props.index).map(option => (   
+                    <Options>
                       <input
                       type="radio"
                       name="CrossFilter"
-                      value={option.label}
-                  /><FilterOption>{option.label}</FilterOption>
-                    </OptionContainer>
-                    )
-                  })}
+                      value={option.argForQuery}
+                      />
+                        <FilterOption>{option.label}</FilterOption>
+                      </Options>
+                    ))
+                  )}
+                </OptionContainer>
+                )}
+                                  
+
+                <button onSubmit={handleSubmit}>Submit</button>
             </form>
         </div>
     )

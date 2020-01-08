@@ -11,8 +11,7 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState("gender");
-  const [index2, setIndex2] = useState("");
-  const [crossFilter, setCrossFilter] = useState("age");
+  const [crossFilter, setCrossFilter] = useState("");
   const [query, setQuery] = useState("tradersUsers");
   const [label, setLabel] = useState("Gender");
   const [label2, setLabel2] = useState("");
@@ -57,9 +56,7 @@ const App = () => {
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
-              index2={index2}
               setIndex={setIndex}
-              setIndex2={setIndex2}
               setCrossFilter={setCrossFilter}
               setQuery={setQuery}
               label={label}
