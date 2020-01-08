@@ -25,9 +25,7 @@ const getIndex = (data, indexBy) => {
   );
 
   // Reduces down to a set of the possible key:value pairs
-  const reducedArr = [...new Set(cleanedArr.map(JSON.stringify))].map(
-    JSON.parse
-  );
+  const reducedArr = [...new Set(cleanedArr.map(JSON.stringify))].map(JSON.parse);
 
   return reducedArr;
   // [{gender: male}, {gender: female}, {gender: null},]

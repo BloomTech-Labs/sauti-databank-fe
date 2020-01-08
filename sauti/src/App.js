@@ -14,7 +14,7 @@ const App = () => {
   const [crossFilter, setCrossFilter] = useState("");
   const [query, setQuery] = useState("tradersUsers");
   const [label, setLabel] = useState("Gender");
-  const [argForQuery, setArgForQuery] = useState("");
+  const [argForQuery, setArgForQuery] = useState('');
 
 
   const onChange = event => {
