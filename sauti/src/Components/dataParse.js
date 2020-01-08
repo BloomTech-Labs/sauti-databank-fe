@@ -116,9 +116,12 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   }
   });
 
-  console.log('data structure before return', dataStructure)
+  const optionsForCheckbox = Object.keys(dataStructure[0]).slice(1)
 
-  return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize};
+  console.log('data structure before return', dataStructure)
+  console.log('options', optionsForCheckbox)
+
+  return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize, optionsForCheckbox};
 };
 
 const setItem = (data, dataStructure, indexBy) => {
