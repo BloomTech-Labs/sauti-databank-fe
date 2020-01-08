@@ -140,27 +140,6 @@ export default function FilterBox(props) {
           }}              
         />
 
-          <DateContainer>
-            <div>
-              <p>Start</p>
-              <input
-                name='startData'
-                type='date'
-                value='2012-01-01'
-              />
-            </div>
-            <div>
-              <p>End</p> 
-              <input
-                name='endData'
-                type='date'
-                value='2020-01-08'
-                id='today'
-              />
-            </div>
-          </DateContainer>
-
-
           {props.label2 !== "" &&  ( 
           <div>
           <OptionContainer>
@@ -181,6 +160,27 @@ export default function FilterBox(props) {
           <Button className='checkbox-submit-btn' onSubmit={handleSubmit}>SUBMIT</Button>
           </div>
           )}
+
+          <DateContainer>
+            <div>
+              <p>Start</p>
+              <input
+                name='startData'
+                type='date'
+                value='2012-01-01'
+              />
+            </div>
+            <div>
+              <p>End</p> 
+              <input
+                name='endData'
+                type='date'
+                value='2020-01-08'
+                id='today'
+              />
+            </div>
+          </DateContainer>
+
 
       </form>
     </div>
