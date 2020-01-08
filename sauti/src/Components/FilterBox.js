@@ -81,7 +81,7 @@ export default function FilterBox(props) {
                 controlClassName="myControlClassName"
                 arrowClassName="myArrowClassName"
                 className="dropdown"
-                options={options}
+                options={options.filter(option => option.label.index !== props.index)}
                 onChange={e => {
                   props.setIndex2(e.value.index2)
                   props.setQuery(e.value.query)
