@@ -187,12 +187,6 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     };
   });
 
-  dataStructure = dataStructure
-    .sort((a, b) => (Object.values(a)[1] > Object.values(b)[1] ? -1 : 1))
-    .splice(0, 5);
-
-  const keys = dataStructure.map(obj => obj.request_value);
-
   // This block of code transforms from raw numbers to percentages
   let numberValues = [];
   let sampleSize = 0;
@@ -207,7 +201,22 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     const keyValue = obj[`request_value`];
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
-  console.log(dataStructure);
+
+
+  
+
+  dataStructure = dataStructure
+    .sort((a, b) => (Object.values(a)[1] > Object.values(b)[1] ? -1 : 1))
+
+  const keys = dataStructure.map(obj => obj.request_value);
+
+  console.log('data structure before splice', dataStructure)
+
+  dataStructure = dataStructure.splice(0, 7);
+
+  console.log('data structure after', dataStructure)
+
+  
   if (
     argForQuery === "procedurerelevantagency" ||
     argForQuery === "procedurerequireddocument" ||
