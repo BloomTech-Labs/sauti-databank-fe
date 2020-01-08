@@ -18,6 +18,7 @@ const OptionContainer = styled.div`
 
 export default function FilterBox(props) {
 
+
   const ClickTracker = (index) => {
     ReactGa.event({
       category: 'Option',
@@ -74,7 +75,27 @@ export default function FilterBox(props) {
                 placeholder="Select an option"
               />
 
-              {/* {options.filter(option => option.value !== props.index).map(option => {
+              {/* Second Dropdown Menu */}
+              {props.setIndex !== null && (
+              <Dropdown
+                controlClassName="myControlClassName"
+                arrowClassName="myArrowClassName"
+                className="dropdown"
+                options={options}
+                onChange={e => {
+                  props.setIndex2(e.value.index2)
+                  props.setQuery(e.value.query)
+                  props.setLabel2(e.label2)
+                  ClickTracker(e.value.index2)
+                  if(e.value.arg){
+                    props.setArgForQuery(e.value.arg)
+                  }
+                }}
+                value={props.label2}
+                placeholder="Select second option"
+              />)}
+              
+              {options.filter(option => option.value !== props.index).map(option => {
                   return (      
                     <OptionContainer>
                       <input
@@ -84,7 +105,7 @@ export default function FilterBox(props) {
                   /><FilterOption>{option.label}</FilterOption>
                     </OptionContainer>
                     )
-                  })} */}
+                  })}
             </form>
         </div>
     )
