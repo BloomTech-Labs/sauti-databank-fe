@@ -1,7 +1,6 @@
 import React from 'react';
 import '../App.scss';
 import ReactGa from 'react-ga';
-
 import styled from 'styled-components';
 import Dropdown from 'react-dropdown';
 
@@ -22,6 +21,32 @@ const OptionContainer = styled.div`
   margin: 10px 0;
 `;
 
+const DateContainer = styled.div`
+  max-height: 40vh;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  div{
+    display: flex;
+    flex-direction: column;
+    input{
+      font-family: 'Helvetica', 
+      sans-serif; 
+      margin: 0; 
+      border-radius: 2px;
+      border: 1px solid #ccc;
+      padding: 8px 0;
+      ::-webkit-inner-spin-button {display: none};
+      ::-webkit-clear-button{display: none};
+      ::-webkit-calendar-picker-indicator{ 
+        background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) no-repeat; 
+        opacity: 0.8; 
+        cursor: pointer
+      };
+    };
+  }
+`;
+
 const Button = styled.div`
   background: #47837F;
   color: #fff;
@@ -29,7 +54,7 @@ const Button = styled.div`
   margin: auto;
   text-align: center;
   align-self: center;
-  font-size: 16px;
+  font-size: 1.5rem;
   :hover{cursor: pointer};
 `;
 
@@ -119,6 +144,7 @@ export default function FilterBox(props) {
           <div>
           <OptionContainer>
             {/* {(options.filter(option => option.value !== props.index).map(option => (    */}
+            <p>Language</p>
             {(props.optionsForCheckbox.map(option => (   
               <Options>
                 <input
@@ -135,38 +161,28 @@ export default function FilterBox(props) {
           </div>
           )}
 
-              {/* Second Dropdown Menu */}
-              {props.setIndex !== null && (
-              <Dropdown
-                controlClassName="myControlClassName"
-                arrowClassName="myArrowClassName"
-                className="dropdown"
-                options={options.filter(option => option.label.index !== props.index)}
-                onChange={e => {
-                  props.setIndex2(e.value.index2)
-                  props.setQuery(e.value.query)
-                  props.setLabel2(e.label2)
-                  ClickTracker(e.value.index2)
-                  if(e.value.arg){
-                    props.setArgForQuery(e.value.arg)
-                  }
-                }}
-                value={props.label2}
-                placeholder="Select second option"
-              />)}
-              
-              {options.filter(option => option.value !== props.index).map(option => {
-                  return (      
-                    <OptionContainer>
-                      <input
-                      type="radio"
-                      name="CrossFilter"
-                      value={option.label}
-                  /><FilterOption>{option.label}</FilterOption>
-                    </OptionContainer>
-                    )
-                  })}
-            </form>
-        </div>
-    )
+          <DateContainer>
+            <div>
+              <p>Start</p>
+              <input
+                name='startData'
+                type='date'
+                value='2012-01-01'
+              />
+            </div>
+            <div>
+              <p>End</p> 
+              <input
+                name='endData'
+                type='date'
+                value='2020-01-08'
+                id='today'
+              />
+            </div>
+          </DateContainer>
+
+
+      </form>
+    </div>
+  )
 }

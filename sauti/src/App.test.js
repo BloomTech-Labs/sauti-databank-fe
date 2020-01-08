@@ -68,27 +68,27 @@ let data = [
 //   }
 // }
 
-const waitForData = () => new Promise(res=>setTimeout(res, 0));
+// const waitForData = () => new Promise(res=>setTimeout(res, 0));
 
-describe('Components in App work:', () => {
-  afterEach(cleanup);
+// describe('Components in App work:', () => {
+//   afterEach(cleanup);
 
 
-  test('Does chartData function in Queries work?', async () => {
-    // const {findByText} = customRender( <Queries/>)
-    render(<MockedProvider mocks={mocks} dataParse={dataParse} data={data} addTypename={false}>
-        <Router >
-          <Queries/>
-        </Router>
-      </MockedProvider>)
-    await waitForData();
+  // test('Does chartData function in Queries work?', async () => {
+  //   // const {findByText} = customRender( <Queries/>)
+  //   render(<MockedProvider mocks={mocks} dataParse={dataParse} data={data} addTypename={false}>
+  //       <Router >
+  //         <Queries/>
+  //       </Router>
+  //     </MockedProvider>)
+  //   await waitForData();
 
-    const ChartDataFunc = findByText('chartData')
-    const response = await dataParse('gender', data, "")
+  //   const ChartDataFunc = findByText('chartData')
+  //   const response = await dataParse('gender', data, "")
     
-    expect(response.dataStructure).toBeArray()
-    expect(response).toBeDefined()
-  });
+  //   expect(response.dataStructure).toBeArray()
+  //   expect(response).toBeDefined()
+  // });
 
 
   // test('Is Loading state initialized when loading?', async () => {
