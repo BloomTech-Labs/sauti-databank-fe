@@ -11,8 +11,7 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState("gender");
-  const [crossFilter, setCrossFilter] = useState("language");
-  const [optionsForCheckbox, setOptions] = useState("age")
+  const [crossFilter, setCrossFilter] = useState("age");
   const [query, setQuery] = useState("tradersUsers");
   const [label, setLabel] = useState("Gender");
   const [label2, setLabel2] = useState("");
@@ -49,7 +48,7 @@ const App = () => {
               query={query}
               label={label}
               argForQuery={argForQuery}
-              optionsForCheckbox={optionsForCheckbox}
+              // optionsForCheckbox={optionsForCheckbox}
             />
           </div>
           <div className="dropdown-container">
@@ -58,8 +57,8 @@ const App = () => {
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
-              setOptions={setOptions}
-              optionsForCheckbox={optionsForCheckbox}
+              // setOptions={setOptions}
+              // optionsForCheckbox={optionsForCheckbox}
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
               setQuery={setQuery}
