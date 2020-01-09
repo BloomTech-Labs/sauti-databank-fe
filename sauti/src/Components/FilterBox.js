@@ -115,7 +115,6 @@ export default function FilterBox(props) {
             props.setIndex(e.value)
             props.setLabel(e.label)
             ClickTracker(e.value.type)
-            console.log('arg menu 1', props.arg)
             if(e.value.arg){
               props.setArgForQuery(e.value.arg)
             }
@@ -126,21 +125,20 @@ export default function FilterBox(props) {
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
-          placeholder='Select second option...'
-          // options={options.filter(option=>option.label !== props.index)}
           options={options}
-          value={props.label2} 
+          value={props.label} 
+          placeholder='Select second option...'
           onChange={e => {
-            // props.setCrossFilter(e.value.crossFilter)
             props.setLabel2(e.value.label)
             props.setCheckboxOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
+            props.setCrossFilter(e.value)
             if(e.value.arg){
-              props.setCrossFilter(e.value.arg)
+              props.setArgForQuery(e.value.arg)
             }
           }}              
         />
 
-          {props.label2 !== "" &&  ( 
+          {props.label !== "" &&  ( 
           <div>
           <OptionContainer>
             {/* {(options.filter(option => option.value !== props.index).map(option => (    */}

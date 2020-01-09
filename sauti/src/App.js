@@ -11,10 +11,11 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState({ type: 'request_type', query: 'Sessions'});
-  const [crossFilter, setCrossFilter] = useState({ type: 'age', query: 'Users'});
+  const [crossFilter, setCrossFilter] = useState({ type: '', query: 'Users'});
   const [label, setLabel] = useState("Gender");
   const [label2, setLabel2] = useState("");
   const [argForQuery, setArgForQuery] = useState("procedurecommodity");
+  const [optionsForCheckbox, setCheckboxOptions] = useState([])
 
   useEffect (()=> {
     ReactGa.initialize('UA-155468784-1')
