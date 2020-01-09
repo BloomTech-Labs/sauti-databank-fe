@@ -2,6 +2,7 @@ import graphLabels from "./graphLabels";
 
 const dataParse = (indexBy, data, crossFilter, argForQuery) => {
   let dataStructure;
+  // If single filtering, filter the data of all duplicates based on cell_num, otherwise use whole data
 
   if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
@@ -24,6 +25,7 @@ const dataParse = (indexBy, data, crossFilter, argForQuery) => {
 // THESE NEED TO BE IN CORRECT ORDER OR FUNCTION WILL NOT WORK
 const getIndex = (data, indexBy) => {
   // Shrinks objects to one single key:value pair specified by the indexBy
+  console.log(data)
   const cleanedArr = data.map(
     item => (item = { [`request_value`]: item[`request_value`] })
   );
@@ -318,25 +320,3 @@ const abbreviateLabels = dataStructure => {
 };
 
 export default dataParse;
-
-
-/* 
-[
-  {
-    gender: Male,
-    cat1: 33,
-    cat2: 10,
-    cat3: 3,
-    cat4: 2,
-    cat5: 1
-  },
-  {
-    gender: Female,
-    cat1: 33,
-    cat2: 10,
-    cat3: 3,
-    cat4: 2,
-    cat5: 1
-  }
-] 
-*/

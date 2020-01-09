@@ -10,11 +10,11 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState("gender");
-  const [crossFilter, setCrossFilter] = useState("request_type");
-  const [query, setQuery] = useState("tradersData");
+  const [index, setIndex] = useState("age");
+  const [crossFilter, setCrossFilter] = useState("gender");
+  const [query, setQuery] = useState("tradersUsers");
   const [label, setLabel] = useState("Gender");
-  const [argForQuery, setArgForQuery] = useState('procedurecommodity');
+  const [argForQuery, setArgForQuery] = useState('');
 
   useEffect (()=> {
     ReactGa.initialize('UA-155468784-1')
