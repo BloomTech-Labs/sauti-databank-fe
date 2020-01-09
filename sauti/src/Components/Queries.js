@@ -7,15 +7,11 @@ import dataParse from "./dataParse";
 
 const GetData = props => {
 
-    const [queryType, setQueryType] = useState('tradersUsers');
-
+    let queryType = 'tradersUsers'
     let QUERY;
-
+  
     if (props.index.query === "Users" && props.crossFilter.query === "Users" ) {
-        if (queryType !== 'tradersUsers') {
-            setQueryType('tradersUsers');
-        } 
-
+        queryType = "tradersUsers"
         QUERY = gql`
         query getUsers{
             tradersUsers{
@@ -25,14 +21,13 @@ const GetData = props => {
         }
         `;
     } else if (props.index.query === "Sessions" && props.crossFilter.query === "Users") {
-        if (queryType !== 'tradersData') {
-            setQueryType('tradersData');
-        } 
+        queryType = "tradersData"
         
         QUERY = gql`
         query getData($request_type: String!){
             tradersData(request_type: $request_type){
                 ${props.index.type}
+                ${props.crossFilter.type}
                 request_value
             }
         }
