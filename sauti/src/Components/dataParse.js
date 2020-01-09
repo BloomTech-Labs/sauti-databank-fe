@@ -71,7 +71,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     // Then pushes into crossFilteredData
     const crossFilteredData = [];
 
-    if (crossFilter === 'request_type') {
+    if (indexBy === 'request_type') {
       crossFilterKeysArr.forEach((key, index) => {
         const crossFiltered = filtered.filter(trader => 
           trader["request_value"] === key
@@ -143,7 +143,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   
   // If crossfiltering with a "Most Requested" graph, sort and slice the values for each object
   // then add in every key that is being used in the graphs
-  if (crossFilter === "request_type") {
+  if (indexBy === "request_type") {
     dataStructure = dataStructure.map(obj => {
       let keyValueArr = [];
       let newObj = {};

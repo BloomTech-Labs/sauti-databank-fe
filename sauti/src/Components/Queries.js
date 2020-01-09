@@ -25,18 +25,6 @@ const GetData = props => {
             }
         }
         `;
-    } else if (props.index.query === "Users" && props.crossFilter.query === "" ) {
-        if (queryType !== 'tradersUsers') {
-            setQueryType('tradersUsers');
-        } 
-        
-        QUERY = gql`
-        query getUsers{
-            tradersUsers{
-                ${props.index.type}
-            }
-        }
-        `;
     } else if (props.index.query === "Sessions" && props.crossFilter.query === "Users") {
         if (queryType !== 'tradersData') {
             setQueryType('tradersData');
@@ -50,20 +38,7 @@ const GetData = props => {
             }
         }
         `;
-    } else if (props.index.query === "Sessions" && props.crossFilter.query === "") {
-        if (queryType !== 'tradersData') {
-            setQueryType('tradersData');
-        } 
-        
-        QUERY = gql`
-        query getData($request_type: String!){
-            tradersData(request_type: $request_type){
-                ${props.index.type}
-                request_value
-            }
-        }
-        `;
-    }
+    };
     // (props.index.query === "Sessions" && props.crossFilter.query === "Sessions") 
     // (props.index.query === "Users" && props.crossFilter.query === "Sessions") 
     // WE DO NOT WANT TO SUPPORT THESE TYPES OF FILTERING
