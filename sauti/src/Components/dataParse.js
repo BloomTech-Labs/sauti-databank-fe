@@ -1,8 +1,18 @@
 import graphLabels from "./graphLabels";
 
-const dataParse = (indexBy, data, crossFilter, argForQuery) => {
+const dataParse = (indexBy, data, crossFilter, argForQuery, queryAtt) => {
   let dataStructure;
 
+  if(queryAtt !== null){
+    let filteredArr = [];
+
+    data.forEach(obj=>{
+      if(filteredArr.includes(obj.cell_num) === false){
+        filteredArr.push(obj)
+      }
+    })
+    console.log('REDUCED DATA BE 6000?', filteredArr)
+  }
   if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
     return getMostRequested(data, dataStructure, indexBy, argForQuery);
@@ -50,7 +60,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
    crossFilterKeys = graphLabels[`${crossFilter}`].structure;
   }
 
-  console.log('cross filter keys', crossFilterKeys)
+  // console.log('cross filter keys', crossFilterKeys)
 
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
@@ -85,7 +95,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     });
   });
 
-  console.log('data structure before percentages', dataStructure)
+  // console.log('data structure before percentages', dataStructure)
 
   //TESTING PERCENTAGES
   // GET SAMPLE SIZE
@@ -138,8 +148,8 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
 };
 
 const setItem = (data, dataStructure, indexBy) => {
-  console.log("datastructure", dataStructure);
-  console.log("data", data);
+  // console.log("datastructure", dataStructure);
+  // console.log("data", data);
   let arr = [];
 
   // Puts each value from key:value pair into an array

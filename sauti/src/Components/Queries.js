@@ -9,14 +9,13 @@ import dataParse from "./dataParse";
 const GetData = props => {
     let QUERY;
 
-    if (props.index === "request_type") {
+    if (props.argForQuery !== "") {
 
     QUERY = gql`
         query getData($request_type: String!){
-            ${props.query}(request_type: $request_type){
+            tradersData(request_type: $request_type){
                 ${props.index}
                 request_value
-                ${props.crossFilter}
             }
         }
         `;
@@ -24,9 +23,10 @@ const GetData = props => {
 
     QUERY = gql`
         query getUsers{
-            ${props.query}{
+            tradersData{
                 ${props.index}
                 ${props.crossFilter}
+                cell_num
             }
         }
         `;
@@ -45,7 +45,7 @@ const GetData = props => {
          /></div>
     )
     
-    const chartData = dataParse(props.index, data[`${props.query}`], props.crossFilter, props.argForQuery); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+    const chartData = dataParse(props.index, data[`tradersData`], props.crossFilter, props.argForQuery, props.query); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
     if(props.crossFilter !== ""){
         return (
             <div>
