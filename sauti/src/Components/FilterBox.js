@@ -66,6 +66,41 @@ const Button = styled.div`
   :hover{cursor: pointer};
 `;
 
+const DropdownContainer = styled.div`
+font-family: Helvetica, sans-serif;
+        color: $greyColor;
+        font-weight: bold;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 26.9rem;
+
+        p {
+          font-size: 1.3rem;
+          margin-bottom: 10px;
+        }
+
+        .dropdown {
+          color: $greyColor;
+          font-size: 1.6rem;
+          font-weight: normal;
+          display: flex;
+          align-items: center;
+        }
+        .myControlClassName {
+          width: 100%;
+
+          padding-top: 15px;
+          padding-bottom: 15px;
+          display: flex;
+          align-items: center;
+        }
+        .Dropdown-arrow {
+          position: absolute;
+          top: 21px;
+          right: 15px;`;
+
 export default function FilterBox(props) {
   
 
@@ -103,17 +138,18 @@ export default function FilterBox(props) {
   ];
 
   return (
-    <div className="dropdown-container">
+    <DropdownContainer>
       <form>
+        <p>Choose Index</p>
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
           options={options}
-          value={props.label}
+          value={props.indexLabel}
           onChange={e => {
             props.setIndex(e.value)
-            props.setLabel(e.label)
+            props.setIndexLabel(e.label)
             ClickTracker(e.value.type)
             if(e.value.arg){
               props.setArgForQuery(e.value.arg)
@@ -126,10 +162,10 @@ export default function FilterBox(props) {
           arrowClassName="myArrowClassName"
           className="dropdown"
           options={options}
-          value={props.label} 
+          value={props.crossLabel} 
           placeholder='Select second option...'
           onChange={e => {
-            props.setLabel2(e.value.label)
+            props.setCrossLabel(e.label)
             props.setCheckboxOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
             props.setCrossFilter(e.value)
             if(e.value.arg){
@@ -138,11 +174,11 @@ export default function FilterBox(props) {
           }}              
         />
 
-          {props.label !== "" &&  ( 
+          {props.crossLabel !== "" &&  ( 
           <div>
           <OptionContainer>
             {/* {(options.filter(option => option.value !== props.index).map(option => (    */}
-            <p>{props.label2}</p>
+            <p>{props.crossLabel}</p>
             {(props.optionsForCheckbox.map(option => (   
               <Options>
                 <input
@@ -179,9 +215,12 @@ export default function FilterBox(props) {
               />
             </div>
           </DateContainer>
-
+              <p onClick={e=> {
+                props.setCrossLabel('')
+                props.setCrossFilter({type: '', query: 'Users'})
+              }}>Reset</p>
 
       </form>
-    </div>
+    </DropdownContainer>
   )
 }
