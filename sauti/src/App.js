@@ -10,15 +10,9 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 
 const App = () => {
-<<<<<<< HEAD
-  const [index, setIndex] = useState("gender");
-  const [crossFilter, setCrossFilter] = useState("age");
-  const [query, setQuery] = useState("tradersUsers");
-=======
   const [index, setIndex] = useState("age");
   const [crossFilter, setCrossFilter] = useState("gender");
   const [query, setQuery] = useState("Users");
->>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
   const [label, setLabel] = useState("Gender");
   const [argForQuery, setArgForQuery] = useState("");
   

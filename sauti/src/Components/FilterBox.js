@@ -88,25 +88,6 @@ export default function FilterBox(props) {
         index: "education",
         query: "Users"
       }},
-<<<<<<< HEAD
-      {label: "Border Crossing Frequency", value: {index: "crossing_freq", query: "users"}},
-      {label: "Age", value: {index: "age", query: "users"}},
-      {label: "Country of Residence", value: {index: "country_of_residence", query: "users"}},
-      {label: "Primary Income", value: {index: "primary_income", query: "users"}},
-      {label: "Language", value: {index: "language", query: "users"}},
-      {label: "Produce", value: {index: "produce", query: "users"}},
-      {label: "Most Requested Procedures Commodities", value: {index: "request_type", query: "sessions", arg: 'procedurecommodity'}},
-      {label: "Most Requested Procedure Commodity Categories", value: {index: "request_type", query: "sessions", arg: 'procedurecommoditycat'}},
-      {label: "Requested Procedures for Destination (Imports to:)", value: {index: "request_type", query: "sessions", arg: 'proceduredest'}},
-      {label: "Most Requested Document Information for Procedures", value: {index: "request_type", query: "sessions", arg: 'procedurerequireddocument'}},
-      {label: "Most Requested Agency Information for Procedures", value: {index: "request_type", query: "sessions", arg: 'procedurerelevantagency'}},
-      {label: "Origin of Traders' Goods", value: {index: "request_type", query: "sessions", arg: 'procedureorigin'}},
-      {label: "Final Destination Country", value: {index: "request_type", query: "sessions", arg: 'commoditycountry'}},
-      {label: "Final Destination Market", value: {index: "request_type", query: "sessions", arg: 'commoditymarket'}},
-      {label: "Top Commodity", value: {index: "request_type", query: "sessions", arg: 'commodityproduct'}},
-      {label: "Top Commodity Categories", value: {index: "request_type", query: "sessions", arg: 'commoditycat'}},
-      {label: "Exchange Rate Direction", value: {index: "request_type", query: "sessions", arg: 'exchangedirection'}}
-=======
       {label: "Border Crossing Frequency", value: {index: "crossing_freq", query: "Users"}},
       {label: "Age", value: {index: "age", query: "Users"}},
       {label: "Country of Residence", value: {index: "country_of_residence", query: "Users"}},
@@ -124,7 +105,6 @@ export default function FilterBox(props) {
       {label: "Top Commodity", value: {index: "request_type", query: "Sessions", arg: 'commodityproduct'}},
       {label: "Top Commodity Categories", value: {index: "request_type", query: "Sessions", arg: 'commoditycat'}},
       {label: "Exchange Rate Direction", value: {index: "request_type", query: "Sessions", arg: 'exchangedirection'}}
->>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
     ];
 
   return (
