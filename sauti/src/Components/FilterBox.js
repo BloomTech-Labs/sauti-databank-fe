@@ -13,16 +13,22 @@ const FilterOption = styled.p`
 const Options = styled.div`
   display: flex;
   align-items: center;
-
+  input [type='radio']{
+    background-color: red;
+    font-size: 16px;
+    background-image: none;
+  }
 `
 const OptionContainer = styled.div`
   max-height: 40vh;
-  overflow-x: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
   margin: 10px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
 `;
 
 const DateContainer = styled.div`
-  max-height: 40vh;
   margin: 20px 0;
   display: flex;
   justify-content: space-between;
@@ -30,12 +36,12 @@ const DateContainer = styled.div`
     display: flex;
     flex-direction: column;
     input{
-      font-family: 'Helvetica', 
-      sans-serif; 
+      font-family: 'Helvetica', sans-serif;  
+      font-size: 16px;
       margin: 0; 
       border-radius: 2px;
       border: 1px solid #ccc;
-      padding: 8px 0;
+      padding: 8px 0 8px 4px;
       ::-webkit-inner-spin-button {display: none};
       ::-webkit-clear-button{display: none};
       ::-webkit-calendar-picker-indicator{ 
@@ -49,7 +55,9 @@ const DateContainer = styled.div`
 
 const Button = styled.div`
   background: #47837F;
+  max-width: 40%;
   color: #fff;
+  font-weight: 400;
   padding: 10px;
   margin: auto;
   text-align: center;
@@ -60,7 +68,7 @@ const Button = styled.div`
 
 export default function FilterBox(props) {
 
-  const handleSubmit = (e, props) => {
+  const handleSubmit = e => {
     e.preventDefault();
   }
 
@@ -111,9 +119,8 @@ export default function FilterBox(props) {
           onChange={e => {
             props.setIndex(e.value.index)
             props.setQuery(e.value.query)
-            props.setLabel(e.label)
+            props.setLabel(e.value.label)
             ClickTracker(e.value.index)
-            console.log('arg menu 1', props.arg)
             if(e.value.arg){
               props.setArgForQuery(e.value.arg)
             }
@@ -124,15 +131,15 @@ export default function FilterBox(props) {
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
-          // Find way to render without the prev. set Index:
-          options={options.filter(option=>option.label !== props.index)}
-          value={props.label2}
-          placeholder="Select second option"  
+          placeholder='Select second option...'
+          // options={options.filter(option=>option.label !== props.index)}
+          options={options}
+          value={props.label2} 
           onChange={e => {
             // props.setCrossFilter(e.value.crossFilter)
             props.setQuery(e.value.query)
             props.setLabel2(e.value.label2)
-            props.setOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
+            props.setCheckboxOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
             ClickTracker(e.value.crossFilter)
             if(e.value.arg){
               props.setCrossFilter(e.value.arg)
@@ -144,7 +151,7 @@ export default function FilterBox(props) {
           <div>
           <OptionContainer>
             {/* {(options.filter(option => option.value !== props.index).map(option => (    */}
-            <p>Language</p>
+            <p>{props.label2}</p>
             {(props.optionsForCheckbox.map(option => (   
               <Options>
                 <input

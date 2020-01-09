@@ -11,8 +11,8 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState("gender");
-  const [crossFilter, setCrossFilter] = useState("language");
-  const [optionsForCheckbox, setOptions] = useState("age")
+  const [crossFilter, setCrossFilter] = useState("");
+  const [optionsForCheckbox, setCheckboxOptions] = useState("age")
   const [query, setQuery] = useState("tradersUsers");
   const [label, setLabel] = useState("Gender");
   const [label2, setLabel2] = useState("");
@@ -48,6 +48,7 @@ const App = () => {
               crossFilter={crossFilter}
               query={query}
               label={label}
+              label2={label2}
               argForQuery={argForQuery}
               optionsForCheckbox={optionsForCheckbox}
             />
@@ -58,7 +59,7 @@ const App = () => {
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
-              setOptions={setOptions}
+              setCheckboxOptions={setCheckboxOptions}
               optionsForCheckbox={optionsForCheckbox}
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
