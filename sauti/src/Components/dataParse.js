@@ -74,7 +74,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
       crossFilterKeysArr.forEach((item, index) => {
         const filtered = data.filter(trader => trader[`${crossFilter}`] === item);
         const crossFiltered = filtered.filter(trader => 
-          trader["request_value"] === item
+          trader["request_value"] === key
         );
           crossFilteredData.push({ [`${item}`]: crossFiltered.length });
         });
@@ -93,7 +93,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     crossFilteredData.forEach(obj => {
       return (dataStructure[index] = {
         ...dataStructure[index],
-        [`${Object.keys(obj)[0]}`]: +[`${Object.values(obj)[0]}`][0]
+        [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
       });
     });
   });
@@ -133,6 +133,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   dataStructure.map(item => {
     // {gender: "Male", "10-20": 200, "20-30": 150}
     // add values where not indexing by
+
     let sampleSize = 0
 
     //["Male", "130", "100", "34"]
