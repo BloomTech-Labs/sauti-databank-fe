@@ -3,34 +3,40 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Graph from "./Graph";
 import Loader from 'react-loader-spinner'
-
 import dataParse from "./dataParse";
 
 const GetData = props => {
+    const[queryType, setQueryType] = useState('tradersUsers');
     let QUERY;
 
-    if (props.argForQuery !== "") {
+    if (props.index.query === 'Users' && props.crossFilter.type === 'Users') {
+        if(queryType !== 'tradersUsers'){
+            setQueryType('tradersUsers')
+        }
 
     QUERY = gql`
-        query getData($request_type: String!){
-            tradersData(request_type: $request_type){
-                ${props.index}
+        query getUsers($request_type: String!){
+            tradersUsers(request_type: $request_type){
+                ${props.index.type}
+                ${props.crossFilter.type}
                 request_value
             }
         }
         `;
-    } else {
-
-    QUERY = gql`
-        query getUsers{
-            tradersData{
-                ${props.index}
-                ${props.crossFilter}
-                cell_num
-            }
+    } else if (props.index.query === 'Sessions' && props.crossFilter.type === 'Sessions'){
+        if(queryType !== 'tradersData'){
+            setQueryType('tradersData')
         }
-        `;
-    }
+
+        QUERY = gql`
+            query getData($request_type: String!){
+                tradersData(request_type: !request_type){
+                    ${props.index.type}
+                    request_type
+                }
+            }
+            `;
+    } 
 
     const { loading, error, data } = useQuery(QUERY, {variables: { request_type: props.argForQuery}});
 
@@ -45,12 +51,9 @@ const GetData = props => {
          /></div>
     )
     
-    const chartData = dataParse(props.index, data[`tradersData`], props.crossFilter, props.argForQuery, props.query); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
-<<<<<<< HEAD
-=======
+    const chartData = dataParse(props.index, data[`${queryType}`], props.crossFilter, props.argForQuery, props.query); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
 
->>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
     if(props.crossFilter !== ""){
         return (
             <div>

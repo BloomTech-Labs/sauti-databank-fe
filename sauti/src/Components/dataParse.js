@@ -3,29 +3,16 @@ import graphLabels from "./graphLabels";
 const dataParse = (indexBy, data, crossFilter, argForQuery, queryAtt) => {
   let dataStructure;
   // If single filtering, filter the data of all duplicates based on cell_num, otherwise use whole data
-  console.log(data)
+  console.log('Data', data)
   if (queryAtt === "Users") {
     let filterArr =[];
     
-    
-    data.forEach(obj => {
-      if(filterArr.includes(obj.cell_num) === false) {
-        filterArr.push(obj)
-      }
-    })
-
-    console.log('filtered', filterArr);
-  }
-
-  if(queryAtt !== 'sessions'){
-    let filteredArr = [];
-
     data.forEach(obj=>{
       if(filteredArr.includes(obj.cell_num) === false){
         filteredArr.push(obj.cell_num)
       }
     })
-    console.log('REDUCED DATA BE 6000?', filteredArr)
+    console.log('REDUCED DATA BE 6000?', filterArr)
   }
   if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
@@ -76,11 +63,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     crossFilterKeys = getIndex(data, indexBy);
   }
 
-<<<<<<< HEAD
-  // console.log('cross filter keys', crossFilterKeys)
-
-=======
->>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
   dataStructure.forEach(obj => keysArr.push(Object.values(obj)[0]));
@@ -124,11 +106,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     });
   });
 
-<<<<<<< HEAD
-  // console.log('data structure before percentages', dataStructure)
-
-=======
->>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
   //TESTING PERCENTAGES
   // GET SAMPLE SIZE
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
@@ -138,11 +115,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   dataStructure.map(item => {
     // {gender: "Male", "10-20": 200, "20-30": 150}
     // add values where not indexing by
-<<<<<<< HEAD
-    // console.log('object values', Object.values(item))
-=======
-
->>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
     let sampleSize = 0
 
     //["Male", "130", "100", "34"]

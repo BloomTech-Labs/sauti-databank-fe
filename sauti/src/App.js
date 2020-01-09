@@ -10,8 +10,8 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState("age");
-  const [crossFilter, setCrossFilter] = useState("gender");
+  const [index, setIndex] = useState({type: 'gender', query: 'Users'});
+  const [crossFilter, setCrossFilter] = useState({type: 'age', query: 'Users'});
   const [query, setQuery] = useState("Users");
   const [label, setLabel] = useState("Gender");
   const [argForQuery, setArgForQuery] = useState("");
@@ -60,13 +60,8 @@ const App = () => {
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
-<<<<<<< HEAD
-              setCheckboxOptions={setCheckboxOptions}
-              optionsForCheckbox={optionsForCheckbox}
-=======
               // setOptions={setOptions}
               // optionsForCheckbox={optionsForCheckbox}
->>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
               setQuery={setQuery}

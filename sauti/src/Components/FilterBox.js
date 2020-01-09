@@ -117,7 +117,7 @@ export default function FilterBox(props) {
           options={options}
           value={props.label}
           onChange={e => {
-            props.setIndex(e.value.index)
+            props.setIndex(e.value)
             props.setQuery(e.value.query)
             props.setLabel(e.value.label)
             ClickTracker(e.value.index)
