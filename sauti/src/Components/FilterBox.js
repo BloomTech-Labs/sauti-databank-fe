@@ -74,29 +74,29 @@ export default function FilterBox(props) {
   const options = [
       {label: "Gender", value: {
         index: "gender",
-        query: "tradersUsers"
+        query: "Users"
       }},
       {label: "Education Level", value: {
         index: "education",
-        query: "tradersUsers"
+        query: "Users"
       }},
-      {label: "Border Crossing Frequency", value: {index: "crossing_freq", query: "tradersUsers"}},
-      {label: "Age", value: {index: "age", query: "tradersUsers"}},
-      {label: "Country of Residence", value: {index: "country_of_residence", query: "tradersUsers"}},
-      {label: "Primary Income", value: {index: "primary_income", query: "tradersUsers"}},
-      {label: "Language", value: {index: "language", query: "tradersUsers"}},
-      {label: "Produce", value: {index: "produce", query: "tradersUsers"}},
-      {label: "Most Requested Procedures Commodities", value: {index: "request_type", query: "tradersData", arg: 'procedurecommodity'}},
-      {label: "Most Requested Procedure Commodity Categories", value: {index: "request_type", query: "tradersData", arg: 'procedurecommoditycat'}},
-      {label: "Requested Procedures for Destination (Imports to:)", value: {index: "request_type", query: "tradersData", arg: 'proceduredest'}},
-      {label: "Most Requested Document Information for Procedures", value: {index: "request_type", query: "tradersData", arg: 'procedurerequireddocument'}},
-      {label: "Most Requested Agency Information for Procedures", value: {index: "request_type", query: "tradersData", arg: 'procedurerelevantagency'}},
-      {label: "Origin of Traders' Goods", value: {index: "request_type", query: "tradersData", arg: 'procedureorigin'}},
-      {label: "Final Destination Country", value: {index: "request_type", query: "tradersData", arg: 'commoditycountry'}},
-      {label: "Final Destination Market", value: {index: "request_type", query: "tradersData", arg: 'commoditymarket'}},
-      {label: "Top Commodity", value: {index: "request_type", query: "tradersData", arg: 'commodityproduct'}},
-      {label: "Top Commodity Categories", value: {index: "request_type", query: "tradersData", arg: 'commoditycat'}},
-      {label: "Exchange Rate Direction", value: {index: "request_type", query: "tradersData", arg: 'exchangedirection'}}
+      {label: "Border Crossing Frequency", value: {index: "crossing_freq", query: "Users"}},
+      {label: "Age", value: {index: "age", query: "Users"}},
+      {label: "Country of Residence", value: {index: "country_of_residence", query: "Users"}},
+      {label: "Primary Income", value: {index: "primary_income", query: "Users"}},
+      {label: "Language", value: {index: "language", query: "Users"}},
+      {label: "Produce", value: {index: "produce", query: "Users"}},
+      {label: "Most Requested Procedures Commodities", value: {index: "request_type", query: "Sessions", arg: 'procedurecommodity'}},
+      {label: "Most Requested Procedure Commodity Categories", value: {index: "request_type", query: "Sessions", arg: 'procedurecommoditycat'}},
+      {label: "Requested Procedures for Destination (Imports to:)", value: {index: "request_type", query: "Sessions", arg: 'proceduredest'}},
+      {label: "Most Requested Document Information for Procedures", value: {index: "request_type", query: "Sessions", arg: 'procedurerequireddocument'}},
+      {label: "Most Requested Agency Information for Procedures", value: {index: "request_type", query: "Sessions", arg: 'procedurerelevantagency'}},
+      {label: "Origin of Traders' Goods", value: {index: "request_type", query: "Sessions", arg: 'procedureorigin'}},
+      {label: "Final Destination Country", value: {index: "request_type", query: "Sessions", arg: 'commoditycountry'}},
+      {label: "Final Destination Market", value: {index: "request_type", query: "Sessions", arg: 'commoditymarket'}},
+      {label: "Top Commodity", value: {index: "request_type", query: "Sessions", arg: 'commodityproduct'}},
+      {label: "Top Commodity Categories", value: {index: "request_type", query: "Sessions", arg: 'commoditycat'}},
+      {label: "Exchange Rate Direction", value: {index: "request_type", query: "Sessions", arg: 'exchangedirection'}}
     ];
 
   return (

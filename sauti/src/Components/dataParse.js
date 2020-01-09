@@ -1,7 +1,21 @@
 import graphLabels from "./graphLabels";
 
-const dataParse = (indexBy, data, crossFilter, argForQuery) => {
+const dataParse = (indexBy, data, crossFilter, argForQuery, queryAtt) => {
   let dataStructure;
+  // If single filtering, filter the data of all duplicates based on cell_num, otherwise use whole data
+  console.log(data)
+  if (queryAtt === "Users") {
+    let filterArr =[];
+    
+    
+    data.forEach(obj => {
+      if(filterArr.includes(obj.cell_num) === false) {
+        filterArr.push(obj)
+      }
+    })
+
+    console.log('filtered', filterArr);
+  }
 
   if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
@@ -24,14 +38,13 @@ const dataParse = (indexBy, data, crossFilter, argForQuery) => {
 // THESE NEED TO BE IN CORRECT ORDER OR FUNCTION WILL NOT WORK
 const getIndex = (data, indexBy) => {
   // Shrinks objects to one single key:value pair specified by the indexBy
+  console.log(data)
   const cleanedArr = data.map(
     item => (item = { [`request_value`]: item[`request_value`] })
   );
 
   // Reduces down to a set of the possible key:value pairs
-  const reducedArr = [...new Set(cleanedArr.map(JSON.stringify))].map(
-    JSON.parse
-  );
+  const reducedArr = [...new Set(cleanedArr.map(JSON.stringify))].map(JSON.parse);
 
   return reducedArr;
   // [{gender: male}, {gender: female}, {gender: null},]
@@ -41,16 +54,17 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   const keysArr = [];
   let crossFilterKeysArr = [];
 
-
+  
   // SETS THE KEYS TO BE PREDETERMINED BASED ON WHAT ORDER LANCE WANTS THEM IN
   // ONLY NEED TO DO THIS FOR CERTAIN ONES, OTHERS NEED TO BE FROM HIGHEST TO LOWEST
   let crossFilterKeys;
   // ONLY SET CROSSFILTER KEYS IF THEY ARE SPECIFIED, OTHERWISE, WE DO IT LATER
-  if (graphLabels[`${crossFilter}`].structure){
-   crossFilterKeys = graphLabels[`${crossFilter}`].structure;
+  
+  if (graphLabels[`${crossFilter}`]){
+    crossFilterKeys = graphLabels[`${crossFilter}`].structure;
+  } else {
+    crossFilterKeys = getIndex(data, indexBy);
   }
-
-  console.log('cross filter keys', crossFilterKeys)
 
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
@@ -65,17 +79,27 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   keysArr.forEach((key, index) => {
     // Gets every trader at the index where it equals the value in the keysArr
     const filtered = data.filter(trader => trader[`${indexBy}`] === key);
-
+    
     // Gets every trader at the crossFilter where it equals the value in the crossFilterKeysArr 
     // Then pushes into crossFilteredData
     const crossFilteredData = [];
-    crossFilterKeysArr.forEach((key, index) => {
-      const crossFiltered = filtered.filter(
-        trader => trader[`${crossFilter}`] === key
-      );
-      crossFilteredData.push({ [`${key}`]: crossFiltered.length });
-    });
 
+    if (crossFilter === 'request_type') {
+      crossFilterKeysArr.forEach((key, index) => {
+        const crossFiltered = filtered.filter(trader => 
+          trader["request_value"] === key
+        );
+          crossFilteredData.push({ [`${key}`]: crossFiltered.length });
+        });
+    } else {
+      crossFilterKeysArr.forEach((key, index) => {
+        const crossFiltered = filtered.filter(trader => 
+          trader[`${crossFilter}`] === key
+        );
+          crossFilteredData.push({ [`${key}`]: crossFiltered.length });
+        });
+    }
+    
     // Builds the object that will be sent to the graph component
     crossFilteredData.forEach(obj => {
       return (dataStructure[index] = {
@@ -84,8 +108,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
       });
     });
   });
-
-  console.log('data structure before percentages', dataStructure)
 
   //TESTING PERCENTAGES
   // GET SAMPLE SIZE
@@ -96,7 +118,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   dataStructure.map(item => {
     // {gender: "Male", "10-20": 200, "20-30": 150}
     // add values where not indexing by
-    console.log('object values', Object.values(item))
+
     let sampleSize = 0
 
     //["Male", "130", "100", "34"]
@@ -126,14 +148,41 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   }
   });
 
-
   // GET LIST OF OPTIONS TO SEND TO CHECKBOX COMPONENT
   const optionsForCheckbox = Object.keys(dataStructure[0]).slice(1)
 
-
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   //abbreviateLabels(dataStructure)
+  
+  // If crossfiltering with a "Most Requested" graph, sort and slice the values for each object
+  // then add in every key that is being used in the graphs
+  if (crossFilter === "request_type") {
+    dataStructure = dataStructure.map(obj => {
+      let keyValueArr = [];
+      let newObj = {};
+      
+      for (let item in obj) {
+        keyValueArr.push([item, obj[item]])
+      }
+      
+      keyValueArr.sort((a,b) => b[1] - a[1]).slice(0, 8).forEach(arr => {
+        newObj = {
+          ...newObj,
+          [`${arr[0]}`]: arr[1]
+        }
+      });
+      
+     return obj = newObj
+    })
+    
+    crossFilterKeysArr = [];
+    dataStructure.forEach(obj => {
+        crossFilterKeysArr.push(...Object.keys(obj).slice(1));
+    })
 
+    crossFilterKeysArr = [...new Set(crossFilterKeysArr)]
+  }
+  
   return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize, optionsForCheckbox};
 };
 
@@ -183,7 +232,7 @@ const setItem = (data, dataStructure, indexBy) => {
 
 const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
   let arr = [];
-
+  console.log("MOST REQUEST BEGIN", dataStructure)
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
@@ -210,13 +259,12 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     sampleSize += Number(item[keyValue]);
   });
 
+  console.log("BEFORE LOOP TO DO STUFF", dataStructure)
+
   dataStructure.forEach(obj => {
     const keyValue = obj[`request_value`];
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
-
-
-  
 
   dataStructure = dataStructure
     .sort((a, b) => (Object.values(a)[1] > Object.values(b)[1] ? -1 : 1))
@@ -225,7 +273,7 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
 
   console.log('data structure before splice', dataStructure)
 
-  dataStructure = dataStructure.splice(0, 7);
+  dataStructure = dataStructure.slice(0, 7);
 
   console.log('data structure after', dataStructure)
 
