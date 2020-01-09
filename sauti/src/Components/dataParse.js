@@ -1,8 +1,21 @@
 import graphLabels from "./graphLabels";
 
-const dataParse = (indexBy, data, crossFilter, argForQuery) => {
+const dataParse = (indexBy, data, crossFilter, argForQuery, queryAtt) => {
   let dataStructure;
   // If single filtering, filter the data of all duplicates based on cell_num, otherwise use whole data
+  console.log(data)
+  if (queryAtt === "Users") {
+    let filterArr =[];
+    
+    
+    data.forEach(obj => {
+      if(filterArr.includes(obj.cell_num) === false) {
+        filterArr.push(obj)
+      }
+    })
+
+    console.log('filtered', filterArr);
+  }
 
   if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);

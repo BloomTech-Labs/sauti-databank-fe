@@ -12,9 +12,10 @@ import Queries from "./Components/Queries";
 const App = () => {
   const [index, setIndex] = useState("age");
   const [crossFilter, setCrossFilter] = useState("gender");
-  const [query, setQuery] = useState("tradersUsers");
+  const [query, setQuery] = useState("Users");
   const [label, setLabel] = useState("Gender");
-  const [argForQuery, setArgForQuery] = useState('');
+  const [label2, setLabel2] = useState("");
+  const [argForQuery, setArgForQuery] = useState("");
 
   useEffect (()=> {
     ReactGa.initialize('UA-155468784-1')
@@ -47,6 +48,7 @@ const App = () => {
               query={query}
               label={label}
               argForQuery={argForQuery}
+              // optionsForCheckbox={optionsForCheckbox}
             />
           </div>
           <div className="dropdown-container">
@@ -55,11 +57,15 @@ const App = () => {
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
+              // setOptions={setOptions}
+              // optionsForCheckbox={optionsForCheckbox}
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
               setQuery={setQuery}
               label={label}
+              label2={label2}
               setLabel={setLabel}
+              setLabel2={setLabel2}
               setArgForQuery={setArgForQuery}
             />
           </div>
