@@ -1,19 +1,9 @@
 import graphLabels from "./graphLabels";
 
-const dataParse = (indexBy, data, crossFilter, argForQuery, queryAtt) => {
+const dataParse = (indexBy, data, crossFilter, argForQuery) => {
   let dataStructure;
-  // If single filtering, filter the data of all duplicates based on cell_num, otherwise use whole data
-  console.log('Data', data)
-  if (queryAtt === "Users") {
-    let filterArr =[];
-    
-    data.forEach(obj=>{
-      if(filteredArr.includes(obj.cell_num) === false){
-        filteredArr.push(obj.cell_num)
-      }
-    })
-    console.log('REDUCED DATA BE 6000?', filterArr)
-  }
+
+  console.log("index", indexBy, "cross", crossFilter)
   if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
     return getMostRequested(data, dataStructure, indexBy, argForQuery);
@@ -73,20 +63,18 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   );
 
   // For each object in the array,
-  keysArr.forEach((key, index) => {
-    // Gets every trader at the index where it equals the value in the keysArr
-    const filtered = data.filter(trader => trader[`${indexBy}`] === key);
-    
+  keysArr.forEach((key, index) => {    
     // Gets every trader at the crossFilter where it equals the value in the crossFilterKeysArr 
     // Then pushes into crossFilteredData
     const crossFilteredData = [];
 
-    if (crossFilter === 'request_type') {
-      crossFilterKeysArr.forEach((key, index) => {
+    if (indexBy === 'request_type') {
+      crossFilterKeysArr.forEach((item, index) => {
+        const filtered = data.filter(trader => trader[`${crossFilter}`] === item);
         const crossFiltered = filtered.filter(trader => 
-          trader["request_value"] === key
+          trader["request_value"] === item
         );
-          crossFilteredData.push({ [`${key}`]: crossFiltered.length });
+          crossFilteredData.push({ [`${item}`]: crossFiltered.length });
         });
     } else {
       crossFilterKeysArr.forEach((key, index) => {
@@ -98,14 +86,35 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     }
     
     // Builds the object that will be sent to the graph component
+    // [{Male: 10}, {Female: 10}]
     crossFilteredData.forEach(obj => {
       return (dataStructure[index] = {
         ...dataStructure[index],
-        [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
+        [`${Object.keys(obj)[0]}`]: +[`${Object.values(obj)[0]}`][0]
       });
     });
   });
 
+  // {request_value: 'Maize', Male: 33, Female: 50}
+  if (indexBy === 'request_type'){
+    let keyValueArr = [];
+    dataStructure =  dataStructure.map(obj=> {
+      keyValueArr.push([obj['request_value'], Object.value(obj).slice(1).reduce((a,b) => a + b)])
+    })
+
+    keyValueArr.sort((a,b) => b[1] - a[1]).splice(0, 8)
+    let newDataStructure = [];
+    keyValueArr.forEach(arr=> {
+      for(let i = 0, i =dataStructure.length; i < len; i++){
+        if(arr[0] === dataStructure[i].request_value){
+          newDataStructure.push(dataStructure[i])
+        }
+      }
+    })
+    dataStructure = newDataStructure
+  }
+
+  
   //TESTING PERCENTAGES
   // GET SAMPLE SIZE
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
@@ -139,7 +148,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   dataStructure.forEach(obj => {
   for(var property in obj){
     if(Number.isInteger(+obj[property])){
-      obj[property] = ((obj[property] / sampleArr[`${obj[indexBy]}`]) * 100).toFixed(1)
+      obj[property] = ((obj[property] / sampleArr[obj['request_value']]) * 100).toFixed(1) //FIX THIS BEFORE END
     }
   }
   });
@@ -152,7 +161,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   
   // If crossfiltering with a "Most Requested" graph, sort and slice the values for each object
   // then add in every key that is being used in the graphs
-  if (crossFilter === "request_type") {
+  if (indexBy === "request_type") {
     dataStructure = dataStructure.map(obj => {
       let keyValueArr = [];
       let newObj = {};
@@ -183,8 +192,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
 };
 
 const setItem = (data, dataStructure, indexBy) => {
-  // console.log("datastructure", dataStructure);
-  // console.log("data", data);
+  console.log("data entering into setItem function", data);
   let arr = [];
 
   // Puts each value from key:value pair into an array
@@ -202,6 +210,7 @@ const setItem = (data, dataStructure, indexBy) => {
     };
   });
 
+
   // This block of code transforms from raw numbers to percentages
   let numberValues = [];
 
@@ -217,6 +226,8 @@ const setItem = (data, dataStructure, indexBy) => {
     const keyValue = obj[`${indexBy}`];
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
+
+  console.log('before return', dataStructure)
 
   return {
     dataStructure,
