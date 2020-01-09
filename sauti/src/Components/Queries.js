@@ -9,14 +9,13 @@ import dataParse from "./dataParse";
 const GetData = props => {
     let QUERY;
 
-    if (props.index === "request_type") {
+    if ((props.index === "request_type") || (props.crossFilter === "request_type")) {
 
     QUERY = gql`
         query getData($request_type: String!){
             ${props.query}(request_type: $request_type){
                 ${props.index}
                 request_value
-                ${props.crossFilter}
             }
         }
         `;
