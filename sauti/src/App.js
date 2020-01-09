@@ -10,9 +10,15 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 
 const App = () => {
+<<<<<<< HEAD
   const [index, setIndex] = useState("gender");
   const [crossFilter, setCrossFilter] = useState("age");
   const [query, setQuery] = useState("tradersUsers");
+=======
+  const [index, setIndex] = useState("age");
+  const [crossFilter, setCrossFilter] = useState("gender");
+  const [query, setQuery] = useState("Users");
+>>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
   const [label, setLabel] = useState("Gender");
   const [argForQuery, setArgForQuery] = useState("");
   
@@ -51,7 +57,7 @@ const App = () => {
               label={label}
               label2={label2}
               argForQuery={argForQuery}
-              optionsForCheckbox={optionsForCheckbox}
+              // optionsForCheckbox={optionsForCheckbox}
             />
           </div>
           <div className="dropdown-container">
@@ -60,8 +66,13 @@ const App = () => {
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
+<<<<<<< HEAD
               setCheckboxOptions={setCheckboxOptions}
               optionsForCheckbox={optionsForCheckbox}
+=======
+              // setOptions={setOptions}
+              // optionsForCheckbox={optionsForCheckbox}
+>>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
               setQuery={setQuery}

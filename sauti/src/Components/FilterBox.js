@@ -82,12 +82,13 @@ export default function FilterBox(props) {
   const options = [
       {label: "Gender", value: {
         index: "gender",
-        query: "tradersUsers"
+        query: "Users"
       }},
       {label: "Education Level", value: {
         index: "education",
-        query: "tradersUsers"
+        query: "Users"
       }},
+<<<<<<< HEAD
       {label: "Border Crossing Frequency", value: {index: "crossing_freq", query: "users"}},
       {label: "Age", value: {index: "age", query: "users"}},
       {label: "Country of Residence", value: {index: "country_of_residence", query: "users"}},
@@ -105,6 +106,25 @@ export default function FilterBox(props) {
       {label: "Top Commodity", value: {index: "request_type", query: "sessions", arg: 'commodityproduct'}},
       {label: "Top Commodity Categories", value: {index: "request_type", query: "sessions", arg: 'commoditycat'}},
       {label: "Exchange Rate Direction", value: {index: "request_type", query: "sessions", arg: 'exchangedirection'}}
+=======
+      {label: "Border Crossing Frequency", value: {index: "crossing_freq", query: "Users"}},
+      {label: "Age", value: {index: "age", query: "Users"}},
+      {label: "Country of Residence", value: {index: "country_of_residence", query: "Users"}},
+      {label: "Primary Income", value: {index: "primary_income", query: "Users"}},
+      {label: "Language", value: {index: "language", query: "Users"}},
+      {label: "Produce", value: {index: "produce", query: "Users"}},
+      {label: "Most Requested Procedures Commodities", value: {index: "request_type", query: "Sessions", arg: 'procedurecommodity'}},
+      {label: "Most Requested Procedure Commodity Categories", value: {index: "request_type", query: "Sessions", arg: 'procedurecommoditycat'}},
+      {label: "Requested Procedures for Destination (Imports to:)", value: {index: "request_type", query: "Sessions", arg: 'proceduredest'}},
+      {label: "Most Requested Document Information for Procedures", value: {index: "request_type", query: "Sessions", arg: 'procedurerequireddocument'}},
+      {label: "Most Requested Agency Information for Procedures", value: {index: "request_type", query: "Sessions", arg: 'procedurerelevantagency'}},
+      {label: "Origin of Traders' Goods", value: {index: "request_type", query: "Sessions", arg: 'procedureorigin'}},
+      {label: "Final Destination Country", value: {index: "request_type", query: "Sessions", arg: 'commoditycountry'}},
+      {label: "Final Destination Market", value: {index: "request_type", query: "Sessions", arg: 'commoditymarket'}},
+      {label: "Top Commodity", value: {index: "request_type", query: "Sessions", arg: 'commodityproduct'}},
+      {label: "Top Commodity Categories", value: {index: "request_type", query: "Sessions", arg: 'commoditycat'}},
+      {label: "Exchange Rate Direction", value: {index: "request_type", query: "Sessions", arg: 'exchangedirection'}}
+>>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
     ];
 
   return (

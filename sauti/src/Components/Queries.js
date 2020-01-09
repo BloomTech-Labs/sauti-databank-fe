@@ -46,6 +46,11 @@ const GetData = props => {
     )
     
     const chartData = dataParse(props.index, data[`tradersData`], props.crossFilter, props.argForQuery, props.query); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 15e52f05659aae9b9f648bbda817e0a798b47157
     if(props.crossFilter !== ""){
         return (
             <div>
