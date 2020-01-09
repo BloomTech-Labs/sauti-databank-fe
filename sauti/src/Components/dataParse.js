@@ -1,22 +1,9 @@
 import graphLabels from "./graphLabels";
 
-const dataParse = (indexBy, data, crossFilter, argForQuery, queryAtt) => {
+const dataParse = (indexBy, data, crossFilter, argForQuery) => {
   let dataStructure;
-  // If single filtering, filter the data of all duplicates based on cell_num, otherwise use whole data
-  console.log(data)
-  if (queryAtt === "Users") {
-    let filterArr =[];
-    
-    
-    data.forEach(obj => {
-      if(filterArr.includes(obj.cell_num) === false) {
-        filterArr.push(obj)
-      }
-    })
 
-    console.log('filtered', filterArr);
-  }
-
+  console.log("index", indexBy, "cross", crossFilter)
   if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
     return getMostRequested(data, dataStructure, indexBy, argForQuery);
@@ -187,8 +174,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
 };
 
 const setItem = (data, dataStructure, indexBy) => {
-  console.log("datastructure", dataStructure);
-  console.log("data", data);
+  console.log("data entering into setItem function", data);
   let arr = [];
 
   // Puts each value from key:value pair into an array
@@ -206,6 +192,7 @@ const setItem = (data, dataStructure, indexBy) => {
     };
   });
 
+
   // This block of code transforms from raw numbers to percentages
   let numberValues = [];
 
@@ -221,6 +208,8 @@ const setItem = (data, dataStructure, indexBy) => {
     const keyValue = obj[`${indexBy}`];
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
+
+  console.log('before return', dataStructure)
 
   return {
     dataStructure,

@@ -7,32 +7,70 @@ import Loader from 'react-loader-spinner'
 import dataParse from "./dataParse";
 
 const GetData = props => {
+
+    const [queryType, setQueryType] = useState('tradersUsers');
+
     let QUERY;
 
-    if (props.argForQuery !== "") {
+    if (props.index.query === "Users" && props.crossFilter.query === "Users" ) {
+        if (queryType !== 'tradersUsers') {
+            setQueryType('tradersUsers');
+        } 
 
-    QUERY = gql`
+        QUERY = gql`
+        query getUsers{
+            tradersUsers{
+                ${props.index.type}
+                ${props.crossFilter.type}
+            }
+        }
+        `;
+    } else if (props.index.query === "Users" && props.crossFilter.query === "" ) {
+        if (queryType !== 'tradersUsers') {
+            setQueryType('tradersUsers');
+        } 
+        
+        QUERY = gql`
+        query getUsers{
+            tradersUsers{
+                ${props.index.type}
+            }
+        }
+        `;
+    } else if (props.index.query === "Sessions" && props.crossFilter.query === "Users") {
+        if (queryType !== 'tradersData') {
+            setQueryType('tradersData');
+        } 
+        
+        QUERY = gql`
         query getData($request_type: String!){
             tradersData(request_type: $request_type){
-                ${props.index}
+                ${props.index.type}
                 request_value
             }
         }
         `;
-    } else {
-
-    QUERY = gql`
-        query getUsers{
-            tradersData{
-                ${props.index}
-                ${props.crossFilter}
-                cell_num
+    } else if (props.index.query === "Sessions" && props.crossFilter.query === "") {
+        if (queryType !== 'tradersData') {
+            setQueryType('tradersData');
+        } 
+        
+        QUERY = gql`
+        query getData($request_type: String!){
+            tradersData(request_type: $request_type){
+                ${props.index.type}
+                request_value
             }
         }
         `;
     }
+    // (props.index.query === "Sessions" && props.crossFilter.query === "Sessions") 
+    // (props.index.query === "Users" && props.crossFilter.query === "Sessions") 
+    // WE DO NOT WANT TO SUPPORT THESE TYPES OF FILTERING
 
     const { loading, error, data } = useQuery(QUERY, {variables: { request_type: props.argForQuery}});
+
+    console.log("query data", data)
 
     if (loading)  return (
         <div className='loader-container'>
@@ -45,10 +83,10 @@ const GetData = props => {
          /></div>
     )
     
-    const chartData = dataParse(props.index, data[`tradersData`], props.crossFilter, props.argForQuery, props.query); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
+    const chartData = dataParse(props.index.type, data[`${queryType}`], props.crossFilter.type, props.argForQuery); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
-    if(props.crossFilter !== ""){
+    if(props.crossFilter.type !== ""){
         return (
             <div>
                 <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'} sampleSize={chartData.totalSampleSize} />
