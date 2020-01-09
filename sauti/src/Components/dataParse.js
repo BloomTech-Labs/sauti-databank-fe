@@ -3,12 +3,12 @@ import graphLabels from "./graphLabels";
 const dataParse = (indexBy, data, crossFilter, argForQuery, queryAtt) => {
   let dataStructure;
 
-  if(queryAtt !== null){
+  if(queryAtt !== 'sessions'){
     let filteredArr = [];
 
     data.forEach(obj=>{
       if(filteredArr.includes(obj.cell_num) === false){
-        filteredArr.push(obj)
+        filteredArr.push(obj.cell_num)
       }
     })
     console.log('REDUCED DATA BE 6000?', filteredArr)
@@ -106,7 +106,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   dataStructure.map(item => {
     // {gender: "Male", "10-20": 200, "20-30": 150}
     // add values where not indexing by
-    console.log('object values', Object.values(item))
+    // console.log('object values', Object.values(item))
     let sampleSize = 0
 
     //["Male", "130", "100", "34"]
