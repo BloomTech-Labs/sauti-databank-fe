@@ -162,16 +162,11 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   }
   });
 
-  // GET LIST OF OPTIONS TO SEND TO CHECKBOX COMPONENT
-  const optionsForCheckbox = Object.keys(dataStructure[0]).slice(1)
-
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure)
   
-
   console.log("CROSSS OPTIONS", optionsForCheckbox)
-  
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, optionsForCheckbox};
+  return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize};
 };
 
 // Sets single filter index

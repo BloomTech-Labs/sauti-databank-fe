@@ -13,8 +13,8 @@ const GetData = props => {
     if (props.index.query === "Users" && props.crossFilter.query === "Users" ) {
         queryType = "tradersUsers"
         QUERY = gql`
-        query getUsers{
-            tradersUsers{
+        query getUsers( $gender: String, $education: String ){
+            tradersUsers (gender: $gender, education: $education) {
                 ${props.index.type}
                 ${props.crossFilter.type}
             }
@@ -24,7 +24,7 @@ const GetData = props => {
         queryType = "tradersData"
         
         QUERY = gql`
-        query getData($request_type: String!){
+        query getData($request_type: String!, $gender: String, $age: String){
             tradersData(request_type: $request_type){
                 ${props.index.type}
                 ${props.crossFilter.type}
@@ -33,8 +33,21 @@ const GetData = props => {
         }
         `;
     };
+    // (props.index.query === "Sessions" && props.crossFilter.query === "Sessions") 
+    // (props.index.query === "Users" && props.crossFilter.query === "Sessions") 
+    // WE DO NOT WANT TO SUPPORT THESE TYPES OF FILTERING
+    
+    let queryArgs = {}
 
-    const { loading, error, data } = useQuery(QUERY, {variables: { request_type: props.argForQuery}});
+    // if(Object.values(props.selectedCheckbox).length === 0){
+    //     queryArgs = {c}
+    // } else { 
+    //     queryArgs = {...props.selectedCheckbox}
+    // }
+
+    let {loading, error, data} = useQuery(QUERY, {variables: {education: 'Secondary'}})
+
+    // const { loading, error, data } = useQuery(QUERY, {variables: { request_type: props.argForQuery, ...props.selectedCheckbox}});
 
     if (loading)  return (
         <div className='loader-container'>
@@ -49,9 +62,13 @@ const GetData = props => {
 
     const chartData = dataParse(props.index.type, data[`${queryType}`], props.crossFilter.type, props.argForQuery); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
+    
+
     if(props.crossFilter.type !== ""){
+        
         return (
             <div>
+                <h1 className = 'graph-title'>{props.label} by 'crossFilter.crossLabel?'</h1>
                 <Graph data={chartData.dataStructure} keys={chartData.crossFilterValues} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'} sampleSize={chartData.totalSampleSize} />
             </div>
         )
