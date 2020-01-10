@@ -13,8 +13,8 @@ const GetData = props => {
     if (props.index.query === "Users" && props.crossFilter.query === "Users" ) {
         queryType = "tradersUsers"
         QUERY = gql`
-        query getUsers{
-            tradersUsers{
+        query getUsers( $gender: String, $education: String ){
+            tradersUsers (gender: $gender, education: $education) {
                 ${props.index.type}
                 ${props.crossFilter.type}
             }
@@ -24,7 +24,7 @@ const GetData = props => {
         queryType = "tradersData"
         
         QUERY = gql`
-        query getData($request_type: String!){
+        query getData($request_type: String!, $gender: String, $age: String){
             tradersData(request_type: $request_type){
                 ${props.index.type}
                 ${props.crossFilter.type}
@@ -36,8 +36,18 @@ const GetData = props => {
     // (props.index.query === "Sessions" && props.crossFilter.query === "Sessions") 
     // (props.index.query === "Users" && props.crossFilter.query === "Sessions") 
     // WE DO NOT WANT TO SUPPORT THESE TYPES OF FILTERING
+    
+    let queryArgs = {}
 
-    const { loading, error, data } = useQuery(QUERY, {variables: { request_type: props.argForQuery}});
+    // if(Object.values(props.selectedCheckbox).length === 0){
+    //     queryArgs = {c}
+    // } else { 
+    //     queryArgs = {...props.selectedCheckbox}
+    // }
+
+    let {loading, error, data} = useQuery(QUERY, {variables: {education: 'Secondary'}})
+
+    // const { loading, error, data } = useQuery(QUERY, {variables: { request_type: props.argForQuery, ...props.selectedCheckbox}});
 
     console.log("query data", data)
 

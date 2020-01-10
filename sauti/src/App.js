@@ -6,16 +6,16 @@ import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
-
 import Queries from "./Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState({ type: 'request_type', query: 'Sessions'});
+  const [index, setIndex] = useState({ type: 'gender', query: 'Users'});
   const [crossFilter, setCrossFilter] = useState({ type: '', query: 'Users'});
   const [indexLabel, setIndexLabel] = useState("Most Requested Procedures Commodities");
   const [crossLabel, setCrossLabel] = useState("");
   const [argForQuery, setArgForQuery] = useState("procedurecommodity");
   const [optionsForCheckbox, setCheckboxOptions] = useState([])
+  const [selectedCheckbox, setSelectedCheckbox] = useState({})
 
   useEffect (()=> {
     ReactGa.initialize('UA-155468784-1')
@@ -33,6 +33,8 @@ const App = () => {
     setCrossFilter(e.target.value);
   };
 
+  console.log('selected checkbox!!!!', selectedCheckbox)
+
   return (
     <div className="App">
       <Navbar />
@@ -47,6 +49,7 @@ const App = () => {
               crossFilter={crossFilter}
               label={indexLabel}
               argForQuery={argForQuery}
+              selectedCheckbox={selectedCheckbox}
             />
           </div>
           <div className="dropdown-container">
@@ -61,6 +64,7 @@ const App = () => {
               setIndexLabel={setIndexLabel}
               setCrossLabel={setCrossLabel}
               setArgForQuery={setArgForQuery}
+              setSelectedCheckbox={setSelectedCheckbox}
             />
           </div>
         </div>

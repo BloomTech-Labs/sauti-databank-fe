@@ -41,19 +41,13 @@ export default function FilterBox(props) {
     }
   }, [])
 
-  // useEffect(()=> {
-  //   if(props.crossFilter !== ''){
-  //     // props.setCheckboxOptions(props.crossFilterKeysArr)
-  //     props.setCheckboxOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
-  //   }
-  // }, [])
   return (
     <DropdownContainer>
-
-    
       <form>
-      <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
-      <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
+        <div className='btn-container'>
+          <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
+          <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
+        </div>
         <p>Choose Index</p>
 
         <Dropdown
@@ -91,12 +85,15 @@ export default function FilterBox(props) {
         <div>
         <CheckboxContainer>
           <p>{props.crossLabel}</p>
-          {(graphLabels[`${filterBoxCrossFilter.type}`].labels.reverse().map(option => (   
+          {(graphLabels[`${filterBoxCrossFilter.type}`].labels.map(option => (   
             <Options>
               <input
               type="radio"
               name="CrossFilter"
-              value={option.value}
+              value={option}
+              onChange={e=> (
+                props.setSelectedCheckbox( { [`${filterBoxCrossFilter.type}`]: option } )
+              )}
               />
                 <FilterOption>{option}</FilterOption>
             </Options>
@@ -183,11 +180,11 @@ const DateContainer = styled.div`
 
 const Button = styled.div`
   background: #47837F;
-  max-width: 40%;
+  width: 90px;
+  margin-left: 10px;
   color: #fff;
   font-weight: 400;
   padding: 10px;
-  margin-left: 60%;
   text-align: center;
   align-self: center;
   font-size: 1.5rem;
@@ -232,5 +229,9 @@ const DropdownContainer = styled.div`
     top: 21px;
     right: 15px;
   }      
-  // .download-btn{margin-left: 60%}
+  .btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
