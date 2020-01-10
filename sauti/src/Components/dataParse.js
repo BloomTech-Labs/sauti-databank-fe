@@ -124,13 +124,9 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     dataStructure = newDataStructure
   }
 
-<<<<<<< HEAD
-  //TESTING PERCENTAGES
-=======
  
 
   
->>>>>>> b8ca99e8789bbb3d048a6eea1dea07e9faef9cd9
   // GET SAMPLE SIZE
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
   //[{gender: "Male", "10-20": 200, "20-30": 150}, {gender: "Female", "10-20": 140, "20-30": 100}]
