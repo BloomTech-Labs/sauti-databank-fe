@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.scss';
 import ReactGa from 'react-ga';
 import styled from 'styled-components';
 import Dropdown from 'react-dropdown';
+import {FilterBoxOptions} from './FilterBoxOptions';
 
 const FilterOption = styled.p`
   margin-left: .5rem;
@@ -102,8 +103,7 @@ font-family: Helvetica, sans-serif;
           right: 15px;`;
 
 export default function FilterBox(props) {
-  
-
+  const [options, setOptions] = useState(FilterBoxOptions.default);
   const handleSubmit = e => {
     e.preventDefault();
   }
@@ -115,27 +115,13 @@ export default function FilterBox(props) {
     })
   }
 
-  const options = [
-      {label: "Gender", value: {type: "gender", query: "Users"}},
-      {label: "Education Level", value: {type: "education", query: "Users"}},
-      {label: "Border Crossing Frequency", value: {type: "crossing_freq", query: "Users"}},
-      {label: "Age", value: {type: "age", query: "Users"}},
-      {label: "Country of Residence", value: {type: "country_of_residence", query: "Users"}},
-      {label: "Primary Income", value: {type: "primary_income", query: "Users"}},
-      {label: "Language", value: {type: "language", query: "Users"}},
-      {label: "Produce", value: {type: "produce", query: "Users"}},
-      {label: "Most Requested Procedures Commodities", value: {type: "request_type", query: "Sessions", arg: 'procedurecommodity'}},
-      {label: "Most Requested Procedure Commodity Categories", value: {type: "request_type", query: "Sessions", arg: 'procedurecommoditycat'}},
-      {label: "Requested Procedures for Destination (Imports to:)", value: {type: "request_type", query: "Sessions", arg: 'proceduredest'}},
-      {label: "Most Requested Document Information for Procedures", value: {type: "request_type", query: "Sessions", arg: 'procedurerequireddocument'}},
-      {label: "Most Requested Agency Information for Procedures", value: {type: "request_type", query: "Sessions", arg: 'procedurerelevantagency'}},
-      {label: "Origin of Traders' Goods", value: {type: "request_type", query: "Sessions", arg: 'procedureorigin'}},
-      {label: "Final Destination Country", value: {type: "request_type", query: "Sessions", arg: 'commoditycountry'}},
-      {label: "Final Destination Market", value: {type: "request_type", query: "Sessions", arg: 'commoditymarket'}},
-      {label: "Top Commodity", value: {type: "request_type", query: "Sessions", arg: 'commodityproduct'}},
-      {label: "Top Commodity Categories", value: {type: "request_type", query: "Sessions", arg: 'commoditycat'}},
-      {label: "Exchange Rate Direction", value: {type: "request_type", query: "Sessions", arg: 'exchangedirection'}}
-  ];
+  useEffect(()=> {
+    if(props.index.query === 'Sessions'){
+      setOptions(FilterBoxOptions.filtered)
+    } else if(props.index.query === 'Users'){
+      setOptions(FilterBoxOptions.default)
+    }
+  }, [])
 
   return (
     <DropdownContainer>
@@ -145,7 +131,7 @@ export default function FilterBox(props) {
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
-          options={options}
+          options={FilterBoxOptions.default}
           value={props.indexLabel}
           onChange={e => {
             props.setIndex(e.value)
@@ -196,6 +182,7 @@ export default function FilterBox(props) {
           </div>
           )}
 
+          {props.index.query === 'Sessions' && (
           <DateContainer>
             <div>
               <p>Start</p>
@@ -215,10 +202,13 @@ export default function FilterBox(props) {
               />
             </div>
           </DateContainer>
-              <p onClick={e=> {
-                props.setCrossLabel('')
-                props.setCrossFilter({type: '', query: 'Users'})
-              }}>Reset</p>
+          
+          )}
+
+          <p onClick={e=> {
+            props.setCrossLabel('')
+            props.setCrossFilter({type: '', query: 'Users'})
+          }}>Reset</p>
 
       </form>
     </DropdownContainer>
