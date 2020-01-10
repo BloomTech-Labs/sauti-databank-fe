@@ -52,7 +52,7 @@ const GetData = props => {
     if(props.crossFilter.type !== ""){
         return (
             <div>
-                <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'} sampleSize={chartData.totalSampleSize} />
+                <Graph data={chartData.dataStructure} keys={chartData.crossFilterValues} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'} sampleSize={chartData.totalSampleSize} />
             </div>
         )
     } else {
