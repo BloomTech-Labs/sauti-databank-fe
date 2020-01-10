@@ -161,14 +161,15 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   }
   });
 
-  // GET LIST OF OPTIONS TO SEND TO CHECKBOX COMPONENT
-  const optionsForCheckbox = Object.keys(dataStructure[0]).slice(1)
-
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure)
   
+<<<<<<< HEAD
+  return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize};
+=======
   
   return { dataStructure, crossFilterValues, indexBy, totalSampleSize, optionsForCheckbox};
+>>>>>>> b8ca99e8789bbb3d048a6eea1dea07e9faef9cd9
 };
 
 // Sets single filter index
@@ -190,7 +191,11 @@ const setItem = (data, dataStructure, indexBy) => {
     };
   });
 
+<<<<<<< HEAD
+  // This block of code transforms from raw numbers to percentages
+=======
   // This block of code transforms from raw numbers to rounded percentages
+>>>>>>> b8ca99e8789bbb3d048a6eea1dea07e9faef9cd9
   let numberValues = [];
   let sampleSize = 0;
 

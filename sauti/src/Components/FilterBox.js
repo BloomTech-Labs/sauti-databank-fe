@@ -4,12 +4,26 @@ import ReactGa from 'react-ga';
 import styled from 'styled-components';
 import Dropdown from 'react-dropdown';
 import {FilterBoxOptions} from './FilterBoxOptions';
+import graphLabels from './graphLabels';
 
 
 export default function FilterBox(props) {
   const [options, setOptions] = useState(FilterBoxOptions.default);
+  const [filterBoxIndex, setFilterBoxIndex] = useState({type: "gender", query: "Users"});
+  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({type: "", query: "Users"});
+  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Most Requested Procedures Commodities");
+  const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState("procedurecommodity");
+  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
+
   const handleSubmit = e => {
     e.preventDefault();
+    props.setIndex(filterBoxIndex)
+    props.setIndexLabel(filterBoxIndexLabel)
+    props.setCrossLabel(filterBoxCrossLabel)
+    props.setCrossFilter(filterBoxCrossFilter)
+    if(filterBoxArgForQuery){
+      props.setArgForQuery(filterBoxArgForQuery)
+    }
   }
 
   const ClickTracker = (index) => {
@@ -30,86 +44,89 @@ export default function FilterBox(props) {
   return (
     <DropdownContainer>
       <form>
+        <div className='btn-container'>
+          <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
+          <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
+        </div>
         <p>Choose Index</p>
+
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
           options={FilterBoxOptions.default}
-          value={props.indexLabel}
+          value={filterBoxIndexLabel}
           onChange={e => {
-            props.setIndex(e.value)
-            props.setIndexLabel(e.label)
+            setFilterBoxIndex(e.value)
+            setFilterBoxIndexLabel(e.label)
             ClickTracker(e.value.type)
             if(e.value.arg){
-              props.setArgForQuery(e.value.arg)
+              setFilterBoxArgForQuery(e.value.arg)
             }
           }}
         />
 
+        <p>Choose Crossfilter</p>
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
           options={options}
-          value={props.crossLabel} 
+          value={filterBoxCrossLabel} 
           placeholder='Select second option...'
           onChange={e => {
-            props.setCrossLabel(e.label)
-            props.setCheckboxOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
-            props.setCrossFilter(e.value)
-            if(e.value.arg){
-              props.setArgForQuery(e.value.arg)
-            }
+            setFilterBoxCrossLabel(e.label)
+            setFilterBoxCrossFilter(e.value)
           }}              
         />
 
-          {props.crossLabel !== "" &&  ( 
-          <div>
-          <OptionContainer>
-            {/* {(options.filter(option => option.value !== props.index).map(option => (    */}
-            <p>{props.crossLabel}</p>
-            {(props.optionsForCheckbox.map(option => (   
-              <Options>
-                <input
-                type="radio"
-                name="CrossFilter"
-                value={option.value}
-                // value={crossFilter.value}
-                />
-                  <FilterOption>{option}</FilterOption>
-              </Options>
-              ))
-            )}
-          </OptionContainer>
-          <Button className='checkbox-submit-btn' onSubmit={handleSubmit}>SUBMIT</Button>
-          </div>
-          )}
-
-          {props.index.query === 'Sessions' && (
-          <DateContainer>
-            <div>
-              <p>Start</p>
-              <input
-                name='startData'
-                type='date'
-                value='2012-01-01'
-              />
-            </div>
-            <div>
-              <p>End</p> 
-              <input
-                name='endData'
-                type='date'
-                value='2020-01-08'
-                id='today'
-              />
-            </div>
-          </DateContainer>
+        {filterBoxCrossFilter.type !== "" &&  ( 
           
+        <div>
+        <CheckboxContainer>
+          <p>{props.crossLabel}</p>
+          {(graphLabels[`${filterBoxCrossFilter.type}`].labels.map(option => (   
+            <Options>
+              <input
+              type="radio"
+              name="CrossFilter"
+              value={option}
+              onChange={e=> (
+                props.setSelectedCheckbox( { [`${filterBoxCrossFilter.type}`]: option } )
+              )}
+              />
+                <FilterOption>{option}</FilterOption>
+            </Options>
+            ))
           )}
+        </CheckboxContainer>
+        </div>
+        )}
 
-          <p className='reset-btn' onClick={e=> {
+        {props.index.query === 'Sessions' && (
+        <DateContainer>
+          <div>
+            <p>Start</p>
+            <input
+              name='startData'
+              type='date'
+              value='2012-01-01'
+            />
+          </div>
+          <div>
+            <p>End</p> 
+            <input
+              name='endData'
+              type='date'
+              value='2020-01-08'
+              id='today'
+            />
+          </div>
+        </DateContainer>
+        
+        )}
+
+        <p className='reset-btn' onClick={e=> {
             props.setCrossLabel('')
             props.setCrossFilter({type: '', query: 'Users'})
           }}>Reset</p>
@@ -129,13 +146,9 @@ const FilterOption = styled.p`
 const Options = styled.div`
   display: flex;
   align-items: center;
-  input [type='radio']{
-    background-color: red;
-    font-size: 16px;
-    background-image: none;
-  }
+  font-weight: 400;
 `
-const OptionContainer = styled.div`
+const CheckboxContainer = styled.div`
   max-height: 40vh;
   overflow-x: hidden;
   overflow-y: auto;
@@ -157,25 +170,21 @@ const DateContainer = styled.div`
       margin: 0; 
       border-radius: 2px;
       border: 1px solid #ccc;
-      padding: 8px 0 8px 4px;
+      padding: 10px;
       ::-webkit-inner-spin-button {display: none};
       ::-webkit-clear-button{display: none};
-      ::-webkit-calendar-picker-indicator{ 
-        background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) no-repeat; 
-        opacity: 0.8; 
-        cursor: pointer
-      };
+      ::-webkit-calendar-picker-indicator{opacity: 0.8; cursor: pointer; color: #999};
     };
   }
 `;
 
 const Button = styled.div`
   background: #47837F;
-  max-width: 40%;
+  width: 90px;
+  margin-left: 10px;
   color: #fff;
   font-weight: 400;
   padding: 10px;
-  margin: auto;
   text-align: center;
   align-self: center;
   font-size: 1.5rem;
@@ -183,41 +192,46 @@ const Button = styled.div`
 `;
 
 const DropdownContainer = styled.div`
-font-family: Helvetica, sans-serif;
-        color: $greyColor;
-        font-weight: bold;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        width: 26.9rem;
-
-        p {
-          font-size: 1.3rem;
-          margin-bottom: 10px;
-          
-        }
-        .reset-btn{
-            text-decoration: underline;
-            opacity: .7;
-            cursor: pointer
-        }
-        .dropdown {
-          color: $greyColor;
-          font-size: 1.6rem;
-          font-weight: normal;
-          display: flex;
-          align-items: center;
-        }
-        .myControlClassName {
-          width: 100%;
-
-          padding-top: 15px;
-          padding-bottom: 15px;
-          display: flex;
-          align-items: center;
-        }
-        .Dropdown-arrow {
-          position: absolute;
-          top: 21px;
-          right: 15px;`;
+  font-family: Helvetica, sans-serif;
+  color: $greyColor;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 26.9rem;
+  p {
+    font-size: 1.3rem;
+    margin: 10px 0;
+  }
+  .reset-btn{
+    text-decoration: underline;
+    opacity: .7;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .dropdown {
+    color: $greyColor;
+    font-size: 1.6rem;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;    
+  }
+  .myControlClassName {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .Dropdown-arrow {
+    position: absolute;
+    top: 21px;
+    right: 15px;
+  }      
+  .btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
