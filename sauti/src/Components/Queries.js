@@ -55,7 +55,10 @@ const GetData = props => {
 
     const chartData = dataParse(props.index.type, data[`${queryType}`], props.crossFilter.type, props.argForQuery); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
+    
+
     if(props.crossFilter.type !== ""){
+        
         return (
             <div>
                 <h1 className = 'graph-title'>{props.label} by 'crossFilter.crossLabel?'</h1>

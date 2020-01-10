@@ -3,7 +3,7 @@ import "./App.scss";
 import "./index.css";
 import ReactGa from 'react-ga';
 import Navbar from "./Components/Navbar";
-import FilterForm from "./Components/FilterBox";
+import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 
@@ -50,17 +50,14 @@ const App = () => {
             />
           </div>
           <div className="dropdown-container">
-            <FilterForm
+            <FilterBox
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
-              // setOptions={setOptions}
               optionsForCheckbox={optionsForCheckbox}
-              setCheckboxOptions={setCheckboxOptions}
+              crossFilter={crossFilter}
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
-              indexLabel={indexLabel}
-              crossLabel={crossLabel}
               setIndexLabel={setIndexLabel}
               setCrossLabel={setCrossLabel}
               setArgForQuery={setArgForQuery}

@@ -4,12 +4,26 @@ import ReactGa from 'react-ga';
 import styled from 'styled-components';
 import Dropdown from 'react-dropdown';
 import {FilterBoxOptions} from './FilterBoxOptions';
+import graphLabels from './graphLabels';
 
 
 export default function FilterBox(props) {
   const [options, setOptions] = useState(FilterBoxOptions.default);
+  const [filterBoxIndex, setFilterBoxIndex] = useState({type: "gender", query: "Users"});
+  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({type: "", query: "Users"});
+  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Most Requested Procedures Commodities");
+  const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState("procedurecommodity");
+  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
+
   const handleSubmit = e => {
     e.preventDefault();
+    props.setIndex(filterBoxIndex)
+    props.setIndexLabel(filterBoxIndexLabel)
+    props.setCrossLabel(filterBoxCrossLabel)
+    props.setCrossFilter(filterBoxCrossFilter)
+    if(filterBoxArgForQuery){
+      props.setArgForQuery(filterBoxArgForQuery)
+    }
   }
 
   const ClickTracker = (index) => {
@@ -27,18 +41,18 @@ export default function FilterBox(props) {
     }
   }, [])
 
-  useEffect(()=> {
-    if(props.crossFilter !== ''){
-      // props.setCheckboxOptions(props.crossFilterKeysArr)
-      props.setCheckboxOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
-    }
-  }, [])
-
+  // useEffect(()=> {
+  //   if(props.crossFilter !== ''){
+  //     // props.setCheckboxOptions(props.crossFilterKeysArr)
+  //     props.setCheckboxOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
+  //   }
+  // }, [])
   return (
     <DropdownContainer>
 
     
       <form>
+      <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
       <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
         <p>Choose Index</p>
 
@@ -47,13 +61,13 @@ export default function FilterBox(props) {
           arrowClassName="myArrowClassName"
           className="dropdown"
           options={FilterBoxOptions.default}
-          value={props.indexLabel}
+          value={filterBoxIndexLabel}
           onChange={e => {
-            props.setIndex(e.value)
-            props.setIndexLabel(e.label)
+            setFilterBoxIndex(e.value)
+            setFilterBoxIndexLabel(e.label)
             ClickTracker(e.value.type)
             if(e.value.arg){
-              props.setArgForQuery(e.value.arg)
+              setFilterBoxArgForQuery(e.value.arg)
             }
           }}
         />
@@ -64,22 +78,20 @@ export default function FilterBox(props) {
           arrowClassName="myArrowClassName"
           className="dropdown"
           options={options}
-          value={props.crossLabel} 
+          value={filterBoxCrossLabel} 
           placeholder='Select second option...'
           onChange={e => {
-            props.setCrossLabel(e.label)
-            props.setCrossFilter(e.value)
-            if(e.value.arg){
-              props.setArgForQuery(e.value.arg)
-            }
+            setFilterBoxCrossLabel(e.label)
+            setFilterBoxCrossFilter(e.value)
           }}              
         />
 
-        {props.crossLabel !== "" &&  ( 
+        {filterBoxCrossFilter.type !== "" &&  ( 
+          
         <div>
         <CheckboxContainer>
           <p>{props.crossLabel}</p>
-          {(props.optionsForCheckbox.map(option => (   
+          {(graphLabels[`${filterBoxCrossFilter.type}`].labels.reverse().map(option => (   
             <Options>
               <input
               type="radio"
@@ -91,7 +103,6 @@ export default function FilterBox(props) {
             ))
           )}
         </CheckboxContainer>
-        <Button className='checkbox-submit-btn' onSubmit={handleSubmit}>Submit</Button>
         </div>
         )}
 
