@@ -27,10 +27,21 @@ export default function FilterBox(props) {
     }
   }, [])
 
+  useEffect(()=> {
+    if(props.crossFilter !== ''){
+      // props.setCheckboxOptions(props.crossFilterKeysArr)
+      props.setCheckboxOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
+    }
+  }, [])
+
   return (
     <DropdownContainer>
+
+    
       <form>
+      <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
         <p>Choose Index</p>
+
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
@@ -47,6 +58,7 @@ export default function FilterBox(props) {
           }}
         />
 
+        <p>Choose Crossfilter</p>
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
@@ -56,7 +68,6 @@ export default function FilterBox(props) {
           placeholder='Select second option...'
           onChange={e => {
             props.setCrossLabel(e.label)
-            props.setCheckboxOptions(['Swahili', 'English', 'Luganda', 'Lukiga'])
             props.setCrossFilter(e.value)
             if(e.value.arg){
               props.setArgForQuery(e.value.arg)
@@ -64,51 +75,50 @@ export default function FilterBox(props) {
           }}              
         />
 
-          {props.crossLabel !== "" &&  ( 
+        {props.crossLabel !== "" &&  ( 
+        <div>
+        <CheckboxContainer>
+          <p>{props.crossLabel}</p>
+          {(props.optionsForCheckbox.map(option => (   
+            <Options>
+              <input
+              type="radio"
+              name="CrossFilter"
+              value={option.value}
+              />
+                <FilterOption>{option}</FilterOption>
+            </Options>
+            ))
+          )}
+        </CheckboxContainer>
+        <Button className='checkbox-submit-btn' onSubmit={handleSubmit}>Submit</Button>
+        </div>
+        )}
+
+        {props.index.query === 'Sessions' && (
+        <DateContainer>
           <div>
-          <OptionContainer>
-            <p>{props.crossLabel}</p>
-            {(props.optionsForCheckbox.map(option => (   
-              <Options>
-                <input
-                type="radio"
-                name="CrossFilter"
-                value={option.value}
-                // value={crossFilter.value}
-                />
-                  <FilterOption>{option}</FilterOption>
-              </Options>
-              ))
-            )}
-          </OptionContainer>
-          <Button className='checkbox-submit-btn' onSubmit={handleSubmit}>SUBMIT</Button>
+            <p>Start</p>
+            <input
+              name='startData'
+              type='date'
+              value='2012-01-01'
+            />
           </div>
-          )}
+          <div>
+            <p>End</p> 
+            <input
+              name='endData'
+              type='date'
+              value='2020-01-08'
+              id='today'
+            />
+          </div>
+        </DateContainer>
+        
+        )}
 
-          {props.index.query === 'Sessions' && (
-          <DateContainer>
-            <div>
-              <p>Start</p>
-              <input
-                name='startData'
-                type='date'
-                value='2012-01-01'
-              />
-            </div>
-            <div>
-              <p>End</p> 
-              <input
-                name='endData'
-                type='date'
-                value='2020-01-08'
-                id='today'
-              />
-            </div>
-          </DateContainer>
-          
-          )}
-
-          <p className='reset-btn' onClick={e=> {
+        <p className='reset-btn' onClick={e=> {
             props.setCrossLabel('')
             props.setCrossFilter({type: '', query: 'Users'})
           }}>Reset</p>
@@ -128,13 +138,9 @@ const FilterOption = styled.p`
 const Options = styled.div`
   display: flex;
   align-items: center;
-  input [type='radio']{
-    background-color: red;
-    font-size: 16px;
-    background-image: none;
-  }
+  font-weight: 400;
 `
-const OptionContainer = styled.div`
+const CheckboxContainer = styled.div`
   max-height: 40vh;
   overflow-x: hidden;
   overflow-y: auto;
@@ -199,7 +205,8 @@ font-family: Helvetica, sans-serif;
         .reset-btn{
             text-decoration: underline;
             opacity: .7;
-            cursor: pointer
+            cursor: pointer;
+            margin-top: 8px;
         }
         .dropdown {
           color: $greyColor;
@@ -207,6 +214,7 @@ font-family: Helvetica, sans-serif;
           font-weight: normal;
           display: flex;
           align-items: center;
+          margin-bottom: 8px;
         }
         .myControlClassName {
           width: 100%;
@@ -219,4 +227,7 @@ font-family: Helvetica, sans-serif;
         .Dropdown-arrow {
           position: absolute;
           top: 21px;
-          right: 15px;`;
+          right: 15px;
+        }      
+        .download-btn{margin-left: 60%}
+`;

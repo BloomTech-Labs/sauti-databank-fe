@@ -58,12 +58,14 @@ const GetData = props => {
     if(props.crossFilter.type !== ""){
         return (
             <div>
+                <h1 className = 'graph-title'>{props.label} by 'crossFilter.crossLabel?'</h1>
                 <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'} sampleSize={chartData.totalSampleSize} />
             </div>
         )
     } else {
         return (
             <div>
+                <h1 className = 'graph-title'>{props.label}</h1>
                 <Graph data={chartData.dataStructure} keys={chartData.keys} indexBy={chartData.indexBy} label={props.label} groupMode={'stacked'} sampleSize={chartData.sampleSize}/>
             </div>
         )
