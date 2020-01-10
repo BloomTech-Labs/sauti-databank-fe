@@ -91,6 +91,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     // Builds the object that will be sent to the graph component
     // [{Male: 10}, {Female: 10}]
     crossFilteredData.forEach(obj => {
+      console.log({[`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]})
       return (dataStructure[index] = {
         ...dataStructure[index],
         [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
@@ -121,8 +122,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     console.log('new data structure', newDataStructure)
     dataStructure = newDataStructure
   }
-
- 
 
   //TESTING PERCENTAGES
   // GET SAMPLE SIZE
@@ -169,6 +168,8 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure)
   
+
+  console.log("CROSSS OPTIONS", optionsForCheckbox)
   
   return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize, optionsForCheckbox};
 };

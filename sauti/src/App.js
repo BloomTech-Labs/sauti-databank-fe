@@ -10,11 +10,11 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState({ type: 'request_type', query: 'Sessions'});
-  const [crossFilter, setCrossFilter] = useState({ type: 'age', query: 'Users'});
+  const [index, setIndex] = useState({ type: 'education', query: 'Users'});
+  const [crossFilter, setCrossFilter] = useState({ type: 'crossing_freq', query: 'Users'});
   const [label, setLabel] = useState("Gender");
   const [label2, setLabel2] = useState("");
-  const [argForQuery, setArgForQuery] = useState("procedurecommodity");
+  const [argForQuery, setArgForQuery] = useState("");
   const [optionsForCheckbox, setCheckboxOptions] = useState([])
 
   useEffect (()=> {
