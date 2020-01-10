@@ -162,14 +162,10 @@ const DateContainer = styled.div`
       margin: 0; 
       border-radius: 2px;
       border: 1px solid #ccc;
-      padding: 8px 0 8px 4px;
+      padding: 10px;
       ::-webkit-inner-spin-button {display: none};
       ::-webkit-clear-button{display: none};
-      ::-webkit-calendar-picker-indicator{ 
-        background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) no-repeat; 
-        opacity: 0.8; 
-        cursor: pointer
-      };
+      ::-webkit-calendar-picker-indicator{opacity: 0.8; cursor: pointer; color: #999};
     };
   }
 `;
@@ -180,7 +176,7 @@ const Button = styled.div`
   color: #fff;
   font-weight: 400;
   padding: 10px;
-  margin: auto;
+  margin-left: 60%;
   text-align: center;
   align-self: center;
   font-size: 1.5rem;
@@ -188,46 +184,42 @@ const Button = styled.div`
 `;
 
 const DropdownContainer = styled.div`
-font-family: Helvetica, sans-serif;
-        color: $greyColor;
-        font-weight: bold;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        width: 26.9rem;
-
-        p {
-          font-size: 1.3rem;
-          margin-bottom: 10px;
-          
-        }
-        .reset-btn{
-            text-decoration: underline;
-            opacity: .7;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-        .dropdown {
-          color: $greyColor;
-          font-size: 1.6rem;
-          font-weight: normal;
-          display: flex;
-          align-items: center;
-          margin-bottom: 8px;
-        }
-        .myControlClassName {
-          width: 100%;
-
-          padding-top: 15px;
-          padding-bottom: 15px;
-          display: flex;
-          align-items: center;
-        }
-        .Dropdown-arrow {
-          position: absolute;
-          top: 21px;
-          right: 15px;
-        }      
-        .download-btn{margin-left: 60%}
+  font-family: Helvetica, sans-serif;
+  color: $greyColor;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 26.9rem;
+  p {
+    font-size: 1.3rem;
+    margin: 10px 0;
+  }
+  .reset-btn{
+    text-decoration: underline;
+    opacity: .7;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .dropdown {
+    color: $greyColor;
+    font-size: 1.6rem;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;    
+  }
+  .myControlClassName {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .Dropdown-arrow {
+    position: absolute;
+    top: 21px;
+    right: 15px;
+  }      
+  // .download-btn{margin-left: 60%}
 `;
