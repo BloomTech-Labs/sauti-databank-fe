@@ -10,11 +10,11 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState({ type: 'education', query: 'Users'});
-  const [crossFilter, setCrossFilter] = useState({ type: 'crossing_freq', query: 'Users'});
-  const [label, setLabel] = useState("Gender");
-  const [label2, setLabel2] = useState("");
-  const [argForQuery, setArgForQuery] = useState("");
+  const [index, setIndex] = useState({ type: 'request_type', query: 'Sessions'});
+  const [crossFilter, setCrossFilter] = useState({ type: '', query: 'Users'});
+  const [indexLabel, setIndexLabel] = useState("Most Requested Procedures Commodities");
+  const [crossLabel, setCrossLabel] = useState("");
+  const [argForQuery, setArgForQuery] = useState("procedurecommodity");
   const [optionsForCheckbox, setCheckboxOptions] = useState([])
 
   useEffect (()=> {
@@ -45,13 +45,11 @@ const App = () => {
             <Queries
               index={index}
               crossFilter={crossFilter}
-              label={label}
-              label2={label2}
+              label={indexLabel}
               argForQuery={argForQuery}
             />
           </div>
           <div className="dropdown-container">
-            <p>Choose Index</p>
             <FilterForm
               onChange={onChange}
               onSubmit={onSubmit}
@@ -61,10 +59,10 @@ const App = () => {
               setCheckboxOptions={setCheckboxOptions}
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
-              label={label}
-              label2={label2}
-              setLabel={setLabel}
-              setLabel2={setLabel2}
+              indexLabel={indexLabel}
+              crossLabel={crossLabel}
+              setIndexLabel={setIndexLabel}
+              setCrossLabel={setCrossLabel}
               setArgForQuery={setArgForQuery}
             />
           </div>
