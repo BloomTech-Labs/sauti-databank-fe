@@ -33,13 +33,8 @@ const GetData = props => {
         }
         `;
     };
-    // (props.index.query === "Sessions" && props.crossFilter.query === "Sessions") 
-    // (props.index.query === "Users" && props.crossFilter.query === "Sessions") 
-    // WE DO NOT WANT TO SUPPORT THESE TYPES OF FILTERING
 
     const { loading, error, data } = useQuery(QUERY, {variables: { request_type: props.argForQuery}});
-
-    console.log("query data", data)
 
     if (loading)  return (
         <div className='loader-container'>
@@ -51,7 +46,6 @@ const GetData = props => {
         timeout={5000}
          /></div>
     )
-    
 
     const chartData = dataParse(props.index.type, data[`${queryType}`], props.crossFilter.type, props.argForQuery); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
