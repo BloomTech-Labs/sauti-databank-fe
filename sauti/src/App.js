@@ -17,9 +17,12 @@ const App = () => {
   const [optionsForCheckbox, setCheckboxOptions] = useState([])
   const [selectedCheckbox, setSelectedCheckbox] = useState({})
 
+  useEffect(() => {
+    ReactGa.initialize("UA-155468784-1");
     //to report specified pageview:
     ReactGa.pageview("/");
   }, []);
+
 
   const onChange = event => {
     setIndex(event.target.value);
