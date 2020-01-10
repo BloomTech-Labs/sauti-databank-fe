@@ -67,7 +67,6 @@ export default function FilterBox(props) {
           {props.crossLabel !== "" &&  ( 
           <div>
           <OptionContainer>
-            {/* {(options.filter(option => option.value !== props.index).map(option => (    */}
             <p>{props.crossLabel}</p>
             {(props.optionsForCheckbox.map(option => (   
               <Options>
