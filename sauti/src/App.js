@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.scss";
 import "./index.css";
-import ReactGa from 'react-ga';
+import ReactGa from "react-ga";
 import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
@@ -17,11 +17,8 @@ const App = () => {
   const [optionsForCheckbox, setCheckboxOptions] = useState([])
   const [selectedCheckbox, setSelectedCheckbox] = useState({})
 
-  useEffect (()=> {
-    ReactGa.initialize('UA-155468784-1')
-    
     //to report specified pageview:
-    ReactGa.pageview('/')
+    ReactGa.pageview("/");
   }, []);
 
   const onChange = event => {

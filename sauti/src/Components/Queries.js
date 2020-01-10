@@ -49,8 +49,6 @@ const GetData = props => {
 
     // const { loading, error, data } = useQuery(QUERY, {variables: { request_type: props.argForQuery, ...props.selectedCheckbox}});
 
-    console.log("query data", data)
-
     if (loading)  return (
         <div className='loader-container'>
         <Loader
@@ -61,7 +59,6 @@ const GetData = props => {
         timeout={5000}
          /></div>
     )
-    
 
     const chartData = dataParse(props.index.type, data[`${queryType}`], props.crossFilter.type, props.argForQuery); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
@@ -72,7 +69,7 @@ const GetData = props => {
         return (
             <div>
                 <h1 className = 'graph-title'>{props.label} by 'crossFilter.crossLabel?'</h1>
-                <Graph data={chartData.dataStructure} keys={chartData.crossFilterKeysArr} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'} sampleSize={chartData.totalSampleSize} />
+                <Graph data={chartData.dataStructure} keys={chartData.crossFilterValues} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'} sampleSize={chartData.totalSampleSize} />
             </div>
         )
     } else {
