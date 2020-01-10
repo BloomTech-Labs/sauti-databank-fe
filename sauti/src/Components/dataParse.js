@@ -1,51 +1,57 @@
 import graphLabels from "./graphLabels";
 
+
 const dataParse = (indexBy, data, crossFilter, argForQuery) => {
   let dataStructure;
 
   console.log("index", indexBy, "cross", crossFilter)
+  //when single filtering "Most Requested" graph
   if (indexBy === "request_type" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
     return getMostRequested(data, dataStructure, indexBy, argForQuery);
   } 
+  //when cross-filtering "Most Requested" as index
   else if(indexBy === "request_type" && crossFilter !== ""){
     dataStructure = getIndex(data, indexBy)
     return setCrossedItems(data, dataStructure, crossFilter, indexBy)
   } else {
+    //telling function how to format data. See "graphLabels.js"
     dataStructure = graphLabels[`${indexBy}`].structure;
-
+    
+    //when cross-filtering and index is Not "Most Requested"
     if (crossFilter !== "") {
       return setCrossedItems(data, dataStructure, crossFilter, indexBy);
     } else {
+      //when single filtering with index that is not "Most Requested"
       return setItem(data, dataStructure, indexBy);
     }
   }
 };
 
-// THESE NEED TO BE IN CORRECT ORDER OR FUNCTION WILL NOT WORK
-const getIndex = (data, indexBy) => {
+//Gives an array of objects with a set of the Key: Value pairs
+const getIndex = data => {
   // Shrinks objects to one single key:value pair specified by the indexBy
   const cleanedArr = data.map(
     item => (item = { [`request_value`]: item[`request_value`] })
   );
 
   // Reduces down to a set of the possible key:value pairs
-  const reducedArr = [...new Set(cleanedArr.map(JSON.stringify))].map(JSON.parse);
-
-  return reducedArr;
-  // [{gender: male}, {gender: female}, {gender: null},]
+  // [{gender: male}, {gender: female}, {gender: null}]
+  return [...new Set(cleanedArr.map(JSON.stringify))].map(JSON.parse);
 };
 
 const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
-  const keysArr = [];
-  let crossFilterKeysArr = [];
+  //will be used to store all possible values for the index value, which is referring to a column in the database table
+  let keysArr = []; 
+  //will be used to store all possible values for the cross filter value, which is referring to a column in the database table
+  let crossFilterKeysArr = []; 
+  //will be used to store array of objects, where the key will be what is being cross filtered by / "crossFilter" 
+  // and the value is every possible value for that cross filter in the database
+  let crossFilterKeys = []; 
 
   console.log('data at beginning', dataStructure)
-  // SETS THE KEYS TO BE PREDETERMINED BASED ON WHAT ORDER LANCE WANTS THEM IN
-  // ONLY NEED TO DO THIS FOR CERTAIN ONES, OTHERS NEED TO BE FROM HIGHEST TO LOWEST
-  let crossFilterKeys;
-  // ONLY SET CROSSFILTER KEYS IF THEY ARE SPECIFIED, OTHERWISE, WE DO IT LATER
-  
+  // IF NOT A "MOST REQUESTED" GRAPH, SETS THE KEYS IN A PREDETERMINED ORDER BASED ON WHAT ORDER LANCE WANTS THEM IN
+  // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
   if (graphLabels[`${crossFilter}`]){
     crossFilterKeys = graphLabels[`${crossFilter}`].structure;
   } else {
@@ -60,14 +66,12 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
       Object.values(obj)[0] !== null &&
       crossFilterKeysArr.push(Object.values(obj)[0])
   );
-  console.log('crossfilter keys', crossFilterKeysArr)
-  console.log('keys arr', keysArr)
-  // For each object in the array,
+
+  // Building an array of objects where each object is formatted in this way
+  // ex: if indexBy = "gender" and crossFilter = "age"
+  // {"gender": "Male", "10-20": 167, "20-30": 237, "30-40": 642, "40-50": 210, "50-60": 123, "60-70": 1}
+  // There will be an object like this for each value of the keysArr ex: ["Male", "Female"]
   keysArr.forEach((key, index) => {
-    // Gets every trader at the index where it equals the value in the keysArr
-    
-    // Gets every trader at the crossFilter where it equals the value in the crossFilterKeysArr 
-    // Then pushes into crossFilteredData
     const crossFilteredData = [];
 
     if (indexBy === 'request_type') {
@@ -88,8 +92,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
           crossFilteredData.push({ [`${key}`]: crossFiltered.length });
         });
     }
-    // Builds the object that will be sent to the graph component
-    // [{Male: 10}, {Female: 10}]
     crossFilteredData.forEach(obj => {
       return (dataStructure[index] = {
         ...dataStructure[index],
@@ -98,15 +100,14 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     });
   });
 
-  console.log('data before percent', dataStructure)
-  //{request_value: "Maize", Male: 33, Female: 50}
+  //If graph is "Most Requested" sort from Most to Least requested and provide top 7 objects
   if (indexBy === 'request_type'){
     let keyValueArr = [];
     dataStructure.map(obj => {
       keyValueArr.push([obj['request_value'], Object.values(obj).slice(1).reduce((a,b) => a +b)])
     })
 
-    keyValueArr = keyValueArr.sort((a,b) => b[1] - a[1]).splice(0, 8)
+    keyValueArr = keyValueArr.sort((a,b) => b[1] - a[1]).splice(0, 7)
 
     console.log('key value arr', keyValueArr)
     console.log('data structure after map', dataStructure)
