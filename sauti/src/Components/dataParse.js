@@ -123,9 +123,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
     dataStructure = newDataStructure
   }
 
- 
-
-  
   // GET SAMPLE SIZE
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
   //[{gender: "Male", "10-20": 200, "20-30": 150}, {gender: "Female", "10-20": 140, "20-30": 100}]
@@ -164,12 +161,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure)
   
-<<<<<<< HEAD
-  return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize};
-=======
-  
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, optionsForCheckbox};
->>>>>>> b8ca99e8789bbb3d048a6eea1dea07e9faef9cd9
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize};
 };
 
 // Sets single filter index
@@ -184,18 +176,13 @@ const setItem = (data, dataStructure, indexBy) => {
   // For each object get every trader at the index where it equals the value in the arr
   arr.forEach((key, index) => {
     const filtered = data.filter(trader => trader[`${indexBy}`] === key).length;
-
     dataStructure[index] = {
       ...dataStructure[index],
       [`${arr[index]}`]: filtered
     };
   });
 
-<<<<<<< HEAD
   // This block of code transforms from raw numbers to percentages
-=======
-  // This block of code transforms from raw numbers to rounded percentages
->>>>>>> b8ca99e8789bbb3d048a6eea1dea07e9faef9cd9
   let numberValues = [];
   let sampleSize = 0;
 

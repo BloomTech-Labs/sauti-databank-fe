@@ -43,13 +43,8 @@ export default function FilterBox(props) {
 
   return (
     <DropdownContainer>
-      <form>
-        <div className='btn-container'>
-          <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
-          <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
-        </div>
+      <form>               
         <p>Choose Index</p>
-
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
@@ -81,8 +76,6 @@ export default function FilterBox(props) {
         />
 
         {filterBoxCrossFilter.type !== "" &&  ( 
-          
-        <div>
         <CheckboxContainer>
           <p>{props.crossLabel}</p>
           {(graphLabels[`${filterBoxCrossFilter.type}`].labels.map(option => (   
@@ -100,7 +93,6 @@ export default function FilterBox(props) {
             ))
           )}
         </CheckboxContainer>
-        </div>
         )}
 
         {props.index.query === 'Sessions' && (
@@ -123,7 +115,6 @@ export default function FilterBox(props) {
             />
           </div>
         </DateContainer>
-        
         )}
 
         <p className='reset-btn' onClick={e=> {
@@ -131,6 +122,10 @@ export default function FilterBox(props) {
             props.setCrossFilter({type: '', query: 'Users'})
           }}>Reset</p>
 
+        <div className='btn-container'>
+          <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
+          <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
+        </div>
       </form>
     </DropdownContainer>
   )
@@ -180,8 +175,7 @@ const DateContainer = styled.div`
 
 const Button = styled.div`
   background: #47837F;
-  width: 90px;
-  margin-left: 10px;
+  width: 40%;
   color: #fff;
   font-weight: 400;
   padding: 10px;
@@ -232,6 +226,6 @@ const DropdownContainer = styled.div`
   .btn-container {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 `;
