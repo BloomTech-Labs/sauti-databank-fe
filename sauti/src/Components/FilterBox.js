@@ -47,13 +47,8 @@ export default function FilterBox(props) {
 
   return (
     <DropdownContainer>
-      <form>
-        <div className='btn-container'>
-          <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
-          <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
-        </div>
-        <p>Choose Index</p>
-
+      <form>               
+        <p>Choose Category</p>
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
@@ -70,7 +65,7 @@ export default function FilterBox(props) {
           }}
         />
 
-        <p>Choose Crossfilter</p>
+        <p>Additional Filter</p>
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
@@ -84,9 +79,7 @@ export default function FilterBox(props) {
           }}              
         />
 
-        {filterBoxCrossFilter.type !== "" &&  ( 
-          
-        <div>
+        {/* {filterBoxCrossFilter.type !== "" &&  ( 
         <CheckboxContainer>
           <p>{props.crossLabel}</p>
           {(graphLabels[`${filterBoxCrossFilter.type}`].labels.map(option => (   
@@ -104,8 +97,7 @@ export default function FilterBox(props) {
             ))
           )}
         </CheckboxContainer>
-        </div>
-        )}
+        )} */}
 
         {filterBoxIndex.query === 'Sessions' && (
         <DateContainer>
@@ -129,8 +121,12 @@ export default function FilterBox(props) {
             />
           </div>
         </DateContainer>
-        
         )}
+
+        <div className='btn-container'>
+          <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
+          <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
+        </div>
 
         <p className='reset-btn' onClick={e=> {
             props.setIndexLabel('Most Requested Procedures Commodities')
@@ -148,7 +144,7 @@ export default function FilterBox(props) {
             setFilterBoxStartDate('2012-01-01')
             setFilterBoxEndDate('2020-01-08')
           }}>Reset</p>
-
+        
       </form>
     </DropdownContainer>
   )
@@ -198,11 +194,11 @@ const DateContainer = styled.div`
 
 const Button = styled.div`
   background: #47837F;
-  width: 90px;
-  margin-left: 10px;
+  width: 40%;
   color: #fff;
   font-weight: 400;
   padding: 10px;
+  border-radius: 2px;
   text-align: center;
   align-self: center;
   font-size: 1.5rem;
@@ -225,7 +221,7 @@ const DropdownContainer = styled.div`
     text-decoration: underline;
     opacity: .7;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 20px;
   }
   .dropdown {
     color: $greyColor;
@@ -250,6 +246,6 @@ const DropdownContainer = styled.div`
   .btn-container {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 `;
