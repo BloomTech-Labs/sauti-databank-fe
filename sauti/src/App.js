@@ -9,20 +9,24 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState({ type: 'gender', query: 'Users'});
-  const [crossFilter, setCrossFilter] = useState({ type: '', query: 'Users'});
-  const [indexLabel, setIndexLabel] = useState("Most Requested Procedures Commodities");
+  const [index, setIndex] = useState({
+    type: "request_type",
+    query: "Sessions"
+  });
+  const [crossFilter, setCrossFilter] = useState({ type: "", query: "Users" });
+  const [indexLabel, setIndexLabel] = useState(
+    "Most Requested Procedures Commodities"
+  );
   const [crossLabel, setCrossLabel] = useState("");
   const [argForQuery, setArgForQuery] = useState("procedurecommodity");
-  const [optionsForCheckbox, setCheckboxOptions] = useState([])
-  const [selectedCheckbox, setSelectedCheckbox] = useState({})
+  const [optionsForCheckbox, setCheckboxOptions] = useState([]);
+  const [selectedCheckbox, setSelectedCheckbox] = useState({});
 
   useEffect(() => {
     ReactGa.initialize("UA-155468784-1");
     //to report specified pageview:
     ReactGa.pageview("/");
   }, []);
-
 
   const onChange = event => {
     setIndex(event.target.value);
@@ -33,7 +37,7 @@ const App = () => {
     setCrossFilter(e.target.value);
   };
 
-  console.log('selected checkbox!!!!', selectedCheckbox)
+  console.log("selected checkbox!!!!", selectedCheckbox);
 
   return (
     <div className="App">
@@ -48,6 +52,7 @@ const App = () => {
               index={index}
               crossFilter={crossFilter}
               label={indexLabel}
+              crossLabel={crossLabel}
               argForQuery={argForQuery}
               selectedCheckbox={selectedCheckbox}
             />

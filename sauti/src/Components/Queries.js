@@ -2,17 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Graph from "./Graph";
-import Loader from 'react-loader-spinner'
+import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
 
 const GetData = props => {
+  let queryType = "tradersData";
+  let QUERY;
 
-    let queryType = 'tradersUsers'
-    let QUERY;
-  
-    if (props.index.query === "Users" && props.crossFilter.query === "Users" ) {
-        queryType = "tradersUsers"
-        QUERY = gql`
+  if (props.index.query === "Users" && props.crossFilter.query === "Users") {
+    queryType = "tradersUsers";
+    QUERY = gql`
         query getUsers( $gender: String, $education: String ){
             tradersUsers (gender: $gender, education: $education) {
                 ${props.index.type}
@@ -20,11 +19,14 @@ const GetData = props => {
             }
         }
         `;
-    } else if (props.index.query === "Sessions" && props.crossFilter.query === "Users") {
-        queryType = "tradersData"
-        
-        QUERY = gql`
-        query getData($request_type: String!, $gender: String, $age: String){
+  } else if (
+    props.index.query === "Sessions" &&
+    props.crossFilter.query === "Users"
+  ) {
+    queryType = "tradersData";
+
+    QUERY = gql`
+        query getData($request_type: String!){
             tradersData(request_type: $request_type){
                 ${props.index.type}
                 ${props.crossFilter.type}
@@ -32,54 +34,63 @@ const GetData = props => {
             }
         }
         `;
-    };
-    // (props.index.query === "Sessions" && props.crossFilter.query === "Sessions") 
-    // (props.index.query === "Users" && props.crossFilter.query === "Sessions") 
-    // WE DO NOT WANT TO SUPPORT THESE TYPES OF FILTERING
-    
-    let queryArgs = {}
+  }
 
-    // if(Object.values(props.selectedCheckbox).length === 0){
-    //     queryArgs = {c}
-    // } else { 
-    //     queryArgs = {...props.selectedCheckbox}
-    // }
+  const { loading, error, data } = useQuery(QUERY, {
+    variables: { request_type: props.argForQuery }
+  });
 
-    let {loading, error, data} = useQuery(QUERY, {variables: {education: 'Secondary'}})
-
-    // const { loading, error, data } = useQuery(QUERY, {variables: { request_type: props.argForQuery, ...props.selectedCheckbox}});
-
-    if (loading)  return (
-        <div className='loader-container'>
+  if (loading)
+    return (
+      <div className="loader-container">
         <Loader
-        className='loader'
-        type='Oval'
-        color='#708090'
-        width={100}
-        timeout={5000}
-         /></div>
-    )
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={5000}
+        />
+      </div>
+    );
 
-    const chartData = dataParse(props.index.type, data[`${queryType}`], props.crossFilter.type, props.argForQuery); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+  const chartData = dataParse(
+    props.index.type,
+    data[`${queryType}`],
+    props.crossFilter.type,
+    props.argForQuery
+  ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
-    
+  if (props.crossFilter.type !== "") {
+    return (
+      <div>
+        <h1 className="graph-title">
+          {props.label} by {props.crossLabel}
+        </h1>
+        <Graph
+          data={chartData.dataStructure}
+          keys={chartData.crossFilterValues}
+          indexBy={chartData.indexBy}
+          label={props.label}
+          groupMode={"grouped"}
+          sampleSize={chartData.totalSampleSize}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h1 className="graph-title">{props.label}</h1>
+        <Graph
+          data={chartData.dataStructure}
+          keys={chartData.keys}
+          indexBy={chartData.indexBy}
+          label={props.label}
+          groupMode={"stacked"}
+          sampleSize={chartData.sampleSize}
+        />
+      </div>
+    );
+  }
+};
 
-    if(props.crossFilter.type !== ""){
-        
-        return (
-            <div>
-                <h1 className = 'graph-title'>{props.label} by 'crossFilter.crossLabel?'</h1>
-                <Graph data={chartData.dataStructure} keys={chartData.crossFilterValues} indexBy={chartData.indexBy} label={props.label} groupMode={'grouped'} sampleSize={chartData.totalSampleSize} />
-            </div>
-        )
-    } else {
-        return (
-            <div>
-                <h1 className = 'graph-title'>{props.label}</h1>
-                <Graph data={chartData.dataStructure} keys={chartData.keys} indexBy={chartData.indexBy} label={props.label} groupMode={'stacked'} sampleSize={chartData.sampleSize}/>
-            </div>
-        )
-    }
-}
-
-export default GetData
+export default GetData;

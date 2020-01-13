@@ -164,12 +164,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure)
   
-<<<<<<< HEAD
-  return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize};
-=======
-  
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, optionsForCheckbox};
->>>>>>> b8ca99e8789bbb3d048a6eea1dea07e9faef9cd9
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize };
 };
 
 // Sets single filter index
@@ -191,11 +186,7 @@ const setItem = (data, dataStructure, indexBy) => {
     };
   });
 
-<<<<<<< HEAD
-  // This block of code transforms from raw numbers to percentages
-=======
   // This block of code transforms from raw numbers to rounded percentages
->>>>>>> b8ca99e8789bbb3d048a6eea1dea07e9faef9cd9
   let numberValues = [];
   let sampleSize = 0;
 
