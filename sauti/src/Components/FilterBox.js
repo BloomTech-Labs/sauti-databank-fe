@@ -124,8 +124,20 @@ export default function FilterBox(props) {
         )}
 
         <p className='reset-btn' onClick={e=> {
+            props.setIndexLabel('Most Requested Procedures Commodities')
+            props.setIndex({type: 'request_type', query: 'Sessions'})
             props.setCrossLabel('')
             props.setCrossFilter({type: '', query: 'Users'})
+            props.setArgForQuery('procedurecommodity')
+            props.setStartDate('2012-01-01')
+            props.setEndDate('2020-01-08')
+            setFilterBoxIndexLabel('Most Requested Procedures Commodities')
+            setFilterBoxIndex({type: 'request_type', query: 'Sessions'})
+            setFilterBoxCrossLabel('')
+            setFilterBoxCrossFilter({type: '', query: 'Users'})
+            setFilterBoxArgForQuery('')
+            setFilterBoxStartDate('2012-01-01')
+            setFilterBoxEndDate('2020-01-08')
           }}>Reset</p>
 
         <div className='btn-container'>
