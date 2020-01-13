@@ -9,11 +9,13 @@ import graphLabels from './graphLabels';
 
 export default function FilterBox(props) {
   const [options, setOptions] = useState(FilterBoxOptions.default);
-  const [filterBoxIndex, setFilterBoxIndex] = useState({type: "gender", query: "Users"});
+  const [filterBoxIndex, setFilterBoxIndex] = useState({type: "request_type", query: "Sessions"});
   const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({type: "", query: "Users"});
   const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Most Requested Procedures Commodities");
   const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState("procedurecommodity");
   const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
+  const [filterBoxStartDate, setFilterBoxStartDate] = useState("2012-01-01");
+  const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -21,6 +23,8 @@ export default function FilterBox(props) {
     props.setIndexLabel(filterBoxIndexLabel)
     props.setCrossLabel(filterBoxCrossLabel)
     props.setCrossFilter(filterBoxCrossFilter)
+    props.setStartDate(filterBoxStartDate)
+    props.setEndDate(filterBoxEndDate)
     if(filterBoxArgForQuery){
       props.setArgForQuery(filterBoxArgForQuery)
     }
@@ -103,14 +107,15 @@ export default function FilterBox(props) {
         </div>
         )}
 
-        {props.index.query === 'Sessions' && (
+        {filterBoxIndex.query === 'Sessions' && (
         <DateContainer>
           <div>
             <p>Start</p>
             <input
               name='startData'
               type='date'
-              value='2012-01-01'
+              value={filterBoxStartDate}
+              onChange={e => setFilterBoxStartDate(e.target.value)}
             />
           </div>
           <div>
@@ -118,8 +123,9 @@ export default function FilterBox(props) {
             <input
               name='endData'
               type='date'
-              value='2020-01-08'
+              value={filterBoxEndDate}
               id='today'
+              onChange={e => setFilterBoxEndDate(e.target.value)}
             />
           </div>
         </DateContainer>

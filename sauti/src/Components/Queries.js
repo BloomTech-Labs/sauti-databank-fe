@@ -31,6 +31,7 @@ const GetData = props => {
                 ${props.index.type}
                 ${props.crossFilter.type}
                 request_value
+                created_date
             }
         }
         `;
@@ -57,7 +58,9 @@ const GetData = props => {
     props.index.type,
     data[`${queryType}`],
     props.crossFilter.type,
-    props.argForQuery
+    props.argForQuery,
+    props.startDate,
+    props.endDate
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
   if (props.crossFilter.type !== "") {
