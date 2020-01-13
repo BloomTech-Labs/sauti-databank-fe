@@ -1,22 +1,34 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.scss';
 import ReactGa from 'react-ga';
-
 import styled from 'styled-components';
 import Dropdown from 'react-dropdown';
+import {FilterBoxOptions} from './FilterBoxOptions';
+import graphLabels from './graphLabels';
 
-const FilterOption = styled.p`
-  margin-left: .5rem;
-  margin-top: .5rem;
-  font-size: 1rem;
-`
-
-const OptionContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
 
 export default function FilterBox(props) {
+  const [options, setOptions] = useState(FilterBoxOptions.default);
+  const [filterBoxIndex, setFilterBoxIndex] = useState({type: "request_type", query: "Sessions"});
+  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({type: "", query: "Users"});
+  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Most Requested Procedures Commodities");
+  const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState("procedurecommodity");
+  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
+  const [filterBoxStartDate, setFilterBoxStartDate] = useState("2012-01-01");
+  const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.setIndex(filterBoxIndex)
+    props.setIndexLabel(filterBoxIndexLabel)
+    props.setCrossLabel(filterBoxCrossLabel)
+    props.setCrossFilter(filterBoxCrossFilter)
+    props.setStartDate(filterBoxStartDate)
+    props.setEndDate(filterBoxEndDate)
+    if(filterBoxArgForQuery){
+      props.setArgForQuery(filterBoxArgForQuery)
+    }
+  }
 
   const ClickTracker = (index) => {
     ReactGa.event({
@@ -25,67 +37,215 @@ export default function FilterBox(props) {
     })
   }
 
-    const options = [
-        {label: "Gender", value: {
-          index: "gender",
-          query: "tradersUsers"
-        }},
-        {label: "Education Level", value: {
-          index: "education",
-          query: "tradersUsers"
-        }},
-        {label: "Border Crossing Frequency", value: {index: "crossing_freq", query: "tradersUsers"}},
-        {label: "Age", value: {index: "age", query: "tradersUsers"}},
-        {label: "Country of Residence", value: {index: "country_of_residence", query: "tradersUsers"}},
-        {label: "Primary Income", value: {index: "primary_income", query: "tradersUsers"}},
-        {label: "Language", value: {index: "language", query: "tradersUsers"}},
-        {label: "Produce", value: {index: "produce", query: "tradersUsers"}},
-        {label: "Most Requested Procedures Commodities", value: {index: "request_type", query: "tradersData", arg: 'procedurecommodity'}},
-        {label: "Most Requested Procedure Commodity Categories", value: {index: "request_type", query: "tradersData", arg: 'procedurecommoditycat'}},
-        {label: "Requested Procedures for Destination (Imports to:)", value: {index: "request_type", query: "tradersData", arg: 'proceduredest'}},
-        {label: "Most Requested Document Information for Procedures", value: {index: "request_type", query: "tradersData", arg: 'procedurerequireddocument'}},
-        {label: "Most Requested Agency Information for Procedures", value: {index: "request_type", query: "tradersData", arg: 'procedurerelevantagency'}},
-        {label: "Origin of Traders' Goods", value: {index: "request_type", query: "tradersData", arg: 'procedureorigin'}},
-        {label: "Final Destination Country", value: {index: "request_type", query: "tradersData", arg: 'commoditycountry'}},
-        {label: "Final Destination Market", value: {index: "request_type", query: "tradersData", arg: 'commoditymarket'}},
-        {label: "Top Commodity", value: {index: "request_type", query: "tradersData", arg: 'commodityproduct'}},
-        {label: "Top Commodity Categories", value: {index: "request_type", query: "tradersData", arg: 'commoditycat'}},
-        {label: "Exchange Rate Direction", value: {index: "request_type", query: "tradersData", arg: 'exchangedirection'}}
-      ];
+  useEffect(()=> {
+    if(props.index.query === 'Sessions'){
+      setOptions(FilterBoxOptions.filtered)
+    } else if(props.index.query === 'Users'){
+      setOptions(FilterBoxOptions.default)
+    }
+  }, [])
 
-    return (
-        <div className="dropdown-container">
-            <form>
-              <Dropdown
-                controlClassName="myControlClassName"
-                arrowClassName="myArrowClassName"
-                className="dropdown"
-                options={options}
-                onChange={e => {
-                  props.setIndex(e.value.index)
-                  props.setQuery(e.value.query)
-                  props.setLabel(e.label)
-                  ClickTracker(e.value.index)
-                  if(e.value.arg){
-                    props.setArgForQuery(e.value.arg)
-                  }
-                }}
-                value={props.label}
-                placeholder="Select an option"
+  return (
+    <DropdownContainer>
+      <form>               
+        <p>Choose Category</p>
+        <Dropdown
+          controlClassName="myControlClassName"
+          arrowClassName="myArrowClassName"
+          className="dropdown"
+          options={FilterBoxOptions.default}
+          value={filterBoxIndexLabel}
+          onChange={e => {
+            setFilterBoxIndex(e.value)
+            setFilterBoxIndexLabel(e.label)
+            ClickTracker(e.value.type)
+            if(e.value.arg){
+              setFilterBoxArgForQuery(e.value.arg)
+            }
+          }}
+        />
+
+        <p>Additional Filter</p>
+        <Dropdown
+          controlClassName="myControlClassName"
+          arrowClassName="myArrowClassName"
+          className="dropdown"
+          options={options}
+          value={filterBoxCrossLabel} 
+          placeholder='Select second option...'
+          onChange={e => {
+            setFilterBoxCrossLabel(e.label)
+            setFilterBoxCrossFilter(e.value)
+          }}              
+        />
+
+        {/* {filterBoxCrossFilter.type !== "" &&  ( 
+        <CheckboxContainer>
+          <p>{props.crossLabel}</p>
+          {(graphLabels[`${filterBoxCrossFilter.type}`].labels.map(option => (   
+            <Options>
+              <input
+              type="radio"
+              name="CrossFilter"
+              value={option}
+              onChange={e=> (
+                props.setSelectedCheckbox( { [`${filterBoxCrossFilter.type}`]: option } )
+              )}
               />
+                <FilterOption>{option}</FilterOption>
+            </Options>
+            ))
+          )}
+        </CheckboxContainer>
+        )} */}
 
-              {/* {options.filter(option => option.value !== props.index).map(option => {
-                  return (      
-                    <OptionContainer>
-                      <input
-                      type="radio"
-                      name="CrossFilter"
-                      value={option.label}
-                  /><FilterOption>{option.label}</FilterOption>
-                    </OptionContainer>
-                    )
-                  })} */}
-            </form>
+        {filterBoxIndex.query === 'Sessions' && (
+        <DateContainer>
+          <div>
+            <p>Start</p>
+            <input
+              name='startData'
+              type='date'
+              value={filterBoxStartDate}
+              onChange={e => setFilterBoxStartDate(e.target.value)}
+            />
+          </div>
+          <div>
+            <p>End</p> 
+            <input
+              name='endData'
+              type='date'
+              value={filterBoxEndDate}
+              id='today'
+              onChange={e => setFilterBoxEndDate(e.target.value)}
+            />
+          </div>
+        </DateContainer>
+        )}
+
+        <div className='btn-container'>
+          <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
+          <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
         </div>
-    )
+
+        <p className='reset-btn' onClick={e=> {
+            props.setIndexLabel('Most Requested Procedures Commodities')
+            props.setIndex({type: 'request_type', query: 'Sessions'})
+            props.setCrossLabel('')
+            props.setCrossFilter({type: '', query: 'Users'})
+            props.setArgForQuery('procedurecommodity')
+            props.setStartDate('2012-01-01')
+            props.setEndDate('2020-01-08')
+            setFilterBoxIndexLabel('Most Requested Procedures Commodities')
+            setFilterBoxIndex({type: 'request_type', query: 'Sessions'})
+            setFilterBoxCrossLabel('')
+            setFilterBoxCrossFilter({type: '', query: 'Users'})
+            setFilterBoxArgForQuery('')
+            setFilterBoxStartDate('2012-01-01')
+            setFilterBoxEndDate('2020-01-08')
+          }}>Reset</p>
+        
+      </form>
+    </DropdownContainer>
+  )
 }
+
+
+const FilterOption = styled.p`
+  margin-left: .5rem;
+  margin-top: .5rem;
+  font-size: 1rem;
+`
+
+const Options = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+`
+const CheckboxContainer = styled.div`
+  max-height: 40vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 10px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+`;
+
+const DateContainer = styled.div`
+  margin: 20px 0;
+  display: flex;  
+  div{
+    display: flex;
+    flex-direction: column;
+    max-width: 50%;
+    input{
+      font-family: 'Helvetica', sans-serif;  
+      font-size: 16px;
+      margin: 0; 
+      border-radius: 2px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      ::-webkit-inner-spin-button {display: none};
+      ::-webkit-clear-button{display: none};
+      ::-webkit-calendar-picker-indicator{opacity: 0.8; cursor: pointer; color: #999};
+    };
+  }
+`;
+
+const Button = styled.div`
+  background: #47837F;
+  width: 40%;
+  color: #fff;
+  font-weight: 400;
+  padding: 10px;
+  border-radius: 2px;
+  text-align: center;
+  align-self: center;
+  font-size: 1.5rem;
+  :hover{cursor: pointer};
+`;
+
+const DropdownContainer = styled.div`
+  font-family: Helvetica, sans-serif;
+  color: $greyColor;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 26.9rem;
+  p {
+    font-size: 1.3rem;
+    margin: 10px 0;
+  }
+  .reset-btn{
+    text-decoration: underline;
+    opacity: .7;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  .dropdown {
+    color: $greyColor;
+    font-size: 1.6rem;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;    
+  }
+  .myControlClassName {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .Dropdown-arrow {
+    position: absolute;
+    top: 21px;
+    right: 15px;
+  }      
+  .btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+`;

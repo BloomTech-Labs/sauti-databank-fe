@@ -1,26 +1,36 @@
 import React, { useState, useEffect } from "react";
 import "./App.scss";
 import "./index.css";
-import ReactGa from 'react-ga';
+import ReactGa from "react-ga";
 import Navbar from "./Components/Navbar";
-import FilterForm from "./Components/FilterBox";
+import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
-
 import Queries from "./Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState("gender");
-  const [crossFilter, setCrossFilter] = useState("");
-  const [query, setQuery] = useState("tradersUsers");
-  const [label, setLabel] = useState("Gender");
-  const [argForQuery, setArgForQuery] = useState("");
+  const [index, setIndex] = useState({
+    type: "request_type",
+    query: "Sessions"
+  });
+  const [crossFilter, setCrossFilter] = useState({ 
+    type: "", 
+    query: "Users" 
+  });
+  const [indexLabel, setIndexLabel] = useState(
+    "Most Requested Procedures Commodities"
+  );
+  const [crossLabel, setCrossLabel] = useState("");
+  const [argForQuery, setArgForQuery] = useState("procedurecommodity");
+  const [optionsForCheckbox, setCheckboxOptions] = useState([]);
+  const [selectedCheckbox, setSelectedCheckbox] = useState({});
+  const [startDate, setStartDate] = useState("2012-01-01");
+  const [endDate, setEndDate] = useState("2020-01-08");
 
-  useEffect (()=> {
-    ReactGa.initialize('UA-155468784-1')
-    
+  useEffect(() => {
+    ReactGa.initialize("UA-155468784-1");
     //to report specified pageview:
-    ReactGa.pageview('/')
+    ReactGa.pageview("/");
   }, []);
 
   const onChange = event => {
@@ -31,6 +41,8 @@ const App = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
+
+  console.log("selected checkbox!!!!", selectedCheckbox);
 
   return (
     <div className="App">
@@ -44,23 +56,31 @@ const App = () => {
             <Queries
               index={index}
               crossFilter={crossFilter}
-              query={query}
-              label={label}
+              label={indexLabel}
+              crossLabel={crossLabel}
               argForQuery={argForQuery}
+              selectedCheckbox={selectedCheckbox}
+              startDate={startDate}
+              endDate={endDate}
             />
           </div>
           <div className="dropdown-container">
-            <p>Choose Index</p>
-            <FilterForm
+            <FilterBox
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
+              optionsForCheckbox={optionsForCheckbox}
+              crossFilter={crossFilter}
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
-              setQuery={setQuery}
-              label={label}
-              setLabel={setLabel}
+              setIndexLabel={setIndexLabel}
+              setCrossLabel={setCrossLabel}
               setArgForQuery={setArgForQuery}
+              setSelectedCheckbox={setSelectedCheckbox}
+              startDate={startDate}
+              endDate={endDate}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
             />
           </div>
         </div>

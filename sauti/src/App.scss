@@ -22,16 +22,16 @@ $greyColor: #4d4f52;
 }
 
 .App {
+  .graph-title{font-size: 2rem; font-family: 'Helvetica', sans-serif}
   .TopBar {
     display: flex;
     background-color: #212121;
-    width: 100vw;
+    width: 100%;
     height: 100px;
     align-items: center;
     justify-content: space-evenly;
 
     .Sauti-Logo {
-      // background-color: black;
       font-family: Montserrat;
       font-size: 3.0rem;
       font-weight: 1000;
@@ -40,7 +40,6 @@ $greyColor: #4d4f52;
       line-height: normal;
       letter-spacing: normal;
       margin: 20px;
-
       color: white;
       margin-left: 40px;
       text-decoration: none;
@@ -54,7 +53,6 @@ $greyColor: #4d4f52;
         color: #eb5e52;
       }
     }
-
     .Navigation {
       display: flex;
       justify-content: space-evenly;
@@ -82,7 +80,7 @@ $greyColor: #4d4f52;
 
     .header {
       height: 88px;
-      width: 1200px;
+      width: 85vw;
       background: #212121;
       display: flex;
       align-items: center;
@@ -98,7 +96,7 @@ $greyColor: #4d4f52;
     .content-container {
       margin-top: 65px;
       display: flex;
-      margin-left: 40px;
+      justify-content: space-between;
       width: 100%;
 
       .chart-container {
@@ -106,7 +104,6 @@ $greyColor: #4d4f52;
 
         .Chart {
           height: 500px;
-          //font-size: 62.5%;
 
           h2 {
             padding-bottom: 35px;
@@ -159,43 +156,41 @@ $greyColor: #4d4f52;
         }
       }
 
-      .dropdown-container {
-        font-family: Helvetica, sans-serif;
-        color: $greyColor;
-        font-weight: bold;
+      // .dropdown-container {
+      //   font-family: Helvetica, sans-serif;
+      //   color: $greyColor;
+      //   font-weight: bold;
 
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        width: 26.9rem;
-        margin-right: 40px;
+      //   display: flex;
+      //   flex-direction: column;
+      //   justify-content: flex-start;
+      //   width: 26.9rem;
 
-        p {
-          font-size: 1.3rem;
-          margin-bottom: 10px;
-        }
+      //   p {
+      //     font-size: 1.3rem;
+      //     margin-bottom: 10px;
+      //   }
 
-        .dropdown {
-          color: $greyColor;
-          font-size: 1.6rem;
-          font-weight: normal;
-          display: flex;
-          align-items: center;
-        }
-        .myControlClassName {
-          width: 100%;
+      //   .dropdown {
+      //     color: $greyColor;
+      //     font-size: 1.6rem;
+      //     font-weight: normal;
+      //     display: flex;
+      //     align-items: center;
+      //   }
+      //   .myControlClassName {
+      //     width: 100%;
 
-          padding-top: 15px;
-          padding-bottom: 15px;
-          display: flex;
-          align-items: center;
-        }
-        .Dropdown-arrow {
-          position: absolute;
-          top: 21px;
-          right: 15px;
-        }
-      }
+      //     padding-top: 15px;
+      //     padding-bottom: 15px;
+      //     display: flex;
+      //     align-items: center;
+      //   }
+      //   .Dropdown-arrow {
+      //     position: absolute;
+      //     top: 21px;
+      //     right: 15px;
+        
     }
   }
 }
