@@ -1,17 +1,19 @@
 import graphLabels from "./graphLabels";
 
 
-const dataParse = (indexBy, data, crossFilter, argForQuery) => {
+const dataParse = (indexBy, data, crossFilter, argForQuery, startDate, endDate) => {
   let dataStructure;
 
   console.log("index", indexBy, "cross", crossFilter)
   //when single filtering "Most Requested" graph
   if (indexBy === "request_type" && crossFilter === "") {
+    data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, indexBy);
     return getMostRequested(data, dataStructure, indexBy, argForQuery);
   } 
   //when cross-filtering "Most Requested" as index
   else if(indexBy === "request_type" && crossFilter !== ""){
+    data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, indexBy)
     return setCrossedItems(data, dataStructure, crossFilter, indexBy)
   } else {
@@ -307,5 +309,23 @@ const abbreviateLabels = dataStructure => {
 
   return dataStructure;
 };
+
+const filterByDate = (data, startDate, endDate) => {
+  
+  console.log('filter data', data)
+  
+  startDate = startDate.replace(/-/g, "");
+  endDate = endDate.replace(/-/g, "");
+  
+  const filteredData = data.filter(obj => {
+   const objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
+   return objectDate > startDate && objectDate < endDate
+
+  })
+
+console.log('filtered data', filteredData);
+return filteredData;
+
+}
 
 export default dataParse;

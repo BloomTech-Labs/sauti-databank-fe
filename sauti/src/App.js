@@ -13,7 +13,10 @@ const App = () => {
     type: "request_type",
     query: "Sessions"
   });
-  const [crossFilter, setCrossFilter] = useState({ type: "", query: "Users" });
+  const [crossFilter, setCrossFilter] = useState({ 
+    type: "", 
+    query: "Users" 
+  });
   const [indexLabel, setIndexLabel] = useState(
     "Most Requested Procedures Commodities"
   );
@@ -21,6 +24,8 @@ const App = () => {
   const [argForQuery, setArgForQuery] = useState("procedurecommodity");
   const [optionsForCheckbox, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
+  const [startDate, setStartDate] = useState("2012-01-01");
+  const [endDate, setEndDate] = useState("2020-01-08");
 
   useEffect(() => {
     ReactGa.initialize("UA-155468784-1");
@@ -55,6 +60,8 @@ const App = () => {
               crossLabel={crossLabel}
               argForQuery={argForQuery}
               selectedCheckbox={selectedCheckbox}
+              startDate={startDate}
+              endDate={endDate}
             />
           </div>
           <div className="dropdown-container">
@@ -70,6 +77,10 @@ const App = () => {
               setCrossLabel={setCrossLabel}
               setArgForQuery={setArgForQuery}
               setSelectedCheckbox={setSelectedCheckbox}
+              startDate={startDate}
+              endDate={endDate}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
             />
           </div>
         </div>
