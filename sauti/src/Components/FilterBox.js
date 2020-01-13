@@ -48,7 +48,7 @@ export default function FilterBox(props) {
   return (
     <DropdownContainer>
       <form>               
-        <p>Choose Index</p>
+        <p>Choose Category</p>
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
@@ -65,7 +65,7 @@ export default function FilterBox(props) {
           }}
         />
 
-        <p>Choose Crossfilter</p>
+        <p>Additional Filter</p>
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
@@ -79,7 +79,7 @@ export default function FilterBox(props) {
           }}              
         />
 
-        {filterBoxCrossFilter.type !== "" &&  ( 
+        {/* {filterBoxCrossFilter.type !== "" &&  ( 
         <CheckboxContainer>
           <p>{props.crossLabel}</p>
           {(graphLabels[`${filterBoxCrossFilter.type}`].labels.map(option => (   
@@ -97,7 +97,7 @@ export default function FilterBox(props) {
             ))
           )}
         </CheckboxContainer>
-        )}
+        )} */}
 
         {filterBoxIndex.query === 'Sessions' && (
         <DateContainer>
