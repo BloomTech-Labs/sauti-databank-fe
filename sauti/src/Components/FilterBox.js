@@ -179,6 +179,7 @@ const Button = styled.div`
   color: #fff;
   font-weight: 400;
   padding: 10px;
+  border-radius: 2px;
   text-align: center;
   align-self: center;
   font-size: 1.5rem;
