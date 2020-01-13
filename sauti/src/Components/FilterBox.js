@@ -123,6 +123,11 @@ export default function FilterBox(props) {
         </DateContainer>
         )}
 
+        <div className='btn-container'>
+          <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
+          <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
+        </div>
+
         <p className='reset-btn' onClick={e=> {
             props.setIndexLabel('Most Requested Procedures Commodities')
             props.setIndex({type: 'request_type', query: 'Sessions'})
@@ -139,11 +144,7 @@ export default function FilterBox(props) {
             setFilterBoxStartDate('2012-01-01')
             setFilterBoxEndDate('2020-01-08')
           }}>Reset</p>
-
-        <div className='btn-container'>
-          <Button className='checkbox-submit-btn' type="submit" onClick={handleSubmit}>Submit</Button>
-          <Button className='download-btn' onClick={()=> console.log('Download CSV')}>Download</Button>
-        </div>
+        
       </form>
     </DropdownContainer>
   )
@@ -220,7 +221,7 @@ const DropdownContainer = styled.div`
     text-decoration: underline;
     opacity: .7;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 20px;
   }
   .dropdown {
     color: $greyColor;
