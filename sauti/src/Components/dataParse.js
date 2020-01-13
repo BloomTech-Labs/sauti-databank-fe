@@ -95,6 +95,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
         });
     }
     crossFilteredData.forEach(obj => {
+      console.log({[`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]})
       return (dataStructure[index] = {
         ...dataStructure[index],
         [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
