@@ -165,8 +165,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure)
   
-  console.log("CROSSS OPTIONS", optionsForCheckbox)
-  return { dataStructure, crossFilterKeysArr, indexBy, totalSampleSize};
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize};
 };
 
 // Sets single filter index
