@@ -110,7 +110,8 @@ export default function FilterBox(props) {
             <input
               name='startData'
               type='date'
-              value='2012-01-01'
+              value='2012-01-11'
+              onChange={e => console.dir(e.target.value)}
             />
           </div>
           <div>
