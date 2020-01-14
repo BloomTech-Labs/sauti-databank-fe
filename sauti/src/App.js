@@ -68,7 +68,7 @@ const App = () => {
               endDate={endDate}
             />
           </div>
-          {/* <div className="dropdown-container">
+          <div className="dropdown-container">
             <FilterBox
               onChange={onChange}
               onSubmit={onSubmit}
@@ -88,7 +88,7 @@ const App = () => {
               setStartDate={setStartDate}
               setEndDate={setEndDate}
             />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

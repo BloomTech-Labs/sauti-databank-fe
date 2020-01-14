@@ -7,7 +7,6 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 
 export default function FilterBox(props) {
-  console.log("checkboxOptions", props.checkboxOptions);
   const [options, setOptions] = useState(FilterBoxOptions.default);
   const [filterBoxIndex, setFilterBoxIndex] = useState({
     type: "request_type",
@@ -33,6 +32,11 @@ export default function FilterBox(props) {
   ] = useState("");
   const [filterBoxStartDate, setFilterBoxStartDate] = useState("2012-01-01");
   const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
+
+  useEffect(() => {
+    setOptions(options.filter(obj => obj.label !== filterBoxIndexLabel));
+    console.log(options)
+  }, [filterBoxIndexLabel])
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -77,6 +81,7 @@ export default function FilterBox(props) {
           onChange={e => {
             setFilterBoxIndex(e.value);
             setFilterBoxIndexLabel(e.label);
+            setOptions(FilterBoxOptions.default)
             ClickTracker(e.value.type);
             if (e.value.arg) {
               setFilterBoxArgForQuery(e.value.arg);
@@ -89,7 +94,7 @@ export default function FilterBox(props) {
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
-          options={options}
+          options={options.filter(obj => obj.label !== setFilterBoxIndexLabel)}
           value={filterBoxCrossLabel}
           placeholder="Select second option..."
           onChange={e => {
