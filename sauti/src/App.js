@@ -7,23 +7,24 @@ import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
+import AdditionalFilterOptions from "./Components/AdditionalFilterOptions"
 
 const App = () => {
   const [index, setIndex] = useState({
-    type: "request_type",
-    query: "Sessions"
-  });
-  const [crossFilter, setCrossFilter] = useState({
-    type: "",
+    type: "gender",
     query: "Users"
   });
-  const [additionalFilter, setAdditionalFilter] = useState("");
+  const [crossFilter, setCrossFilter] = useState({
+    type: "age",
+    query: "Users"
+  });
+  const [additionalFilter, setAdditionalFilter] = useState("procedurecommoditycat");
   const [additionalFilterLabel, setAdditionalFilterLabel] = useState("");
   const [indexLabel, setIndexLabel] = useState(
-    "Most Requested Procedures Commodities"
+    "Gender"
   );
-  const [crossLabel, setCrossLabel] = useState("");
-  const [argForQuery, setArgForQuery] = useState("procedurecommodity");
+  const [crossLabel, setCrossLabel] = useState("Age");
+  const [argForQuery, setArgForQuery] = useState("");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
   const [startDate, setStartDate] = useState("2012-01-01");

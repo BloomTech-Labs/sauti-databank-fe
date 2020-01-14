@@ -5,27 +5,28 @@ import styled from "styled-components";
 import Dropdown from "react-dropdown";
 import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
+import AdditionalFilterOptions from "./AdditionalFilterOptions";
 
 export default function FilterBox(props) {
-  console.log("options", props.checkboxOptions)
+  console.log('options', props.checkboxOptions)
   const [options, setOptions] = useState(FilterBoxOptions.default);
   const [filterBoxIndex, setFilterBoxIndex] = useState({
-    type: "request_type",
-    query: "Sessions"
+    type: "gender",
+    query: "Users"
   });
   const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
-    type: "",
+    type: "age",
     query: "Users"
   });
   const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState(
-    "Most Requested Procedures Commodities"
+    "Gender"
   );
   const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState(
-    "procedurecommodity"
-  );
-  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
-  const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState(
     ""
+  );
+  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("Age");
+  const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState(
+    "procedurecommoditycat"
   );
   const [
     filterBoxAdditionalFilterLabel,
@@ -52,9 +53,7 @@ export default function FilterBox(props) {
     }
   };
 
-  const handleChange = e => {
-    props.setAdditionalFilter(filterBoxAdditionalFilter)
-  }
+ 
 
   const ClickTracker = index => {
     ReactGa.event({
@@ -80,6 +79,7 @@ export default function FilterBox(props) {
   
 
   return (
+    <>
     <DropdownContainer>
       <form>
         <p>Choose Category</p>
@@ -136,7 +136,7 @@ export default function FilterBox(props) {
          )
         }
 
-        {graphLabels[`${filterBoxAdditionalFilter}`] &&  ( 
+        {graphLabels[`${filterBoxAdditionalFilter}`] &&  (
         <CheckboxContainer>
           <p>{props.crossLabel}</p>
           {graphLabels[`${filterBoxAdditionalFilter}`].labels.reverse().map((option => (   
@@ -241,6 +241,10 @@ export default function FilterBox(props) {
         </p>
       </form>
     </DropdownContainer>
+      {
+          props.additionalFilter && <AdditionalFilterOptions additionalFilter={props.additionalFilter} />
+        }
+    </>
   );
 }
 
