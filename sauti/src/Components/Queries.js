@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Graph from "./Graph";
 import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
+import getIndex from "../DataParseHelpers/getIndex"
 
 const GetData = props => {
-  console.log("additonal thing", props.additionalFilter)
-  console.log("RERENDERED")
+ 
   let queryType = "tradersData";
   let QUERY;
 
     // useEffect(() => {
     // }, [props.additionalFilter]);
 
-  if (props.index.query === "Users" && props.crossFilter.query === "Users") {
+  if (props.index.query === "Users" && props.crossFilter.query === "Users" && !props.additionalFilter) {
     queryType = "tradersUsers";
     QUERY = gql`
       query getUsers( 
@@ -25,7 +25,8 @@ const GetData = props => {
         $produce: String,
         $primary_income: String,
         $language: String,
-        $country_of_residence: String
+        $country_of_residence: String,
+        $request_type: String
         ){
         tradersUsers (
           age: $age,
@@ -39,13 +40,18 @@ const GetData = props => {
           ) {
           ${props.index.type}
           ${props.crossFilter.type}
-          ${props.additionalFilter}
         }
+        
+            tradersData(request_type: $request_type){
+                request_value
+            }
+        
       }
       `;
   } else if (
     props.index.query === "Sessions" &&
-    props.crossFilter.query === "Users"
+    props.crossFilter.query === "Users" && 
+    !props.additionalFilter
   ) {
     queryType = "tradersData";
 
@@ -76,16 +82,85 @@ const GetData = props => {
           ){
           ${props.index.type}
           ${props.crossFilter.type}
-          ${props.additionalFilter}
           request_value
           created_date
         }
       }
       `;
+  } else if (props.index.query === "Users" && props.crossFilter.query === "Users") {
+    queryType = "tradersUsers";
+    QUERY = gql`
+      query getUsers( 
+        $age: String,
+        $gender: String, 
+        $education: String 
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        $request_type: String
+        ){
+        tradersUsers (
+          age: $age,
+          gender: $gender, 
+          education: $education
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence
+          ) {
+          ${props.index.type}
+          ${props.crossFilter.type}
+        }
+        additionalFilterData:tradersData(request_type: $request_type){
+            request_value
+        }
+      }
+      `;
+  } else {
+    queryType = "tradersData";
+
+    QUERY = gql`
+      query getData(
+        $age: String,
+        $gender: String, 
+        $education: String, 
+        $request_type: String!,
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        $request_value: String
+        ){
+        tradersData(
+          age: $age,
+          gender: $gender, 
+          education: $education, 
+          request_type: $request_type,
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence,
+          request_value: $request_value
+          ){
+          ${props.index.type}
+          ${props.crossFilter.type}
+          request_value
+          created_date
+        }
+        additionalFilterData:tradersData(request_type: $request_type){
+            request_value
+        }
+      }
+      `;
   }
 
-  const { loading, error, data } = useQuery(QUERY, {
-    variables: { ...props.selectedCheckbox, request_type: props.argForQuery }
+  let { loading, error, data } = useQuery(QUERY, {
+    variables: { ...props.selectedCheckbox, request_type: props.additionalFilter }
   });
 
   if (loading)
@@ -100,6 +175,10 @@ const GetData = props => {
         />
       </div>
     );
+    console.log('dataaa', data)
+    // data = [...data.tradersUsers, ...data.tradersData] // This is for when we are supporting multiple queries of same type
+
+  const filteredData = getIndex(data.additionalFilterData, "request_value").map(obj => obj.request_value);
 
   const chartData = dataParse(
     props.index.type,
@@ -123,8 +202,8 @@ const GetData = props => {
           indexBy={chartData.indexBy}
           label={props.label}
           groupMode={"grouped"}
+          filteredData={filteredData}
           sampleSize={chartData.totalSampleSize}
-          additionalFilterOptions={chartData.additionalFilterOptions}
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
         />
@@ -140,8 +219,8 @@ const GetData = props => {
           indexBy={chartData.indexBy}
           label={props.label}
           groupMode={"stacked"}
+          filteredData={filteredData}
           sampleSize={chartData.sampleSize}
-          additionalFilterOptions={chartData.additionalFilterOptions}
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
         />
