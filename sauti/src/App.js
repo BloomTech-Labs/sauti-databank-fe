@@ -14,7 +14,7 @@ const App = () => {
     query: "Sessions"
   });
   const [crossFilter, setCrossFilter] = useState({ 
-    type: "", 
+    type: "age", 
     query: "Users" 
   });
   const [indexLabel, setIndexLabel] = useState(
@@ -64,7 +64,7 @@ const App = () => {
               endDate={endDate}
             />
           </div>
-          <div className="dropdown-container">
+          {/* <div className="dropdown-container">
             <FilterBox
               onChange={onChange}
               onSubmit={onSubmit}
@@ -82,7 +82,7 @@ const App = () => {
               setStartDate={setStartDate}
               setEndDate={setEndDate}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
