@@ -56,14 +56,18 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   //will be used to store array of objects, where the key will be what is being cross filtered by / "crossFilter"
   // and the value is every possible value for that cross filter in the database
   let crossFilterKeys = [];
-
+  let additionalFilterKeys = [];
+  
   // IF NOT A "MOST REQUESTED" GRAPH, SETS THE KEYS IN A PREDETERMINED ORDER BASED ON WHAT ORDER LANCE WANTS THEM IN
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
   if (graphLabels[`${crossFilter}`]) {
     crossFilterKeys = graphLabels[`${crossFilter}`].structure;
+    console.log('DATA', data)
+    additionalFilterKeys = getIndex(data, additionalFilter);
   } else {
     crossFilterKeys = getIndex(data, "request_value");
   }
+  // console.log('additional Keys:', additionalFilterKeys)
 
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
@@ -73,7 +77,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
       Object.values(obj)[0] !== null &&
       crossFilterValues.push(Object.values(obj)[0])
   );
-
   // Building an array of objects where each object is formatted in this way
   // ex: if indexBy = "gender" and crossFilter = "age"
   // {"gender": "Male", "10-20": 167, "20-30": 237, "30-40": 642, "40-50": 210, "50-60": 123, "60-70": 1}
