@@ -13,16 +13,18 @@ const App = () => {
     type: "request_type",
     query: "Sessions"
   });
-  const [crossFilter, setCrossFilter] = useState({ 
-    type: "", 
-    query: "Users" 
+  const [crossFilter, setCrossFilter] = useState({
+    type: "",
+    query: "Users"
   });
+  const [additionalFilter, setAdditionalFilter] = useState("");
+  const [additionalFilterLabel, setAdditionalFilterLabel] = useState("");
   const [indexLabel, setIndexLabel] = useState(
     "Most Requested Procedures Commodities"
   );
   const [crossLabel, setCrossLabel] = useState("");
   const [argForQuery, setArgForQuery] = useState("procedurecommodity");
-  const [optionsForCheckbox, setCheckboxOptions] = useState([]);
+  const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
   const [startDate, setStartDate] = useState("2012-01-01");
   const [endDate, setEndDate] = useState("2020-01-08");
@@ -60,6 +62,8 @@ const App = () => {
               crossLabel={crossLabel}
               argForQuery={argForQuery}
               selectedCheckbox={selectedCheckbox}
+              setCheckboxOptions={setCheckboxOptions}
+              additionalFilter={additionalFilter}
               startDate={startDate}
               endDate={endDate}
             />
@@ -69,7 +73,7 @@ const App = () => {
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
-              optionsForCheckbox={optionsForCheckbox}
+              checkboxOptions={checkboxOptions}
               crossFilter={crossFilter}
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
@@ -77,6 +81,8 @@ const App = () => {
               setCrossLabel={setCrossLabel}
               setArgForQuery={setArgForQuery}
               setSelectedCheckbox={setSelectedCheckbox}
+              setAdditionalFilter={setAdditionalFilter}
+              setAdditionalFilterLabel={setAdditionalFilterLabel}
               startDate={startDate}
               endDate={endDate}
               setStartDate={setStartDate}
