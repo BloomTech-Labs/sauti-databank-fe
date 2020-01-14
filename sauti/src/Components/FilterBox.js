@@ -125,7 +125,9 @@ export default function FilterBox(props) {
               value={filterBoxAdditionalFilterLabel}
               placeholder="Select a filter..."
               onChange={e => {
-                setFilterBoxAdditionalFilter(e.value.type);
+                if(e.value.arg){
+                  setFilterBoxAdditionalFilter(e.value.arg);
+                } else{setFilterBoxAdditionalFilter(e.value.type)};
                 setFilterBoxAdditionalFilterLabel(e.label);
                 ClickTracker(e.value.type);
                 }}

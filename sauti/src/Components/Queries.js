@@ -17,32 +17,32 @@ const GetData = props => {
   if (props.index.query === "Users" && props.crossFilter.query === "Users") {
     queryType = "tradersUsers";
     QUERY = gql`
-        query getUsers( 
-            $age: String,
-            $gender: String, 
-            $education: String 
-            $crossing_freq: String,
-            $produce: String,
-            $primary_income: String,
-            $language: String,
-            $country_of_residence: String
-            ){
-            tradersUsers (
-                age: $age,
-                gender: $gender, 
-                education: $education
-                crossing_freq: $crossing_freq,
-                produce: $produce,
-                primary_income: $primary_income,
-                language: $language,
-                country_of_residence: $country_of_residence
-                ) {
-                ${props.index.type}
-                ${props.crossFilter.type}
-                ${props.additionalFilter}
-            }
+      query getUsers( 
+        $age: String,
+        $gender: String, 
+        $education: String 
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String
+        ){
+        tradersUsers (
+          age: $age,
+          gender: $gender, 
+          education: $education
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence
+          ) {
+          ${props.index.type}
+          ${props.crossFilter.type}
+          ${props.additionalFilter}
         }
-        `;
+      }
+      `;
   } else if (
     props.index.query === "Sessions" &&
     props.crossFilter.query === "Users"
@@ -50,38 +50,38 @@ const GetData = props => {
     queryType = "tradersData";
 
     QUERY = gql`
-        query getData(
-            $age: String,
-            $gender: String, 
-            $education: String, 
-            $request_type: String!,
-            $crossing_freq: String,
-            $produce: String,
-            $primary_income: String,
-            $language: String,
-            $country_of_residence: String,
-            $request_value: String
-            ){
-            tradersData(
-                age: $age,
-                gender: $gender, 
-                education: $education, 
-                request_type: $request_type,
-                crossing_freq: $crossing_freq,
-                produce: $produce,
-                primary_income: $primary_income,
-                language: $language,
-                country_of_residence: $country_of_residence,
-                request_value: $request_value
-                ){
-                ${props.index.type}
-                ${props.crossFilter.type}
-                ${props.additionalFilter}
-                request_value
-                created_date
-            }
+      query getData(
+        $age: String,
+        $gender: String, 
+        $education: String, 
+        $request_type: String!,
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        $request_value: String
+        ){
+        tradersData(
+          age: $age,
+          gender: $gender, 
+          education: $education, 
+          request_type: $request_type,
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence,
+          request_value: $request_value
+          ){
+          ${props.index.type}
+          ${props.crossFilter.type}
+          ${props.additionalFilter}
+          request_value
+          created_date
         }
-        `;
+      }
+      `;
   }
 
   const { loading, error, data } = useQuery(QUERY, {
