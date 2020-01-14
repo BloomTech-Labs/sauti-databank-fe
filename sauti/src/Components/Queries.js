@@ -9,13 +9,38 @@ const GetData = props => {
   let queryType = "tradersData";
   let QUERY;
 
+  //   useEffect(() => {
+  //     return (
+  //       chartData && props.setCheckboxOptions(chartData.additionalFilterOptions)
+  //     );
+  //   }, []);
+
   if (props.index.query === "Users" && props.crossFilter.query === "Users") {
     queryType = "tradersUsers";
     QUERY = gql`
-        query getUsers( $gender: String, $education: String ){
-            tradersUsers (gender: $gender, education: $education) {
+        query getUsers( 
+            $age: String,
+            $gender: String, 
+            $education: String 
+            $crossing_freq: String,
+            $produce: String,
+            $primary_income: String,
+            $language: String,
+            $country_of_residence: String
+            ){
+            tradersUsers (
+                age: $age,
+                gender: $gender, 
+                education: $education
+                crossing_freq: $crossing_freq,
+                produce: $produce,
+                primary_income: $primary_income,
+                language: $language,
+                country_of_residence: $country_of_residence
+                ) {
                 ${props.index.type}
                 ${props.crossFilter.type}
+                ${props.additionalFilter}
             }
         }
         `;
@@ -26,10 +51,33 @@ const GetData = props => {
     queryType = "tradersData";
 
     QUERY = gql`
-        query getData($request_type: String!){
-            tradersData(request_type: $request_type){
+        query getData(
+            $age: String,
+            $gender: String, 
+            $education: String, 
+            $request_type: String!,
+            $crossing_freq: String,
+            $produce: String,
+            $primary_income: String,
+            $language: String,
+            $country_of_residence: String,
+            $request_value: String
+            ){
+            tradersData(
+                age: $age,
+                gender: $gender, 
+                education: $education, 
+                request_type: $request_type,
+                crossing_freq: $crossing_freq,
+                produce: $produce,
+                primary_income: $primary_income,
+                language: $language,
+                country_of_residence: $country_of_residence,
+                request_value: $request_value
+                ){
                 ${props.index.type}
                 ${props.crossFilter.type}
+                ${props.additionalFilter}
                 request_value
                 created_date
             }
@@ -38,7 +86,7 @@ const GetData = props => {
   }
 
   const { loading, error, data } = useQuery(QUERY, {
-    variables: { request_type: props.argForQuery }
+    variables: { ...props.selectedCheckbox, request_type: props.argForQuery }
   });
 
   if (loading)
@@ -59,9 +107,17 @@ const GetData = props => {
     data[`${queryType}`],
     props.crossFilter.type,
     props.argForQuery,
+    props.additionalFilter,
     props.startDate,
     props.endDate
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
+
+  //   if (
+  //     chartData &&
+  //     props.checkboxOptions !== chartData.additionalFilterOptions
+  //   ) {
+  //     props.setCheckboxOptions(chartData.additionalFilterOptions);
+  //   }
 
   if (props.crossFilter.type !== "") {
     return (
