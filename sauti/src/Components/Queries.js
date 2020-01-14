@@ -6,14 +6,13 @@ import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
 
 const GetData = props => {
+  console.log("additonal thing", props.additionalFilter)
+  console.log("RERENDERED")
   let queryType = "tradersData";
   let QUERY;
 
-  //   useEffect(() => {
-  //     return (
-  //       chartData && props.setCheckboxOptions(chartData.additionalFilterOptions)
-  //     );
-  //   }, []);
+    // useEffect(() => {
+    // }, [props.additionalFilter]);
 
   if (props.index.query === "Users" && props.crossFilter.query === "Users") {
     queryType = "tradersUsers";
@@ -112,13 +111,6 @@ const GetData = props => {
     props.endDate
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
-  //   if (
-  //     chartData &&
-  //     props.checkboxOptions !== chartData.additionalFilterOptions
-  //   ) {
-  //     props.setCheckboxOptions(chartData.additionalFilterOptions);
-  //   }
-
   if (props.crossFilter.type !== "") {
     return (
       <div>
@@ -132,6 +124,9 @@ const GetData = props => {
           label={props.label}
           groupMode={"grouped"}
           sampleSize={chartData.totalSampleSize}
+          additionalFilterOptions={chartData.additionalFilterOptions}
+          checkboxOptions={props.checkboxOptions}
+          setCheckboxOptions={props.setCheckboxOptions}
         />
       </div>
     );
@@ -146,6 +141,9 @@ const GetData = props => {
           label={props.label}
           groupMode={"stacked"}
           sampleSize={chartData.sampleSize}
+          additionalFilterOptions={chartData.additionalFilterOptions}
+          checkboxOptions={props.checkboxOptions}
+          setCheckboxOptions={props.setCheckboxOptions}
         />
       </div>
     );

@@ -57,7 +57,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // and the value is every possible value for that cross filter in the database
   let crossFilterKeys = [];
 
-  console.log("data at beginning", dataStructure);
   // IF NOT A "MOST REQUESTED" GRAPH, SETS THE KEYS IN A PREDETERMINED ORDER BASED ON WHAT ORDER LANCE WANTS THEM IN
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
   if (graphLabels[`${crossFilter}`]) {
@@ -123,8 +122,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
     keyValueArr = keyValueArr.sort((a, b) => b[1] - a[1]).splice(0, 7);
 
-    console.log("key value arr", keyValueArr);
-    console.log("data structure after map", dataStructure);
     let newDataStructure = [];
     keyValueArr.forEach(arr => {
       for (let i = 0, len = dataStructure.length; i < len; i++) {
@@ -133,7 +130,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
         }
       }
     });
-    console.log("new data structure", newDataStructure);
+
     dataStructure = newDataStructure;
   }
 
@@ -195,7 +192,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 // Puts each value from key:value pair into an array
 // ['Female', 'Male', null]
 const setItem = (data, dataStructure, indexBy, additionalFilter) => {
-  console.log("data entering into setItem function", data);
   let arr = [];
 
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
@@ -231,8 +227,6 @@ const setItem = (data, dataStructure, indexBy, additionalFilter) => {
     })
     .filter(str => str !== null);
 
-  console.log("before return", dataStructure);
-
   return {
     dataStructure,
     keys: graphLabels[`${indexBy}`].labels,
@@ -245,7 +239,7 @@ const setItem = (data, dataStructure, indexBy, additionalFilter) => {
 //Builds data for Nivo when single filtering by "Most Requested"
 const getMostRequested = (data, dataStructure, indexBy, argForQuery, additionalFilter) => {
   let arr = [];
-  console.log("MOST REQUEST BEGIN", dataStructure);
+
   // Puts each value from key:value pair into an array
   // ['Maize', 'Clothes', 'Bananas']
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
@@ -269,8 +263,6 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery, additionalF
     sampleSize += Number(item[keyValue]);
   });
 
-  console.log("BEFORE LOOP TO DO STUFF", dataStructure);
-
   dataStructure.forEach(obj => {
     const keyValue = obj[`request_value`];
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
@@ -282,11 +274,7 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery, additionalF
 
   const keys = dataStructure.map(obj => obj.request_value);
 
-  console.log("data structure before splice", dataStructure);
-
   dataStructure = dataStructure.slice(0, 7);
-
-  console.log("data structure after", dataStructure);
 
   //Function abbreviates graph labels
   if (
@@ -352,8 +340,6 @@ const abbreviateLabels = dataStructure => {
 };
 
 const filterByDate = (data, startDate, endDate) => {
-  console.log("filter data", data);
-
   startDate = startDate.replace(/-/g, "");
   endDate = endDate.replace(/-/g, "");
 
@@ -362,7 +348,6 @@ const filterByDate = (data, startDate, endDate) => {
     return objectDate > startDate && objectDate < endDate;
   });
 
-  console.log("filtered data", filteredData);
   return filteredData;
 };
 
