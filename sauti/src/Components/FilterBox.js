@@ -7,6 +7,7 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 
 export default function FilterBox(props) {
+  console.log("options", props.checkboxOptions)
   const [options, setOptions] = useState(FilterBoxOptions.default);
   const [filterBoxIndex, setFilterBoxIndex] = useState({
     type: "request_type",
@@ -35,11 +36,10 @@ export default function FilterBox(props) {
 
   useEffect(() => {
     setOptions(options.filter(obj => obj.label !== filterBoxIndexLabel));
-    console.log(options)
   }, [filterBoxIndexLabel])
 
   const handleSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     props.setIndex(filterBoxIndex);
     props.setIndexLabel(filterBoxIndexLabel);
     props.setCrossLabel(filterBoxCrossLabel);
@@ -52,6 +52,10 @@ export default function FilterBox(props) {
       props.setArgForQuery(filterBoxArgForQuery);
     }
   };
+
+  const handleChange = e => {
+    props.setAdditionalFilter(filterBoxAdditionalFilter)
+  }
 
   const ClickTracker = index => {
     ReactGa.event({
@@ -103,25 +107,30 @@ export default function FilterBox(props) {
           }}
         />
 
-        <p>Additional Filter</p>
-        <Dropdown
-          controlClassName="myControlClassName"
-          arrowClassName="myArrowClassName"
-          className="dropdown"
-          options={FilterBoxOptions.default}
-          value={filterBoxAdditionalFilterLabel}
-          placeholder="Select a filter..."
-          onChange={e => {
-            setFilterBoxAdditionalFilter(e.value.type);
-            setFilterBoxAdditionalFilterLabel(e.label);
-            ClickTracker(e.value.type);
-          }}
-        />
+       {filterBoxCrossFilter.type && (
+         <>
+          <p>Additional Filter</p>
+            <Dropdown
+              controlClassName="myControlClassName"
+              arrowClassName="myArrowClassName"
+              className="dropdown"
+              options={FilterBoxOptions.default}
+              value={filterBoxAdditionalFilterLabel}
+              placeholder="Select a filter..."
+              onChange={e => {
+                setFilterBoxAdditionalFilter(e.value.type);
+                setFilterBoxAdditionalFilterLabel(e.label);
+                ClickTracker(e.value.type);
+                }}
+              />
+          </>
+         )
+        }
 
-        {/* {filterBoxCrossFilter.type !== "" &&  ( 
+        {props.checkboxOptions.length > 1 &&  ( 
         <CheckboxContainer>
           <p>{props.crossLabel}</p>
-          {(graphLabels[`${filterBoxCrossFilter.type}`].labels.map(option => (   
+          {(props.checkboxOptions.map(option => (   
             <Options>
               <input
               type="radio"
@@ -136,7 +145,8 @@ export default function FilterBox(props) {
             ))
           )}
         </CheckboxContainer>
-        )} */}
+        )}
+
 
         {filterBoxIndex.query === "Sessions" && (
           <DateContainer>

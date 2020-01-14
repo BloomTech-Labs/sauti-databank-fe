@@ -28,6 +28,7 @@ const App = () => {
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
   const [startDate, setStartDate] = useState("2012-01-01");
   const [endDate, setEndDate] = useState("2020-01-08");
+  console.log('app additonal option', additionalFilter)
 
   useEffect(() => {
     ReactGa.initialize("UA-155468784-1");
@@ -43,8 +44,6 @@ const App = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
-
-  console.log("selected checkbox!!!!", selectedCheckbox);
 
   return (
     <div className="App">
@@ -62,6 +61,7 @@ const App = () => {
               crossLabel={crossLabel}
               argForQuery={argForQuery}
               selectedCheckbox={selectedCheckbox}
+              checkboxOptions={checkboxOptions}
               setCheckboxOptions={setCheckboxOptions}
               additionalFilter={additionalFilter}
               startDate={startDate}
