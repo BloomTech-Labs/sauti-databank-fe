@@ -39,7 +39,6 @@ export default function FilterBox(props) {
   }, [filterBoxIndexLabel])
 
   const handleSubmit = e => {
-    // e.preventDefault();
     props.setIndex(filterBoxIndex);
     props.setIndexLabel(filterBoxIndexLabel);
     props.setCrossLabel(filterBoxCrossLabel);
@@ -71,6 +70,14 @@ export default function FilterBox(props) {
       setOptions(FilterBoxOptions.default);
     }
   }, []);
+
+  useEffect(() => {
+    if (!graphLabels[`${filterBoxAdditionalFilter}`]){
+      handleSubmit()
+    }
+  }, [filterBoxAdditionalFilter])
+
+  
 
   return (
     <DropdownContainer>
@@ -127,6 +134,26 @@ export default function FilterBox(props) {
          )
         }
 
+        {graphLabels[`${filterBoxAdditionalFilter}`] &&  ( 
+        <CheckboxContainer>
+          <p>{props.crossLabel}</p>
+          {graphLabels[`${filterBoxAdditionalFilter}`].labels.reverse().map((option => (   
+            <Options>
+              <input
+              type="radio"
+              name="CrossFilter"
+              value={option}
+              onChange={e=> (
+                props.setSelectedCheckbox( { [`${filterBoxCrossFilter.type}`]: option } )
+              )}
+              />
+                <FilterOption>{option}</FilterOption>
+            </Options>
+            ))
+          )}
+        </CheckboxContainer>
+        )}
+
         {props.checkboxOptions.length > 1 &&  ( 
         <CheckboxContainer>
           <p>{props.crossLabel}</p>
@@ -146,6 +173,7 @@ export default function FilterBox(props) {
           )}
         </CheckboxContainer>
         )}
+
 
 
         {filterBoxIndex.query === "Sessions" && (
