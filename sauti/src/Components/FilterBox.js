@@ -69,7 +69,7 @@ export default function FilterBox(props) {
   }, []);
 
   useEffect(() => {
-    if (!graphLabels[`${filterBoxAdditionalFilter}`]){
+    if (!graphLabels[`${filterBoxAdditionalFilter}`]) {
       handleSubmit()
     }
   }, [filterBoxAdditionalFilter])
@@ -109,9 +109,9 @@ export default function FilterBox(props) {
           }}
         />
 
-       {filterBoxCrossFilter.type && (
-         <>
-          <p>Additional Filter</p>
+        {filterBoxCrossFilter.type && (
+          <>
+            <p>Additional Filter</p>
             <Dropdown
               controlClassName="myControlClassName"
               arrowClassName="myArrowClassName"
@@ -120,58 +120,58 @@ export default function FilterBox(props) {
               value={filterBoxAdditionalFilterLabel}
               placeholder="Select a filter..."
               onChange={e => {
-                if(e.value.arg){
+                if (e.value.arg) {
                   setFilterBoxAdditionalFilter(e.value.arg);
-                } else { 
-                  setFilterBoxAdditionalFilter(e.value.type) 
+                } else {
+                  setFilterBoxAdditionalFilter(e.value.type)
                 };
                 setFilterBoxAdditionalFilterLabel(e.label);
                 props.setCheckboxOptions([]);
                 ClickTracker(e.value.type);
-                }}
-              />
+              }}
+            />
           </>
-         )
+        )
         }
 
-        {graphLabels[`${filterBoxAdditionalFilter}`] &&  (
-        <CheckboxContainer>
-          <p>{props.crossLabel}</p>
-          {graphLabels[`${filterBoxAdditionalFilter}`].labels.map((option => (   
-            <Options>
-              <input
-              type="radio"
-              name="CrossFilter"
-              value={option}
-              onChange={e=> (
-                props.setSelectedCheckbox( { [`${filterBoxCrossFilter.type}`]: option } )
-              )}
-              />
+        {graphLabels[`${filterBoxAdditionalFilter}`] && (
+          <CheckboxContainer>
+            <p>{props.crossLabel}</p>
+            {graphLabels[`${filterBoxAdditionalFilter}`].labels.map((option => (
+              <Options>
+                <input
+                  type="radio"
+                  name="CrossFilter"
+                  value={option}
+                  onChange={e => (
+                    props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter}`]: option })
+                  )}
+                />
                 <FilterOption>{option}</FilterOption>
-            </Options>
+              </Options>
             ))
-          )}
-        </CheckboxContainer>
+            )}
+          </CheckboxContainer>
         )}
 
-        {props.checkboxOptions.length > 1 &&  ( 
-        <CheckboxContainer>
-          <p>{props.crossLabel}</p>
-          {(props.checkboxOptions.map(option => (   
-            <Options>
-              <input
-              type="radio"
-              name="CrossFilter"
-              value={option}
-              onChange={e=> (
-                props.setSelectedCheckbox( { [`${filterBoxCrossFilter.type}`]: option } )
-              )}
-              />
+        {props.checkboxOptions.length > 1 && (
+          <CheckboxContainer>
+            <p>{props.crossLabel}</p>
+            {(props.checkboxOptions.map(option => (
+              <Options>
+                <input
+                  type="radio"
+                  name="CrossFilter"
+                  value={option}
+                  onChange={e => {
+                    props.setSelectedCheckbox({ [`request_value`]: option })
+                  }}
+                />
                 <FilterOption>{option}</FilterOption>
-            </Options>
+              </Options>
             ))
-          )}
-        </CheckboxContainer>
+            )}
+          </CheckboxContainer>
         )}
 
 
@@ -227,6 +227,7 @@ export default function FilterBox(props) {
             props.setStartDate("2012-01-01");
             props.setEndDate("2020-01-08");
             props.setCheckboxOptions([]);
+            props.setSelectedCheckbox({})
             setFilterBoxIndexLabel("Most Requested Procedures Commodities");
             setFilterBoxIndex({ type: "request_type", query: "Sessions" });
             setFilterBoxCrossLabel("");
@@ -234,6 +235,7 @@ export default function FilterBox(props) {
             setFilterBoxArgForQuery("");
             setFilterBoxStartDate("2012-01-01");
             setFilterBoxEndDate("2020-01-08");
+            
           }}
         >
           Reset

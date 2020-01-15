@@ -8,6 +8,8 @@ import getIndex from "../DataParseHelpers/getIndex"
 import graphLabels from "./graphLabels"
 
 const GetData = props => {
+  console.log('selected checkbox', props.selectedCheckbox)
+  console.log('argument', props.argForQuery)
   let queryType = "tradersData";
   let QUERY;
 
@@ -79,7 +81,7 @@ const GetData = props => {
       }
       `;
   } else if (props.index.query === "Users" && props.crossFilter.query === "Users") {
-    queryType = "tradersUsers";
+    queryType = "tradersData";
     QUERY = gql`
       query getUsers( 
         $age: String,
@@ -90,9 +92,10 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $request_type: String
+        $request_value: String,
+        $additional_filter_type: String
         ){
-        tradersUsers (
+        tradersData (
           age: $age,
           gender: $gender, 
           education: $education
@@ -100,12 +103,13 @@ const GetData = props => {
           produce: $produce,
           primary_income: $primary_income,
           language: $language,
-          country_of_residence: $country_of_residence
+          country_of_residence: $country_of_residence,
+          request_value: $request_value,
           ) {
           ${props.index.type}
           ${props.crossFilter.type}
         }
-        additionalFilterData:tradersData(request_type: $request_type){
+        additionalFilterData:tradersData(request_type: $additional_filter_type){
             request_value
         }
       }
@@ -124,7 +128,8 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $request_value: String
+        $request_value: String,
+        $additional_filter_type: String,
         ){
         tradersData(
           age: $age,
@@ -143,7 +148,7 @@ const GetData = props => {
           request_value
           created_date
         }
-        additionalFilterData:tradersData(request_type: $request_type){
+        additionalFilterData:tradersData(request_type: $additional_filter_type){
             request_value
         }
       }
@@ -158,7 +163,7 @@ const GetData = props => {
   }
 
   let { loading, error, data } = useQuery(QUERY, {
-    variables: { ...props.selectedCheckbox, request_type: props.additionalFilter },
+    variables: { ...props.selectedCheckbox, request_type: props.argForQuery, additional_filter_type: props.additionalFilter},
     fetchPolicy: policyType
   });
 
