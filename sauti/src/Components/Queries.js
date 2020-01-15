@@ -186,18 +186,14 @@ const GetData = props => {
     filteredData = getIndex(data.additionalFilterData, "request_value").map(obj => obj.request_value);
   };
 
-  console.log("DATES IN QUERIES.JS", props.startDate, 'ENDS:', props.endDate)
-  console.log(" INDX TYPE IN QUERIES.JS", props.index.type)
-  console.log(" CROSS IN QUERIES.JS", props.crossFilter.type)
-  console.log(" ADDTNL IN QUERIES.JS", props.additionalFilter.type)
-
   const chartData = dataParse(
     props.index.type,
     data[`${queryType}`],
     props.crossFilter.type,
     props.argForQuery,
     props.startDate,
-    props.endDate
+    props.endDate,
+    props.additionalFilter.type
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
   if (props.crossFilter.type !== "") {

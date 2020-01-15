@@ -7,11 +7,10 @@ const dataParse = (
   crossFilter,
   argForQuery,
   startDate,
-  endDate
+  endDate,
+  additionalFilter
 ) => {
   let dataStructure;
-
-  console.log('DATES', startDate, 'END:', endDate);
 
   //when single filtering "Most Requested" graph
   if (indexBy === "request_type" && crossFilter === "") {
@@ -23,14 +22,14 @@ const dataParse = (
   else if (indexBy === "request_type" && crossFilter !== "") {
     data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, "request_value");
-    return setCrossedItems(data, dataStructure, crossFilter, indexBy);
+    return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
   } else {
     //telling function how to format data. See "graphLabels.js"
     dataStructure = graphLabels[`${indexBy}`].structure;
 
     //when cross-filtering and index is Not "Most Requested"
     if (crossFilter !== "") {
-      return setCrossedItems(data, dataStructure, crossFilter, indexBy);
+      return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
     } else {
       //when single filtering with index that is not "Most Requested"
       return setItem(data, dataStructure, indexBy);
@@ -38,7 +37,7 @@ const dataParse = (
   }
 };
 
-const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
+const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFilter) => {
   //will be used to store all possible values for the index value, which is referring to a column in the database table
   let indexByValues = [];
   //will be used to store all possible values for the cross filter value, which is referring to a column in the database table
@@ -167,7 +166,13 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure);
 
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize};
+  console.log("additonal filter", additionalFilter)
+
+  const additionalFilterOptions = getIndex(data, additionalFilter)
+    .map(obj => Object.values(obj)[0])
+    .filter(str => str !== null)
+
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions};
 };
 
 // Sets single filter index
