@@ -10,22 +10,25 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState({
-    type: "request_type",
-    query: "Sessions"
+    type: "gender",
+    query: "Users"
   });
-  const [crossFilter, setCrossFilter] = useState({ 
-    type: "", 
-    query: "Users" 
+  const [crossFilter, setCrossFilter] = useState({
+    type: "age",
+    query: "Users"
   });
+  const [additionalFilter, setAdditionalFilter] = useState("");
+  const [additionalFilterLabel, setAdditionalFilterLabel] = useState("");
   const [indexLabel, setIndexLabel] = useState(
-    "Most Requested Procedures Commodities"
+    "Gender"
   );
-  const [crossLabel, setCrossLabel] = useState("");
-  const [argForQuery, setArgForQuery] = useState("procedurecommodity");
-  const [optionsForCheckbox, setCheckboxOptions] = useState([]);
+  const [crossLabel, setCrossLabel] = useState("Age");
+  const [argForQuery, setArgForQuery] = useState("");
+  const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
   const [startDate, setStartDate] = useState("2012-01-01");
   const [endDate, setEndDate] = useState("2020-01-08");
+  console.log('app additonal option', additionalFilter)
 
   useEffect(() => {
     ReactGa.initialize("UA-155468784-1");
@@ -41,8 +44,6 @@ const App = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
-
-  console.log("selected checkbox!!!!", selectedCheckbox);
 
   return (
     <div className="App">
@@ -60,6 +61,9 @@ const App = () => {
               crossLabel={crossLabel}
               argForQuery={argForQuery}
               selectedCheckbox={selectedCheckbox}
+              checkboxOptions={checkboxOptions}
+              setCheckboxOptions={setCheckboxOptions}
+              additionalFilter={additionalFilter}
               startDate={startDate}
               endDate={endDate}
             />
@@ -69,7 +73,7 @@ const App = () => {
               onChange={onChange}
               onSubmit={onSubmit}
               index={index}
-              optionsForCheckbox={optionsForCheckbox}
+              checkboxOptions={checkboxOptions}
               crossFilter={crossFilter}
               setIndex={setIndex}
               setCrossFilter={setCrossFilter}
@@ -77,6 +81,9 @@ const App = () => {
               setCrossLabel={setCrossLabel}
               setArgForQuery={setArgForQuery}
               setSelectedCheckbox={setSelectedCheckbox}
+              setCheckboxOptions={setCheckboxOptions}
+              setAdditionalFilter={setAdditionalFilter}
+              setAdditionalFilterLabel={setAdditionalFilterLabel}
               startDate={startDate}
               endDate={endDate}
               setStartDate={setStartDate}

@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
 const Graph = props => {
+
+  useEffect(() => {
+    if(props.filteredData && props.checkboxOptions !== props.filteredData) {
+      props.setCheckboxOptions(props.filteredData)
+    }
+  }, [])
+
   return (
     <div className="Graph-Container">
       <ResponsiveBar

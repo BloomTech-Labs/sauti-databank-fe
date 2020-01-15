@@ -1,44 +1,170 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Graph from "./Graph";
 import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
+import getIndex from "../DataParseHelpers/getIndex"
+import graphLabels from "./graphLabels"
 
 const GetData = props => {
+  console.log('selected checkbox', props.selectedCheckbox)
+  console.log('argument', props.argForQuery)
   let queryType = "tradersData";
   let QUERY;
 
-  if (props.index.query === "Users" && props.crossFilter.query === "Users") {
+  if (props.index.query === "Users" && props.crossFilter.query === "Users" && !props.additionalFilter) {
     queryType = "tradersUsers";
     QUERY = gql`
-        query getUsers( $gender: String, $education: String ){
-            tradersUsers (gender: $gender, education: $education) {
-                ${props.index.type}
-                ${props.crossFilter.type}
-            }
+      query getUsers( 
+        $age: String,
+        $gender: String, 
+        $education: String 
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        ){
+        tradersUsers (
+          age: $age,
+          gender: $gender, 
+          education: $education
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence
+          ) {
+          ${props.index.type}
+          ${props.crossFilter.type}
         }
-        `;
+      }
+      `;
   } else if (
     props.index.query === "Sessions" &&
-    props.crossFilter.query === "Users"
+    props.crossFilter.query === "Users" && 
+    !props.additionalFilter
   ) {
     queryType = "tradersData";
 
     QUERY = gql`
-        query getData($request_type: String!){
-            tradersData(request_type: $request_type){
-                ${props.index.type}
-                ${props.crossFilter.type}
-                request_value
-                created_date
-            }
+      query getData(
+        $age: String,
+        $gender: String, 
+        $education: String, 
+        $request_type: String!,
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        $request_value: String
+        ){
+        tradersData(
+          age: $age,
+          gender: $gender, 
+          education: $education, 
+          request_type: $request_type,
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence,
+          request_value: $request_value
+          ){
+          ${props.index.type}
+          ${props.crossFilter.type}
+          request_value
+          created_date
         }
-        `;
+      }
+      `;
+  } else if (props.index.query === "Users" && props.crossFilter.query === "Users") {
+    queryType = "tradersData";
+    QUERY = gql`
+      query getUsers( 
+        $age: String,
+        $gender: String, 
+        $education: String 
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        $request_value: String,
+        $additional_filter_type: String
+        ){
+        tradersData (
+          age: $age,
+          gender: $gender, 
+          education: $education
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence,
+          request_value: $request_value,
+          ) {
+          ${props.index.type}
+          ${props.crossFilter.type}
+        }
+        additionalFilterData:tradersData(request_type: $additional_filter_type){
+            request_value
+        }
+      }
+      `;
+  } else {
+    queryType = "tradersData";
+
+    QUERY = gql`
+      query getData(
+        $age: String,
+        $gender: String, 
+        $education: String, 
+        $request_type: String!,
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        $request_value: String,
+        $additional_filter_type: String,
+        ){
+        tradersData(
+          age: $age,
+          gender: $gender, 
+          education: $education, 
+          request_type: $request_type,
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence,
+          request_value: $request_value
+          ){
+          ${props.index.type}
+          ${props.crossFilter.type}
+          request_value
+          created_date
+        }
+        additionalFilterData:tradersData(request_type: $additional_filter_type){
+            request_value
+        }
+      }
+      `;
   }
 
-  const { loading, error, data } = useQuery(QUERY, {
-    variables: { request_type: props.argForQuery }
+  let policyType;
+  if (props.additionalFilter && !graphLabels[`${props.additionalFilter}`]) {
+    policyType = "network-only";
+  } else {
+    policyType = "cache-first";
+  }
+
+  let { loading, error, data } = useQuery(QUERY, {
+    variables: { ...props.selectedCheckbox, request_type: props.argForQuery, additional_filter_type: props.additionalFilter},
+    fetchPolicy: policyType
   });
 
   if (loading)
@@ -49,16 +175,25 @@ const GetData = props => {
           type="Oval"
           color="#708090"
           width={100}
-          timeout={5000}
+          timeout={8000}
         />
       </div>
     );
+    // data = [...data.tradersUsers, ...data.tradersData] // This is for when we are supporting multiple queries of same type
+  
+  let filteredData;
+  if (props.additionalFilter) {
+    filteredData = getIndex(data.additionalFilterData, "request_value").map(obj => obj.request_value);
+  };
+
+  console.log("the goods", data)
 
   const chartData = dataParse(
     props.index.type,
     data[`${queryType}`],
     props.crossFilter.type,
     props.argForQuery,
+    props.additionalFilter,
     props.startDate,
     props.endDate
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
@@ -75,7 +210,10 @@ const GetData = props => {
           indexBy={chartData.indexBy}
           label={props.label}
           groupMode={"grouped"}
+          filteredData={filteredData}
           sampleSize={chartData.totalSampleSize}
+          checkboxOptions={props.checkboxOptions}
+          setCheckboxOptions={props.setCheckboxOptions}
         />
       </div>
     );
@@ -89,7 +227,10 @@ const GetData = props => {
           indexBy={chartData.indexBy}
           label={props.label}
           groupMode={"stacked"}
+          filteredData={filteredData}
           sampleSize={chartData.sampleSize}
+          checkboxOptions={props.checkboxOptions}
+          setCheckboxOptions={props.setCheckboxOptions}
         />
       </div>
     );
