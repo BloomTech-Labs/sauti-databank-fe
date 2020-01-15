@@ -100,7 +100,7 @@ export default function FilterBox(props) {
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
-          options={options.filter(obj => obj.label !== setFilterBoxIndexLabel)}
+          options={options.filter(obj => obj.label !== filterBoxIndexLabel)}
           value={filterBoxCrossLabel}
           placeholder="Select second option..."
           onChange={e => {
