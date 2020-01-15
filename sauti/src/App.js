@@ -17,7 +17,7 @@ const App = () => {
     type: "age",
     query: "Users"
   });
-  const [additionalFilter, setAdditionalFilter] = useState("");
+  const [additionalFilter, setAdditionalFilter] = useState({type: '', query: ''});
   const [additionalFilterLabel, setAdditionalFilterLabel] = useState("");
   const [indexLabel, setIndexLabel] = useState(
     "Gender"
