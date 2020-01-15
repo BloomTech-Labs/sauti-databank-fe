@@ -5,14 +5,11 @@ import Graph from "./Graph";
 import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
 import getIndex from "../DataParseHelpers/getIndex"
+import graphLabels from "./graphLabels"
 
 const GetData = props => {
- 
   let queryType = "tradersData";
   let QUERY;
-
-    // useEffect(() => {
-    // }, [props.additionalFilter]);
 
   if (props.index.query === "Users" && props.crossFilter.query === "Users" && !props.additionalFilter) {
     queryType = "tradersUsers";
@@ -26,7 +23,6 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $request_type: String
         ){
         tradersUsers (
           age: $age,
@@ -41,11 +37,6 @@ const GetData = props => {
           ${props.index.type}
           ${props.crossFilter.type}
         }
-        
-            tradersData(request_type: $request_type){
-                request_value
-            }
-        
       }
       `;
   } else if (
@@ -159,8 +150,16 @@ const GetData = props => {
       `;
   }
 
+  let policyType;
+  if (props.additionalFilter && !graphLabels[`${props.additionalFilter}`]) {
+    policyType = "network-only";
+  } else {
+    policyType = "cache-first";
+  }
+
   let { loading, error, data } = useQuery(QUERY, {
-    variables: { ...props.selectedCheckbox, request_type: props.additionalFilter }
+    variables: { ...props.selectedCheckbox, request_type: props.additionalFilter },
+    fetchPolicy: policyType
   });
 
   if (loading)
@@ -171,14 +170,18 @@ const GetData = props => {
           type="Oval"
           color="#708090"
           width={100}
-          timeout={5000}
+          timeout={8000}
         />
       </div>
     );
-    console.log('dataaa', data)
     // data = [...data.tradersUsers, ...data.tradersData] // This is for when we are supporting multiple queries of same type
+  
+  let filteredData;
+  if (props.additionalFilter) {
+    filteredData = getIndex(data.additionalFilterData, "request_value").map(obj => obj.request_value);
+  };
 
-  const filteredData = getIndex(data.additionalFilterData, "request_value").map(obj => obj.request_value);
+  console.log("the goods", data)
 
   const chartData = dataParse(
     props.index.type,
