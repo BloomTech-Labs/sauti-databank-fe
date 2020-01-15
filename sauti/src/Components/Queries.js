@@ -8,10 +8,12 @@ import getIndex from "../DataParseHelpers/getIndex"
 import graphLabels from "./graphLabels"
 
 const GetData = props => {
+  console.log('selected checkbox', props.selectedCheckbox)
+  console.log('argument', props.argForQuery)
   let queryType = "tradersData";
   let QUERY;
 
-  if (props.index.query === "Users" && props.crossFilter.query === "Users" && !props.additionalFilter) {
+  if (props.index.query === "Users" && props.crossFilter.query === "Users" && !props.additionalFilter.type) {
     queryType = "tradersUsers";
     QUERY = gql`
       query getUsers( 
@@ -42,7 +44,7 @@ const GetData = props => {
   } else if (
     props.index.query === "Sessions" &&
     props.crossFilter.query === "Users" && 
-    !props.additionalFilter
+    !props.additionalFilter.type
   ) {
     queryType = "tradersData";
 
@@ -79,7 +81,7 @@ const GetData = props => {
       }
       `;
   } else if (props.index.query === "Users" && props.crossFilter.query === "Users") {
-    queryType = "tradersUsers";
+    queryType = "tradersData";
     QUERY = gql`
       query getUsers( 
         $age: String,
@@ -90,9 +92,10 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $request_type: String
+        $request_value: String,
+        $additional_filter_type: String
         ){
-        tradersUsers (
+        tradersData (
           age: $age,
           gender: $gender, 
           education: $education
@@ -100,12 +103,13 @@ const GetData = props => {
           produce: $produce,
           primary_income: $primary_income,
           language: $language,
-          country_of_residence: $country_of_residence
+          country_of_residence: $country_of_residence,
+          request_value: $request_value,
           ) {
           ${props.index.type}
           ${props.crossFilter.type}
         }
-        additionalFilterData:tradersData(request_type: $request_type){
+        additionalFilterData:tradersData(request_type: $additional_filter_type){
             request_value
         }
       }
@@ -124,7 +128,8 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $request_value: String
+        $request_value: String,
+        $additional_filter_type: String,
         ){
         tradersData(
           age: $age,
@@ -143,7 +148,7 @@ const GetData = props => {
           request_value
           created_date
         }
-        additionalFilterData:tradersData(request_type: $request_type){
+        additionalFilterData:tradersData(request_type: $additional_filter_type){
             request_value
         }
       }
@@ -151,14 +156,14 @@ const GetData = props => {
   }
 
   let policyType;
-  if (props.additionalFilter && !graphLabels[`${props.additionalFilter}`]) {
+  if (props.additionalFilter.type && !graphLabels[`${props.additionalFilter.type}`]) {
     policyType = "network-only";
   } else {
     policyType = "cache-first";
   }
 
   let { loading, error, data } = useQuery(QUERY, {
-    variables: { ...props.selectedCheckbox, request_type: props.additionalFilter },
+    variables: { ...props.selectedCheckbox, request_type: props.argForQuery, additional_filter_type: props.additionalFilter.type},
     fetchPolicy: policyType
   });
 
@@ -177,18 +182,20 @@ const GetData = props => {
     // data = [...data.tradersUsers, ...data.tradersData] // This is for when we are supporting multiple queries of same type
   
   let filteredData;
-  if (props.additionalFilter) {
+  if (props.additionalFilter.type) {
     filteredData = getIndex(data.additionalFilterData, "request_value").map(obj => obj.request_value);
   };
 
-  console.log("the goods", data)
+  console.log("DATES IN QUERIES.JS", props.startDate, 'ENDS:', props.endDate)
+  console.log(" INDX TYPE IN QUERIES.JS", props.index.type)
+  console.log(" CROSS IN QUERIES.JS", props.crossFilter.type)
+  console.log(" ADDTNL IN QUERIES.JS", props.additionalFilter.type)
 
   const chartData = dataParse(
     props.index.type,
     data[`${queryType}`],
     props.crossFilter.type,
     props.argForQuery,
-    props.additionalFilter,
     props.startDate,
     props.endDate
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
