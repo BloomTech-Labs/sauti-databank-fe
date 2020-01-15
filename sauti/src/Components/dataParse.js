@@ -6,38 +6,39 @@ const dataParse = (
   data,
   crossFilter,
   argForQuery,
-  additionalFilter,
   startDate,
   endDate
 ) => {
   let dataStructure;
 
+  console.log('DATES', startDate, 'END:', endDate);
+
   //when single filtering "Most Requested" graph
   if (indexBy === "request_type" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, "request_value");
-    return getMostRequested(data, dataStructure, indexBy, argForQuery, additionalFilter);
+    return getMostRequested(data, dataStructure, indexBy, argForQuery);
   }
   //when cross-filtering "Most Requested" as index
   else if (indexBy === "request_type" && crossFilter !== "") {
     data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, "request_value");
-    return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
+    return setCrossedItems(data, dataStructure, crossFilter, indexBy);
   } else {
     //telling function how to format data. See "graphLabels.js"
     dataStructure = graphLabels[`${indexBy}`].structure;
 
     //when cross-filtering and index is Not "Most Requested"
     if (crossFilter !== "") {
-      return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
+      return setCrossedItems(data, dataStructure, crossFilter, indexBy);
     } else {
       //when single filtering with index that is not "Most Requested"
-      return setItem(data, dataStructure, indexBy, additionalFilter);
+      return setItem(data, dataStructure, indexBy);
     }
   }
 };
 
-const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFilter) => {
+const setCrossedItems = (data, dataStructure, crossFilter, indexBy) => {
   //will be used to store all possible values for the index value, which is referring to a column in the database table
   let indexByValues = [];
   //will be used to store all possible values for the cross filter value, which is referring to a column in the database table
@@ -45,18 +46,14 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   //will be used to store array of objects, where the key will be what is being cross filtered by / "crossFilter"
   // and the value is every possible value for that cross filter in the database
   let crossFilterKeys = [];
-  let additionalFilterKeys = [];
   
   // IF NOT A "MOST REQUESTED" GRAPH, SETS THE KEYS IN A PREDETERMINED ORDER BASED ON WHAT ORDER LANCE WANTS THEM IN
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
   if (graphLabels[`${crossFilter}`]) {
     crossFilterKeys = graphLabels[`${crossFilter}`].structure;
-    console.log('DATA', data)
-    additionalFilterKeys = getIndex(data, additionalFilter);
   } else {
     crossFilterKeys = getIndex(data, "request_value");
   }
-  // console.log('additional Keys:', additionalFilterKeys)
 
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
@@ -170,20 +167,13 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure);
 
-  //Gets additional index values to render below third dropdown menu
-  const additionalFilterOptions = getIndex(data, additionalFilter)
-    .map(obj => {
-      return Object.values(obj)[0];
-    })
-    .filter(str => str !== null);
-
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions};
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize};
 };
 
 // Sets single filter index
 // Puts each value from key:value pair into an array
 // ['Female', 'Male', null]
-const setItem = (data, dataStructure, indexBy, additionalFilter) => {
+const setItem = (data, dataStructure, indexBy) => {
   let arr = [];
 
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
@@ -212,24 +202,16 @@ const setItem = (data, dataStructure, indexBy, additionalFilter) => {
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
 
-  //Gets additional index values to render below third dropdown menu
-  const additionalFilterOptions = getIndex(data, additionalFilter)
-    .map(obj => {
-      return Object.values(obj)[0];
-    })
-    .filter(str => str !== null);
-
   return {
     dataStructure,
     keys: graphLabels[`${indexBy}`].labels,
     indexBy,
-    sampleSize,
-    additionalFilterOptions
+    sampleSize
   };
 };
 
 //Builds data for Nivo when single filtering by "Most Requested"
-const getMostRequested = (data, dataStructure, indexBy, argForQuery, additionalFilter) => {
+const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
   let arr = [];
 
   // Puts each value from key:value pair into an array
@@ -278,14 +260,8 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery, additionalF
     abbreviateLabels(dataStructure);
   }
 
-  //Gets additional index values to render below third dropdown menu
-  const additionalFilterOptions = getIndex(data, additionalFilter)
-    .map(obj => {
-      return Object.values(obj)[0];
-    })
-    .filter(str => str !== null);
 
-  return { dataStructure, keys: keys.reverse(), indexBy, sampleSize, additionalFilterOptions };
+  return { dataStructure, keys: keys.reverse(), indexBy, sampleSize};
 };
 
 //This function is invoked when filtering by certain categories where the keys may be too long for Nivo to display
@@ -334,6 +310,7 @@ const abbreviateLabels = dataStructure => {
 const filterByDate = (data, startDate, endDate) => {
   startDate = startDate.replace(/-/g, "");
   endDate = endDate.replace(/-/g, "");
+
 
   const filteredData = data.filter(obj => {
     const objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
