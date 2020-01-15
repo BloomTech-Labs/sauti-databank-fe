@@ -41,7 +41,7 @@ export default function FilterBox(props) {
     props.setIndexLabel(filterBoxIndexLabel);
     props.setCrossLabel(filterBoxCrossLabel);
     props.setCrossFilter(filterBoxCrossFilter);
-    props.setAdditionalFilter(filterBoxAdditionalFilter.type);
+    props.setAdditionalFilter(filterBoxAdditionalFilter);
     props.setAdditionalFilterLabel(filterBoxAdditionalFilterLabel);
     props.setStartDate(filterBoxStartDate);
     props.setEndDate(filterBoxEndDate);
@@ -87,13 +87,11 @@ export default function FilterBox(props) {
             setFilterBoxIndexLabel(e.label);
             setOptions(FilterBoxOptions.default)
             ClickTracker(e.value.type);
-            if(e.value.type === 'request_type' ){
-              setFilterBoxAdditionalFilter({type: '', query: ''})
-              props.setAdditionalFilter({type: '', query: ''})
-              setFilterBoxAdditionalFilterLabel('')
-              props.setCheckboxOptions([])
-              props.setSelectedCheckbox({})
-            }
+            setFilterBoxAdditionalFilter({type: '', query: ''})
+            props.setAdditionalFilter({type: '', query: ''})
+            setFilterBoxAdditionalFilterLabel('')
+            props.setCheckboxOptions([])
+            props.setSelectedCheckbox({})
             if (e.value.arg) {
               setFilterBoxArgForQuery(e.value.arg);
             }
@@ -111,6 +109,11 @@ export default function FilterBox(props) {
           onChange={e => {
             setFilterBoxCrossLabel(e.label);
             setFilterBoxCrossFilter(e.value);
+            setFilterBoxAdditionalFilter({type: '', query: ''})
+            props.setAdditionalFilter({type: '', query: ''})
+            setFilterBoxAdditionalFilterLabel('')
+            props.setCheckboxOptions([])
+            props.setSelectedCheckbox({})
           }}
         />
 
