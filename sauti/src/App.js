@@ -7,7 +7,6 @@ import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
-import AdditionalFilterOptions from "./Components/AdditionalFilterOptions"
 
 const App = () => {
   const [index, setIndex] = useState({
@@ -18,7 +17,7 @@ const App = () => {
     type: "age",
     query: "Users"
   });
-  const [additionalFilter, setAdditionalFilter] = useState("procedurecommoditycat");
+  const [additionalFilter, setAdditionalFilter] = useState("");
   const [additionalFilterLabel, setAdditionalFilterLabel] = useState("");
   const [indexLabel, setIndexLabel] = useState(
     "Gender"
@@ -82,6 +81,7 @@ const App = () => {
               setCrossLabel={setCrossLabel}
               setArgForQuery={setArgForQuery}
               setSelectedCheckbox={setSelectedCheckbox}
+              setCheckboxOptions={setCheckboxOptions}
               setAdditionalFilter={setAdditionalFilter}
               setAdditionalFilterLabel={setAdditionalFilterLabel}
               startDate={startDate}
