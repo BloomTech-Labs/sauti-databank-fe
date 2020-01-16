@@ -1,56 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "../App.scss";
 import ReactGa from "react-ga";
 import styled from "styled-components";
-import Dropdown from "react-dropdown";
+import Dropdown from "react-dropdown-label-key";
 import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 
 export default function FilterBox(props) {
-  console.log('options', props.checkboxOptions)
-  const [options, setOptions] = useState(FilterBoxOptions.filtered);
-  const [filterBoxIndex, setFilterBoxIndex] = useState({
-    type: "gender",
-    query: "Users"
-  });
-  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
-    type: "age",
-    query: "Users"
-  });
-  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState(
-    "Gender"
-  );
-  const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState(
-    ""
-  );
-  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("Age");
+  const [filterBoxIndex, setFilterBoxIndex] = useState({ type: "gender", query: "Users" });
+  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({ type: "education", query: "Users" });
+  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
+  const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState("");
+  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("Education Level");
   const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({type: '', query: ''});
-  const [
-    filterBoxAdditionalFilterLabel,
-    setFilterBoxAdditionalFilterLabel
-  ] = useState("");
+  const [filterBoxAdditionalFilterLabel, setFilterBoxAdditionalFilterLabel] = useState("");
   const [filterBoxStartDate, setFilterBoxStartDate] = useState("2012-01-01");
   const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
-
-  useEffect(() => {
-    setOptions(options.filter(obj => obj.label !== filterBoxIndexLabel));
-  }, [filterBoxIndexLabel])
-
-  const handleSubmit = e => {
+  
+  const handleSubmit = useCallback(e => {
     props.setIndex(filterBoxIndex);
     props.setIndexLabel(filterBoxIndexLabel);
     props.setCrossLabel(filterBoxCrossLabel);
     props.setCrossFilter(filterBoxCrossFilter);
     props.setAdditionalFilter(filterBoxAdditionalFilter);
-    props.setAdditionalFilterLabel(filterBoxAdditionalFilterLabel);
     props.setStartDate(filterBoxStartDate);
     props.setEndDate(filterBoxEndDate);
     if (filterBoxArgForQuery) {
       props.setArgForQuery(filterBoxArgForQuery);
     }
-  };
-
-
+  }, [filterBoxAdditionalFilter, filterBoxArgForQuery, filterBoxCrossFilter, filterBoxCrossLabel, filterBoxEndDate, filterBoxIndex, filterBoxIndexLabel, filterBoxStartDate, props]);
+  
+  
   const ClickTracker = index => {
     ReactGa.event({
       category: "Option",
@@ -59,18 +39,10 @@ export default function FilterBox(props) {
   };
 
   useEffect(() => {
-    if (props.index.query === "Sessions") {
-      setOptions(FilterBoxOptions.filtered);
-    } else if (props.index.query === "Users") {
-      setOptions(FilterBoxOptions.default);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!graphLabels[`${filterBoxAdditionalFilter.type}`]) {
+    if (!graphLabels[`${filterBoxAdditionalFilter.type}`] && filterBoxAdditionalFilter) {
       handleSubmit()
     }
-  }, [filterBoxAdditionalFilter.type])
+  }, [handleSubmit, filterBoxAdditionalFilter.type])
 
   return (
     <DropdownContainer>
@@ -80,12 +52,11 @@ export default function FilterBox(props) {
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
-          options={FilterBoxOptions.default}
+          options={FilterBoxOptions.default.filter(obj => obj.label !== filterBoxCrossLabel)}
           value={filterBoxIndexLabel}
           onChange={e => {
             setFilterBoxIndex(e.value);
             setFilterBoxIndexLabel(e.label);
-            setOptions(FilterBoxOptions.default)
             ClickTracker(e.value.type);
             setFilterBoxAdditionalFilter({type: '', query: ''})
             props.setAdditionalFilter({type: '', query: ''})
@@ -103,7 +74,7 @@ export default function FilterBox(props) {
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
           className="dropdown"
-          options={FilterBoxOptions.filtered.filter(obj => obj.label !== filterBoxIndexLabel)}
+          options={FilterBoxOptions.filtered.filter(obj => (obj.label !== filterBoxIndexLabel && obj.label !== filterBoxCrossLabel))}
           value={filterBoxCrossLabel}
           placeholder="Select second option..."
           onChange={e => {
@@ -124,7 +95,9 @@ export default function FilterBox(props) {
               controlClassName="myControlClassName"
               arrowClassName="myArrowClassName"
               className="dropdown"
-              options={filterBoxIndex.type === 'request_type' ? FilterBoxOptions.filtered : FilterBoxOptions.default.filter(obj=> (obj.label !== filterBoxIndexLabel && obj.label !== filterBoxCrossLabel))}
+              options={filterBoxIndex.type === 'request_type' 
+                ? FilterBoxOptions.filtered.filter(obj => obj.label !== filterBoxCrossLabel) 
+                : FilterBoxOptions.default.filter(obj=> (obj.label !== filterBoxIndexLabel && obj.label !== filterBoxCrossLabel))}
               value={filterBoxAdditionalFilterLabel}
               placeholder="Select a filter..."
               onChange={e => {
@@ -146,7 +119,7 @@ export default function FilterBox(props) {
           <CheckboxContainer>
             <p>{props.crossLabel}</p>
             {graphLabels[`${filterBoxAdditionalFilter.type}`].labels.map((option => (
-              <Options>
+              <Options key={option}>
                 <input
                   type="radio"
                   name="CrossFilter"
@@ -166,7 +139,7 @@ export default function FilterBox(props) {
           <CheckboxContainer>
             <p>{props.crossLabel}</p>
             {(props.checkboxOptions.map(option => (
-              <Options>
+              <Options key={option}>
                 <input
                   type="radio"
                   name="CrossFilter"
