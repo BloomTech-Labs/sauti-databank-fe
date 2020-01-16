@@ -91,6 +91,7 @@ export default function FilterBox(props) {
         {filterBoxCrossFilter.type && (
           <>
             <p>Additional Filter</p>
+            <p className='disclosure'>*This optional filter adjusts samplesize and may not always alter the graph appearance.</p>
             <Dropdown
               controlClassName="myControlClassName"
               arrowClassName="myArrowClassName"
@@ -189,12 +190,13 @@ export default function FilterBox(props) {
           >
             Submit
           </Button>
-          <Button
+          {/* <CsvDownloader data={} columns={getHeaders()} filename={tradersDataCSV} seperator={';'}> */}
+          {/* <Button
             className="download-btn"
             onClick={() => console.log("Download CSV")}
           >
             Download
-          </Button>
+          </Button> */}
         </div>
 
         <p
@@ -302,6 +304,7 @@ const DropdownContainer = styled.div`
     font-size: 1.3rem;
     margin: 10px 0;
   }
+  .disclosure{font-size: 14px; color: #999; font-style: italic; font-weight: 400}
   .reset-btn {
     text-decoration: underline;
     opacity: 0.7;
