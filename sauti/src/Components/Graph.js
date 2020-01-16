@@ -8,23 +8,22 @@ const Graph = props => {
     if(props.filteredData && props.checkboxOptions !== props.filteredData) {
       props.setCheckboxOptions(props.filteredData)
     }
-    /* eslint-disable */
   }, [])
 
   //Gets headers from keys of incoming data to be used as column titles in downloaded CSV.
-  let headers = Object.keys(props.data[0]); 
+  // let headers = Object.keys(props.data[0]); 
 
-  const percentToRaw = (data) => {
-    let restructured = data.map(obj=> {
-      return Object.values(obj)
-    })
+  // const percentToRaw = (data) => {
+  //   let restructured = data.map(obj=> {
+  //     return Object.values(obj)
+  //   })
     
-    for(let i = 1; i < restructured.length; i++){
-      if(Number.isInteger(restructured[i])){
-        return parseFloat(restructured[i])
-      }
-    }
-    console.log('IS RESTRCTURE NUMS?', restructured)
+  //   for(let i = 1; i < restructured.length; i++){
+  //     if(Number.isInteger(restructured[i])){
+  //       return parseFloat(restructured[i])
+  //     }
+  //   }
+  //   console.log('IS RESTRCTURE NUMS?', restructured)
 
     // restructured = restructured.forEach(obj => {
     //   if(Number.isInteger(+obj)){
@@ -33,16 +32,14 @@ const Graph = props => {
     //   }
     // })
 
-// asdf
+  //   return restructured;
+  // }
 
-    return restructured;
-  }
-
-  let restructuredData = percentToRaw(props.data);
+  // let restructuredData = percentToRaw(props.data);
 
 
-  console.log(' RESTRUCTURED:', restructuredData)    
-  console.log(' DATA:', props.data)    
+  // console.log(' RESTRUCTURED:', restructuredData)    
+  // console.log(' DATA:', props.data)    
 
   return (
     <div className="Graph-Container">
