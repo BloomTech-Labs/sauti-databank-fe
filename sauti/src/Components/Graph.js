@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
+import CsvDownloader from 'react-csv-downloader';
+
 
 const Graph = props => {
 
@@ -9,8 +11,14 @@ const Graph = props => {
     }
   }, [])
 
+  //Gets headers from keys of incoming data to be used as column titles in downloaded CSV.
+  let headers = Object.keys(props.data[0]); 
+  console.log(' DATA FOR CSV:', props.data)      
+  // console.log('Headers:', headers)   
+
   return (
     <div className="Graph-Container">
+      <CsvDownloader datas={props.data} columns={headers} filename={'tradersDataCSV'} seperator={';'}/> 
       <ResponsiveBar
         data={props.data}
         keys={props.keys}
