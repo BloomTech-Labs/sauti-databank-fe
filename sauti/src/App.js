@@ -14,21 +14,19 @@ const App = () => {
     query: "Users"
   });
   const [crossFilter, setCrossFilter] = useState({
-    type: "age",
+    type: "education",
     query: "Users"
   });
   const [additionalFilter, setAdditionalFilter] = useState({type: '', query: ''});
-  const [additionalFilterLabel, setAdditionalFilterLabel] = useState("");
   const [indexLabel, setIndexLabel] = useState(
     "Gender"
   );
-  const [crossLabel, setCrossLabel] = useState("Age");
+  const [crossLabel, setCrossLabel] = useState("Education Level");
   const [argForQuery, setArgForQuery] = useState("");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
   const [startDate, setStartDate] = useState("2012-01-01");
   const [endDate, setEndDate] = useState("2020-01-08");
-  console.log('app additonal option', additionalFilter)
 
   useEffect(() => {
     ReactGa.initialize("UA-155468784-1");
@@ -83,7 +81,6 @@ const App = () => {
               setSelectedCheckbox={setSelectedCheckbox}
               setCheckboxOptions={setCheckboxOptions}
               setAdditionalFilter={setAdditionalFilter}
-              setAdditionalFilterLabel={setAdditionalFilterLabel}
               startDate={startDate}
               endDate={endDate}
               setStartDate={setStartDate}
