@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import "../App.scss";
 import ReactGa from "react-ga";
 import styled from "styled-components";
-import Dropdown from "react-dropdown-label-key";
+import Dropdown from "react-dropdown";
 import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
@@ -20,6 +20,23 @@ export default function FilterBox(props) {
   const [loading, setLoading] = useState(false);
   
   const handleSubmit = useCallback(e => {
+    if (e.target.textContent === "Submit"){
+      e.preventDefault();
+    }
+
+    props.setIndex(filterBoxIndex);
+    props.setIndexLabel(filterBoxIndexLabel);
+    props.setCrossLabel(filterBoxCrossLabel);
+    props.setCrossFilter(filterBoxCrossFilter);
+    props.setAdditionalFilter(filterBoxAdditionalFilter);
+    props.setStartDate(filterBoxStartDate);
+    props.setEndDate(filterBoxEndDate);
+    if (filterBoxArgForQuery) {
+      props.setArgForQuery(filterBoxArgForQuery);
+    }
+  }, [filterBoxAdditionalFilter, filterBoxArgForQuery, filterBoxCrossFilter, filterBoxCrossLabel, filterBoxEndDate, filterBoxIndex, filterBoxIndexLabel, filterBoxStartDate, props]);
+  
+  const handleAuto = useCallback(e => {
     props.setIndex(filterBoxIndex);
     props.setIndexLabel(filterBoxIndexLabel);
     props.setCrossLabel(filterBoxCrossLabel);
@@ -34,7 +51,7 @@ export default function FilterBox(props) {
     
   useEffect(() => {
     if (!graphLabels[`${filterBoxAdditionalFilter.type}`] && filterBoxAdditionalFilter.type) {
-      handleSubmit()
+      handleAuto()
       setLoading(true);
     }
     /* eslint-disable */
