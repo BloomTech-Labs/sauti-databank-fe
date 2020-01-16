@@ -195,6 +195,8 @@ const setItem = (data, dataStructure, indexBy) => {
   // This block of code transforms from raw numbers to rounded percentages
   let numberValues = [];
   let sampleSize = 0;
+  let wholeNumbers = dataStructure;
+  console.log('WHOLE NUMBUHS', wholeNumbers);
 
   dataStructure.map(item => {
     const keyValue = item[`${indexBy}`];
@@ -209,6 +211,7 @@ const setItem = (data, dataStructure, indexBy) => {
 
   return {
     dataStructure,
+    wholeNumbers,
     keys: graphLabels[`${indexBy}`].labels,
     indexBy,
     sampleSize
