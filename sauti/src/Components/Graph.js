@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from 'react-csv-downloader';
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Graph from "./Graph";
@@ -8,8 +8,6 @@ import getIndex from "../DataParseHelpers/getIndex"
 import graphLabels from "./graphLabels"
 
 const GetData = props => {
-  console.log('selected checkbox', props.selectedCheckbox)
-  console.log('argument', props.argForQuery)
   let queryType = "tradersData";
   let QUERY;
 
@@ -162,9 +160,9 @@ const GetData = props => {
     policyType = "cache-first";
   }
 
-  let { loading, error, data } = useQuery(QUERY, {
+  let { loading, data } = useQuery(QUERY, {
     variables: { ...props.selectedCheckbox, request_type: props.argForQuery, additional_filter_type: props.additionalFilter.type},
-    fetchPolicy: policyType
+    fetchPolicy: "network-only"
   });
 
   if (loading)
