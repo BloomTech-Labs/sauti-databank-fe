@@ -156,6 +156,12 @@ $greyColor: #4d4f52;
         }
       }
 
+      .options-loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       // .dropdown-container {
       //   font-family: Helvetica, sans-serif;
       //   color: $greyColor;

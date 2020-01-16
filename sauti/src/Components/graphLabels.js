@@ -38,11 +38,12 @@ const dataOrder = {
     ]
   },
   country_of_residence: {
-    labels: ["RWA", "UGA", "KEN"],
+    labels: ["RWA", "UGA", "KEN", "TZA"],
     structure: [
       { country_of_residence: "KEN" },
       { country_of_residence: "UGA" },
-      { country_of_residence: "RWA" }
+      { country_of_residence: "RWA" },
+      { country_of_residence: "TZA" }
     ]
   },
   primary_income: {
