@@ -10,8 +10,7 @@ const dataParse = (
   endDate,
   additionalFilter
 ) => {
-  let dataStructure;
-
+  let dataStructure = [];
   //when single filtering "Most Requested" graph
   if (indexBy === "request_type" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
@@ -25,7 +24,7 @@ const dataParse = (
     return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
   } else {
     //telling function how to format data. See "graphLabels.js"
-    dataStructure = graphLabels[`${indexBy}`].structure;
+    dataStructure = graphLabels[`${indexBy}`].structure.map(item => item);
 
     //when cross-filtering and index is Not "Most Requested"
     if (crossFilter !== "") {
@@ -45,7 +44,8 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   //will be used to store array of objects, where the key will be what is being cross filtered by / "crossFilter"
   // and the value is every possible value for that cross filter in the database
   let crossFilterKeys = [];
-  
+
+
   // IF NOT A "MOST REQUESTED" GRAPH, SETS THE KEYS IN A PREDETERMINED ORDER BASED ON WHAT ORDER LANCE WANTS THEM IN
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
   if (graphLabels[`${crossFilter}`]) {
@@ -100,7 +100,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   if (indexBy === "request_type") {
     let keyValueArr = [];
     dataStructure.map(obj => {
-      keyValueArr.push([
+      return keyValueArr.push([
         obj["request_value"],
         Object.values(obj)
           .slice(1)
@@ -121,7 +121,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
     dataStructure = newDataStructure;
   }
-
+  
   // GET SAMPLE SIZE
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
   //[{gender: "Male", "10-20": 200, "20-30": 150}, {gender: "Female", "10-20": 140, "20-30": 100}]
@@ -133,13 +133,13 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
     //["Male", "130", "100", "34"]
     let valuesArr = Object.values(item);
-    valuesArr.map(value => {
+    valuesArr.forEach(value => {
       if (Number.isInteger(+value)) {
-        sampleSize += Number(value);
-      }
+         return sampleSize += Number(value);
+      };
     });
 
-    sampleArr = {
+    return sampleArr = {
       ...sampleArr,
       [`${valuesArr[0]}`]: sampleSize
     };
@@ -152,7 +152,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   dataStructure.forEach(obj => {
     for (var property in obj) {
       if (Number.isInteger(+obj[property])) {
-        obj[property] = (
+        obj[property] = +(
           (obj[property] /
             sampleArr[
               obj[`${indexBy === "request_type" ? "request_value" : indexBy}`]
@@ -166,11 +166,10 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure);
 
-  console.log("additonal filter", additionalFilter)
-
   const additionalFilterOptions = getIndex(data, additionalFilter)
     .map(obj => Object.values(obj)[0])
     .filter(str => str !== null)
+
 
   return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions};
 };
@@ -186,6 +185,7 @@ const setItem = (data, dataStructure, indexBy) => {
   // For each object get every trader at the index where it equals the value in the arr
   arr.forEach((key, index) => {
     const filtered = data.filter(trader => trader[`${indexBy}`] === key).length;
+
     dataStructure[index] = {
       ...dataStructure[index],
       [`${arr[index]}`]: filtered
@@ -199,7 +199,7 @@ const setItem = (data, dataStructure, indexBy) => {
   dataStructure.map(item => {
     const keyValue = item[`${indexBy}`];
     numberValues.push(Number(item[keyValue]));
-    sampleSize += Number(item[keyValue]);
+    return sampleSize += Number(item[keyValue]);
   });
 
   dataStructure.forEach(obj => {
@@ -239,7 +239,7 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
 
   dataStructure.map(item => {
     let keyValue = item[`request_value`];
-    sampleSize += Number(item[keyValue]);
+    return sampleSize += Number(item[keyValue]);
   });
 
   dataStructure.forEach(obj => {

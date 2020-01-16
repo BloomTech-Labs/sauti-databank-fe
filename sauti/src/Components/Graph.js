@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
 const Graph = props => {
-
   useEffect(() => {
     if(props.filteredData && props.checkboxOptions !== props.filteredData) {
       props.setCheckboxOptions(props.filteredData)
     }
+    /* eslint-disable */
   }, [])
 
   return (
