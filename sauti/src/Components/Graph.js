@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from 'react-csv-downloader';
 
 
 const Graph = props => {
-
   useEffect(() => {
     if(props.filteredData && props.checkboxOptions !== props.filteredData) {
       props.setCheckboxOptions(props.filteredData)
     }
+    /* eslint-disable */
   }, [])
 
   //Gets headers from keys of incoming data to be used as column titles in downloaded CSV.
@@ -33,13 +33,16 @@ const Graph = props => {
     //   }
     // })
 
+// asdf
+
     return restructured;
   }
 
   let restructuredData = percentToRaw(props.data);
 
   console.log(' RESTRUCTURED:', restructuredData)    
-  console.log(' DATA:', props.data)    
+  console.log(' DATA:', props.data)
+  console.log('headers', headers)    
 
   return (
     <div className="Graph-Container">
