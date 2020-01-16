@@ -196,7 +196,6 @@ const setItem = (data, dataStructure, indexBy) => {
   let numberValues = [];
   let sampleSize = 0;
   let wholeNumbers = dataStructure;
-  console.log('WHOLE NUMBUHS', wholeNumbers);
 
   dataStructure.map(item => {
     const keyValue = item[`${indexBy}`];
