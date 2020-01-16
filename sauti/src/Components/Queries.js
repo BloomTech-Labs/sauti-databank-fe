@@ -162,10 +162,10 @@ const GetData = props => {
 
   let { loading, data } = useQuery(QUERY, {
     variables: { ...props.selectedCheckbox, request_type: props.argForQuery, additional_filter_type: props.additionalFilter.type},
-    fetchPolicy: "network-only"
+    fetchPolicy: policyType
   });
 
-  if (loading)
+  if (loading) {
     return (
       <div className="loader-container">
         <Loader
@@ -173,10 +173,11 @@ const GetData = props => {
           type="Oval"
           color="#708090"
           width={100}
-          timeout={8000}
+          timeout={12000}
         />
       </div>
     );
+  }
     // data = [...data.tradersUsers, ...data.tradersData] // This is for when we are supporting multiple queries of same type
   
   let filteredData;

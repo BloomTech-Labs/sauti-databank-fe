@@ -10,19 +10,19 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState({
-    type: "gender",
-    query: "Users"
+    type: "request_type",
+    query: "Sessions"
   });
   const [crossFilter, setCrossFilter] = useState({
-    type: "education",
+    type: "",
     query: "Users"
   });
   const [additionalFilter, setAdditionalFilter] = useState({type: '', query: ''});
   const [indexLabel, setIndexLabel] = useState(
-    "Gender"
+    "Most Requested Procedure Commodity"
   );
-  const [crossLabel, setCrossLabel] = useState("Education Level");
-  const [argForQuery, setArgForQuery] = useState("");
+  const [crossLabel, setCrossLabel] = useState("");
+  const [argForQuery, setArgForQuery] = useState("procedurecommodity");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
   const [startDate, setStartDate] = useState("2012-01-01");

@@ -10,8 +10,7 @@ const dataParse = (
   endDate,
   additionalFilter
 ) => {
-  let dataStructure;
-  console.log("DATAPARSE", data)
+  let dataStructure = [];
   //when single filtering "Most Requested" graph
   if (indexBy === "request_type" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
@@ -25,7 +24,7 @@ const dataParse = (
     return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
   } else {
     //telling function how to format data. See "graphLabels.js"
-    dataStructure = graphLabels[`${indexBy}`].structure;
+    dataStructure = graphLabels[`${indexBy}`].structure.map(item => item);
 
     //when cross-filtering and index is Not "Most Requested"
     if (crossFilter !== "") {
@@ -45,6 +44,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   //will be used to store array of objects, where the key will be what is being cross filtered by / "crossFilter"
   // and the value is every possible value for that cross filter in the database
   let crossFilterKeys = [];
+
 
   // IF NOT A "MOST REQUESTED" GRAPH, SETS THE KEYS IN A PREDETERMINED ORDER BASED ON WHAT ORDER LANCE WANTS THEM IN
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
