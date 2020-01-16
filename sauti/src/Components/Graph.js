@@ -13,12 +13,37 @@ const Graph = props => {
 
   //Gets headers from keys of incoming data to be used as column titles in downloaded CSV.
   let headers = Object.keys(props.data[0]); 
-  console.log(' DATA FOR CSV:', props.data)      
-  // console.log('Headers:', headers)   
+
+  const percentToRaw = (data) => {
+    let restructured = data.map(obj=> {
+      return Object.values(obj)
+    })
+    
+    for(let i = 1; i < restructured.length; i++){
+      if(Number.isInteger(restructured[i])){
+        return parseFloat(restructured[i])
+      }
+    }
+    console.log('IS RESTRCTURE NUMS?', restructured)
+
+    // restructured = restructured.forEach(obj => {
+    //   if(Number.isInteger(+obj)){
+    //    console.log(' Object is Num?', obj)
+    //    return parseFloat(obj)
+    //   }
+    // })
+
+    return restructured;
+  }
+
+  let restructuredData = percentToRaw(props.data);
+
+  console.log(' RESTRUCTURED:', restructuredData)    
+  console.log(' DATA:', props.data)    
 
   return (
     <div className="Graph-Container">
-      <CsvDownloader datas={props.data} columns={headers} filename={'tradersDataCSV'} seperator={';'}/> 
+      {/* <CsvDownloader datas={restructuredData} columns={headers} filename={'tradersDataCSV'} seperator={';'}/>  */}
       <ResponsiveBar
         data={props.data}
         keys={props.keys}
