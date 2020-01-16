@@ -10,8 +10,7 @@ const dataParse = (
   endDate,
   additionalFilter
 ) => {
-  let dataStructure;
-  console.log("DATAPARSE", data)
+  let dataStructure = [];
   //when single filtering "Most Requested" graph
   if (indexBy === "request_type" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
@@ -25,7 +24,7 @@ const dataParse = (
     return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
   } else {
     //telling function how to format data. See "graphLabels.js"
-    dataStructure = graphLabels[`${indexBy}`].structure;
+    dataStructure = graphLabels[`${indexBy}`].structure.map(item => item);
 
     //when cross-filtering and index is Not "Most Requested"
     if (crossFilter !== "") {
@@ -46,6 +45,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // and the value is every possible value for that cross filter in the database
   let crossFilterKeys = [];
 
+
   // IF NOT A "MOST REQUESTED" GRAPH, SETS THE KEYS IN A PREDETERMINED ORDER BASED ON WHAT ORDER LANCE WANTS THEM IN
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
   if (graphLabels[`${crossFilter}`]) {
@@ -56,7 +56,10 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
-  dataStructure.forEach(obj => indexByValues.push(Object.values(obj)[0]));
+  dataStructure.forEach(obj => {
+    console.log(obj)
+    indexByValues.push(Object.values(obj)[0])
+  });
   crossFilterKeys.forEach(
     obj =>
       Object.values(obj)[0] !== null &&
@@ -130,6 +133,8 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   let sampleArr = {};
   dataStructure.map(item => {
     let sampleSize = 0;
+
+    console.log("what it lookss like ", item)
 
     //["Male", "130", "100", "34"]
     let valuesArr = Object.values(item);
