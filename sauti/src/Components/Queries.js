@@ -162,7 +162,7 @@ const GetData = props => {
 
   let { loading, data } = useQuery(QUERY, {
     variables: { ...props.selectedCheckbox, request_type: props.argForQuery, additional_filter_type: props.additionalFilter.type},
-    fetchPolicy: "network-only"
+    fetchPolicy: policyType
   });
 
   if (loading)

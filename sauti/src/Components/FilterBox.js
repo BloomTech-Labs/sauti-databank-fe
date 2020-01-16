@@ -7,11 +7,11 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 
 export default function FilterBox(props) {
-  const [filterBoxIndex, setFilterBoxIndex] = useState({ type: "gender", query: "Users" });
-  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({ type: "education", query: "Users" });
-  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
+  const [filterBoxIndex, setFilterBoxIndex] = useState({ type: "produce", query: "Users" });
+  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({ type: "", query: "Users" });
+  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Produce");
   const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState("");
-  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("Education Level");
+  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
   const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({type: '', query: ''});
   const [filterBoxAdditionalFilterLabel, setFilterBoxAdditionalFilterLabel] = useState("");
   const [filterBoxStartDate, setFilterBoxStartDate] = useState("2012-01-01");
@@ -38,11 +38,11 @@ export default function FilterBox(props) {
     });
   };
 
-  useEffect(() => {
-    if (!graphLabels[`${filterBoxAdditionalFilter.type}`] && filterBoxAdditionalFilter) {
-      handleSubmit()
-    }
-  }, [handleSubmit, filterBoxAdditionalFilter.type])
+  // useEffect(() => {
+  //   if (!graphLabels[`${filterBoxAdditionalFilter.type}`]) {
+  //     handleSubmit()
+  //   }
+  // }, [])
 
   return (
     <DropdownContainer>
@@ -59,10 +59,10 @@ export default function FilterBox(props) {
             setFilterBoxIndexLabel(e.label);
             ClickTracker(e.value.type);
             setFilterBoxAdditionalFilter({type: '', query: ''})
-            props.setAdditionalFilter({type: '', query: ''})
+            // props.setAdditionalFilter({type: '', query: ''})
             setFilterBoxAdditionalFilterLabel('')
-            props.setCheckboxOptions([])
-            props.setSelectedCheckbox({})
+            // props.setCheckboxOptions([])
+            // props.setSelectedCheckbox({})
             if (e.value.arg) {
               setFilterBoxArgForQuery(e.value.arg);
             }
@@ -81,10 +81,10 @@ export default function FilterBox(props) {
             setFilterBoxCrossLabel(e.label);
             setFilterBoxCrossFilter(e.value);
             setFilterBoxAdditionalFilter({type: '', query: ''})
-            props.setAdditionalFilter({type: '', query: ''})
+            // props.setAdditionalFilter({type: '', query: ''})
             setFilterBoxAdditionalFilterLabel('')
-            props.setCheckboxOptions([])
-            props.setSelectedCheckbox({})
+            // props.setCheckboxOptions([])
+            // props.setSelectedCheckbox({})
           }}
         />
 
@@ -107,7 +107,7 @@ export default function FilterBox(props) {
                   setFilterBoxAdditionalFilter({type: e.value.type, query: e.value.query})
                 };
                 setFilterBoxAdditionalFilterLabel(e.label);
-                props.setCheckboxOptions([]);
+                // props.setCheckboxOptions([]);
                 ClickTracker(e.value.type);
               }}
             />
@@ -124,9 +124,9 @@ export default function FilterBox(props) {
                   type="radio"
                   name="CrossFilter"
                   value={option}
-                  onChange={e => (
-                    props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option })
-                  )}
+                  // onChange={e => (
+                  //   // props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option })
+                  // )}
                 />
                 <FilterOption>{option}</FilterOption>
               </Options>
@@ -145,7 +145,7 @@ export default function FilterBox(props) {
                   name="CrossFilter"
                   value={option}
                   onChange={e => {
-                    props.setSelectedCheckbox({ [`request_value`]: option })
+                    // props.setSelectedCheckbox({ [`request_value`]: option })
                   }}
                 />
                 <FilterOption>{option}</FilterOption>

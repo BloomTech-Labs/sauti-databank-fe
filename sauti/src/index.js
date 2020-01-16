@@ -8,7 +8,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
 const client = new ApolloClient({
-  uri: "https://sauti-databank.herokuapp.com/graphql"
+  uri: "https://sauti-databank.herokuapp.com/graphql",
 });
 
 ReactDOM.render(

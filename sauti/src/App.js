@@ -10,18 +10,18 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState({
-    type: "gender",
+    type: "produce",
     query: "Users"
   });
   const [crossFilter, setCrossFilter] = useState({
-    type: "education",
+    type: "",
     query: "Users"
   });
   const [additionalFilter, setAdditionalFilter] = useState({type: '', query: ''});
   const [indexLabel, setIndexLabel] = useState(
-    "Gender"
+    "Produce"
   );
-  const [crossLabel, setCrossLabel] = useState("Education Level");
+  const [crossLabel, setCrossLabel] = useState("");
   const [argForQuery, setArgForQuery] = useState("");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
