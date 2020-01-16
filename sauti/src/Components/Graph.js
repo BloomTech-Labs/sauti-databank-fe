@@ -38,8 +38,9 @@ const Graph = props => {
   // let restructuredData = percentToRaw(props.data);
 
 
-  // console.log(' RESTRUCTURED:', restructuredData)    
-  // console.log(' DATA:', props.data)    
+  console.log(' RESTRUCTURED:', restructuredData)    
+  console.log(' DATA:', props.data)
+  console.log('headers', headers)    
 
   return (
     <div className="Graph-Container">
