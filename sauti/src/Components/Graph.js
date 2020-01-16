@@ -4,11 +4,11 @@ import CsvDownloader from 'react-csv-downloader';
 
 
 const Graph = props => {
-
   useEffect(() => {
     if(props.filteredData && props.checkboxOptions !== props.filteredData) {
       props.setCheckboxOptions(props.filteredData)
     }
+    /* eslint-disable */
   }, [])
 
   //Gets headers from keys of incoming data to be used as column titles in downloaded CSV.
@@ -33,10 +33,13 @@ const Graph = props => {
     //   }
     // })
 
+// asdf
+
     return restructured;
   }
 
   let restructuredData = percentToRaw(props.data);
+
 
   console.log(' RESTRUCTURED:', restructuredData)    
   console.log(' DATA:', props.data)    
