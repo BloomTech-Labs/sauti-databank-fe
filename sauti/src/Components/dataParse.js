@@ -56,10 +56,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
-  dataStructure.forEach(obj => {
-    console.log(obj)
-    indexByValues.push(Object.values(obj)[0])
-  });
+  dataStructure.forEach(obj => indexByValues.push(Object.values(obj)[0]));
   crossFilterKeys.forEach(
     obj =>
       Object.values(obj)[0] !== null &&
@@ -133,8 +130,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   let sampleArr = {};
   dataStructure.map(item => {
     let sampleSize = 0;
-
-    console.log("what it lookss like ", item)
 
     //["Male", "130", "100", "34"]
     let valuesArr = Object.values(item);

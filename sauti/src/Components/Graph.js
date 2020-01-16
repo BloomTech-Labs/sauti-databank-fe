@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
 const Graph = props => {
-  // useEffect(() => {
-  //   if(props.filteredData && props.checkboxOptions !== props.filteredData) {
-  //     props.setCheckboxOptions(props.filteredData)
-  //   }
-  //   /* eslint-disable */
-  // }, [])
-
-  console.log("data in graph", props.data)
+  useEffect(() => {
+    if(props.filteredData && props.checkboxOptions !== props.filteredData) {
+      props.setCheckboxOptions(props.filteredData)
+    }
+    /* eslint-disable */
+  }, [])
 
   return (
     <div className="Graph-Container">

@@ -7,10 +7,10 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 
 export default function FilterBox(props) {
-  const [filterBoxIndex, setFilterBoxIndex] = useState({ type: "produce", query: "Users" });
+  const [filterBoxIndex, setFilterBoxIndex] = useState({ type: "request_type", query: "Sessions" });
   const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({ type: "", query: "Users" });
-  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Produce");
-  const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState("");
+  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Most Requested Procedure Commodity");
+  const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState("procedurecommodity");
   const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
   const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({type: '', query: ''});
   const [filterBoxAdditionalFilterLabel, setFilterBoxAdditionalFilterLabel] = useState("");

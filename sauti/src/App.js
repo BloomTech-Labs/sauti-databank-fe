@@ -10,8 +10,8 @@ import Queries from "./Components/Queries";
 
 const App = () => {
   const [index, setIndex] = useState({
-    type: "produce",
-    query: "Users"
+    type: "request_type",
+    query: "Sessions"
   });
   const [crossFilter, setCrossFilter] = useState({
     type: "",
@@ -19,10 +19,10 @@ const App = () => {
   });
   const [additionalFilter, setAdditionalFilter] = useState({type: '', query: ''});
   const [indexLabel, setIndexLabel] = useState(
-    "Produce"
+    "Most Requested Procedure Commodity"
   );
   const [crossLabel, setCrossLabel] = useState("");
-  const [argForQuery, setArgForQuery] = useState("");
+  const [argForQuery, setArgForQuery] = useState("procedurecommodity");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
   const [startDate, setStartDate] = useState("2012-01-01");
