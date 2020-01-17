@@ -16,13 +16,15 @@ const dataParse = (
   if (indexBy === "request_type" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, "request_value");
-    return getMostRequested(data, dataStructure, indexBy, argForQuery);
+    wholeNumbers = getIndex(data, "request_value");
+    return getMostRequested(data, dataStructure, indexBy, argForQuery, wholeNumbers);
   }
   //when cross-filtering "Most Requested" as index
   else if (indexBy === "request_type" && crossFilter !== "") {
     data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, "request_value");
-    return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
+    wholeNumbers = getIndex(data, "request_value");
+    return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter, wholeNumbers);
   } else {
     //telling function how to format data. See "graphLabels.js"
     dataStructure = graphLabels[`${indexBy}`].structure.map(item => item);
@@ -30,7 +32,7 @@ const dataParse = (
 
     //when cross-filtering and index is Not "Most Requested"
     if (crossFilter !== "") {
-      return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
+      return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter, wholeNumbers);
     } else {
       //when single filtering with index that is not "Most Requested"
       return setItem(data, dataStructure, indexBy, wholeNumbers);
@@ -47,6 +49,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // and the value is every possible value for that cross filter in the database
   let crossFilterKeys = [];
 
+console.log('wholenumbs in dP', wholeNumbers);
 
   // IF NOT A "MOST REQUESTED" GRAPH, SETS THE KEYS IN A PREDETERMINED ORDER BASED ON WHAT ORDER LANCE WANTS THEM IN
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
@@ -59,11 +62,14 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
   dataStructure.forEach(obj => indexByValues.push(Object.values(obj)[0]));
+  wholeNumbers.forEach(obj => indexByValues.push(Object.values(obj)[0]));
+
   crossFilterKeys.forEach(
     obj =>
       Object.values(obj)[0] !== null &&
       crossFilterValues.push(Object.values(obj)[0])
   );
+  
   // Building an array of objects where each object is formatted in this way
   // ex: if indexBy = "gender" and crossFilter = "age"
   // {"gender": "Male", "10-20": 167, "20-30": 237, "30-40": 642, "40-50": 210, "50-60": 123, "60-70": 1}
@@ -96,12 +102,27 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
         [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
       });
     });
+    crossFilteredData.forEach(obj => {
+      return (wholeNumbers[index] = {
+        ...wholeNumbers[index],
+        [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
+      });
+    });
   });
 
   //If graph is "Most Requested" sort from Most to Least requested and provide top 7 objects
   if (indexBy === "request_type") {
     let keyValueArr = [];
     dataStructure.map(obj => {
+      return keyValueArr.push([
+        obj["request_value"],
+        Object.values(obj)
+          .slice(1)
+          .reduce((a, b) => a + b)
+      ]);
+    });
+
+    wholeNumbers.map(obj => {
       return keyValueArr.push([
         obj["request_value"],
         Object.values(obj)
@@ -146,6 +167,23 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
       [`${valuesArr[0]}`]: sampleSize
     };
   });
+
+  wholeNumbers.map(item => {
+    let sampleSize = 0;
+
+    //["Male", "130", "100", "34"]
+    let valuesArr = Object.values(item);
+    valuesArr.forEach(value => {
+      if (Number.isInteger(+value)) {
+         return sampleSize += Number(value);
+      };
+    });
+
+    return sampleArr = {
+      ...sampleArr,
+      [`${valuesArr[0]}`]: sampleSize
+    };
+  });
   //This is the sampleSize of all responses {"Male": 153, "Female": 124 => totalSampleSize: 277}
   let totalSampleSize = Object.values(sampleArr).reduce((a, b) => a + b);
 
@@ -167,6 +205,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
   abbreviateLabels(dataStructure);
+  abbreviateLabels(wholeNumbers);
 
   const additionalFilterOptions = getIndex(data, additionalFilter)
     .map(obj => Object.values(obj)[0])
@@ -197,7 +236,6 @@ const setItem = (data, dataStructure, indexBy, wholeNumbers) => {
     };
   });
 
-  console.log('WHOLE NUMBES DATAPARSER', wholeNumbers);
   // This block of code transforms from raw numbers to rounded percentages
   let numberValues = [];
   let sampleSize = 0;
