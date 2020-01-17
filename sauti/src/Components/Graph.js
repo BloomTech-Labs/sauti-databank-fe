@@ -13,17 +13,12 @@ const Graph = props => {
   //Gets headers from data kays to be used as column headers in CSV.
   let headers = Object.keys(props.data[0]); 
   console.log(' HEADERS', headers);
-  console.log(' DATA IN GRAPH', props.data);
+  console.log(' DATA IN GRAPH', Object.values(props.data));
 
-  let csvData = (data) => {
-    // add additional filters
-    // add wholeNumbers
-    data.map()
-  }
 
   return (
     <div className="Graph-Container">
-      <CsvDownloader datas={props.data} columns={headers} filename={'tradersData'} seperator={';'}/> 
+      <CsvDownloader datas={props.data} columns={headers} filename={'tradersData'} suffix={`${new Date().toISOString()}`}/> 
       <ResponsiveBar
         data={props.data}
         keys={props.keys}

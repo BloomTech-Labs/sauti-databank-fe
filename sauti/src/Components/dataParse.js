@@ -11,6 +11,7 @@ const dataParse = (
   additionalFilter
 ) => {
   let dataStructure = [];
+  let wholeNumbers =[];
   //when single filtering "Most Requested" graph
   if (indexBy === "request_type" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
@@ -25,18 +26,19 @@ const dataParse = (
   } else {
     //telling function how to format data. See "graphLabels.js"
     dataStructure = graphLabels[`${indexBy}`].structure.map(item => item);
+    wholeNumbers = graphLabels[`${indexBy}`].structure.map(item => item);
 
     //when cross-filtering and index is Not "Most Requested"
     if (crossFilter !== "") {
       return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
     } else {
       //when single filtering with index that is not "Most Requested"
-      return setItem(data, dataStructure, indexBy);
+      return setItem(data, dataStructure, indexBy, wholeNumbers);
     }
   }
 };
 
-const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFilter) => {
+const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFilter, wholeNumbers) => {
   //will be used to store all possible values for the index value, which is referring to a column in the database table
   let indexByValues = [];
   //will be used to store all possible values for the cross filter value, which is referring to a column in the database table
@@ -171,15 +173,14 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
     .filter(str => str !== null)
 
 
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions};
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, wholeNumbers};
 };
 
 // Sets single filter index
 // Puts each value from key:value pair into an array
 // ['Female', 'Male', null]
-const setItem = (data, dataStructure, indexBy) => {
+const setItem = (data, dataStructure, indexBy, wholeNumbers) => {
   let arr = [];
-
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
 
   // For each object get every trader at the index where it equals the value in the arr
@@ -190,12 +191,17 @@ const setItem = (data, dataStructure, indexBy) => {
       ...dataStructure[index],
       [`${arr[index]}`]: filtered
     };
+    wholeNumbers[index] = {
+      ...wholeNumbers[index],
+      [`${arr[index]}`]: filtered
+    };
   });
 
+  console.log('WHOLE NUMBES DATAPARSER', wholeNumbers);
   // This block of code transforms from raw numbers to rounded percentages
   let numberValues = [];
   let sampleSize = 0;
-  let wholeNumbers = dataStructure;
+  
 
   dataStructure.map(item => {
     const keyValue = item[`${indexBy}`];
