@@ -202,8 +202,8 @@ const GetData = props => {
           {props.label} by {props.crossLabel}
         </h1>
         <Graph
-          data={chartData.dataStructure}
-          csvData={chartData.wholeNumbers}
+          data={chartData.percentageData}
+          csvData={chartData.dataStructure}
           keys={chartData.crossFilterValues}
           indexBy={chartData.indexBy}
           label={props.label}
@@ -220,8 +220,8 @@ const GetData = props => {
       <div>
         <h1 className="graph-title">{props.label}</h1>
         <Graph
-          data={chartData.dataStructure}
-          csvData={chartData.wholeNumbers}
+          data={chartData.percentageData}
+          csvData={chartData.dataStructure}
           keys={chartData.keys}
           indexBy={chartData.indexBy}
           label={props.label}
