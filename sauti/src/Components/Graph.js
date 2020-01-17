@@ -4,62 +4,57 @@ import CsvDownloader from 'react-csv-downloader';
 
 
 const Graph = props => {
-  // const [csvHeaders, setCsvHeaders] = useState([]);
-  // const [csvFormattedData, setCsvFormattedData] = useState([]);
+  const [csvHeaders, setCsvHeaders] = useState([]);
+  const [csvFormattedData, setCsvFormattedData] = useState([]);
+  console.log('Index in Graph', props.index);
+
 
   useEffect(() => {
     if(props.filteredData && props.checkboxOptions !== props.filteredData) {
       props.setCheckboxOptions(props.filteredData)
     }
   }, [])
-  console.log('Data in Graph', props.data);
   console.log('CsvData in Graph', props.csvData);
+  console.log('Keys in Graph', props.keys);
 
-  //Gets headers from data kays to be used as column headers in CSV. 
-  //   let headers = (data, data2) => {
-  //     let allHeaders = [];
-  //     if (Object.keys(data[0]).includes('request_value')){
-  //       allHeaders = ['Request Value'];
-  //       data.forEach(obj => {
-  //         allHeaders.push(Object.keys(obj)[1]) 
-  //       })
-  //     }
-
-  //     else if (data2){ 
-  //       allHeaders = [`${props.indexBy}`];
-  //       data2.forEach(obj => {
-  //         allHeaders.push(Object.keys(obj)[1]) 
-  //       })
-  //     } 
-        
-  //     console.log('Headers', allHeaders)
-  //     return allHeaders;
-
-  //   };
-
-  //   let csvFormater = (data, data2) => {
+  //Gets headers for CSV. 
+    let headers = (data) => {
       
-  //     if (Object.keys(data[0]).includes('request_value')){
-  //       console.log('Data1', data)
-  //       return data.map(obj=> {return Object.values(obj)}) 
-  //     }
+      let allHeaders = [];
+      //no crossfilter
+      if (!props.crossFilter){
+        const firstValue = props.index === 'request_type' ? 'Request Value' : props.index
+        allHeaders = [firstValue];
+        data.forEach(obj => {
+          allHeaders.push(Object.keys(obj)[1]) 
+        })
+      }
+             
+      console.log('Headers', allHeaders)
+      return allHeaders;
 
-  //     else {
-  //       console.log('Is there Data2?', data2)
-  //       return data2
-  //     } 
-  //   }
+    };
 
-  //  useEffect(()=> {
-  //    setCsvFormattedData(csvFormater(props.data, props.csvData))
-  //    setCsvHeaders(headers(props.data, props.csvData))
-  //  }, [props.data, props.csvData])
+    let csvFormater = (data) => {
+      if (Object.keys(data[0]).includes('request_value')){
+        return data.map(obj=> {return Object.values(obj)}) 
+      }
+
+      else {
+        return data
+      } 
+    }
+
+   useEffect(()=> {
+     setCsvFormattedData(csvFormater(props.csvData))
+     setCsvHeaders(headers(props.csvData))
+   }, [props.csvData])
 
 
 
   return (
     <div className="Graph-Container">
-      {/* <CsvDownloader datas={csvFormattedData} columns={csvHeaders} filename={'tradersData'} suffix={`${new Date().toISOString()}`}/>  */}
+      <CsvDownloader datas={csvFormattedData} columns={csvHeaders} filename={'tradersData'} suffix={`${new Date().toISOString()}`}/> 
       <ResponsiveBar
         data={props.data}
         keys={props.keys}

@@ -204,8 +204,9 @@ const GetData = props => {
         <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
+          crossFilter={props.crossFilter.type}
           keys={chartData.crossFilterValues}
-          indexBy={chartData.indexBy}
+          index={props.index.type}
           label={props.label}
           groupMode={"grouped"}
           filteredData={filteredData}
@@ -222,8 +223,9 @@ const GetData = props => {
         <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
+          crossFilter={props.crossFilter.type}
           keys={chartData.keys}
-          indexBy={chartData.indexBy}
+          index={props.index.type}
           label={props.label}
           groupMode={"stacked"}
           filteredData={filteredData}
