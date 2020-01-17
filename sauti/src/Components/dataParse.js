@@ -11,36 +11,32 @@ const dataParse = (
   additionalFilter
 ) => {
   let dataStructure = [];
-  let wholeNumbers =[];
   //when single filtering "Most Requested" graph
   if (indexBy === "request_type" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, "request_value");
-    wholeNumbers = getIndex(data, "request_value");
-    return getMostRequested(data, dataStructure, indexBy, argForQuery, wholeNumbers);
+    return getMostRequested(data, dataStructure, indexBy, argForQuery);
   }
   //when cross-filtering "Most Requested" as index
   else if (indexBy === "request_type" && crossFilter !== "") {
     data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, "request_value");
-    wholeNumbers = getIndex(data, "request_value");
-    return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter, wholeNumbers);
+    return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
   } else {
     //telling function how to format data. See "graphLabels.js"
     dataStructure = graphLabels[`${indexBy}`].structure.map(item => item);
-    wholeNumbers = graphLabels[`${indexBy}`].structure.map(item => item);
 
     //when cross-filtering and index is Not "Most Requested"
     if (crossFilter !== "") {
-      return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter, wholeNumbers);
+      return setCrossedItems(data, dataStructure, crossFilter, indexBy, additionalFilter);
     } else {
       //when single filtering with index that is not "Most Requested"
-      return setItem(data, dataStructure, indexBy, wholeNumbers);
+      return setItem(data, dataStructure, indexBy);
     }
   }
 };
 
-const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFilter, wholeNumbers) => {
+const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFilter) => {
   //will be used to store all possible values for the index value, which is referring to a column in the database table
   let indexByValues = [];
   //will be used to store all possible values for the cross filter value, which is referring to a column in the database table
@@ -49,7 +45,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // and the value is every possible value for that cross filter in the database
   let crossFilterKeys = [];
 
-console.log('wholenumbs in dP', wholeNumbers);
 
   // IF NOT A "MOST REQUESTED" GRAPH, SETS THE KEYS IN A PREDETERMINED ORDER BASED ON WHAT ORDER LANCE WANTS THEM IN
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
@@ -62,7 +57,6 @@ console.log('wholenumbs in dP', wholeNumbers);
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
   dataStructure.forEach(obj => indexByValues.push(Object.values(obj)[0]));
-  wholeNumbers.forEach(obj => indexByValues.push(Object.values(obj)[0]));
 
   crossFilterKeys.forEach(
     obj =>
@@ -102,27 +96,12 @@ console.log('wholenumbs in dP', wholeNumbers);
         [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
       });
     });
-    crossFilteredData.forEach(obj => {
-      return (wholeNumbers[index] = {
-        ...wholeNumbers[index],
-        [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
-      });
-    });
   });
 
   //If graph is "Most Requested" sort from Most to Least requested and provide top 7 objects
   if (indexBy === "request_type") {
     let keyValueArr = [];
     dataStructure.map(obj => {
-      return keyValueArr.push([
-        obj["request_value"],
-        Object.values(obj)
-          .slice(1)
-          .reduce((a, b) => a + b)
-      ]);
-    });
-
-    wholeNumbers.map(obj => {
       return keyValueArr.push([
         obj["request_value"],
         Object.values(obj)
@@ -168,28 +147,15 @@ console.log('wholenumbs in dP', wholeNumbers);
     };
   });
 
-  wholeNumbers.map(item => {
-    let sampleSize = 0;
-
-    //["Male", "130", "100", "34"]
-    let valuesArr = Object.values(item);
-    valuesArr.forEach(value => {
-      if (Number.isInteger(+value)) {
-         return sampleSize += Number(value);
-      };
-    });
-
-    return sampleArr = {
-      ...sampleArr,
-      [`${valuesArr[0]}`]: sampleSize
-    };
-  });
   //This is the sampleSize of all responses {"Male": 153, "Female": 124 => totalSampleSize: 277}
   let totalSampleSize = Object.values(sampleArr).reduce((a, b) => a + b);
 
   //CHANGE VALUES TO PERCENTAGE OF SAMPLE SIZE
   //[{gender: "Male", "10-20": 200, "20-30": 150},{gender: "Female", "10-20": 140, "20-30": 100}]
-  dataStructure.forEach(obj => {
+
+  let percentageData = dataStructure.map(obj => Object.assign({}, obj))
+  
+  percentageData.forEach(obj => {
     for (var property in obj) {
       if (Number.isInteger(+obj[property])) {
         obj[property] = +(
@@ -204,21 +170,20 @@ console.log('wholenumbs in dP', wholeNumbers);
   });
 
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
-  abbreviateLabels(dataStructure);
-  abbreviateLabels(wholeNumbers);
+  abbreviateLabels(percentageData);
 
   const additionalFilterOptions = getIndex(data, additionalFilter)
     .map(obj => Object.values(obj)[0])
     .filter(str => str !== null)
 
 
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, wholeNumbers};
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, percentageData};
 };
 
 // Sets single filter index
 // Puts each value from key:value pair into an array
 // ['Female', 'Male', null]
-const setItem = (data, dataStructure, indexBy, wholeNumbers) => {
+const setItem = (data, dataStructure, indexBy) => {
   let arr = [];
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
 
@@ -228,10 +193,6 @@ const setItem = (data, dataStructure, indexBy, wholeNumbers) => {
 
     dataStructure[index] = {
       ...dataStructure[index],
-      [`${arr[index]}`]: filtered
-    };
-    wholeNumbers[index] = {
-      ...wholeNumbers[index],
       [`${arr[index]}`]: filtered
     };
   });
@@ -247,14 +208,16 @@ const setItem = (data, dataStructure, indexBy, wholeNumbers) => {
     return sampleSize += Number(item[keyValue]);
   });
 
-  dataStructure.forEach(obj => {
+  let percentageData = dataStructure.map(obj => Object.assign({}, obj))
+
+  percentageData.forEach(obj => {
     const keyValue = obj[`${indexBy}`];
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
 
   return {
     dataStructure,
-    wholeNumbers,
+    percentageData,
     keys: graphLabels[`${indexBy}`].labels,
     indexBy,
     sampleSize
@@ -288,18 +251,19 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     return sampleSize += Number(item[keyValue]);
   });
 
-  dataStructure.forEach(obj => {
+  let percentageData = dataStructure.map(obj => Object.assign({}, obj))
+
+  percentageData.forEach(obj => {
     const keyValue = obj[`request_value`];
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
 
-  dataStructure = dataStructure.sort((a, b) =>
-    Object.values(a)[1] > Object.values(b)[1] ? -1 : 1
-  );
+  percentageData = percentageData.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1 );
+  dataStructure = dataStructure.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1 );
 
   const keys = dataStructure.map(obj => obj.request_value);
 
-  dataStructure = dataStructure.slice(0, 7);
+  percentageData = percentageData.slice(0, 7);
 
   //Function abbreviates graph labels
   if (
@@ -308,11 +272,11 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     argForQuery === "procedurecommodity" ||
     argForQuery === "procedureorigin"
   ) {
-    abbreviateLabels(dataStructure);
+    abbreviateLabels(percentageData);
   }
 
 
-  return { dataStructure, keys: keys.reverse(), indexBy, sampleSize};
+  return { dataStructure, keys: keys.reverse(), indexBy, sampleSize, percentageData};
 };
 
 //This function is invoked when filtering by certain categories where the keys may be too long for Nivo to display
