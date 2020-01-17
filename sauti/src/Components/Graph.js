@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from 'react-csv-downloader';
 
 
 const Graph = props => {
+  const [csvHeaders, setCsvHeaders] = useState([]);
+  const [csvFormattedData, setCsvFormattedData] = useState([]);
+
   useEffect(() => {
     if(props.filteredData && props.checkboxOptions !== props.filteredData) {
       props.setCheckboxOptions(props.filteredData)
@@ -11,19 +14,52 @@ const Graph = props => {
   }, [])
 
   //Gets headers from data kays to be used as column headers in CSV.
-  let headers = Object.keys(props.data[0]); 
-  console.log(' HEADERS', headers);
-  console.log(' DATA IN GRAPH', props.data);
 
-  let csvData = (data) => {
-    // add additional filters
-    // add wholeNumbers
-    data.map()
-  }
+ 
+    let headers = (data, data2) => {
+      let allHeaders = [];
+      if (Object.keys(data[0]).includes('request_value')){
+        allHeaders = ['Request Value'];
+        data.forEach(obj => {
+          allHeaders.push(Object.keys(obj)[1]) 
+        })
+      }
+
+      else if (data2){ 
+        allHeaders = [`${props.indexBy}`];
+        data2.forEach(obj => {
+          allHeaders.push(Object.keys(obj)[1]) 
+        })
+      } 
+        
+      console.log('Headers', allHeaders)
+      return allHeaders;
+
+    };
+
+    let csvFormater = (data, data2) => {
+      
+      if (Object.keys(data[0]).includes('request_value')){
+        console.log('Data1', data)
+        return data.map(obj=> {return Object.values(obj)}) 
+      }
+
+      else {
+        console.log('Is there Data2?', data2)
+        return data2
+      } 
+    }
+
+   useEffect(()=> {
+     setCsvFormattedData(csvFormater(props.data, props.csvData))
+     setCsvHeaders(headers(props.data, props.csvData))
+   }, [props.data, props.csvData])
+
+
 
   return (
     <div className="Graph-Container">
-      <CsvDownloader datas={props.data} columns={headers} filename={'tradersData'} seperator={';'}/> 
+      <CsvDownloader datas={csvFormattedData} columns={csvHeaders} filename={'tradersData'} suffix={`${new Date().toISOString()}`}/> 
       <ResponsiveBar
         data={props.data}
         keys={props.keys}

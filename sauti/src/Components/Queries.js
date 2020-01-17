@@ -195,7 +195,6 @@ const GetData = props => {
     props.additionalFilter.type
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
-      console.log('WHOLE NUMBRS IN QUERIES', chartData.wholeNumbers)
   if (props.crossFilter.type !== "") {
     return (
       <div>
