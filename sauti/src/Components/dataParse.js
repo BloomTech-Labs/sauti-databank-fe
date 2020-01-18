@@ -110,7 +110,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
       ]);
     });
 
-    keyValueArr = keyValueArr.sort((a, b) => b[1] - a[1]).splice(0, 7);
+    keyValueArr = keyValueArr.sort((a, b) => b[1] - a[1]);
 
     let newDataStructure = [];
     keyValueArr.forEach(arr => {
@@ -153,6 +153,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   //CHANGE VALUES TO PERCENTAGE OF SAMPLE SIZE
   //[{gender: "Male", "10-20": 200, "20-30": 150},{gender: "Female", "10-20": 140, "20-30": 100}]
 
+  // dataStructure becomes data set for a csv file, and percentageData is for nivo chart.
   let percentageData = dataStructure.map(obj => Object.assign({}, obj))
   
   percentageData.forEach(obj => {
@@ -176,8 +177,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
     .map(obj => Object.values(obj)[0])
     .filter(str => str !== null)
 
-
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, percentageData};
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, percentageData: percentageData.splice(0, 7)};
 };
 
 // Sets single filter index
