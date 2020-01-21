@@ -212,7 +212,7 @@ const setItem = (data, dataStructure, indexBy) => {
 
   percentageData.forEach(obj => {
     const keyValue = obj[`${indexBy}`];
-    obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
+    obj[keyValue] = ((obj[keyValue] / sampleSize) * 100).toFixed(1);
   });
 
   return {
