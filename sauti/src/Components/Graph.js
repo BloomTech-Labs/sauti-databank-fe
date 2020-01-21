@@ -27,16 +27,35 @@ const Graph = props => {
         allHeaders.push(Object.keys(obj)[1]) 
       })
     } else {
-      allHeaders = [{id: `${props.index}`, displayName: `${props.crossFilter}`}, ...props.keys]
-      props.csvData.unshift({[`${props.index}`]: `${props.index}`})
+      allHeaders = [{id: `${props.index}`, displayName: `${props.index}`}, ...props.keys, {id: `${props.additionalFilter}`}]
+      // props.csvData.unshift({[`${props.index}`]: `${props.index}`})
     }
       console.log('Headers', allHeaders)
+      console.log('csv Props', props.csvData)
+      console.log('checkbox', props.selectedCheckbox)
       return allHeaders;
     };
 
+    
+
     let csvFormater = (data) => {
+      if (props.selectedCheckbox) {
+      data = data.map(obj => {
+        let key = Object.keys(props.selectedCheckbox)[0];
+        let val = Object.values(props.selectedCheckbox)[0];
+        console.log('key', key, 'val', val)
+        let o = Object.assign({}, obj);
+        o[key] = val;
+        console.log('o', o)
+        return o;
+        // obj = {...obj, key: Object.keys(props.additionalFilter)[0], value: Object.values(props.selectedCheckbox)[0]}
+    })
+    console.log('data after foreach', data)}
+    
+    
+      // props.additionalFilter && data.push(Object.values(props.selectedCheckbox)[0])
       if (Object.keys(data[0]).includes('request_value')){
-        props.csvData.unshift({[`${props.index}`]: `${props.index}`})
+        // props.csvData.unshift({[`${props.index}`]: `${props.index}`})
         return data.map(obj=> {return Object.values(obj)}) 
       } else {
         return data
