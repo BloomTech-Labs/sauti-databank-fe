@@ -205,6 +205,9 @@ const GetData = props => {
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
           crossFilter={props.crossFilter.type}
+          argForQuery={props.argForQuery}
+          additionalFilter={props.additionalFilter.type}
+          selectedCheckbox={props.selectedCheckbox}
           keys={chartData.crossFilterValues}
           index={props.index.type}
           label={props.label}
@@ -223,6 +226,9 @@ const GetData = props => {
         <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
+          argForQuery={props.argForQuery}
+          additionalFilter={props.additionalFilter.type}
+          selectedCheckbox={props.selectedCheckbox}
           crossFilter={props.crossFilter.type}
           keys={chartData.keys}
           index={props.index.type}

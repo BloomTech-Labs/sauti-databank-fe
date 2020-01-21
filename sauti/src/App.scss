@@ -14,6 +14,22 @@ $greyColor: #4d4f52;
   margin-left: 80
 }
 
+Button{
+  background: #47837f;
+  max-width: 40%;
+  color: #fff;
+  font-weight: 400;
+  padding: 10px;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  align-self: center;
+  font-size: 1.5rem;
+  :hover {
+    cursor: pointer;
+  }
+}
+
 .loader{
   padding-top: 28%;
   display:flex;
@@ -160,43 +176,7 @@ $greyColor: #4d4f52;
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-
-      // .dropdown-container {
-      //   font-family: Helvetica, sans-serif;
-      //   color: $greyColor;
-      //   font-weight: bold;
-
-      //   display: flex;
-      //   flex-direction: column;
-      //   justify-content: flex-start;
-      //   width: 26.9rem;
-
-      //   p {
-      //     font-size: 1.3rem;
-      //     margin-bottom: 10px;
-      //   }
-
-      //   .dropdown {
-      //     color: $greyColor;
-      //     font-size: 1.6rem;
-      //     font-weight: normal;
-      //     display: flex;
-      //     align-items: center;
-      //   }
-      //   .myControlClassName {
-      //     width: 100%;
-
-      //     padding-top: 15px;
-      //     padding-bottom: 15px;
-      //     display: flex;
-      //     align-items: center;
-      //   }
-      //   .Dropdown-arrow {
-      //     position: absolute;
-      //     top: 21px;
-      //     right: 15px;
-        
+      }        
     }
   }
 }
