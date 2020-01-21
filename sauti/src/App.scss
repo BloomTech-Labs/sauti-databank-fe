@@ -2,6 +2,11 @@ $greyColor: #4d4f52;
 
 .Graph-Container{
   height:600px;
+  position: relative;
+  // button{
+  //   position: absolute;
+  //   right: 0;
+  // }
 }
 
 .loader-container{
@@ -23,7 +28,6 @@ Button{
   border: none;
   border-radius: 2px;
   text-align: center;
-  align-self: center;
   font-size: 1.5rem;
   :hover {
     cursor: pointer;
