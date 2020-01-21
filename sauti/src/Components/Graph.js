@@ -40,11 +40,7 @@ const Graph = props => {
   }   
 
   let csvFormater = (data) => {    
-    //if most requested
-    if (Object.keys(data[0]).includes('request_value')){
-      return data.map(obj=> {return Object.values(obj)}) 
-    } 
-
+    
     //if there's additionalFilter
     if (props.selectedCheckbox) {
       data = data.map(obj => {
@@ -54,9 +50,11 @@ const Graph = props => {
         o[key] = val;
         return o;
       })
-    } 
-    
-    return data
+    }
+     //if most requested
+    if (Object.keys(data[0]).includes('request_value')){
+      return data.map(obj=> {return Object.values(obj)}) 
+    } else {return data}
   }
 
   let fileName = '';
