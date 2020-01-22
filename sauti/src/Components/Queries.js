@@ -202,9 +202,14 @@ const GetData = props => {
           {props.label} by {props.crossLabel}
         </h1>
         <Graph
-          data={chartData.dataStructure}
+          data={chartData.percentageData}
+          csvData={chartData.dataStructure}
+          crossFilter={props.crossFilter.type}
+          argForQuery={props.argForQuery}
+          additionalFilter={props.additionalFilter.type}
+          selectedCheckbox={props.selectedCheckbox}
           keys={chartData.crossFilterValues}
-          indexBy={chartData.indexBy}
+          index={props.index.type}
           label={props.label}
           groupMode={"grouped"}
           filteredData={filteredData}
@@ -219,9 +224,14 @@ const GetData = props => {
       <div>
         <h1 className="graph-title">{props.label}</h1>
         <Graph
-          data={chartData.dataStructure}
+          data={chartData.percentageData}
+          csvData={chartData.dataStructure}
+          argForQuery={props.argForQuery}
+          additionalFilter={props.additionalFilter.type}
+          selectedCheckbox={props.selectedCheckbox}
+          crossFilter={props.crossFilter.type}
           keys={chartData.keys}
-          indexBy={chartData.indexBy}
+          index={props.index.type}
           label={props.label}
           groupMode={"stacked"}
           filteredData={filteredData}
