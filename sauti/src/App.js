@@ -9,20 +9,11 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState({
-    type: "request_type",
-    query: "Sessions"
-  });
-  const [crossFilter, setCrossFilter] = useState({
-    type: "",
-    query: "Users"
-  });
+  const [index, setIndex] = useState({type: "gender", query: "Users"});
+  const [crossFilter, setCrossFilter] = useState({type: "", query: "Users"});
   const [additionalFilter, setAdditionalFilter] = useState({type: '', query: ''});
-  const [indexLabel, setIndexLabel] = useState(
-    "Most Requested Procedure Commodity"
-  );
+  const [indexLabel, setIndexLabel] = useState("Gender");
   const [crossLabel, setCrossLabel] = useState("");
-  const [argForQuery, setArgForQuery] = useState("procedurecommodity");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
   const [startDate, setStartDate] = useState("2012-01-01");
@@ -57,7 +48,6 @@ const App = () => {
               crossFilter={crossFilter}
               label={indexLabel}
               crossLabel={crossLabel}
-              argForQuery={argForQuery}
               selectedCheckbox={selectedCheckbox}
               checkboxOptions={checkboxOptions}
               setCheckboxOptions={setCheckboxOptions}
@@ -77,7 +67,6 @@ const App = () => {
               setCrossFilter={setCrossFilter}
               setIndexLabel={setIndexLabel}
               setCrossLabel={setCrossLabel}
-              setArgForQuery={setArgForQuery}
               setSelectedCheckbox={setSelectedCheckbox}
               setCheckboxOptions={setCheckboxOptions}
               setAdditionalFilter={setAdditionalFilter}

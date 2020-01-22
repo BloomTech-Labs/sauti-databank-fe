@@ -161,7 +161,7 @@ const GetData = props => {
   }
 
   let { loading, data } = useQuery(QUERY, {
-    variables: { ...props.selectedCheckbox, request_type: props.argForQuery, additional_filter_type: props.additionalFilter.type},
+    variables: { ...props.selectedCheckbox, additional_filter_type: props.additionalFilter.type},
     fetchPolicy: policyType
   });
 
@@ -181,18 +181,19 @@ const GetData = props => {
     // data = [...data.tradersUsers, ...data.tradersData] // This is for when we are supporting multiple queries of same type
   
   let filteredData;
+  // This is how we nab checkbox options.
   if (props.additionalFilter.type) {
-    filteredData = getIndex(data.additionalFilterData, "request_value").map(obj => obj.request_value);
+    filteredData = getIndex(data.additionalFilterData, `${props.additionalFilter.type}`).map(obj => obj.request_value);
   };
 
   const chartData = dataParse(
     props.index.type,
     data[`${queryType}`],
     props.crossFilter.type,
-    props.argForQuery,
     props.startDate,
     props.endDate,
-    props.additionalFilter.type
+    props.additionalFilter.type,
+    props.index.query
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
 
   if (props.crossFilter.type !== "") {
@@ -205,7 +206,6 @@ const GetData = props => {
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
           crossFilter={props.crossFilter.type}
-          argForQuery={props.argForQuery}
           additionalFilter={props.additionalFilter.type}
           selectedCheckbox={props.selectedCheckbox}
           keys={chartData.crossFilterValues}
@@ -226,7 +226,6 @@ const GetData = props => {
         <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
-          argForQuery={props.argForQuery}
           additionalFilter={props.additionalFilter.type}
           selectedCheckbox={props.selectedCheckbox}
           crossFilter={props.crossFilter.type}
