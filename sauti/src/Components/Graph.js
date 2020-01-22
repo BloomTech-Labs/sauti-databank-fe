@@ -29,19 +29,18 @@ const Graph = props => {
       allHeaders.push({id: `${props.sampleSize}`, displayName: `Sample Size: ${props.sampleSize}`})
     } else {
       allHeaders = [
-        {id: `${props.index}`, displayName: `${props.crossFilter}`}, 
+        {id: `${props.index}`, displayName: `${props.index}`}, 
         ...props.keys, 
         {id: `${props.additionalFilter}`}, 
         {id: `${props.sampleSize}`, displayName: `Sample Size: ${props.sampleSize}`}
       ]
     }
-      console.log('No CrossFilter Headers', allHeaders)
-      return allHeaders;
+    return allHeaders;
   }   
 
   let csvFormater = (data) => {   
     //if there's additionalFilter 
-    if (props.selectedCheckbox) {
+    if (props.additionalFilter) {
       data = data.map(obj => {
         let key = Object.keys(props.selectedCheckbox)[0];
         let val = Object.values(props.selectedCheckbox)[0];
@@ -79,9 +78,7 @@ const Graph = props => {
       <ResponsiveBar
         data={props.data}
         keys={props.keys}
-        indexBy={
-          props.index === "request_type" ? "request_value" : props.index
-        }
+        indexBy={props.index === "request_type" ? "request_value" : props.index}
         groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
         margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
         padding={0.3}
