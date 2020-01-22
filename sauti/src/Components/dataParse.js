@@ -57,11 +57,13 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // Puts each value from key:value pair into an array
   // ['Female', 'Male', null]
   dataStructure.forEach(obj => indexByValues.push(Object.values(obj)[0]));
+
   crossFilterKeys.forEach(
     obj =>
       Object.values(obj)[0] !== null &&
       crossFilterValues.push(Object.values(obj)[0])
   );
+  
   // Building an array of objects where each object is formatted in this way
   // ex: if indexBy = "gender" and crossFilter = "age"
   // {"gender": "Male", "10-20": 167, "20-30": 237, "30-40": 642, "40-50": 210, "50-60": 123, "60-70": 1}
@@ -108,7 +110,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
       ]);
     });
 
-    keyValueArr = keyValueArr.sort((a, b) => b[1] - a[1]).splice(0, 7);
+    keyValueArr = keyValueArr.sort((a, b) => b[1] - a[1]);
 
     let newDataStructure = [];
     keyValueArr.forEach(arr => {
@@ -144,12 +146,17 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
       [`${valuesArr[0]}`]: sampleSize
     };
   });
+
   //This is the sampleSize of all responses {"Male": 153, "Female": 124 => totalSampleSize: 277}
   let totalSampleSize = Object.values(sampleArr).reduce((a, b) => a + b);
 
   //CHANGE VALUES TO PERCENTAGE OF SAMPLE SIZE
   //[{gender: "Male", "10-20": 200, "20-30": 150},{gender: "Female", "10-20": 140, "20-30": 100}]
-  dataStructure.forEach(obj => {
+
+  // dataStructure becomes data set for a csv file, and percentageData is for nivo chart.
+  let percentageData = dataStructure.map(obj => Object.assign({}, obj))
+  
+  percentageData.forEach(obj => {
     for (var property in obj) {
       if (Number.isInteger(+obj[property])) {
         obj[property] = +(
@@ -164,14 +171,13 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   });
 
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
-  abbreviateLabels(dataStructure);
+  abbreviateLabels(percentageData);
 
   const additionalFilterOptions = getIndex(data, additionalFilter)
     .map(obj => Object.values(obj)[0])
     .filter(str => str !== null)
 
-
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions};
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, percentageData: percentageData.splice(0, 7)};
 };
 
 // Sets single filter index
@@ -179,7 +185,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 // ['Female', 'Male', null]
 const setItem = (data, dataStructure, indexBy) => {
   let arr = [];
-
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
 
   // For each object get every trader at the index where it equals the value in the arr
@@ -195,6 +200,7 @@ const setItem = (data, dataStructure, indexBy) => {
   // This block of code transforms from raw numbers to rounded percentages
   let numberValues = [];
   let sampleSize = 0;
+  
 
   dataStructure.map(item => {
     const keyValue = item[`${indexBy}`];
@@ -202,13 +208,16 @@ const setItem = (data, dataStructure, indexBy) => {
     return sampleSize += Number(item[keyValue]);
   });
 
-  dataStructure.forEach(obj => {
+  let percentageData = dataStructure.map(obj => Object.assign({}, obj))
+
+  percentageData.forEach(obj => {
     const keyValue = obj[`${indexBy}`];
-    obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
+    obj[keyValue] = ((obj[keyValue] / sampleSize) * 100).toFixed(1);
   });
 
   return {
     dataStructure,
+    percentageData,
     keys: graphLabels[`${indexBy}`].labels,
     indexBy,
     sampleSize
@@ -242,18 +251,19 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     return sampleSize += Number(item[keyValue]);
   });
 
-  dataStructure.forEach(obj => {
+  let percentageData = dataStructure.map(obj => Object.assign({}, obj))
+
+  percentageData.forEach(obj => {
     const keyValue = obj[`request_value`];
     obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
 
-  dataStructure = dataStructure.sort((a, b) =>
-    Object.values(a)[1] > Object.values(b)[1] ? -1 : 1
-  );
+  percentageData = percentageData.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1 );
+  dataStructure = dataStructure.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1 );
 
   const keys = dataStructure.map(obj => obj.request_value);
 
-  dataStructure = dataStructure.slice(0, 7);
+  percentageData = percentageData.slice(0, 7);
 
   //Function abbreviates graph labels
   if (
@@ -262,11 +272,11 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     argForQuery === "procedurecommodity" ||
     argForQuery === "procedureorigin"
   ) {
-    abbreviateLabels(dataStructure);
+    abbreviateLabels(percentageData);
   }
 
 
-  return { dataStructure, keys: keys.reverse(), indexBy, sampleSize};
+  return { dataStructure, keys: keys.reverse(), indexBy, sampleSize, percentageData};
 };
 
 //This function is invoked when filtering by certain categories where the keys may be too long for Nivo to display
