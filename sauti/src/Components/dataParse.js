@@ -94,8 +94,12 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   });
 
   //If graph is "Most Requested" sort from Most to Least requested and provide top 7 objects
+
+  let keyValueArrIndex = [];
+  let keyValueArrCross = [];
+  let newDataStructure = [];
+
   if (!graphLabels[`${indexBy}`]) {
-    let keyValueArrIndex = [];
     dataStructure.map(obj => {
       return keyValueArrIndex.push([
         obj[`${indexBy}`],
@@ -104,10 +108,18 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
           .reduce((a, b) => a + b)
         ]);
       })
+      keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]);
+
+      keyValueArrIndex.forEach(arr => {
+        for (let i = 0, len = dataStructure.length; i < len; i++) {
+          if (arr[0] === dataStructure[i].indexBy) {
+            newDataStructure.push(dataStructure[i]);
+          }
+        }
+      });
   };
     
   if(!graphLabels[`${crossFilter}`]){
-    let keyValueArrCross = [];
     dataStructure.map(obj => {
       return keyValueArrCross.push([
         obj[`${crossFilter}`],
@@ -116,22 +128,20 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
           .reduce((a, b) => a + b)
         ]);
       })
+      keyValueArrCross = keyValueArrCross.sort((a, b) => b[1] - a[1]);
+
+      keyValueArrCross.forEach(arr => {
+        for (let i = 0, len = dataStructure.length; i < len; i++) {
+          if (arr[0] === dataStructure[i].crossFilter) {
+            newDataStructure.push(dataStructure[i]);
+          }
+        }
+      })
   };
 
-  keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]);
-  keyValueArrCross = keyValueArrCross.sort((a, b) => b[1] - a[1]);
-
-  // COME BACK AND FIX******************************
-  let newDataStructure = [];
-  keyValueArrIndex.forEach(arr => {
-    for (let i = 0, len = dataStructure.length; i < len; i++) {
-      if (arr[0] === dataStructure[i].request_value) {
-        newDataStructure.push(dataStructure[i]);
-      }
-    }
-  });
-
-  dataStructure = newDataStructure;
+  if(!graphLabels[`${indexBy}`] || !graphLabels[`${crossFilter}`]){
+    dataStructure = newDataStructure;
+  }
   
   // GET SAMPLE SIZE
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
@@ -171,7 +181,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
         obj[property] = +(
           (obj[property] /
             sampleArr[
-              obj[`${indexBy === "request_type" ? "request_value" : indexBy}`]
+              obj[`${indexBy}`]
             ]) *
           100
         ).toFixed(1);
@@ -180,7 +190,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   });
 
   // ABBREVIATE LABELS IF THERE ARE ANY TO ABBREVIATE (SEE BELOW)
-  abbreviateLabels(percentageData);
+  abbreviateLabels(percentageData, indexBy);
 
   const additionalFilterOptions = getIndex(data, additionalFilter)
     .map(obj => Object.values(obj)[0])
@@ -287,7 +297,7 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
 };
 
 //This function is invoked when filtering by certain categories where the keys may be too long for Nivo to display
-const abbreviateLabels = dataStructure => {
+const abbreviateLabels = (dataStructure, indexBy) => {
   let replaceValues = {
     //Agencies
     "Ministry of Agriculture Animal Industry & Fisheries (MAAIF)": "MAAIF",
@@ -320,9 +330,9 @@ const abbreviateLabels = dataStructure => {
     OutsideEAC: "Outside EAC"
   };
   dataStructure.forEach(obj => {
-    let longValue = obj["request_value"];
+    let longValue = obj[`${indexBy}`];
     if (replaceValues[`${longValue}`]) {
-      obj["request_value"] = replaceValues[`${longValue}`];
+      obj[`${indexBy}`] = replaceValues[`${longValue}`];
     }
   });
 

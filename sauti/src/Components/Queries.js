@@ -51,25 +51,43 @@ const GetData = props => {
         $age: String,
         $gender: String, 
         $education: String, 
-        $request_type: String!,
         $crossing_freq: String,
         $produce: String,
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $request_value: String
+        $procedurecommodity: String,
+        $procedurecommoditycat: String,
+        $proceduredest: String,
+        $procedurerequireddocument: String,
+        $procedurerelevantagency: String,
+        $procedureorigin: String,
+        $commoditycountry: String,
+        $commoditymarket: String,
+        $commodityproduct: String,
+        $commoditycat: String,
+        $exchangedirection: String,
         ){
         tradersData(
           age: $age,
           gender: $gender, 
           education: $education, 
-          request_type: $request_type,
           crossing_freq: $crossing_freq,
           produce: $produce,
           primary_income: $primary_income,
           language: $language,
           country_of_residence: $country_of_residence,
-          request_value: $request_value
+          procedurecommodity: $procedurecommodity,
+          procedurecommoditycat: $procedurecommoditycat,
+          proceduredest: $proceduredest,
+          procedurerequireddocument: $procedurerequireddocument,
+          procedurerelevantagency: $procedurerelevantagency,
+          procedureorigin: $procedureorigin,
+          commoditycountry: $commoditycountry,
+          commoditymarket: $commoditymarket,
+          commodityproduct: $commodityproduct,
+          commoditycat: $commoditycat,
+          exchangedirection: $exchangedirection,
           ){
           ${props.index.type}
           ${props.crossFilter.type}
@@ -107,8 +125,8 @@ const GetData = props => {
           ${props.index.type}
           ${props.crossFilter.type}
         }
-        additionalFilterData:tradersData(request_type: $additional_filter_type){
-            request_value
+        additionalFilterData:tradersData(${props.additionalFilter.type}: $additional_filter_type){
+            ${props.additionalFilter.type}
         }
       }
       `;
@@ -120,26 +138,44 @@ const GetData = props => {
         $age: String,
         $gender: String, 
         $education: String, 
-        $request_type: String!,
         $crossing_freq: String,
         $produce: String,
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $request_value: String,
         $additional_filter_type: String,
+        $procedurecommodity: String,
+        $procedurecommoditycat: String,
+        $proceduredest: String,
+        $procedurerequireddocument: String,
+        $procedurerelevantagency: String,
+        $procedureorigin: String,
+        $commoditycountry: String,
+        $commoditymarket: String,
+        $commodityproduct: String,
+        $commoditycat: String,
+        $exchangedirection: String,
         ){
         tradersData(
           age: $age,
           gender: $gender, 
           education: $education, 
-          request_type: $request_type,
           crossing_freq: $crossing_freq,
           produce: $produce,
           primary_income: $primary_income,
           language: $language,
           country_of_residence: $country_of_residence,
-          request_value: $request_value
+          procedurecommodity: $procedurecommodity,
+          procedurecommoditycat: $procedurecommoditycat,
+          proceduredest: $proceduredest,
+          procedurerequireddocument: $procedurerequireddocument,
+          procedurerelevantagency: $procedurerelevantagency,
+          procedureorigin: $procedureorigin,
+          commoditycountry: $commoditycountry,
+          commoditymarket: $commoditymarket,
+          commodityproduct: $commodityproduct,
+          commoditycat: $commoditycat,
+          exchangedirection: $exchangedirection,
           ){
           ${props.index.type}
           ${props.crossFilter.type}
@@ -147,7 +183,7 @@ const GetData = props => {
           created_date
         }
         additionalFilterData:tradersData(request_type: $additional_filter_type){
-            request_value
+            ${props.additionalFilter.type}
         }
       }
       `;
