@@ -7,7 +7,7 @@ const mockData = [
     {procedurecommoditycat: "Vegetables,Legumes,Grains", gender: "Male,Female"}
 ]
 
-const removeMultiples = data => {
+const removeMultiple = data => {
     let keys = Object.keys(data[0])
     // [gender, procedurecommodity]
     keys.forEach(key => {
@@ -25,4 +25,4 @@ const removeMultiples = data => {
     return data
 }
 
-export default removeMultiples
+export default removeMultiple
