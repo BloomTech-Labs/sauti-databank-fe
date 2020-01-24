@@ -2,12 +2,11 @@ import React, { useEffect, useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
 const Graph = props => {
-
   useEffect(() => {
-    if(props.filteredData && props.checkboxOptions !== props.filteredData) {
-      props.setCheckboxOptions(props.filteredData)
+    if (props.filteredData && props.checkboxOptions !== props.filteredData) {
+      props.setCheckboxOptions(props.filteredData);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="Graph-Container">
@@ -20,7 +19,7 @@ const Graph = props => {
         groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
         margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
         padding={0.3}
-        innerPadding={0}
+        innerPadding={3}
         maxValue={100}
         colors={{ scheme: "nivo" }}
         borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
