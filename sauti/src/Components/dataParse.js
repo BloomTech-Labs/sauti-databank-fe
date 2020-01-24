@@ -15,7 +15,7 @@ const dataParse = (
   if (queryType === "Sessions" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
     dataStructure = getIndex(data, indexBy);
-    return setItem(data, dataStructure, indexBy);
+    return getMostRequested(data, dataStructure, indexBy);
   }
   //when cross-filtering "Most Requested" as index
   else if (queryType === "Sessions" && crossFilter !== "") {
@@ -112,7 +112,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
       keyValueArrIndex.forEach(arr => {
         for (let i = 0, len = dataStructure.length; i < len; i++) {
-          if (arr[0] === dataStructure[i].indexBy) {
+          if (arr[0] === dataStructure[i][`${indexBy}`]) {
             newDataStructure.push(dataStructure[i]);
           }
         }
@@ -132,7 +132,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
       keyValueArrCross.forEach(arr => {
         for (let i = 0, len = dataStructure.length; i < len; i++) {
-          if (arr[0] === dataStructure[i].crossFilter) {
+          if (arr[0] === dataStructure[i][`${crossFilter}`]) {
             newDataStructure.push(dataStructure[i]);
           }
         }
@@ -142,6 +142,9 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   if(!graphLabels[`${indexBy}`] || !graphLabels[`${crossFilter}`]){
     dataStructure = newDataStructure;
   }
+  
+  dataStructure = dataStructure.filter(obj=> obj[`${indexBy}`] !== null);
+  console.log('DATA', dataStructure)
   
   // GET SAMPLE SIZE
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
@@ -242,7 +245,7 @@ const setItem = (data, dataStructure, indexBy) => {
 };
 
 //Builds data for Nivo when single filtering by "Most Requested"
-const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
+const getMostRequested = (data, dataStructure, indexBy) => {
   let arr = [];
 
   // Puts each value from key:value pair into an array
@@ -251,7 +254,7 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
 
   // For each object get every trader at the index where it equals the value in the arr
   arr.forEach((key, index) => {
-    const filtered = data.filter(value => value[`request_value`] === key)
+    const filtered = data.filter(value => value[`${indexBy}`] === key)
       .length;
 
     dataStructure[index] = {
@@ -260,38 +263,42 @@ const getMostRequested = (data, dataStructure, indexBy, argForQuery) => {
     };
   });
 
+  dataStructure = dataStructure.filter(obj=> 
+    obj[`${indexBy}`]!== null
+  );
+
   // This block of code transforms from raw numbers to percentages
   let sampleSize = 0;
 
   dataStructure.map(item => {
-    let keyValue = item[`request_value`];
+    let keyValue = item[`${indexBy}`];
     return sampleSize += Number(item[keyValue]);
   });
 
   let percentageData = dataStructure.map(obj => Object.assign({}, obj))
 
   percentageData.forEach(obj => {
-    const keyValue = obj[`request_value`];
-    obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
+    const keyValue = obj[`${indexBy}`];
+    obj[keyValue] =  Math.round((obj[keyValue] / sampleSize) * 100);
   });
 
+  // dataStructure used for csv, percentage for graph
   percentageData = percentageData.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1 );
   dataStructure = dataStructure.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1 );
 
-  const keys = dataStructure.map(obj => obj.request_value);
+  const keys = dataStructure.map(obj => obj[`${indexBy}`]);
 
   percentageData = percentageData.slice(0, 7);
 
   //Function abbreviates graph labels
   if (
-    argForQuery === "procedurerelevantagency" ||
-    argForQuery === "procedurerequireddocument" ||
-    argForQuery === "procedurecommodity" ||
-    argForQuery === "procedureorigin"
+    indexBy === "procedurerelevantagency" ||
+    indexBy === "procedurerequireddocument" ||
+    indexBy === "procedurecommodity" ||
+    indexBy === "procedureorigin"
   ) {
-    abbreviateLabels(percentageData);
+    abbreviateLabels(percentageData, indexBy);
   }
-
 
   return { dataStructure, keys: keys.reverse(), indexBy, sampleSize, percentageData};
 };

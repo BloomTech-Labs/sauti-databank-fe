@@ -8,7 +8,7 @@ import getIndex from "../DataParseHelpers/getIndex"
 import graphLabels from "./graphLabels"
 
 const GetData = props => {
-  let queryType = "tradersData";
+  let queryType = "tradersUsers";
   let QUERY;
 
   if (props.index.query === "Users" && props.crossFilter.query === "Users" && !props.additionalFilter.type) {
@@ -44,7 +44,7 @@ const GetData = props => {
     props.crossFilter.query === "Users" && 
     !props.additionalFilter.type
   ) {
-    queryType = "tradersData";
+    queryType = "sessionsData";
 
     QUERY = gql`
       query getData(
@@ -68,7 +68,7 @@ const GetData = props => {
         $commoditycat: String,
         $exchangedirection: String,
         ){
-        tradersData(
+          sessionsData(
           age: $age,
           gender: $gender, 
           education: $education, 
@@ -91,13 +91,12 @@ const GetData = props => {
           ){
           ${props.index.type}
           ${props.crossFilter.type}
-          request_value
           created_date
         }
       }
       `;
   } else if (props.index.query === "Users" && props.crossFilter.query === "Users") {
-    queryType = "tradersData";
+    queryType = "sessionsData";
     QUERY = gql`
       query getUsers( 
         $age: String,
@@ -108,10 +107,9 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $request_value: String,
         $additional_filter_type: String
         ){
-        tradersData (
+        sessionsData (
           age: $age,
           gender: $gender, 
           education: $education
@@ -120,18 +118,17 @@ const GetData = props => {
           primary_income: $primary_income,
           language: $language,
           country_of_residence: $country_of_residence,
-          request_value: $request_value,
           ) {
           ${props.index.type}
           ${props.crossFilter.type}
         }
-        additionalFilterData:tradersData(${props.additionalFilter.type}: $additional_filter_type){
+        additionalFilterData:sessionsData(${props.additionalFilter.type}: $additional_filter_type){
             ${props.additionalFilter.type}
         }
       }
       `;
   } else {
-    queryType = "tradersData";
+    queryType = "sessionsData";
 
     QUERY = gql`
       query getData(
@@ -156,7 +153,7 @@ const GetData = props => {
         $commoditycat: String,
         $exchangedirection: String,
         ){
-        tradersData(
+        sessionsData(
           age: $age,
           gender: $gender, 
           education: $education, 
@@ -179,10 +176,9 @@ const GetData = props => {
           ){
           ${props.index.type}
           ${props.crossFilter.type}
-          request_value
           created_date
         }
-        additionalFilterData:tradersData(request_type: $additional_filter_type){
+        additionalFilterData:sessionsData(${props.additionalFilter.type}: $additional_filter_type){
             ${props.additionalFilter.type}
         }
       }
@@ -219,7 +215,7 @@ const GetData = props => {
   let filteredData;
   // This is how we nab checkbox options.
   if (props.additionalFilter.type) {
-    filteredData = getIndex(data.additionalFilterData, `${props.additionalFilter.type}`).map(obj => obj.request_value);
+    filteredData = getIndex(data.additionalFilterData, `${props.additionalFilter.type}`).map(obj => obj[`${props.additionalFilter.type}`]);
   };
 
   const chartData = dataParse(
