@@ -110,7 +110,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   };
   console.log('DATA', dataStructure)
   if(!graphLabels[`${crossFilter}`]){
-    crossFilterValues = [];
     dataStructure.forEach(obj=> {
       let crossKeys = Object.keys(obj);
       let crossValues = Object.values(obj);
@@ -119,14 +118,13 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
         tempCrossArr.push([ key, crossValues[index] ])
       })
       let slicedCrossArr = tempCrossArr.sort((a, b) => b[1] - a[1]).slice(0,7)
-
+      crossFilterValues = []
+      slicedCrossArr.slice(1).forEach(arr => {
+        crossFilterValues.push(arr[0])
+      })
       let tempObj = {};
-      slicedCrossArr.forEach((arr, index) => {
+      slicedCrossArr.forEach(arr => {
         tempObj = {...tempObj, [arr[0]]: arr[1] }
-        if(index !== 0){
-          crossFilterValues.push(arr[0])
-        }
-
       })
         newDataStructure.push(tempObj)
         console.log('sliced stuff', newDataStructure);
