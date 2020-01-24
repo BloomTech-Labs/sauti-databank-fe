@@ -1,5 +1,6 @@
 import graphLabels from "./graphLabels";
 import getIndex from '../DataParseHelpers/getIndex'
+import removeMultiple from './removeMultiple';
 
 const dataParse = (
   indexBy,
@@ -11,6 +12,7 @@ const dataParse = (
   queryType
 ) => {
   let dataStructure = [];
+
   //when single filtering "Most Requested" graph
   if (queryType === "Sessions" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
@@ -36,6 +38,7 @@ const dataParse = (
 };
 
 const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFilter) => {
+  data = removeMultiple(data);
   //will be used to store all possible values for the index value, which is referring to a column in the database table
   let indexByValues = [];
   //will be used to store all possible values for the cross filter value, which is referring to a column in the database table
@@ -206,6 +209,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 // Puts each value from key:value pair into an array
 // ['Female', 'Male', null]
 const setItem = (data, dataStructure, indexBy) => {
+  data = removeMultiple(data);
   let arr = [];
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
 
@@ -246,6 +250,7 @@ const setItem = (data, dataStructure, indexBy) => {
 
 //Builds data for Nivo when single filtering by "Most Requested"
 const getMostRequested = (data, dataStructure, indexBy) => {
+  data = removeMultiple(data)
   let arr = [];
 
   // Puts each value from key:value pair into an array

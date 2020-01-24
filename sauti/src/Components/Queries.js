@@ -107,7 +107,6 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $additional_filter_type: String
         ){
         sessionsData (
           age: $age,
@@ -122,8 +121,8 @@ const GetData = props => {
           ${props.index.type}
           ${props.crossFilter.type}
         }
-        additionalFilterData:sessionsData(${props.additionalFilter.type}: $additional_filter_type){
-            ${props.additionalFilter.type}
+        additionalFilterData:sessionsData{
+          ${props.additionalFilter.type}
         }
       }
       `;
@@ -140,7 +139,6 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
-        $additional_filter_type: String,
         $procedurecommodity: String,
         $procedurecommoditycat: String,
         $proceduredest: String,
@@ -178,7 +176,7 @@ const GetData = props => {
           ${props.crossFilter.type}
           created_date
         }
-        additionalFilterData:sessionsData(${props.additionalFilter.type}: $additional_filter_type){
+        additionalFilterData:sessionsData{
             ${props.additionalFilter.type}
         }
       }
