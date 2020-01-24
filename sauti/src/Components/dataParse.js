@@ -13,6 +13,7 @@ const dataParse = (
   queryType
 ) => {
   let dataStructure = [];
+
   //when single filtering "Most Requested" graph
   if (queryType === "Sessions" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
