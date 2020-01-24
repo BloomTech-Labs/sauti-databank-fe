@@ -158,6 +158,17 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
+        $procedurecommodity: String,
+        $procedurecommoditycat: String,
+        $proceduredest: String,
+        $procedurerequireddocument: String,
+        $procedurerelevantagency: String,
+        $procedureorigin: String,
+        $commoditycountry: String,
+        $commoditymarket: String,
+        $commodityproduct: String,
+        $commoditycat: String,
+        $exchangedirection: String,
         ){
         sessionsData (
           age: $age,
@@ -168,6 +179,17 @@ const GetData = props => {
           primary_income: $primary_income,
           language: $language,
           country_of_residence: $country_of_residence,
+          procedurecommodity: $procedurecommodity,
+          procedurecommoditycat: $procedurecommoditycat,
+          proceduredest: $proceduredest,
+          procedurerequireddocument: $procedurerequireddocument,
+          procedurerelevantagency: $procedurerelevantagency,
+          procedureorigin: $procedureorigin,
+          commoditycountry: $commoditycountry,
+          commoditymarket: $commoditymarket,
+          commodityproduct: $commodityproduct,
+          commoditycat: $commoditycat,
+          exchangedirection: $exchangedirection,
           ) {
           ${props.index.type}
           ${props.crossFilter.type}
@@ -239,9 +261,10 @@ const GetData = props => {
   } else {
     policyType = "cache-first";
   }
-
+  
   let { loading, data } = useQuery(QUERY, {
-    variables: { ...props.selectedCheckbox, additional_filter_type: props.additionalFilter.type},
+    
+    variables: { ...props.selectedCheckbox},
     fetchPolicy: policyType
   });
 
