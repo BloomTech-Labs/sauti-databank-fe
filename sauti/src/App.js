@@ -9,26 +9,15 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 
 const App = () => {
-  const [index, setIndex] = useState({
-    type: "gender",
-    query: "Users"
-  });
-  const [crossFilter, setCrossFilter] = useState({
-    type: "age",
-    query: "Users"
-  });
+  const [index, setIndex] = useState({type: "gender", query: "Users"});
+  const [crossFilter, setCrossFilter] = useState({type: "", query: "Users"});
   const [additionalFilter, setAdditionalFilter] = useState({type: '', query: ''});
-  const [additionalFilterLabel, setAdditionalFilterLabel] = useState("");
-  const [indexLabel, setIndexLabel] = useState(
-    "Gender"
-  );
-  const [crossLabel, setCrossLabel] = useState("Age");
-  const [argForQuery, setArgForQuery] = useState("");
+  const [indexLabel, setIndexLabel] = useState("Gender");
+  const [crossLabel, setCrossLabel] = useState("");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
   const [startDate, setStartDate] = useState("2012-01-01");
   const [endDate, setEndDate] = useState("2020-01-08");
-  console.log('app additonal option', additionalFilter)
 
   useEffect(() => {
     ReactGa.initialize("UA-155468784-1");
@@ -59,7 +48,6 @@ const App = () => {
               crossFilter={crossFilter}
               label={indexLabel}
               crossLabel={crossLabel}
-              argForQuery={argForQuery}
               selectedCheckbox={selectedCheckbox}
               checkboxOptions={checkboxOptions}
               setCheckboxOptions={setCheckboxOptions}
@@ -79,11 +67,9 @@ const App = () => {
               setCrossFilter={setCrossFilter}
               setIndexLabel={setIndexLabel}
               setCrossLabel={setCrossLabel}
-              setArgForQuery={setArgForQuery}
               setSelectedCheckbox={setSelectedCheckbox}
               setCheckboxOptions={setCheckboxOptions}
               setAdditionalFilter={setAdditionalFilter}
-              setAdditionalFilterLabel={setAdditionalFilterLabel}
               startDate={startDate}
               endDate={endDate}
               setStartDate={setStartDate}
