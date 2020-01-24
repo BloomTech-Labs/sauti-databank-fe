@@ -1,10 +1,9 @@
 const mockData = [
-    {gender: "Male", procedurecommodity: "Maize,Maize", procedurecommoditycat:"Vegetables"},
+    {gender: "Male", procedurecommodity: "Maize,Maize"},
     {gender: "Female", procedurecommodity: "Beans"},
     {gender: "Female", procedurecommodity: "Maize,Maize,Maize,Beans,Dylan"},
     {gender: "Male", procedurecommodity: "Maize"},
     {gender: null, procedurecommodity:"Maize,Bananas"},
-    {procedurecommoditycat: "Vegetables,Legumes,Grains", gender: "Male,Female"}
 ]
 
 const removeMultiple = data => {
@@ -17,8 +16,7 @@ const removeMultiple = data => {
                 obj[key] = split[0]
                 split.splice(1).forEach(value => {
                     data.push({[key]: value})
-                })
-                
+                })  
             }           
         })
     })
