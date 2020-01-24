@@ -21,11 +21,7 @@ const Graph = props => {
     let allHeaders = [];
     //no crossfilter
     if (!props.crossFilter){
-      const firstValue = props.index === 'request_type' ? 'Request Value' : props.index
-      allHeaders = [firstValue];
-      // data.forEach(obj => {
-      //   allHeaders.push(Object.keys(obj)[1]) 
-      // })
+      allHeaders = [props.index];
       allHeaders.push({id: `${props.sampleSize}`, displayName: `Sample Size: ${props.sampleSize}`})
     } else {
       allHeaders = [
@@ -49,12 +45,7 @@ const Graph = props => {
         return o;
       })
     } 
-    //if most requested
-    if (Object.keys(data[0]).includes('request_value')){
-      return data.map(obj=> {return Object.values(obj)}) 
-    } else {
-      return data
-    }
+    return data
   }
 
   let fileName = '';
@@ -78,7 +69,7 @@ const Graph = props => {
       <ResponsiveBar
         data={props.data}
         keys={props.keys}
-        indexBy={props.index === "request_type" ? "request_value" : props.index}
+        indexBy={props.index}
         groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
         margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
         padding={0.3}

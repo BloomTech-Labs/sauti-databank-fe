@@ -8,10 +8,9 @@ import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 
 export default function FilterBox(props) {
-  const [filterBoxIndex, setFilterBoxIndex] = useState({ type: "request_type", query: "Sessions" });
+  const [filterBoxIndex, setFilterBoxIndex] = useState({ type: "gender", query: "Users" });
   const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({ type: "", query: "Users" });
-  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Most Requested Procedure Commodity");
-  const [filterBoxArgForQuery, setFilterBoxArgForQuery] = useState("procedurecommodity");
+  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
   const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
   const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({type: '', query: ''});
   const [filterBoxAdditionalFilterLabel, setFilterBoxAdditionalFilterLabel] = useState("");
@@ -23,7 +22,6 @@ export default function FilterBox(props) {
     if (e.target.textContent === "Submit"){
       e.preventDefault();
     }
-
     props.setIndex(filterBoxIndex);
     props.setIndexLabel(filterBoxIndexLabel);
     props.setCrossLabel(filterBoxCrossLabel);
@@ -31,10 +29,7 @@ export default function FilterBox(props) {
     props.setAdditionalFilter(filterBoxAdditionalFilter);
     props.setStartDate(filterBoxStartDate);
     props.setEndDate(filterBoxEndDate);
-    if (filterBoxArgForQuery) {
-      props.setArgForQuery(filterBoxArgForQuery);
-    }
-  }, [filterBoxAdditionalFilter, filterBoxArgForQuery, filterBoxCrossFilter, filterBoxCrossLabel, filterBoxEndDate, filterBoxIndex, filterBoxIndexLabel, filterBoxStartDate, props]);
+  }, [filterBoxAdditionalFilter, filterBoxCrossFilter, filterBoxCrossLabel, filterBoxEndDate, filterBoxIndex, filterBoxIndexLabel, filterBoxStartDate, props]);
   
   const handleAuto = useCallback(e => {
     props.setIndex(filterBoxIndex);
@@ -44,10 +39,7 @@ export default function FilterBox(props) {
     props.setAdditionalFilter(filterBoxAdditionalFilter);
     props.setStartDate(filterBoxStartDate);
     props.setEndDate(filterBoxEndDate);
-    if (filterBoxArgForQuery) {
-      props.setArgForQuery(filterBoxArgForQuery);
-    }
-  }, [filterBoxAdditionalFilter, filterBoxArgForQuery, filterBoxCrossFilter, filterBoxCrossLabel, filterBoxEndDate, filterBoxIndex, filterBoxIndexLabel, filterBoxStartDate, props]);
+  }, [filterBoxAdditionalFilter, filterBoxCrossFilter, filterBoxCrossLabel, filterBoxEndDate, filterBoxIndex, filterBoxIndexLabel, filterBoxStartDate, props]);
     
   useEffect(() => {
     if (!graphLabels[`${filterBoxAdditionalFilter.type}`] && filterBoxAdditionalFilter.type) {
@@ -90,9 +82,6 @@ export default function FilterBox(props) {
             setFilterBoxAdditionalFilterLabel('')
             props.setCheckboxOptions([])
             props.setSelectedCheckbox({})
-            if (e.value.arg) {
-              setFilterBoxArgForQuery(e.value.arg);
-            }
           }}
         />
 
@@ -102,7 +91,7 @@ export default function FilterBox(props) {
           arrowClassName="myArrowClassName"
           className="dropdown"
           disabled={loading}
-          options={FilterBoxOptions.filtered.filter(obj => (obj.label !== filterBoxIndexLabel && obj.label !== filterBoxCrossLabel))}
+          options={FilterBoxOptions.default.filter(obj => (obj.label !== filterBoxIndexLabel && obj.label !== filterBoxCrossLabel))}
           value={filterBoxCrossLabel}
           placeholder="Select second option..."
           onChange={e => {
@@ -125,25 +114,18 @@ export default function FilterBox(props) {
               arrowClassName="myArrowClassName"
               className="dropdown"
               disabled={loading}
-              options={filterBoxIndex.type === 'request_type' 
-                ? FilterBoxOptions.filtered.filter(obj => obj.label !== filterBoxCrossLabel) 
-                : FilterBoxOptions.default.filter(obj=> (obj.label !== filterBoxIndexLabel && obj.label !== filterBoxCrossLabel))}
+              options={FilterBoxOptions.default.filter(obj=> (obj.label !== filterBoxIndexLabel && obj.label !== filterBoxCrossLabel))}
               value={filterBoxAdditionalFilterLabel}
               placeholder="Select a filter..."
               onChange={e => {
-                if (e.value.arg) {
-                  setFilterBoxAdditionalFilter({type: e.value.arg, query: e.value.query});
-                } else {
-                  setFilterBoxAdditionalFilter({type: e.value.type, query: e.value.query})
-                };
+                setFilterBoxAdditionalFilter({type: e.value.type, query: e.value.query})
                 setFilterBoxAdditionalFilterLabel(e.label);
                 props.setCheckboxOptions([]);
                 ClickTracker(e.value.type);
               }}
             />
           </>
-        )
-        }
+        )}
 
         {graphLabels[`${filterBoxAdditionalFilter.type}`] && (
           <CheckboxContainer>
@@ -187,7 +169,7 @@ export default function FilterBox(props) {
                       name="CrossFilter"
                       value={option}
                       onChange={e => {
-                        props.setSelectedCheckbox({ [`request_value`]: option })
+                        props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option })
                       }}
                     />
                     <FilterOption>{option}</FilterOption>
@@ -249,20 +231,18 @@ export default function FilterBox(props) {
         <p
           className="reset-btn"
           onClick={e => {
-            props.setIndexLabel("Most Requested Procedures Commodities");
-            props.setIndex({ type: "request_type", query: "Sessions" });
+            props.setIndexLabel("Gender");
+            props.setIndex({ type: "gender", query: "Users" });
             props.setCrossLabel("");
             props.setCrossFilter({ type: "", query: "Users" });
-            props.setArgForQuery("procedurecommodity");
             props.setStartDate("2012-01-01");
             props.setEndDate("2020-01-08");
             props.setCheckboxOptions([]);
             props.setSelectedCheckbox({})
-            setFilterBoxIndexLabel("Most Requested Procedures Commodities");
-            setFilterBoxIndex({ type: "request_type", query: "Sessions" });
+            setFilterBoxIndexLabel("Gender");
+            setFilterBoxIndex({ type: "gender", query: "Users" });
             setFilterBoxCrossLabel("");
             setFilterBoxCrossFilter({ type: "", query: "Users" });
-            setFilterBoxArgForQuery("");
             setFilterBoxStartDate("2012-01-01");
             setFilterBoxEndDate("2020-01-08");
             
