@@ -199,6 +199,57 @@ const GetData = props => {
         }
       }
       `;
+  } else if (props.index.query === "Sessions" && props.crossFilter.query === "Sessions" && !props.additionalFilter.type) {
+    queryType = "sessionsData";
+    QUERY = gql`
+      query getUsers( 
+        $age: String,
+        $gender: String, 
+        $education: String 
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        $procedurecommodity: String,
+        $procedurecommoditycat: String,
+        $proceduredest: String,
+        $procedurerequireddocument: String,
+        $procedurerelevantagency: String,
+        $procedureorigin: String,
+        $commoditycountry: String,
+        $commoditymarket: String,
+        $commodityproduct: String,
+        $commoditycat: String,
+        $exchangedirection: String,
+        ){
+        sessionsData (
+          age: $age,
+          gender: $gender, 
+          education: $education
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence,
+          procedurecommodity: $procedurecommodity,
+          procedurecommoditycat: $procedurecommoditycat,
+          proceduredest: $proceduredest,
+          procedurerequireddocument: $procedurerequireddocument,
+          procedurerelevantagency: $procedurerelevantagency,
+          procedureorigin: $procedureorigin,
+          commoditycountry: $commoditycountry,
+          commoditymarket: $commoditymarket,
+          commodityproduct: $commodityproduct,
+          commoditycat: $commoditycat,
+          exchangedirection: $exchangedirection,
+          ) {
+          ${props.index.type}
+          ${props.crossFilter.type}
+          created_date
+        }
+      }
+      `;
   } else {
     queryType = "sessionsData";
     QUERY = gql`

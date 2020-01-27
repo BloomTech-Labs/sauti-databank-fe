@@ -107,8 +107,9 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
           }
         }
       });
+      dataStructure = newDataStructure
   };
-  console.log('DATA', dataStructure)
+
   if(!graphLabels[`${crossFilter}`]){
     dataStructure.forEach(obj=> {
       let crossKeys = Object.keys(obj);
@@ -127,14 +128,10 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
         tempObj = {...tempObj, [arr[0]]: arr[1] }
       })
         newDataStructure.push(tempObj)
-        console.log('sliced stuff', newDataStructure);
     })
+    dataStructure = newDataStructure
   };
 
-  if(!graphLabels[`${indexBy}`] || !graphLabels[`${crossFilter}`]){
-    dataStructure = newDataStructure;
-  }
-  
   dataStructure = dataStructure.filter(obj=> obj[`${indexBy}`] !== null);
   
   
