@@ -19,11 +19,11 @@ const App = () => {
   const [startDate, setStartDate] = useState("2012-01-01");
   const [endDate, setEndDate] = useState("2020-01-08");
 
-  useEffect(() => {
-    ReactGa.initialize("UA-155468784-1");
-    //to report specified pageview:
-    ReactGa.pageview("/");
-  }, []);
+  // useEffect(() => {
+  //   ReactGa.initialize("UA-155468784-1");
+  //   //to report specified pageview:
+  //   ReactGa.pageview("/");
+  // }, []);
 
   const onChange = event => {
     setIndex(event.target.value);
