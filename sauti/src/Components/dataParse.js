@@ -53,7 +53,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   if (graphLabels[`${crossFilter}`]) {
     crossFilterKeys = graphLabels[`${crossFilter}`].structure;
   } else { 
-    crossFilterKeys = getIndex(data, indexBy) 
+    crossFilterKeys = getIndex(data, crossFilter) 
   }
 
   // Puts each value from key:value pair into an array
@@ -70,17 +70,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // There will be an object like this for each value of the indexByValues ex: ["Male", "Female"]
   indexByValues.forEach((key, index) => {
     const crossFilteredData = [];
-    // if (indexBy === "request_type") {
-    //   crossFilterValues.forEach((item, index) => {
-    //     const filtered = data.filter(
-    //       trader => trader[`${crossFilter}`] === item
-    //     );
-    //     const crossFiltered = filtered.filter(
-    //       trader => trader["request_value"] === key
-    //     );
-    //     crossFilteredData.push({ [`${item}`]: crossFiltered.length });
-    //   });
-    // } 
     const filtered = data.filter(trader => trader[`${indexBy}`] === key);
     crossFilterValues.forEach((key, index) => {
       const crossFiltered = filtered.filter(
@@ -88,7 +77,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
       );
       crossFilteredData.push({ [`${key}`]: crossFiltered.length });
     })
-
     crossFilteredData.forEach(obj => {
       return (dataStructure[index] = {
         ...dataStructure[index],
@@ -98,7 +86,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   });
 
   //If graph is "Most Requested" sort from Most to Least requested and provide top 7 objects
-
   let keyValueArrIndex = [];
   let keyValueArrCross = [];
   let newDataStructure = [];
@@ -113,7 +100,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
         ]);
       })
       keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]);
-
       keyValueArrIndex.forEach(arr => {
         for (let i = 0, len = dataStructure.length; i < len; i++) {
           if (arr[0] === dataStructure[i][`${indexBy}`]) {
@@ -122,25 +108,27 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
         }
       });
   };
-    
+  console.log('DATA', dataStructure)
   if(!graphLabels[`${crossFilter}`]){
-    dataStructure.map(obj => {
-      return keyValueArrCross.push([
-        obj[`${crossFilter}`],
-        Object.values(obj)
-          .slice(1)
-          .reduce((a, b) => a + b)
-        ]);
+    dataStructure.forEach(obj=> {
+      let crossKeys = Object.keys(obj);
+      let crossValues = Object.values(obj);
+      let tempCrossArr=[];
+      crossKeys.forEach((key, index)=> {
+        tempCrossArr.push([ key, crossValues[index] ])
       })
-      keyValueArrCross = keyValueArrCross.sort((a, b) => b[1] - a[1]);
-
-      keyValueArrCross.forEach(arr => {
-        for (let i = 0, len = dataStructure.length; i < len; i++) {
-          if (arr[0] === dataStructure[i][`${crossFilter}`]) {
-            newDataStructure.push(dataStructure[i]);
-          }
-        }
+      let slicedCrossArr = tempCrossArr.sort((a, b) => b[1] - a[1]).slice(0,7)
+      crossFilterValues = []
+      slicedCrossArr.slice(1).forEach(arr => {
+        crossFilterValues.push(arr[0])
       })
+      let tempObj = {};
+      slicedCrossArr.forEach(arr => {
+        tempObj = {...tempObj, [arr[0]]: arr[1] }
+      })
+        newDataStructure.push(tempObj)
+        console.log('sliced stuff', newDataStructure);
+    })
   };
 
   if(!graphLabels[`${indexBy}`] || !graphLabels[`${crossFilter}`]){
@@ -148,7 +136,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   }
   
   dataStructure = dataStructure.filter(obj=> obj[`${indexBy}`] !== null);
-  console.log('DATA', dataStructure)
+  
   
   // GET SAMPLE SIZE
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
@@ -203,6 +191,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
     .map(obj => Object.values(obj)[0])
     .filter(str => str !== null)
 
+    console.log('CROSSFILVALLS', crossFilterValues)
   return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, percentageData: percentageData.splice(0, 7)};
 };
 

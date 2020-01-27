@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
 import getIndex from "../DataParseHelpers/getIndex"
 import graphLabels from "./graphLabels"
+import removeMultiple from "./removeMultiple";
 
 const GetData = props => {
   let queryType = "tradersUsers";
@@ -95,6 +96,56 @@ const GetData = props => {
         }
       }
       `;
+  } else if(props.index.query === "Users" && props.crossFilter.query === "Sessions" && !props.additionalFilter.type) {
+    queryType = "sessionsData"
+    QUERY = gql`
+      query getData(
+        $age: String,
+        $gender: String, 
+        $education: String, 
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        $procedurecommodity: String,
+        $procedurecommoditycat: String,
+        $proceduredest: String,
+        $procedurerequireddocument: String,
+        $procedurerelevantagency: String,
+        $procedureorigin: String,
+        $commoditycountry: String,
+        $commoditymarket: String,
+        $commodityproduct: String,
+        $commoditycat: String,
+        $exchangedirection: String,
+        ){
+        sessionsData(
+          age: $age,
+          gender: $gender, 
+          education: $education, 
+          crossing_freq: $crossing_freq,
+          produce: $produce,
+          primary_income: $primary_income,
+          language: $language,
+          country_of_residence: $country_of_residence,
+          procedurecommodity: $procedurecommodity,
+          procedurecommoditycat: $procedurecommoditycat,
+          proceduredest: $proceduredest,
+          procedurerequireddocument: $procedurerequireddocument,
+          procedurerelevantagency: $procedurerelevantagency,
+          procedureorigin: $procedureorigin,
+          commoditycountry: $commoditycountry,
+          commoditymarket: $commoditymarket,
+          commodityproduct: $commodityproduct,
+          commoditycat: $commoditycat,
+          exchangedirection: $exchangedirection,
+          ){
+          ${props.index.type}
+          ${props.crossFilter.type}
+          created_date
+        }
+      }`
   } else if (props.index.query === "Users" && props.crossFilter.query === "Users") {
     queryType = "sessionsData";
     QUERY = gql`
@@ -107,6 +158,17 @@ const GetData = props => {
         $primary_income: String,
         $language: String,
         $country_of_residence: String,
+        $procedurecommodity: String,
+        $procedurecommoditycat: String,
+        $proceduredest: String,
+        $procedurerequireddocument: String,
+        $procedurerelevantagency: String,
+        $procedureorigin: String,
+        $commoditycountry: String,
+        $commoditymarket: String,
+        $commodityproduct: String,
+        $commoditycat: String,
+        $exchangedirection: String,
         ){
         sessionsData (
           age: $age,
@@ -117,6 +179,17 @@ const GetData = props => {
           primary_income: $primary_income,
           language: $language,
           country_of_residence: $country_of_residence,
+          procedurecommodity: $procedurecommodity,
+          procedurecommoditycat: $procedurecommoditycat,
+          proceduredest: $proceduredest,
+          procedurerequireddocument: $procedurerequireddocument,
+          procedurerelevantagency: $procedurerelevantagency,
+          procedureorigin: $procedureorigin,
+          commoditycountry: $commoditycountry,
+          commoditymarket: $commoditymarket,
+          commodityproduct: $commodityproduct,
+          commoditycat: $commoditycat,
+          exchangedirection: $exchangedirection,
           ) {
           ${props.index.type}
           ${props.crossFilter.type}
@@ -128,7 +201,6 @@ const GetData = props => {
       `;
   } else {
     queryType = "sessionsData";
-
     QUERY = gql`
       query getData(
         $age: String,
@@ -189,9 +261,10 @@ const GetData = props => {
   } else {
     policyType = "cache-first";
   }
-
+  
   let { loading, data } = useQuery(QUERY, {
-    variables: { ...props.selectedCheckbox, additional_filter_type: props.additionalFilter.type},
+    
+    variables: { ...props.selectedCheckbox},
     fetchPolicy: policyType
   });
 
@@ -213,7 +286,10 @@ const GetData = props => {
   let filteredData;
   // This is how we nab checkbox options.
   if (props.additionalFilter.type) {
+    console.log('additional filter data', data.additionalFilterData)
+    removeMultiple(data.additionalFilterData)
     filteredData = getIndex(data.additionalFilterData, `${props.additionalFilter.type}`).map(obj => obj[`${props.additionalFilter.type}`]);
+    filteredData = filteredData.filter(item => item !== null)
   };
 
   const chartData = dataParse(

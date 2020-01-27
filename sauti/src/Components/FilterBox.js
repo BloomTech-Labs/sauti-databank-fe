@@ -71,7 +71,7 @@ export default function FilterBox(props) {
           arrowClassName="myArrowClassName"
           className="dropdown"
           disabled={loading}
-          options={FilterBoxOptions.default.filter(obj => obj.label !== filterBoxCrossLabel)}
+          options={FilterBoxOptions.default}
           value={filterBoxIndexLabel}
           onChange={e => {
             setFilterBoxIndex(e.value);
@@ -91,7 +91,7 @@ export default function FilterBox(props) {
           arrowClassName="myArrowClassName"
           className="dropdown"
           disabled={loading}
-          options={FilterBoxOptions.default.filter(obj => (obj.label !== filterBoxIndexLabel && obj.label !== filterBoxCrossLabel))}
+          options={FilterBoxOptions.default}
           value={filterBoxCrossLabel}
           placeholder="Select second option..."
           onChange={e => {
