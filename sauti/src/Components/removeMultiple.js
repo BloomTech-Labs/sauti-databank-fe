@@ -6,7 +6,15 @@ const mockData = [
     {gender: null, procedurecommodity:"Maize,Bananas"},
 ]
 
-const removeMultiple = data => {
+const messedUpData = [
+    {gender: "Female,Male,What,Are,You,Doing", procedurecommodity: "Maize,Maize,Maize,Beans,Dylan"},
+    {gender: "Female", procedurecommodity: "Maize,s,Dylan"},
+    {gender: "Male", procedurecommodity: "Maize,Ma,Beans,Dylan"},
+    {gender: "Female,Male,Doing", procedurecommodity: "Maizeze,Beans,Dylan"},
+    {gender: "Female,Male,Doing", procedurecommodity: "Maizez"},
+]
+
+function removeMultiple(data) {
     let keys = Object.keys(data[0])
     // [gender, procedurecommodity]
     keys.forEach(key => {
@@ -20,7 +28,10 @@ const removeMultiple = data => {
             }           
         })
     })
+    console.log('removeMultiple Ran Bro', data)
     return data
 }
+
+
 
 export default removeMultiple
