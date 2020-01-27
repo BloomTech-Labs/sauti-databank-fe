@@ -52,8 +52,8 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
   if (graphLabels[`${crossFilter}`]) {
     crossFilterKeys = graphLabels[`${crossFilter}`].structure;
-  } else { 
-    crossFilterKeys = getIndex(data, crossFilter) 
+  } else {
+    crossFilterKeys = getIndex(data, crossFilter)
   }
 
   // Puts each value from key:value pair into an array
@@ -63,7 +63,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
     Object.values(obj)[0] !== null &&
     crossFilterValues.push(Object.values(obj)[0])
   );
-  
+
   // Building an array of objects where each object is formatted in this way
   // ex: if indexBy = "gender" and crossFilter = "age"
   // {"gender": "Male", "10-20": 167, "20-30": 237, "30-40": 642, "40-50": 210, "50-60": 123, "60-70": 1}
@@ -91,50 +91,52 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
   let newDataStructure = [];
 
   if (!graphLabels[`${indexBy}`]) {
-    dataStructure.map(obj => {
+    //may remove tempDataStructure later. Debugging cross filter shift without submission
+    let tempDataStructure = dataStructure.map(item => item);
+    tempDataStructure.forEach(obj => {
       return keyValueArrIndex.push([
         obj[`${indexBy}`],
         Object.values(obj)
           .slice(1)
           .reduce((a, b) => a + b)
-        ]);
-      })
-      keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]);
-      keyValueArrIndex.forEach(arr => {
-        for (let i = 0, len = dataStructure.length; i < len; i++) {
-          if (arr[0] === dataStructure[i][`${indexBy}`]) {
-            newDataStructure.push(dataStructure[i]);
-          }
+      ]);
+    })
+    keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0, 7);
+    keyValueArrIndex.forEach(arr => {
+      for (let i = 0, len = dataStructure.length; i < len; i++) {
+        if (arr[0] === dataStructure[i][`${indexBy}`]) {
+          newDataStructure.push(tempDataStructure[i]);
         }
-      });
-      dataStructure = newDataStructure
+      }
+    });
+    dataStructure = newDataStructure
   };
 
-  if(!graphLabels[`${crossFilter}`]){
-    dataStructure.forEach(obj=> {
+  if (!graphLabels[`${crossFilter}`]) {
+    dataStructure.forEach(obj => {
       let crossKeys = Object.keys(obj);
       let crossValues = Object.values(obj);
-      let tempCrossArr=[];
-      crossKeys.forEach((key, index)=> {
-        tempCrossArr.push([ key, crossValues[index] ])
+      let tempCrossArr = [];
+      crossKeys.forEach((key, index) => {
+        tempCrossArr.push([key, crossValues[index]])
       })
-      let slicedCrossArr = tempCrossArr.sort((a, b) => b[1] - a[1]).slice(0,7)
+      let slicedCrossArr = tempCrossArr.sort((a, b) => b[1] - a[1]).slice(0, 7)
       crossFilterValues = []
       slicedCrossArr.slice(1).forEach(arr => {
         crossFilterValues.push(arr[0])
       })
       let tempObj = {};
       slicedCrossArr.forEach(arr => {
-        tempObj = {...tempObj, [arr[0]]: arr[1] }
+        tempObj = { ...tempObj, [arr[0]]: arr[1] }
       })
-        newDataStructure.push(tempObj)
+      newDataStructure.push(tempObj)
     })
     dataStructure = newDataStructure
   };
 
-  dataStructure = dataStructure.filter(obj=> obj[`${indexBy}`] !== null);
-  
-  
+  dataStructure = dataStructure.filter(obj => obj[`${indexBy}`] !== null);
+
+
   // GET SAMPLE SIZE
   // For each object, want to add up numbers skipping first key value pair, which is the index and will not have a number as value
   //[{gender: "Male", "10-20": 200, "20-30": 150}, {gender: "Female", "10-20": 140, "20-30": 100}]
@@ -148,7 +150,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
     let valuesArr = Object.values(item);
     valuesArr.forEach(value => {
       if (Number.isInteger(+value)) {
-         return sampleSize += Number(value);
+        return sampleSize += Number(value);
       };
     });
 
@@ -166,14 +168,14 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
   // dataStructure becomes data set for a csv file, and percentageData is for nivo chart.
   let percentageData = dataStructure.map(obj => Object.assign({}, obj))
-  
+
   percentageData.forEach(obj => {
     for (var property in obj) {
       if (Number.isInteger(+obj[property])) {
         obj[property] = +(
           (obj[property] /
             sampleArr[
-              obj[`${indexBy}`]
+            obj[`${indexBy}`]
             ]) *
           100
         ).toFixed(1);
@@ -188,8 +190,11 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
     .map(obj => Object.values(obj)[0])
     .filter(str => str !== null)
 
-    console.log('CROSSFILVALLS', crossFilterValues)
-  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, percentageData: percentageData.splice(0, 7)};
+  console.log('CROSSFILVALLS', crossFilterValues)
+  console.log('testing dataStructure', dataStructure)
+  console.log("additionalFilterOptions", additionalFilterOptions)
+  console.log("percentageData", percentageData)
+  return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, percentageData: percentageData.splice(0, 7) };
 };
 
 // Sets single filter index
@@ -239,7 +244,7 @@ const setItem = (data, dataStructure, indexBy) => {
 //Builds data for Nivo when single filtering by "Most Requested"
 const getMostRequested = (data, dataStructure, indexBy) => {
   data = removeMultiple(data)
-  
+
   let arr = [];
 
   // Puts each value from key:value pair into an array
@@ -257,8 +262,8 @@ const getMostRequested = (data, dataStructure, indexBy) => {
     };
   });
 
-  dataStructure = dataStructure.filter(obj=> 
-    obj[`${indexBy}`]!== null
+  dataStructure = dataStructure.filter(obj =>
+    obj[`${indexBy}`] !== null
   );
 
   // This block of code transforms from raw numbers to percentages
@@ -273,12 +278,12 @@ const getMostRequested = (data, dataStructure, indexBy) => {
 
   percentageData.forEach(obj => {
     const keyValue = obj[`${indexBy}`];
-    obj[keyValue] =  Math.round((obj[keyValue] / sampleSize) * 100);
+    obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
   });
 
   // dataStructure used for csv, percentage for graph
-  percentageData = percentageData.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1 );
-  dataStructure = dataStructure.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1 );
+  percentageData = percentageData.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1);
+  dataStructure = dataStructure.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1);
 
   const keys = dataStructure.map(obj => obj[`${indexBy}`]);
 
@@ -294,7 +299,7 @@ const getMostRequested = (data, dataStructure, indexBy) => {
     abbreviateLabels(percentageData, indexBy);
   }
 
-  return { dataStructure, keys: keys.reverse(), indexBy, sampleSize, percentageData};
+  return { dataStructure, keys: keys.reverse(), indexBy, sampleSize, percentageData };
 };
 
 //This function is invoked when filtering by certain categories where the keys may be too long for Nivo to display
