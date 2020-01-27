@@ -158,20 +158,55 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
       })
       dataStructure = dataStructure.filter(obj => topSeven.includes(obj[`${indexBy}`]))
       let keysToSort = Object.keys(dataStructure[0]).slice(1)
-      keysToSort = keysToSort.map(item =>{
-        return {[`${item}`]: 0}
+      let tempObj = {}
+      keysToSort.forEach(item =>{
+        return tempObj = {...tempObj, [`${item}`]: 0}
       })
-      console.log('sort them', keysToSort)
+      keysToSort = tempObj
       dataStructure.forEach(obj => {
         for(var key in obj){
           if(Number.isInteger(+obj[key]))
-          console.log('obj at key', obj[key])
-          console.log('keys at key', keysToSort[key])
           keysToSort[key] += Number(obj[key])
         }
       })
-      console.log('wooo keys', keysToSort)
+     
+      let crossKeys = Object.keys(keysToSort).filter(item => item !== undefined && item !== 'undefined');
+      let crossValues = Object.values(keysToSort);
+      let tempCrossArr=[];
+      crossKeys.forEach((key, index)=> {
+        tempCrossArr.push([ key, crossValues[index] ])
+      })
+      let slicedCrossArr = tempCrossArr.sort((a, b) => b[1] - a[1]).slice(0,7)
+      crossFilterValues = []
+      slicedCrossArr.forEach(arr => {
+         crossFilterValues.push(arr[0])
+      })
+      let temp = {};
+      slicedCrossArr.forEach(arr => {
+        temp = {...temp, [arr[0]]: arr[1] }
+      })
+
+      keysToSort = temp
+  
+      let keysToKeep = Object.keys(keysToSort)
+
+      //build on new ds from ds
+        dataStructure.forEach((obj, index) => {
+        let tempObject = {[indexBy]: obj[indexBy]}
+        for(var key in obj){
+          if(keysToKeep.includes(key)){
+            tempObject = {...tempObject, [key]: obj[key]}
+          }
+        }
+        console.log('temp object tho', tempObject)
+        dataStructure[index] = tempObject
+      })
+
+      console.log('data structer what up', dataStructure)
+      
   }
+
+  /// KEYS TO SORT IS AN ARRAY OF OBJECTS YOU IDIOT
 
   
   dataStructure = dataStructure.filter(obj=> obj[`${indexBy}`] !== null);
