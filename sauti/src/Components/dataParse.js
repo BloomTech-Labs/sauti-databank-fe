@@ -13,7 +13,8 @@ const dataParse = (
   queryType
 ) => {
   let dataStructure = [];
-
+  console.log('data at beginning', data)
+  
   //when single filtering "Most Requested" graph
   if (queryType === "Sessions" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
@@ -149,6 +150,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
       };
       })
       keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0,7);
+      console.log('keyvalArr', keyValueArrIndex)
       keyValueArrIndex.forEach(arr => {
         newDataStructure.push({[indexBy]: arr[0]})
       })
