@@ -4,6 +4,9 @@ import CsvDownloader from 'react-csv-downloader';
 
 
 const Graph = props => {
+  console.log('keys in graph', props.keys)
+  console.log('data in graph', props.data)
+
   const [csvHeaders, setCsvHeaders] = useState([]);
   const [csvFormattedData, setCsvFormattedData] = useState([]);
   // console.log('Index in Graph', props.index);

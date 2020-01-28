@@ -384,7 +384,7 @@ const GetData = props => {
   
   let filteredData;
   // This is how we nab checkbox options.
-  if (props.additionalFilter.type) {
+  if (props.additionalFilter.type && !graphLabels[`${props.additionalFilter.type}`]) {
     console.log('additional filter data', data.additionalFilterData)
     removeMultiple(data.additionalFilterData)
     filteredData = getIndex(data.additionalFilterData, `${props.additionalFilter.type}`).map(obj => obj[`${props.additionalFilter.type}`]);
