@@ -13,17 +13,20 @@ import FilterBoxOptions from './FilterBoxOptions'
 
 let data = {
     index: [
-        {gender: "Female", language: 'English', education: 'Primary', query: 'Users'},
+        {gender: "Female", language: 'English', education: 'Primary', query: 'Users', queryType: 'Users'},
         {gender: "Female", language: 'Swahili', education: null, query: 'Users'},
         {gender: "Male", language: null, education: 'Secondary', query: 'Users'},
     ],
     crossFilter: [
-        {commoditycountry: 'RWA', query: 'Sessions'},
+        {commoditycountry: 'RWA', query: 'Sessions', queryType: 'Sessions'},
         {commoditycountry: 'KEN', query: 'Sessions'},
         {commoditycountry: 'UGA', query: 'Sessions'},
     ],
     additionalFilter: [
-        {commodityproduct: 'beans', type: "commodityproduct", query: 'Sessions'}
+        {commodityproduct: 'beans', type: "commodityproduct", query: 'Sessions', queryType: 'Sessions'}
+    ],
+    additionalFilterData: [
+        {commodityproduct: 'beans', type: "commodityproduct", queryType: 'Sessions'}
     ]  
 }
 
@@ -69,8 +72,8 @@ const TESTQUERY = gql`
                 commodityproduct
                 commoditycat
                 exchangedirection
-                additionalFilterData:sessionsData{
-                    Sessions
+                additionalFilterData:sessionsData(commodityproduct:$commodityproduct){
+                    commodityproduct
                 }
         }
     }
@@ -101,9 +104,9 @@ const customRender = () => {
                 data={data}
                 index={data.index} 
                 crossFilter={data.crossFilter} 
-                additionalFilterData={data.additionalFilter} 
+                additionalFilterData={data.additionalFilterData} 
                 additionalFilter={data.additionalFilter}
-                queryType={data.index.type}
+                queryType={`${data.additionalFilterData.type}`}
             />
           </Router>
         </MockedProvider>
