@@ -13,7 +13,7 @@ const dataParse = (
   queryType
 ) => {
   let dataStructure = [];
-  console.log('data at beginning', data)
+  // console.log('data at beginning', data)
   
   //when single filtering "Most Requested" graph
   if (queryType === "Sessions" && crossFilter === "") {
@@ -150,7 +150,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
       };
       })
       keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0,7);
-      console.log('keyvalArr', keyValueArrIndex)
+      // console.log('keyvalArr', keyValueArrIndex)
       keyValueArrIndex.forEach(arr => {
         newDataStructure.push({[indexBy]: arr[0]})
       })
@@ -200,7 +200,7 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
             tempObject = {...tempObject, [key]: obj[key]}
           }
         }
-        console.log('temp object tho', tempObject)
+        // console.log('temp object tho', tempObject)
         dataStructure[index] = tempObject
       })
 
@@ -269,9 +269,9 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
 
 
   
-  console.log('datastructure', dataStructure)
-  console.log('crossfiltervalues', crossFilterValues)
-  console.log('percentageData', percentageData)
+  // console.log('datastructure', dataStructure)
+  // console.log('crossfiltervalues', crossFilterValues)
+  // console.log('percentageData', percentageData)
   return { dataStructure, crossFilterValues, indexBy, totalSampleSize, additionalFilterOptions, percentageData};
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
+import TestRenderer from 'react-test-renderer';
 import { gql } from "apollo-boost";
 import { MockedProvider} from '@apollo/react-testing';
 import {render, cleanup, findByText} from '@testing-library/react';
@@ -8,155 +8,96 @@ import 'jest-extended'
 
 //components
 import Queries from './Queries';
-import FilterBoxOptions from './FilterBoxOptions'
-  
+import FilterBox from './FilterBox';
 
-let data = {
-    index: [
-        {gender: "Female", language: 'English', education: 'Primary', query: 'Users', queryType: 'Users'},
-        {gender: "Female", language: 'Swahili', education: null, query: 'Users'},
-        {gender: "Male", language: null, education: 'Secondary', query: 'Users'},
-    ],
-    crossFilter: [
-        {commoditycountry: 'RWA', query: 'Sessions', queryType: 'Sessions'},
-        {commoditycountry: 'KEN', query: 'Sessions'},
-        {commoditycountry: 'UGA', query: 'Sessions'},
-    ],
-    additionalFilter: [
-        {commodityproduct: 'beans', type: "commodityproduct", query: 'Sessions', queryType: 'Sessions'}
-    ],
-    additionalFilterData: [
-        {commodityproduct: 'beans', type: "commodityproduct", queryType: 'Sessions'}
-    ]  
-}
 
+const index = {type: "gender", query: "Users"}
+const crossFilter = {type: 'age', query: 'Users'}
+const additionalFilter = {type: "commodityproduct", query: 'Sessions'} 
 const TESTQUERY = gql`
-    query tradersUsers($id: Int!){
-        getData(
-            age: $age,
-            gender: $gender, 
-            education: $education, 
-            crossing_freq: $crossing_freq,
-            produce: $produce,
-            primary_income: $primary_income,
-            language: $language,
-            country_of_residence: $country_of_residence,
-            procedurecommodity: $procedurecommodity,
-            procedurecommoditycat: $procedurecommoditycat,
-            proceduredest: $proceduredest,
-            procedurerequireddocument: $procedurerequireddocument,
-            procedurerelevantagency: $procedurerelevantagency,
-            procedureorigin: $procedureorigin,
-            commoditycountry: $commoditycountry,
-            commoditymarket: $commoditymarket,
-            commodityproduct: $commodityproduct,
-            commoditycat: $commoditycat,
-            exchangedirection: $exchangedirection,
-            ){
-                age
-                gender 
-                education 
-                crossing_freq
-                produce
-                primary_income
-                language
-                country_of_residence
-                procedurecommodity
-                procedurecommoditycat
-                proceduredest
-                procedurerequireddocument
-                procedurerelevantagency
-                procedureorigin
-                commoditycountry
-                commoditymarket
-                commodityproduct
-                commoditycat
-                exchangedirection
-                additionalFilterData:sessionsData(commodityproduct:$commodityproduct){
-                    commodityproduct
-                }
+    query getUsers( 
+        $age: String,
+        $gender: String, 
+        $education: String 
+        $crossing_freq: String,
+        $produce: String,
+        $primary_income: String,
+        $language: String,
+        $country_of_residence: String,
+        ){
+            tradersUsers (
+                age: $age,
+                gender: $gender, 
+                education: $education
+                crossing_freq: $crossing_freq,
+                produce: $produce,
+                primary_income: $primary_income,
+                language: $language,
+                country_of_residence: $country_of_residence
+            ) {
+                ${index.type}
+                ${crossFilter.type}
+            } 
         }
-    }
 `;
-
 const mocks = [{
     request: {
         query: TESTQUERY,
-        variables: {
-            gender: 'Female'
-        }    
     },
     result: {
         data: {
-            getUsers: {gender: 'Female', language: 'English', education: 'Primary'}
-        }
-    }  
-}]
+            tradersUsers: {gender: 'Female', age: '10-20'}
+        },
+    },
+}];
 
-const customRender = () => {
-    return {
-      history, 
-      ...render(
-        <MockedProvider mocks={mocks} data={data} addTypename={false} >
-          <Router >
-            <Queries 
-                props={data} 
-                data={data}
-                index={data.index} 
-                crossFilter={data.crossFilter} 
-                additionalFilterData={data.additionalFilterData} 
-                additionalFilter={data.additionalFilter}
-                queryType={`${data.additionalFilterData.type}`}
-            />
-          </Router>
-        </MockedProvider>
-      )
-    }
-}
-  
+
 const waitForData = () => new Promise(res=>setTimeout(res, 0));
 
   
 describe('Queries:', () => {
     afterEach(cleanup);
   
-    test('Does Queries render?', async ()=> {
-        const {debug} = customRender()
-        debug()
-        await waitForData();
-    })
+    test('Does Queries render?', ()=> {
+        render(
+            <MockedProvider mocks={mocks}>
+                <Queries
+                    index={index} 
+                    crossFilter={crossFilter} 
+                    additionalFilter={additionalFilter}
+                />
+            </MockedProvider>
+        )
+    });
 
     // test('Does it render loading state when loading?', async () => {
-    //     const {debug} = customRender()
-    //     debug()
-    //     await waitForData();
+    //     const component = TestRenderer.create(
+    //         <MockedProvider mocks={mocks}>
+    //             <Queries
+    //                 index={index} 
+    //                 crossFilter={crossFilter} 
+    //                 additionalFilter={additionalFilter}
+    //             />
+    //         </MockedProvider>
+    //     );
 
-    //     const isLoading = document.getElementsByClassName('loader-container')
-    //     const Loader = document.getElementsByTagName('Loader')
-    //     expect(isLoading).toContain(Loader)
-    // })
-
-    // test('Does it throw an error?', async()=> {
-        // const {debug} = customRender()
-        // debug()
-        // await waitForData();
-
+    //     expect(component).toBeDefined();
         // const tree = component.toJSON();
-        // expect(tree.childrend).toContain(/error/gi)
+        // expect(tree.children).toContain(/load/gi);
     // })
 
-    // test('Does it get query?', async()=> {
+
+    // test('Does it fetch correct query?', async()=> {
+        // const testQuery = 
+        // expect(testQuery).toBeArray();
+        // expect(testQuery).toContain(/female/gi);
     // })
 
     // test('Does query pass into Graph?', async()=> {
+        // const testGraph = document.getElementByTagName('Graph')
+        // expect(testGraph).toBeDefined();
     // })
 
     // test('Does filterBox alter query?', async()=> {
-    // })
-
-    // test('Does query return Sessions?', async()=> {
-    // })
-
-    // test('Does query return Users?', async()=> {
     // })
 })
