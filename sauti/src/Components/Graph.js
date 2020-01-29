@@ -4,14 +4,9 @@ import CsvDownloader from 'react-csv-downloader';
 
 
 const Graph = props => {
-  // console.log('keys in graph', props.keys)
-  // console.log('data in graph', props.data)
 
   const [csvHeaders, setCsvHeaders] = useState([]);
   const [csvFormattedData, setCsvFormattedData] = useState([]);
-  // console.log('Index in Graph', props.index);
-  // console.log('CsvData in Graph', props.csvData);
-  // console.log('Keys in Graph', props.keys);
 
   useEffect(() => {
     if(props.filteredData && props.checkboxOptions !== props.filteredData) {
@@ -22,7 +17,7 @@ const Graph = props => {
   //Gets headers for CSV. 
   let headers = (data) => {
     let allHeaders = [];
-    //no crossfilter
+    //If no crossfilter
     if (!props.crossFilter){
       allHeaders = [props.index];
       allHeaders.push({id: `${props.sampleSize}`, displayName: `Sample Size: ${props.sampleSize}`})
