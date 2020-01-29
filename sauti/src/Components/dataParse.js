@@ -14,7 +14,7 @@ const dataParse = (
 ) => {
   let dataStructure = [];
   console.log('data at beginning', data)
-  
+
   //when single filtering "Most Requested" graph
   if (queryType === "Sessions" && crossFilter === "") {
     data = filterByDate(data, startDate, endDate);
@@ -149,9 +149,9 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
             .reduce((a, b) => +a + +b)
         ])
       };
-<<<<<<< HEAD
     })
     keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0, 7);
+    console.log('keyvalArr', keyValueArrIndex)
     keyValueArrIndex.forEach(arr => {
       newDataStructure.push({ [indexBy]: arr[0] })
     })
@@ -169,28 +169,6 @@ const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFi
     dataStructure.forEach(obj => {
       for (var key in obj) {
         if (Number.isInteger(+obj[key]))
-=======
-      })
-      keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0,7);
-      console.log('keyvalArr', keyValueArrIndex)
-      keyValueArrIndex.forEach(arr => {
-        newDataStructure.push({[indexBy]: arr[0]})
-      })
-      let topSeven = []
-      newDataStructure.forEach(item => {
-        topSeven.push(item[`${indexBy}`])
-      })
-      dataStructure = dataStructure.filter(obj => topSeven.includes(obj[`${indexBy}`]))
-      let keysToSort = Object.keys(dataStructure[0]).slice(1)
-      let tempObj = {}
-      keysToSort.forEach(item =>{
-        return tempObj = {...tempObj, [`${item}`]: 0}
-      })
-      keysToSort = tempObj
-      dataStructure.forEach(obj => {
-        for(var key in obj){
-          if(Number.isInteger(+obj[key]))
->>>>>>> 4035cdecabcfbf70697def909f65f6979c9da9ba
           keysToSort[key] += Number(obj[key])
       }
     })
