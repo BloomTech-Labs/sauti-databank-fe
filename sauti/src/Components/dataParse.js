@@ -355,7 +355,7 @@ const getMostRequested = (data, dataStructure, indexBy) => {
 
   percentageData.forEach(obj => {
     const keyValue = obj[`${indexBy}`];
-    obj[keyValue] = Math.round((obj[keyValue] / sampleSize) * 100);
+    obj[keyValue] = ((obj[keyValue] / sampleSize) * 100)
   });
 
   // dataStructure used for csv, percentage for graph
@@ -368,14 +368,19 @@ const getMostRequested = (data, dataStructure, indexBy) => {
 
   combinedNondisplayedEntries.forEach(obj => {
     let tempVar = obj[`${indexBy}`]
-    count += obj[tempVar]
+    count += +obj[tempVar]
   })
 
-  percentageData = percentageData.slice(0, 6);
-  percentageData.push({ [indexBy]: "Other", "Other": count })
+  percentageData = percentageData.slice(0, 6)
+  
+  percentageData.forEach(obj => {
+    let tempVar = obj[`${indexBy}`]
+    obj[tempVar] = obj[tempVar].toFixed(0)
+  });
+  
+  percentageData.push({ [indexBy]: "Other", "Other": count.toFixed(0) })
 
   const keys = percentageData.map(obj => obj[`${indexBy}`]);
-  console.log(percentageData)
 
   //Function abbreviates graph labels
   if (
