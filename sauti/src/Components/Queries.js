@@ -359,6 +359,7 @@ const GetData = props => {
         <h1 className="graph-title">
           {props.label} by {props.crossLabel}
         </h1>
+        <h2>Additional Filter: {props.additionalFilter.label} - {Object.values(props.selectedCheckbox).length === 0 ? "none" : Object.values(props.selectedCheckbox)[0]}</h2>
         <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
