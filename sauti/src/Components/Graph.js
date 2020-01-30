@@ -50,11 +50,11 @@ const Graph = props => {
       })
     } 
     //if most requested
-    if (Object.keys(data[0]).includes('request_value')){
+    // if (Object.keys(data[0]).includes('request_value')){
       return data.map(obj=> {return Object.values(obj)}) 
-    } else {
-      return data
-    }
+    // } else {
+      // return data
+    // }
   }
 
   let fileName = '';
@@ -64,7 +64,9 @@ const Graph = props => {
     setCsvFormattedData(csvFormater(props.csvData))
     setCsvHeaders(headers(props.csvData))
   }, [props.csvData])
-
+console.log(props.csvData)
+console.log(csvFormattedData)
+console.log(csvHeaders)
   return (
     <div className="Graph-Container">
       <div className = 'dwnld-btn'>
