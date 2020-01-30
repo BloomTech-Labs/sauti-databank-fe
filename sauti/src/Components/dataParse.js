@@ -350,8 +350,8 @@ const getMostRequested = (data, dataStructure, indexBy) => {
     let keyValue = item[`${indexBy}`];
     return sampleSize += Number(item[keyValue]);
   });
-
-  let percentageData = dataStructure.map(obj => Object.assign({}, obj))
+  const csvKeys = dataStructure.map(obj => obj[`${indexBy}`]);
+  let percentageData = dataStructure.map(obj => Object.assign({}, obj));
 
   percentageData.forEach(obj => {
     const keyValue = obj[`${indexBy}`];
@@ -362,9 +362,20 @@ const getMostRequested = (data, dataStructure, indexBy) => {
   percentageData = percentageData.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1);
   dataStructure = dataStructure.sort((a, b) => Object.values(a)[1] > Object.values(b)[1] ? -1 : 1);
 
-  const keys = dataStructure.map(obj => obj[`${indexBy}`]);
 
-  percentageData = percentageData.slice(0, 7);
+  let combinedNondisplayedEntries = percentageData.slice(6, percentageData.length - 1);
+  let count = 0;
+
+  combinedNondisplayedEntries.forEach(obj => {
+    let tempVar = obj[`${indexBy}`]
+    count += obj[tempVar]
+  })
+
+  percentageData = percentageData.slice(0, 6);
+  percentageData.push({ [indexBy]: "Other", "Other": count })
+
+  const keys = percentageData.map(obj => obj[`${indexBy}`]);
+  console.log(percentageData)
 
   //Function abbreviates graph labels
   if (
@@ -376,7 +387,7 @@ const getMostRequested = (data, dataStructure, indexBy) => {
     abbreviateLabels(percentageData, indexBy);
   }
 
-  return { dataStructure, keys: keys.reverse(), indexBy, sampleSize, percentageData };
+  return { dataStructure, keys: keys.reverse(), csvKeys, indexBy, sampleSize, percentageData };
 };
 
 //This function is invoked when filtering by certain categories where the keys may be too long for Nivo to display
