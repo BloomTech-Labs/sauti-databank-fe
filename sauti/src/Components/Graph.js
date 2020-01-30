@@ -35,9 +35,9 @@ const Graph = props => {
   let csvFormater = (data) => {    
     if(!props.crossFilter) {
       console.log('oldData', data)
-      let firstKey = data.map(obj=> {return Object.keys(obj)[0]}).slice(1);
+      let firstKey = data.map(obj=> {return Object.keys(obj)[0]});
       let newData = data.map(obj => ({
-        [`${firstKey}`]: `${Object.values(obj)[0]}`, size: `${Object.values(obj)[1]}`
+        [`${firstKey[0]}`]: `${Object.values(obj)[0]}`, size: `${Object.values(obj)[1]}`
       }))
       console.log('NewData for Single', newData)
 
