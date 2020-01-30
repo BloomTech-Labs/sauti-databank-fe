@@ -77,11 +77,6 @@ export default function FilterBox(props) {
             setFilterBoxIndex(e.value);
             setFilterBoxIndexLabel(e.label);
             ClickTracker(e.value.type);
-            setFilterBoxAdditionalFilter({ type: '', query: '' })
-            props.setAdditionalFilter({ type: '', query: '' })
-            setFilterBoxAdditionalFilterLabel('')
-            props.setCheckboxOptions([])
-            props.setSelectedCheckbox({})
           }}
         />
 
@@ -97,11 +92,6 @@ export default function FilterBox(props) {
           onChange={e => {
             setFilterBoxCrossLabel(e.label);
             setFilterBoxCrossFilter(e.value);
-            setFilterBoxAdditionalFilter({ type: '', query: '' })
-            props.setAdditionalFilter({ type: '', query: '' })
-            setFilterBoxAdditionalFilterLabel('')
-            props.setCheckboxOptions([])
-            props.setSelectedCheckbox({})
           }}
         />
         {/* {filterBoxCrossFilter.type && ( */}
