@@ -42,7 +42,7 @@ const GetData = props => {
       `;
   } else if (
     props.index.query === "Sessions" &&
-    props.crossFilter.query === "Users" && 
+    props.crossFilter.query === "Users" &&
     !props.additionalFilter.type
   ) {
     queryType = "sessionsData";
@@ -96,7 +96,7 @@ const GetData = props => {
         }
       }
       `;
-  } else if(props.index.query === "Users" && props.crossFilter.query === "Sessions" && !props.additionalFilter.type) {
+  } else if (props.index.query === "Users" && props.crossFilter.query === "Sessions" && !props.additionalFilter.type) {
     queryType = "sessionsData"
     QUERY = gql`
       query getData(
@@ -312,10 +312,10 @@ const GetData = props => {
   } else {
     policyType = "cache-first";
   }
-  
+
   let { loading, data } = useQuery(QUERY, {
-    
-    variables: { ...props.selectedCheckbox},
+
+    variables: { ...props.selectedCheckbox },
     fetchPolicy: policyType
   });
 
@@ -332,8 +332,8 @@ const GetData = props => {
       </div>
     );
   }
-    // data = [...data.tradersUsers, ...data.tradersData] // This is for when we are supporting multiple queries of same type
-  
+  // data = [...data.tradersUsers, ...data.tradersData] // This is for when we are supporting multiple queries of same type
+
   let filteredData;
   // This is how we nab checkbox options.
   if (props.additionalFilter.type && !graphLabels[`${props.additionalFilter.type}`]) {
@@ -386,7 +386,7 @@ const GetData = props => {
           additionalFilter={props.additionalFilter.type}
           selectedCheckbox={props.selectedCheckbox}
           crossFilter={props.crossFilter.type}
-          keys={chartData.keys}
+          keys={chartData.keys || chartData.csvKeys}
           index={props.index.type}
           label={props.label}
           groupMode={"stacked"}
