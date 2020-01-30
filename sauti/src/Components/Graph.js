@@ -48,6 +48,7 @@ const Graph = props => {
         return o;
       })
     }
+    console.log("data", data)
     return data
   }
 
@@ -58,7 +59,7 @@ const Graph = props => {
     setCsvFormattedData(csvFormater(props.csvData))
     setCsvHeaders(headers(props.csvData))
   }, [props.csvData])
-
+  console.log("formater", csvFormattedData)
   return (
     <div className="Graph-Container">
       <div className='dwnld-btn'>
