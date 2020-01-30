@@ -389,7 +389,7 @@ const GetData = props => {
     filteredData = getIndex(data.additionalFilterData, `${props.additionalFilter.type}`).map(obj => obj[`${props.additionalFilter.type}`]);
     filteredData = filteredData.filter(item => item !== null)
   };
-  console.log('DATA IN QUERIES', data)
+
   const chartData = dataParse(
     props.index.type,
     data[`${queryType}`],
