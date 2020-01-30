@@ -48,7 +48,7 @@ const Graph = props => {
         return o;
       })
     }
-    return data
+    return data.map(obj=> {return Object.values(obj)}) 
   }
 
   let fileName = '';
