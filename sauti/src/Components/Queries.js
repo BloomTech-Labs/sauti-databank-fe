@@ -193,6 +193,7 @@ const GetData = props => {
           ) {
           ${props.index.type}
           ${props.crossFilter.type}
+          created_date
         }
         additionalFilterData:sessionsData{
           ${props.additionalFilter.type}

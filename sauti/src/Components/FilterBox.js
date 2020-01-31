@@ -247,7 +247,9 @@ export default function FilterBox(props) {
             setFilterBoxCrossFilter({ type: "", query: "Users" });
             setFilterBoxStartDate("2012-01-01");
             setFilterBoxEndDate("2020-01-08");
-
+            setFilterBoxAdditionalFilter({ type: '', query: '' });
+            setFilterBoxAdditionalFilterLabel("");
+            props.setAdditionalFilter({ type: '', query: '' });
           }}
         >
           Reset
