@@ -54,9 +54,7 @@ const Graph = props => {
         return o;
       })
     }
-   
-    console.log('CSV FORMATER', data)
-    return data
+    return data.map(obj=> {return Object.values(obj)}) 
   }
 
   let fileName = '';
@@ -66,8 +64,7 @@ const Graph = props => {
     setCsvFormattedData(csvFormater(props.csvData))
     setCsvHeaders(headers(props.csvData))
   }, [props.csvData])
-  console.log('Headers', headers(props.csvData))
-
+  console.log("formater", csvFormattedData)
   return (
     <div className="Graph-Container">
       <div className='dwnld-btn'>
