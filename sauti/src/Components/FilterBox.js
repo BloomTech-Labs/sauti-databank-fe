@@ -94,7 +94,6 @@ export default function FilterBox(props) {
             setFilterBoxCrossFilter(e.value);
           }}
         />
-        {/* {filterBoxCrossFilter.type && ( */}
         <>
           <p>Additional Filter</p>
           <p className='disclosure'>*This optional filter adjusts samplesize and may not always alter the graph appearance.</p>
@@ -137,7 +136,8 @@ export default function FilterBox(props) {
                   name="CrossFilter"
                   value={option}
                   onChange={e => (
-                    props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option })
+                    props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option }),
+                    props.setAdditionalFilter(filterBoxAdditionalFilter)
                   )}
                 />
                 <FilterOption>{option}</FilterOption>
@@ -169,7 +169,9 @@ export default function FilterBox(props) {
                       name="CrossFilter"
                       value={option}
                       onChange={e => {
-                        props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option })
+                        props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option },
+                        props.setAdditionalFilter(filterBoxAdditionalFilter)
+                        )
                       }}
                     />
                     <FilterOption>{option}</FilterOption>
@@ -245,7 +247,9 @@ export default function FilterBox(props) {
             setFilterBoxCrossFilter({ type: "", query: "Users" });
             setFilterBoxStartDate("2012-01-01");
             setFilterBoxEndDate("2020-01-08");
-
+            setFilterBoxAdditionalFilter({ type: '', query: '' });
+            setFilterBoxAdditionalFilterLabel("");
+            props.setAdditionalFilter({ type: '', query: '' });
           }}
         >
           Reset

@@ -243,7 +243,14 @@ const GetData = props => {
           ) {
           ${props.index.type}
           ${props.crossFilter.type}
+<<<<<<< HEAD
           create_date
+=======
+          created_date
+        }
+        additionalFilterData:sessionsData{
+          ${props.additionalFilter.type}
+>>>>>>> d4a47807ab458a3620c1a8dce3c604b4674ba99d
         }
       }
       `;
@@ -406,7 +413,10 @@ const GetData = props => {
         <h1 className="graph-title">
           {props.label} by {props.crossLabel}
         </h1>
-        <h2>Additional Filter: {props.additionalFilter.label} - {Object.values(props.selectedCheckbox).length === 0 ? "none" : Object.values(props.selectedCheckbox)[0]}</h2>
+        {props.additionalFilter.type &&
+          <h3 className="graph-title-small">Additional Filter: {props.additionalFilter.label} - {Object.values(props.selectedCheckbox).length === 0 ? "none" : Object.values(props.selectedCheckbox)[0]}</h3>
+        }
+
         <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
@@ -428,6 +438,9 @@ const GetData = props => {
     return (
       <div>
         <h1 className="graph-title">{props.label}</h1>
+        {props.additionalFilter.type &&
+          <h3 className="graph-title-small">Additional Filter: {props.additionalFilter.label} - {Object.values(props.selectedCheckbox).length === 0 ? "none" : Object.values(props.selectedCheckbox)[0]}</h3>
+        }
         <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
