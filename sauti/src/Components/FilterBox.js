@@ -94,7 +94,6 @@ export default function FilterBox(props) {
             setFilterBoxCrossFilter(e.value);
           }}
         />
-        {/* {filterBoxCrossFilter.type && ( */}
         <>
           <p>Additional Filter</p>
           <p className='disclosure'>*This optional filter adjusts samplesize and may not always alter the graph appearance.</p>
@@ -137,7 +136,8 @@ export default function FilterBox(props) {
                   name="CrossFilter"
                   value={option}
                   onChange={e => (
-                    props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option })
+                    props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option }),
+                    props.setAdditionalFilter(filterBoxAdditionalFilter)
                   )}
                 />
                 <FilterOption>{option}</FilterOption>
@@ -169,7 +169,9 @@ export default function FilterBox(props) {
                       name="CrossFilter"
                       value={option}
                       onChange={e => {
-                        props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option })
+                        props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option },
+                        props.setAdditionalFilter(filterBoxAdditionalFilter)
+                        )
                       }}
                     />
                     <FilterOption>{option}</FilterOption>
