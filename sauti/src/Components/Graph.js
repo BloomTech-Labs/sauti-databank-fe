@@ -2,398 +2,150 @@ import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from 'react-csv-downloader';
 
+const Graph = props => {
+  console.log('keys in graph', props.keys)
+  console.log('data in graph', props.data)
 
-const GetData = props => {
-  let queryType = "tradersUsers";
-  let QUERY;
+  const [csvHeaders, setCsvHeaders] = useState([]);
+  const [csvFormattedData, setCsvFormattedData] = useState([]);
+  // console.log('Index in Graph', props.index);
+  // console.log('CsvData in Graph', props.csvData);
+  // console.log('Keys in Graph', props.keys);
 
-  if (props.index.query === "Users" && props.crossFilter.query === "Users" && !props.additionalFilter.type) {
-    queryType = "tradersUsers";
-    QUERY = gql`
-      query getUsers( 
-        $age: String,
-        $gender: String, 
-        $education: String 
-        $crossing_freq: String,
-        $produce: String,
-        $primary_income: String,
-        $language: String,
-        $country_of_residence: String,
-        ){
-        tradersUsers (
-          age: $age,
-          gender: $gender, 
-          education: $education
-          crossing_freq: $crossing_freq,
-          produce: $produce,
-          primary_income: $primary_income,
-          language: $language,
-          country_of_residence: $country_of_residence
-          ) {
-          ${props.index.type}
-          ${props.crossFilter.type}
-        }
-      }
-      `;
-  } else if (
-    props.index.query === "Sessions" &&
-    props.crossFilter.query === "Users" &&
-    !props.additionalFilter.type
-  ) {
-    queryType = "sessionsData";
+  useEffect(() => {
+    if (props.filteredData && props.checkboxOptions !== props.filtgiteredData) {
+      props.setCheckboxOptions(props.filteredData);
+    }
+  }, []);
 
-    QUERY = gql`
-      query getData(
-        $age: String,
-        $gender: String, 
-        $education: String, 
-        $crossing_freq: String,
-        $produce: String,
-        $primary_income: String,
-        $language: String,
-        $country_of_residence: String,
-        $procedurecommodity: String,
-        $procedurecommoditycat: String,
-        $proceduredest: String,
-        $procedurerequireddocument: String,
-        $procedurerelevantagency: String,
-        $procedureorigin: String,
-        $commoditycountry: String,
-        $commoditymarket: String,
-        $commodityproduct: String,
-        $commoditycat: String,
-        $exchangedirection: String,
-        ){
-          sessionsData(
-          age: $age,
-          gender: $gender, 
-          education: $education, 
-          crossing_freq: $crossing_freq,
-          produce: $produce,
-          primary_income: $primary_income,
-          language: $language,
-          country_of_residence: $country_of_residence,
-          procedurecommodity: $procedurecommodity,
-          procedurecommoditycat: $procedurecommoditycat,
-          proceduredest: $proceduredest,
-          procedurerequireddocument: $procedurerequireddocument,
-          procedurerelevantagency: $procedurerelevantagency,
-          procedureorigin: $procedureorigin,
-          commoditycountry: $commoditycountry,
-          commoditymarket: $commoditymarket,
-          commodityproduct: $commodityproduct,
-          commoditycat: $commoditycat,
-          exchangedirection: $exchangedirection,
-          ){
-          ${props.index.type}
-          ${props.crossFilter.type}
-          created_date
-        }
-      }
-      `;
-  } else if (props.index.query === "Users" && props.crossFilter.query === "Sessions" && !props.additionalFilter.type) {
-    queryType = "sessionsData"
-    QUERY = gql`
-      query getData(
-        $age: String,
-        $gender: String, 
-        $education: String, 
-        $crossing_freq: String,
-        $produce: String,
-        $primary_income: String,
-        $language: String,
-        $country_of_residence: String,
-        $procedurecommodity: String,
-        $procedurecommoditycat: String,
-        $proceduredest: String,
-        $procedurerequireddocument: String,
-        $procedurerelevantagency: String,
-        $procedureorigin: String,
-        $commoditycountry: String,
-        $commoditymarket: String,
-        $commodityproduct: String,
-        $commoditycat: String,
-        $exchangedirection: String,
-        ){
-        sessionsData(
-          age: $age,
-          gender: $gender, 
-          education: $education, 
-          crossing_freq: $crossing_freq,
-          produce: $produce,
-          primary_income: $primary_income,
-          language: $language,
-          country_of_residence: $country_of_residence,
-          procedurecommodity: $procedurecommodity,
-          procedurecommoditycat: $procedurecommoditycat,
-          proceduredest: $proceduredest,
-          procedurerequireddocument: $procedurerequireddocument,
-          procedurerelevantagency: $procedurerelevantagency,
-          procedureorigin: $procedureorigin,
-          commoditycountry: $commoditycountry,
-          commoditymarket: $commoditymarket,
-          commodityproduct: $commodityproduct,
-          commoditycat: $commoditycat,
-          exchangedirection: $exchangedirection,
-          ){
-          ${props.index.type}
-          ${props.crossFilter.type}
-          created_date
-        }
-      }`
-  } else if (props.index.query === "Users" && props.crossFilter.query === "Users") {
-    queryType = "sessionsData";
-    QUERY = gql`
-      query getUsers( 
-        $age: String,
-        $gender: String, 
-        $education: String 
-        $crossing_freq: String,
-        $produce: String,
-        $primary_income: String,
-        $language: String,
-        $country_of_residence: String,
-        $procedurecommodity: String,
-        $procedurecommoditycat: String,
-        $proceduredest: String,
-        $procedurerequireddocument: String,
-        $procedurerelevantagency: String,
-        $procedureorigin: String,
-        $commoditycountry: String,
-        $commoditymarket: String,
-        $commodityproduct: String,
-        $commoditycat: String,
-        $exchangedirection: String,
-        ){
-        sessionsData (
-          age: $age,
-          gender: $gender, 
-          education: $education
-          crossing_freq: $crossing_freq,
-          produce: $produce,
-          primary_income: $primary_income,
-          language: $language,
-          country_of_residence: $country_of_residence,
-          procedurecommodity: $procedurecommodity,
-          procedurecommoditycat: $procedurecommoditycat,
-          proceduredest: $proceduredest,
-          procedurerequireddocument: $procedurerequireddocument,
-          procedurerelevantagency: $procedurerelevantagency,
-          procedureorigin: $procedureorigin,
-          commoditycountry: $commoditycountry,
-          commoditymarket: $commoditymarket,
-          commodityproduct: $commodityproduct,
-          commoditycat: $commoditycat,
-          exchangedirection: $exchangedirection,
-          ) {
-          ${props.index.type}
-          ${props.crossFilter.type}
-        }
-        additionalFilterData:sessionsData{
-          ${props.additionalFilter.type}
-        }
-      }
-      `;
-  } else if (props.index.query === "Sessions" && props.crossFilter.query === "Sessions" && !props.additionalFilter.type) {
-    queryType = "sessionsData";
-    QUERY = gql`
-      query getUsers( 
-        $age: String,
-        $gender: String, 
-        $education: String 
-        $crossing_freq: String,
-        $produce: String,
-        $primary_income: String,
-        $language: String,
-        $country_of_residence: String,
-        $procedurecommodity: String,
-        $procedurecommoditycat: String,
-        $proceduredest: String,
-        $procedurerequireddocument: String,
-        $procedurerelevantagency: String,
-        $procedureorigin: String,
-        $commoditycountry: String,
-        $commoditymarket: String,
-        $commodityproduct: String,
-        $commoditycat: String,
-        $exchangedirection: String,
-        ){
-        sessionsData (
-          age: $age,
-          gender: $gender, 
-          education: $education
-          crossing_freq: $crossing_freq,
-          produce: $produce,
-          primary_income: $primary_income,
-          language: $language,
-          country_of_residence: $country_of_residence,
-          procedurecommodity: $procedurecommodity,
-          procedurecommoditycat: $procedurecommoditycat,
-          proceduredest: $proceduredest,
-          procedurerequireddocument: $procedurerequireddocument,
-          procedurerelevantagency: $procedurerelevantagency,
-          procedureorigin: $procedureorigin,
-          commoditycountry: $commoditycountry,
-          commoditymarket: $commoditymarket,
-          commodityproduct: $commodityproduct,
-          commoditycat: $commoditycat,
-          exchangedirection: $exchangedirection,
-          ) {
-          ${props.index.type}
-          ${props.crossFilter.type}
-          created_date
-        }
-      }
-      `;
-  } else {
-    queryType = "sessionsData";
-    QUERY = gql`
-      query getData(
-        $age: String,
-        $gender: String, 
-        $education: String, 
-        $crossing_freq: String,
-        $produce: String,
-        $primary_income: String,
-        $language: String,
-        $country_of_residence: String,
-        $procedurecommodity: String,
-        $procedurecommoditycat: String,
-        $proceduredest: String,
-        $procedurerequireddocument: String,
-        $procedurerelevantagency: String,
-        $procedureorigin: String,
-        $commoditycountry: String,
-        $commoditymarket: String,
-        $commodityproduct: String,
-        $commoditycat: String,
-        $exchangedirection: String,
-        ){
-        sessionsData(
-          age: $age,
-          gender: $gender, 
-          education: $education, 
-          crossing_freq: $crossing_freq,
-          produce: $produce,
-          primary_income: $primary_income,
-          language: $language,
-          country_of_residence: $country_of_residence,
-          procedurecommodity: $procedurecommodity,
-          procedurecommoditycat: $procedurecommoditycat,
-          proceduredest: $proceduredest,
-          procedurerequireddocument: $procedurerequireddocument,
-          procedurerelevantagency: $procedurerelevantagency,
-          procedureorigin: $procedureorigin,
-          commoditycountry: $commoditycountry,
-          commoditymarket: $commoditymarket,
-          commodityproduct: $commodityproduct,
-          commoditycat: $commoditycat,
-          exchangedirection: $exchangedirection,
-          ){
-          ${props.index.type}
-          ${props.crossFilter.type}
-          created_date
-        }
-        additionalFilterData:sessionsData{
-            ${props.additionalFilter.type}
-        }
-      }
-      `;
+  //Gets headers for CSV. 
+  let headers = (data) => {
+    let allHeaders = [];
+    //no crossfilter
+    if (!props.crossFilter) {
+      allHeaders = [props.index];
+      allHeaders.push({ id: `${props.sampleSize}`, displayName: `Sample Size: ${props.sampleSize}` })
+    } else {
+      allHeaders = [
+        { id: `${props.index}`, displayName: `${props.index}` },
+        ...props.keys,
+        { id: `${props.additionalFilter}` },
+        { id: `${props.sampleSize}`, displayName: `Sample Size: ${props.sampleSize}` }
+      ]
+    }
+    return allHeaders;
   }
 
-  let policyType;
-  if (props.additionalFilter.type && !graphLabels[`${props.additionalFilter.type}`]) {
-    policyType = "network-only";
-  } else {
-    policyType = "cache-first";
+  let csvFormater = (data) => {
+    //if there's additionalFilter 
+    if (props.additionalFilter) {
+      data = data.map(obj => {
+        let key = Object.keys(props.selectedCheckbox)[0];
+        let val = Object.values(props.selectedCheckbox)[0];
+        let o = Object.assign({}, obj);
+        o[key] = val;
+        return o;
+      })
+    }
+    return data.map(obj=> {return Object.values(obj)}) 
   }
 
-  let { loading, data } = useQuery(QUERY, {
+  let fileName = '';
+  fileName = `${props.index && props.index}${props.crossFilter && ('_by_' + props.crossFilter)}${props.additionalFilter && `_where_${props.additionalFilter}:(${Object.values(props.selectedCheckbox)[0]})`}`
 
-    variables: { ...props.selectedCheckbox },
-    fetchPolicy: policyType
-  });
-
-  if (loading) {
-    return (
-      <div className="loader-container">
-        <Loader
-          className="loader"
-          type="Oval"
-          color="#708090"
-          width={100}
-          timeout={12000}
-        />
+  useEffect(() => {
+    setCsvFormattedData(csvFormater(props.csvData))
+    setCsvHeaders(headers(props.csvData))
+  }, [props.csvData])
+  console.log("formater", csvFormattedData)
+  return (
+    <div className="Graph-Container">
+      <div className='dwnld-btn'>
+        <CsvDownloader
+          datas={csvFormattedData}
+          columns={csvHeaders}
+          filename={fileName}
+          suffix={`${new Date().toISOString()}`}
+        ><button>Download⯆</button></CsvDownloader>
       </div>
-    );
-  }
-  // data = [...data.tradersUsers, ...data.tradersData] // This is for when we are supporting multiple queries of same type
-
-  let filteredData;
-  // This is how we nab checkbox options.
-  if (props.additionalFilter.type && !graphLabels[`${props.additionalFilter.type}`]) {
-    console.log('additional filter data', data.additionalFilterData)
-    removeMultiple(data.additionalFilterData)
-    filteredData = getIndex(data.additionalFilterData, `${props.additionalFilter.type}`).map(obj => obj[`${props.additionalFilter.type}`]);
-    filteredData = filteredData.filter(item => item !== null)
-  };
-
-  const chartData = dataParse(
-    props.index.type,
-    data[`${queryType}`],
-    props.crossFilter.type,
-    props.startDate,
-    props.endDate,
-    props.additionalFilter.type,
-    props.index.query
-  ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
-
-  if (props.crossFilter.type !== "") {
-    return (
-      <div>
-        <h1 className="graph-title">
-          {props.label} by {props.crossLabel}
-        </h1>
-        <h2>Additional Filter: {props.additionalFilter.label} - {Object.values(props.selectedCheckbox).length === 0 ? "none" : Object.values(props.selectedCheckbox)[0]}</h2>
-        <Graph
-          data={chartData.percentageData}
-          csvData={chartData.dataStructure}
-          crossFilter={props.crossFilter.type}
-          additionalFilter={props.additionalFilter.type}
-          selectedCheckbox={props.selectedCheckbox}
-          keys={chartData.crossFilterValues}
-          index={props.index.type}
-          label={props.label}
-          groupMode={"grouped"}
-          filteredData={filteredData}
-          sampleSize={chartData.totalSampleSize}
-          checkboxOptions={props.checkboxOptions}
-          setCheckboxOptions={props.setCheckboxOptions}
-        />
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <h1 className="graph-title">{props.label}</h1>
-        <Graph
-          data={chartData.percentageData}
-          csvData={chartData.dataStructure}
-          additionalFilter={props.additionalFilter.type}
-          selectedCheckbox={props.selectedCheckbox}
-          crossFilter={props.crossFilter.type}
-          keys={chartData.keys || chartData.csvKeys}
-          index={props.index.type}
-          label={props.label}
-          groupMode={"stacked"}
-          filteredData={filteredData}
-          sampleSize={chartData.sampleSize}
-          checkboxOptions={props.checkboxOptions}
-          setCheckboxOptions={props.setCheckboxOptions}
-        />
-      </div>
-    );
-  }
+      <ResponsiveBar
+        data={props.data}
+        keys={props.keys}
+        indexBy={props.index}
+        groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
+        margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
+        padding={0.3}
+        innerPadding={3}
+        maxValue={100}
+        colors={{ scheme: "nivo" }}
+        borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+        axisTop={null}
+        axisRight={null}
+        tooltip={({ id, value }) => (
+          <strong
+            style={{
+              color: "#000000",
+              fontSize: "15px",
+              fontFamily: "Helvetica"
+            }}
+          >
+            {id}: {value}%
+          </strong>
+        )}
+        labelFormat={d => <tspan y={-15}>{d}% </tspan>}
+        labelForm={d => <text>{d}% </text>}
+        axisBottom={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend:
+            props.label +
+            " (values as percent of total)," +
+            ` sample size = ${props.sampleSize}`,
+          legendPosition: "middle",
+          legendOffset: 35
+        }}
+        axisLeft={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "Percentage", // Possibly toggle percentage or number in future release
+          legendPosition: "middle",
+          legendOffset: -60
+        }}
+        labelSkipWidth={0}
+        labelSkipHeight={0}
+        labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+        legends={[
+          {
+            dataFrom: "keys",
+            anchor: "bottom-right",
+            direction: "column",
+            justify: false,
+            translateX: 120,
+            translateY: 0,
+            itemsSpacing: 2,
+            itemWidth: 100,
+            itemHeight: 20,
+            itemDirection: "left-to-right",
+            itemOpacity: 0.85,
+            symbolSize: 20,
+            effects: [
+              {
+                on: "hover",
+                style: {
+                  itemOpacity: 1
+                }
+              }
+            ]
+          }
+        ]}
+        animate={true}
+        motionStiffness={90}
+        motionDamping={15}
+      />
+    </div>
+  );
 };
 
-export default GetData;
+export default Graph;
