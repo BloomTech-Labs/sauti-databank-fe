@@ -6,7 +6,7 @@ import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
 import getIndex from "../DataParseHelpers/getIndex"
 import graphLabels from "./graphLabels"
-import removeMultiple from "./removeMultiple";
+import removeMultiple from "../DataParseHelpers/removeMultiple";
 
 const GetData = props => {
   let queryType = "tradersUsers";
@@ -243,14 +243,7 @@ const GetData = props => {
           ) {
           ${props.index.type}
           ${props.crossFilter.type}
-<<<<<<< HEAD
-          create_date
-=======
           created_date
-        }
-        additionalFilterData:sessionsData{
-          ${props.additionalFilter.type}
->>>>>>> d4a47807ab458a3620c1a8dce3c604b4674ba99d
         }
       }
       `;
