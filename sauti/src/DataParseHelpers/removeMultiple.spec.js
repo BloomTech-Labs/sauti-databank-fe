@@ -1,4 +1,4 @@
-import removeMultiple from './removeMultiple'
+import removeMultiple from '../Components/removeMultiple'
 import 'jest'
 import 'jest-extended'
 
