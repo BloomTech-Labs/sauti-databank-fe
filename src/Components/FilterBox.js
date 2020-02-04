@@ -12,7 +12,7 @@ export default function FilterBox(props) {
   const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({ type: "", query: "Users" });
   const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
   const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
-  const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({ type: '', query: '' });
+  const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({ type: '', query: '', label: '' });
   const [filterBoxAdditionalFilterLabel, setFilterBoxAdditionalFilterLabel] = useState("");
   const [filterBoxStartDate, setFilterBoxStartDate] = useState("2012-01-01");
   const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
@@ -77,11 +77,6 @@ export default function FilterBox(props) {
             setFilterBoxIndex(e.value);
             setFilterBoxIndexLabel(e.label);
             ClickTracker(e.value.type);
-            setFilterBoxAdditionalFilter({ type: '', query: '' })
-            props.setAdditionalFilter({ type: '', query: '' })
-            setFilterBoxAdditionalFilterLabel('')
-            props.setCheckboxOptions([])
-            props.setSelectedCheckbox({})
           }}
         />
 
@@ -97,14 +92,8 @@ export default function FilterBox(props) {
           onChange={e => {
             setFilterBoxCrossLabel(e.label);
             setFilterBoxCrossFilter(e.value);
-            setFilterBoxAdditionalFilter({ type: '', query: '' })
-            props.setAdditionalFilter({ type: '', query: '' })
-            setFilterBoxAdditionalFilterLabel('')
-            props.setCheckboxOptions([])
-            props.setSelectedCheckbox({})
           }}
         />
-        {/* {filterBoxCrossFilter.type && ( */}
         <>
           <p>Additional Filter</p>
           <p className='disclosure'>*This optional filter adjusts samplesize and may not always alter the graph appearance.</p>
@@ -117,10 +106,11 @@ export default function FilterBox(props) {
             value={filterBoxAdditionalFilterLabel}
             placeholder="Select a filter..."
             onChange={e => {
-              setFilterBoxAdditionalFilter({ type: e.value.type, query: e.value.query })
+              setFilterBoxAdditionalFilter({ type: e.value.type, query: e.value.query, label: e.label })
               setFilterBoxAdditionalFilterLabel(e.label);
               props.setCheckboxOptions([]);
               ClickTracker(e.value.type);
+            console.log("event", e)
             }}
           />
           <div className="reset-btn" onClick={() => {
@@ -146,7 +136,8 @@ export default function FilterBox(props) {
                   name="CrossFilter"
                   value={option}
                   onChange={e => (
-                    props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option })
+                    props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option }),
+                    props.setAdditionalFilter(filterBoxAdditionalFilter)
                   )}
                 />
                 <FilterOption>{option}</FilterOption>
@@ -178,7 +169,9 @@ export default function FilterBox(props) {
                       name="CrossFilter"
                       value={option}
                       onChange={e => {
-                        props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option })
+                        props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option },
+                        props.setAdditionalFilter(filterBoxAdditionalFilter)
+                        )
                       }}
                     />
                     <FilterOption>{option}</FilterOption>
@@ -254,7 +247,9 @@ export default function FilterBox(props) {
             setFilterBoxCrossFilter({ type: "", query: "Users" });
             setFilterBoxStartDate("2012-01-01");
             setFilterBoxEndDate("2020-01-08");
-
+            setFilterBoxAdditionalFilter({ type: '', query: '' });
+            setFilterBoxAdditionalFilterLabel("");
+            props.setAdditionalFilter({ type: '', query: '' });
           }}
         >
           Reset

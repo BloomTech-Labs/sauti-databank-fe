@@ -12,6 +12,7 @@ const dataParse = (
   additionalFilter,
   queryType
 ) => {
+  try{
   let dataStructure = [];
   console.log('data at beginning', data)
 
@@ -41,6 +42,10 @@ const dataParse = (
       return setItem(data, dataStructure, indexBy);
     }
   }
+} catch (error) {
+  alert("There was an error getting the data. This can happen if you select too many filters and there is no data for that subset. The page will automatically refresh.")
+  window.location.reload()
+}
 };
 
 const setCrossedItems = (data, dataStructure, crossFilter, indexBy, additionalFilter) => {

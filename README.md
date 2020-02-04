@@ -4,11 +4,11 @@ You can find our deployed project at:  https://sauti.now.sh/
 
 ## Contributors
 
-|                                                                               ---                                                                                | ---                                                                                                                        | ---                                                                                                               |
+|                                                                                                                                                          |                                                                                                                        |                                                                                                                |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 |                                      <img src="https://avatars1.githubusercontent.com/u/52979795?s=400&v=4" width="200" />                                       | <img src="https://avatars3.githubusercontent.com/u/51310083?s=400&v=4" width="200" />                                      | <img src="https://avatars3.githubusercontent.com/u/53502963?s=400&v=4" width="200" />                             |
 | Dylan Mestyanek [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/dylanmestyanek) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/dylan-mestyanek-593907189/) | Robert Carter [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/Robdowski) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/robert-carter-72824918a/)                                    | Sandra Kimball [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/sandramkimball) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/sandy-kimball-9b7461192/)                     |
-|                                      <img src="https://avatars3.githubusercontent.com/u/50163182?s=400&v=4" width="200" />                                       | <img src="https://avatars0.githubusercontent.com/u/50240571?s=460&v=4" width="200" />)                                     | <img src="https://avatars1.githubusercontent.com/u/7843803?s=400&v=4" width="200" />                              |
+|                                      <img src="https://avatars3.githubusercontent.com/u/50163182?s=400&v=4" width="200" />                                       | <img src="https://avatars0.githubusercontent.com/u/50240571?s=460&v=4" width="200" />                                     | <img src="https://avatars1.githubusercontent.com/u/7843803?s=400&v=4" width="200" />                              |
 |                                      Len Winkler[<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/LenWinkler) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/lenwinkler/)                                      | Candace Rossi [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/CandaceRossi) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/)                                | Timothy McGowen [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/mcgowent) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/timothymcgowen/)                          |
 |                                      <img src="https://avatars3.githubusercontent.com/u/42799618?s=460&v=4" width="200" />                                       | <img src="https://avatars3.githubusercontent.com/u/48725513?s=460&v=4" width="200" />                                      | ![](https://avatars2.githubusercontent.com/u/40050726?s=460&v=4.png "Logo Title Text 1")                          |
 |                              Jason Aviles [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/jason-aviles) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/jason-aviles/)                              | Elise Spain [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/espain16) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/elisespain/)                            | Gregory L Jordan Sr [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/GregJordanSr) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/gregoryljordansr/) |
@@ -16,8 +16,7 @@ You can find our deployed project at:  https://sauti.now.sh/
 |                         Melanie Harris [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/Melanie-Harris) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/melanieharris-mba/)                          | Vijay Das [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/vijaydas) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/vijaytdas/)                               | Azra Panjwani [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/azrap) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/azrapanjwani/)                  |
 |                                      <img src="https://avatars1.githubusercontent.com/u/46355406?s=400&v=4" width="200" />                                       | <img src="https://avatars3.githubusercontent.com/u/32531002?s=400&v=4" width="200" />                                      | <img src="https://avatars0.githubusercontent.com/u/48607171?s=400&v=4" width="200" />                             |
 |                            Cash Globe [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/cashcoder88) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/cash-globe-1371ab21/)                            | Christopher Lopez [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/numberoneecsstudent) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/christopher-ro-lopez/) | Heymi Vanegas [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/heymiday) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/heymi-vanegas-50b81b182/)     |
-|
-| <img src="https://avatars1.githubusercontent.com/u/35579235?s=400&v=4" width="200" /> | <img src="https://avatars2.githubusercontent.com/u/28582074?s=400&v=4" width ="200" /> | <img src="https://avatars0.githubusercontent.com/u/41352551?s=400&v=4" width="200" />
+| <img src="https://avatars1.githubusercontent.com/u/35579235?s=400&v=4" width="200" /> | <img src="https://avatars2.githubusercontent.com/u/28582074?s=400&v=4" width ="200" /> | <img src="https://avatars0.githubusercontent.com/u/41352551?s=400&v=4" width="200" /> 
 | Jonathan Erlich [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/joerlop) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/jonathanerlich/) | Kimberlee Johnson [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/kimberleejohnson) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/kimberleejohnson/) | Mark La Monica [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/sauti-databank) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/mark-la-monica-11155b181/)
 |
 <br>
@@ -31,17 +30,15 @@ You can find our deployed project at:  https://sauti.now.sh/
 
 ## Project Overview
 
-- [Trello Board](https://trello.com/b/ycDN2Mzb/labs-14-sauti-databank) 
-
 - [Labs 19 Trello Board](https://trello.com/b/2LXUKk9x/labs-19-sauti-data-bank)
 
 - [Product Canvases](https://www.notion.so/e975f72982c24806a63b4a09840142d1?v=e2ba54cf176244d1b886672103bca454)
 
-- [UX Design files](https://app.zeplin.io/project/5d26179fd0a6fc367e0fdc94/screen/5d5307619df85c9b3c2f2469)
+- [UX Design files](https://www.figma.com/file/8Mv2EXDnjjZoauqWfzZbsa/Sauti-Databank?node-id=108%3A9789)
 
 Sauti is a nonprofit that provides a platform for small traders in East African countries to look up realtime market data. Sauti also collects demographic data on these traders, but, until our Labs project, they didn't have a way to visualize that demographic data for researchers.
 
-Using [React](https://reactjs.org/), the [react-dropdown library](https://www.npmjs.com/package/react-dropdown), [Nivo](https://nivo.rocks/) (built for React data visualization, on top of d3js),and [Sass](https://sass-lang.com/) on the front-end, our team helped Sauti make its data more helpful and useful for economic researchers and policy makers.
+Using [React](https://reactjs.org/), [react-dropdown library](https://www.npmjs.com/package/react-dropdown), [Apollo GraphQL](https://www.apollographql.com/docs/), [Nivo](https://nivo.rocks/), and [Sass](https://sass-lang.com/) on the front-end, our team helped Sauti make its data more helpful and useful for economic researchers and policy makers.
 
 ### Key Features
 
@@ -77,26 +74,23 @@ A researcher interested in the Sauti Databank is able to see the following Key D
 - [Apollo](https://www.apollographql.com/): Built to interact with GraphQL backend API's well, Apollo is the platform that enables us to write queries that specify back-end requests which retreives data for smooth transitions in crossfiltration. We utilize Apollo-Boost wrapper for easy interaction between React front-end components and GraphQL back-end. 
 - [Sass](https://sass-lang.com/): A CSS compiler helped us iterate more quickly on styling with the efficient use of nesting.
 
-#### Front-end deployed to [Netlify](https://production-sauti-databank.netlify.com/).
+#### Front-end deployed to [Netlify](https://sauti.now.sh/).
 
-#### [Back-end](https://github.com/sauti-databank/back-end) built using:
+#### [Back-end](https://github.com/Lambda-School-Labs/sauti-databank-be) built using:
 
 - Node.js
 - Express
-- KNEX
+- Knex
 - GraphQL
 - MySQL
+- Jest
 
 Our reasoning behind using the above tools for the back-end build is to make cross-filtering easy and efficient. Alongside Node and Express for operation set up, we are using the GraphQL framework which is a query manipulation language that requests specific data from the database using one single API endpoint.
 
 # APIs
 
-Please see Back-end documentation
+Please see Back-end documentation [here](https://github.com/Lambda-School-Labs/sauti-databank-be/blob/master/README.md).
 
-
-## Authentication
-
-🚫Placeholder: Protected routes were not a priority for Sauti at the time of our first release (August 2019).
 
 # Testing
 

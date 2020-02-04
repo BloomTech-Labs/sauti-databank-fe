@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 
+
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
+
+
 const client = new ApolloClient({
-  uri: "https://sauti-databank.herokuapp.com/graphql"
+  uri: `${process.env.REACT_APP_BACKEND_URL}`
 });
 
 ReactDOM.render(
