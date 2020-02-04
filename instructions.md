@@ -24,3 +24,4 @@
 *  Improvements can be made to reduce the amount of code and conditional statements in all files
 *  Support multiple additional filters
 *  Support viewing data over time with line graph (Get all data for certain dates, split up data by month in React, shape data for each month and send to Nivo. We'll need to tell Nivo switch to a different type of graph)
+
