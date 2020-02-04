@@ -353,7 +353,7 @@ const GetData = props => {
     props.additionalFilter.type,
     props.index.query
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
-
+  console.log('csvData', chartData.dataStructure)
   if (props.crossFilter.type !== "") {
     return (
       <div>

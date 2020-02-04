@@ -94,7 +94,7 @@ Please see Back-end documentation [here](https://github.com/Lambda-School-Labs/s
 
 # Testing
 
-We tested the site in Chrome and Firefox thoroughly, and reported seven issues (and counting!) as Github Issues.
+We tested the site in Chrome and Firefox using Jest.
 
 # Installation Instructions
 
