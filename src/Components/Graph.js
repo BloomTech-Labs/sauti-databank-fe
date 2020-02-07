@@ -46,13 +46,8 @@ const Graph = props => {
         o[key] = val;
         return o;
       })
-    } 
-    //if most requested
-    // if (Object.keys(data[0]).includes('request_value')){
-      return data.map(obj=> {return Object.values(obj)}) 
-    // } else {
-      // return data
-    // }
+    }
+    return data.map(obj=> {return Object.values(obj)}) 
   }
 
   let fileName = '';
