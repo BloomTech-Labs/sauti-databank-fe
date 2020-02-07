@@ -2,22 +2,20 @@ import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import { gql } from "apollo-boost";
 import { MockedProvider} from '@apollo/react-testing';
+import 'jest'
+import 'jest-extended'
 
 //components to test
 import App from './App';
-import Queries from './Components/Queries';
-import Graph from './Components/Graph'
-import dataParse from './Components/dataParse';
+import Graph from './Components/Graph';
 import FilterBox from './Components/FilterBox';
-
+import FilterBoxOptions from './Components/FilterBoxOptions';
 import {
   render, 
   cleanup, 
   fireEvent, 
-  findByText, 
-  findByType, 
-  findByPlaceholderText, 
-  findByDisplayValue} from '@testing-library/react';
+  getByText,
+  getByPlaceholderText} from '@testing-library/react';
 
 
 const mocks = [{
@@ -55,83 +53,84 @@ let data = [
   {gender: null, language: 'Swahili'}
 ]
 
-// const customRender = () => {
-//   return {
-//     history, 
-//     ...render(
-//       <MockedProvider mocks={mocks} data={data} addTypename={false}>
-//         <Router >
-//           <App/>
-//         </Router>
-//       </MockedProvider>
-//     )
-//   }
-// }
-
-// const waitForData = () => new Promise(res=>setTimeout(res, 0));
-
-// describe('Components in App work:', () => {
-//   afterEach(cleanup);
+let checkboxOptions = ['cat', 'dog', 'pig', 'cow']
 
 
-  // test('Does chartData function in Queries work?', async () => {
-  //   // const {findByText} = customRender( <Queries/>)
-  //   render(<MockedProvider mocks={mocks} dataParse={dataParse} data={data} addTypename={false}>
-  //       <Router >
-  //         <Queries/>
-  //       </Router>
-  //     </MockedProvider>)
-  //   await waitForData();
+const customRender = (component) => {
+  return {
+    history, 
+    ...render(
+      <MockedProvider mocks={mocks} data={data} addTypename={false} >
+        <Router >
+          {component}
+        </Router>
+      </MockedProvider>
+    )
+  }
+}
 
-  //   const ChartDataFunc = findByText('chartData')
-  //   const response = await dataParse('gender', data, "")
-    
-  //   expect(response.dataStructure).toBeArray()
-  //   expect(response).toBeDefined()
-  // });
-
-
-  // test('Is Loading state initialized when loading?', async () => {
-  //   const {findByText} = customRender( <Queries/>)
-  //   await waitForData();
-
-  //   const GetDataTest = findByText('GetData')
-  //   expect(GetDataTest).toBeDefined()
-
-  //   const isLoading = findByText('loader-container')
-  //   expect(GetDataTest).toContain(isLoading)
-  // })
+const waitForData = () => new Promise(res=>setTimeout(res, 0));
 
 
-  // test('Check if query tradersUsers has correct fields', ()=> {
-  //   const {findByText} = customRender( <Queries mocks={mocks}/>)
-  //  await waitForData();
-  //   const {tradersQuery} = findByText('tradersUsers')
-  //   expect(tradersUsers).toBe(gql`
-  //     type tradersUsers{
-  //       gender: String!
-  //       language: String!
-  //     }`
-  //   );
-  // });
+describe('Components in App work:', () => {
+  afterEach(cleanup);
 
-  // test('Does clicking dropdown option change data?', async () => {
-  //   const {findByText} = customRender(<FilterBox/>)
-  //   await waitForData()
+  test('Does FilterBox render without crashing?', async ()=> {
+    const {debug} = customRender( <FilterBox checkboxOptions={checkboxOptions}/>)
+    debug()
+    await waitForData()
 
-  //   const Menu = findByText('form')
-  //   await waitForData()
-  //   expect(Menu).toBeDefined();
+    const renderedApp = document.getElementsByTagName('DropdownContainer')
+    expect(renderedApp).toBeDefined()
+  })
+  
+  test('Does Dropdown render?', async () => {
+    const {getByText} = customRender(
+      <FilterBox 
+        checkboxOptions={checkboxOptions} 
+        FilterBoxIndexLabel={FilterBoxOptions}
+      />
+    )
+    await waitForData()
 
-    // const menuOpt = findByText('Select an option')
-    // fireEvent.click(menuOpt)
+    const Dropdown = getByText(/gender/i)
+    await waitForData()
+    expect(Dropdown).toBeDefined();
+
+    // expect(Dropdown).toContain(/gender/gi);
+    // fireEvent.change(Dropdown, {target: {value: "Language"}})
     // await waitForData()
-    // expect(menuOpt).toBe('Select an option');
+    // expect(Dropdown).toContain('Language');
+  });
 
-    // fireEvent.change(menuOpt, {target: {value: "language"}})
-    // await waitForElement(()=> getByDisplayValue('language'))
-    // expect(menuOpt).toBe('language');
-  // });
+  test('Does Graph render without crashing?', async ()=> {
+    const {findByText} = customRender( <Graph/>)
+    await waitForData()
+
+    const renderedGraph = document.getElementsByClassName('Graph-Container')
+    expect(renderedGraph).toBeDefined()
+
+  })
+
+  test('Does Download button render?', async () => {
+    const {getByText} = customRender( <Graph datas={data} columns={data}/> )
+    await waitForData()
+
+    // let Button = document.getElementsByTagName('button')
+    // expect(Button).toBeDefined();
+    // fireEvent.click(getByText(/download/gi));
+    // await waitForData()
+
+    let Button = getByText(/download/gi)
+    expect(Button).toBeDefined();
+    await waitForData()
+
+    // fireEvent.click(Button);
+    // await waitForData()
+
+    // expect(Button).toHaveBeenCalled()
+    // expect({datas}).toBe(typeOf(text))
+  })
 
 })
 
