@@ -36,7 +36,15 @@
   "browserslist": [
     "defaults"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "devDependencies": {
-    "jest-extended": "^0.11.2"
+    "husky": "^4.2.3",
+    "jest-extended": "^0.11.2",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1"
   }
 }
