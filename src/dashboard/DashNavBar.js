@@ -34,6 +34,7 @@ function DashNav() {
           <Links to="/about">ABOUT</Links>
           <Links to="/login">LOGIN</Links>
           <Links to="/signup">SIGN UP</Links>
+          <Links to="/logout">LOGOUT</Links>
           <SautiLink href="http://sautiafrica.org/">Sauti Home</SautiLink>
         </Navigation>
       </TopBar>

@@ -123,3 +123,12 @@ export const Buttons = styled.button`
     background-color: #eb5e52;
   }
 `;
+export const SignUpPage = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+export const SignUpContainers = styled.div`
+  width: 20%;
+  padding: 2%;
+  background-color: grey;
+`;

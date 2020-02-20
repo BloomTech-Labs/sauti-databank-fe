@@ -11,7 +11,9 @@ import {
   Header2,
   Form,
   Input,
-  Buttons
+  Buttons,
+  SignUpPage,
+  SignUpContainers
 } from "./Styling";
 
 function DashSignup() {
@@ -24,81 +26,90 @@ function DashSignup() {
 
   return (
     <ContentContainer>
-      <Header2>Login to your account</Header2>
-      <Form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="email"
-          placeholder="email"
-          value={email}
-          onChange={event => setEmail(event.target.value)}
-        />
-        <Input
-          className="my-4"
-          type="password"
-          name="password"
-          placeholder="password"
-          value={password}
-          onChange={event => setPassword(event.target.value)}
-        />
-        {/* <Input
-          className="my-4"
-          type="profession"
-          name="profession"
-          placeholder="profession"
-          value={profession}
-          onChange={event => setUsername(event.target.value)}
-        />
-        <Input
-          className="my-4"
-          type="organization"
-          name="organization"
-          placeholder="organization"
-          value={organization}
-          onChange={event => setUsername(event.target.value)}
-        />
-        <Input
-          className="my-4"
-          type="job_position"
-          name="job_position"
-          placeholder="job_position"
-          value={job_position}
-          onChange={event => setUsername(event.target.value)}
-        />
-        <Input
-          className="my-4"
-          type="country"
-          name="country"
-          placeholder="country"
-          value={country}
-          onChange={event => setUsername(event.target.value)}
-        />
-        <Input
-          className="my-4"
-          type="government_role"
-          name="government_role"
-          placeholder="government_role"
-          value={government_role}
-          onChange={event => setUsername(event.target.value)}
-        />
-        <Input
-          className="my-4"
-          type="user_tier"
-          name="user_tier"
-          placeholder="user_tier"
-          value={user_tier}
-          onChange={event => setUsername(event.target.value)}
-        />
-        <Input
-          className="my-4"
-          type="interests"
-          name="interests"
-          placeholder="interests"
-          value={interests}
-          onChange={event => setUsername(event.target.value)}
-        /> */}
-        <Buttons type="submit">Create Account</Buttons>
-      </Form>
+      <Header2>Sign Up</Header2>
+      <SignUpPage>
+        <SignUpContainers>
+          <PageText>Tier List:</PageText>
+          <PageText>Free: description goes here</PageText>
+          <PageText>Premium: description goes here</PageText>
+        </SignUpContainers>
+        <SignUpContainers>
+          <Form onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              name="email"
+              placeholder="email"
+              value={email}
+              onChange={event => setEmail(event.target.value)}
+            />
+            <Input
+              className="my-4"
+              type="password"
+              name="password"
+              placeholder="password"
+              value={password}
+              onChange={event => setPassword(event.target.value)}
+            />
+            {/* <Input
+              className="my-4"
+              type="profession"
+              name="profession"
+              placeholder="profession"
+              value={profession}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <Input
+              className="my-4"
+              type="organization"
+              name="organization"
+              placeholder="organization"
+              value={organization}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <Input
+              className="my-4"
+              type="job_position"
+              name="job_position"
+              placeholder="job_position"
+              value={job_position}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <Input
+              className="my-4"
+              type="country"
+              name="country"
+              placeholder="country"
+              value={country}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <Input
+              className="my-4"
+              type="government_role"
+              name="government_role"
+              placeholder="government_role"
+              value={government_role}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <Input
+              className="my-4"
+              type="user_tier"
+              name="user_tier"
+              placeholder="user_tier"
+              value={user_tier}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <Input
+              className="my-4"
+              type="interests"
+              name="interests"
+              placeholder="interests"
+              value={interests}
+              onChange={event => setUsername(event.target.value)}
+            /> */}
+            <Buttons type="submit">Create Account</Buttons>
+          </Form>
+        </SignUpContainers>
+      </SignUpPage>
     </ContentContainer>
   );
 }
