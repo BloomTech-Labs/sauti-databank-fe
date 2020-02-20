@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+export const Header1 = styled.h2`
+  font-size: 2rem;
+  text-align: center;
+  padding: 1% 0% 0% 0%;
+`;
 export const Header2 = styled.h2`
   font-size: 2rem;
   padding: 2% 0% 2% 0%;
