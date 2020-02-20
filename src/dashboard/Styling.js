@@ -144,7 +144,7 @@ export const LoginPage = styled.div`
   margin: 0 auto;
   width: 70%;
   height: 250px;
-  border: 4px solid #eb5e52;
+  border: 4px solid lightgrey;
   border-radius: 5px;
   background-color: #212121;
 `;
@@ -153,7 +153,7 @@ export const SignUpPage = styled.div`
   justify-content: center;
   margin: 0 auto;
   width: 80%;
-  border: 4px solid #eb5e52;
+  border: 4px solid lightgrey;
   border-radius: 5px;
   background-color: white;
 `;
