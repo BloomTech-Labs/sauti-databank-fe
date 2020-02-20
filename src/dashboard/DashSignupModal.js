@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-import DashLogin from "./DashLogin";
+import DashSignup from "./DashSignup";
 
 import { ModalButtons } from "./Styling";
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function DashLoginModal() {
+export default function DashSignupModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -37,7 +37,7 @@ export default function DashLoginModal() {
   return (
     <div>
       <ModalButtons type="button" onClick={handleOpen}>
-        LOGIN
+        SIGN UP
       </ModalButtons>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -52,7 +52,7 @@ export default function DashLoginModal() {
         }}
       >
         <Fade in={open}>
-          <DashLogin />
+          <DashSignup />
         </Fade>
       </Modal>
     </div>

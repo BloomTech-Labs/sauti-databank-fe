@@ -5,6 +5,7 @@ import DashHome from "./DashHome";
 import DashTools from "./DashTools";
 import DashAbout from "./DashAbout";
 import DashLoginModal from "./DashLoginModal";
+import DashSignupModal from "./DashSignupModal";
 import DashSignup from "./DashSignup";
 
 import {
@@ -14,6 +15,7 @@ import {
   SautiDot,
   Navigation,
   Links,
+  LinksLast,
   SautiLink
 } from "./Styling";
 
@@ -31,10 +33,10 @@ function DashNav() {
         <Navigation>
           <Links to="/">DATA</Links>
           <Links to="/tools">TOOLS</Links>
-          <Links to="/about">ABOUT</Links>
+          <LinksLast to="/about">ABOUT</LinksLast>
           <DashLoginModal />
-          <Links to="/signup">SIGN UP</Links>
-          <Links to="/logout">LOGOUT</Links>
+          <DashSignupModal />
+          {/* <Links to="/logout">LOGOUT</Links> */}
           <SautiLink href="http://sautiafrica.org/">Sauti Home</SautiLink>
         </Navigation>
       </TopBar>
@@ -42,8 +44,6 @@ function DashNav() {
       <Route exact path="/" component={DashHome} />
       <Route exact path="/tools" component={DashTools} />
       <Route exact path="/about" component={DashAbout} />
-      <Route exact path="/login" component={DashLoginModal} />
-      <Route exact path="/signup" component={DashSignup} />
     </>
   );
 }

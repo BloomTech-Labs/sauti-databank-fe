@@ -8,17 +8,26 @@ import React, { useState } from "react";
 import {
   ContentContainer,
   PageText,
+  ModalText,
   Header2,
   Form,
   Input,
   Buttons,
   SignUpPage,
-  SignUpContainers
+  SignUpContainerText,
+  SignUpContainerForm
 } from "./Styling";
 
 function DashSignup() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [profession, setProfession] = useState();
+  const [organization, setOrganization] = useState();
+  const [jobPosition, setJobPosition] = useState();
+  const [country, setCountry] = useState();
+  const [governmentRole, setGovernmentRole] = useState();
+  const [userTier, setUserTier] = useState();
+  const [interests, setInterests] = useState();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -28,12 +37,12 @@ function DashSignup() {
     <ContentContainer>
       <Header2>Sign Up</Header2>
       <SignUpPage>
-        <SignUpContainers>
-          <PageText>Tier List:</PageText>
-          <PageText>Free: description goes here</PageText>
-          <PageText>Premium: description goes here</PageText>
-        </SignUpContainers>
-        <SignUpContainers>
+        <SignUpContainerText>
+          <ModalText>User Tier:</ModalText>
+          <ModalText>Free: description goes here</ModalText>
+          <ModalText>Premium: description goes here</ModalText>
+        </SignUpContainerText>
+        <SignUpContainerForm>
           <Form onSubmit={handleSubmit}>
             <Input
               type="text"
@@ -43,72 +52,64 @@ function DashSignup() {
               onChange={event => setEmail(event.target.value)}
             />
             <Input
-              className="my-4"
               type="password"
               name="password"
               placeholder="password"
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
-            {/* <Input
-              className="my-4"
-              type="profession"
+            <Input
+              type="text"
               name="profession"
               placeholder="profession"
               value={profession}
-              onChange={event => setUsername(event.target.value)}
+              onChange={event => setProfession(event.target.value)}
             />
             <Input
-              className="my-4"
-              type="organization"
+              type="text"
               name="organization"
               placeholder="organization"
               value={organization}
-              onChange={event => setUsername(event.target.value)}
+              onChange={event => setOrganization(event.target.value)}
             />
             <Input
-              className="my-4"
-              type="job_position"
-              name="job_position"
-              placeholder="job_position"
-              value={job_position}
-              onChange={event => setUsername(event.target.value)}
+              type="text"
+              name="jobPosition"
+              placeholder="jobPosition"
+              value={jobPosition}
+              onChange={event => setJobPosition(event.target.value)}
             />
             <Input
-              className="my-4"
-              type="country"
+              type="text"
               name="country"
               placeholder="country"
               value={country}
-              onChange={event => setUsername(event.target.value)}
+              onChange={event => setCountry(event.target.value)}
             />
             <Input
-              className="my-4"
-              type="government_role"
-              name="government_role"
-              placeholder="government_role"
-              value={government_role}
-              onChange={event => setUsername(event.target.value)}
+              type="checkbox"
+              name="governmentRole"
+              placeholder="governmentRole"
+              value={governmentRole}
+              onChange={event => setGovernmentRole(event.target.value)}
             />
             <Input
-              className="my-4"
-              type="user_tier"
-              name="user_tier"
-              placeholder="user_tier"
-              value={user_tier}
-              onChange={event => setUsername(event.target.value)}
+              type="text"
+              name="userTier"
+              placeholder="userTier"
+              value={userTier}
+              onChange={event => setUserTier(event.target.value)}
             />
             <Input
-              className="my-4"
-              type="interests"
+              type="text"
               name="interests"
               placeholder="interests"
               value={interests}
-              onChange={event => setUsername(event.target.value)}
-            /> */}
+              onChange={event => setInterests(event.target.value)}
+            />
             <Buttons type="submit">Create Account</Buttons>
           </Form>
-        </SignUpContainers>
+        </SignUpContainerForm>
       </SignUpPage>
     </ContentContainer>
   );

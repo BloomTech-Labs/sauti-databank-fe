@@ -10,6 +10,9 @@ export const PageText = styled.p`
   width: 85vw;
   margin: 0 auto;
 `;
+export const ModalText = styled.p`
+  font-size: 1.8rem;
+`;
 export const ContentContainer = styled.div`
   width: 95vw;
   margin: 0 auto;
@@ -80,6 +83,21 @@ export const Links = styled(Link)`
     color: #eb5e52;
   }
 `;
+export const LinksLast = styled(Link)`
+  text-decoration: none;
+  color: white;
+  margin-right: 27.5px;
+  font-family: Helvetica;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  &: hover {
+    color: #eb5e52;
+  }
+`;
 export const SautiLink = styled.a`
   text-decoration: none;
   color: #eb5e52;
@@ -99,7 +117,6 @@ export const Form = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 65%;
   margin: 0 auto;
   padding: 4%;
   background-color: #212121;
@@ -123,12 +140,45 @@ export const Buttons = styled.button`
     background-color: #eb5e52;
   }
 `;
+export const LoginPage = styled.div`
+  margin: 0 auto;
+  width: 70%;
+  height: 250px;
+  border: 4px solid #eb5e52;
+  border-radius: 5px;
+  background-color: #212121;
+`;
 export const SignUpPage = styled.div`
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  width: 80%;
+  border: 4px solid #eb5e52;
+  border-radius: 5px;
+  background-color: white;
 `;
-export const SignUpContainers = styled.div`
-  width: 20%;
-  padding: 2%;
-  background-color: grey;
+export const SignUpContainerText = styled.div`
+  width: 40%;
+  padding: 1% 0% 0% 1%;
+`;
+export const SignUpContainerForm = styled.div`
+  width: 60%;
+`;
+export const ModalButtons = styled.button`
+  background-color: transparent;
+  margin-right: 10px;
+  padding: 2;
+  border: none;
+  font-family: Helvetica;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: white;
+  width: 75px;
+  &:hover {
+    color: #eb5e52;
+  }
 `;

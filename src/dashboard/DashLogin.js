@@ -9,7 +9,8 @@ import {
   Header2,
   Form,
   Input,
-  Buttons
+  Buttons,
+  LoginPage
 } from "./Styling";
 
 function DashLogin() {
@@ -32,25 +33,26 @@ function DashLogin() {
 
   return (
     <ContentContainer>
-      <Header2>Login to your account</Header2>
-      <Form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="email"
-          placeholder="email"
-          value={data.email}
-          onChange={handleChange}
-        />
-        <Input
-          className="my-4"
-          type="password"
-          name="password"
-          placeholder="password"
-          value={data.password}
-          onChange={handleChange}
-        />
-        <Buttons type="submit">Login</Buttons>
-      </Form>
+      <LoginPage>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            name="email"
+            placeholder="email"
+            value={data.email}
+            onChange={handleChange}
+          />
+          <Input
+            className="my-4"
+            type="password"
+            name="password"
+            placeholder="password"
+            value={data.password}
+            onChange={handleChange}
+          />
+          <Buttons type="submit">Login</Buttons>
+        </Form>
+      </LoginPage>
     </ContentContainer>
   );
 }
