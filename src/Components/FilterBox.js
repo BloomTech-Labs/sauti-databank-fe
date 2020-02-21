@@ -8,52 +8,92 @@ import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 
 export default function FilterBox(props) {
-  const [filterBoxIndex, setFilterBoxIndex] = useState({ type: "gender", query: "Users" });
-  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({ type: "", query: "Users" });
+  const [filterBoxIndex, setFilterBoxIndex] = useState({
+    type: "gender",
+    query: "Users"
+  });
+  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
+    type: "",
+    query: "Users"
+  });
   const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
   const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
-  const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({ type: '', query: '', label: '' });
-  const [filterBoxAdditionalFilterLabel, setFilterBoxAdditionalFilterLabel] = useState("");
-  const [filterBoxStartDate, setFilterBoxStartDate] = useState("2012-01-01");
+  const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
+    type: "",
+    query: "",
+    label: ""
+  });
+  const [
+    filterBoxAdditionalFilterLabel,
+    setFilterBoxAdditionalFilterLabel
+  ] = useState("");
+  const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
   const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = useCallback(e => {
-    if (e.target.textContent === "Submit") {
-      e.preventDefault();
-    }
-    props.setIndex(filterBoxIndex);
-    props.setIndexLabel(filterBoxIndexLabel);
-    props.setCrossLabel(filterBoxCrossLabel);
-    props.setCrossFilter(filterBoxCrossFilter);
-    props.setAdditionalFilter(filterBoxAdditionalFilter);
-    props.setStartDate(filterBoxStartDate);
-    props.setEndDate(filterBoxEndDate);
-  }, [filterBoxAdditionalFilter, filterBoxCrossFilter, filterBoxCrossLabel, filterBoxEndDate, filterBoxIndex, filterBoxIndexLabel, filterBoxStartDate, props]);
+  const handleSubmit = useCallback(
+    e => {
+      if (e.target.textContent === "Submit") {
+        e.preventDefault();
+      }
+      props.setIndex(filterBoxIndex);
+      props.setIndexLabel(filterBoxIndexLabel);
+      props.setCrossLabel(filterBoxCrossLabel);
+      props.setCrossFilter(filterBoxCrossFilter);
+      props.setAdditionalFilter(filterBoxAdditionalFilter);
+      props.setStartDate(filterBoxStartDate);
+      props.setEndDate(filterBoxEndDate);
+    },
+    [
+      filterBoxAdditionalFilter,
+      filterBoxCrossFilter,
+      filterBoxCrossLabel,
+      filterBoxEndDate,
+      filterBoxIndex,
+      filterBoxIndexLabel,
+      filterBoxStartDate,
+      props
+    ]
+  );
 
-  const handleAuto = useCallback(e => {
-    props.setIndex(filterBoxIndex);
-    props.setIndexLabel(filterBoxIndexLabel);
-    props.setCrossLabel(filterBoxCrossLabel);
-    props.setCrossFilter(filterBoxCrossFilter);
-    props.setAdditionalFilter(filterBoxAdditionalFilter);
-    props.setStartDate(filterBoxStartDate);
-    props.setEndDate(filterBoxEndDate);
-  }, [filterBoxAdditionalFilter, filterBoxCrossFilter, filterBoxCrossLabel, filterBoxEndDate, filterBoxIndex, filterBoxIndexLabel, filterBoxStartDate, props]);
+  const handleAuto = useCallback(
+    e => {
+      props.setIndex(filterBoxIndex);
+      props.setIndexLabel(filterBoxIndexLabel);
+      props.setCrossLabel(filterBoxCrossLabel);
+      props.setCrossFilter(filterBoxCrossFilter);
+      props.setAdditionalFilter(filterBoxAdditionalFilter);
+      props.setStartDate(filterBoxStartDate);
+      props.setEndDate(filterBoxEndDate);
+    },
+    [
+      filterBoxAdditionalFilter,
+      filterBoxCrossFilter,
+      filterBoxCrossLabel,
+      filterBoxEndDate,
+      filterBoxIndex,
+      filterBoxIndexLabel,
+      filterBoxStartDate,
+      props
+    ]
+  );
 
   useEffect(() => {
-    if (!graphLabels[`${filterBoxAdditionalFilter.type}`] && filterBoxAdditionalFilter.type) {
-      handleAuto()
+    if (
+      !graphLabels[`${filterBoxAdditionalFilter.type}`] &&
+      filterBoxAdditionalFilter.type
+    ) {
+      handleAuto();
       setLoading(true);
     }
     /* eslint-disable */
-  }, [filterBoxAdditionalFilter.type])
+  }, [filterBoxAdditionalFilter.type]);
 
   useEffect(() => {
     if (props.checkboxOptions.length) {
       setLoading(false);
     }
-  }, [props.checkboxOptions])
+  }, [props.checkboxOptions]);
 
   const ClickTracker = index => {
     ReactGa.event({
@@ -96,94 +136,110 @@ export default function FilterBox(props) {
         />
         <>
           <p>Additional Filter</p>
-          <p className='disclosure'>*This optional filter adjusts samplesize and may not always alter the graph appearance.</p>
+          <p className="disclosure">
+            *This optional filter adjusts samplesize and may not always alter
+            the graph appearance.
+          </p>
           <Dropdown
             controlClassName="myControlClassName"
             arrowClassName="myArrowClassName"
             className="dropdown"
             disabled={loading}
-            options={FilterBoxOptions.default.filter(obj => (obj.label !== filterBoxIndexLabel && obj.label !== filterBoxCrossLabel))}
+            options={FilterBoxOptions.default.filter(
+              obj =>
+                obj.label !== filterBoxIndexLabel &&
+                obj.label !== filterBoxCrossLabel
+            )}
             value={filterBoxAdditionalFilterLabel}
             placeholder="Select a filter..."
             onChange={e => {
-              setFilterBoxAdditionalFilter({ type: e.value.type, query: e.value.query, label: e.label })
+              setFilterBoxAdditionalFilter({
+                type: e.value.type,
+                query: e.value.query,
+                label: e.label
+              });
               setFilterBoxAdditionalFilterLabel(e.label);
               props.setCheckboxOptions([]);
               ClickTracker(e.value.type);
-            console.log("event", e)
+              console.log("event", e);
             }}
           />
-          <div className="reset-btn" onClick={() => {
-            setFilterBoxAdditionalFilter({ type: '', query: '' });
-            setFilterBoxAdditionalFilterLabel("");
-            props.setAdditionalFilter({ type: '', query: '' });
-            props.setCheckboxOptions([]);
-            props.setSelectedCheckbox({})
-          }}>
+          <div
+            className="reset-btn"
+            onClick={() => {
+              setFilterBoxAdditionalFilter({ type: "", query: "" });
+              setFilterBoxAdditionalFilterLabel("");
+              props.setAdditionalFilter({ type: "", query: "" });
+              props.setCheckboxOptions([]);
+              props.setSelectedCheckbox({});
+            }}
+          >
             <p>Clear Additional Filter</p>
           </div>
         </>
         {/* )} */}
 
-
         {graphLabels[`${filterBoxAdditionalFilter.type}`] && (
           <CheckboxContainer>
             <p>Select an option to further filter the data: </p>
-            {graphLabels[`${filterBoxAdditionalFilter.type}`].labels.map((option => (
-              <Options key={option}>
-                <input
-                  type="radio"
-                  name="CrossFilter"
-                  value={option}
-                  onChange={e => (
-                    props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option }),
-                    props.setAdditionalFilter(filterBoxAdditionalFilter)
-                  )}
-                />
-                <FilterOption>{option}</FilterOption>
-              </Options>
-            ))
+            {graphLabels[`${filterBoxAdditionalFilter.type}`].labels.map(
+              option => (
+                <Options key={option}>
+                  <input
+                    type="radio"
+                    name="CrossFilter"
+                    value={option}
+                    onChange={e => (
+                      props.setSelectedCheckbox({
+                        [`${filterBoxAdditionalFilter.type}`]: option
+                      }),
+                      props.setAdditionalFilter(filterBoxAdditionalFilter)
+                    )}
+                  />
+                  <FilterOption>{option}</FilterOption>
+                </Options>
+              )
             )}
           </CheckboxContainer>
         )}
 
-        {loading
-          ? (
-            <Loader
-              className="options-loader"
-              type="Oval"
-              color="#708090"
-              width={50}
-              height={20}
-              timeout={12000}
-            />
-          )
-          : props.checkboxOptions.length > 1 && (
+        {loading ? (
+          <Loader
+            className="options-loader"
+            type="Oval"
+            color="#708090"
+            width={50}
+            height={20}
+            timeout={12000}
+          />
+        ) : (
+          props.checkboxOptions.length > 1 && (
             <>
               <p>Select an option to further filter the data: </p>
               <CheckboxContainer>
-                {(props.checkboxOptions.map(option => (
+                {props.checkboxOptions.map(option => (
                   <Options key={option}>
                     <input
                       type="radio"
                       name="CrossFilter"
                       value={option}
                       onChange={e => {
-                        props.setSelectedCheckbox({ [`${filterBoxAdditionalFilter.type}`]: option },
-                        props.setAdditionalFilter(filterBoxAdditionalFilter)
-                        )
+                        props.setSelectedCheckbox(
+                          { [`${filterBoxAdditionalFilter.type}`]: option },
+                          props.setAdditionalFilter(filterBoxAdditionalFilter)
+                        );
                       }}
                     />
                     <FilterOption>{option}</FilterOption>
                   </Options>
-                ))
-                )}
+                ))}
               </CheckboxContainer>
             </>
           )
-        }
+        )}
 
-        {(filterBoxIndex.query === "Sessions" || filterBoxAdditionalFilter.query === 'Sessions') && (
+        {(filterBoxIndex.query === "Sessions" ||
+          filterBoxAdditionalFilter.query === "Sessions") && (
           <DateContainer>
             <div>
               <p>Start</p>
@@ -240,16 +296,16 @@ export default function FilterBox(props) {
             props.setStartDate("2012-01-01");
             props.setEndDate("2020-01-08");
             props.setCheckboxOptions([]);
-            props.setSelectedCheckbox({})
+            props.setSelectedCheckbox({});
             setFilterBoxIndexLabel("Gender");
             setFilterBoxIndex({ type: "gender", query: "Users" });
             setFilterBoxCrossLabel("");
             setFilterBoxCrossFilter({ type: "", query: "Users" });
             setFilterBoxStartDate("2012-01-01");
             setFilterBoxEndDate("2020-01-08");
-            setFilterBoxAdditionalFilter({ type: '', query: '' });
+            setFilterBoxAdditionalFilter({ type: "", query: "" });
             setFilterBoxAdditionalFilterLabel("");
-            props.setAdditionalFilter({ type: '', query: '' });
+            props.setAdditionalFilter({ type: "", query: "" });
           }}
         >
           Reset
@@ -336,7 +392,12 @@ const DropdownContainer = styled.div`
     font-size: 1.3rem;
     margin: 10px 0;
   }
-  .disclosure{font-size: 14px; color: #999; font-style: italic; font-weight: 400}
+  .disclosure {
+    font-size: 14px;
+    color: #999;
+    font-style: italic;
+    font-weight: 400;
+  }
   .reset-btn {
     text-decoration: underline;
     opacity: 0.7;
