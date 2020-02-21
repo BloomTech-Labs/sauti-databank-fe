@@ -5,12 +5,10 @@ import React, { useState } from "react";
 
 import {
   ContentContainer,
-  PageText,
-  Header2,
   Form,
-  Input,
-  Buttons,
-  LoginPage
+  FormTitle,
+  FormButton,
+  FormInputs
 } from "./Styling";
 
 function DashLogin() {
@@ -33,16 +31,17 @@ function DashLogin() {
 
   return (
     <ContentContainer>
-      <LoginPage>
+      <div>
         <Form onSubmit={handleSubmit}>
-          <Input
+          <FormTitle>Login</FormTitle>
+          <FormInputs
             type="text"
             name="email"
             placeholder="email"
             value={data.email}
             onChange={handleChange}
           />
-          <Input
+          <FormInputs
             className="my-4"
             type="password"
             name="password"
@@ -50,9 +49,9 @@ function DashLogin() {
             value={data.password}
             onChange={handleChange}
           />
-          <Buttons type="submit">Login</Buttons>
+          <FormButton type="submit">Login</FormButton>
         </Form>
-      </LoginPage>
+      </div>
     </ContentContainer>
   );
 }

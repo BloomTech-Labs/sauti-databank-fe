@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+// General Styles
 export const Header1 = styled.h2`
   font-size: 2rem;
   text-align: center;
@@ -49,6 +50,7 @@ export const AccountLinks = styled(Link)`
     color: white;
   }
 `;
+// Sauti Logo in Nav Styling
 export const SautiLogo = styled.div`
   font-family: Montserrat;
   font-size: 3rem;
@@ -69,6 +71,7 @@ export const SautiLogoText = styled.a`
 export const SautiDot = styled.span`
   color: #eb5e52;
 `;
+// Nav and Nav Links Styling
 export const Navigation = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -118,33 +121,7 @@ export const SautiLink = styled.a`
     color: khaki;
   }
 `;
-export const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  padding: 4%;
-  background-color: #212121;
-`;
-export const Input = styled.input`
-  width: 45%;
-  height: 30px;
-  margin: 0.5%;
-  border-radius: 5px;
-  border: 2px solid black;
-`;
-export const Buttons = styled.button`
-  width: 25%;
-  height: 30px;
-  border: 2px solid black;
-  border-radius: 5px;
-  font-size: 1.4rem;
-  font-weight: bold;
-  background: lightgrey;
-  &:hover {
-    background-color: #eb5e52;
-  }
-`;
+// Form Pages
 export const LoginPage = styled.div`
   margin: 0 auto;
   width: 70%;
@@ -155,20 +132,104 @@ export const LoginPage = styled.div`
 `;
 export const SignUpPage = styled.div`
   display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width: 80%;
-  border: 4px solid lightgrey;
-  border-radius: 5px;
+`;
+export const SignUpInfo = styled.div`
+  width: 300px;
+  height: 680px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  background: #212121;
+  text-align: left;
+  border-radius: 10px;
   background-color: white;
+  color: #212121;
 `;
-export const SignUpContainerText = styled.div`
-  width: 40%;
-  padding: 1% 0% 0% 1%;
+// Form Styling
+export const Form = styled.form`
+  width: 300px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #212121;
+  text-align: center;
+  border-radius: 10px;
 `;
-export const SignUpContainerForm = styled.div`
-  width: 60%;
+export const SignUpForm = styled.form`
+  width: 300px;
+  height: 680px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  background: #212121;
+  text-align: center;
+  border-radius: 10px;
 `;
+export const FormTitle = styled.h1`
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 3rem;
+`;
+export const FormInputs = styled.input`
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #eb5e52;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition 0.25s;
+  &:focus {
+    width: 280px;
+    border-color: white;
+  }
+`;
+export const FormButton = styled.button`
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #eb5e52;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+  &:hover {
+    background: #eb5e52;
+  }
+`;
+export const FormButton2 = styled.button`
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #eb5e52;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+  &:hover {
+    background: #eb5e52;
+  }
+`;
+// Modal Styling
 export const ModalButtons = styled.button`
   background-color: transparent;
   margin-right: 10px;

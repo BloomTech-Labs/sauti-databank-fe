@@ -10,12 +10,14 @@ import {
   PageText,
   ModalText,
   Header2,
-  Form,
-  Input,
-  Buttons,
   SignUpPage,
   SignUpContainerText,
-  SignUpContainerForm
+  SignUpContainerForm,
+  SignUpForm,
+  FormTitle,
+  FormButton,
+  FormInputs,
+  SignUpInfo
 } from "./Styling";
 
 function DashSignup() {
@@ -35,81 +37,81 @@ function DashSignup() {
 
   return (
     <ContentContainer>
-      <Header2>Sign Up</Header2>
       <SignUpPage>
-        <SignUpContainerText>
+        <SignUpInfo>
           <ModalText>User Tier:</ModalText>
           <ModalText>Free: description goes here</ModalText>
           <ModalText>Premium: description goes here</ModalText>
-        </SignUpContainerText>
-        <SignUpContainerForm>
-          <Form onSubmit={handleSubmit}>
-            <Input
+        </SignUpInfo>
+        <div>
+          <SignUpForm onSubmit={handleSubmit}>
+            <FormTitle>Sign Up</FormTitle>
+            <FormInputs
               type="text"
               name="email"
               placeholder="email"
               value={email}
               onChange={event => setEmail(event.target.value)}
             />
-            <Input
+            <FormInputs
               type="password"
               name="password"
               placeholder="password"
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
-            <Input
+            <FormInputs
               type="text"
               name="profession"
               placeholder="profession"
               value={profession}
               onChange={event => setProfession(event.target.value)}
             />
-            <Input
+            <FormInputs
               type="text"
               name="organization"
               placeholder="organization"
               value={organization}
               onChange={event => setOrganization(event.target.value)}
             />
-            <Input
+            <FormInputs
               type="text"
               name="jobPosition"
               placeholder="jobPosition"
               value={jobPosition}
               onChange={event => setJobPosition(event.target.value)}
             />
-            <Input
+            <FormInputs
               type="text"
               name="country"
               placeholder="country"
               value={country}
               onChange={event => setCountry(event.target.value)}
             />
-            <Input
+            <FormInputs
               type="checkbox"
               name="governmentRole"
               placeholder="governmentRole"
               value={governmentRole}
               onChange={event => setGovernmentRole(event.target.value)}
             />
-            <Input
+            <FormInputs
               type="text"
               name="userTier"
               placeholder="userTier"
               value={userTier}
               onChange={event => setUserTier(event.target.value)}
             />
-            <Input
+            <FormInputs
               type="text"
               name="interests"
               placeholder="interests"
               value={interests}
               onChange={event => setInterests(event.target.value)}
             />
-            <Buttons type="submit">Create Account</Buttons>
-          </Form>
-        </SignUpContainerForm>
+            <FormButton type="submit">Create Account</FormButton>
+          </SignUpForm>
+        </div>
       </SignUpPage>
     </ContentContainer>
   );
