@@ -13,7 +13,7 @@ import gridOptions from "./Gridoptions";
 //import Archivebutton from 'icons/Archivebutton.svg'
 //import './accountGrid.scss'
 
-//import EditGrid from './EditGrid'
+import EditModal from "./EditModal";
 
 class Tools extends Component {
   constructor(props) {
@@ -32,39 +32,6 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Organization",
-          field: "organization",
-          sortable: true,
-          filter: true,
-          width: 150,
-          cellStyle: {
-            "font-size": "2rem",
-            "padding-top": ".75rem"
-          }
-        },
-        {
-          headerName: "First Name",
-          field: "first_name",
-          sortable: true,
-          filter: true,
-          width: 120,
-          cellStyle: {
-            "font-size": "2rem",
-            "padding-top": ".75rem"
-          }
-        },
-        {
-          headerName: "Last Name",
-          field: "last_name",
-          sortable: true,
-          filter: true,
-          width: 120,
-          cellStyle: {
-            "font-size": "2rem",
-            "padding-top": ".75rem"
-          }
-        },
-        {
           headerName: "Email",
           field: "email_address",
           sortable: true,
@@ -76,8 +43,8 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Mobile",
-          field: "mobile_number",
+          headerName: "Organization",
+          field: "organization",
           sortable: true,
           filter: true,
           width: 150,
@@ -87,8 +54,75 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Role",
-          field: "Role",
+          headerName: "Job Position",
+          field: "jobPosition",
+          sortable: true,
+          filter: true,
+          width: 120,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Country",
+          field: "country",
+          sortable: true,
+          filter: true,
+          width: 120,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+
+        {
+          headerName: "Government",
+          field: "government",
+          sortable: true,
+          filter: true,
+          width: 150,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Interests",
+          field: "interests",
+          sortable: true,
+          filter: true,
+          width: 150,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Tier",
+          field: "userTier",
+          sortable: true,
+          filter: true,
+          width: 150,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Payment",
+          field: "payment",
+          sortable: true,
+          filter: true,
+          width: 150,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Current",
+          field: "current",
           sortable: true,
           filter: true,
           width: 150,
@@ -107,11 +141,12 @@ class Tools extends Component {
           cellRendererFramework: params => {
             return (
               <div>
-                {/* <EditGrid
-                api={params}
-                data={params.data}
-                otherProps={this.props}
-                editAccount={this.props.editAccount}/> */}
+                <EditModal
+                  api={params}
+                  data={params.data}
+                  otherProps={this.props}
+                  editAccount={this.props.editAccount}
+                />
               </div>
             );
           }
