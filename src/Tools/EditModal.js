@@ -88,6 +88,18 @@ const EditModal = props => {
                 />
               </h2>
               <h2>
+                <label for="Email">Email</label>
+                <br></br>
+                <input
+                  type="email"
+                  name="email"
+                  id="Email"
+                  placeholder={props.data.email}
+                  value={account.email}
+                  onChange={handleChange}
+                />
+              </h2>
+              <h2>
                 <label for="Organization">Organization</label>
                 <br></br>
                 <input
@@ -100,53 +112,65 @@ const EditModal = props => {
                 />
               </h2>
               <h2>
-                <label for="First Name">First Name</label>
+                <label for="jobPosition">Job Position</label>
+                <br></br>
+                <input
+                  type="jobPosition"
+                  name="jobPosition"
+                  id="jobPosition"
+                  placeholder={props.data.jobPosition}
+                  value={account.jobPosition}
+                  onChange={handleChange}
+                />
+              </h2>
+              <h2>
+                <label for="Country">Country</label>
                 <br></br>
                 <input
                   type="text"
-                  id="first_name"
-                  placeholder={props.data.first_name}
-                  name="first_name"
-                  value={account.first_name}
+                  id="country"
+                  placeholder={props.data.country}
+                  name="country"
+                  value={account.country}
+                  onChange={handleChange}
+                />
+              </h2>
+              <h2>
+                <label for="Tier">Tier</label>
+                <br></br>
+                <input
+                  type="text"
+                  id="tier"
+                  placeholder={props.data.tier}
+                  name="tier"
+                  value={account.tier}
                   onChange={handleChange}
                 />
               </h2>
 
               <h2>
-                <label for="Last Name">Last Name</label>
+                <label for="interests">Interests</label>
                 <br></br>
                 <input
-                  type="text"
-                  id="last_name"
-                  placeholder={props.data.last_name}
-                  name="last_name"
-                  value={account.last_name}
-                  onChange={handleChange}
-                />
-              </h2>
-              <h2>
-                <label for="Email">Email</label>
-                <br></br>
-                <input
-                  type="email"
-                  name="email"
-                  id="Email"
-                  placeholder={props.data.email}
-                  value={account.email}
+                  type="interests"
+                  name="interests"
+                  id="interests"
+                  placeholder={props.data.interests}
+                  value={account.interests}
                   onChange={handleChange}
                 />
               </h2>
             </div>
             <div className="col2">
               <h2>
-                <label for="mobile number">Mobile Number</label>
+                <label for="Government">Government/ NGO/ Researcher</label>
                 <br></br>
                 <input
                   type="string"
-                  name="mobile_number"
-                  id="mobile_number"
-                  placeholder={props.data.mobile_number}
-                  value={account.mobile_number}
+                  name="government"
+                  id="government"
+                  placeholder={props.data.government}
+                  value={account.government}
                   onChange={handleChange}
                 />
               </h2>
