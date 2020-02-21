@@ -160,13 +160,9 @@ export const Form = styled.form`
   border-radius: 10px;
 `;
 export const SignUpForm = styled.form`
-  width: 300px;
+  width: 25%;
   height: 680px;
   padding: 40px;
-  position: absolute;
-  top: 50%;
-  left: 65%;
-  transform: translate(-50%, -50%);
   background: #212121;
   text-align: center;
   border-radius: 10px;
@@ -185,13 +181,31 @@ export const FormInputs = styled.input`
   text-align: center;
   border: 2px solid #eb5e52;
   padding: 14px 10px;
-  width: 200px;
+  width: 65%;
   outline: none;
   color: white;
   border-radius: 24px;
   transition 0.25s;
   &:focus {
-    width: 280px;
+    width: 75%;
+    border-color: white;
+  }
+`;
+export const SignUpInputs = styled.input`
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #eb5e52;
+  padding: 14px 10px;
+  width: 50%;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition 0.25s;
+  &:focus {
+    width: 70%;
     border-color: white;
   }
 `;

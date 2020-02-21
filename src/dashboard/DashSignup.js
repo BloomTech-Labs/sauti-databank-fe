@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import mutation from "../queries/mutation";
 import { graphql } from "react-apollo";
 
+import { SignUpContainer, SignUpText, SignUpForm2 } from "./Styling2";
 import {
   ContentContainer,
   PageText,
@@ -77,84 +78,80 @@ function DashSignup(props) {
   };
 
   return (
-    <ContentContainer>
-      <SignUpPage>
-        <SignUpInfo>
-          <ModalText>User Tier:</ModalText>
-          <ModalText>Free: description goes here</ModalText>
-          <ModalText>Premium: description goes here</ModalText>
-        </SignUpInfo>
-        <div>
-          <SignUpForm onSubmit={handleSubmit}>
-            <FormTitle>Sign Up</FormTitle>
-            <FormInputs
-              type="text"
-              name="email"
-              placeholder="email"
-              value={email}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="password"
-              name="password"
-              placeholder="password"
-              value={password}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="profession"
-              placeholder="profession"
-              value={profession}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="organization"
-              placeholder="organization"
-              value={organization}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="jobPosition"
-              placeholder="jobPosition"
-              value={jobPosition}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="country"
-              placeholder="country"
-              value={country}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="checkbox"
-              name="governmentRole"
-              placeholder="governmentRole"
-              value={governmentRole}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="userTier"
-              placeholder="userTier"
-              value={userTier}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="interests"
-              placeholder="interests"
-              value={interests}
-              onChange={handleChange}
-            />
-            <FormButton2 type="submit">Create Account</FormButton2>
-          </SignUpForm>
-        </div>
-      </SignUpPage>
-    </ContentContainer>
+    <SignUpContainer>
+      <SignUpText>
+        <ModalText>User Tier:</ModalText>
+        <ModalText>Free: description goes here</ModalText>
+        <ModalText>Premium: description goes here</ModalText>
+      </SignUpText>
+      <SignUpForm onSubmit={handleSubmit}>
+        <FormTitle>Sign Up</FormTitle>
+        <FormInputs
+          type="text"
+          name="email"
+          placeholder="email"
+          value={email}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="password"
+          name="password"
+          placeholder="password"
+          value={password}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="profession"
+          placeholder="profession"
+          value={profession}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="organization"
+          placeholder="organization"
+          value={organization}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="jobPosition"
+          placeholder="jobPosition"
+          value={jobPosition}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="country"
+          placeholder="country"
+          value={country}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="checkbox"
+          name="governmentRole"
+          placeholder="governmentRole"
+          value={governmentRole}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="userTier"
+          placeholder="userTier"
+          value={userTier}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="interests"
+          placeholder="interests"
+          value={interests}
+          onChange={handleChange}
+        />
+        <FormButton2 type="submit">Create Account</FormButton2>
+      </SignUpForm>
+    </SignUpContainer>
   );
 }
 
