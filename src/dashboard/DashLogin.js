@@ -10,6 +10,7 @@ import {
   Form,
   FormTitle,
   FormButton,
+  FormButton2,
   FormInputs
 } from "./Styling";
 
@@ -65,7 +66,7 @@ function DashLogin(props) {
             value={data.password}
             onChange={handleChange}
           />
-          <FormButton type="submit">Login</FormButton>
+          <FormButton2 type="submit">Login</FormButton2>
         </Form>
       </div>
     </ContentContainer>

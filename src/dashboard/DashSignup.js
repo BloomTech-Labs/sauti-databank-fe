@@ -18,6 +18,7 @@ import {
   SignUpForm,
   FormTitle,
   FormButton,
+  FormButton2,
   FormInputs,
   SignUpInfo
 } from "./Styling";
@@ -149,7 +150,7 @@ function DashSignup(props) {
               value={interests}
               onChange={handleChange}
             />
-            <FormButton type="submit">Create Account</FormButton>
+            <FormButton2 type="submit">Create Account</FormButton2>
           </SignUpForm>
         </div>
       </SignUpPage>
