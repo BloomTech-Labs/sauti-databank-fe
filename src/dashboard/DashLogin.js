@@ -2,6 +2,8 @@
 // we will also use this modal in various places within the dashboard so that when somone clicks something you need to sign in for or pay to see it will direct you to the sign up then to the payment options in future releases
 
 import React, { useState } from "react";
+import mutation from "../queries/mutation";
+import { graphql } from "react-apollo";
 
 import {
   ContentContainer,
@@ -11,7 +13,7 @@ import {
   FormInputs
 } from "./Styling";
 
-function DashLogin() {
+function DashLogin(props) {
   const [data, setData] = useState({
     email: "",
     password: ""
@@ -27,6 +29,20 @@ function DashLogin() {
 
   const handleSubmit = event => {
     event.preventDefault();
+    props
+      .mutate({
+        variables: {
+          email: data.email,
+          password: data.password
+        }
+      })
+      .then(() => {
+        setData({
+          email: "",
+          password: ""
+        });
+        // props.history.push('/trade-data');
+      });
   };
 
   return (
@@ -56,4 +72,4 @@ function DashLogin() {
   );
 }
 
-export default DashLogin;
+export default graphql(mutation)(DashLogin);

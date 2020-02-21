@@ -4,6 +4,8 @@
 // Talk about pricing in here
 // email, password, profession, organization, job_position, country, gov_role, user_tier, interests_in_data
 import React, { useState } from "react";
+import mutation from "../queries/mutation";
+import { graphql } from "react-apollo";
 
 import {
   ContentContainer,
@@ -20,19 +22,57 @@ import {
   SignUpInfo
 } from "./Styling";
 
-function DashSignup() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [profession, setProfession] = useState();
-  const [organization, setOrganization] = useState();
-  const [jobPosition, setJobPosition] = useState();
-  const [country, setCountry] = useState();
-  const [governmentRole, setGovernmentRole] = useState();
-  const [userTier, setUserTier] = useState();
-  const [interests, setInterests] = useState();
+const initialState = {
+  email: "",
+  password: "",
+  profession: "",
+  organization: "",
+  jobPosition: "",
+  country: "",
+  governmentRole: "",
+  userTier: "",
+  interests: ""
+};
+
+function DashSignup(props) {
+  const [user, setUser] = useState(initialState);
+  const {
+    email,
+    password,
+    profession,
+    organization,
+    jobPosition,
+    country,
+    governmentRole,
+    userTier,
+    interests
+  } = user;
+
+  const handleChange = e => {
+    e.preventDefault();
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
+    props
+      .mutate({
+        variables: {
+          email,
+          password,
+          profession,
+          organization,
+          jobPosition,
+          country,
+          governmentRole,
+          userTier,
+          interests
+        }
+      })
+      .then(() => setUser(initialState));
   };
 
   return (
@@ -51,63 +91,63 @@ function DashSignup() {
               name="email"
               placeholder="email"
               value={email}
-              onChange={event => setEmail(event.target.value)}
+              onChange={handleChange}
             />
             <FormInputs
               type="password"
               name="password"
               placeholder="password"
               value={password}
-              onChange={event => setPassword(event.target.value)}
+              onChange={handleChange}
             />
             <FormInputs
               type="text"
               name="profession"
               placeholder="profession"
               value={profession}
-              onChange={event => setProfession(event.target.value)}
+              onChange={handleChange}
             />
             <FormInputs
               type="text"
               name="organization"
               placeholder="organization"
               value={organization}
-              onChange={event => setOrganization(event.target.value)}
+              onChange={handleChange}
             />
             <FormInputs
               type="text"
               name="jobPosition"
               placeholder="jobPosition"
               value={jobPosition}
-              onChange={event => setJobPosition(event.target.value)}
+              onChange={handleChange}
             />
             <FormInputs
               type="text"
               name="country"
               placeholder="country"
               value={country}
-              onChange={event => setCountry(event.target.value)}
+              onChange={handleChange}
             />
             <FormInputs
               type="checkbox"
               name="governmentRole"
               placeholder="governmentRole"
               value={governmentRole}
-              onChange={event => setGovernmentRole(event.target.value)}
+              onChange={handleChange}
             />
             <FormInputs
               type="text"
               name="userTier"
               placeholder="userTier"
               value={userTier}
-              onChange={event => setUserTier(event.target.value)}
+              onChange={handleChange}
             />
             <FormInputs
               type="text"
               name="interests"
               placeholder="interests"
               value={interests}
-              onChange={event => setInterests(event.target.value)}
+              onChange={handleChange}
             />
             <FormButton type="submit">Create Account</FormButton>
           </SignUpForm>
@@ -117,4 +157,4 @@ function DashSignup() {
   );
 }
 
-export default DashSignup;
+export default graphql(mutation)(DashSignup);
