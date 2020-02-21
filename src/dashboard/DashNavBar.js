@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Route, withRouter } from "react-router-dom";
 
 import DashHome from "./DashHome";
-import DashTools from "./DashTools";
+import Tools from "../Tools/Tools";
 import DashAbout from "./DashAbout";
 import DashAccount from "./DashAccount";
 import DashLoginModal from "./DashLoginModal";
@@ -44,7 +44,7 @@ function DashNav() {
       </TopBar>
 
       <Route exact path="/" component={DashHome} />
-      <Route exact path="/tools" component={DashTools} />
+      <Route exact path="/tools" component={Tools} />
       <Route exact path="/about" component={DashAbout} />
       <Route exact path="/myaccount" component={DashAccount} />
     </>
