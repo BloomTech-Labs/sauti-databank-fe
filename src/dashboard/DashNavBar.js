@@ -18,7 +18,7 @@ import {
   Links,
   LinksLast,
   SautiLink
-} from "./Styling";
+} from "./styledComponents/Index";
 
 function DashNav() {
   return (

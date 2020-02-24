@@ -1,7 +1,7 @@
 // page to edit or delete information + settings
 import React from "react";
 
-import { ContentContainer, PageText, Header2 } from "./Styling";
+import { ContentContainer, PageText, Header2 } from "./styledComponents/Index";
 
 function DashTools() {
   return (

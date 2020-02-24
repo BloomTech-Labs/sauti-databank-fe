@@ -1,4 +1,3 @@
-// will be a modal that when clicked will overlay the form on the page
 // we will also use this modal in various places within the dashboard so that when somone clicks something you need to sign in for or pay to see it will direct you to the sign up then to the payment options in future releases
 
 import React, { useState } from "react";
@@ -12,18 +11,18 @@ import {
   FormButton,
   FormButton2,
   FormInputs
-} from "./Styling";
+} from "./styledComponents/Index";
 
 function DashLogin(props) {
-  const [data, setData] = useState({
+  const [user, setUser] = useState({
     email: "",
     password: ""
   });
 
   const handleChange = event => {
     event.preventDefault();
-    setData({
-      ...data,
+    setUser({
+      ...user,
       [event.target.name]: event.target.value
     });
   };
@@ -33,16 +32,16 @@ function DashLogin(props) {
     props
       .mutate({
         variables: {
-          email: data.email,
-          password: data.password
+          email: user.email,
+          password: user.password
         }
       })
       .then(() => {
-        setData({
+        setUser({
           email: "",
           password: ""
         });
-        // props.history.push('/trade-data');
+        // props.history.push('/');
       });
   };
 
@@ -55,7 +54,7 @@ function DashLogin(props) {
             type="text"
             name="email"
             placeholder="email"
-            value={data.email}
+            value={user.email}
             onChange={handleChange}
           />
           <FormInputs
@@ -63,7 +62,7 @@ function DashLogin(props) {
             type="password"
             name="password"
             placeholder="password"
-            value={data.password}
+            value={user.password}
             onChange={handleChange}
           />
           <FormButton2 type="submit">Login</FormButton2>
