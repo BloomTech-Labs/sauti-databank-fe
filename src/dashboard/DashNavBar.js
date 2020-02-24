@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Route, withRouter } from "react-router-dom";
 
 import DashHome from "./DashHome";
-import Tools from "../Tools/Tools";
+import Tools from "./Tools/Tools";
 import DashAbout from "./DashAbout";
 import DashAccount from "./DashAccount";
 import DashLoginModal from "./DashLoginModal";
