@@ -19,7 +19,11 @@ import {
   SignUpText,
   ContentContainer,
   SignUpInfo,
-  SignUpPage
+  SignUpPage,
+  SignUpInputsDropDown,
+  SignUpInputs,
+  DropDownOption,
+  DropDownLabel
 } from "./styledComponents/Index";
 
 const initialState = {
@@ -136,13 +140,14 @@ function DashSignup(props) {
           value={job_position}
           onChange={handleChange}
         />
-        <FormInputs
-          type="text"
-          name="organization_type"
-          placeholder="organization_type"
-          value={organization_type}
-          onChange={handleChange}
-        />
+        <DropDownLabel>Select Your Organization Type</DropDownLabel>
+        <SignUpInputsDropDown id="organization_type" name="organization_type">
+          <DropDownOption value={null}>Please Select</DropDownOption>
+          <DropDownOption value="RESEARCH">RESEARCHER</DropDownOption>
+          <DropDownOption value="GOVERNMENT">GOVERNMENT</DropDownOption>
+          <DropDownOption value="NGO">NGO</DropDownOption>
+          <DropDownOption value="OTHER">OTHER</DropDownOption>
+        </SignUpInputsDropDown>
         <FormInputs
           type="text"
           name="country"
@@ -150,13 +155,14 @@ function DashSignup(props) {
           value={country}
           onChange={handleChange}
         />
-        <FormInputs
-          type="text"
-          name="tier"
-          placeholder="tier"
-          value={tier}
-          onChange={handleChange}
-        />
+        <DropDownLabel>Select A User Type</DropDownLabel>
+        <SignUpInputsDropDown id="tier" name="tier">
+          <DropDownOption value={null}>Please Select</DropDownOption>
+          <DropDownOption value="FREE">FREE</DropDownOption>
+          <DropDownOption value="PAID">PAID</DropDownOption>
+          <DropDownOption value="ADMIN">ADMIN</DropDownOption>
+          <DropDownOption value="GOV_ROLE">GOV. OFFICIAL</DropDownOption>
+        </SignUpInputsDropDown>
         <FormInputs
           type="text"
           name="interest"

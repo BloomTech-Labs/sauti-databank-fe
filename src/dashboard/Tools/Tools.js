@@ -15,6 +15,15 @@ import gridOptions from "./Gridoptions";
 
 import EditModal from "./EditModal";
 
+import {
+  ToolsInput,
+  ToolsTitle,
+  ToolsHeader,
+  UserDownloadButton,
+  ToolsGrid
+} from "../styledComponents/Index";
+import { AutoWidthCalculator } from "ag-grid-community";
+
 class Tools extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +45,7 @@ class Tools extends Component {
           field: "email_address",
           sortable: true,
           filter: true,
-          width: 200,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -47,7 +56,7 @@ class Tools extends Component {
           field: "organization",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -58,7 +67,7 @@ class Tools extends Component {
           field: "jobPosition",
           sortable: true,
           filter: true,
-          width: 120,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -69,7 +78,7 @@ class Tools extends Component {
           field: "country",
           sortable: true,
           filter: true,
-          width: 120,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -81,7 +90,7 @@ class Tools extends Component {
           field: "government",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -92,7 +101,7 @@ class Tools extends Component {
           field: "interests",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -103,7 +112,7 @@ class Tools extends Component {
           field: "userTier",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -114,7 +123,7 @@ class Tools extends Component {
           field: "payment",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -125,7 +134,7 @@ class Tools extends Component {
           field: "current",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -217,51 +226,38 @@ class Tools extends Component {
 
   render() {
     return (
-      <div>
-        <div className="accountBody">
-          <div className="accountHeader">
-            <h1>Accounts</h1>
-            <div className="searchContainer">
-              <input
-                className="searchAccounts"
-                type="text"
-                onInput={this.onQuickFilterChanged.bind(this)}
-                id="quickFilterss"
-                placeholder=" search..."
-              />
-              {/* <AiOutlineSearch className='searchIcon' /> */}
-            </div>
-            <button
-              className="downloadButton"
-              type="default"
-              icon="download"
-              size="small"
-              onClick={this.exportToCsv.bind(this)}
-            >
-              {/* <img src={Archivebutton} alt="download"></img> */}
-            </button>
-            <div className="modalHeaderAccount">{/* <ModalOperator /> */}</div>
-          </div>
-          <div
-            id="grid-wrapper"
-            style={{
-              height: "500px",
-              width: "100%"
-            }}
-            className="ag-theme-balham"
+      <>
+        <ToolsHeader>
+          <ToolsTitle>User Accounts</ToolsTitle>
+          <ToolsInput
+            type="text"
+            onInput={this.onQuickFilterChanged.bind(this)}
+            id="quickFilterss"
+            placeholder=" search..."
+          />
+          {/* <AiOutlineSearch className='searchIcon' /> */}
+          <UserDownloadButton
+            type="default"
+            icon="download"
+            size="small"
+            onClick={this.exportToCsv.bind(this)}
           >
-            <AgGridReact
-              columnDefs={this.state.columnDefs}
-              //rowData={this.props.accountReducer}
-              gridOptions={gridOptions}
-              modules={this.state.modules}
-              defaultColDef={this.state.defaultColDef}
-              rowSelection={this.state.rowSelection}
-              onGridSizeChanged={this.onGridSizeChanged}
-            />
-          </div>
-        </div>
-      </div>
+            Download
+            {/* <img src={Archivebutton} alt="download"></img> */}
+          </UserDownloadButton>
+        </ToolsHeader>
+        <ToolsGrid id="grid-wrapper" className="ag-theme-balham">
+          <AgGridReact
+            columnDefs={this.state.columnDefs}
+            //rowData={this.props.accountReducer}
+            gridOptions={gridOptions}
+            modules={this.state.modules}
+            defaultColDef={this.state.defaultColDef}
+            rowSelection={this.state.rowSelection}
+            onGridSizeChanged={this.onGridSizeChanged}
+          />
+        </ToolsGrid>
+      </>
     );
   }
 }
