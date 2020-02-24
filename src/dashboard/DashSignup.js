@@ -1,8 +1,5 @@
-// will be a modal that when clicked will overlay the form on the page
 // we will also use this modal in various places within the dashboard so that when somone clicks something you need to sign in for or pay to see it will direct you to the sign up then to the payment options in future releases
 
-// Talk about pricing in here
-// email, password, profession, organization, job_position, country, gov_role, user_tier, interests_in_data
 import React, { useState } from "react";
 import mutation from "../queries/mutation";
 import { graphql } from "react-apollo";
@@ -11,19 +8,18 @@ import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
 import {
-  ContentContainer,
-  PageText,
   ModalText,
-  Header2,
-  SignUpPage,
-  SignUpContainerText,
-  SignUpContainerForm,
   SignUpForm,
   FormTitle,
   FormButton,
+  FormButton2,
   FormInputs,
-  SignUpInfo
-} from "./Styling";
+  SignUpContainer,
+  SignUpText,
+  ContentContainer,
+  SignUpInfo,
+  SignUpPage
+} from "./styledComponents/Index";
 
 const initialState = {
   email: "",

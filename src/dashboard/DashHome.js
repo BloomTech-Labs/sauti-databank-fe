@@ -2,7 +2,7 @@
 import React from "react";
 import GraphContainer from "../GraphContainer";
 
-import { PageText, Header1 } from "./Styling";
+import { PageText, Header1 } from "./styledComponents/Index";
 
 function DashHome() {
   // const signedIn = getToken();

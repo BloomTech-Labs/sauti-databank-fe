@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
-import { ContentContainer, PageText, Header2 } from "./Styling";
+import { ContentContainer, PageText, Header2 } from "./styledComponents/Index";
 
 const ALL_USERS = gql`
   query allUsers {

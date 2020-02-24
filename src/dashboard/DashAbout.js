@@ -1,12 +1,12 @@
 // just talk about methodologies in here for the sub app specifically
 import React from "react";
 
-import { ContentContainer, PageText, Header2 } from "./Styling";
+import { ContentContainer, PageText, Header2 } from "./styledComponents/Index";
 
 function DashAbout() {
   return (
     <ContentContainer>
-      <Header2>About Sauti Data</Header2>
+      <Header2>About Sauti Data *NOT FINAL VERSION*</Header2>
       <PageText>
         This is the about page. In here we will talk about the methodologies of
         the Sauti Data App. We will also take screen shots of specific features

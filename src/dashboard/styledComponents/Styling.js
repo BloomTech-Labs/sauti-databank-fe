@@ -71,7 +71,7 @@ export const SautiLogoText = styled.a`
 export const SautiDot = styled.span`
   color: #eb5e52;
 `;
-// Nav and Nav Links Styling
+// Nav and Links Styling
 export const Navigation = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -119,114 +119,6 @@ export const SautiLink = styled.a`
   letter-spacing: normal;
   &:hover {
     color: khaki;
-  }
-`;
-// Form Pages
-export const LoginPage = styled.div`
-  margin: 0 auto;
-  width: 70%;
-  height: 250px;
-  border: 4px solid lightgrey;
-  border-radius: 5px;
-  background-color: #212121;
-`;
-export const SignUpPage = styled.div`
-  display: flex;
-`;
-export const SignUpInfo = styled.div`
-  width: 300px;
-  height: 680px;
-  padding: 40px;
-  position: absolute;
-  top: 50%;
-  left: 35%;
-  transform: translate(-50%, -50%);
-  background: #212121;
-  text-align: left;
-  border-radius: 10px;
-  background-color: white;
-  color: #212121;
-`;
-// Form Styling
-export const Form = styled.form`
-  width: 300px;
-  padding: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #212121;
-  text-align: center;
-  border-radius: 10px;
-`;
-export const SignUpForm = styled.form`
-  width: 300px;
-  height: 680px;
-  padding: 40px;
-  position: absolute;
-  top: 50%;
-  left: 65%;
-  transform: translate(-50%, -50%);
-  background: #212121;
-  text-align: center;
-  border-radius: 10px;
-`;
-export const FormTitle = styled.h1`
-  color: white;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 3rem;
-`;
-export const FormInputs = styled.input`
-  border: 0;
-  background: none;
-  display: block;
-  margin: 20px auto;
-  text-align: center;
-  border: 2px solid #eb5e52;
-  padding: 14px 10px;
-  width: 200px;
-  outline: none;
-  color: white;
-  border-radius: 24px;
-  transition 0.25s;
-  &:focus {
-    width: 280px;
-    border-color: white;
-  }
-`;
-export const FormButton = styled.button`
-  border: 0;
-  background: none;
-  display: block;
-  margin: 20px auto;
-  text-align: center;
-  border: 2px solid #eb5e52;
-  padding: 14px 40px;
-  outline: none;
-  color: white;
-  border-radius: 24px;
-  transition: 0.25s;
-  cursor: pointer;
-  &:hover {
-    background: #eb5e52;
-  }
-`;
-export const FormButton2 = styled.button`
-  border: 0;
-  background: none;
-  display: block;
-  margin: 20px auto;
-  text-align: center;
-  border: 2px solid #eb5e52;
-  padding: 14px 40px;
-  outline: none;
-  color: white;
-  border-radius: 24px;
-  transition: 0.25s;
-  cursor: pointer;
-  &:hover {
-    background: #eb5e52;
   }
 `;
 // Modal Styling

@@ -1,4 +1,3 @@
-// will be a modal that when clicked will overlay the form on the page
 // we will also use this modal in various places within the dashboard so that when somone clicks something you need to sign in for or pay to see it will direct you to the sign up then to the payment options in future releases
 
 import React, { useState } from "react";
@@ -13,8 +12,9 @@ import {
   Form,
   FormTitle,
   FormButton,
+  FormButton2,
   FormInputs
-} from "./Styling";
+} from "./styledComponents/Index";
 
 const LOGIN = gql`
   mutation registerNewUser($login: newLoginInput!) {
@@ -28,7 +28,7 @@ const LOGIN = gql`
 `;
 
 function DashLogin(props) {
-  const [data, setData] = useState({
+  const [user, setUser] = useState({
     email: "",
     password: ""
   });
@@ -54,8 +54,8 @@ function DashLogin(props) {
 
   const handleChange = event => {
     event.preventDefault();
-    setData({
-      ...data,
+    setUser({
+      ...user,
       [event.target.name]: event.target.value
     });
   };
@@ -72,13 +72,13 @@ function DashLogin(props) {
   return (
     <ContentContainer>
       <div>
-        <Form onSubmit={e => handleSubmit(e, data)}>
+        <Form onSubmit={e => handleSubmit(e, user)}>
           <FormTitle>Login</FormTitle>
           <FormInputs
             type="text"
             name="email"
             placeholder="email"
-            value={data.email}
+            value={user.email}
             onChange={handleChange}
           />
           <FormInputs
@@ -86,10 +86,10 @@ function DashLogin(props) {
             type="password"
             name="password"
             placeholder="password"
-            value={data.password}
+            value={user.password}
             onChange={handleChange}
           />
-          <FormButton type="submit">Login</FormButton>
+          <FormButton2 type="submit">Login</FormButton2>
         </Form>
       </div>
     </ContentContainer>
