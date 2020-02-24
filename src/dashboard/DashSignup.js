@@ -6,6 +6,9 @@
 import React, { useState } from "react";
 import mutation from "../queries/mutation";
 import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+import Loader from "react-loader-spinner";
 
 import {
   ContentContainer,
@@ -25,27 +28,42 @@ import {
 const initialState = {
   email: "",
   password: "",
-  profession: "",
   organization: "",
-  jobPosition: "",
+  job_position: "",
   country: "",
-  governmentRole: "",
-  userTier: "",
-  interests: ""
+  organization_type: "",
+  tier: "",
+  interest: ""
 };
+
+const REGISTER = gql`
+  mutation registerNewUser($newUser: newRegisterInput!) {
+    register(input: $newUser) {
+      id
+      email
+      password
+      tier
+      interest
+      organization
+      job_position
+      country
+      organization_type
+    }
+  }
+`;
 
 function DashSignup(props) {
   const [user, setUser] = useState(initialState);
+  const [createUser, newUser] = useMutation(REGISTER);
   const {
     email,
     password,
-    profession,
     organization,
-    jobPosition,
+    job_position,
     country,
-    governmentRole,
-    userTier,
-    interests
+    organization_type,
+    tier,
+    interest
   } = user;
 
   const handleChange = e => {
@@ -56,24 +74,31 @@ function DashSignup(props) {
     });
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    props
-      .mutate({
-        variables: {
-          email,
-          password,
-          profession,
-          organization,
-          jobPosition,
-          country,
-          governmentRole,
-          userTier,
-          interests
-        }
-      })
-      .then(() => setUser(initialState));
+  const handleSubmit = (e, input) => {
+    e.preventDefault();
+    createUser({
+      variables: { newUser: input }
+    });
   };
+
+  if (newUser.loading) {
+    return (
+      <div className="loader-container">
+        <Loader
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={12000}
+        />
+      </div>
+    );
+  }
+
+  if (newUser.error) {
+    return <p>ERROR!</p>;
+  }
+  console.log("user", user);
 
   return (
     <ContentContainer>
@@ -84,7 +109,7 @@ function DashSignup(props) {
           <ModalText>Premium: description goes here</ModalText>
         </SignUpInfo>
         <div>
-          <SignUpForm onSubmit={handleSubmit}>
+          <SignUpForm onSubmit={e => handleSubmit(e, user)}>
             <FormTitle>Sign Up</FormTitle>
             <FormInputs
               type="text"
@@ -102,13 +127,6 @@ function DashSignup(props) {
             />
             <FormInputs
               type="text"
-              name="profession"
-              placeholder="profession"
-              value={profession}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
               name="organization"
               placeholder="organization"
               value={organization}
@@ -116,9 +134,16 @@ function DashSignup(props) {
             />
             <FormInputs
               type="text"
-              name="jobPosition"
-              placeholder="jobPosition"
-              value={jobPosition}
+              name="job_position"
+              placeholder="job_position"
+              value={job_position}
+              onChange={handleChange}
+            />
+            <FormInputs
+              type="text"
+              name="organization_type"
+              placeholder="organization_type"
+              value={organization_type}
               onChange={handleChange}
             />
             <FormInputs
@@ -129,24 +154,17 @@ function DashSignup(props) {
               onChange={handleChange}
             />
             <FormInputs
-              type="checkbox"
-              name="governmentRole"
-              placeholder="governmentRole"
-              value={governmentRole}
+              type="text"
+              name="tier"
+              placeholder="tier"
+              value={tier}
               onChange={handleChange}
             />
             <FormInputs
               type="text"
-              name="userTier"
-              placeholder="userTier"
-              value={userTier}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="interests"
-              placeholder="interests"
-              value={interests}
+              name="interest"
+              placeholder="interest"
+              value={interest}
               onChange={handleChange}
             />
             <FormButton type="submit">Create Account</FormButton>
@@ -157,4 +175,4 @@ function DashSignup(props) {
   );
 }
 
-export default graphql(mutation)(DashSignup);
+export default DashSignup;

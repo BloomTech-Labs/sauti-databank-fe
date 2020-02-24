@@ -1,9 +1,44 @@
 // page to edit or delete information + settings
 import React from "react";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import Loader from "react-loader-spinner";
 
 import { ContentContainer, PageText, Header2 } from "./Styling";
 
+const ALL_USERS = gql`
+  query allUsers {
+    users: databankUser {
+      id
+      email
+      tier
+      token
+    }
+  }
+`;
+
 function DashTools() {
+  const { data, loading, error } = useQuery(ALL_USERS);
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <Loader
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={12000}
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p>ERROR!</p>;
+  }
+  console.log(data.users);
+
   return (
     <ContentContainer>
       <Header2>Tools page is an ADMIN only link</Header2>

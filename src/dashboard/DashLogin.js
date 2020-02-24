@@ -4,6 +4,9 @@
 import React, { useState } from "react";
 import mutation from "../queries/mutation";
 import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+import Loader from "react-loader-spinner";
 
 import {
   ContentContainer,
@@ -13,11 +16,41 @@ import {
   FormInputs
 } from "./Styling";
 
+const LOGIN = gql`
+  mutation registerNewUser($login: newLoginInput!) {
+    login(input: $login) {
+      id
+      email
+      password
+      token
+    }
+  }
+`;
+
 function DashLogin(props) {
   const [data, setData] = useState({
     email: "",
     password: ""
   });
+  const [userLoggedIn, { loading, error }] = useMutation(LOGIN);
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <Loader
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={12000}
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p>ERROR!</p>;
+  }
 
   const handleChange = event => {
     event.preventDefault();
@@ -27,28 +60,19 @@ function DashLogin(props) {
     });
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    props
-      .mutate({
-        variables: {
-          email: data.email,
-          password: data.password
-        }
-      })
-      .then(() => {
-        setData({
-          email: "",
-          password: ""
-        });
-        // props.history.push('/trade-data');
-      });
+  const handleSubmit = async (e, input) => {
+    e.preventDefault();
+    const newUser = await userLoggedIn({
+      variables: { login: input }
+    });
+    console.log("userr", newUser);
+    console.log("newUser", newUser.data.login);
   };
 
   return (
     <ContentContainer>
       <div>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={e => handleSubmit(e, data)}>
           <FormTitle>Login</FormTitle>
           <FormInputs
             type="text"
@@ -72,4 +96,4 @@ function DashLogin(props) {
   );
 }
 
-export default graphql(mutation)(DashLogin);
+export default DashLogin;
