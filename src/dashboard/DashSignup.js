@@ -27,13 +27,11 @@ import {
 const initialState = {
   email: "",
   password: "",
-  profession: "",
+  tier: "",
+  interests: "",
   organization: "",
-  jobPosition: "",
-  country: "",
-  governmentRole: "",
-  userTier: "",
-  interests: ""
+  job_position: "",
+  country: ""
 };
 
 function DashSignup(props) {
@@ -41,13 +39,11 @@ function DashSignup(props) {
   const {
     email,
     password,
-    profession,
+    tier,
+    interests,
     organization,
-    jobPosition,
-    country,
-    governmentRole,
-    userTier,
-    interests
+    job_position,
+    country
   } = user;
 
   const handleChange = e => {
@@ -65,13 +61,11 @@ function DashSignup(props) {
         variables: {
           email,
           password,
-          profession,
+          tier,
+          interests,
           organization,
-          jobPosition,
-          country,
-          governmentRole,
-          userTier,
-          interests
+          job_position,
+          country
         }
       })
       .then(() => setUser(initialState));
@@ -102,9 +96,16 @@ function DashSignup(props) {
         />
         <FormInputs
           type="text"
-          name="profession"
-          placeholder="profession"
-          value={profession}
+          name="tier"
+          placeholder="tier"
+          value={tier}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="interests"
+          placeholder="interests"
+          value={interests}
           onChange={handleChange}
         />
         <FormInputs
@@ -116,9 +117,9 @@ function DashSignup(props) {
         />
         <FormInputs
           type="text"
-          name="jobPosition"
-          placeholder="jobPosition"
-          value={jobPosition}
+          name="job_position"
+          placeholder="job position"
+          value={job_position}
           onChange={handleChange}
         />
         <FormInputs
@@ -126,27 +127,6 @@ function DashSignup(props) {
           name="country"
           placeholder="country"
           value={country}
-          onChange={handleChange}
-        />
-        <FormInputs
-          type="checkbox"
-          name="governmentRole"
-          placeholder="governmentRole"
-          value={governmentRole}
-          onChange={handleChange}
-        />
-        <FormInputs
-          type="text"
-          name="userTier"
-          placeholder="userTier"
-          value={userTier}
-          onChange={handleChange}
-        />
-        <FormInputs
-          type="text"
-          name="interests"
-          placeholder="interests"
-          value={interests}
           onChange={handleChange}
         />
         <FormButton2 type="submit">Create Account</FormButton2>
