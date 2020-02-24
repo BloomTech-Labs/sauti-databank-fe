@@ -97,77 +97,73 @@ function DashSignup(props) {
   console.log("user", user);
 
   return (
-    <ContentContainer>
-      <SignUpPage>
-        <SignUpInfo>
-          <ModalText>User Tier:</ModalText>
-          <ModalText>Free: description goes here</ModalText>
-          <ModalText>Premium: description goes here</ModalText>
-        </SignUpInfo>
-        <div>
-          <SignUpForm onSubmit={e => handleSubmit(e, user)}>
-            <FormTitle>Sign Up</FormTitle>
-            <FormInputs
-              type="text"
-              name="email"
-              placeholder="email"
-              value={email}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="password"
-              name="password"
-              placeholder="password"
-              value={password}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="organization"
-              placeholder="organization"
-              value={organization}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="job_position"
-              placeholder="job_position"
-              value={job_position}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="organization_type"
-              placeholder="organization_type"
-              value={organization_type}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="country"
-              placeholder="country"
-              value={country}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="tier"
-              placeholder="tier"
-              value={tier}
-              onChange={handleChange}
-            />
-            <FormInputs
-              type="text"
-              name="interest"
-              placeholder="interest"
-              value={interest}
-              onChange={handleChange}
-            />
-            <FormButton type="submit">Create Account</FormButton>
-          </SignUpForm>
-        </div>
-      </SignUpPage>
-    </ContentContainer>
+    <SignUpContainer>
+      <SignUpText>
+        <ModalText>User Tier:</ModalText>
+        <ModalText>Free: description goes here</ModalText>
+        <ModalText>Premium: description goes here</ModalText>
+      </SignUpText>
+      <SignUpForm onSubmit={e => handleSubmit(e, user)}>
+        <FormTitle>Sign Up</FormTitle>
+        <FormInputs
+          type="text"
+          name="email"
+          placeholder="email"
+          value={email}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="password"
+          name="password"
+          placeholder="password"
+          value={password}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="organization"
+          placeholder="organization"
+          value={organization}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="job_position"
+          placeholder="job_position"
+          value={job_position}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="organization_type"
+          placeholder="organization_type"
+          value={organization_type}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="country"
+          placeholder="country"
+          value={country}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="tier"
+          placeholder="tier"
+          value={tier}
+          onChange={handleChange}
+        />
+        <FormInputs
+          type="text"
+          name="interest"
+          placeholder="interest"
+          value={interest}
+          onChange={handleChange}
+        />
+        <FormButton2 type="submit">Create Account</FormButton2>
+      </SignUpForm>
+    </SignUpContainer>
   );
 }
 
