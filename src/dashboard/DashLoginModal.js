@@ -52,7 +52,7 @@ export default function DashLoginModal() {
         }}
       >
         <Fade in={open}>
-          <DashLogin />
+          <DashLogin handleClose={handleClose} />
         </Fade>
       </Modal>
     </div>

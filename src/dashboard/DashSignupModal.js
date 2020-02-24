@@ -52,7 +52,7 @@ export default function DashSignupModal() {
         }}
       >
         <Fade in={open}>
-          <DashSignup />
+          <DashSignup handleClose={handleClose} />
         </Fade>
       </Modal>
     </div>

@@ -1,6 +1,7 @@
 // we will also use this modal in various places within the dashboard so that when somone clicks something you need to sign in for or pay to see it will direct you to the sign up then to the payment options in future releases
 
 import React, { useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import mutation from "../queries/mutation";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
@@ -28,6 +29,7 @@ const LOGIN = gql`
 `;
 
 function DashLogin(props) {
+  const history = useHistory();
   const [user, setUser] = useState({
     email: "",
     password: ""
@@ -65,6 +67,7 @@ function DashLogin(props) {
     const newUser = await userLoggedIn({
       variables: { login: input }
     });
+    history.push("/");
     console.log("userr", newUser);
     console.log("newUser", newUser.data.login);
   };
@@ -89,7 +92,9 @@ function DashLogin(props) {
             value={user.password}
             onChange={handleChange}
           />
-          <FormButton2 type="submit">Login</FormButton2>
+          <FormButton2 type="submit" onClick={props.handleClose}>
+            Login
+          </FormButton2>
         </Form>
       </div>
     </ContentContainer>
