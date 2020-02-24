@@ -6,7 +6,7 @@ import Fade from "@material-ui/core/Fade";
 
 import DashSignup from "./DashSignup";
 
-import { ModalButtons } from "./Styling";
+import { ModalButtons } from "./styledComponents/Index";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -52,7 +52,7 @@ export default function DashSignupModal() {
         }}
       >
         <Fade in={open}>
-          <DashSignup />
+          <DashSignup handleClose={handleClose} />
         </Fade>
       </Modal>
     </div>
