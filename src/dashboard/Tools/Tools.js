@@ -8,6 +8,7 @@ import gridOptions from "./Gridoptions";
 
 import UsersQuery from "./UsersQuery";
 import EditModal from "./EditModal";
+import ToolsCreateUser from "./ToolsCreateUser";
 
 import {
   ToolsInput,
@@ -239,6 +240,7 @@ class Tools extends Component {
             Download
             {/* <img src={Archivebutton} alt="download"></img> */}
           </UserDownloadButton>
+          <ToolsCreateUser />
         </ToolsHeader>
         <ToolsGrid id="grid-wrapper" className="ag-theme-balham">
           <AgGridReact
