@@ -8,6 +8,7 @@ import DashAccount from "./DashAccount";
 import DashLoginModal from "./DashLoginModal";
 import DashSignupModal from "./DashSignupModal";
 import DashLogout from "./DashLogout";
+import PaypalButton from "../Components/PaypalButton";
 
 import {
   TopBar,
@@ -49,7 +50,7 @@ function DashNav() {
           <SautiLink href="http://sautiafrica.org/">Sauti Home</SautiLink>
         </Navigation>
       </TopBar>
-
+      <PaypalButton />
       <Route exact path="/" component={DashHome} />
       <Route exact path="/tools" component={Tools} />
       <Route exact path="/about" component={DashAbout} />
