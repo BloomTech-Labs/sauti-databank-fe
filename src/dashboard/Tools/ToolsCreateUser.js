@@ -134,41 +134,77 @@ const ToolsCreateUser = () => {
               </Form.Control> */}
               <br></br>
               <h2>
-                <label for="Email">Email</label>
+                <label for="Organization">Organization</label>
                 <br></br>
                 <input
-                  type="email"
-                  name="email_address"
-                  id="Email"
-                  placeholder="email"
-                  value={addUser.email_address}
+                  type="organization"
+                  name="organization"
+                  id="organization"
+                  placeholder="organization"
+                  value={addUser.organization_address}
                   onChange={handleChange}
                 />
               </h2>
 
               <h2>
-                <label for="Password">Password</label>
+                <label for="job_position">job_position</label>
                 <br></br>
                 <input
-                  type="password"
-                  name="password"
-                  id="Password"
-                  placeholder="password"
-                  value={addUser.password}
+                  type="job_position"
+                  name="job_position"
+                  id="job_position"
+                  placeholder="job_position"
+                  value={addUser.job_position}
                   onChange={handleChange}
                 />
               </h2>
             </div>
             <div className="col2">
               <h2>
-                <label for="Password">Mobile Number</label>
+                <label for="Organization_type">Organiztion Type</label>
                 <br></br>
                 <input
                   type="string"
-                  name="mobile_number"
-                  id="mobile_number"
+                  name="organization_type"
+                  id="organization_type"
                   placeholder=""
-                  value={addUser.mobile_number}
+                  value={addUser.organization_type}
+                  onChange={handleChange}
+                />
+              </h2>
+              <h2>
+                <label for="country">country</label>
+                <br></br>
+                <input
+                  type="country"
+                  name="country"
+                  id="country"
+                  placeholder="country"
+                  value={addUser.country}
+                  onChange={handleChange}
+                />
+              </h2>
+              <h2>
+                <label for="tier">tier</label>
+                <br></br>
+                <input
+                  type="tier"
+                  name="tier"
+                  id="tier"
+                  placeholder="tier"
+                  value={addUser.tier}
+                  onChange={handleChange}
+                />
+              </h2>
+              <h2>
+                <label for="interest">interest</label>
+                <br></br>
+                <input
+                  type="interest"
+                  name="interest"
+                  id="interest"
+                  placeholder="interest"
+                  value={addUser.interest}
                   onChange={handleChange}
                 />
               </h2>
