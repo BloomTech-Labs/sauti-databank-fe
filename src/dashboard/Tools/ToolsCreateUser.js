@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 
+import { Redirect, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
+import mutation from "../../queries/mutation";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+import Loader from "react-loader-spinner";
 //import { Dropdown, Form } from 'react-bootstrap'
 
 const useStyles = makeStyles(theme => ({
@@ -22,24 +28,80 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ToolsCreateUser = () => {
-  const [addUser, setAddUser] = useState([]);
+const initialState = {
+  email: "",
+  password: "",
+  organization: "",
+  job_position: "",
+  country: "",
+  organization_type: "",
+  tier: "",
+  interest: ""
+};
 
+const REGISTER = gql`
+  mutation registerNewUser($newUser: newRegisterInput!) {
+    register(input: $newUser) {
+      id
+      email
+      password
+      tier
+      interest
+      organization
+      job_position
+      country
+      organization_type
+    }
+  }
+`;
+
+const ToolsCreateUser = () => {
+  const [addUser, setAddUser] = useState(initialState);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
+  const [createUser, newUser] = useMutation(REGISTER);
+  const {
+    email,
+    password,
+    organization,
+    job_position,
+    country,
+    organization_type,
+    tier,
+    interest
+  } = addUser;
 
   const handleChange = event => {
     setAddUser({ ...addUser, [event.target.name]: event.target.value });
   };
 
-  //fetch pumps for dropdown menu
-  useEffect(() => {}, []);
-
   //on submit add operator
-  const handleSubmit = event => {
+  const handleSubmit = (event, input) => {
     event.preventDefault();
+    createUser({
+      variables: { newUser: input }
+    });
     handleClose();
   };
+
+  if (newUser.loading) {
+    return (
+      <div className="loader-container">
+        <Loader
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={12000}
+        />
+      </div>
+    );
+  }
+
+  if (newUser.error) {
+    return <p>ERROR!</p>;
+  }
 
   const handleOpen = () => {
     setOpen(true);
