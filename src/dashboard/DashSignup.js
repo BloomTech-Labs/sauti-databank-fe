@@ -23,7 +23,10 @@ import {
   SignUpInputsDropDown,
   SignUpInputs,
   DropDownOption,
-  DropDownLabel
+  DropDownLabel,
+  FormTitle2,
+  CloseButton,
+  SignUpClose
 } from "./styledComponents/Index";
 
 const initialState = {
@@ -112,83 +115,88 @@ function DashSignup(props) {
         <ModalText>Free: description goes here</ModalText>
         <ModalText>Premium: description goes here</ModalText>
       </SignUpText>
-      <SignUpForm onSubmit={e => handleSubmit(e, user)}>
-        <FormTitle>Sign Up</FormTitle>
-        <FormInputs
-          type="text"
-          name="email"
-          placeholder="email"
-          value={email}
-          onChange={handleChange}
-        />
-        <FormInputs
-          type="password"
-          name="password"
-          placeholder="password"
-          value={password}
-          onChange={handleChange}
-        />
-        <FormInputs
-          type="text"
-          name="organization"
-          placeholder="organization"
-          value={organization}
-          onChange={handleChange}
-        />
-        <FormInputs
-          type="text"
-          name="job_position"
-          placeholder="job_position"
-          value={job_position}
-          onChange={handleChange}
-        />
-        <DropDownLabel>Select Your Organization Type</DropDownLabel>
-        {/* <SignUpInputsDropDown id="organization_type" name="organization_type">
+      <SignUpForm>
+        <SignUpClose>
+          <CloseButton onClick={props.handleClose}>X</CloseButton>
+        </SignUpClose>
+        <form onSubmit={e => handleSubmit(e, user)}>
+          <FormTitle2>Sign Up</FormTitle2>
+          <FormInputs
+            type="text"
+            name="email"
+            placeholder="email"
+            value={email}
+            onChange={handleChange}
+          />
+          <FormInputs
+            type="password"
+            name="password"
+            placeholder="password"
+            value={password}
+            onChange={handleChange}
+          />
+          <FormInputs
+            type="text"
+            name="organization"
+            placeholder="organization"
+            value={organization}
+            onChange={handleChange}
+          />
+          <FormInputs
+            type="text"
+            name="job_position"
+            placeholder="job_position"
+            value={job_position}
+            onChange={handleChange}
+          />
+          <DropDownLabel>Select Your Organization Type</DropDownLabel>
+          {/* <SignUpInputsDropDown id="organization_type" name="organization_type">
           <DropDownOption value={null}>Please Select</DropDownOption>
           <DropDownOption value="RESEARCH">RESEARCH</DropDownOption>
           <DropDownOption value="GOVERNMENT">GOVERNMENT</DropDownOption>
           <DropDownOption value="NGO">NGO</DropDownOption>
           <DropDownOption value="OTHER">OTHER</DropDownOption>
         </SignUpInputsDropDown> */}
-        <FormInputs
-          type="text"
-          name="organization_type"
-          placeholder="organization type"
-          value={organization_type}
-          onChange={handleChange}
-        />
-        <FormInputs
-          type="text"
-          name="country"
-          placeholder="country"
-          value={country}
-          onChange={handleChange}
-        />
-        <DropDownLabel>Select A User Type</DropDownLabel>
-        {/* <SignUpInputsDropDown id="tier" name="tier">
+          <FormInputs
+            type="text"
+            name="organization_type"
+            placeholder="organization type"
+            value={organization_type}
+            onChange={handleChange}
+          />
+          <FormInputs
+            type="text"
+            name="country"
+            placeholder="country"
+            value={country}
+            onChange={handleChange}
+          />
+          <DropDownLabel>Select A User Type</DropDownLabel>
+          {/* <SignUpInputsDropDown id="tier" name="tier">
           <DropDownOption value={null}>Please Select</DropDownOption>
           <DropDownOption value="FREE">FREE</DropDownOption>
           <DropDownOption value="PAID">PAID</DropDownOption>
           <DropDownOption value="ADMIN">ADMIN</DropDownOption>
           <DropDownOption value="GOV_ROLE">GOV. OFFICIAL</DropDownOption>
         </SignUpInputsDropDown> */}
-        <FormInputs
-          type="text"
-          name="tier"
-          placeholder="user tier"
-          value={tier}
-          onChange={handleChange}
-        />
-        <FormInputs
-          type="text"
-          name="interest"
-          placeholder="interest"
-          value={interest}
-          onChange={handleChange}
-        />
-        <FormButton2 type="submit" onClick={props.handleClose}>
-          Create Account
-        </FormButton2>
+          <FormInputs
+            type="text"
+            name="tier"
+            placeholder="user tier"
+            value={tier}
+            onChange={handleChange}
+          />
+          <FormInputs
+            type="text"
+            name="interest"
+            placeholder="interest"
+            value={interest}
+            onChange={handleChange}
+          />
+          <FormButton2 type="submit" onClick={props.handleClose}>
+            Create Account
+          </FormButton2>
+        </form>
       </SignUpForm>
     </SignUpContainer>
   );

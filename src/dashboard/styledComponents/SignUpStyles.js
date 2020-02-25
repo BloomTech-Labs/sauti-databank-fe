@@ -1,3 +1,12 @@
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import NativeSelect from "@material-ui/core/NativeSelect";
+import InputBase from "@material-ui/core/InputBase";
+import { nonExecutableDefinitionMessage } from "graphql/validation/rules/ExecutableDefinitions";
+
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -37,8 +46,8 @@ export const SignUpInfo = styled.div`
 `;
 export const SignUpForm = styled.form`
   width: 25%;
-  height: 720px;
-  padding: 40px;
+  height: 750px;
+  padding: 10px 40px 40px 40px;
   background: #212121;
   text-align: center;
   border-radius: 10px;
@@ -85,4 +94,48 @@ export const DropDownLabel = styled.option`
 `;
 export const DropDownOption = styled.option`
   color: #212121;
+`;
+
+// NEW SIGN UP
+export const SignUpDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  // margin: 0 auto;
+  background-color: #212121;
+  color: white;
+  // margin-top: 2%;
+  padding: 2%;
+  border-radius: 5px;
+`;
+export const InputTitle = styled.p`
+  font-size: 1.6rem;
+  padding: 1% 0% 4% 0%;
+  color: white;
+`;
+export const CloseButton = styled.button`
+  background-color: #212121;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: right;
+  &:hover {
+    color: red;
+    cursor: pointer;
+  }
+`;
+export const FormTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const SignUpClose = styled.div`
+  text-align: right;
+`;
+export const FormTitle2 = styled.h1`
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 3rem;
+  text-align: center;
 `;

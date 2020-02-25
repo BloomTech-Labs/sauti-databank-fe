@@ -38,7 +38,13 @@ import {
   SignUpInputs,
   SignUpInputsDropDown,
   DropDownOption,
-  DropDownLabel
+  DropDownLabel,
+  SignUpDiv,
+  InputTitle,
+  CloseButton,
+  FormTop,
+  FormTitle2,
+  SignUpClose
 } from "./SignUpStyles";
 
 // Tools Styling Imports
@@ -107,5 +113,11 @@ export {
   SignUpInputs,
   SignUpInputsDropDown,
   DropDownOption,
-  DropDownLabel
+  DropDownLabel,
+  SignUpDiv,
+  InputTitle,
+  CloseButton,
+  FormTop,
+  FormTitle2,
+  SignUpClose
 };

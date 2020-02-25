@@ -1,6 +1,8 @@
 // just talk about methodologies in here for the sub app specifically
 import React from "react";
 
+import CustomizedSelects from "./DashSignUp02";
+
 import {
   AboutContainer,
   AboutText,
@@ -15,7 +17,7 @@ import {
 function DashAbout() {
   return (
     <AboutContainer>
-      <AboutHeader>About Sauti Data *NOT FINAL VERSION*</AboutHeader>
+      {/* <AboutHeader>About Sauti Data *NOT FINAL VERSION*</AboutHeader>
       <TopText>
         The ability to provide our users with an easily navigated and simple to
         use tool is our main goal. We separate primary search categories out so
@@ -53,7 +55,8 @@ function DashAbout() {
             with a picture.
           </AboutText>
         </ImfoSections>
-      </MiddleContent>
+      </MiddleContent> */}
+      <CustomizedSelects />
     </AboutContainer>
   );
 }
