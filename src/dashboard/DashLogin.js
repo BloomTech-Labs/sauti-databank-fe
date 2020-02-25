@@ -24,6 +24,7 @@ const LOGIN = gql`
       email
       password
       token
+      tier
     }
   }
 `;
@@ -68,8 +69,11 @@ function DashLogin(props) {
       variables: { login: input }
     });
     history.push("/");
+
     console.log("userr", newUser);
-    console.log("newUser", newUser.data.login);
+    console.log("newUser", newUser.data.login.token);
+    console.log("newUser", newUser.data.login.token.email);
+    localStorage.setItem("token", newUser.data.login.token);
   };
 
   return (
