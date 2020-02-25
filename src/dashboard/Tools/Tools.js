@@ -2,16 +2,8 @@ import React, { Component } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
-//import 'antd/dist/antd.css'
 
 import gridOptions from "./Gridoptions";
-
-//import { withRouter } from 'react-router'
-
-//import { AiOutlineSearch } from 'react-icons/ai'
-
-//import Archivebutton from 'icons/Archivebutton.svg'
-//import './accountGrid.scss'
 
 import EditModal from "./EditModal";
 
@@ -175,6 +167,7 @@ class Tools extends Component {
   }
 
   componentDidMount = () => {
+    console.log(this.props);
     //this.props.fetchAccounts()
   };
 
@@ -252,7 +245,7 @@ class Tools extends Component {
           >
             <AgGridReact
               columnDefs={this.state.columnDefs}
-              //rowData={this.props.accountReducer}
+              rowData={this.props.allUsers}
               gridOptions={gridOptions}
               modules={this.state.modules}
               defaultColDef={this.state.defaultColDef}
