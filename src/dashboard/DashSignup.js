@@ -82,6 +82,7 @@ function DashSignup(props) {
       variables: { newUser: input }
     });
     history.push("/");
+    console.log(createUser, input);
   };
 
   if (newUser.loading) {
@@ -142,13 +143,20 @@ function DashSignup(props) {
           onChange={handleChange}
         />
         <DropDownLabel>Select Your Organization Type</DropDownLabel>
-        <SignUpInputsDropDown id="organization_type" name="organization_type">
+        {/* <SignUpInputsDropDown id="organization_type" name="organization_type">
           <DropDownOption value={null}>Please Select</DropDownOption>
-          <DropDownOption value="RESEARCH">RESEARCHER</DropDownOption>
+          <DropDownOption value="RESEARCH">RESEARCH</DropDownOption>
           <DropDownOption value="GOVERNMENT">GOVERNMENT</DropDownOption>
           <DropDownOption value="NGO">NGO</DropDownOption>
           <DropDownOption value="OTHER">OTHER</DropDownOption>
-        </SignUpInputsDropDown>
+        </SignUpInputsDropDown> */}
+        <FormInputs
+          type="text"
+          name="organization_type"
+          placeholder="organization type"
+          value={organization_type}
+          onChange={handleChange}
+        />
         <FormInputs
           type="text"
           name="country"
@@ -157,13 +165,20 @@ function DashSignup(props) {
           onChange={handleChange}
         />
         <DropDownLabel>Select A User Type</DropDownLabel>
-        <SignUpInputsDropDown id="tier" name="tier">
+        {/* <SignUpInputsDropDown id="tier" name="tier">
           <DropDownOption value={null}>Please Select</DropDownOption>
           <DropDownOption value="FREE">FREE</DropDownOption>
           <DropDownOption value="PAID">PAID</DropDownOption>
           <DropDownOption value="ADMIN">ADMIN</DropDownOption>
           <DropDownOption value="GOV_ROLE">GOV. OFFICIAL</DropDownOption>
-        </SignUpInputsDropDown>
+        </SignUpInputsDropDown> */}
+        <FormInputs
+          type="text"
+          name="tier"
+          placeholder="user tier"
+          value={tier}
+          onChange={handleChange}
+        />
         <FormInputs
           type="text"
           name="interest"

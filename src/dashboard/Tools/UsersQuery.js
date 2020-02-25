@@ -5,7 +5,7 @@ import Tools from "./Tools";
 
 const Users_Query = gql`
   query UsersQ {
-    allUsers: databankUser {
+    allUsers: DatabankUser {
       id
       email
       interest
