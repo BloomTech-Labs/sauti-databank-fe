@@ -17,7 +17,7 @@ export const ToolsInput = styled.input`
   transition 0.25s;
   &:focus {
     width: 55%;
-    border-color: #eb5e52;
+    border-color: white;
   }
 `;
 export const ToolsTitle = styled.h2`

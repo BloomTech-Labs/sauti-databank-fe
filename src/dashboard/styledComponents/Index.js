@@ -50,10 +50,30 @@ import {
   ToolsGrid
 } from "./ToolsStyles";
 
+// About Page Styling Imports
+import {
+  AboutHeader,
+  AboutText,
+  TopText,
+  AboutContainer,
+  MiddleContent,
+  MiddleContentImages,
+  Images,
+  ImfoSections
+} from "./AboutStyles";
+
 // Export ALL Styles
 export {
   AccountDiv,
+  AboutHeader,
+  AboutText,
+  AboutContainer,
   AccountLinks,
+  TopText,
+  MiddleContent,
+  MiddleContentImages,
+  Images,
+  ImfoSections,
   ContentContainer,
   Header1,
   Header2,

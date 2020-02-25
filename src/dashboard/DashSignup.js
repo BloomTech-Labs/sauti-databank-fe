@@ -107,6 +107,7 @@ function DashSignup(props) {
     <SignUpContainer>
       <SignUpText>
         <ModalText>User Tier:</ModalText>
+        <hr />
         <ModalText>Free: description goes here</ModalText>
         <ModalText>Premium: description goes here</ModalText>
       </SignUpText>

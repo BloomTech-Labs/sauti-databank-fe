@@ -3,6 +3,7 @@ import { Link, Route, withRouter } from "react-router-dom";
 
 import DashHome from "./DashHome";
 import Tools from "./Tools/Tools";
+import UsersQuery from "./Tools/UsersQuery";
 import DashAbout from "./DashAbout";
 import DashAccount from "./DashAccount";
 import DashLoginModal from "./DashLoginModal";
@@ -51,7 +52,7 @@ function DashNav() {
       </TopBar>
 
       <Route exact path="/" component={DashHome} />
-      <Route exact path="/tools" component={Tools} />
+      <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/about" component={DashAbout} />
       <Route exact path="/myaccount" component={DashAccount} />
       <Route exact path="/logout" component={DashLogout} />

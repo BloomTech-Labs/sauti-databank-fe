@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
+import { AutoWidthCalculator } from "ag-grid-community";
 
 import gridOptions from "./Gridoptions";
 
+import UsersQuery from "./UsersQuery";
 import EditModal from "./EditModal";
 
 import {
@@ -14,7 +16,6 @@ import {
   UserDownloadButton,
   ToolsGrid
 } from "../styledComponents/Index";
-import { AutoWidthCalculator } from "ag-grid-community";
 
 class Tools extends Component {
   constructor(props) {
@@ -250,6 +251,7 @@ class Tools extends Component {
             onGridSizeChanged={this.onGridSizeChanged}
           />
         </ToolsGrid>
+        {/* <UsersQuery /> */}
       </>
     );
   }
