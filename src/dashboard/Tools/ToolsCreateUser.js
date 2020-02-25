@@ -22,14 +22,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ModalOperator = () => {
-  const [operator, setOperator] = useState([]);
+const ToolsCreateUser = () => {
+  const [addUser, setAddUser] = useState([]);
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleChange = event => {
-    setOperator({ ...operator, [event.target.name]: event.target.value });
+    setAddUser({ ...addUser, [event.target.name]: event.target.value });
   };
 
   //fetch pumps for dropdown menu
@@ -90,27 +90,27 @@ const ModalOperator = () => {
           <div className={classes.paper}>
             <div className="col1">
               <h2>
-                <label for="Name">First Name</label>
+                <label for="Name">Email</label>
                 <br></br>
                 <input
                   type="text"
-                  id="first_name"
-                  placeholder="first name"
-                  name="first_name"
-                  value={operator.first_name}
+                  id="email"
+                  placeholder="Email"
+                  name="email"
+                  value={addUser.email}
                   onChange={handleChange}
                 />
               </h2>
 
               <h2>
-                <label for="Name">Last Name</label>
+                <label for="Name">Password</label>
                 <br></br>
                 <input
                   type="text"
-                  id="last_name"
-                  placeholder="last_name"
-                  name="last_name"
-                  value={operator.last_name}
+                  id="password"
+                  placeholder="password"
+                  name="password"
+                  value={addUser.password}
                   onChange={handleChange}
                 />
               </h2>
@@ -123,7 +123,7 @@ const ModalOperator = () => {
               <Form.Control
                 as='select'
                 name='role'
-                value={operator.role}
+                value={addUser.role}
                 onChange={handleChange}
               >
                 {role.map(option => (
@@ -141,7 +141,7 @@ const ModalOperator = () => {
                   name="email_address"
                   id="Email"
                   placeholder="email"
-                  value={operator.email_address}
+                  value={addUser.email_address}
                   onChange={handleChange}
                 />
               </h2>
@@ -154,7 +154,7 @@ const ModalOperator = () => {
                   name="password"
                   id="Password"
                   placeholder="password"
-                  value={operator.password}
+                  value={addUser.password}
                   onChange={handleChange}
                 />
               </h2>
@@ -168,7 +168,7 @@ const ModalOperator = () => {
                   name="mobile_number"
                   id="mobile_number"
                   placeholder=""
-                  value={operator.mobile_number}
+                  value={addUser.mobile_number}
                   onChange={handleChange}
                 />
               </h2>
@@ -180,7 +180,7 @@ const ModalOperator = () => {
               <h2>
                 <div className="CreateAccount">
                   <button type="Submit" onClick={handleSubmit}>
-                    Create Operator
+                    Create addUser
                   </button>
                 </div>
               </h2>
@@ -197,4 +197,4 @@ const ModalOperator = () => {
     </>
   );
 };
-export default ModalOperator;
+export default ToolsCreateUser;
