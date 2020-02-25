@@ -35,8 +35,20 @@ import {
   SignUpPage,
   SignUpInfo,
   SignUpForm,
-  SignUpInputs
+  SignUpInputs,
+  SignUpInputsDropDown,
+  DropDownOption,
+  DropDownLabel
 } from "./SignUpStyles";
+
+// Tools Styling Imports
+import {
+  ToolsInput,
+  ToolsTitle,
+  UserDownloadButton,
+  ToolsHeader,
+  ToolsGrid
+} from "./ToolsStyles";
 
 // Export ALL Styles
 export {
@@ -56,6 +68,11 @@ export {
   SautiDot,
   SautiLink,
   TopBar,
+  ToolsInput,
+  ToolsTitle,
+  ToolsHeader,
+  ToolsGrid,
+  UserDownloadButton,
   LoginPage,
   Form,
   FormTitle,
@@ -67,5 +84,8 @@ export {
   SignUpPage,
   SignUpInfo,
   SignUpForm,
-  SignUpInputs
+  SignUpInputs,
+  SignUpInputsDropDown,
+  DropDownOption,
+  DropDownLabel
 };

@@ -11,7 +11,7 @@ export const SignUpContainer = styled.div`
 `;
 export const SignUpText = styled.div`
   width: 25%;
-  height: 680px;
+  height: 720px;
   padding: 40px;
   background: white;
   border-radius: 10px;
@@ -23,7 +23,7 @@ export const SignUpPage = styled.div`
 `;
 export const SignUpInfo = styled.div`
   width: 300px;
-  height: 680px;
+  height: 720px;
   padding: 40px;
   position: absolute;
   top: 50%;
@@ -37,7 +37,7 @@ export const SignUpInfo = styled.div`
 `;
 export const SignUpForm = styled.form`
   width: 25%;
-  height: 680px;
+  height: 720px;
   padding: 40px;
   background: #212121;
   text-align: center;
@@ -60,4 +60,29 @@ export const SignUpInputs = styled.input`
     width: 70%;
     border-color: white;
   }
+`;
+export const SignUpInputsDropDown = styled.select`
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid white;
+  padding: 14px 10px;
+  width: 50%;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition 0.25s;
+  &:focus {
+    width: 70%;
+    border-color: #eb5e52;
+  }
+`;
+export const DropDownLabel = styled.option`
+  font-size: 1.6rem;
+  color: white;
+`;
+export const DropDownOption = styled.option`
+  color: #212121;
 `;

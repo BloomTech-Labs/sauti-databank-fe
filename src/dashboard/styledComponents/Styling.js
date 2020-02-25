@@ -138,5 +138,6 @@ export const ModalButtons = styled.button`
   width: 75px;
   &:hover {
     color: #eb5e52;
+    cursor: pointer;
   }
 `;
