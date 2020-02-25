@@ -34,7 +34,7 @@ class Tools extends Component {
         },
         {
           headerName: "Email",
-          field: "email_address",
+          field: "email",
           sortable: true,
           filter: true,
           width: 100,
@@ -56,7 +56,7 @@ class Tools extends Component {
         },
         {
           headerName: "Job Position",
-          field: "jobPosition",
+          field: "job_position",
           sortable: true,
           filter: true,
           width: 100,
@@ -78,8 +78,8 @@ class Tools extends Component {
         },
 
         {
-          headerName: "Government",
-          field: "government",
+          headerName: "Interest",
+          field: "interest",
           sortable: true,
           filter: true,
           width: 100,

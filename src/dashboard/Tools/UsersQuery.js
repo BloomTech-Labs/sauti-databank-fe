@@ -8,6 +8,10 @@ const Users_Query = gql`
     allUsers: databankUser {
       id
       email
+      interest
+      organization
+      job_position
+      country
     }
   }
 `;
