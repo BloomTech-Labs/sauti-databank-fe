@@ -8,7 +8,7 @@ import { ContentContainer, PageText, Header2 } from "./styledComponents/Index";
 
 const ALL_USERS = gql`
   query allUsers {
-    users: databankUser {
+    users: DatabankUser {
       id
       email
       tier
@@ -37,7 +37,7 @@ function DashTools() {
   if (error) {
     return <p>ERROR!</p>;
   }
-  console.log(data.users);
+  console.log("data", data.users);
 
   return (
     <ContentContainer>
