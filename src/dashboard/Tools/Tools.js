@@ -114,7 +114,7 @@ class Tools extends Component {
         },
         {
           headerName: "Tier",
-          field: "userTier",
+          field: "tier",
           sortable: true,
           filter: true,
           width: 100,

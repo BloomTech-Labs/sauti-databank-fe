@@ -40,13 +40,15 @@ const initialState = {
 //brought in from UsersQuery.js used to update apollo cache
 const Users_Query = gql`
   query UsersQ {
-    allUsers: DatabankUser {
+    allUsers: databankUsers {
       id
       email
       interest
+      tier
       organization
       job_position
       country
+      organization_type
     }
   }
 `;

@@ -8,7 +8,7 @@ import { ContentContainer, PageText, Header2 } from "./styledComponents/Index";
 
 const ALL_USERS = gql`
   query allUsers {
-    users: databankUser {
+    users: DatabankUser {
       id
       email
       tier
