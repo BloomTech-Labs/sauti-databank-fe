@@ -5,13 +5,15 @@ import Tools from "./Tools";
 
 const Users_Query = gql`
   query UsersQ {
-    allUsers: DatabankUser {
+    allUsers: databankUsers {
       id
       email
       interest
+      tier
       organization
       job_position
       country
+      organization_type
     }
   }
 `;

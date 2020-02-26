@@ -8,6 +8,7 @@ import gridOptions from "./Gridoptions";
 
 import UsersQuery from "./UsersQuery";
 import EditModal from "./EditModal";
+import ToolsCreateUser from "./ToolsCreateUser";
 
 import {
   ToolsInput,
@@ -47,6 +48,17 @@ class Tools extends Component {
         {
           headerName: "Organization",
           field: "organization",
+          sortable: true,
+          filter: true,
+          width: 100,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Organization Type",
+          field: "organization_type",
           sortable: true,
           filter: true,
           width: 100,
@@ -102,7 +114,7 @@ class Tools extends Component {
         },
         {
           headerName: "Tier",
-          field: "userTier",
+          field: "tier",
           sortable: true,
           filter: true,
           width: 100,
@@ -239,6 +251,7 @@ class Tools extends Component {
             Download
             {/* <img src={Archivebutton} alt="download"></img> */}
           </UserDownloadButton>
+          <ToolsCreateUser />
         </ToolsHeader>
         <ToolsGrid id="grid-wrapper" className="ag-theme-balham">
           <AgGridReact

@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import mutation from "../queries/mutation";
-import { graphql } from "react-apollo";
+//import mutation from "../queries/mutation";
+//import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -58,6 +58,7 @@ const REGISTER = gql`
 
 function DashSignup(props) {
   const [user, setUser] = useState(initialState);
+  console.log(user);
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
   const {
@@ -85,7 +86,7 @@ function DashSignup(props) {
       variables: { newUser: input }
     });
     history.push("/");
-    console.log(createUser, input);
+    console.log(input);
   };
 
   if (newUser.loading) {
