@@ -110,8 +110,7 @@ const ToolsCreateUser = () => {
     createUser({
       variables: { newUser: input }
     });
-    //handleClose();
-    console.log(createUser, input);
+    handleClose();
   };
 
   if (newUser.loading) {
