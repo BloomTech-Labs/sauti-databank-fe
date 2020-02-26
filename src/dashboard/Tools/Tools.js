@@ -2,18 +2,21 @@ import React, { Component } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
-//import 'antd/dist/antd.css'
+import { AutoWidthCalculator } from "ag-grid-community";
 
 import gridOptions from "./Gridoptions";
 
-//import { withRouter } from 'react-router'
-
-//import { AiOutlineSearch } from 'react-icons/ai'
-
-//import Archivebutton from 'icons/Archivebutton.svg'
-//import './accountGrid.scss'
-
+import UsersQuery from "./UsersQuery";
 import EditModal from "./EditModal";
+import ToolsCreateUser from "./ToolsCreateUser";
+
+import {
+  ToolsInput,
+  ToolsTitle,
+  ToolsHeader,
+  UserDownloadButton,
+  ToolsGrid
+} from "../styledComponents/Index";
 
 class Tools extends Component {
   constructor(props) {
@@ -33,10 +36,10 @@ class Tools extends Component {
         },
         {
           headerName: "Email",
-          field: "email_address",
+          field: "email",
           sortable: true,
           filter: true,
-          width: 200,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -47,7 +50,18 @@ class Tools extends Component {
           field: "organization",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Organization Type",
+          field: "organization_type",
+          sortable: true,
+          filter: true,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -55,10 +69,10 @@ class Tools extends Component {
         },
         {
           headerName: "Job Position",
-          field: "jobPosition",
+          field: "job_position",
           sortable: true,
           filter: true,
-          width: 120,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -69,7 +83,7 @@ class Tools extends Component {
           field: "country",
           sortable: true,
           filter: true,
-          width: 120,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -77,11 +91,11 @@ class Tools extends Component {
         },
 
         {
-          headerName: "Government",
-          field: "government",
+          headerName: "Interest",
+          field: "interest",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -92,7 +106,7 @@ class Tools extends Component {
           field: "interests",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -100,10 +114,10 @@ class Tools extends Component {
         },
         {
           headerName: "Tier",
-          field: "userTier",
+          field: "tier",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -114,7 +128,7 @@ class Tools extends Component {
           field: "payment",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -125,7 +139,7 @@ class Tools extends Component {
           field: "current",
           sortable: true,
           filter: true,
-          width: 150,
+          width: 100,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -175,6 +189,7 @@ class Tools extends Component {
   }
 
   componentDidMount = () => {
+    console.log(this.props);
     //this.props.fetchAccounts()
   };
 
@@ -217,51 +232,40 @@ class Tools extends Component {
 
   render() {
     return (
-      <div>
-        <div className="accountBody">
-          <div className="accountHeader">
-            <h1>Accounts</h1>
-            <div className="searchContainer">
-              <input
-                className="searchAccounts"
-                type="text"
-                onInput={this.onQuickFilterChanged.bind(this)}
-                id="quickFilterss"
-                placeholder=" search..."
-              />
-              {/* <AiOutlineSearch className='searchIcon' /> */}
-            </div>
-            <button
-              className="downloadButton"
-              type="default"
-              icon="download"
-              size="small"
-              onClick={this.exportToCsv.bind(this)}
-            >
-              {/* <img src={Archivebutton} alt="download"></img> */}
-            </button>
-            <div className="modalHeaderAccount">{/* <ModalOperator /> */}</div>
-          </div>
-          <div
-            id="grid-wrapper"
-            style={{
-              height: "500px",
-              width: "100%"
-            }}
-            className="ag-theme-balham"
+      <>
+        <ToolsHeader>
+          <ToolsTitle>User Accounts</ToolsTitle>
+          <ToolsInput
+            type="text"
+            onInput={this.onQuickFilterChanged.bind(this)}
+            id="quickFilterss"
+            placeholder=" search..."
+          />
+          {/* <AiOutlineSearch className='searchIcon' /> */}
+          <UserDownloadButton
+            type="default"
+            icon="download"
+            size="small"
+            onClick={this.exportToCsv.bind(this)}
           >
-            <AgGridReact
-              columnDefs={this.state.columnDefs}
-              //rowData={this.props.accountReducer}
-              gridOptions={gridOptions}
-              modules={this.state.modules}
-              defaultColDef={this.state.defaultColDef}
-              rowSelection={this.state.rowSelection}
-              onGridSizeChanged={this.onGridSizeChanged}
-            />
-          </div>
-        </div>
-      </div>
+            Download
+            {/* <img src={Archivebutton} alt="download"></img> */}
+          </UserDownloadButton>
+          <ToolsCreateUser />
+        </ToolsHeader>
+        <ToolsGrid id="grid-wrapper" className="ag-theme-balham">
+          <AgGridReact
+            columnDefs={this.state.columnDefs}
+            rowData={this.props.allUsers}
+            gridOptions={gridOptions}
+            modules={this.state.modules}
+            defaultColDef={this.state.defaultColDef}
+            rowSelection={this.state.rowSelection}
+            onGridSizeChanged={this.onGridSizeChanged}
+          />
+        </ToolsGrid>
+        {/* <UsersQuery /> */}
+      </>
     );
   }
 }
