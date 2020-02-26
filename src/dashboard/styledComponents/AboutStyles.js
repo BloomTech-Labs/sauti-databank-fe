@@ -3,9 +3,10 @@ import styled from "styled-components";
 export const AboutHeader = styled.h2`
   font-size: 3rem;
   padding: 2% 0% 2% 0%;
+  font-family: Montserrat;
 `;
 export const TopText = styled.p`
-  font-size: 2rem;
+  font-size: 1.6rem;
   padding: 0% 0% 2% 2%;
   width: 85%;
   margin: 0 auto;

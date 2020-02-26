@@ -22,6 +22,7 @@ export const ModalText = styled.p`
 export const ContentContainer = styled.div`
   width: 95vw;
   margin: 0 auto;
+  font-family: Montserrat;
 `;
 export const TopBar = styled.div`
   display: flex;
