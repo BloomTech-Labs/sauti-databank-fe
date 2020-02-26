@@ -37,6 +37,20 @@ const initialState = {
   interest: ""
 };
 
+//brought in from UsersQuery.js used to update apollo cache
+const Users_Query = gql`
+  query UsersQ {
+    allUsers: DatabankUser {
+      id
+      email
+      interest
+      organization
+      job_position
+      country
+    }
+  }
+`;
+
 const REGISTER = gql`
   mutation registerNewUser($newUser: newRegisterInput!) {
     register(input: $newUser) {
@@ -60,7 +74,15 @@ const ToolsCreateUser = () => {
   const [open, setOpen] = React.useState(false);
   //createUser is f(x) to make user,
   //newUser includes {data, loading, error}
-  const [createUser, newUser] = useMutation(REGISTER);
+  const [createUser, newUser] = useMutation(REGISTER, {
+    update(cache, { data: { register } }) {
+      const data = cache.readQuery({ query: Users_Query });
+      cache.writeQuery({
+        query: Users_Query,
+        data: { allUsers: [...data.allUsers, register] }
+      });
+    }
+  });
   const {
     email,
     password,
