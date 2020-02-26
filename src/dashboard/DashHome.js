@@ -30,6 +30,7 @@ function DashHome() {
           <UserHeader>
             Welcome <UserName>{userEmail}</UserName> !
           </UserHeader>
+          <PaypalButton />
         </SignedInDiv>
       )}
       <GraphContainer />
