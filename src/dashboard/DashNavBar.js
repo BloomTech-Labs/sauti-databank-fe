@@ -9,6 +9,7 @@ import DashAccount from "./DashAccount";
 import DashLoginModal from "./DashLoginModal";
 import DashSignupModal from "./DashSignupModal";
 import DashLogout from "./DashLogout";
+import { getToken } from "./auth/Auth";
 
 import {
   TopBar,
@@ -22,7 +23,7 @@ import {
 } from "./styledComponents/Index";
 
 function DashNav() {
-  // const SignedIn = getToken();
+  const SignedIn = getToken();
 
   return (
     <>
@@ -36,17 +37,17 @@ function DashNav() {
         </SautiLogo>
         <Navigation>
           <Links to="/">DATA</Links>
-          <Links to="/tools">TOOLS</Links>
-          {/* {SignedIn && <Links to="/tools">TOOLS</Links>} */}
-          <Links to="/myaccount">MY ACCOUNT</Links>
-          {/* {SignedIn && <Links to="/myaccount">MY ACCOUNT</Links>} */}
+          {/* <Links to="/tools">TOOLS</Links> */}
+          {SignedIn && <Links to="/tools">TOOLS</Links>}
+          {/* <Links to="/myaccount">MY ACCOUNT</Links> */}
+          {SignedIn && <Links to="/myaccount">MY ACCOUNT</Links>}
           <LinksLast to="/about">ABOUT</LinksLast>
-          <DashLoginModal />
-          {/* {!SignedIn && <DashLoginModal />} */}
-          <DashSignupModal />
-          {/* {!SignedIn && <DashSignupModal />} */}
-          <Links to="/logout">LOGOUT</Links>
-          {/* {SignedIn && <Links to="/logout">LOGOUT</Links>} */}
+          {/* <DashLoginModal /> */}
+          {!SignedIn && <DashLoginModal />}
+          {/* <DashSignupModal /> */}
+          {!SignedIn && <DashSignupModal />}
+          {/* <Links to="/logout">LOGOUT</Links> */}
+          {SignedIn && <Links to="/logout">LOGOUT</Links>}
           <SautiLink href="http://sautiafrica.org/">Sauti Home</SautiLink>
         </Navigation>
       </TopBar>

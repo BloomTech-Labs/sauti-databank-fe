@@ -6,8 +6,6 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-import mutation from "../../queries/mutation";
-import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -57,9 +55,11 @@ const REGISTER = gql`
 
 const ToolsCreateUser = () => {
   const [addUser, setAddUser] = useState(initialState);
+  console.log(addUser);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  //createUser is f(x) to make user,
+  //newUser includes {data, loading, error}
   const [createUser, newUser] = useMutation(REGISTER);
   const {
     email,
@@ -77,12 +77,17 @@ const ToolsCreateUser = () => {
   };
 
   //on submit add operator
+  //createUser has a property called variables
+  // input is an object with our variables
+  //use newUser from REGISTER
+  //onSubmit make sure to pass event and input
   const handleSubmit = (event, input) => {
     event.preventDefault();
     createUser({
       variables: { newUser: input }
     });
-    handleClose();
+    //handleClose();
+    console.log(createUser, input);
   };
 
   if (newUser.loading) {
@@ -159,7 +164,7 @@ const ToolsCreateUser = () => {
                   id="email"
                   placeholder="Email"
                   name="email"
-                  value={addUser.email}
+                  value={email}
                   onChange={handleChange}
                 />
               </h2>
@@ -172,7 +177,7 @@ const ToolsCreateUser = () => {
                   id="password"
                   placeholder="password"
                   name="password"
-                  value={addUser.password}
+                  value={password}
                   onChange={handleChange}
                 />
               </h2>
@@ -185,7 +190,7 @@ const ToolsCreateUser = () => {
               <Form.Control
                 as='select'
                 name='role'
-                value={addUser.role}
+                value={role}
                 onChange={handleChange}
               >
                 {role.map(option => (
@@ -203,7 +208,7 @@ const ToolsCreateUser = () => {
                   name="organization"
                   id="organization"
                   placeholder="organization"
-                  value={addUser.organization_address}
+                  value={organization}
                   onChange={handleChange}
                 />
               </h2>
@@ -216,7 +221,7 @@ const ToolsCreateUser = () => {
                   name="job_position"
                   id="job_position"
                   placeholder="job_position"
-                  value={addUser.job_position}
+                  value={job_position}
                   onChange={handleChange}
                 />
               </h2>
@@ -230,7 +235,7 @@ const ToolsCreateUser = () => {
                   name="organization_type"
                   id="organization_type"
                   placeholder=""
-                  value={addUser.organization_type}
+                  value={organization_type}
                   onChange={handleChange}
                 />
               </h2>
@@ -242,7 +247,7 @@ const ToolsCreateUser = () => {
                   name="country"
                   id="country"
                   placeholder="country"
-                  value={addUser.country}
+                  value={country}
                   onChange={handleChange}
                 />
               </h2>
@@ -254,7 +259,7 @@ const ToolsCreateUser = () => {
                   name="tier"
                   id="tier"
                   placeholder="tier"
-                  value={addUser.tier}
+                  value={tier}
                   onChange={handleChange}
                 />
               </h2>
@@ -266,7 +271,7 @@ const ToolsCreateUser = () => {
                   name="interest"
                   id="interest"
                   placeholder="interest"
-                  value={addUser.interest}
+                  value={interest}
                   onChange={handleChange}
                 />
               </h2>
@@ -277,7 +282,7 @@ const ToolsCreateUser = () => {
 
               <h2>
                 <div className="CreateAccount">
-                  <button type="Submit" onClick={handleSubmit}>
+                  <button type="Submit" onClick={e => handleSubmit(e, addUser)}>
                     Create addUser
                   </button>
                 </div>

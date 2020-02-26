@@ -57,6 +57,17 @@ class Tools extends Component {
           }
         },
         {
+          headerName: "Organization Type",
+          field: "organization_type",
+          sortable: true,
+          filter: true,
+          width: 100,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
           headerName: "Job Position",
           field: "job_position",
           sortable: true,
