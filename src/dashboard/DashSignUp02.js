@@ -103,15 +103,8 @@ const REGISTER = gql`
 
 export default function CustomizedSelects(props) {
   const classes = useStyles();
-  const [organization_type, setOrganization_type] = useState("");
-  const [tier, setTier] = useState("");
-  const handleOrgChange = event => {
-    setOrganization_type(event.target.value);
-  };
-  const handleTierChange = event => {
-    setTier(event.target.value);
-  };
   const [user, setUser] = useState(initialState);
+  console.log(user);
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
   const {
@@ -120,8 +113,8 @@ export default function CustomizedSelects(props) {
     organization,
     job_position,
     country,
-    // organization_type,
-    // tier,
+    organization_type,
+    tier,
     interest
   } = user;
 
@@ -139,7 +132,7 @@ export default function CustomizedSelects(props) {
       variables: { newUser: input }
     });
     history.push("/");
-    console.log("AAAAAA", input);
+    console.log(input);
   };
 
   if (newUser.loading) {
@@ -171,7 +164,7 @@ export default function CustomizedSelects(props) {
       <CloseButton onClick={props.handleClose}>X</CloseButton>
       <SignUpDiv>
         <FormTitle2>Sign Up</FormTitle2>
-        <form>
+        <form onSubmit={e => handleSubmit(e, user)}>
           <FormInputs
             type="text"
             name="email"
@@ -208,16 +201,16 @@ export default function CustomizedSelects(props) {
               labelId="demo-customized-select-label"
               id="demo-customized-select"
               value={organization_type}
-              onChange={handleOrgChange}
+              onChange={handleChange}
               input={<Styles />}
             >
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>RESEARCH</MenuItem>
-              <MenuItem value={20}>GOVERNMENT</MenuItem>
-              <MenuItem value={30}>NGO</MenuItem>
-              <MenuItem value={30}>OTHER</MenuItem>
+              <MenuItem value={"RESEARCH"}>RESEARCH</MenuItem>
+              <MenuItem value={"GOVERNMENT"}>GOVERNMENT</MenuItem>
+              <MenuItem value={"NGO"}>NGO</MenuItem>
+              <MenuItem value={"OTHER"}>OTHER</MenuItem>
             </Select>
           </FormControl>
           <FormInputs
@@ -233,7 +226,7 @@ export default function CustomizedSelects(props) {
               labelId="demo-customized-select-label"
               id="demo-customized-select"
               value={tier}
-              onChange={handleTierChange}
+              onChange={handleChange}
               input={<Styles />}
             >
               <MenuItem value="">
