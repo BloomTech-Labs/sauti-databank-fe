@@ -11,7 +11,7 @@ function ProtectedRoute(props) {
         if (localStorage.getItem("token")) {
           return <Component {...renderProps} />;
         } else {
-          return <Redirect to="/login" />;
+          return <Redirect to="/" />;
         }
       }}
     />

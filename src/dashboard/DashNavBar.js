@@ -3,11 +3,14 @@ import { Link, Route, withRouter } from "react-router-dom";
 
 import DashHome from "./DashHome";
 import Tools from "./Tools/Tools";
+import UsersQuery from "./Tools/UsersQuery";
 import DashAbout from "./DashAbout";
 import DashAccount from "./DashAccount";
 import DashLoginModal from "./DashLoginModal";
 import DashSignupModal from "./DashSignupModal";
 import DashLogout from "./DashLogout";
+import ProtectedRoute from "./auth/ProtectedRoute";
+import { getToken } from "./auth/Auth";
 
 import {
   TopBar,
@@ -21,7 +24,7 @@ import {
 } from "./styledComponents/Index";
 
 function DashNav() {
-  // const SignedIn = getToken();
+  const SignedIn = getToken();
 
   return (
     <>
@@ -35,25 +38,25 @@ function DashNav() {
         </SautiLogo>
         <Navigation>
           <Links to="/">DATA</Links>
-          <Links to="/tools">TOOLS</Links>
-          {/* {SignedIn && <Links to="/tools">TOOLS</Links>} */}
-          <Links to="/myaccount">MY ACCOUNT</Links>
-          {/* {SignedIn && <Links to="/myaccount">MY ACCOUNT</Links>} */}
+          {/* <Links to="/tools">TOOLS</Links> */}
+          {SignedIn && <Links to="/tools">TOOLS</Links>}
+          {/* <Links to="/myaccount">MY ACCOUNT</Links> */}
+          {SignedIn && <Links to="/myaccount">MY ACCOUNT</Links>}
           <LinksLast to="/about">ABOUT</LinksLast>
-          <DashLoginModal />
-          {/* {!SignedIn && <DashLoginModal />} */}
-          <DashSignupModal />
-          {/* {!SignedIn && <DashSignupModal />} */}
-          <Links to="/logout">LOGOUT</Links>
-          {/* {SignedIn && <Links to="/logout">LOGOUT</Links>} */}
+          {/* <DashLoginModal /> */}
+          {!SignedIn && <DashLoginModal />}
+          {/* <DashSignupModal /> */}
+          {!SignedIn && <DashSignupModal />}
+          {/* <Links to="/logout">LOGOUT</Links> */}
+          {SignedIn && <Links to="/logout">LOGOUT</Links>}
           <SautiLink href="http://sautiafrica.org/">Sauti Home</SautiLink>
         </Navigation>
       </TopBar>
       <Route exact path="/" component={DashHome} />
-      <Route exact path="/tools" component={Tools} />
+      <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/about" component={DashAbout} />
-      <Route exact path="/myaccount" component={DashAccount} />
-      <Route exact path="/logout" component={DashLogout} />
+      <ProtectedRoute exact path="/myaccount" component={DashAccount} />
+      <ProtectedRoute exact path="/logout" component={DashLogout} />
     </>
   );
 }
