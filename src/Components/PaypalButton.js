@@ -1,5 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 
+// notes to patch/edit you have to set the body up like this in postman
+
+// [
+//   {
+//       "op": "replace",
+//       "path": "/payment_preferences/setup_fee",
+//       "value": {
+//           "currency_code": "USD",
+//           "value": 0
+//       }
+//   }
+// ]
+
 export default function PaypalButton() {
   useEffect(() => {
     window.paypal
