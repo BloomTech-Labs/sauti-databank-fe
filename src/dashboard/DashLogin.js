@@ -72,6 +72,8 @@ function DashLogin(props) {
     console.log("newUser2", newUser.data.login.token);
     localStorage.setItem("token", newUser.data.login.token);
     localStorage.setItem("user_id", newUser.data.login.id);
+    localStorage.setItem("email", newUser.data.login.email);
+    localStorage.setItem("tier", newUser.data.login.tier);
 
     history.push("/");
   };

@@ -49,18 +49,18 @@ export default function PaypalButton() {
           // decode the token
           // make query to change the user account to paid(do we have this?)
           const decoded = decodeToken(token);
+          console.log("decoded", decoded);
           decoded.tier = "PAID";
           delete decoded.iat;
           delete decoded.exp;
-
           const editedUser = await userUpdated({
             variables: { newEditUser: decoded }
           });
+          console.log("editeduser", editedUser);
         },
-
         onError: function(err) {
           // Show an error page here, when an error occurs
-          console.error(err);
+          console.error("err", err);
         }
       })
       .render("#paypal-button-container");

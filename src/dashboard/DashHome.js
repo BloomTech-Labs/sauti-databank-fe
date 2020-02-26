@@ -2,21 +2,38 @@
 import React from "react";
 import PaypalButton from "../Components/PaypalButton";
 import GraphContainer from "../GraphContainer";
+import { getToken, getEmail, getTier } from "./auth/Auth";
 
-import { PageText, Header1 } from "./styledComponents/Index";
+import {
+  NotSignedInDiv,
+  SignedInDiv,
+  UserHeader,
+  UserText,
+  UserTypeText,
+  UserName,
+  Header1
+} from "./styledComponents/Index";
 
 function DashHome() {
-  // const signedIn = getToken();
+  const signedIn = getToken();
+  const userEmail = getEmail();
 
   return (
-    <div>
-      <Header1>Welcome To the Sauti Data App</Header1>
-      <Header1>Welcome user.email</Header1>
-      <PaypalButton />
-      {/* {!signedIn && <PageText>Welcome To the Sauti Data App</PageText>}
-      {signedIn && <PageText>Welcome user.email</PageText>} */}
+    <>
+      {!signedIn && (
+        <NotSignedInDiv>
+          <UserHeader>Welcome To the Sauti Data App</UserHeader>
+        </NotSignedInDiv>
+      )}
+      {signedIn && (
+        <SignedInDiv>
+          <UserHeader>
+            Welcome <UserName>{userEmail}</UserName> !
+          </UserHeader>
+        </SignedInDiv>
+      )}
       <GraphContainer />
-    </div>
+    </>
   );
 }
 
