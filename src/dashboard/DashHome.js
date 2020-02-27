@@ -1,6 +1,5 @@
 // display user information for the admin and other basic info for quick access
 import React from "react";
-import PaypalButton from "../Components/PaypalButton";
 import GraphContainer from "../GraphContainer";
 import { getToken, getEmail, getTier } from "./auth/Auth";
 
@@ -30,7 +29,6 @@ function DashHome() {
           <UserHeader>
             Welcome <UserName>{userEmail}</UserName> !
           </UserHeader>
-          <PaypalButton />
         </SignedInDiv>
       )}
       <GraphContainer />

@@ -1,5 +1,6 @@
 import React from "react";
 import { getTier } from "./auth/Auth";
+import PaypalButton from "../Components/PaypalButton";
 
 import {
   ContentContainer,
@@ -38,6 +39,8 @@ function DashAccount() {
         PayPal info and other things related to the subscirption and payments
         here.
       </PageText>
+      <br />
+      <PaypalButton />
     </ContentContainer>
   );
 }
