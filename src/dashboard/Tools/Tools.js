@@ -10,6 +10,8 @@ import UsersQuery from "./UsersQuery";
 import EditModal from "./EditModal";
 import ToolsCreateUser from "./ToolsCreateUser";
 
+import DeleteAccount from "./DeleteAccount";
+
 import {
   ToolsInput,
   ToolsTitle,
@@ -175,11 +177,12 @@ class Tools extends Component {
           cellRendererFramework: params => {
             return (
               <div>
-                {/* <DeleteAccount
-                params={params}
-                data={params.data}
-                otherProps={this.props}
-                deleteAccount={this.props.deleteAccount}/> */}
+                <DeleteAccount
+                  params={params}
+                  data={params.data}
+                  otherProps={this.props}
+                  deleteAccount={this.props.deleteAccount}
+                />
               </div>
             );
           }

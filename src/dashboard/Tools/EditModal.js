@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -6,7 +6,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
 import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
 const useStyles = makeStyles(theme => ({
@@ -42,7 +42,19 @@ const Users_Query = gql`
 const EDIT = gql`
   mutation editUserData($editUser: newEditUserInput!) {
     editUser(input: $editUser) {
-      __typename
+      ... on DatabankUser {
+        id
+        email
+        interest
+        tier
+        organization
+        job_position
+        country
+        organization_type
+      }
+      ... on Error {
+        message
+      }
     }
   }
 `;
@@ -50,7 +62,7 @@ const EDIT = gql`
 //button on AccountGrid
 const EditModal = props => {
   const [account, setAccount] = useState({});
-  console.log(`account`, account);
+  //console.log(`account`, account);
   //account id added automatically, needed to .put
   account.id = props.data.id;
 
@@ -58,15 +70,7 @@ const EditModal = props => {
 
   const [open, setOpen] = useState(false);
 
-  const [createUser, editUser] = useMutation(EDIT, {
-    update(cache, { data: { editUser } }) {
-      const data = cache.readQuery({ query: Users_Query });
-      cache.writeQuery({
-        query: Users_Query,
-        data: { allUsers: [...data.allUsers, editUser] }
-      });
-    }
-  });
+  const [createUser, editUser] = useMutation(EDIT);
 
   const handleChange = event => {
     setAccount({ ...account, [event.target.name]: event.target.value });
@@ -75,11 +79,11 @@ const EditModal = props => {
   const handleSubmit = (event, input) => {
     event.preventDefault();
     createUser({
-      variables: { editUser: input }
+      variables: { editUser: input },
+      refetchQueries: [{ query: Users_Query }]
     });
     setOpen(false);
     props.api.api.redrawRows();
-    console.log(`input`, input);
   };
 
   if (editUser.loading) {
@@ -100,19 +104,12 @@ const EditModal = props => {
     return <p>ERROR!</p>;
   }
 
-  const handleOpen = () => {
+  const handleOpen = props => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   props.editAccount(account);
-
-  //   props.api.api.redrawRows();
-  // };
 
   return (
     <>
@@ -226,14 +223,14 @@ const EditModal = props => {
               </h2>
 
               <h2>
-                <label for="interests">Interests</label>
+                <label for="interest">Interest</label>
                 <br></br>
                 <input
                   type="text"
-                  name="interests"
-                  id="interests"
-                  placeholder={props.data.interests}
-                  value={account.interests}
+                  name="interest"
+                  id="interest"
+                  placeholder={props.data.interest}
+                  value={account.interest}
                   onChange={handleChange}
                 />
               </h2>
