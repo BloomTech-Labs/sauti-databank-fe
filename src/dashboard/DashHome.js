@@ -1,7 +1,7 @@
 // display user information for the admin and other basic info for quick access
 import React from "react";
 import GraphContainer from "../GraphContainer";
-import { getToken, getEmail, getTier } from "./auth/Auth";
+import { getToken, decodeToken } from "./auth/Auth";
 
 import {
   NotSignedInDiv,
@@ -15,7 +15,13 @@ import {
 
 function DashHome() {
   const signedIn = getToken();
-  const userEmail = getEmail();
+  const token = getToken();
+  let userEmail;
+  if (token) {
+    userEmail = decodeToken(token);
+    userEmail = userEmail.email;
+    console.log("AAAAAAAAAA", userEmail);
+  }
 
   return (
     <>

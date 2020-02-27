@@ -66,6 +66,7 @@ const REGISTER = gql`
       job_position
       country
       organization_type
+      token
     }
   }
 `;
@@ -137,7 +138,7 @@ function DashSignup(props) {
     });
   };
 
-  const handleSubmit = (e, input) => {
+  const handleSubmit = async (e, input) => {
     e.preventDefault();
     if (
       user.email === "" ||
@@ -152,14 +153,11 @@ function DashSignup(props) {
         dangerMode: true
       });
     } else {
-      createUser({
+      const createdUser = await createUser({
         variables: { newUser: input }
       });
-      console.log(user);
-      localStorage.setItem("token", user.token);
-      localStorage.setItem("user_id", user.id);
-      localStorage.setItem("email", user.email);
-      localStorage.setItem("tier", user.tier);
+      console.log(createdUser);
+      localStorage.setItem("token", createdUser.data.register.token);
       props.handleClose();
       history.push("/");
       swal({ title: "✔", text: "Success", icon: "success" });
@@ -301,7 +299,7 @@ function DashSignup(props) {
                 <em>None</em>
               </MenuItem>
               <MenuItem value={"FREE"}>FREE</MenuItem>
-              <MenuItem value={"PREMIUM"}>PREMIUM</MenuItem>
+              <MenuItem value={"PAID"}>PAID</MenuItem>
             </Select>
           </FormControl>
           <FormInputs
