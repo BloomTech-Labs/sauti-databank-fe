@@ -58,23 +58,24 @@ const DeleteAccount = props => {
     event.preventDefault();
     deleteId({
       variables: { delete_user: input },
-      update(cache, { data: { deleteUser } }) {
-        const data = cache.readQuery({ query: Users_Query });
-        console.log(data);
-        cache.writeQuery({
-          query: Users_Query,
-          data: {
-            allUsers: [
-              ...data.allUsers,
-              data.allUsers.map(e => {
-                if (e.id !== deleteUser.id) {
-                  return e;
-                }
-              })
-            ]
-          }
-        });
-      }
+      refetchQueries: [{ query: Users_Query }]
+      // update(cache, { data: { deleteUser } }) {
+      //   const data = cache.readQuery({ query: Users_Query });
+      //   console.log(data);
+      //   cache.writeQuery({
+      //     query: Users_Query,
+      //     data: {
+      //       allUsers: [
+      //         ...data.allUsers,
+      //         data.allUsers.map(e => {
+      //           if (e.id !== deleteUser.id) {
+      //             return e;
+      //           }
+      //         })
+      //       ]
+      //     }
+      //   });
+      // }
       // update: (store, {data})=> {
       //   const userData = store.readQuery<Users_Query>({
       //     query: Users_Query

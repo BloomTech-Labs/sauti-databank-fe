@@ -8,6 +8,13 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import InputBase from "@material-ui/core/InputBase";
+
 import {
   ModalText,
   SignUpForm,
@@ -26,7 +33,8 @@ import {
   DropDownLabel,
   FormTitle2,
   CloseButton,
-  SignUpClose
+  SignUpClose,
+  InputTitle
 } from "./styledComponents/Index";
 
 const initialState = {
@@ -56,6 +64,48 @@ const REGISTER = gql`
   }
 `;
 
+const Styles = withStyles(theme => ({
+  root: {
+    "label + &": {
+      marginTop: theme.spacing(3)
+    }
+  },
+  input: {
+    borderRadius: 24,
+    position: "relative",
+    backgroundColor: "none",
+    color: "white",
+    border: "2px solid #eb5e52",
+    fontSize: 18,
+    width: 200,
+    padding: "14px 20px 14px 8px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"'
+    ].join(","),
+    "&:focus": {
+      borderRadius: 4,
+      borderColor: "white",
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
+    }
+  }
+}))(InputBase);
+
+const useStyles = makeStyles(theme => ({
+  margin: {
+    margin: theme.spacing(1)
+  }
+}));
+
 function DashSignup(props) {
   const [user, setUser] = useState(initialState);
   console.log(user);
@@ -71,6 +121,8 @@ function DashSignup(props) {
     tier,
     interest
   } = user;
+
+  const classes = useStyles();
 
   const handleChange = e => {
     e.preventDefault();
@@ -124,6 +176,8 @@ function DashSignup(props) {
           <FormTitle2>Sign Up</FormTitle2>
           <FormInputs
             type="text"
+            pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+            validate="required"
             name="email"
             placeholder="email"
             value={email}
@@ -158,13 +212,34 @@ function DashSignup(props) {
           <DropDownOption value="NGO">NGO</DropDownOption>
           <DropDownOption value="OTHER">OTHER</DropDownOption>
         </SignUpInputsDropDown> */}
-          <FormInputs
+          {/* <FormInputs
             type="text"
             name="organization_type"
             placeholder="organization type"
             value={organization_type}
             onChange={handleChange}
-          />
+          /> */}
+          <FormControl className={classes.margin}>
+            <InputTitle id="demo-customized-select-label">
+              Organization Type
+            </InputTitle>
+            <Select
+              labelId="demo-customized-select-label"
+              id="demo-customized-select"
+              name="organization_type"
+              value={organization_type}
+              onChange={handleChange}
+              input={<Styles />}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={"RESEARCH"}>RESEARCH</MenuItem>
+              <MenuItem value={"GOVERNMENT"}>GOVERNMENT</MenuItem>
+              <MenuItem value={"NGO"}>NGO</MenuItem>
+              <MenuItem value={"OTHER"}>OTHER</MenuItem>
+            </Select>
+          </FormControl>
           <FormInputs
             type="text"
             name="country"
@@ -180,13 +255,32 @@ function DashSignup(props) {
           <DropDownOption value="ADMIN">ADMIN</DropDownOption>
           <DropDownOption value="GOV_ROLE">GOV. OFFICIAL</DropDownOption>
         </SignUpInputsDropDown> */}
-          <FormInputs
+          {/* <FormInputs
             type="text"
             name="tier"
             placeholder="user tier"
             value={tier}
             onChange={handleChange}
-          />
+          /> */}
+          <FormControl className={classes.margin}>
+            <InputTitle id="demo-customized-select-label">User Tier</InputTitle>
+            <Select
+              labelId="demo-customized-select-label"
+              id="demo-customized-select"
+              value={tier}
+              name="tier"
+              onChange={handleChange}
+              input={<Styles />}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={"FREE"}>FREE</MenuItem>
+              <MenuItem value={"PREMIUM"}>PREMIUM</MenuItem>
+              <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
+              <MenuItem value={"GOVERNMENT"}>GOV. OFFICIAL</MenuItem>
+            </Select>
+          </FormControl>
           <FormInputs
             type="text"
             name="interest"
