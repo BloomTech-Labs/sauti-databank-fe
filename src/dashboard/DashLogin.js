@@ -77,6 +77,7 @@ function DashLogin(props) {
       localStorage.setItem("email", newUser.data.login.email);
       localStorage.setItem("tier", newUser.data.login.tier);
 
+      props.handleClose();
       history.push("/");
       swal({ title: "✔", text: "Success", icon: "success" });
     } else {
@@ -110,9 +111,7 @@ function DashLogin(props) {
             value={user.password}
             onChange={handleChange}
           />
-          <FormButton2 type="submit" onClick={props.handleClose}>
-            Login
-          </FormButton2>
+          <FormButton2 type="submit">Login</FormButton2>
         </Form>
       </div>
     </ContentContainer>

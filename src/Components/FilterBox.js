@@ -7,7 +7,10 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 
+import { getTier } from "../dashboard/auth/Auth";
+
 export default function FilterBox(props) {
+  const tier = getTier();
   const [filterBoxIndex, setFilterBoxIndex] = useState({
     type: "gender",
     query: "Users"
@@ -238,8 +241,9 @@ export default function FilterBox(props) {
           )
         )}
 
-        {(filterBoxIndex.query === "Sessions" ||
-          filterBoxAdditionalFilter.query === "Sessions") && (
+        {tier === "ADMIN" ||
+        (tier === "PAID" && filterBoxIndex.query === "Sessions") ||
+        filterBoxAdditionalFilter.query === "Sessions" ? (
           <DateContainer>
             <div>
               <p>Start</p>
@@ -260,6 +264,30 @@ export default function FilterBox(props) {
                 value={filterBoxEndDate}
                 id="today"
                 onChange={e => setFilterBoxEndDate(e.target.value)}
+              />
+            </div>
+          </DateContainer>
+        ) : (
+          <DateContainer>
+            <div>
+              <p>Start</p>
+              <input
+                name="startData"
+                type="date"
+                value={filterBoxStartDate}
+                disabled={loading}
+                placeholder={setFilterBoxStartDate}
+              />
+            </div>
+            <div>
+              <p>End</p>
+              <input
+                disabled={loading}
+                name="endData"
+                type="date"
+                value={filterBoxEndDate}
+                id="today"
+                placeholder={setFilterBoxEndDate}
               />
             </div>
           </DateContainer>
