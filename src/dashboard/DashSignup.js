@@ -15,6 +15,8 @@ import Select from "@material-ui/core/Select";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 
+import swal from "sweetalert";
+
 import {
   ModalText,
   SignUpForm,
@@ -134,11 +136,31 @@ function DashSignup(props) {
 
   const handleSubmit = (e, input) => {
     e.preventDefault();
-    createUser({
-      variables: { newUser: input }
-    });
-    history.push("/");
-    console.log(input);
+    if (
+      user.email === "" ||
+      user.password === "" ||
+      user.organization_type === "" ||
+      user.tier === ""
+    ) {
+      swal({
+        title: "Error",
+        text: "Error Signing up. Please fill all required fields.",
+        icon: "warning",
+        dangerMode: true
+      });
+    } else {
+      createUser({
+        variables: { newUser: input }
+      });
+      console.log(user);
+      localStorage.setItem("token", user.token);
+      localStorage.setItem("user_id", user.id);
+      localStorage.setItem("email", user.email);
+      localStorage.setItem("tier", user.tier);
+      props.handleClose();
+      history.push("/");
+      swal({ title: "✔", text: "Success", icon: "success" });
+    }
   };
 
   if (newUser.loading) {
@@ -158,7 +180,6 @@ function DashSignup(props) {
   if (newUser.error) {
     return <p>ERROR!</p>;
   }
-  // console.log("user", user);
 
   return (
     <SignUpContainer>
