@@ -3,6 +3,12 @@ import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from "react-csv-downloader";
 
 import { getTier } from "../dashboard/auth/Auth";
+import DownloadModal from "../dashboard/DownloadModal";
+
+import {
+  NoAccessText,
+  DownloadText
+} from "../dashboard/styledComponents/Index";
 
 const Graph = props => {
   console.log("keys in graph", props.keys);
@@ -78,17 +84,20 @@ const Graph = props => {
   return (
     <div className="Graph-Container">
       <div className="dwnld-btn">
-        {tier === "ADMIN" ? (
+        {tier === "ADMIN" || tier === "PAID" ? (
           <CsvDownloader
             datas={csvFormattedData}
             columns={csvHeaders}
             filename={fileName}
             suffix={`${new Date().toISOString()}`}
           >
-            <button className="csv-download">Download⯆</button>
+            <DownloadText className="csv-download">Download⯆</DownloadText>
           </CsvDownloader>
         ) : (
-          <p>Download⯆</p>
+          <>
+            {/* <NoAccessText>Download⯆</NoAccessText> */}
+            <DownloadModal />
+          </>
         )}
       </div>
 

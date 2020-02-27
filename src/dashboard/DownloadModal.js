@@ -4,9 +4,16 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-import DashLogin from "./DashLogin";
+import { Link } from "react-router-dom";
 
-import { ModalButtons } from "./styledComponents/Index";
+import {
+  NoAccessText,
+  DownloadModalDiv,
+  DownloadModalTitle,
+  DownloadModalText,
+  DownloadModalButtons,
+  DownloadModalButtonsX
+} from "./styledComponents/Index";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -22,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function DashLoginModal() {
+export default function DownloadModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -34,11 +41,13 @@ export default function DashLoginModal() {
     setOpen(false);
   };
 
+  const handleCloseContinue = props => {
+    setOpen(false);
+  };
+
   return (
     <div>
-      <ModalButtons className="nav-login" type="button" onClick={handleOpen}>
-        LOGIN
-      </ModalButtons>
+      <NoAccessText onClick={handleOpen}>Download⯆</NoAccessText>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -52,7 +61,25 @@ export default function DashLoginModal() {
         }}
       >
         <Fade in={open}>
-          <DashLogin handleClose={handleClose} />
+          <DownloadModalDiv>
+            <DownloadModalButtonsX onClick={handleClose}>
+              X
+            </DownloadModalButtonsX>
+            <DownloadModalTitle>
+              You do not have access to this feature.
+            </DownloadModalTitle>
+            <DownloadModalText>
+              If you would like to learn more about signing up or upgrading your
+              account to access premium features, click the CONTINUE button
+              below.
+            </DownloadModalText>
+            <br />
+            <br />
+            <br />
+            <DownloadModalButtons onClick={handleCloseContinue}>
+              Continue
+            </DownloadModalButtons>
+          </DownloadModalDiv>
         </Fade>
       </Modal>
     </div>

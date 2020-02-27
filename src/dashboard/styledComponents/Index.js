@@ -15,7 +15,9 @@ import {
   SautiLogoText,
   SautiDot,
   SautiLink,
-  TopBar
+  TopBar,
+  NoAccessText,
+  DownloadText
 } from "./Styling";
 
 // Home Page Styling Import
@@ -82,6 +84,15 @@ import {
   ImfoSections
 } from "./AboutStyles";
 
+// Download Modal Styling Imports
+import {
+  DownloadModalDiv,
+  DownloadModalTitle,
+  DownloadModalText,
+  DownloadModalButtons,
+  DownloadModalButtonsX
+} from "./DownloadModal";
+
 // Export ALL Styles
 export {
   AccountDiv,
@@ -143,5 +154,12 @@ export {
   UserType,
   SignUpRequiredInputs,
   RequiredInputTitle,
-  ModalTextBottom
+  ModalTextBottom,
+  NoAccessText,
+  DownloadText,
+  DownloadModalDiv,
+  DownloadModalTitle,
+  DownloadModalText,
+  DownloadModalButtons,
+  DownloadModalButtonsX
 };
