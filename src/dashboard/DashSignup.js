@@ -37,7 +37,10 @@ import {
   CloseButton,
   SignUpClose,
   UserType,
-  InputTitle
+  InputTitle,
+  SignUpRequiredInputs,
+  RequiredInputTitle,
+  ModalTextBottom
 } from "./styledComponents/Index";
 
 const initialState = {
@@ -211,6 +214,10 @@ function DashSignup(props) {
             <li>User can download data to a csv file.</li>
           </ul>
         </ModalText>
+        <br />
+        <br />
+        <br />
+        <ModalTextBottom>* = Required filed</ModalTextBottom>
       </SignUpText>
       <SignUpForm>
         <SignUpClose>
@@ -218,7 +225,8 @@ function DashSignup(props) {
         </SignUpClose>
         <form onSubmit={e => handleSubmit(e, user)}>
           <FormTitle2>Sign Up</FormTitle2>
-          <FormInputs
+          <RequiredInputTitle>*</RequiredInputTitle>
+          <SignUpRequiredInputs
             type="text"
             // pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
             // validate="required"
@@ -227,7 +235,8 @@ function DashSignup(props) {
             value={email}
             onChange={handleChange}
           />
-          <FormInputs
+          <RequiredInputTitle>*</RequiredInputTitle>
+          <SignUpRequiredInputs
             type="password"
             name="password"
             placeholder="password"
@@ -250,7 +259,7 @@ function DashSignup(props) {
           />
           <FormControl className={classes.margin}>
             <InputTitle id="demo-customized-select-label">
-              Select Your Organization Type
+              * Select Your Organization Type
             </InputTitle>
             <Select
               labelId="demo-customized-select-label"
@@ -278,7 +287,7 @@ function DashSignup(props) {
           />
           <FormControl className={classes.margin}>
             <InputTitle id="demo-customized-select-label">
-              Select A User Type
+              * Select A User Type
             </InputTitle>
             <Select
               labelId="demo-customized-select-label"
