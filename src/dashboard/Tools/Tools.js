@@ -104,17 +104,6 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Interests",
-          field: "interests",
-          sortable: true,
-          filter: true,
-          width: 100,
-          cellStyle: {
-            "font-size": "2rem",
-            "padding-top": ".75rem"
-          }
-        },
-        {
           headerName: "Tier",
           field: "tier",
           sortable: true,
