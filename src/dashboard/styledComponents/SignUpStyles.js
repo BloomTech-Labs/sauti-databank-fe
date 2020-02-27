@@ -26,6 +26,9 @@ export const SignUpText = styled.div`
   border-radius: 10px;
   background-color: white;
   color: #212121;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: space-between;
 `;
 export const SignUpPage = styled.div`
   display: flex;
@@ -67,6 +70,24 @@ export const SignUpInputs = styled.input`
   transition 0.25s;
   &:focus {
     width: 70%;
+    border-color: white;
+  }
+`;
+export const SignUpRequiredInputs = styled.input`
+  border: 0;
+  background: none;
+  display: block;
+  margin: 0px auto;
+  text-align: center;
+  border: 2px solid white;
+  padding: 14px 10px;
+  width: 65%;
+  outline: none;
+  color: white;
+  // border-radius: 24px;
+  transition 0.25s;
+  &:focus {
+    width: 78%;
     border-color: white;
   }
 `;
@@ -113,6 +134,13 @@ export const InputTitle = styled.p`
   padding: 1% 0% 4% 0%;
   color: white;
 `;
+export const RequiredInputTitle = styled.p`
+  font-size: 2rem;
+  margin-left: 10%;
+  padding: 2% 0% 0% 0%;
+  color: white;
+  text-align: left;
+`;
 export const CloseButton = styled.button`
   background-color: #212121;
   color: white;
@@ -143,4 +171,9 @@ export const UserType = styled.big`
   font-size: 1.8rem;
   font-weight: bold;
   color: #eb5e52;
+`;
+export const ModalTextBottom = styled.p`
+  font-size: 1.6rem;
+  color: red;
+  bottom: 0;
 `;

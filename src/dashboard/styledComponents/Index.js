@@ -55,7 +55,10 @@ import {
   FormTop,
   FormTitle2,
   SignUpClose,
-  UserType
+  UserType,
+  SignUpRequiredInputs,
+  RequiredInputTitle,
+  ModalTextBottom
 } from "./SignUpStyles";
 
 // Tools Styling Imports
@@ -137,5 +140,8 @@ export {
   UserName,
   UserText,
   UserTypeText,
-  UserType
+  UserType,
+  SignUpRequiredInputs,
+  RequiredInputTitle,
+  ModalTextBottom
 };

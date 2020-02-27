@@ -8,6 +8,8 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
+import swal from "sweetalert";
+
 import {
   ContentContainer,
   Form,
@@ -67,15 +69,26 @@ function DashLogin(props) {
     const newUser = await userLoggedIn({
       variables: { login: input }
     });
+    if (newUser.data.login.token !== null) {
+      console.log("newUser", newUser.data.login);
+      console.log("newUser2", newUser.data.login.token);
+      localStorage.setItem("token", newUser.data.login.token);
+      localStorage.setItem("user_id", newUser.data.login.id);
+      localStorage.setItem("email", newUser.data.login.email);
+      localStorage.setItem("tier", newUser.data.login.tier);
 
-    console.log("newUser", newUser.data.login);
-    console.log("newUser2", newUser.data.login.token);
-    localStorage.setItem("token", newUser.data.login.token);
-    localStorage.setItem("user_id", newUser.data.login.id);
-    localStorage.setItem("email", newUser.data.login.email);
-    localStorage.setItem("tier", newUser.data.login.tier);
-
-    history.push("/");
+      props.handleClose();
+      history.push("/");
+      swal({ title: "✔", text: "Success", icon: "success" });
+    } else {
+      swal({
+        title: "Error",
+        text:
+          "Error logging in. Please Check that your email and password are correct.",
+        icon: "warning",
+        dangerMode: true
+      });
+    }
   };
 
   return (
@@ -98,9 +111,7 @@ function DashLogin(props) {
             value={user.password}
             onChange={handleChange}
           />
-          <FormButton2 type="submit" onClick={props.handleClose}>
-            Login
-          </FormButton2>
+          <FormButton2 type="submit">Login</FormButton2>
         </Form>
       </div>
     </ContentContainer>

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import CsvDownloader from 'react-csv-downloader';
+import CsvDownloader from "react-csv-downloader";
+
+import { getTier } from "../dashboard/auth/Auth";
 
 const Graph = props => {
-  console.log('keys in graph', props.keys)
-  console.log('data in graph', props.data)
+  console.log("keys in graph", props.keys);
+  console.log("data in graph", props.data);
+
+  const tier = getTier();
+  console.log("aaa", tier);
 
   const [csvHeaders, setCsvHeaders] = useState([]);
   const [csvFormattedData, setCsvFormattedData] = useState([]);
@@ -18,26 +23,32 @@ const Graph = props => {
     }
   }, []);
 
-  //Gets headers for CSV. 
-  let headers = (data) => {
+  //Gets headers for CSV.
+  let headers = data => {
     let allHeaders = [];
     //no crossfilter
     if (!props.crossFilter) {
       allHeaders = [props.index];
-      allHeaders.push({ id: `${props.sampleSize}`, displayName: `Sample Size: ${props.sampleSize}` })
+      allHeaders.push({
+        id: `${props.sampleSize}`,
+        displayName: `Sample Size: ${props.sampleSize}`
+      });
     } else {
       allHeaders = [
         { id: `${props.index}`, displayName: `${props.index}` },
         ...props.keys,
         { id: `${props.additionalFilter}` },
-        { id: `${props.sampleSize}`, displayName: `Sample Size: ${props.sampleSize}` }
-      ]
+        {
+          id: `${props.sampleSize}`,
+          displayName: `Sample Size: ${props.sampleSize}`
+        }
+      ];
     }
     return allHeaders;
-  }
+  };
 
-  let csvFormater = (data) => {
-    //if there's additionalFilter 
+  let csvFormater = data => {
+    //if there's additionalFilter
     if (props.additionalFilter) {
       data = data.map(obj => {
         let key = Object.keys(props.selectedCheckbox)[0];
@@ -45,28 +56,42 @@ const Graph = props => {
         let o = Object.assign({}, obj);
         o[key] = val;
         return o;
-      })
+      });
     }
-    return data.map(obj=> {return Object.values(obj)}) 
-  }
+    return data.map(obj => {
+      return Object.values(obj);
+    });
+  };
 
-  let fileName = '';
-  fileName = `${props.index && props.index}${props.crossFilter && ('_by_' + props.crossFilter)}${props.additionalFilter && `_where_${props.additionalFilter}:(${Object.values(props.selectedCheckbox)[0]})`}`
+  let fileName = "";
+  fileName = `${props.index && props.index}${props.crossFilter &&
+    "_by_" + props.crossFilter}${props.additionalFilter &&
+    `_where_${props.additionalFilter}:(${
+      Object.values(props.selectedCheckbox)[0]
+    })`}`;
 
   useEffect(() => {
-    setCsvFormattedData(csvFormater(props.csvData))
-    setCsvHeaders(headers(props.csvData))
-  }, [props.csvData])
+    setCsvFormattedData(csvFormater(props.csvData));
+    setCsvHeaders(headers(props.csvData));
+  }, [props.csvData]);
+
   return (
     <div className="Graph-Container">
-      <div className='dwnld-btn'>
-        <CsvDownloader
-          datas={csvFormattedData}
-          columns={csvHeaders}
-          filename={fileName}
-          suffix={`${new Date().toISOString()}`}
-        ><button>Download⯆</button></CsvDownloader>
+      <div className="dwnld-btn">
+        {tier === "ADMIN" ? (
+          <CsvDownloader
+            datas={csvFormattedData}
+            columns={csvHeaders}
+            filename={fileName}
+            suffix={`${new Date().toISOString()}`}
+          >
+            <button className="csv-download">Download⯆</button>
+          </CsvDownloader>
+        ) : (
+          <p>Download⯆</p>
+        )}
       </div>
+
       <ResponsiveBar
         data={props.data}
         keys={props.keys}
