@@ -37,7 +37,7 @@ export default function DashSignupModal() {
 
   return (
     <div>
-      <ModalButtons type="button" onClick={handleOpen}>
+      <ModalButtons className="nav-signup" type="button" onClick={handleOpen}>
         SIGN UP
       </ModalButtons>
       <Modal
