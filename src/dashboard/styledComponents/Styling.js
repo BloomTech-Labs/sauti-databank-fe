@@ -142,3 +142,20 @@ export const ModalButtons = styled.button`
     cursor: pointer;
   }
 `;
+// Graph Page
+export const NoAccessText = styled.button`
+  padding: 2% 0% 0% 0%;
+  font-size: 1.4rem;
+  color: lightgrey;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+export const DownloadText = styled.button`
+  padding: 2% 0% 0% 0%;
+  font-size: 1.4rem;
+  color: #212121;
+  &:hover {
+    cursor: pointer;
+  }
+`;
