@@ -1,28 +1,29 @@
 $greyColor: #4d4f52;
 
-.Graph-Container{
-  height:600px;
+.Graph-Container {
+  height: 600px;
   position: relative;
-  button{
+  button {
     color: gray;
     cursor: pointer;
-    margin-top: 10px; 
+    margin-top: 10px;
     border: none;
     background: none;
     padding: 0;
   }
-  button:hover{color: #47837f}
-    
+  button:hover {
+    color: #47837f;
+  }
 }
 
-.loader-container{
+.loader-container {
   box-sizing: border-box;
-  height:600px;
+  height: 600px;
   width: 887px;
   margin-top: 50;
   margin-right: 200;
   margin-bottom: 75;
-  margin-left: 80
+  margin-left: 80;
 }
 
 // Button{
@@ -40,15 +41,18 @@ $greyColor: #4d4f52;
 //   }
 // }
 
-.loader{
+.loader {
   padding-top: 28%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .App {
-  .graph-title{font-size: 2rem; font-family: 'Helvetica', sans-serif}
+  .graph-title {
+    font-size: 2rem;
+    font-family: "Helvetica", sans-serif;
+  }
   .TopBar {
     display: flex;
     background-color: #212121;
@@ -59,7 +63,7 @@ $greyColor: #4d4f52;
 
     .Sauti-Logo {
       font-family: Montserrat;
-      font-size: 3.0rem;
+      font-size: 3rem;
       font-weight: 1000;
       font-style: normal;
       font-stretch: normal;
@@ -101,7 +105,7 @@ $greyColor: #4d4f52;
     display: flex;
     flex-direction: column;
     align-content: center;
-    margin-top: 75px;
+    margin-top: 0px;
     margin-bottom: 100px;
 
     .header {
@@ -186,7 +190,7 @@ $greyColor: #4d4f52;
         display: flex;
         justify-content: center;
         align-items: center;
-      }        
+      }
     }
   }
 }

@@ -52,7 +52,6 @@ function DashNav() {
           <SautiLink href="http://sautiafrica.org/">Sauti Home</SautiLink>
         </Navigation>
       </TopBar>
-
       <Route exact path="/" component={DashHome} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/about" component={DashAbout} />

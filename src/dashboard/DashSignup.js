@@ -26,7 +26,8 @@ import {
   DropDownLabel,
   FormTitle2,
   CloseButton,
-  SignUpClose
+  SignUpClose,
+  UserType
 } from "./styledComponents/Index";
 
 const initialState = {
@@ -113,8 +114,31 @@ function DashSignup(props) {
       <SignUpText>
         <ModalText>User Tier:</ModalText>
         <hr />
-        <ModalText>Free: description goes here</ModalText>
-        <ModalText>Premium: description goes here</ModalText>
+        <ModalText>
+          <UserType>Free:</UserType>
+          <ul>
+            <li>User has access to the base app.</li>
+            <li>
+              Ability to cross-filter data using the filtering options on the
+              Data page.
+            </li>
+            <li>cannot access calendar and date filtering feature.</li>
+            <li>User cannot download data to a csv file.</li>
+          </ul>
+        </ModalText>
+        <br />
+        <ModalText>
+          <UserType>PAID:</UserType>
+          <ul>
+            <li>User has access to the base app.</li>
+            <li>
+              Ability to cross-filter data using the filtering options on the
+              Data page.
+            </li>
+            <li>User has access to calendar and date filtering feature.</li>
+            <li>User can download data to a csv file.</li>
+          </ul>
+        </ModalText>
       </SignUpText>
       <SignUpForm>
         <SignUpClose>
@@ -151,15 +175,16 @@ function DashSignup(props) {
             onChange={handleChange}
           />
           <DropDownLabel>Select Your Organization Type</DropDownLabel>
-          {/* <SignUpInputsDropDown id="organization_type" name="organization_type">
-          <DropDownOption value={null}>Please Select</DropDownOption>
-          <DropDownOption value="RESEARCH">RESEARCH</DropDownOption>
-          <DropDownOption value="GOVERNMENT">GOVERNMENT</DropDownOption>
-          <DropDownOption value="NGO">NGO</DropDownOption>
-          <DropDownOption value="OTHER">OTHER</DropDownOption>
-        </SignUpInputsDropDown> */}
+          {/* <fieldset>
+            <select name="organization_type" value={organization_type}>
+              <option value="RESEARCH">RESEARCH</option>
+              <option value="GOVERNMENT">GOVERNMENT</option>
+              <option value="NGO">NGO</option>
+              <option value="OTHER">OTHER</option>
+            </select>
+          </fieldset> */}
           <FormInputs
-            type="text"
+            type="select"
             name="organization_type"
             placeholder="organization type"
             value={organization_type}
@@ -173,13 +198,12 @@ function DashSignup(props) {
             onChange={handleChange}
           />
           <DropDownLabel>Select A User Type</DropDownLabel>
-          {/* <SignUpInputsDropDown id="tier" name="tier">
-          <DropDownOption value={null}>Please Select</DropDownOption>
-          <DropDownOption value="FREE">FREE</DropDownOption>
-          <DropDownOption value="PAID">PAID</DropDownOption>
-          <DropDownOption value="ADMIN">ADMIN</DropDownOption>
-          <DropDownOption value="GOV_ROLE">GOV. OFFICIAL</DropDownOption>
-        </SignUpInputsDropDown> */}
+          {/* <fieldset>
+            <select name="tier" value={tier}>
+              <option value="FREE">FREE</option>
+              <option value="PAID">PAID</option>
+            </select>
+          </fieldset> */}
           <FormInputs
             type="text"
             name="tier"

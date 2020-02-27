@@ -18,6 +18,16 @@ import {
   TopBar
 } from "./Styling";
 
+// Home Page Styling Import
+import {
+  NotSignedInDiv,
+  SignedInDiv,
+  UserHeader,
+  UserName,
+  UserText,
+  UserTypeText
+} from "./HomeStyles";
+
 // Login Styling Imports
 import {
   LoginPage,
@@ -44,7 +54,8 @@ import {
   CloseButton,
   FormTop,
   FormTitle2,
-  SignUpClose
+  SignUpClose,
+  UserType
 } from "./SignUpStyles";
 
 // Tools Styling Imports
@@ -119,5 +130,12 @@ export {
   CloseButton,
   FormTop,
   FormTitle2,
-  SignUpClose
+  SignUpClose,
+  NotSignedInDiv,
+  SignedInDiv,
+  UserHeader,
+  UserName,
+  UserText,
+  UserTypeText,
+  UserType
 };

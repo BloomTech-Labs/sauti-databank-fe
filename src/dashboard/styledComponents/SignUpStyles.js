@@ -139,3 +139,8 @@ export const FormTitle2 = styled.h1`
   font-size: 3rem;
   text-align: center;
 `;
+export const UserType = styled.big`
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #eb5e52;
+`;
