@@ -311,7 +311,9 @@ function DashSignup(props) {
             value={interest}
             onChange={handleChange}
           />
-          <FormButton2 type="submit">Create Account</FormButton2>
+          <FormButton2 className="initialize-signup" type="submit">
+            Create Account
+          </FormButton2>
         </form>
       </SignUpForm>
     </SignUpContainer>

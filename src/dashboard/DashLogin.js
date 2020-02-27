@@ -111,7 +111,9 @@ function DashLogin(props) {
             value={user.password}
             onChange={handleChange}
           />
-          <FormButton2 type="submit">Login</FormButton2>
+          <FormButton2 className="initialize-login" type="submit">
+            Login
+          </FormButton2>
         </Form>
       </div>
     </ContentContainer>

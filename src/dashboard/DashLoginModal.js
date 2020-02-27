@@ -36,7 +36,7 @@ export default function DashLoginModal() {
 
   return (
     <div>
-      <ModalButtons type="button" onClick={handleOpen}>
+      <ModalButtons className="nav-login" type="button" onClick={handleOpen}>
         LOGIN
       </ModalButtons>
       <Modal
