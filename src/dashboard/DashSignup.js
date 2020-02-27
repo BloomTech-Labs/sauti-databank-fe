@@ -72,11 +72,10 @@ const Styles = withStyles(theme => ({
     }
   },
   input: {
-    borderRadius: 24,
     position: "relative",
     backgroundColor: "none",
     color: "white",
-    border: "2px solid #eb5e52",
+    border: "2px solid white",
     fontSize: 18,
     width: 200,
     padding: "14px 20px 14px 8px",
@@ -200,8 +199,8 @@ function DashSignup(props) {
           <FormTitle2>Sign Up</FormTitle2>
           <FormInputs
             type="text"
-            pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
-            validate="required"
+            // pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+            // validate="required"
             name="email"
             placeholder="email"
             value={email}
@@ -282,9 +281,7 @@ function DashSignup(props) {
             value={interest}
             onChange={handleChange}
           />
-          <FormButton2 type="submit" onClick={props.handleClose}>
-            Create Account
-          </FormButton2>
+          <FormButton2 type="submit">Create Account</FormButton2>
         </form>
       </SignUpForm>
     </SignUpContainer>

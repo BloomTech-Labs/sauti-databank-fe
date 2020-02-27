@@ -63,7 +63,7 @@ export const SignUpInputs = styled.input`
   width: 50%;
   outline: none;
   color: white;
-  border-radius: 24px;
+  // border-radius: 24px;
   transition 0.25s;
   &:focus {
     width: 70%;
@@ -81,7 +81,7 @@ export const SignUpInputsDropDown = styled.select`
   width: 50%;
   outline: none;
   color: white;
-  border-radius: 24px;
+  // border-radius: 24px;
   transition 0.25s;
   &:focus {
     width: 70%;

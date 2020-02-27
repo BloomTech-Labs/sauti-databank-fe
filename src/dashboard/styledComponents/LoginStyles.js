@@ -37,7 +37,7 @@ export const FormInputs = styled.input`
   width: 65%;
   outline: none;
   color: white;
-  border-radius: 24px;
+  // border-radius: 24px;
   transition 0.25s;
   &:focus {
     width: 75%;
