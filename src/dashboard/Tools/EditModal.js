@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+
+import gql from "graphql-tag";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import Loader from "react-loader-spinner";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -20,10 +24,45 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const Users_Query = gql`
+  query UsersQ {
+    allUsers: databankUsers {
+      id
+      email
+      interest
+      tier
+      organization
+      job_position
+      country
+      organization_type
+    }
+  }
+`;
+
+const EDIT = gql`
+  mutation editUserData($editUser: newEditUserInput!) {
+    editUser(input: $editUser) {
+      ... on DatabankUser {
+        id
+        email
+        interest
+        tier
+        organization
+        job_position
+        country
+        organization_type
+      }
+      ... on Error {
+        message
+      }
+    }
+  }
+`;
+
 //button on AccountGrid
 const EditModal = props => {
-  const [account, setAccount] = useState([]);
-
+  const [account, setAccount] = useState({});
+  //console.log(`account`, account);
   //account id added automatically, needed to .put
   account.id = props.data.id;
 
@@ -31,22 +70,45 @@ const EditModal = props => {
 
   const [open, setOpen] = useState(false);
 
+  const [createUser, editUser] = useMutation(EDIT);
+
   const handleChange = event => {
     setAccount({ ...account, [event.target.name]: event.target.value });
   };
 
-  const handleOpen = () => {
+  const handleSubmit = (event, input) => {
+    event.preventDefault();
+    createUser({
+      variables: { editUser: input },
+      refetchQueries: [{ query: Users_Query }]
+    });
+    setOpen(false);
+    props.api.api.redrawRows();
+  };
+
+  if (editUser.loading) {
+    return (
+      <div className="loader-container">
+        <Loader
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={12000}
+        />
+      </div>
+    );
+  }
+
+  if (editUser.error) {
+    return <p>ERROR!</p>;
+  }
+
+  const handleOpen = props => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    props.editAccount(account);
-    setOpen(false);
-    props.api.api.redrawRows();
   };
 
   return (
@@ -93,7 +155,7 @@ const EditModal = props => {
                 <input
                   type="email"
                   name="email"
-                  id="Email"
+                  id="email"
                   placeholder={props.data.email}
                   value={account.email}
                   onChange={handleChange}
@@ -107,7 +169,7 @@ const EditModal = props => {
                   id="organization"
                   placeholder={props.data.organization}
                   name="organization"
-                  value={account.last_name}
+                  value={account.organization}
                   onChange={handleChange}
                 />
               </h2>
@@ -115,11 +177,23 @@ const EditModal = props => {
                 <label for="jobPosition">Job Position</label>
                 <br></br>
                 <input
-                  type="jobPosition"
-                  name="jobPosition"
-                  id="jobPosition"
-                  placeholder={props.data.jobPosition}
-                  value={account.jobPosition}
+                  type="text"
+                  name="job_position"
+                  id="job_position"
+                  placeholder={props.data.job_position}
+                  value={account.job_position}
+                  onChange={handleChange}
+                />
+              </h2>
+              <h2>
+                <label for="Organization_type">Organization Type</label>
+                <br></br>
+                <input
+                  type="text"
+                  id="organization_type"
+                  placeholder={props.data.organization_type}
+                  name="organization_type"
+                  value={account.organization_type}
                   onChange={handleChange}
                 />
               </h2>
@@ -149,40 +223,28 @@ const EditModal = props => {
               </h2>
 
               <h2>
-                <label for="interests">Interests</label>
+                <label for="interest">Interest</label>
                 <br></br>
                 <input
-                  type="interests"
-                  name="interests"
-                  id="interests"
-                  placeholder={props.data.interests}
-                  value={account.interests}
+                  type="text"
+                  name="interest"
+                  id="interest"
+                  placeholder={props.data.interest}
+                  value={account.interest}
                   onChange={handleChange}
                 />
               </h2>
             </div>
             <div className="col2">
-              <h2>
-                <label for="Government">Government/ NGO/ Researcher</label>
-                <br></br>
-                <input
-                  type="string"
-                  name="government"
-                  id="government"
-                  placeholder={props.data.government}
-                  value={account.government}
-                  onChange={handleChange}
-                />
-              </h2>
-              <br></br>
-
-              <h2></h2>
               <br></br>
               <footer>
                 <button variant="secondary" onClick={handleClose}>
                   Close
                 </button>
-                <button variant="primary" onClick={handleSubmit}>
+                <button
+                  variant="primary"
+                  onClick={e => handleSubmit(e, account)}
+                >
                   Save Changes
                 </button>
               </footer>

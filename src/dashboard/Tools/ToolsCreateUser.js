@@ -71,7 +71,6 @@ const REGISTER = gql`
 
 const ToolsCreateUser = () => {
   const [addUser, setAddUser] = useState(initialState);
-  console.log(addUser);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   //createUser is f(x) to make user,
@@ -85,6 +84,7 @@ const ToolsCreateUser = () => {
       });
     }
   });
+  //destructed and used as field values
   const {
     email,
     password,
@@ -227,7 +227,7 @@ const ToolsCreateUser = () => {
                 <label for="Organization">Organization</label>
                 <br></br>
                 <input
-                  type="organization"
+                  type="text"
                   name="organization"
                   id="organization"
                   placeholder="organization"
