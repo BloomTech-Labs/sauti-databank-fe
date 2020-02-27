@@ -4,6 +4,21 @@ import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
+const Users_Query = gql`
+  query UsersQ {
+    allUsers: databankUsers {
+      id
+      email
+      interest
+      tier
+      organization
+      job_position
+      country
+      organization_type
+    }
+  }
+`;
+
 const DELETE = gql`
   mutation deleteAUser($delete_user: newDeleteUserInput!) {
     deleteUser(input: $delete_user) {
@@ -19,13 +34,53 @@ const DELETE = gql`
 `;
 
 const DeleteAccount = props => {
-  const [deleteId, deleteUser] = useMutation(DELETE);
-  //console.log(props.data)
+  const [deleteId, deleteUser] = useMutation(DELETE, {
+    update(cache, { data: { deleteUser } }) {
+      const data = cache.readQuery({ query: Users_Query });
+      cache.writeQuery({
+        query: Users_Query,
+        data: {
+          allUsers: [
+            ...data.allUsers,
+            data.allUsers.map(e => {
+              if (e.id !== deleteUser.id) {
+                return e;
+              }
+            })
+          ]
+        }
+      });
+    }
+  });
+
   const deleteHandler = (event, input) => {
     input = { id: input };
     event.preventDefault();
     deleteId({
-      variables: { delete_user: input }
+      variables: { delete_user: input },
+      update(cache, { data: { deleteUser } }) {
+        const data = cache.readQuery({ query: Users_Query });
+        console.log(data);
+        cache.writeQuery({
+          query: Users_Query,
+          data: {
+            allUsers: [
+              ...data.allUsers,
+              data.allUsers.map(e => {
+                if (e.id !== deleteUser.id) {
+                  return e;
+                }
+              })
+            ]
+          }
+        });
+      }
+      // update: (store, {data})=> {
+      //   const userData = store.readQuery<Users_Query>({
+      //     query: Users_Query
+      //   })
+      //   console.log(userData)
+      // }
     });
     console.log(input);
     props.params.api.redrawRows();
