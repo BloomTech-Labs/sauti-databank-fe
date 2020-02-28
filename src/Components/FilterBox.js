@@ -7,10 +7,17 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 
-import { getTier } from "../dashboard/auth/Auth";
+import { decodeToken, getToken } from "../dashboard/auth/Auth";
 
 export default function FilterBox(props) {
-  const tier = getTier();
+  const token = getToken();
+  let tier;
+  if (token) {
+    tier = decodeToken(token);
+    tier = tier.tier;
+    console.log("AAAAAAAAAA", tier);
+  }
+
   const [filterBoxIndex, setFilterBoxIndex] = useState({
     type: "gender",
     query: "Users"
@@ -241,9 +248,7 @@ export default function FilterBox(props) {
           )
         )}
 
-        {tier === "ADMIN" ||
-        (tier === "PAID" && filterBoxIndex.query === "Sessions") ||
-        filterBoxAdditionalFilter.query === "Sessions" ? (
+        {tier === "ADMIN" || tier === "PAID" ? (
           <DateContainer>
             <div>
               <p>Start</p>
