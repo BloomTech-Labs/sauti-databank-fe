@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from "react-csv-downloader";
 
-import { getTier } from "../dashboard/auth/Auth";
+import { getTier, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
 
 import {
@@ -14,7 +14,15 @@ const Graph = props => {
   console.log("keys in graph", props.keys);
   console.log("data in graph", props.data);
 
-  const tier = getTier();
+  // const tier = getTier();
+  const token = getToken();
+  let tier;
+  if (token) {
+    tier = decodeToken(token);
+    tier = tier.tier;
+    console.log("AAAAAAAAAA", tier);
+  }
+
   console.log("aaa", tier);
 
   const [csvHeaders, setCsvHeaders] = useState([]);
