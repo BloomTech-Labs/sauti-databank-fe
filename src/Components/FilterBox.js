@@ -7,6 +7,8 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 
+import CalendarModal from "../dashboard/CalendarModal";
+
 import { decodeToken, getToken } from "../dashboard/auth/Auth";
 
 export default function FilterBox(props) {
@@ -273,29 +275,32 @@ export default function FilterBox(props) {
             </div>
           </DateContainer>
         ) : (
-          <DateContainer>
-            <div>
-              <p>Start</p>
-              <input
-                name="startData"
-                type="date"
-                value={filterBoxStartDate}
-                disabled={loading}
-                placeholder={setFilterBoxStartDate}
-              />
-            </div>
-            <div>
-              <p>End</p>
-              <input
-                disabled={loading}
-                name="endData"
-                type="date"
-                value={filterBoxEndDate}
-                id="today"
-                placeholder={setFilterBoxEndDate}
-              />
-            </div>
-          </DateContainer>
+          <CalendarModal />
+          // <DateContainer>
+          //   <div>
+          //     <p>Start</p>
+          //     <input
+          //       name="startData"
+          //       type="date"
+          //       value={filterBoxStartDate}
+          //       disabled={loading}
+          //       placeholder={setFilterBoxStartDate}
+          //       onClick={}
+          //     />
+          //   </div>
+          //   <div>
+          //     <p>End</p>
+          //     <input
+          //       disabled={loading}
+          //       name="endData"
+          //       type="date"
+          //       value={filterBoxEndDate}
+          //       id="today"
+          //       placeholder={setFilterBoxEndDate}
+          //       onClick={}
+          //     />
+          //   </div>
+          // </DateContainer>
         )}
 
         <div className="btn-container">
