@@ -1,5 +1,5 @@
 import React from "react";
-import { getTier } from "./auth/Auth";
+import { getToken, decodeToken } from "./auth/Auth";
 import PaypalButton from "../Components/PaypalButton";
 
 import {
@@ -13,13 +13,19 @@ import {
 } from "./styledComponents/Index";
 
 function DashAccount() {
-  const userType = getTier();
+  const token = getToken();
+  let tier;
+  if (token) {
+    tier = decodeToken(token);
+    tier = tier.tier;
+    console.log("AAAAAAAAAA", tier);
+  }
 
   return (
     <ContentContainer>
       <Header2>My Account *NOT FINAL VERSION*</Header2>
       <UserText>
-        User Access = <UserTypeText>{userType}</UserTypeText>
+        User Access = <UserTypeText>{tier}</UserTypeText>
       </UserText>
       <br />
       <hr />
