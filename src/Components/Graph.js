@@ -92,7 +92,7 @@ const Graph = props => {
   return (
     <div className="Graph-Container">
       <div className="dwnld-btn">
-        {tier === "ADMIN" || tier === "PAID" ? (
+        {tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE" ? (
           <CsvDownloader
             datas={csvFormattedData}
             columns={csvHeaders}
@@ -103,7 +103,6 @@ const Graph = props => {
           </CsvDownloader>
         ) : (
           <>
-            {/* <NoAccessText>Download⯆</NoAccessText> */}
             <DownloadModal />
           </>
         )}

@@ -250,7 +250,7 @@ export default function FilterBox(props) {
           )
         )}
 
-        {tier === "ADMIN" || tier === "PAID" ? (
+        {tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE" ? (
           <DateContainer>
             <div>
               <p>Start</p>
