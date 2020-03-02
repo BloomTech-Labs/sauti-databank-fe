@@ -50,7 +50,7 @@ function DashNav() {
           {!SignedIn && <DashLoginModal />}
           {!SignedIn && <DashSignupModal />}
           {SignedIn && <Links to="/logout">LOGOUT</Links>}
-          <SautiLink href="http://sautiafrica.org/">Sauti Home</SautiLink>
+          <SautiLink href="http://sautiafrica.org/">Home</SautiLink>
         </Navigation>
       </TopBar>
 

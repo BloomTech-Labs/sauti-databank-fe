@@ -5,7 +5,7 @@ export const DownloadModalDiv = styled.div`
   background-color: white;
   width: 35%;
   height: 30vh;
-  font-size: 1.8rem;
+  font-size: 2rem;
   text-align: center;
   border-radius: 5px;
 `;

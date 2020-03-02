@@ -8,17 +8,10 @@ export const ToolsInput = styled.input`
   background: white;
   display: block;
   margin: 20px auto;
-  text-align: center;
-  border: 2px solid #212121;
   padding: 14px 10px;
   width: 35%;
   outline: none;
-  border-radius: 24px;
   transition 0.25s;
-  &:focus {
-    width: 55%;
-    border-color: white;
-  }
 `;
 export const ToolsTitle = styled.h2`
   padding: 1% 0% 0% 2%;
@@ -37,6 +30,5 @@ export const UserDownloadButton = styled.button`
 `;
 export const ToolsGrid = styled.div`
   height: 750px;
-  //   width: 95%;
   margin: 0 auto;
 `;
