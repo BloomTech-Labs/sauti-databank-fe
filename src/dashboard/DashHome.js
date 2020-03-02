@@ -20,7 +20,6 @@ function DashHome() {
   if (token) {
     userEmail = decodeToken(token);
     userEmail = userEmail.email;
-    console.log("AAAAAAAAAA", userEmail);
   }
 
   return (

@@ -20,19 +20,10 @@ import swal from "sweetalert";
 import {
   ModalText,
   SignUpForm,
-  FormTitle,
-  FormButton,
   FormButton2,
   FormInputs,
   SignUpContainer,
   SignUpText,
-  ContentContainer,
-  SignUpInfo,
-  SignUpPage,
-  SignUpInputsDropDown,
-  SignUpInputs,
-  DropDownOption,
-  DropDownLabel,
   FormTitle2,
   CloseButton,
   SignUpClose,
@@ -148,7 +139,7 @@ function DashSignup(props) {
     ) {
       swal({
         title: "Error",
-        text: "Error Signing up. Please fill all required fields.",
+        text: "Please fill all required fields.",
         icon: "warning",
         dangerMode: true
       });
@@ -156,11 +147,20 @@ function DashSignup(props) {
       const createdUser = await createUser({
         variables: { newUser: input }
       });
-      console.log(createdUser);
-      localStorage.setItem("token", createdUser.data.register.token);
-      props.handleClose();
-      history.push("/");
-      swal({ title: "✔", text: "Success", icon: "success" });
+      if (createdUser.data.register.id === null) {
+        swal({
+          title: "Error",
+          text: "Please use a different email.",
+          icon: "warning",
+          dangerMode: true
+        });
+      } else {
+        console.log(createdUser.data.register.id);
+        localStorage.setItem("token", createdUser.data.register.token);
+        props.handleClose();
+        history.push("/");
+        swal({ title: "", text: "Success!", icon: "success" });
+      }
     }
   };
 
@@ -226,8 +226,6 @@ function DashSignup(props) {
           <RequiredInputTitle>*</RequiredInputTitle>
           <SignUpRequiredInputs
             type="text"
-            // pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
-            // validate="required"
             name="email"
             placeholder="email"
             value={email}
