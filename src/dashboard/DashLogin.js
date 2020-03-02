@@ -70,8 +70,6 @@ function DashLogin(props) {
       variables: { login: input }
     });
     if (newUser.data.login.token !== null) {
-      console.log("newUser", newUser.data.login);
-      console.log("newUser2", newUser.data.login.token);
       localStorage.setItem("token", newUser.data.login.token);
 
       props.handleClose();

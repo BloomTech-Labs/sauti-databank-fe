@@ -7,7 +7,6 @@ import Fade from "@material-ui/core/Fade";
 import { Link } from "react-router-dom";
 
 import {
-  ContentContainer,
   NoAccessText,
   DownloadModalDiv,
   DownloadModalTitle,
