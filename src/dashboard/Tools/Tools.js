@@ -6,7 +6,6 @@ import { AutoWidthCalculator } from "ag-grid-community";
 
 import gridOptions from "./Gridoptions";
 
-import UsersQuery from "./UsersQuery";
 import EditModal from "./EditModal";
 import ToolsCreateUser from "./ToolsCreateUser";
 
@@ -256,7 +255,6 @@ class Tools extends Component {
             onGridSizeChanged={this.onGridSizeChanged}
           />
         </ToolsGrid>
-        {/* <UsersQuery /> */}
       </>
     );
   }

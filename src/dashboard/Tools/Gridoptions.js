@@ -1,4 +1,6 @@
 const gridOptions = {
+  enableCharts: true,
+  enableRangeSelection: true,
   onRowClicked(event) {},
   onQuickFilterChanged: function(event) {},
   onGridReady: function(event) {

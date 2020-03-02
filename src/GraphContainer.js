@@ -10,13 +10,16 @@ import Queries from "./Components/Queries";
 
 const GraphContainer = () => {
   const [index, setIndex] = useState({ type: "gender", query: "Users" });
+  console.log(`GraphContianer index`, index);
   const [crossFilter, setCrossFilter] = useState({ type: "", query: "Users" });
+  console.log(`Gra Container crossFilter`, crossFilter);
   const [additionalFilter, setAdditionalFilter] = useState({
     type: "",
     query: "",
     label: ""
   });
   const [indexLabel, setIndexLabel] = useState("Gender");
+  console.log(`Gra Container indexLabel`, indexLabel);
   const [crossLabel, setCrossLabel] = useState("");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});

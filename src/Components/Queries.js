@@ -11,7 +11,7 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 const GetData = props => {
   let queryType = "tradersUsers";
   let QUERY;
-
+  console.log(props.index, `props.index`);
   if (
     props.index.query === "Users" &&
     props.crossFilter.query === "Users" &&
