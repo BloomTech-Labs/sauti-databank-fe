@@ -24,12 +24,16 @@ export default function FilterBox(props) {
     type: "gender",
     query: "Users"
   });
+  console.log(`filterBoxIndex`, filterBoxIndex);
   const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
     type: "",
     query: "Users"
   });
+  console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
   const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
+  console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
   const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
+  console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
   const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
     type: "",
     query: "",

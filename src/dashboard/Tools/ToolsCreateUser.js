@@ -11,6 +11,75 @@ import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 //import { Dropdown, Form } from 'react-bootstrap'
 
+//dropdown
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
+import { withStyles } from "@material-ui/core/styles";
+import InputBase from "@material-ui/core/InputBase";
+
+import {
+  ModalText,
+  SignUpForm,
+  FormTitle,
+  FormButton,
+  FormButton2,
+  FormInputs,
+  SignUpContainer,
+  SignUpText,
+  ContentContainer,
+  SignUpInfo,
+  SignUpPage,
+  SignUpInputsDropDown,
+  SignUpInputs,
+  DropDownOption,
+  DropDownLabel,
+  FormTitle2,
+  CloseButton,
+  SignUpClose,
+  UserType,
+  InputTitle,
+  SignUpRequiredInputs,
+  RequiredInputTitle,
+  ModalTextBottom
+} from "../styledComponents/Index";
+
+const Styles = withStyles(theme => ({
+  root: {
+    "label + &": {
+      marginTop: theme.spacing(3)
+    }
+  },
+  input: {
+    position: "relative",
+    backgroundColor: "none",
+    color: "white",
+    border: "2px solid white",
+    fontSize: 18,
+    width: 200,
+    padding: "14px 20px 14px 8px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"'
+    ].join(","),
+    "&:focus": {
+      borderRadius: 4,
+      borderColor: "white",
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
+    }
+  }
+}))(InputBase);
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: "flex",
@@ -250,7 +319,7 @@ const ToolsCreateUser = () => {
               </h2>
             </div>
             <div className="col2">
-              <h2>
+              {/* <h2>
                 <label for="Organization_type">Organiztion Type</label>
                 <br></br>
                 <input
@@ -261,7 +330,29 @@ const ToolsCreateUser = () => {
                   value={organization_type}
                   onChange={handleChange}
                 />
-              </h2>
+              </h2> */}
+              <h2>* Select Your Organization Type</h2>
+              <FormControl className={classes.margin}>
+                <InputTitle id="organization_type">
+                  * Select Your Organization Type
+                </InputTitle>
+                <Select
+                  labelId="organization_type"
+                  id="organization_type"
+                  name="organization_type"
+                  value={organization_type}
+                  onChange={handleChange}
+                  input={<Styles />}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={"RESEARCH"}>RESEARCH</MenuItem>
+                  <MenuItem value={"GOVERNMENT"}>GOVERNMENT</MenuItem>
+                  <MenuItem value={"NGO"}>NGO</MenuItem>
+                  <MenuItem value={"OTHER"}>OTHER</MenuItem>
+                </Select>
+              </FormControl>
               <h2>
                 <label for="country">country</label>
                 <br></br>
@@ -274,7 +365,7 @@ const ToolsCreateUser = () => {
                   onChange={handleChange}
                 />
               </h2>
-              <h2>
+              {/* <h2>
                 <label for="tier">tier</label>
                 <br></br>
                 <input
@@ -285,7 +376,28 @@ const ToolsCreateUser = () => {
                   value={tier}
                   onChange={handleChange}
                 />
-              </h2>
+              </h2> */}
+              <h2>* Select User Type</h2>
+              <FormControl className={classes.margin}>
+                <InputTitle id="User type"></InputTitle>
+                <Select
+                  labelId="User type"
+                  id="tier"
+                  value={tier}
+                  name="tier"
+                  onChange={handleChange}
+                  input={<Styles />}
+                  placeholder="tier"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={"FREE"}>FREE</MenuItem>
+                  <MenuItem value={"PAID"}>PAID</MenuItem>
+                  <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
+                  <MenuItem value={"PAID"}>SPECIAL</MenuItem>
+                </Select>
+              </FormControl>
               <h2>
                 <label for="interest">interest</label>
                 <br></br>
