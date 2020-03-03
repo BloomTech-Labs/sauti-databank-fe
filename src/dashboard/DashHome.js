@@ -30,16 +30,14 @@ function DashHome() {
           <UserHeader>Welcome To the Sauti Data App</UserHeader>
         </NotSignedInDiv>
       )}
-      {
-        (signedIn,
-        GASignInHandler(userEmail) && (
-          <SignedInDiv>
-            <UserHeader>
-              Welcome <UserName>{userEmail}</UserName> !
-            </UserHeader>
-          </SignedInDiv>
-        ))
-      }
+      {signedIn && (
+        <SignedInDiv>
+          <UserHeader>
+            Welcome <UserName>{userEmail}</UserName> !
+          </UserHeader>
+        </SignedInDiv>
+      )}
+      {signedIn && GASignInHandler(userEmail)}
       <GraphContainer />
     </>
   );
