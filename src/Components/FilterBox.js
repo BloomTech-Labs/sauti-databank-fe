@@ -222,7 +222,7 @@ export default function FilterBox(props) {
             color="#708090"
             width={50}
             height={20}
-            timeout={12000}
+            timeout={120000000}
           />
         ) : (
           props.checkboxOptions.length > 1 && (
@@ -276,31 +276,6 @@ export default function FilterBox(props) {
           </DateContainer>
         ) : (
           <CalendarModal />
-          // <DateContainer>
-          //   <div>
-          //     <p>Start</p>
-          //     <input
-          //       name="startData"
-          //       type="date"
-          //       value={filterBoxStartDate}
-          //       disabled={loading}
-          //       placeholder={setFilterBoxStartDate}
-          //       onClick={}
-          //     />
-          //   </div>
-          //   <div>
-          //     <p>End</p>
-          //     <input
-          //       disabled={loading}
-          //       name="endData"
-          //       type="date"
-          //       value={filterBoxEndDate}
-          //       id="today"
-          //       placeholder={setFilterBoxEndDate}
-          //       onClick={}
-          //     />
-          //   </div>
-          // </DateContainer>
         )}
 
         <div className="btn-container">
@@ -313,15 +288,6 @@ export default function FilterBox(props) {
           >
             Submit
           </Button>
-          {/* <CsvDownloader data={} columns={getHeaders()} filename={tradersDataCSV} seperator={';'}> */}
-          {/* <Button
-            className="download-btn"
-            onClick={() => console.log("Download CSV")}
-            disabled={loading}
-            style={{ cursor: loading ? "auto" : "pointer" }}
-          >
-            Download
-          </Button> */}
         </div>
 
         <p
