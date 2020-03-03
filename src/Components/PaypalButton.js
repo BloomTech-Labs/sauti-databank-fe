@@ -36,11 +36,13 @@ export default function PaypalButton() {
 
         createSubscription: function(data, actions) {
           return actions.subscription.create({
-            plan_id: "P-72246955VA0534701LZK5PUA"
+            plan_id: "P-88W9005566465954VLZLJ54Q"
           });
         },
-
+        // P-72246955VA0534701LZK5PUA
         onApprove: async function(data, actions) {
+          console.log("2", data.subscriptionID, actions);
+
           alert(
             "You have successfully created subscription " + data.subscriptionID
           );
@@ -49,6 +51,7 @@ export default function PaypalButton() {
           // decode the token
           // make query to change the user account to paid(do we have this?)
           const decoded = decodeToken(token);
+          decoded.subscription_id = data.subscriptionID;
           console.log("decoded", decoded);
           decoded.tier = "PAID";
           delete decoded.iat;
