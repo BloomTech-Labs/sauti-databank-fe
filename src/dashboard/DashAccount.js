@@ -18,7 +18,6 @@ function DashAccount() {
   if (token) {
     tier = decodeToken(token);
     tier = tier.tier;
-    console.log("AAAAAAAAAA", tier);
   }
 
   return (

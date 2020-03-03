@@ -70,18 +70,15 @@ function DashLogin(props) {
       variables: { login: input }
     });
     if (newUser.data.login.token !== null) {
-      console.log("newUser", newUser.data.login);
-      console.log("newUser2", newUser.data.login.token);
       localStorage.setItem("token", newUser.data.login.token);
 
       props.handleClose();
       history.push("/");
-      swal({ title: "✔", text: "Success", icon: "success" });
+      swal({ title: "", text: "Success!", icon: "success" });
     } else {
       swal({
         title: "Error",
-        text:
-          "Error logging in. Please Check that your email and password are correct.",
+        text: "Please check that your email and password are correct.",
         icon: "warning",
         dangerMode: true
       });
@@ -101,7 +98,6 @@ function DashLogin(props) {
             onChange={handleChange}
           />
           <FormInputs
-            className="my-4"
             type="password"
             name="password"
             placeholder="password"
