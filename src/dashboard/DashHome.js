@@ -32,7 +32,7 @@ function DashHome() {
       )}
       {
         (signedIn,
-        GASignInHandler() && (
+        GASignInHandler(userEmail) && (
           <SignedInDiv>
             <UserHeader>
               Welcome <UserName>{userEmail}</UserName> !
