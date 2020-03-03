@@ -7,6 +7,7 @@ import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
+import { Organisation } from "./Components/NewFilterPlan";
 
 const GraphContainer = () => {
   const [index, setIndex] = useState({ type: "gender", query: "Users" });
@@ -44,6 +45,7 @@ const GraphContainer = () => {
         <div className="header">
           <h1>Informal Cross-Border Trade Data</h1>
         </div>
+        <Organisation />
         <div className="content-container">
           <div className="chart-container">
             <Queries
