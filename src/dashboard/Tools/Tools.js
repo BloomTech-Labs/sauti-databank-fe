@@ -252,7 +252,6 @@ class Tools extends Component {
             modules={this.state.modules}
             rowSelection="multiple"
             defaultColDef={this.state.defaultColDef}
-            rowSelection={this.state.rowSelection}
             onGridSizeChanged={this.onGridSizeChanged}
           />
         </ToolsGrid>
