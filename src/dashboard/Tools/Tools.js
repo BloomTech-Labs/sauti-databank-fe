@@ -25,7 +25,7 @@ class Tools extends Component {
     this.state = {
       columnDefs: [
         {
-          headerName: "id",
+          headerName: "ID",
           field: "id",
           sortable: true,
           filter: true,
@@ -36,7 +36,7 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Email",
+          headerName: "EMAIL",
           field: "email",
           sortable: true,
           filter: true,
@@ -47,7 +47,7 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Organization",
+          headerName: "ORGANIZATION",
           field: "organization",
           sortable: true,
           filter: true,
@@ -58,7 +58,7 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Organization Type",
+          headerName: "ORG TITLE",
           field: "organization_type",
           sortable: true,
           filter: true,
@@ -69,7 +69,7 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Job Position",
+          headerName: "JOB POSITION",
           field: "job_position",
           sortable: true,
           filter: true,
@@ -80,7 +80,7 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Country",
+          headerName: "COUNTRY",
           field: "country",
           sortable: true,
           filter: true,
@@ -92,7 +92,7 @@ class Tools extends Component {
         },
 
         {
-          headerName: "Interest",
+          headerName: "INTEREST",
           field: "interest",
           sortable: true,
           filter: true,
@@ -103,7 +103,7 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Tier",
+          headerName: "TIER",
           field: "tier",
           sortable: true,
           filter: true,
@@ -114,7 +114,7 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Payment",
+          headerName: "PAYMENT",
           field: "payment",
           sortable: true,
           filter: true,
@@ -125,7 +125,7 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "Current",
+          headerName: "STATUS",
           field: "current",
           sortable: true,
           filter: true,
@@ -137,7 +137,7 @@ class Tools extends Component {
         },
 
         {
-          headerName: "Edit",
+          headerName: "EDIT",
           field: "Edit",
           sortable: true,
           filter: true,
@@ -157,7 +157,7 @@ class Tools extends Component {
         },
 
         {
-          headerName: "Delete",
+          headerName: "DELETE",
           field: "Delete",
           sortable: true,
           filter: true,
@@ -250,6 +250,7 @@ class Tools extends Component {
             rowData={this.props.allUsers}
             gridOptions={gridOptions}
             modules={this.state.modules}
+            rowSelection="multiple"
             defaultColDef={this.state.defaultColDef}
             rowSelection={this.state.rowSelection}
             onGridSizeChanged={this.onGridSizeChanged}
