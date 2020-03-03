@@ -109,17 +109,18 @@ export const LinksLast = styled(Link)`
 `;
 export const SautiLink = styled.a`
   text-decoration: none;
-  color: #eb5e52;
+  color: white;
   margin-right: 40px;
   font-family: Helvetica;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
+  text-transform: uppercase;
   &:hover {
-    color: khaki;
+    color: #eb5e52;
   }
 `;
 // Modal Styling

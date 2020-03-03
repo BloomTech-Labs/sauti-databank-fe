@@ -5,7 +5,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
 import DashSignup from "./DashSignup";
-import CustomizedSelects from "./DashSignUp02";
 
 import { ModalButtons } from "./styledComponents/Index";
 
@@ -54,7 +53,6 @@ export default function DashSignupModal() {
       >
         <Fade in={open}>
           <DashSignup handleClose={handleClose} />
-          {/* <CustomizedSelects handleClose={handleClose} /> */}
         </Fade>
       </Modal>
     </div>
