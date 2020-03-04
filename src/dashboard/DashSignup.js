@@ -62,8 +62,8 @@ const Styles = withStyles(theme => ({
     border: "2px solid grey",
     borderRadius: 5,
     fontSize: 18,
-    marginLeft: 45,
-    marginRight: 45,
+    margin: "0 auto",
+    width: "75%",
     padding: "14px 20px 14px 8px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     fontFamily: [
@@ -146,7 +146,6 @@ function DashSignup(props) {
       } else {
         console.log(createdUser.data.register.id);
         localStorage.setItem("token", createdUser.data.register.token);
-        props.handleClose();
         GAHandleCreateUser();
         history.push("/");
         swal({ title: "", text: "Success!", icon: "success" });
