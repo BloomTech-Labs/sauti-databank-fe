@@ -38,15 +38,44 @@ const GraphContainer = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
-
+  const categories = [
+    { gender: ["male", "female"] },
+    { contry: ["kenya", "zimbabway", "uganda"] },
+    { trade: ["carrots", "rice", "maize"] }
+  ];
+  const categories2 = [
+    {
+      prompt: "gender",
+      subcategories: [
+        { prompt: "male", subcategories: [] },
+        { prompt: "female", subcategories: [] }
+      ]
+    },
+    {
+      prompt: "country",
+      subcategories: [
+        { prompt: "kenya", subcategories: [] },
+        { prompt: "zimbabway", subcategories: [] },
+        { prompt: "uganda", subcategories: [] }
+      ]
+    },
+    {
+      prompt: "trade",
+      subcategories: [
+        { prompt: "carrots", subcategories: [] },
+        { prompt: "rice", subcategories: [] },
+        { prompt: "maize", subcategories: [] }
+      ]
+    }
+  ];
   return (
     <div className="App">
       <div className="main-container">
         <div className="header">
           <h1>Informal Cross-Border Trade Data</h1>
         </div>
-        <Organisation />
-        <div className="content-container">
+        <Organisation categories={categories} categories2={categories2} />
+        {/* <div className="content-container">
           <div className="chart-container">
             <Queries
               index={index}
@@ -81,7 +110,7 @@ const GraphContainer = () => {
               setEndDate={setEndDate}
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -122,6 +122,7 @@ const GetData = props => {
     props.additionalFilter.type &&
     !graphLabels[`${props.additionalFilter.type}`]
   ) {
+    console.log(data.additionalFilterData, props.additionalFilter.type);
     removeMultiple(data.additionalFilterData);
     filteredData = getIndex(
       data.additionalFilterData,
