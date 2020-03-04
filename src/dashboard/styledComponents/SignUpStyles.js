@@ -1,12 +1,3 @@
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import InputBase from "@material-ui/core/InputBase";
-import { nonExecutableDefinitionMessage } from "graphql/validation/rules/ExecutableDefinitions";
-
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -26,9 +17,6 @@ export const SignUpText = styled.div`
   border-radius: 10px;
   background-color: white;
   color: #212121;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: space-between;
 `;
 export const SignUpPage = styled.div`
   display: flex;
@@ -66,7 +54,6 @@ export const SignUpInputs = styled.input`
   width: 50%;
   outline: none;
   color: white;
-  // border-radius: 24px;
   transition 0.25s;
   &:focus {
     width: 70%;
@@ -84,7 +71,6 @@ export const SignUpRequiredInputs = styled.input`
   width: 65%;
   outline: none;
   color: white;
-  // border-radius: 24px;
   transition 0.25s;
   &:focus {
     width: 78%;
@@ -102,7 +88,6 @@ export const SignUpInputsDropDown = styled.select`
   width: 50%;
   outline: none;
   color: white;
-  // border-radius: 24px;
   transition 0.25s;
   &:focus {
     width: 70%;

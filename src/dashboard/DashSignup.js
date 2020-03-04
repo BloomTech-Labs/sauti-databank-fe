@@ -18,22 +18,10 @@ import InputBase from "@material-ui/core/InputBase";
 
 import swal from "sweetalert";
 
-import {
-  ModalText,
-  SignUpForm,
-  FormButton2,
-  FormInputs,
-  SignUpContainer,
-  SignUpText,
-  FormTitle2,
-  CloseButton,
-  SignUpClose,
-  UserType,
-  InputTitle,
-  SignUpRequiredInputs,
-  RequiredInputTitle,
-  ModalTextBottom
-} from "./styledComponents/Index";
+import styled from "styled-components";
+import DashLoginModal from "./DashLoginModal";
+import "../index.css";
+import { ModalText, FormButton2 } from "./styledComponents/Index";
 
 const initialState = {
   email: "",
@@ -70,12 +58,12 @@ const Styles = withStyles(theme => ({
     }
   },
   input: {
-    position: "relative",
-    backgroundColor: "none",
-    color: "white",
-    border: "2px solid white",
+    backgroundColor: "white",
+    border: "2px solid grey",
+    borderRadius: 5,
     fontSize: 18,
-    width: 200,
+    marginLeft: 45,
+    marginRight: 45,
     padding: "14px 20px 14px 8px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     fontFamily: [
@@ -185,80 +173,82 @@ function DashSignup(props) {
   }
 
   return (
-    <SignUpContainer>
-      <SignUpText>
-        <ModalText>User Tier:</ModalText>
-        <hr />
-        <ModalText>
-          <UserType>Free:</UserType>
-          <ul>
-            <li>User has access to the base app.</li>
-            <li>
-              Ability to cross-filter data using the filtering options on the
-              Data page.
-            </li>
-            <li>cannot access calendar and date filtering feature.</li>
-            <li>User cannot download data to a csv file.</li>
-          </ul>
-        </ModalText>
-        <br />
-        <ModalText>
-          <UserType>PAID:</UserType>
-          <ul>
-            <li>User has access to the base app.</li>
-            <li>
-              Ability to cross-filter data using the filtering options on the
-              Data page.
-            </li>
-            <li>User has access to calendar and date filtering feature.</li>
-            <li>User can download data to a csv file.</li>
-          </ul>
-        </ModalText>
-        <br />
-        <br />
-        <br />
-        <ModalTextBottom>* = Required filed</ModalTextBottom>
-      </SignUpText>
-      <SignUpForm>
-        <SignUpClose>
-          <CloseButton onClick={props.handleClose}>X</CloseButton>
-        </SignUpClose>
-        <form onSubmit={e => handleSubmit(e, user)}>
-          <FormTitle2>Sign Up</FormTitle2>
-          <RequiredInputTitle>*</RequiredInputTitle>
-          <SignUpRequiredInputs
+    <SignupPageContainer>
+      {/* left text area */}
+      <TextContainer>
+        <HeroImage className="hero-img">
+          <img src="" alt="" />
+        </HeroImage>
+        <Text>
+          <p>
+            "With Sauti now, at the confort of my couch or kitchen, I can get
+            all the business and customs information I need right in my cheap
+            old phone. I'm now more confident to pass through the gazetted route
+            and not scared of personally clearing my goods."
+          </p>
+          <br />
+          <br />
+          <br />
+          <p>Middy Amule, Cross-Border Trader, Busi Uganda</p>
+          <br />
+          <br />
+          <br />
+        </Text>
+        <TextButton>
+          <DashLoginModal />
+        </TextButton>
+      </TextContainer>
+      {/* form area */}
+      <FormContainer>
+        {/* <div>
+          <XButton onClick={props.handleClose}>X</XButton>
+        </div> */}
+        <FormTitle>Create Account</FormTitle>
+        <Form onSubmit={e => handleSubmit(e, user)}>
+          <Labels>Email</Labels>
+          <Inputs
             type="text"
             name="email"
-            placeholder="email"
             value={email}
             onChange={handleChange}
           />
-          <RequiredInputTitle>*</RequiredInputTitle>
-          <SignUpRequiredInputs
+          <Labels>Password</Labels>
+          <Inputs
             type="password"
             name="password"
-            placeholder="password"
             value={password}
             onChange={handleChange}
           />
-          <FormInputs
+          <Labels>Organization</Labels>
+          <Inputs
             type="text"
             name="organization"
-            placeholder="organization"
             value={organization}
             onChange={handleChange}
           />
-          <FormInputs
+          <Labels>Job Position</Labels>
+          <Inputs
             type="text"
             name="job_position"
-            placeholder="job_position"
             value={job_position}
             onChange={handleChange}
           />
+          <Labels>Country</Labels>
+          <Inputs
+            type="text"
+            name="country"
+            value={country}
+            onChange={handleChange}
+          />
+          <Labels>Interest</Labels>
+          <Inputs
+            type="text"
+            name="interest"
+            value={interest}
+            onChange={handleChange}
+          />
+          <Labels2>Select Your Organization Type</Labels2>
           <FormControl className={classes.margin}>
-            <InputTitle id="demo-customized-select-label">
-              * Select Your Organization Type
-            </InputTitle>
             <Select
               labelId="demo-customized-select-label"
               id="demo-customized-select"
@@ -276,17 +266,9 @@ function DashSignup(props) {
               <MenuItem value={"OTHER"}>OTHER</MenuItem>
             </Select>
           </FormControl>
-          <FormInputs
-            type="text"
-            name="country"
-            placeholder="country"
-            value={country}
-            onChange={handleChange}
-          />
+          <br />
+          <Labels2>select A User Type</Labels2>
           <FormControl className={classes.margin}>
-            <InputTitle id="demo-customized-select-label">
-              * Select A User Type
-            </InputTitle>
             <Select
               labelId="demo-customized-select-label"
               id="demo-customized-select"
@@ -302,20 +284,135 @@ function DashSignup(props) {
               <MenuItem value={"PAID"}>PAID</MenuItem>
             </Select>
           </FormControl>
-          <FormInputs
-            type="text"
-            name="interest"
-            placeholder="interest"
-            value={interest}
-            onChange={handleChange}
-          />
-          <FormButton2 className="initialize-signup" type="submit">
-            Create Account
-          </FormButton2>
-        </form>
-      </SignUpForm>
-    </SignUpContainer>
+          <br />
+          <Button className="initialize-signup" type="submit">
+            Sign Up
+          </Button>
+        </Form>
+      </FormContainer>
+    </SignupPageContainer>
   );
 }
 
 export default DashSignup;
+
+// WHOLE PAGE
+const SignupPageContainer = styled.div`
+  width: 85%;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 85px;
+  background-color: white;
+  border: 2px solid grey;
+  border-radius: 5px;
+`;
+// TEXT CONTAINER
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 73vh;
+  font-size: 1.8rem;
+  background-color: lightgrey;
+`;
+const HeroImage = styled.div`
+  height: 75%;
+`;
+const Text = styled.div`
+  width: 75%;
+  padding: 5%;
+  margin: 0 auto;
+`;
+const TextButton = styled.button`
+  background-color: lightgrey;
+  border: none;
+  // font-size: 1.6rem;
+  // text-transform: uppercase;
+  // border: none;
+  // border-radius: 5px;
+  // padding: 2%;
+  // transition: 0.5s ease;
+  // width: 80%;
+  // margin: 0 auto;
+  // margin-top: 5%;
+  // margin-bottom: 5%;
+  // border: 2px solid #eb5e52;
+  // color: #eb5e52;
+  // font-weight: bold;
+  // &:hover {
+  //   background-color: #eb5e52;
+  //   cursor: pointer;
+  //   color: white;
+  // }
+`;
+// FORM CONTAINER
+const FormContainer = styled.div`
+  margin: 0 auto;
+  width: 50%;
+  height: 70vh;
+`;
+const FormTitle = styled.h1`
+  text-align: center;
+  font-size: 4rem;
+`;
+const XButton = styled.button`
+  margin-left: 95%;
+  margin-top: 0.5%;
+  border: none;
+  background-color: transparent;
+  font-size: 2rem;
+  font-weight: bold;
+  &:hover {
+    color: red;
+  }
+`;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+const Inputs = styled.input`
+  padding: 14px 20px 14px 8px;
+  width: 75%;
+  margin: 0 auto;
+  border: 2px solid grey;
+  border-radius: 5px;
+`;
+const Labels = styled.label`
+  font-size: 1.6rem;
+  margin-left: 10%;
+  margin-top: 2%;
+`;
+const Labels2 = styled.label`
+  font-size: 1.6rem;
+  margin-left: 10%;
+  margin-top: 2%;
+`;
+const Button = styled.button`
+  background-color: #eb5e52;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  padding: 2%;
+  transition: 0.5s ease;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border: 2px solid #eb5e52;
+  color: white;
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
+    background-color: white;
+    color: #eb5e52;
+  }
+`;
+const DropDowns = styled.select`
+  padding: 2%;
+  width: 82%;
+  margin: 0 auto;
+  border: 2px solid grey;
+  border-radius: 5px;
+`;

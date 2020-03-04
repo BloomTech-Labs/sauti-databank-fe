@@ -18,6 +18,7 @@ import {
   FormButton2,
   FormInputs
 } from "./styledComponents/Index";
+import styled from "styled-components";
 
 const LOGIN = gql`
   mutation registerNewUser($login: newLoginInput!) {
@@ -85,6 +86,27 @@ function DashLogin(props) {
     }
   };
 
+  const LoginButton = styled.button`
+    background-color: transparent;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    border: none;
+    padding: 3%;
+    transition: 0.5s ease;
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border: 2px solid #eb5e52;
+    color: #eb5e52;
+    font-weight: bold;
+    &:hover {
+      background-color: #eb5e52;
+      cursor: pointer;
+      color: white;
+    }
+  `;
+
   return (
     <ContentContainer>
       <div>
@@ -104,9 +126,9 @@ function DashLogin(props) {
             value={user.password}
             onChange={handleChange}
           />
-          <FormButton2 className="initialize-login" type="submit">
+          <LoginButton className="initialize-login" type="submit">
             Login
-          </FormButton2>
+          </LoginButton>
         </Form>
       </div>
     </ContentContainer>

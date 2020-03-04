@@ -3,8 +3,6 @@ import React from "react";
 import { GASignInHandler } from "./GoogleAnalytics/gaSignIn.js";
 import GraphContainer from "../GraphContainer";
 import { getToken, decodeToken } from "./auth/Auth";
-import DashSignup from "./DashSignup.js";
-import DashAccount from "./DashAccount.js";
 
 import {
   NotSignedInDiv,
@@ -27,15 +25,20 @@ function DashHome() {
 
   return (
     <>
-      {!signedIn && <DashSignup />}
+      {!signedIn && (
+        <NotSignedInDiv>
+          {/* <UserHeader>Welcome To the Sauti Data App</UserHeader> */}
+        </NotSignedInDiv>
+      )}
       {signedIn && (
         <SignedInDiv>
           <UserHeader>
-            Welcome <UserName>{userEmail}</UserName> !
+            {/* Hello <UserName>{userEmail}</UserName> ! */}
           </UserHeader>
-          <DashAccount />
         </SignedInDiv>
       )}
+      {signedIn && GASignInHandler(userEmail)}
+      <GraphContainer />
     </>
   );
 }

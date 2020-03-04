@@ -7,6 +7,7 @@ import Fade from "@material-ui/core/Fade";
 import DashLogin from "./DashLogin";
 
 import { ModalButtons } from "./styledComponents/Index";
+import styled from "styled-components";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -22,6 +23,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const ModalButton = styled.button`
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  padding: 2%;
+  transition: 0.5s ease;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border: 2px solid #eb5e52;
+  color: #eb5e52;
+  font-weight: bold;
+  &:hover {
+    background-color: #eb5e52;
+    cursor: pointer;
+    color: white;
+  }
+`;
+
 export default function DashLoginModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -36,9 +58,9 @@ export default function DashLoginModal() {
 
   return (
     <div>
-      <ModalButtons className="nav-login" type="button" onClick={handleOpen}>
+      <ModalButton className="nav-login" type="button" onClick={handleOpen}>
         LOGIN
-      </ModalButtons>
+      </ModalButton>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

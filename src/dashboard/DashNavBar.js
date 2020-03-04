@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Route, withRouter } from "react-router-dom";
 
 import DashHome from "./DashHome";
+import DashData from "./DashData";
 import Tools from "./Tools/Tools";
 import UsersQuery from "./Tools/UsersQuery";
 import DashAbout from "./DashAbout";
@@ -43,20 +44,20 @@ function DashNav() {
           </SautiLogoText>
         </SautiLogo>
         <Navigation>
-          <Links to="/">DATA</Links>
+          {!SignedIn && <Links to="/">HOME</Links>}
+          {SignedIn && <Links to="/">MY ACCOUNT</Links>}
+          <Links to="/data">DATA</Links>
           {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
-          {SignedIn && <Links to="/myaccount">MY ACCOUNT</Links>}
-          <LinksLast to="/about">ABOUT</LinksLast>
-          {!SignedIn && <DashLoginModal />}
-          {!SignedIn && <DashSignupModal />}
+          <LinksLast to="/services">SERVICES</LinksLast>
           {SignedIn && <Links to="/logout">LOGOUT</Links>}
-          <SautiLink href="http://sautiafrica.org/">Home</SautiLink>
+          {/* <SautiLink href="http://sautiafrica.org/">Sauti</SautiLink> */}
         </Navigation>
       </TopBar>
 
       <Route exact path="/" component={DashHome} />
+      <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
-      <Route exact path="/about" component={DashAbout} />
+      <Route exact path="/services" component={DashAbout} />
       <ProtectedRoute exact path="/myaccount" component={DashAccount} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
     </>
