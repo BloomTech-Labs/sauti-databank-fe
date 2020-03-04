@@ -39,11 +39,6 @@ const GraphContainer = () => {
     setCrossFilter(e.target.value);
   };
   const categories = [
-    { gender: ["male", "female"] },
-    { contry: ["kenya", "zimbabway", "uganda"] },
-    { trade: ["carrots", "rice", "maize"] }
-  ];
-  const categories2 = [
     {
       prompt: "gender",
       subcategories: [
@@ -74,7 +69,7 @@ const GraphContainer = () => {
         <div className="header">
           <h1>Informal Cross-Border Trade Data</h1>
         </div>
-        <Organisation categories={categories} categories2={categories2} />
+        <Organisation categories={categories} />
         {/* <div className="content-container">
           <div className="chart-container">
             <Queries
