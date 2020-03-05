@@ -114,7 +114,7 @@ const GetData = props => {
   }
 
   let { loading, data } = useQuery(QUERY, {
-    variables: { queryTraders: { language: "Swahili" } }
+    variables: { input: { age: "50-60" } }
   });
 
   if (data) console.log(`returned data`, data[queryType]);

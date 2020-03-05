@@ -6,7 +6,7 @@ import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
-import Queries from "./Components/Queries";
+import Queries from "./Components/Queries2";
 
 const GraphContainer = () => {
   const [index, setIndex] = useState({
@@ -49,7 +49,7 @@ const GraphContainer = () => {
           <h1>Informal Cross-Border Trade Data</h1>
         </div>
         <div className="content-container">
-          {/* <div className="chart-container">
+          <div className="chart-container">
             <Queries
               index={index}
               crossFilter={crossFilter}
@@ -63,7 +63,7 @@ const GraphContainer = () => {
               endDate={endDate}
             />
           </div>
-      */}
+
           <div className="dropdown-container">
             <FilterBox
               onChange={onChange}
