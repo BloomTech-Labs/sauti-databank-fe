@@ -11,8 +11,9 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 const GetData = props => {
   let queryType = "tradersUsers";
   let QUERY;
-  console.log(props.index, `props.index`);
-  console.log(props.crossFilter, `props.crossFilter`);
+  console.log(props.index.query, `props.index`);
+  console.log(props.crossFilter.query, `props.crossFilter`);
+  console.log(props.additionalFilter, `props.additionalFilter`);
   console.log(props.selectedCheckbox, `props.selectedCheckbox`);
   if (
     props.index.query === "Users" &&
@@ -73,19 +74,30 @@ const GetData = props => {
       }
       `;
   } else {
-    queryType = "sessionsData";
+    //making changes
+    //queryType = "tradersUsers";
+    //   QUERY = gql`
+    //     query getUsers($queryTraders: newTraderInput){
+    //       tradersUsers (input: $queryTraders) {
+    //         ${props.index.type}
+    //         ${props.crossFilter.type}
+    //       }
+    //     }
+    //     additionalFilterData: sessionsData{
+    //         ${props.additionalFilter.type}
+    //     }
+    //   }
+    //   `;
+    queryType = "tradersUsers";
     QUERY = gql`
-      query getData($querySessionData: newTraderSessionInput){
-        sessionsData(input: $querySessionData){
-          ${props.index.type}
-          ${props.crossFilter.type}
-          created_date
-        }
-        additionalFilterData: sessionsData{
-            ${props.additionalFilter.type}
+      query getUsers($queryTraders: newTraderInput) {
+        tradersUsers(input: { language: "Swahili" }) {
+          education
+          age
+          language
         }
       }
-      `;
+    `;
   }
 
   console.log(props.additionalFilter.type);
@@ -97,7 +109,7 @@ const GetData = props => {
   ) {
     policyType = "network-only";
   } else {
-    policyType = "cache-first";
+    policyType = "network-only";
   }
 
   let { loading, data } = useQuery(QUERY, {

@@ -6,7 +6,7 @@ import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
-import Queries from "./Components/Queries";
+import Queries from "./Components/Queries2";
 
 const GraphContainer = () => {
   const [index, setIndex] = useState({ type: "gender", query: "Users" });
@@ -19,10 +19,11 @@ const GraphContainer = () => {
     label: ""
   });
   const [indexLabel, setIndexLabel] = useState("Gender");
-  console.log(`Gra Container indexLabel`, indexLabel);
+  //console.log(`Gra Container indexLabel`, indexLabel);
   const [crossLabel, setCrossLabel] = useState("");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
+  console.log(selectedCheckbox, `selectedcheckbox`);
   const [startDate, setStartDate] = useState("2012-01-01");
   const [endDate, setEndDate] = useState("2020-01-08");
 

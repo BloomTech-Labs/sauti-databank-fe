@@ -39,12 +39,14 @@ export default function FilterBox(props) {
     query: "",
     label: ""
   });
+  console.log(filterBoxAdditionalFilter, `additionalFilter`);
   const [
     filterBoxAdditionalFilterLabel,
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
   const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
   const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
+  //possibly graphql loading
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
@@ -94,6 +96,7 @@ export default function FilterBox(props) {
     ]
   );
 
+  //if no AdditionalFilter
   useEffect(() => {
     if (
       !graphLabels[`${filterBoxAdditionalFilter.type}`] &&
