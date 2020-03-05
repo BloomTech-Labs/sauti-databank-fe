@@ -7,7 +7,7 @@ import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
-import { Organisation } from "./Components/NewFilterPlan";
+import { Organization, Selectable } from "./Components/NewFilterPlan";
 
 const GraphContainer = () => {
   const [index, setIndex] = useState({ type: "gender", query: "Users" });
@@ -38,28 +38,53 @@ const GraphContainer = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
+  // <Selectable prompt={""} />
   const categories = [
     {
-      prompt: "gender",
+      prompt: <Selectable prompt={"gender"} function={"AND"} />,
       subcategories: [
-        { prompt: "male", subcategories: [] },
-        { prompt: "female", subcategories: [] }
+        {
+          prompt: <Selectable prompt={"male"} function={"OR"} />,
+          subcategories: []
+        },
+        {
+          prompt: <Selectable prompt={"female"} function={"OR"} />,
+          subcategories: []
+        }
       ]
     },
     {
-      prompt: "country",
+      prompt: <Selectable prompt={"country"} function={"AND"} />,
       subcategories: [
-        { prompt: "kenya", subcategories: [] },
-        { prompt: "zimbabway", subcategories: [] },
-        { prompt: "uganda", subcategories: [] }
+        {
+          prompt: <Selectable prompt={"kenya"} function={"OR"} />,
+          subcategories: []
+        },
+        {
+          prompt: <Selectable prompt={"zimbabway"} function={"OR"} />,
+          subcategories: []
+        },
+        {
+          prompt: <Selectable prompt={"uganda"} function={"OR"} />,
+          subcategories: []
+        }
       ]
     },
     {
-      prompt: "trade",
+      prompt: <Selectable prompt={"trade"} function={"AND"} />,
       subcategories: [
-        { prompt: "carrots", subcategories: [] },
-        { prompt: "rice", subcategories: [] },
-        { prompt: "maize", subcategories: [] }
+        {
+          prompt: <Selectable prompt={"carrots"} function={"OR"} />,
+          subcategories: []
+        },
+        {
+          prompt: <Selectable prompt={"rice"} function={"OR"} />,
+          subcategories: []
+        },
+        {
+          prompt: <Selectable prompt={"maize"} function={"OR"} />,
+          subcategories: []
+        }
       ]
     }
   ];
@@ -69,7 +94,7 @@ const GraphContainer = () => {
         <div className="header">
           <h1>Informal Cross-Border Trade Data</h1>
         </div>
-        <Organisation categories={categories} />
+        <Organization categories={categories} />
         {/* <div className="content-container">
           <div className="chart-container">
             <Queries

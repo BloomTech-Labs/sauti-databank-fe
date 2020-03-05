@@ -1,8 +1,45 @@
 import React, { useState } from "react";
+import { SignUpText } from "../dashboard/styledComponents/Index";
 
 // have a js object holding some components in a tree form
 // have a single component controlling the nesting
-
+export const Selectable = props => {
+  const [selectedSearchString, setSelectedSearchString] = useState("");
+  // have the prompt be selectable using a checkbox styled form
+  // form with checkbox
+  // the text
+  const setPrompt = e => {
+    e.preventDefault();
+    // console.log(props.prompt, "was selected")
+  };
+  const setx = e => {
+    e.preventDefault();
+    console.log(props.prompt, "was selected");
+  };
+  console.log(props.prompt);
+  return (
+    <div>
+      <div>
+        <form
+          onSubmit={e => {
+            setPrompt(e);
+          }}
+        >
+          <input
+            type="checkbox"
+            id="vehicle1"
+            name="vehicle1"
+            value="Bike"
+            onChange={e => {
+              setx(e);
+            }}
+          />
+        </form>
+      </div>
+      {props.prompt + " " + props.function}
+    </div>
+  );
+};
 // gender(l1)
 // 	[x]femail
 // 	country(l2)
@@ -15,7 +52,7 @@ import React, { useState } from "react";
 
 // each round take the first one out and only show the remaining ones (done)
 const Node = props => {
-  //   console.log("props", props);
+  // console.log("props", props);
 
   // this can be used for show/hide later on
   // const [isSelected, setIsSelected] = useState(false);
@@ -41,7 +78,8 @@ const Node = props => {
       // console.log("next ones", subcategories, remainingCategories);
       setSubcategoriesToDisplay(
         subcategories.map((subcategory, i) => {
-          return <li key={i}>{subcategory.prompt + " OR"}</li>;
+          // console.log(subcategory.prompt)
+          return <li key={i}>{subcategory.prompt}</li>;
         })
       );
     }
@@ -62,15 +100,15 @@ const Node = props => {
   };
   return (
     <div>
-      <li>
+      <li
+        onClick={() => {
+          getTheCategories();
+        }}
+      >
         {/* smallest case */}
-        <span
-          onClick={() => {
-            getTheCategories();
-          }}
-        >
-          {props.currentCategory.prompt + " AND"}
-        </span>
+        {/* <div>{props.currentCategory.prompt + " AND"}</div> */}
+        {prompt}
+
         {/* subproblems */}
         <ul>{subcategoriesToDisplay}</ul>
         <ul>{remainingCategoriesToDisplay}</ul>
@@ -79,7 +117,7 @@ const Node = props => {
   );
 };
 
-export const Organisation = props => {
+export const Organization = props => {
   // loop through the persons array and create a new component for each, passing the current person (id and name) and it's children (person.people) as props
   const [categories, setCategories] = useState(props.categories);
 
