@@ -38,51 +38,51 @@ const GraphContainer = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
-  // <Selectable prompt={""} />
+  // <Selectable prompt={""} function={""}/>
   const categories = [
     {
-      prompt: <Selectable prompt={"gender"} function={"AND"} />,
+      prompt: "gender",
       subcategories: [
         {
-          prompt: <Selectable prompt={"male"} function={"OR"} />,
+          prompt: "male",
           subcategories: []
         },
         {
-          prompt: <Selectable prompt={"female"} function={"OR"} />,
+          prompt: "female",
           subcategories: []
         }
       ]
     },
     {
-      prompt: <Selectable prompt={"country"} function={"AND"} />,
+      prompt: "country",
       subcategories: [
         {
-          prompt: <Selectable prompt={"kenya"} function={"OR"} />,
+          prompt: "kenya",
           subcategories: []
         },
         {
-          prompt: <Selectable prompt={"zimbabway"} function={"OR"} />,
+          prompt: "zimbabway",
           subcategories: []
         },
         {
-          prompt: <Selectable prompt={"uganda"} function={"OR"} />,
+          prompt: "uganda",
           subcategories: []
         }
       ]
     },
     {
-      prompt: <Selectable prompt={"trade"} function={"AND"} />,
+      prompt: "trade",
       subcategories: [
         {
-          prompt: <Selectable prompt={"carrots"} function={"OR"} />,
+          prompt: "carrots",
           subcategories: []
         },
         {
-          prompt: <Selectable prompt={"rice"} function={"OR"} />,
+          prompt: "rice",
           subcategories: []
         },
         {
-          prompt: <Selectable prompt={"maize"} function={"OR"} />,
+          prompt: "maize",
           subcategories: []
         }
       ]
