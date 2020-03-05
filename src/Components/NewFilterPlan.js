@@ -160,8 +160,6 @@ const Node = props => {
 export const Organization = props => {
   // loop through the persons array and create a new component for each, passing the current person (id and name) and it's children (person.people) as props
   const [categories, setCategories] = useState(props.categories);
-  const [orFunction, setOrFunction] = useState([[], [], []]);
-  const [andFunction, setAndFunction] = useState([]);
   let levelId = 0;
   /*
         category0
