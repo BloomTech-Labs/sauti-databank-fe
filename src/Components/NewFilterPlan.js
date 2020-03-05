@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 // this is the non-redux global var solution
+// bug: if things are clicked out of order or different paths are visited at the same time
+// the 3rd option in orFunction2 becomes undefined
 var orFunction2 = [[], [], []];
 var andFunction2 = [];
 
@@ -16,63 +18,23 @@ export const Selectable = props => {
     // console.log(props.prompt, "was selected")
   };
   // It thinks the orFunction is different for each compoment
-  const setx = e => {
+  const setFunctions = e => {
     e.preventDefault();
     console.log(props.prompt, "was selected");
-    // console.log(props.orFunction, props.levelId)
-    let {
-      orFunction,
-      levelId,
-      setOrFunction,
-      andFunction,
-      setAndFunction
-    } = props;
-    // console.log(...orFunction.slice(0, levelId)[0])
-    // console.log([...orFunction.slice(levelId, levelId + 1)[0], props.prompt])
-    // console.log([...orFunction.slice(levelId + 1, orFunction.length)[0]])
-    if (props.function === "OR") {
-      // setOrFunction(
-      //     orFunction.map((orGroup, i) => {
-      //         if(i === levelId) {
-      //             console.log(orGroup)
-      //             return [...orGroup, props.prompt]
-      //         } else {
-      //             return [...orGroup]
-      //         }
-      //     })
-      // )
 
+    let { levelId } = props;
+
+    if (props.function === "OR") {
       orFunction2 = orFunction2.map((orGroup, i) => {
         if (i === levelId) {
-          // console.log(orGroup)
           return [...orGroup, props.prompt];
         } else {
           return [...orGroup];
         }
       });
-      // console.log(orFunction2)
-
-      // )
     } else if (props.function === "AND") {
       andFunction2 = [...andFunction2, props.prompt];
-      // setAndFunction([...andFunction, props.prompt])
     }
-
-    // let result = [
-    //     [...orFunction.slice(0, levelId)],
-    //     [...orFunction.slice(levelId, levelId + 1), props.prompt],
-    //     [...orFunction.slice(levelId + 1, orFunction.length)]
-    // ]
-    // console.log(orFunction, levelId)
-
-    /*
-    selectable shoud know what level it is at
-    orFunction = [
-        orFunction.slice(0, i),
-        [...orFunction.slice(i, i + 1), props.prompt],
-        orFunction.slice(i + 1, orFunction.length)
-    ]
-    */
   };
   console.log(props.prompt);
   return (
@@ -89,7 +51,7 @@ export const Selectable = props => {
             name="vehicle1"
             value="Bike"
             onChange={e => {
-              setx(e);
+              setFunctions(e);
             }}
           />
         </form>
@@ -144,11 +106,7 @@ const Node = props => {
               <Selectable
                 prompt={subcategory.prompt}
                 function={"OR"}
-                orFunction={props.orFunction}
-                setOrFunction={props.setOrFunction}
                 levelId={props.levelId}
-                andFunction={props.andFunction}
-                setAndFunction={props.setAndFunction}
               />
             </li>
           );
@@ -164,11 +122,7 @@ const Node = props => {
               currentCategory={remainingCategory}
               subcategories={remainingCategory.subcategories}
               categories={remainingCategories}
-              orFunction={props.orFunction}
-              setOrFunction={props.setOrFunction}
               levelId={props.levelId + 1}
-              andFunction={props.andFunction}
-              setAndFunction={props.setAndFunction}
             />
           );
         })
@@ -188,11 +142,11 @@ const Node = props => {
         <Selectable
           prompt={prompt}
           function={"AND"}
-          orFunction={props.orFunction}
-          setOrFunction={props.setOrFunction}
+          //   orFunction={props.orFunction}
+          //   setOrFunction={props.setOrFunction}
           levelId={props.levelId}
-          andFunction={props.andFunction}
-          setAndFunction={props.setAndFunction}
+          //   andFunction={props.andFunction}
+          //   setAndFunction={props.setAndFunction}
         />
 
         {/* subproblems */}
@@ -230,11 +184,7 @@ export const Organization = props => {
               subcategories={category.subcategories}
               categories={categories}
               setCategories={setCategories}
-              orFunction={orFunction}
-              setOrFunction={setOrFunction}
               levelId={levelId}
-              andFunction={andFunction}
-              setAndFunction={setAndFunction}
             />
           );
         })}
