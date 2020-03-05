@@ -213,7 +213,7 @@ function CreateUser(props) {
 
   return (
     <>
-      <form className={classes.paper}>
+      <Form className={classes.paper}>
         <FormDiv>
           <InputColumns>
             <ColumnDiv>
@@ -317,12 +317,16 @@ function CreateUser(props) {
             </AddButton>
           </ButtonsDiv>
         </FormDiv>
-      </form>
+      </Form>
     </>
   );
 }
 export default CreateUser;
 
+const Form = styledComp.form`
+  border-radius: 5px;
+  border: none;
+`;
 const ColumnDiv = styledComp.div`
   display: flex;
   flex-direction: column;
