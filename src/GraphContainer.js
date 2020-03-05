@@ -6,20 +6,22 @@ import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
-import Queries from "./Components/Queries";
+import Queries from "./Components/Queries2";
 
 const GraphContainer = () => {
-  const [index, setIndex] = useState({ type: "gender", query: "Users" });
-  console.log(`GraphContianer index`, index);
+  const [index, setIndex] = useState({
+    type: "gender",
+    query: "Users",
+    subLabel: ""
+  });
   const [crossFilter, setCrossFilter] = useState({ type: "", query: "Users" });
-  console.log(`Gra Container crossFilter`, crossFilter);
   const [additionalFilter, setAdditionalFilter] = useState({
     type: "",
     query: "",
     label: ""
   });
   const [indexLabel, setIndexLabel] = useState("Gender");
-  console.log(`Gra Container indexLabel`, indexLabel);
+  //console.log(`Gra Container indexLabel`, indexLabel);
   const [crossLabel, setCrossLabel] = useState("");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});

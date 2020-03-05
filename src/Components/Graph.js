@@ -11,25 +11,16 @@ import {
 } from "../dashboard/styledComponents/Index";
 
 const Graph = props => {
-  console.log("keys in graph", props.keys);
-  console.log("data in graph", props.data);
-
   // const tier = getTier();
   const token = getToken();
   let tier;
   if (token) {
     tier = decodeToken(token);
     tier = tier.tier;
-    console.log("AAAAAAAAAA", tier);
   }
-
-  console.log("aaa", tier);
 
   const [csvHeaders, setCsvHeaders] = useState([]);
   const [csvFormattedData, setCsvFormattedData] = useState([]);
-  // console.log('Index in Graph', props.index);
-  // console.log('CsvData in Graph', props.csvData);
-  // console.log('Keys in Graph', props.keys);
 
   useEffect(() => {
     if (props.filteredData && props.checkboxOptions !== props.filtgiteredData) {

@@ -17,34 +17,35 @@ export default function FilterBox(props) {
   if (token) {
     tier = decodeToken(token);
     tier = tier.tier;
-    console.log("AAAAAAAAAA", tier);
   }
 
   const [filterBoxIndex, setFilterBoxIndex] = useState({
     type: "gender",
     query: "Users"
   });
-  console.log(`filterBoxIndex`, filterBoxIndex);
+  // console.log(`filterBoxIndex`, filterBoxIndex);
   const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
     type: "",
     query: "Users"
   });
-  console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
+  // console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
   const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
-  console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
+  // console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
   const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
-  console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
+  // console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
   const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
     type: "",
     query: "",
     label: ""
   });
+  // console.log(filterBoxAdditionalFilter, `additionalFilter`);
   const [
     filterBoxAdditionalFilterLabel,
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
   const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
   const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
+  //possibly graphql loading
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
@@ -94,6 +95,7 @@ export default function FilterBox(props) {
     ]
   );
 
+  //if no AdditionalFilter
   useEffect(() => {
     if (
       !graphLabels[`${filterBoxAdditionalFilter.type}`] &&
@@ -177,7 +179,6 @@ export default function FilterBox(props) {
               setFilterBoxAdditionalFilterLabel(e.label);
               props.setCheckboxOptions([]);
               ClickTracker(e.value.type);
-              console.log("event", e);
             }}
           />
           <div

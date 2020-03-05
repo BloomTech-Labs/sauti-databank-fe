@@ -10,16 +10,18 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 
 const GetData = props => {
   let queryType = "tradersUsers";
-  const { index, crossFilter } = props;
   let QUERY;
-  console.log(index, `props index`);
-  console.log(crossFilter, `props crossFilter`);
-  // console.log(props.selectedCheckbox, `props.selectedCheckbox`);
-  let variabless = {
+  const { index, crossFilter } = props;
+
+  console.log(index, `props.index`);
+  console.log(crossFilter, `props.crossFilter`);
+  console.log(props.additionalFilter, `props.additionalFilter`);
+  console.log(props.selectedCheckbox, `props.selectedCheckbox`);
+  let varz = {
     index,
     crossFilter
   };
-  console.log("varrrs", variabless);
+  console.log("varz", varz);
   if (
     props.index.query === "Users" &&
     props.crossFilter.query === "Users" &&
@@ -78,6 +80,23 @@ const GetData = props => {
         }
       }
       `;
+  } else if (
+    props.index.query === "Users" &&
+    props.crossFilter.query === "Users" &&
+    props.additionalFilter.query === "Users"
+  ) {
+    queryType = "tradersUsers";
+    QUERY = gql`
+        query getUsers($queryTraders: newTraderInput){
+          tradersUsers(input: $queryTraders) {
+            ${props.index.type}
+            ${props.crossFilter.type}
+          }
+          additionalFilterData: tradersUsers {
+            ${props.additionalFilter.type}
+          }
+        }
+        `;
   } else {
     queryType = "sessionsData";
     QUERY = gql`
@@ -94,23 +113,11 @@ const GetData = props => {
       `;
   }
 
-  console.log(props.additionalFilter.type);
-
-  // let policyType;
-  // if (
-  //   props.additionalFilter.type &&
-  //   !graphLabels[`${props.additionalFilter.type}`]
-  // ) {
-  //   policyType = "network-only";
-  // } else {
-  //   policyType = "cache-first";
-  // }
-
   let { loading, data } = useQuery(QUERY, {
-    variables: { queryTraders: { gender: "Female" } }
-    // fetchPolicy: policyType
+    variables: { queryTraders: { language: "Swahili" } }
   });
-  console.log(`returned data`, data);
+
+  if (data) console.log(`returned data`, data[queryType]);
 
   if (loading) {
     return (
@@ -140,7 +147,7 @@ const GetData = props => {
     ).map(obj => obj[`${props.additionalFilter.type}`]);
     filteredData = filteredData.filter(item => item !== null);
   }
-  console.log(props.index.query, `Queiers.js index.query`);
+  // console.log(props.index.query, `Queiers.js index.query`);
 
   const chartData = dataParse(
     props.index.type,
@@ -151,8 +158,8 @@ const GetData = props => {
     props.additionalFilter.type,
     props.index.query
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
-  console.log("csvData", chartData.dataStructure);
-  console.log(`cross filter type`, props.crossFilter.type);
+  // console.log("csvData", chartData.dataStructure);
+  // console.log(`cross filter type`, props.crossFilter.type);
   if (props.crossFilter.type !== "") {
     return (
       <div>
