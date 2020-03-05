@@ -239,7 +239,7 @@ function DashSignup(props) {
             </Select>
           </FormControl>
           <br />
-          <Labels2>select A User Type</Labels2>
+          <Labels2>Select A User Type</Labels2>
           <FormControl className={classes.margin}>
             <Select
               labelId="demo-customized-select-label"
