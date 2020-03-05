@@ -1,6 +1,8 @@
 // just talk about methodologies in here for the sub app specifically
 import React from "react";
 
+import DashSignup from "./DashSignup";
+
 import {
   AboutContainer,
   AboutText,
@@ -14,6 +16,7 @@ import {
 
 function DashAbout() {
   return (
+    // <DashSignup />
     <AboutContainer>
       <AboutHeader>About Sauti Data *NOT FINAL VERSION*</AboutHeader>
       <TopText>

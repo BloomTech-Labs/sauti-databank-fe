@@ -30,7 +30,7 @@ export const TopBar = styled.div`
   align-items: center;
   background-color: #212121;
   width: 100%;
-  height: 70px;
+  height: 5vh;
 `;
 export const AccountDiv = styled.div`
   margin: 0% 0% 0% 0.75%;

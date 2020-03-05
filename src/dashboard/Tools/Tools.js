@@ -10,14 +10,17 @@ import EditModal from "./EditModal";
 import ToolsCreateUser from "./ToolsCreateUser";
 
 import DeleteAccount from "./DeleteAccount";
+import CreateUserModal from "./CreateUserModal";
 
-import {
-  ToolsInput,
-  ToolsTitle,
-  ToolsHeader,
-  UserDownloadButton,
-  ToolsGrid
-} from "../styledComponents/Index";
+import styled from "styled-components";
+
+// import {
+//   ToolsInput,
+//   ToolsTitle,
+//   ToolsHeader,
+//   UserDownloadButton,
+//   ToolsGrid
+// } from "../styledComponents/Index";
 
 class Tools extends Component {
   constructor(props) {
@@ -233,16 +236,18 @@ class Tools extends Component {
             placeholder=" search..."
           />
           {/* <AiOutlineSearch className='searchIcon' /> */}
-          <UserDownloadButton
-            type="default"
-            icon="download"
-            size="small"
-            onClick={this.exportToCsv.bind(this)}
-          >
-            Download
-            {/* <img src={Archivebutton} alt="download"></img> */}
-          </UserDownloadButton>
-          <ToolsCreateUser />
+          <ButtonsDiv>
+            <UserDownloadButton
+              type="default"
+              icon="download"
+              size="small"
+              onClick={this.exportToCsv.bind(this)}
+            >
+              Download
+              {/* <img src={Archivebutton} alt="download"></img> */}
+            </UserDownloadButton>
+            <CreateUserModal />
+          </ButtonsDiv>
         </ToolsHeader>
         <ToolsGrid id="grid-wrapper" className="ag-theme-balham">
           <AgGridReact
@@ -261,3 +266,50 @@ class Tools extends Component {
 }
 
 export default Tools;
+
+const ToolsHeader = styled.div`
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+`;
+const ToolsTitle = styled.h1`
+  margin-top: 14px;
+  font-size: 4.2rem;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+`;
+const ToolsInput = styled.input`
+  border: 2px solid grey;
+  border-radius: 5px;
+  text-align: right;
+  display: block;
+  width: 315px;
+  height: 32px;
+  margin-top: 14px;
+`;
+const ButtonsDiv = styled.div`
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+`;
+const UserDownloadButton = styled.button`
+  width: 130px;
+  height: 32px;
+  border: 2px solid #eb5e52;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 14px;
+  &:hover {
+    background-color: #eb5e52;
+    color: white;
+    cursor: pointer;
+  }
+`;
+const ToolsGrid = styled.div`
+  height: 750px;
+  width: 95%;
+  margin: 0 auto;
+`;
