@@ -170,10 +170,20 @@ ol {
   list-style-type: decimal;
   list-style-position: inside;
 }
+/* need this for the filter options */
+ul {
+  list-style-type: disc;
+  /* list-style-position: inside; */
+}
+ol {
+  list-style-type: decimal;
+  /* list-style-position: inside; */
+}
 ul ul,
 ol ul {
   list-style-type: circle;
   list-style-position: inside;
+  /* list-style-position: inside; */
   margin-left: 15px;
 }
 ol ol,
@@ -185,3 +195,7 @@ ul ol {
 .background-image {
   background: url("./dashboard/Images/Hero-img.jpg");
 }
+/* list-style-position: inside; */
+
+/* margin-left: 15px;
+} */

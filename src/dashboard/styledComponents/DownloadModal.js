@@ -8,20 +8,28 @@ export const DownloadModalDiv = styled.div`
   font-size: 2rem;
   text-align: center;
   border-radius: 5px;
+  border: none;
 `;
 export const DownloadModalTitle = styled.h3`
-  padding: 2% 0% 2% 0%;
+  margin: 2% 0% 2% 0%;
+  font-weight: bold;
+  font-size: 3rem;
 `;
 export const DownloadModalText = styled.p`
-  width: 85%;
+  width: 60%;
   margin: 0 auto;
   padding: 2% 0% 2% 0%;
+  color: grey;
+`;
+export const DownloadModalTextContinue = styled.big`
+  opacity: 1;
+  color: black;
 `;
 export const DownloadModalButtons = styled.button`
   padding: 2%;
   width: 35%;
   background-color: transparent;
-  border: 2px solid #212121;
+  border: 2px solid #eb5e52;
   border-radius: 5px;
   font-weight: bold;
   &:hover {

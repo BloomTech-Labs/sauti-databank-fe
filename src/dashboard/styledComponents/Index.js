@@ -89,6 +89,7 @@ import {
   DownloadModalDiv,
   DownloadModalTitle,
   DownloadModalText,
+  DownloadModalTextContinue,
   DownloadModalButtons,
   DownloadModalButtonsX
 } from "./DownloadModal";
@@ -161,5 +162,6 @@ export {
   DownloadModalTitle,
   DownloadModalText,
   DownloadModalButtons,
-  DownloadModalButtonsX
+  DownloadModalButtonsX,
+  DownloadModalTextContinue
 };

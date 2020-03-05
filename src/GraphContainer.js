@@ -7,7 +7,7 @@ import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
-import { Organization } from "./Components/NewFilterPlan";
+import { Organization, Selectable } from "./Components/NewFilterPlan";
 
 const GraphContainer = () => {
   const [index, setIndex] = useState({ type: "gender", query: "Users" });
@@ -41,28 +41,53 @@ const GraphContainer = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
+  // <Selectable prompt={""} function={""}/>
   const categories = [
     {
       prompt: "gender",
       subcategories: [
-        { prompt: "male", subcategories: [] },
-        { prompt: "female", subcategories: [] }
+        {
+          prompt: "male",
+          subcategories: []
+        },
+        {
+          prompt: "female",
+          subcategories: []
+        }
       ]
     },
     {
       prompt: "country",
       subcategories: [
-        { prompt: "kenya", subcategories: [] },
-        { prompt: "zimbabway", subcategories: [] },
-        { prompt: "uganda", subcategories: [] }
+        {
+          prompt: "kenya",
+          subcategories: []
+        },
+        {
+          prompt: "zimbabway",
+          subcategories: []
+        },
+        {
+          prompt: "uganda",
+          subcategories: []
+        }
       ]
     },
     {
       prompt: "trade",
       subcategories: [
-        { prompt: "carrots", subcategories: [] },
-        { prompt: "rice", subcategories: [] },
-        { prompt: "maize", subcategories: [] }
+        {
+          prompt: "carrots",
+          subcategories: []
+        },
+        {
+          prompt: "rice",
+          subcategories: []
+        },
+        {
+          prompt: "maize",
+          subcategories: []
+        }
       ]
     }
   ];
