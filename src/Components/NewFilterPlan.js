@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { SignUpText } from "../dashboard/styledComponents/Index";
 
 // have a js object holding some components in a tree form
 // have a single component controlling the nesting
