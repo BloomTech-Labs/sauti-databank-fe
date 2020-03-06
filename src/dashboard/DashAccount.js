@@ -70,6 +70,7 @@ function DashAccount(props) {
               Continue to Payment
             </ContinueButton>
           </ButtonDiv>
+          <PaypalButton />
         </UserTypeContainerDivLong>
       </div>
     </AccountPageDiv>
