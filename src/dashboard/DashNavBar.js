@@ -48,7 +48,7 @@ function DashNav() {
           {SignedIn && <Links to="/">MY ACCOUNT</Links>}
           <Links to="/data">DATA</Links>
           {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
-          <LinksLast to="/services">SERVICES</LinksLast>
+          {/* <LinksLast to="/services">SERVICES</LinksLast> */}
           {SignedIn && <Links to="/logout">LOGOUT</Links>}
           {/* <SautiLink href="http://sautiafrica.org/">Sauti</SautiLink> */}
         </Navigation>
@@ -57,7 +57,7 @@ function DashNav() {
       <Route exact path="/" component={DashHome} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
-      <Route exact path="/services" component={DashAbout} />
+      {/* <Route exact path="/services" component={DashAbout} /> */}
       <ProtectedRoute exact path="/myaccount" component={DashAccount} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
     </>
