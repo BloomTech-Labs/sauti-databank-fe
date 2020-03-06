@@ -160,6 +160,16 @@ table {
 .hero-img {
   background: url(./dashboard/Images/Hero-img-mediumjpg.jpg) left no-repeat;
 }
+@media screen and (min-width: 2800px) {
+  .hero-img {
+    background: url(./dashboard/Images//Hero-img.jpg) left no-repeat;
+  }
+}
+@media screen and (max-width: 760px) {
+  .hero-img {
+    background: url(./dashboard/Images//Hero-img-small.jpg) left no-repeat;
+  }
+}
 
 /* need this for the filter options */
 ul {

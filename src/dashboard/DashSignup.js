@@ -239,7 +239,7 @@ function DashSignup(props) {
             </Select>
           </FormControl>
           <br />
-          <Labels2>select A User Type</Labels2>
+          <Labels2>Select A User Type</Labels2>
           <FormControl className={classes.margin}>
             <Select
               labelId="demo-customized-select-label"
@@ -273,7 +273,7 @@ export default DashSignup;
 
 // WHOLE PAGE
 const SignupPageContainer = styled.div`
-  // height: 95vh;
+  height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: space-between;
@@ -305,6 +305,12 @@ const FormContainer = styled.div`
   background-color: white;
   self-align: flex-end;
   text-align: center;
+  @media screen and (min-width: 2560px) {
+    width: 50%;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 45%;
+  }
 `;
 const LoginButtonDiv = styled.div`
   margin: 0 auto;
@@ -344,7 +350,7 @@ const Button = styled.button`
   border-radius: 5px;
   padding: 2%;
   transition: 0.5s ease;
-  width: 55%;
+  width: 60%;
   margin: 0 auto;
   margin-top: 5%;
   margin-bottom: 5%;
