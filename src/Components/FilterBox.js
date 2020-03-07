@@ -17,35 +17,36 @@ export default function FilterBox(props) {
   if (token) {
     tier = decodeToken(token);
     tier = tier.tier;
+    console.log("AAAAAAAAAA", tier);
   }
 
   const [filterBoxIndex, setFilterBoxIndex] = useState({
     type: "gender",
-    query: "Users"
+    query: "Users",
+    label: ""
   });
-  // console.log(`filterBoxIndex`, filterBoxIndex);
+  console.log(`filterBoxIndex`, filterBoxIndex);
   const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
     type: "",
-    query: "Users"
+    query: "Users",
+    label: ""
   });
-  // console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
+  console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
   const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
-  // console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
+  console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
   const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
-  // console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
+  console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
   const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
     type: "",
     query: "",
     label: ""
   });
-  // console.log(filterBoxAdditionalFilter, `additionalFilter`);
   const [
     filterBoxAdditionalFilterLabel,
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
   const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
   const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
-  //possibly graphql loading
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
@@ -95,7 +96,6 @@ export default function FilterBox(props) {
     ]
   );
 
-  //if no AdditionalFilter
   useEffect(() => {
     if (
       !graphLabels[`${filterBoxAdditionalFilter.type}`] &&
@@ -137,7 +137,27 @@ export default function FilterBox(props) {
             ClickTracker(e.value.type);
           }}
         />
-
+        {graphLabels[`${filterBoxIndex.type}`] && (
+          <CheckboxContainer>
+            <p>Select an option to further filter the data: </p>
+            {graphLabels[`${filterBoxIndex.type}`].labels.map(option => (
+              <Options key={option}>
+                <input
+                  type="radio"
+                  name="CrossFilter"
+                  value={option}
+                  onChange={e => (
+                    props.setFirstSelectedCheckbox({
+                      [`${filterBoxIndex.type}`]: option
+                    }),
+                    props.setIndex(filterBoxIndex)
+                  )}
+                />
+                <FilterOption>{option}</FilterOption>
+              </Options>
+            ))}
+          </CheckboxContainer>
+        )}
         <p>Choose Second Category</p>
         <Dropdown
           controlClassName="myControlClassName"
@@ -152,6 +172,27 @@ export default function FilterBox(props) {
             setFilterBoxCrossFilter(e.value);
           }}
         />
+        {graphLabels[`${filterBoxCrossFilter.type}`] && (
+          <CheckboxContainer>
+            <p>Select an option to further filter the data: </p>
+            {graphLabels[`${filterBoxCrossFilter.type}`].labels.map(option => (
+              <Options key={option}>
+                <input
+                  type="radio"
+                  name="CrossFilter"
+                  value={option}
+                  onChange={e => (
+                    props.setSecondSelectedCheckbox({
+                      [`${filterBoxCrossFilter.type}`]: option
+                    }),
+                    props.setCrossFilter(filterBoxCrossFilter)
+                  )}
+                />
+                <FilterOption>{option}</FilterOption>
+              </Options>
+            ))}
+          </CheckboxContainer>
+        )}
         <>
           <p>Additional Filter</p>
           <p className="disclosure">
@@ -179,6 +220,7 @@ export default function FilterBox(props) {
               setFilterBoxAdditionalFilterLabel(e.label);
               props.setCheckboxOptions([]);
               ClickTracker(e.value.type);
+              console.log("event", e);
             }}
           />
           <div
@@ -194,8 +236,6 @@ export default function FilterBox(props) {
             <p>Clear Additional Filter</p>
           </div>
         </>
-        {/* )} */}
-
         {graphLabels[`${filterBoxAdditionalFilter.type}`] && (
           <CheckboxContainer>
             <p>Select an option to further filter the data: </p>
@@ -219,7 +259,6 @@ export default function FilterBox(props) {
             )}
           </CheckboxContainer>
         )}
-
         {loading ? (
           <Loader
             className="options-loader"
@@ -254,7 +293,6 @@ export default function FilterBox(props) {
             </>
           )
         )}
-
         {tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE" ? (
           <DateContainer>
             <div>
@@ -282,7 +320,6 @@ export default function FilterBox(props) {
         ) : (
           <CalendarModal />
         )}
-
         <div className="btn-container">
           <Button
             className="checkbox-submit-btn"
@@ -294,7 +331,6 @@ export default function FilterBox(props) {
             Submit
           </Button>
         </div>
-
         <p
           className="reset-btn"
           onClick={e => {

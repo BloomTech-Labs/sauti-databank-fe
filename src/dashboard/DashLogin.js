@@ -1,5 +1,3 @@
-// we will also use this modal in various places within the dashboard so that when somone clicks something you need to sign in for or pay to see it will direct you to the sign up then to the payment options in future releases
-
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import mutation from "../queries/mutation";
@@ -14,8 +12,6 @@ import {
   ContentContainer,
   Form,
   FormTitle,
-  FormButton,
-  FormButton2,
   FormInputs
 } from "./styledComponents/Index";
 import styled from "styled-components";
@@ -98,7 +94,6 @@ function DashLogin(props) {
     margin-top: 5%;
     margin-bottom: 5%;
     border: 2px solid #eb5e52;
-    color: #eb5e52;
     font-weight: bold;
     &:hover {
       background-color: #eb5e52;

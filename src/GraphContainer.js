@@ -12,16 +12,24 @@ const GraphContainer = () => {
   const [index, setIndex] = useState({
     type: "gender",
     query: "Users",
-    subLabel: ""
+    label: ""
   });
-  const [crossFilter, setCrossFilter] = useState({ type: "", query: "Users" });
+  // console.log(`GraphContianer index`, index);
+  const [crossFilter, setCrossFilter] = useState({
+    type: "",
+    query: "Users",
+    label: ""
+  });
+  // console.log(`Gra Container crossFilter`, crossFilter);
   const [additionalFilter, setAdditionalFilter] = useState({
     type: "",
     query: "",
     label: ""
   });
+  const [firstSelectedCheckbox, setFirstSelectedCheckbox] = useState({});
+  const [secondSelectedCheckbox, setSecondSelectedCheckbox] = useState({});
   const [indexLabel, setIndexLabel] = useState("Gender");
-  //console.log(`Gra Container indexLabel`, indexLabel);
+  // console.log(`Gra Container indexLabel`, indexLabel);
   const [crossLabel, setCrossLabel] = useState("");
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
@@ -42,6 +50,7 @@ const GraphContainer = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
+
   return (
     <div className="App">
       <div className="main-container">
@@ -61,9 +70,10 @@ const GraphContainer = () => {
               additionalFilter={additionalFilter}
               startDate={startDate}
               endDate={endDate}
+              secondSelectedCheckbox={secondSelectedCheckbox}
+              firstSelectedCheckbox={firstSelectedCheckbox}
             />
           </div>
-
           <div className="dropdown-container">
             <FilterBox
               onChange={onChange}
@@ -82,10 +92,11 @@ const GraphContainer = () => {
               endDate={endDate}
               setStartDate={setStartDate}
               setEndDate={setEndDate}
+              setFirstSelectedCheckbox={setFirstSelectedCheckbox}
+              setSecondSelectedCheckbox={setSecondSelectedCheckbox}
             />
           </div>
         </div>
-        {/* */} */}
       </div>
     </div>
   );

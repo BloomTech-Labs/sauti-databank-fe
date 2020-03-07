@@ -63,7 +63,7 @@ const Styles = withStyles(theme => ({
     borderRadius: 5,
     fontSize: 18,
     margin: "0 auto",
-    width: "75%",
+    width: "55%",
     padding: "14px 20px 14px 8px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     fontFamily: [
@@ -172,38 +172,11 @@ function DashSignup(props) {
   }
 
   return (
-    <SignupPageContainer>
-      {/* left text area */}
-      <TextContainer>
-        <HeroImage className="hero-img">
-          <img src="" alt="" />
-        </HeroImage>
-        <Text>
-          <p>
-            "With Sauti now, at the confort of my couch or kitchen, I can get
-            all the business and customs information I need right in my cheap
-            old phone. I'm now more confident to pass through the gazetted route
-            and not scared of personally clearing my goods."
-          </p>
-          <br />
-          <br />
-          <br />
-          <p>Middy Amule, Cross-Border Trader, Busi Uganda</p>
-          <br />
-          <br />
-          <br />
-        </Text>
-        <TextButton>
-          <DashLoginModal />
-        </TextButton>
-      </TextContainer>
-      {/* form area */}
+    <SignupPageContainer className="hero-img">
+      <div></div>
       <FormContainer>
-        {/* <div>
-          <XButton onClick={props.handleClose}>X</XButton>
-        </div> */}
-        <FormTitle>Create Account</FormTitle>
         <Form onSubmit={e => handleSubmit(e, user)}>
+          <FormTitle>Create Account</FormTitle>
           <Labels>Email</Labels>
           <Inputs
             type="text"
@@ -288,6 +261,9 @@ function DashSignup(props) {
             Sign Up
           </Button>
         </Form>
+        <div>
+          <DashLoginModal />
+        </div>
       </FormContainer>
     </SignupPageContainer>
   );
@@ -297,21 +273,17 @@ export default DashSignup;
 
 // WHOLE PAGE
 const SignupPageContainer = styled.div`
-  width: 85%;
+  // height: 95vh;
+  width: 100vw;
   display: flex;
-  align-items: center;
-  margin: 0 auto;
-  margin-top: 85px;
-  background-color: white;
-  border: 2px solid grey;
-  border-radius: 5px;
+  justify-content: space-between;
 `;
 // TEXT CONTAINER
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  height: 73vh;
+  height: 75vh;
   font-size: 1.8rem;
   background-color: lightgrey;
 `;
@@ -326,65 +298,42 @@ const Text = styled.div`
 const TextButton = styled.button`
   background-color: lightgrey;
   border: none;
-  // font-size: 1.6rem;
-  // text-transform: uppercase;
-  // border: none;
-  // border-radius: 5px;
-  // padding: 2%;
-  // transition: 0.5s ease;
-  // width: 80%;
-  // margin: 0 auto;
-  // margin-top: 5%;
-  // margin-bottom: 5%;
-  // border: 2px solid #eb5e52;
-  // color: #eb5e52;
-  // font-weight: bold;
-  // &:hover {
-  //   background-color: #eb5e52;
-  //   cursor: pointer;
-  //   color: white;
-  // }
 `;
 // FORM CONTAINER
 const FormContainer = styled.div`
+  width: 35%;
+  background-color: white;
+  self-align: flex-end;
+  text-align: center;
+`;
+const LoginButtonDiv = styled.div`
   margin: 0 auto;
-  width: 50%;
-  height: 70vh;
 `;
 const FormTitle = styled.h1`
   text-align: center;
-  font-size: 4rem;
-`;
-const XButton = styled.button`
-  margin-left: 95%;
-  margin-top: 0.5%;
-  border: none;
-  background-color: transparent;
-  font-size: 2rem;
-  font-weight: bold;
-  &:hover {
-    color: red;
-  }
+  font-size: 3rem;
+  margin-top: 2.5%;
 `;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  text-align: left;
 `;
 const Inputs = styled.input`
   padding: 14px 20px 14px 8px;
-  width: 75%;
+  width: 55%;
   margin: 0 auto;
   border: 2px solid grey;
   border-radius: 5px;
 `;
 const Labels = styled.label`
   font-size: 1.6rem;
-  margin-left: 10%;
+  margin-left: 20%;
   margin-top: 2%;
 `;
 const Labels2 = styled.label`
   font-size: 1.6rem;
-  margin-left: 10%;
+  margin-left: 20%;
   margin-top: 2%;
 `;
 const Button = styled.button`
@@ -395,7 +344,7 @@ const Button = styled.button`
   border-radius: 5px;
   padding: 2%;
   transition: 0.5s ease;
-  width: 80%;
+  width: 55%;
   margin: 0 auto;
   margin-top: 5%;
   margin-bottom: 5%;
@@ -407,11 +356,4 @@ const Button = styled.button`
     background-color: white;
     color: #eb5e52;
   }
-`;
-const DropDowns = styled.select`
-  padding: 2%;
-  width: 82%;
-  margin: 0 auto;
-  border: 2px solid grey;
-  border-radius: 5px;
 `;

@@ -5,17 +5,9 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
 import { Link } from "react-router-dom";
+import Download from "./Download";
 
 import styled from "styled-components";
-
-import {
-  NoAccessText,
-  DownloadModalDiv,
-  DownloadModalTitle,
-  DownloadModalText,
-  DownloadModalButtons,
-  DownloadModalButtonsX
-} from "./styledComponents/Index";
 
 const DateContainer = styled.div`
   margin: 20px 0;
@@ -120,25 +112,7 @@ export default function CalendarModal() {
         }}
       >
         <Fade in={open}>
-          <DownloadModalDiv>
-            <DownloadModalButtonsX onClick={handleClose}>
-              X
-            </DownloadModalButtonsX>
-            <DownloadModalTitle>
-              You do not have access to this feature.
-            </DownloadModalTitle>
-            <DownloadModalText>
-              If you would like to learn more about signing up or upgrading your
-              account to access premium features, click the CONTINUE button
-              below.
-            </DownloadModalText>
-            <br />
-            <br />
-            <br />
-            <DownloadModalButtons onClick={handleCloseContinue}>
-              Continue
-            </DownloadModalButtons>
-          </DownloadModalDiv>
+          <Download handleClose={handleClose} />
         </Fade>
       </Modal>
     </div>

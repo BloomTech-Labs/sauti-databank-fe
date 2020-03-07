@@ -4,10 +4,10 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-import { Link } from "react-router-dom";
-import Download from "./Download";
+import CreateUser from "./CreateUser";
 
-import { NoAccessText } from "./styledComponents/Index";
+import { ModalButtons } from "../styledComponents/Index";
+import styled from "styled-components";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function DownloadModal() {
+export default function CreateUserModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -37,7 +37,15 @@ export default function DownloadModal() {
 
   return (
     <div>
-      <NoAccessText onClick={handleOpen}>Download⯆</NoAccessText>
+      <span className="btnCon">
+        <IconButtons
+          style={{ height: 20, lineHeight: 0.5 }}
+          onClick={e => deleteHandler(e, props.data.id)}
+          className="btn btn-info"
+        >
+          <i class="icon-trash"></i>
+        </IconButtons>
+      </span>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -51,7 +59,7 @@ export default function DownloadModal() {
         }}
       >
         <Fade in={open}>
-          <Download handleClose={handleClose} />
+          <CreateUser handleClose={handleClose} />
         </Fade>
       </Modal>
     </div>

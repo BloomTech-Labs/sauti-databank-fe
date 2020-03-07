@@ -16,12 +16,11 @@ export const Form = styled.form`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #212121;
   text-align: center;
   border-radius: 10px;
+  background-color: white;
 `;
 export const FormTitle = styled.h1`
-  color: white;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 3rem;
@@ -32,16 +31,13 @@ export const FormInputs = styled.input`
   display: block;
   margin: 20px auto;
   text-align: center;
-  border: 2px solid #eb5e52;
+  border: 2px solid black;
   padding: 14px 10px;
   width: 65%;
   outline: none;
-  color: white;
-  // border-radius: 24px;
   transition 0.25s;
   &:focus {
-    width: 75%;
-    border-color: white;
+    border-color: #eb5e52;
   }
 `;
 export const FormButton = styled.button`
@@ -53,7 +49,6 @@ export const FormButton = styled.button`
   border: 2px solid #eb5e52;
   padding: 14px 40px;
   outline: none;
-  color: white;
   border-radius: 24px;
   transition: 0.25s;
   cursor: pointer;

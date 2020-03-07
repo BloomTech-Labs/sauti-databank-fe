@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Graph from "./Graph";
@@ -11,22 +11,83 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 const GetData = props => {
   let queryType = "tradersUsers";
   let QUERY;
-  const { index, crossFilter } = props;
+  let thisQuery = {};
 
-  console.log(index, `props.index`);
-  console.log(crossFilter, `props.crossFilter`);
-  console.log(props.additionalFilter, `props.additionalFilter`);
-  console.log(props.selectedCheckbox, `props.selectedCheckbox`);
-  let varz = {
+  const {
+    firstSelectedCheckbox,
+    secondSelectedCheckbox,
+    selectedCheckbox,
     index,
     crossFilter
-  };
-  console.log("varz", varz);
+  } = props;
+
+  // thisQuery = firstSelectedCheckbox
+
+  // if (thisQuery !== firstSelectedCheckbox) {
+  //   console.log("first")
+  //   thisQuery = firstSelectedCheckbox
+
+  // }
+  // console.log("THISQUERY && FIRST", thisQuery, firstSelectedCheckbox);
+
+  // if (thisQuery !== secondSelectedCheckbox) {
+  //   console.log("sec")
+  //   thisQuery = secondSelectedCheckbox
+
+  // }
+  // console.log("THISQUERY && SECOND", thisQuery, secondSelectedCheckbox);
+
+  // if (thisQuery) {
+  //   console.log("first")
+  //     thisQuery = firstSelectedCheckbox
+
+  // }
+
+  console.log(`props.index`, index);
+  console.log(`props.crossFilter`, crossFilter);
+  console.log(`props.additionalFilter`, props.additionalFilter);
+  console.log(" ONE props.firstSelectedCheckbox", props.firstSelectedCheckbox);
+  console.log(
+    " TWO props.secondSelectedCheckbox",
+    props.secondSelectedCheckbox
+  );
+  console.log(` THREE props.selectedCheckbox`, props.selectedCheckbox);
+
   if (
+    props.index.query === "Users" &&
+    !props.crossFilter.type &&
+    !props.additionalFilter.type
+  ) {
+    queryType = "tradersUsers";
+    thisQuery = firstSelectedCheckbox;
+    QUERY = gql`
+      query getUsers($queryTraders: newTraderInput){
+        tradersUsers (input: $queryTraders) {
+          ${props.index.type}
+        }
+      }
+      
+      `;
+  } else if (
     props.index.query === "Users" &&
     props.crossFilter.query === "Users" &&
     !props.additionalFilter.type
   ) {
+    console.log("FUCK", firstSelectedCheckbox);
+    console.log("FUCK2", secondSelectedCheckbox);
+    const { type } = props.index;
+    let first = props.index.type;
+    let second = props.crossFilter.type;
+    let firstQuery = firstSelectedCheckbox[first];
+    education = secondSelectedCheckbox[second];
+
+    console.log(
+      "lsdfjldkfjsdljflsdfjjlsdfdjflsdfjsdljfljsdfjlsldjflddfjlksdf",
+      first,
+      second
+    );
+    thisQuery = { [type]: firstQuery, education };
+    console.log("hola", thisQuery);
     queryType = "tradersUsers";
     QUERY = gql`
       query getUsers($queryTraders: newTraderInput){
@@ -35,6 +96,7 @@ const GetData = props => {
           ${props.crossFilter.type}
         }
       }
+      
       `;
   } else if (
     props.index.query === "Sessions" &&
@@ -43,8 +105,8 @@ const GetData = props => {
   ) {
     queryType = "sessionsData";
     QUERY = gql`
-      query getData($querySessionData: newTraderSessionInput){
-          sessionsData (input: $querySessionData){
+      query getData($queryTraders: newTraderSessionInput){
+          sessionsData (input: $queryTraders){
           ${props.index.type}
           ${props.crossFilter.type}
           created_date
@@ -58,8 +120,8 @@ const GetData = props => {
   ) {
     queryType = "sessionsData";
     QUERY = gql`
-      query getData($querySessionData: newTraderSessionInput){
-        sessionsData(input: $querySessionData){
+      query getData($queryTraders: newTraderSessionInput){
+        sessionsData(input: $queryTraders){
           ${props.index.type}
           ${props.crossFilter.type}
           created_date
@@ -72,8 +134,8 @@ const GetData = props => {
   ) {
     queryType = "sessionsData";
     QUERY = gql`
-      query getData($querySessionData: newTraderSessionInput){
-        sessionsData (input: $querySessionData) {
+      query getData($queryTraders: newTraderSessionInput){
+        sessionsData (input: $queryTraders) {
           ${props.index.type}
           ${props.crossFilter.type}
           created_date
@@ -100,8 +162,8 @@ const GetData = props => {
   } else {
     queryType = "sessionsData";
     QUERY = gql`
-      query getData($querySessionData: newTraderSessionInput){
-        sessionsData(input: $querySessionData){
+      query getData($queryTraders: newTraderSessionInput){
+        sessionsData(input: $queryTraders){
           ${props.index.type}
           ${props.crossFilter.type}
           created_date
@@ -113,10 +175,13 @@ const GetData = props => {
       `;
   }
 
-  let { loading, data } = useQuery(QUERY, {
-    variables: { input: { age: "50-60" } }
-  });
+  console.log("FINAL QUERY", thisQuery, firstSelectedCheckbox);
 
+  let { loading, data } = useQuery(QUERY, {
+    variables: { queryTraders: thisQuery }
+  });
+  // [thisQuery]
+  //queryType: props.selectedCheckbox
   if (data) console.log(`returned data`, data[queryType]);
 
   if (loading) {
@@ -136,6 +201,11 @@ const GetData = props => {
 
   let filteredData;
   // This is how we nab checkbox options.
+  console.log(
+    "asdfojasdofjsdofjosdjfosdjfdj",
+    props.additionalFilter.type,
+    graphLabels[`${props.additionalFilter.type}`]
+  );
   if (
     props.additionalFilter.type &&
     !graphLabels[`${props.additionalFilter.type}`]
@@ -225,3 +295,23 @@ const GetData = props => {
 };
 
 export default GetData;
+
+let gender = gender;
+let education = education;
+let crossing_freq = crossing_freq;
+let age = age;
+let country_of_residence = country_of_residence;
+let primary_income = primary_income;
+let language = language;
+let produce = produce;
+let procedurecommodity = procedurecommodity;
+let procedurecommoditycat = procedurecommoditycat;
+let proceduredest = proceduredest;
+let procedurerequireddocument = procedurerequireddocument;
+let procedurerelevantagency = procedurerelevantagency;
+let procedureorigin = procedureorigin;
+let commoditycountry = commoditycountry;
+let commoditymarket = commoditymarket;
+let commodityproduct = commodityproduct;
+let commoditycat = commoditycat;
+let exchangedirection = exchangedirection;
