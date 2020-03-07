@@ -29,12 +29,12 @@ function DashHome() {
     <>
       {!signedIn && <DashSignup />}
       {signedIn && (
-        <SignedInDiv>
-          <UserHeader>
-            Welcome <UserName>{userEmail}</UserName> !
-          </UserHeader>
+        <div>
+          {/* <UserHeader>
+            Welcome to the Sauti Databank App <UserName>{userEmail}</UserName> !
+          </UserHeader> */}
           <DashAccount />
-        </SignedInDiv>
+        </div>
       )}
     </>
   );
