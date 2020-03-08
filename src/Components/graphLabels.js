@@ -64,6 +64,10 @@ const dataOrder = {
     labels: ["No", "Yes"],
     structure: [{ produce: "Yes" }, { produce: "No" }]
   }
+  // procedurecommodity: {
+  //   labels: ["No", "yes"],
+  //   structure: { procedurecommodity: "No", procedurecommodity: "Yes" }
+  // }
 };
 
 export default dataOrder;

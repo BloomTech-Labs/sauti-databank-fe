@@ -26,12 +26,14 @@ const dataParse = (
     if (queryType === "Sessions" && crossFilter === "") {
       data = filterByDate(data, startDate, endDate);
       dataStructure = getIndex(data, indexBy);
+      console.log("SESSIONS SINGLE FILTER", queryType);
       return getMostRequested(data, dataStructure, indexBy);
     }
     //when cross-filtering "Most Requested" as index
     else if (queryType === "Sessions" && crossFilter !== "") {
       data = filterByDate(data, startDate, endDate);
       dataStructure = getIndex(data, indexBy);
+      console.log("SESSIONS DOUBLE FILTER!!!!!!!!!!!!!", queryType);
       return setCrossedItems(
         data,
         dataStructure,

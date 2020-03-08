@@ -17,7 +17,6 @@ export default function FilterBox(props) {
   if (token) {
     tier = decodeToken(token);
     tier = tier.tier;
-    console.log("AAAAAAAAAA", tier);
   }
 
   const [filterBoxIndex, setFilterBoxIndex] = useState({
@@ -25,17 +24,17 @@ export default function FilterBox(props) {
     query: "Users",
     label: ""
   });
-  console.log(`filterBoxIndex`, filterBoxIndex);
+  // console.log(`filterBoxIndex`, filterBoxIndex);
   const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
     type: "",
     query: "Users",
     label: ""
   });
-  console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
+  // console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
   const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
-  console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
+  // console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
   const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
-  console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
+  // console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
   const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
     type: "",
     query: "",
@@ -95,30 +94,38 @@ export default function FilterBox(props) {
       props
     ]
   );
+  console.log(
+    "IMPORTANTTT",
+    filterBoxAdditionalFilter.type,
+    !graphLabels[`${filterBoxAdditionalFilter.type}`]
+  );
 
-  useEffect(() => {
-    if (
-      !graphLabels[`${filterBoxAdditionalFilter.type}`] &&
-      filterBoxAdditionalFilter.type
-    ) {
-      handleAuto();
-      setLoading(true);
-    }
-    /* eslint-disable */
-  }, [filterBoxAdditionalFilter.type]);
+  // useEffect(() => {
+  //   if (
+  //     !graphLabels[`${filterBoxAdditionalFilter.type}`] &&
+  //     filterBoxAdditionalFilter.type
+  //   ) {
+  //     handleAuto();
+  //     setLoading(true);
+  //   }
+  //   /* eslint-disable */
+  // }, [filterBoxAdditionalFilter.type]);
 
-  useEffect(() => {
-    if (props.checkboxOptions.length) {
-      setLoading(false);
-    }
-  }, [props.checkboxOptions]);
+  // useEffect(() => {
+  //   if (props.checkboxOptions.length) {
+  //     setLoading(false);
+  //   }
+  // }, [props.checkboxOptions]);
 
-  const ClickTracker = index => {
-    ReactGa.event({
-      category: "Option",
-      action: `Clicked a Filter Option: ${index}`
-    });
-  };
+  // const ClickTracker = index => {
+  //   ReactGa.event({
+  //     category: "Option",
+  //     action: `Clicked a Filter Option: ${index}`
+  //   });
+  // };
+
+  console.log("FILTER BOX INDEX TYPE", filterBoxIndex.type);
+  console.log("props.setCheckboxOptions", props.checkboxOptions);
 
   return (
     <DropdownContainer>
@@ -134,7 +141,11 @@ export default function FilterBox(props) {
           onChange={e => {
             setFilterBoxIndex(e.value);
             setFilterBoxIndexLabel(e.label);
-            ClickTracker(e.value.type);
+            setFilterBoxIndex({
+              type: e.value.type,
+              query: e.value.query,
+              label: e.label
+            });
           }}
         />
         {graphLabels[`${filterBoxIndex.type}`] && (
@@ -164,12 +175,19 @@ export default function FilterBox(props) {
           arrowClassName="myArrowClassName"
           className="dropdown"
           disabled={loading}
-          options={FilterBoxOptions.default}
+          options={FilterBoxOptions.default.filter(
+            obj => obj.label !== filterBoxIndexLabel
+          )}
           value={filterBoxCrossLabel}
           placeholder="Select second option..."
           onChange={e => {
             setFilterBoxCrossLabel(e.label);
             setFilterBoxCrossFilter(e.value);
+            setFilterBoxCrossFilter({
+              type: e.value.type,
+              query: e.value.query,
+              label: e.label
+            });
           }}
         />
         {graphLabels[`${filterBoxCrossFilter.type}`] && (
@@ -203,7 +221,7 @@ export default function FilterBox(props) {
             controlClassName="myControlClassName"
             arrowClassName="myArrowClassName"
             className="dropdown"
-            disabled={loading}
+            // disabled={loading}
             options={FilterBoxOptions.default.filter(
               obj =>
                 obj.label !== filterBoxIndexLabel &&
@@ -219,8 +237,6 @@ export default function FilterBox(props) {
               });
               setFilterBoxAdditionalFilterLabel(e.label);
               props.setCheckboxOptions([]);
-              ClickTracker(e.value.type);
-              console.log("event", e);
             }}
           />
           <div
@@ -259,7 +275,8 @@ export default function FilterBox(props) {
             )}
           </CheckboxContainer>
         )}
-        {loading ? (
+
+        {/* {loading ? (
           <Loader
             className="options-loader"
             type="Oval"
@@ -269,30 +286,55 @@ export default function FilterBox(props) {
             timeout={120000000}
           />
         ) : (
-          props.checkboxOptions.length > 1 && (
-            <>
-              <p>Select an option to further filter the data: </p>
-              <CheckboxContainer>
-                {props.checkboxOptions.map(option => (
-                  <Options key={option}>
-                    <input
-                      type="radio"
-                      name="CrossFilter"
-                      value={option}
-                      onChange={e => {
-                        props.setSelectedCheckbox(
-                          { [`${filterBoxAdditionalFilter.type}`]: option },
-                          props.setAdditionalFilter(filterBoxAdditionalFilter)
-                        );
-                      }}
-                    />
-                    <FilterOption>{option}</FilterOption>
-                  </Options>
-                ))}
-              </CheckboxContainer>
-            </>
-          )
+            props.checkboxOptions.length > 1 && (
+              <>
+                <p>Select an option to further filter the data: </p>
+                <CheckboxContainer>
+                  {props.checkboxOptions.map(option => (
+                    <Options key={option}>
+                      <input
+                        type="radio"
+                        name="CrossFilter"
+                        value={option}
+                        onChange={e => {
+                          props.setSelectedCheckbox(
+                            { [`${filterBoxAdditionalFilter.type}`]: option },
+                            props.setAdditionalFilter(filterBoxAdditionalFilter)
+                          );
+                        }}
+                      />
+                      <FilterOption>{option}</FilterOption>
+                    </Options>
+                  ))}
+                </CheckboxContainer>
+              </>
+            )
+          )} */}
+
+        {props.checkboxOptions.length > 1 && (
+          <>
+            <p>Select an option to further filter the data: </p>
+            <CheckboxContainer>
+              {props.checkboxOptions.map(option => (
+                <Options key={option}>
+                  <input
+                    type="radio"
+                    name="CrossFilter"
+                    value={option}
+                    onChange={e => {
+                      props.setSelectedCheckbox(
+                        { [`${filterBoxAdditionalFilter.type}`]: option },
+                        props.setAdditionalFilter(filterBoxAdditionalFilter)
+                      );
+                    }}
+                  />
+                  <FilterOption>{option}</FilterOption>
+                </Options>
+              ))}
+            </CheckboxContainer>
+          </>
         )}
+
         {tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE" ? (
           <DateContainer>
             <div>

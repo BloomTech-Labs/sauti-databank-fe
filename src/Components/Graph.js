@@ -22,11 +22,13 @@ const Graph = props => {
   const [csvHeaders, setCsvHeaders] = useState([]);
   const [csvFormattedData, setCsvFormattedData] = useState([]);
 
-  useEffect(() => {
-    if (props.filteredData && props.checkboxOptions !== props.filtgiteredData) {
-      props.setCheckboxOptions(props.filteredData);
-    }
-  }, []);
+  console.log("GRAPH PROPS", props);
+
+  // useEffect(() => {
+  //   if (props.filteredData && props.checkboxOptions !== props.filtgiteredData) {
+  //     props.setCheckboxOptions(props.filteredData);
+  //   }
+  // }, []);
 
   //Gets headers for CSV.
   let headers = data => {
