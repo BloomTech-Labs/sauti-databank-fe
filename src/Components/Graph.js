@@ -24,11 +24,11 @@ const Graph = props => {
 
   console.log("GRAPH PROPS", props);
 
-  // useEffect(() => {
-  //   if (props.filteredData) {
-  //     props.setCheckboxOptions(props.filteredData);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (props.filteredData) {
+      props.setCheckboxOptions(props.filteredData);
+    }
+  }, []);
 
   //Gets headers for CSV.
   let headers = data => {

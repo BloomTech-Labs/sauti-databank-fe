@@ -125,8 +125,14 @@ export default function FilterBox(props) {
   //   });
   // };
 
-  // console.log("FILTER BOX ADDITIONALFILTER TYPE", filterBoxAdditionalFilter.type);
-  // console.log(" ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES", props.checkboxOptions);
+  console.log(
+    "FILTER BOX ADDITIONALFILTER TYPE",
+    filterBoxAdditionalFilter.type
+  );
+  console.log(
+    " ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES",
+    props.checkboxOptions
+  );
   // console.log(" TWO - props.SECONDCheckboxOptions", props.secondCheckboxOptions);
 
   return (

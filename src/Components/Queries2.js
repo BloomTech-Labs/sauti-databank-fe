@@ -200,18 +200,19 @@ const GetData = props => {
 
   // This is how we nab checkbox options.
 
-  // let filteredData;
-  // if (
-  //   props.additionalFilter.type &&
-  //   !graphLabels[`${props.additionalFilter.type}`]) {
-  //   removeMultiple(data.additionalFilterData);
-  //   filteredData = getIndex(
-  //     data.additionalFilterData,
-  //     `${props.additionalFilter.type}`
-  //   ).map(obj => obj[`${props.additionalFilter.type}`]);
-  //   filteredData = filteredData.filter(item => item !== null);
-  // }
-
+  let filteredData;
+  if (
+    props.additionalFilter.type &&
+    !graphLabels[`${props.additionalFilter.type}`]
+  ) {
+    removeMultiple(data.additionalFilterData);
+    filteredData = getIndex(
+      data.additionalFilterData,
+      `${props.additionalFilter.type}`
+    ).map(obj => obj[`${props.additionalFilter.type}`]);
+    filteredData = filteredData.filter(item => item !== null);
+  }
+  // console.log("FILTERED DATA QUERIES", filteredData)
   // if (props.crossFilter.type &&
   //   !graphLabels[`${props.crossFilter.type}`]) {
   //   removeMultiple(data.sessionsData)
@@ -261,7 +262,7 @@ const GetData = props => {
           index={props.index.type}
           label={props.label}
           groupMode={"grouped"}
-          // filteredData={filteredData}
+          filteredData={filteredData}
           sampleSize={chartData.totalSampleSize}
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
@@ -291,7 +292,7 @@ const GetData = props => {
           index={props.index.type}
           label={props.label}
           groupMode={"stacked"}
-          // filteredData={filteredData}
+          filteredData={filteredData}
           sampleSize={chartData.sampleSize}
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
