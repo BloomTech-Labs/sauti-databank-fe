@@ -274,6 +274,8 @@ export default function FilterBox(props) {
               props.setAdditionalFilter({ type: "", query: "" });
               props.setCheckboxOptions([]);
               props.setSelectedCheckbox({});
+              props.setFirstSelectedCheckbox({});
+              props.setSecondSelectedCheckbox({});
             }}
           >
             <p>Clear Additional Filter</p>
