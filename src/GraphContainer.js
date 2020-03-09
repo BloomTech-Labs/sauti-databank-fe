@@ -8,6 +8,7 @@ import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries";
 import { Organization, Selectable } from "./Components/NewFilterPlan";
+import IndexBox from "./Components/LukasFilterPlan";
 
 const GraphContainer = () => {
   const [index, setIndex] = useState({ type: "gender", query: "Users" });
@@ -97,7 +98,9 @@ const GraphContainer = () => {
         <div className="header">
           <h1>Informal Cross-Border Trade Data</h1>
         </div>
-        <Organization categories={categories} />
+        {/* Top of Graph */}
+        <IndexBox />
+        {/* Top of Graph */}
         <div className="content-container">
           <div className="chart-container">
             <Queries

@@ -111,13 +111,6 @@ export default function FilterBox(props) {
     }
   }, [props.checkboxOptions]);
 
-  const ClickTracker = index => {
-    ReactGa.event({
-      category: "Option",
-      action: `Clicked a Filter Option: ${index}`
-    });
-  };
-
   return (
     <DropdownContainer>
       <form>
@@ -132,7 +125,6 @@ export default function FilterBox(props) {
           onChange={e => {
             setFilterBoxIndex(e.value);
             setFilterBoxIndexLabel(e.label);
-            ClickTracker(e.value.type);
           }}
         />
 
