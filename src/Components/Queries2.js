@@ -11,7 +11,7 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 const GetData = props => {
   let queryType = "tradersUsers";
   let QUERY;
-  let thisQuery = {};
+  let thisQuery;
 
   const {
     firstSelectedCheckbox,
@@ -44,7 +44,6 @@ const GetData = props => {
           ${props.index.type}
         }
       }
-      
       `;
   } else if (
     props.index.query === "Users" &&
@@ -71,6 +70,7 @@ const GetData = props => {
     props.crossFilter.query === "Users" &&
     !props.additionalFilter.type
   ) {
+    // currently broken
     queryType = "sessionsData";
     const firstQuery = firstSelectedCheckbox[props.index.type];
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
@@ -125,11 +125,33 @@ const GetData = props => {
         }
       }
       `;
-  } else if (
-    props.index.query === "Users" &&
-    props.crossFilter.query === "Users" &&
-    props.additionalFilter.query === "Users"
-  ) {
+    // } else if (
+    //   props.index.query === "Users" &&
+    //   props.crossFilter.query === "Users" &&
+    //   props.additionalFilter.query === "Users"
+    // ) {
+    //   const firstQuery = firstSelectedCheckbox[props.index.type];
+    //   const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+    //   const thirdQuery = selectedCheckbox[props.additionalFilter.type];
+    //   thisQuery = {
+    //     [props.index.type]: firstQuery,
+    //     [props.crossFilter.type]: secondQuery,
+    //     [props.additionalFilter.type]: thirdQuery
+    //   };
+    //   queryType = "tradersUsers";
+    //   QUERY = gql`
+    //         query getUsers($queryTraders: newTraderInput){
+    //           tradersUsers(input: $queryTraders) {
+    //             ${props.index.type}
+    //             ${props.crossFilter.type}
+    //           }
+    //           additionalFilterData: tradersUsers {
+    //             ${props.additionalFilter.type}
+    //           }
+    //         }
+    //         `;
+  } else {
+    queryType = "sessionsData";
     const firstQuery = firstSelectedCheckbox[props.index.type];
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     const thirdQuery = selectedCheckbox[props.additionalFilter.type];
@@ -138,20 +160,6 @@ const GetData = props => {
       [props.crossFilter.type]: secondQuery,
       [props.additionalFilter.type]: thirdQuery
     };
-    queryType = "tradersUsers";
-    QUERY = gql`
-        query getUsers($queryTraders: newTraderInput){
-          tradersUsers(input: $queryTraders) {
-            ${props.index.type}
-            ${props.crossFilter.type}
-          }
-          additionalFilterData: tradersUsers {
-            ${props.additionalFilter.type}
-          }
-        }
-        `;
-  } else {
-    queryType = "sessionsData";
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
         sessionsData(input: $queryTraders){
