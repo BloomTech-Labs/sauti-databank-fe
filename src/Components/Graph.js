@@ -25,7 +25,7 @@ const Graph = props => {
   console.log("GRAPH PROPS", props);
 
   // useEffect(() => {
-  //   if (props.filteredData && props.checkboxOptions !== props.filtgiteredData) {
+  //   if (props.filteredData) {
   //     props.setCheckboxOptions(props.filteredData);
   //   }
   // }, []);

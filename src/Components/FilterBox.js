@@ -30,16 +30,17 @@ export default function FilterBox(props) {
     query: "Users",
     label: ""
   });
-  // console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
-  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
-  // console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
-  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
-  // console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
   const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
     type: "",
     query: "",
     label: ""
   });
+  // console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
+  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
+  // console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
+  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
+  // console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
+
   const [
     filterBoxAdditionalFilterLabel,
     setFilterBoxAdditionalFilterLabel
@@ -94,11 +95,11 @@ export default function FilterBox(props) {
       props
     ]
   );
-  console.log(
-    "IMPORTANTTT",
-    filterBoxAdditionalFilter.type,
-    !graphLabels[`${filterBoxAdditionalFilter.type}`]
-  );
+  // console.log(
+  //   "IMPORTANTTT",
+  //   filterBoxAdditionalFilter.type,
+  //   !graphLabels[`${filterBoxAdditionalFilter.type}`]
+  // );
 
   // useEffect(() => {
   //   if (
@@ -124,8 +125,9 @@ export default function FilterBox(props) {
   //   });
   // };
 
-  console.log("FILTER BOX INDEX TYPE", filterBoxIndex.type);
-  console.log("props.setCheckboxOptions", props.checkboxOptions);
+  // console.log("FILTER BOX ADDITIONALFILTER TYPE", filterBoxAdditionalFilter.type);
+  // console.log(" ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES", props.checkboxOptions);
+  // console.log(" TWO - props.SECONDCheckboxOptions", props.secondCheckboxOptions);
 
   return (
     <DropdownContainer>
@@ -190,6 +192,7 @@ export default function FilterBox(props) {
             });
           }}
         />
+        {/* ------------------------------------------------------------------------------- */}
         {graphLabels[`${filterBoxCrossFilter.type}`] && (
           <CheckboxContainer>
             <p>Select an option to further filter the data: </p>
@@ -210,6 +213,30 @@ export default function FilterBox(props) {
               </Options>
             ))}
           </CheckboxContainer>
+        )}
+        {/* ------------------------------------------------------------------------------- */}
+        {props.secondCheckboxOptions.length > 1 && (
+          <>
+            <p>Select an option to further filter the data: </p>
+            <CheckboxContainer>
+              {props.secondCheckboxOptions.map(option => (
+                <Options key={option}>
+                  <input
+                    type="radio"
+                    name="CrossFilter"
+                    value={option}
+                    onChange={e => {
+                      props.setSecondSelectedCheckbox(
+                        { [`${filterBoxCrossFilter.type}`]: option },
+                        props.setCrossFilter(filterBoxCrossFilter)
+                      );
+                    }}
+                  />
+                  <FilterOption>{option}</FilterOption>
+                </Options>
+              ))}
+            </CheckboxContainer>
+          </>
         )}
         <>
           <p>Additional Filter</p>
