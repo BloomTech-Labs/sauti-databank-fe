@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from "react-csv-downloader";
 
-import { getTier, getToken, decodeToken } from "../dashboard/auth/Auth";
+import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
 
 import {
@@ -18,15 +18,22 @@ const Graph = props => {
     tier = decodeToken(token);
     tier = tier.tier;
   }
+  const newSub = getSubscription();
+  let sub;
+  if (newSub) {
+    sub = newSub;
+  }
 
   const [csvHeaders, setCsvHeaders] = useState([]);
   const [csvFormattedData, setCsvFormattedData] = useState([]);
 
-  useEffect(() => {
-    if (props.filteredData && props.checkboxOptions !== props.filtgiteredData) {
-      props.setCheckboxOptions(props.filteredData);
-    }
-  }, []);
+  console.log("GRAPH PROPS", props);
+
+  // useEffect(() => {
+  //   if (props.filteredData) {
+  //     props.setCheckboxOptions(props.filteredData);
+  //   }
+  // }, []);
 
   //Gets headers for CSV.
   let headers = data => {
@@ -83,7 +90,10 @@ const Graph = props => {
   return (
     <div className="Graph-Container">
       <div className="dwnld-btn">
-        {tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE" ? (
+        {tier === "ADMIN" ||
+        tier === "PAID" ||
+        tier === "GOV_ROLE" ||
+        newSub ? (
           <CsvDownloader
             datas={csvFormattedData}
             columns={csvHeaders}

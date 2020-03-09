@@ -8,3 +8,7 @@ export function decodeToken(token) {
 export function getToken() {
   return localStorage.getItem("token");
 }
+
+export function getSubscription() {
+  return localStorage.getItem("xyz");
+}

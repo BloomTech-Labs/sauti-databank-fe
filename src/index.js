@@ -11,7 +11,7 @@ import { ApolloProvider } from "react-apollo";
 
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_BACKEND_URL}`
-  //uri: "http://localhost:2500/graphql"
+  // uri: "http://localhost:2500/graphql"
 });
 
 ReactDOM.render(

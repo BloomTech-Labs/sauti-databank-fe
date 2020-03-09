@@ -6,25 +6,34 @@ import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
-import Queries from "./Components/Queries";
-import { Organization, Selectable } from "./Components/NewFilterPlan";
-import IndexBox from "./Components/LukasFilterPlan";
+import Queries from "./Components/Queries2";
 
 const GraphContainer = () => {
-  const [index, setIndex] = useState({ type: "gender", query: "Users" });
-  console.log(`GraphContianer index`, index);
-  const [crossFilter, setCrossFilter] = useState({ type: "", query: "Users" });
-  console.log(`Gra Container crossFilter`, crossFilter);
+  const [index, setIndex] = useState({
+    type: "gender",
+    query: "Users",
+    label: ""
+  });
+  const [crossFilter, setCrossFilter] = useState({
+    type: "",
+    query: "Users",
+    label: ""
+  });
   const [additionalFilter, setAdditionalFilter] = useState({
     type: "",
     query: "",
     label: ""
   });
-  const [indexLabel, setIndexLabel] = useState("Gender");
-  console.log(`Gra Container indexLabel`, indexLabel);
-  const [crossLabel, setCrossLabel] = useState("");
-  const [checkboxOptions, setCheckboxOptions] = useState([]);
+  const [firstSelectedCheckbox, setFirstSelectedCheckbox] = useState({});
+  const [secondSelectedCheckbox, setSecondSelectedCheckbox] = useState({});
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
+
+  const [indexLabel, setIndexLabel] = useState("Gender");
+  const [crossLabel, setCrossLabel] = useState("");
+
+  const [checkboxOptions, setCheckboxOptions] = useState([]);
+  const [secondCheckboxOptions, setSecondCheckboxOptions] = useState([]);
+
   const [startDate, setStartDate] = useState("2012-01-01");
   const [endDate, setEndDate] = useState("2020-01-08");
 
@@ -42,65 +51,13 @@ const GraphContainer = () => {
     e.preventDefault();
     setCrossFilter(e.target.value);
   };
-  // <Selectable prompt={""} function={""}/>
-  const categories = [
-    {
-      prompt: "gender",
-      subcategories: [
-        {
-          prompt: "male",
-          subcategories: []
-        },
-        {
-          prompt: "female",
-          subcategories: []
-        }
-      ]
-    },
-    {
-      prompt: "country",
-      subcategories: [
-        {
-          prompt: "kenya",
-          subcategories: []
-        },
-        {
-          prompt: "zimbabway",
-          subcategories: []
-        },
-        {
-          prompt: "uganda",
-          subcategories: []
-        }
-      ]
-    },
-    {
-      prompt: "trade",
-      subcategories: [
-        {
-          prompt: "carrots",
-          subcategories: []
-        },
-        {
-          prompt: "rice",
-          subcategories: []
-        },
-        {
-          prompt: "maize",
-          subcategories: []
-        }
-      ]
-    }
-  ];
+
   return (
     <div className="App">
       <div className="main-container">
         <div className="header">
           <h1>Informal Cross-Border Trade Data</h1>
         </div>
-        {/* Top of Graph */}
-        <IndexBox />
-        {/* Top of Graph */}
         <div className="content-container">
           <div className="chart-container">
             <Queries
@@ -111,9 +68,12 @@ const GraphContainer = () => {
               selectedCheckbox={selectedCheckbox}
               checkboxOptions={checkboxOptions}
               setCheckboxOptions={setCheckboxOptions}
+              setSecondCheckboxOptions={setSecondCheckboxOptions}
               additionalFilter={additionalFilter}
               startDate={startDate}
               endDate={endDate}
+              secondSelectedCheckbox={secondSelectedCheckbox}
+              firstSelectedCheckbox={firstSelectedCheckbox}
             />
           </div>
           <div className="dropdown-container">
@@ -134,6 +94,9 @@ const GraphContainer = () => {
               endDate={endDate}
               setStartDate={setStartDate}
               setEndDate={setEndDate}
+              setFirstSelectedCheckbox={setFirstSelectedCheckbox}
+              setSecondSelectedCheckbox={setSecondSelectedCheckbox}
+              secondCheckboxOptions={secondCheckboxOptions}
             />
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, withRouter } from "react-router-dom";
+import { NavLink, Route, withRouter } from "react-router-dom";
 
 import DashHome from "./DashHome";
 import DashData from "./DashData";
@@ -45,7 +45,7 @@ function DashNav() {
         </SautiLogo>
         <Navigation>
           {!SignedIn && <Links to="/">HOME</Links>}
-          {SignedIn && <Links to="/">MY ACCOUNT</Links>}
+          {SignedIn && <Links to="/">ACCOUNT</Links>}
           <Links to="/data">DATA</Links>
           {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
           {/* <LinksLast to="/services">SERVICES</LinksLast> */}

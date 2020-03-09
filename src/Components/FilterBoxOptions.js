@@ -1,6 +1,10 @@
 export const FilterBoxOptions = {
   default: [
-    { label: "Gender", value: { type: "gender", query: "Users" } },
+    {
+      label: "Gender",
+      value: { type: "gender", query: "Users" },
+      subLabels: ["Male", "Female"]
+    },
     { label: "Education Level", value: { type: "education", query: "Users" } },
     {
       label: "Border Crossing Frequency",
@@ -80,12 +84,5 @@ export const FilterBoxOptions = {
     },
     { label: "Language", value: { type: "language", query: "Users" } },
     { label: "Produce", value: { type: "produce", query: "Users" } }
-  ]
-};
-
-export const LukasOptions = {
-  default: [
-    { label: "Gender", value: { type: "gender", query: "Users" } },
-    { label: "Education Level", value: { type: "education", query: "Users" } }
   ]
 };
