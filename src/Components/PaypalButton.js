@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { decodeToken } from "../dashboard/auth/Auth";
 import { useMutation } from "@apollo/react-hooks";
+import swal from "sweetalert";
 import gql from "graphql-tag";
 
 const UPDATE_USER_TIER = gql`
@@ -22,6 +24,7 @@ const UPDATE_USER_TIER = gql`
 
 export default function PaypalButton() {
   const [userUpdated, { loading, error }] = useMutation(UPDATE_USER_TIER);
+  const history = useHistory();
 
   useEffect(function renderPaypalButtons() {
     window.paypal
@@ -43,9 +46,11 @@ export default function PaypalButton() {
         onApprove: async function(data, actions) {
           console.log("2", data.subscriptionID, actions);
 
-          alert(
-            "You have successfully created subscription " + data.subscriptionID
-          );
+          swal({
+            title: "",
+            text: "You are now a premium user!",
+            icon: "success"
+          });
 
           const token = localStorage.getItem("token");
           const decoded = decodeToken(token);
@@ -58,6 +63,7 @@ export default function PaypalButton() {
           const editedUser = await userUpdated({
             variables: { newEditUser: decoded }
           });
+          history.push("/data");
           console.log("editeduser", editedUser);
         },
         onError: function(err) {
