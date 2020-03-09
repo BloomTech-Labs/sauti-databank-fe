@@ -8,6 +8,7 @@ export const SignUpContainer = styled.div`
   &:focus {
     outline: 0;
   }
+  border: 2px solid red;
 `;
 export const SignUpText = styled.div`
   width: 25%;
@@ -17,6 +18,7 @@ export const SignUpText = styled.div`
   border-radius: 10px;
   background-color: white;
   color: #212121;
+  border: 2px solid red;
 `;
 export const SignUpPage = styled.div`
   display: flex;
@@ -34,6 +36,7 @@ export const SignUpInfo = styled.div`
   border-radius: 10px;
   background-color: white;
   color: #212121;
+  border: 2px solid red;
 `;
 export const SignUpForm = styled.form`
   width: 25%;
@@ -42,6 +45,7 @@ export const SignUpForm = styled.form`
   background: #212121;
   text-align: center;
   border-radius: 10px;
+  border: 2px solid red;
 `;
 export const SignUpInputs = styled.input`
   border: 0;
@@ -59,6 +63,8 @@ export const SignUpInputs = styled.input`
     width: 70%;
     border-color: white;
   }
+  border:2px solid red;
+
 `;
 export const SignUpRequiredInputs = styled.input`
   border: 0;

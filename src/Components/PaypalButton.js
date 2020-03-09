@@ -68,8 +68,31 @@ export default function PaypalButton() {
       })
       .render("#paypal-button-container");
   }, []);
-  return <div id="paypal-button-container" style={{ width: "45rem" }}></div>;
+  return (
+    <div
+      id="paypal-button-container"
+      style={{
+        display: "inline-block",
+        padding: "1rem 3rem",
+        margin: "0 auto"
+      }}
+    ></div>
+  );
 }
+
+// display: inline-block;
+//   text-decoration: none;
+//   color: black;
+//   border: 2px solid #eb5e52;
+//   border-radius: 5px;
+//   padding: 1rem 3rem;
+//   margin-top: 2rem;
+//   transition: 0.5s ease;
+//   &:hover {
+//     color: white;
+//     background-color: #eb5e52;
+//     cursor: pointer;
+//   }
 
 // notes to patch/edit you have to set the body up like this in postman
 

@@ -145,10 +145,17 @@ function DashSignup(props) {
         });
       } else {
         console.log(createdUser.data.register.id);
-        localStorage.setItem("token", createdUser.data.register.token);
-        GAHandleCreateUser();
-        history.push("/");
-        swal({ title: "", text: "Success!", icon: "success" });
+        if (tier === "FREE") {
+          localStorage.setItem("token", createdUser.data.register.token);
+          GAHandleCreateUser();
+          history.push("/data");
+          swal({ title: "", text: "Success!", icon: "success" });
+        } else {
+          localStorage.setItem("token", createdUser.data.register.token);
+          GAHandleCreateUser();
+          history.push("/");
+          swal({ title: "", text: "Success!", icon: "success" });
+        }
       }
     }
   };
