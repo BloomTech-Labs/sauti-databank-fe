@@ -14,13 +14,11 @@ const GraphContainer = () => {
     query: "Users",
     label: ""
   });
-  // console.log(`GraphContianer index`, index);
   const [crossFilter, setCrossFilter] = useState({
     type: "",
     query: "Users",
     label: ""
   });
-  // console.log(`Gra Container crossFilter`, crossFilter);
   const [additionalFilter, setAdditionalFilter] = useState({
     type: "",
     query: "",
@@ -28,11 +26,14 @@ const GraphContainer = () => {
   });
   const [firstSelectedCheckbox, setFirstSelectedCheckbox] = useState({});
   const [secondSelectedCheckbox, setSecondSelectedCheckbox] = useState({});
-  const [indexLabel, setIndexLabel] = useState("Gender");
-  // console.log(`Gra Container indexLabel`, indexLabel);
-  const [crossLabel, setCrossLabel] = useState("");
-  const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [selectedCheckbox, setSelectedCheckbox] = useState({});
+
+  const [indexLabel, setIndexLabel] = useState("Gender");
+  const [crossLabel, setCrossLabel] = useState("");
+
+  const [checkboxOptions, setCheckboxOptions] = useState([]);
+  const [secondCheckboxOptions, setSecondCheckboxOptions] = useState([]);
+
   const [startDate, setStartDate] = useState("2012-01-01");
   const [endDate, setEndDate] = useState("2020-01-08");
 
@@ -67,6 +68,7 @@ const GraphContainer = () => {
               selectedCheckbox={selectedCheckbox}
               checkboxOptions={checkboxOptions}
               setCheckboxOptions={setCheckboxOptions}
+              setSecondCheckboxOptions={setSecondCheckboxOptions}
               additionalFilter={additionalFilter}
               startDate={startDate}
               endDate={endDate}
@@ -94,6 +96,7 @@ const GraphContainer = () => {
               setEndDate={setEndDate}
               setFirstSelectedCheckbox={setFirstSelectedCheckbox}
               setSecondSelectedCheckbox={setSecondSelectedCheckbox}
+              secondCheckboxOptions={secondCheckboxOptions}
             />
           </div>
         </div>
