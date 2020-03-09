@@ -26,37 +26,64 @@ const dataParse = (
     if (queryType === "Sessions" && crossFilter === "") {
       data = filterByDate(data, startDate, endDate);
       dataStructure = getIndex(data, indexBy);
-      console.log("SESSIONS SINGLE FILTER", queryType);
+      console.log(
+        "DATAPARSE ONE ----- FIRST FILTER = SESSIONS, CROSSFILTER EMPTY",
+        dataStructure
+      );
       return getMostRequested(data, dataStructure, indexBy);
     }
     //when cross-filtering "Most Requested" as index
     else if (queryType === "Sessions" && crossFilter !== "") {
       data = filterByDate(data, startDate, endDate);
       dataStructure = getIndex(data, indexBy);
-      console.log("SESSIONS DOUBLE FILTER!!!!!!!!!!!!!", queryType);
+      console.log(
+        "DATAPARSE TWO -----FIRST FILTER = SESSIONS ---- CROSSFILTER ANYTHING!!!!!!!!!!!!!",
+        dataStructure
+      );
       return setCrossedItems(
         data,
         dataStructure,
         crossFilter,
         indexBy,
-        additionalFilter
+        additionalFilter,
+        queryType
       );
     } else {
+      console.log("BIG ELSE DATAPARSE");
       //telling function how to format data. See "graphLabels.js"
-      dataStructure = graphLabels[`${indexBy}`].structure.map(item => item);
+      if (queryType === "Users") {
+        // console.log("FIRST QUERY = USERS - DATASTRUCTURE", dataStructure)
+        // console.log("indexby", indexBy)
+        dataStructure = graphLabels[`${indexBy}`].structure.map(item => {
+          return item;
+        });
+        // console.log("FIRST QUERY = USERS - DATASTRUCTURE 222222", dataStructure)
+      }
+
+      // if (crossFilter) {
+      //   console.log("CROSSSSSSSSSSSSSSSSSSSSSFILTER", dataStructure)
+      //   dataStructure = graphLabels[crossFilter].structure.map(item => item);
+      //   console.log("fuckkkers", dataStructure)
+      // }
       // console.log(dataStructure);
       //when cross-filtering and index is Not "Most Requested"
       if (crossFilter !== "") {
+        console.log(
+          "FIRST QUERY = USERS --- BIG ELSE DATAPARSE - IF CROSS ISN'T EMPTY"
+        );
         return setCrossedItems(
           data,
           dataStructure,
           crossFilter,
           indexBy,
-          additionalFilter
+          additionalFilter,
+          queryType
         );
       } else {
         //when single filtering with index that is not "Most Requested"
-
+        console.log(
+          "FIRST QUERY = USERS --- BIG ELSE DATAPARSE - IF CROSSFILTER IS EMPTY"
+        );
         // console.log(`dataparse after removeMultiple`, data);
         return setItem(data, dataStructure, indexBy);
       }
