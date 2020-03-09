@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from "react-csv-downloader";
 
-import { getTier, getToken, decodeToken } from "../dashboard/auth/Auth";
+import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
 
 import {
@@ -17,6 +17,11 @@ const Graph = props => {
   if (token) {
     tier = decodeToken(token);
     tier = tier.tier;
+  }
+  const newSub = getSubscription();
+  let sub;
+  if (newSub) {
+    sub = newSub;
   }
 
   const [csvHeaders, setCsvHeaders] = useState([]);
@@ -85,7 +90,10 @@ const Graph = props => {
   return (
     <div className="Graph-Container">
       <div className="dwnld-btn">
-        {tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE" ? (
+        {tier === "ADMIN" ||
+        tier === "PAID" ||
+        tier === "GOV_ROLE" ||
+        newSub ? (
           <CsvDownloader
             datas={csvFormattedData}
             columns={csvHeaders}

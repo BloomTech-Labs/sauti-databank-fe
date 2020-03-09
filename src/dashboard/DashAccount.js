@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { getToken, decodeToken } from "./auth/Auth";
+import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import PaypalButton from "../Components/PaypalButton";
 
 import styled from "styled-components";
@@ -17,6 +17,11 @@ function DashAccount(props) {
   if (token) {
     userEmail = decodeToken(token);
     userEmail = userEmail.email;
+  }
+  const newSub = getSubscription();
+  let sub;
+  if (newSub) {
+    sub = newSub;
   }
 
   const history = useHistory();

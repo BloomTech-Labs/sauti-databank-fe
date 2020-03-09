@@ -50,6 +50,7 @@ export default function PaypalButton() {
           const token = localStorage.getItem("token");
           const decoded = decodeToken(token);
           decoded.subscription_id = data.subscriptionID;
+          localStorage.setItem("xyz", decoded.subscription_id);
           console.log("decoded", decoded);
           decoded.tier = "PAID";
           delete decoded.iat;

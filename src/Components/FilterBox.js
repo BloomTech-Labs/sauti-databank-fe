@@ -9,7 +9,7 @@ import Loader from "react-loader-spinner";
 
 import CalendarModal from "../dashboard/CalendarModal";
 
-import { decodeToken, getToken } from "../dashboard/auth/Auth";
+import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 
 export default function FilterBox(props) {
   const token = getToken();
@@ -17,6 +17,11 @@ export default function FilterBox(props) {
   if (token) {
     tier = decodeToken(token);
     tier = tier.tier;
+  }
+  const newSub = getSubscription();
+  let sub;
+  if (newSub) {
+    sub = newSub;
   }
 
   const [filterBoxIndex, setFilterBoxIndex] = useState({
@@ -362,7 +367,10 @@ export default function FilterBox(props) {
           </>
         )}
 
-        {tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE" ? (
+        {tier === "ADMIN" ||
+        tier === "PAID" ||
+        tier === "GOV_ROLE" ||
+        newSub ? (
           <DateContainer>
             <div>
               <p>Start</p>
