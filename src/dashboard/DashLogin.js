@@ -70,7 +70,7 @@ function DashLogin(props) {
       localStorage.setItem("token", newUser.data.login.token);
 
       props.handleClose();
-      history.push("/");
+      history.push("/data");
       swal({ title: "", text: "Success!", icon: "success" });
     } else {
       swal({

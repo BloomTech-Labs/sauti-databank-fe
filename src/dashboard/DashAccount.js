@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { getToken, decodeToken } from "./auth/Auth";
+import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import PaypalButton from "../Components/PaypalButton";
 
 import styled from "styled-components";
@@ -18,6 +18,11 @@ function DashAccount(props) {
     userEmail = decodeToken(token);
     userEmail = userEmail.email;
   }
+  const newSub = getSubscription();
+  let sub;
+  if (newSub) {
+    sub = newSub;
+  }
 
   const history = useHistory();
 
@@ -28,92 +33,144 @@ function DashAccount(props) {
 
   return (
     <>
-      {(tier === "FREE") | (tier === "PAID") | (tier === "GOV_ROLE") ? (
+      {(tier === "FREE") | (tier === "ADMIN") ? (
         <AccountPageDiv>
-          <Div>
-            <H1>Need more data?</H1>
-            <P>Upgrade to our paid plan to access all material.</P>
-          </Div>
-          <Div2>
-            <UserTypeContainerDiv>
-              <div>
-                <H1>Free Account</H1>
-                <H2>Free</H2>
-              </div>
-              <ul className="features-list">
-                <li className="features-item">Create an account</li>
-                <li className="features-item">Change data filters</li>
-                <li className="features-item">X</li>
-                <li className="features-item">X</li>
-                <li className="features-item">X</li>
-              </ul>
-              <ButtonDiv>
-                <ContinueButton2 type="submit" onClick={handleSubmit}>
-                  Continue
-                </ContinueButton2>
-              </ButtonDiv>
-            </UserTypeContainerDiv>
-            <UserTypeContainerDiv>
-              <div>
-                <H1>Premium Account</H1>
-                <H2>$9.99/month</H2>
-              </div>
-              <ul className="features-list">
-                <li className="features-item">Create an account</li>
-                <li className="features-item">Change data filters</li>
-                <li className="features-item">Download data into csv</li>
-                <li className="features-item">Additional filter options</li>
-                <li className="features-item">Filter data by date</li>
-              </ul>
-              <ButtonDiv>
-                <PaypalButton />
-              </ButtonDiv>
-            </UserTypeContainerDiv>
-          </Div2>
+          {tier === "FREE" ? (
+            <>
+              <Div>
+                <H1>Need more data?</H1>
+                <P>Upgrade to our paid plan to access all material.</P>
+              </Div>
+              <Div2>
+                <UserTypeContainerDiv>
+                  <div>
+                    <H1>Free Account</H1>
+                    <H2>Free</H2>
+                  </div>
+                  <ul className="features-list">
+                    <li className="features-item">Create an account</li>
+                    <li className="features-item">Change data filters</li>
+                    <li className="features-item">X</li>
+                    <li className="features-item">X</li>
+                    <li className="features-item">X</li>
+                  </ul>
+                  <ButtonDiv>
+                    <ContinueButton2 type="submit" onClick={handleSubmit}>
+                      Continue
+                    </ContinueButton2>
+                  </ButtonDiv>
+                </UserTypeContainerDiv>
+                <UserTypeContainerDiv>
+                  <div>
+                    <H1>Premium Account</H1>
+                    <H2>$9.99/month</H2>
+                  </div>
+                  <ul className="features-list">
+                    <li className="features-item">Create an account</li>
+                    <li className="features-item">Change data filters</li>
+                    <li className="features-item">Download data into csv</li>
+                    <li className="features-item">Additional filter options</li>
+                    <li className="features-item">Filter data by date</li>
+                  </ul>
+                  <ButtonDiv>
+                    <PaypalButton />
+                  </ButtonDiv>
+                </UserTypeContainerDiv>
+              </Div2>
+            </>
+          ) : (
+            <>
+              <Div>
+                <H1>Sauti Databank Admin</H1>
+                <P>Current user type offerings.</P>
+              </Div>
+              <Div2>
+                <UserTypeContainerDiv>
+                  <div>
+                    <H1>Free Account</H1>
+                    <H2>Free</H2>
+                  </div>
+                  <ul className="features-list">
+                    <li className="features-item">Create an account</li>
+                    <li className="features-item">Change data filters</li>
+                    <li className="features-item">X</li>
+                    <li className="features-item">X</li>
+                    <li className="features-item">X</li>
+                  </ul>
+                </UserTypeContainerDiv>
+                <UserTypeContainerDiv>
+                  <div>
+                    <H1>Premium Account</H1>
+                    <H2>$9.99/month</H2>
+                  </div>
+                  <ul className="features-list">
+                    <li className="features-item">Create an account</li>
+                    <li className="features-item">Change data filters</li>
+                    <li className="features-item">Download data into csv</li>
+                    <li className="features-item">Additional filter options</li>
+                    <li className="features-item">Filter data by date</li>
+                  </ul>
+                </UserTypeContainerDiv>
+              </Div2>
+            </>
+          )}
         </AccountPageDiv>
       ) : (
-        <AccountPageDiv>
-          <Div>
-            <H1>Sauti Databank Admin</H1>
-            <P>Current user offerings below</P>
-          </Div>
-          <Div2>
-            <UserTypeContainerDiv>
-              <div>
-                <H1>Free Account</H1>
-                <H2>Free</H2>
-              </div>
-              <ul className="features-list">
-                <li className="features-item">Create an account</li>
-                <li className="features-item">Change data filters</li>
-                <li className="features-item">X</li>
-                <li className="features-item">X</li>
-                <li className="features-item">X</li>
-              </ul>
-              <ButtonDiv>
-                <ContinueButton2 type="submit" onClick={handleSubmit}>
-                  Continue
-                </ContinueButton2>
-              </ButtonDiv>
-            </UserTypeContainerDiv>
-            <UserTypeContainerDiv>
-              <div>
-                <H1>Premium Account</H1>
-                <H2>$9.99/month</H2>
-              </div>
-              <ul className="features-list">
-                <li className="features-item">Create an account</li>
-                <li className="features-item">Change data filters</li>
-                <li className="features-item">Download data into csv</li>
-                <li className="features-item">Additional filter options</li>
-                <li className="features-item">Filter data by date</li>
-              </ul>
-              <ButtonDiv>
-                <PaypalButton />
-              </ButtonDiv>
-            </UserTypeContainerDiv>
-          </Div2>
-        </AccountPageDiv>
+        (tier === "PAID") | sub && (
+          <AccountPageDiv>
+            {tier === "PAID" ? (
+              <>
+                <Div>
+                  <H1>Need More Data?</H1>
+                  <P>Upgrade to our paid plan to access all material.</P>
+                </Div>
+                <Div2>
+                  <UserTypeContainerDiv>
+                    <div>
+                      <H1>Premium Account</H1>
+                      <H2>$9.99/month</H2>
+                    </div>
+                    <ul className="features-list">
+                      <li className="features-item">Create an account</li>
+                      <li className="features-item">Change data filters</li>
+                      <li className="features-item">Download data into csv</li>
+                      <li className="features-item">
+                        Additional filter options
+                      </li>
+                      <li className="features-item">Filter data by date</li>
+                    </ul>
+                    <ButtonDiv>
+                      <ContinueButton2>Cancel Subscription</ContinueButton2>
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
+                </Div2>
+              </>
+            ) : (
+              <>
+                <Div>
+                  <H1>Need More Data?</H1>
+                  <P>Upgrade to our paid plan to access all material.</P>
+                </Div>
+                <Div2>
+                  <UserTypeContainerDiv>
+                    <div>
+                      <H1>Premium Account</H1>
+                    </div>
+                    <ul className="features-list">
+                      <li className="features-item">Create an account</li>
+                      <li className="features-item">Change data filters</li>
+                      <li className="features-item">Download data into csv</li>
+                      <li className="features-item">
+                        Additional filter options
+                      </li>
+                      <li className="features-item">Filter data by date</li>
+                    </ul>
+                  </UserTypeContainerDiv>
+                </Div2>
+              </>
+            )}
+          </AccountPageDiv>
+        )
       )}
     </>
   );
@@ -158,7 +215,7 @@ const UserTypeContainerDiv = styled.div`
   border: 2px solid grey;
   border-radius: 5px;
   width: 35%;
-  height: 550px;
+  height: 600px;
 `;
 const H1 = styled.h1`
   font-size: 5rem;
