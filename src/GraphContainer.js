@@ -97,7 +97,7 @@ const GraphContainer = () => {
         <div className="header">
           <h1>Informal Cross-Border Trade Data</h1>
         </div>
-        <Organization categories={categories} />
+        {/* <Organization categories={categories} /> */}
         <div className="content-container">
           <div className="chart-container">
             <Queries

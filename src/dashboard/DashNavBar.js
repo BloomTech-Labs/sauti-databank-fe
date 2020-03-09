@@ -45,7 +45,7 @@ function DashNav() {
         </SautiLogo>
         <Navigation>
           {!SignedIn && <Links to="/">HOME</Links>}
-          {SignedIn && <Links to="/">MY ACCOUNT</Links>}
+          {SignedIn && <Links to="/">ACCOUNT</Links>}
           <Links to="/data">DATA</Links>
           {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
           {/* <LinksLast to="/services">SERVICES</LinksLast> */}
