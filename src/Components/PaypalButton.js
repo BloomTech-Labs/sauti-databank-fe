@@ -11,6 +11,7 @@ const UPDATE_USER_TIER = gql`
         email
         tier
         organization_type
+        token
       }
       ... on Error {
         message
@@ -29,7 +30,6 @@ export default function PaypalButton() {
         style: {
           shape: "pill",
           size: "responsive",
-          // using height breaks everything. From reading i think its because setting size to responsive alters the height already
           color: "blue",
           label: "paypal"
         },
@@ -48,8 +48,6 @@ export default function PaypalButton() {
           );
 
           const token = localStorage.getItem("token");
-          // decode the token
-          // make query to change the user account to paid(do we have this?)
           const decoded = decodeToken(token);
           decoded.subscription_id = data.subscriptionID;
           console.log("decoded", decoded);
@@ -79,20 +77,6 @@ export default function PaypalButton() {
     ></div>
   );
 }
-
-// display: inline-block;
-//   text-decoration: none;
-//   color: black;
-//   border: 2px solid #eb5e52;
-//   border-radius: 5px;
-//   padding: 1rem 3rem;
-//   margin-top: 2rem;
-//   transition: 0.5s ease;
-//   &:hover {
-//     color: white;
-//     background-color: #eb5e52;
-//     cursor: pointer;
-//   }
 
 // notes to patch/edit you have to set the body up like this in postman
 

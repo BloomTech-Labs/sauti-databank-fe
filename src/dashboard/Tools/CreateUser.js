@@ -284,7 +284,7 @@ function CreateUser(props) {
                   <MenuItem value={"FREE"}>FREE</MenuItem>
                   <MenuItem value={"PAID"}>PAID</MenuItem>
                   <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
-                  <MenuItem value={"PAID"}>SPECIAL</MenuItem>
+                  <MenuItem value={"GOV_ROLE"}>GOVERNMENT</MenuItem>
                 </Select>
               </FormControl>
               <FormControl className={classes.margin}>

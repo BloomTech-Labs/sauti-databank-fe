@@ -94,6 +94,7 @@ const useStyles = makeStyles(theme => ({
 
 function DashSignup(props) {
   const [user, setUser] = useState(initialState);
+  user.tier = "FREE";
   console.log(user);
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
@@ -145,17 +146,10 @@ function DashSignup(props) {
         });
       } else {
         console.log(createdUser.data.register.id);
-        if (tier === "FREE") {
-          localStorage.setItem("token", createdUser.data.register.token);
-          GAHandleCreateUser();
-          history.push("/data");
-          swal({ title: "", text: "Success!", icon: "success" });
-        } else {
-          localStorage.setItem("token", createdUser.data.register.token);
-          GAHandleCreateUser();
-          history.push("/");
-          swal({ title: "", text: "Success!", icon: "success" });
-        }
+        localStorage.setItem("token", createdUser.data.register.token);
+        GAHandleCreateUser();
+        history.push("/data");
+        swal({ title: "", text: "Success!", icon: "success" });
       }
     }
   };
@@ -246,7 +240,7 @@ function DashSignup(props) {
             </Select>
           </FormControl>
           <br />
-          <Labels2>Select A User Type</Labels2>
+          {/* <Labels2>Select A User Type</Labels2>
           <FormControl className={classes.margin}>
             <Select
               labelId="demo-customized-select-label"
@@ -263,7 +257,7 @@ function DashSignup(props) {
               <MenuItem value={"PAID"}>PAID</MenuItem>
             </Select>
           </FormControl>
-          <br />
+          <br /> */}
           <Button className="initialize-signup" type="submit">
             Sign Up
           </Button>
