@@ -116,7 +116,7 @@ function DashAccount(props) {
           )}
         </AccountPageDiv>
       ) : (
-        (tier === "PAID") | (tier === "GOV_ROLE") && (
+        (tier === "PAID") | sub && (
           <AccountPageDiv>
             {tier === "PAID" ? (
               <>
