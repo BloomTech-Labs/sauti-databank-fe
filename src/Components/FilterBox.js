@@ -8,6 +8,7 @@ import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 
 import CalendarModal, { getTodaysDate } from "../dashboard/CalendarModal";
+import useCalendar from "../hooks/useCalendar";
 
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 
@@ -50,8 +51,14 @@ export default function FilterBox(props) {
     filterBoxAdditionalFilterLabel,
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
-  const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
-  const [filterBoxEndDate, setFilterBoxEndDate] = useState(getTodaysDate());
+
+  const {
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
+  } = useCalendar();
+
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
