@@ -6,6 +6,7 @@ import Fade from "@material-ui/core/Fade";
 
 import { Link } from "react-router-dom";
 import Download from "./Download";
+import useCalendar from "../hooks/useCalendar";
 
 import styled from "styled-components";
 
@@ -68,10 +69,15 @@ export default function CalendarModal() {
     setOpen(false);
   };
 
-  const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
-  const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
-  const [loading, setLoading] = useState(false);
+  const {
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
+  } = useCalendar();
 
+  const [loading, setLoading] = useState(false);
+  console.log("=========== HERE =============");
   return (
     <div>
       <div>
@@ -83,7 +89,7 @@ export default function CalendarModal() {
               type="date"
               value={filterBoxStartDate}
               disabled={loading}
-              placeholder={setFilterBoxStartDate}
+              placeholder={filterBoxStartDate}
             />
           </div>
           <div>
@@ -94,7 +100,7 @@ export default function CalendarModal() {
               type="date"
               value={filterBoxEndDate}
               id="today"
-              placeholder={setFilterBoxEndDate}
+              placeholder={filterBoxEndDate}
             />
           </div>
         </DateContainer>
@@ -117,4 +123,38 @@ export default function CalendarModal() {
       </Modal>
     </div>
   );
+}
+
+export function getTodaysDate() {
+  const [_, month, day, year] = `${new Date()}`.split(" ");
+  return `${year}-${formatMonth(month)}-${day}`;
+
+  function formatMonth(month) {
+    switch (month) {
+      case "Jan":
+        return "01";
+      case "Feb":
+        return "02";
+      case "Mar":
+        return "03";
+      case "Apr":
+        return "04";
+      case "May":
+        return "05";
+      case "Jun":
+        return "06";
+      case "Jul":
+        return "07";
+      case "Aug":
+        return "08";
+      case "Sep":
+        return "09";
+      case "Oct":
+        return "10";
+      case "Nov":
+        return "11";
+      case "Dec":
+        return "12";
+    }
+  }
 }
