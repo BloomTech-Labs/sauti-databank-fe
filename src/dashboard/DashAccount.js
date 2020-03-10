@@ -2,11 +2,33 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import PaypalButton from "../Components/PaypalButton";
+import gql from "graphql-tag";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 
 import styled from "styled-components";
 import "../index.css";
 
+const CANCEL_USER_SUB = gql`
+  mutation updateUserToFree(
+    $newUpdateUserToFreeInput: newUpdateUserToFreeInput!
+  ) {
+    newUpdateUserToFreeInput(input: $newUpdateUserToFreeInput) {
+      ... on DatabankUser {
+        email
+        subscription_id
+      }
+      ... on Error {
+        message
+      }
+    }
+  }
+`;
+
 function DashAccount(props) {
+  const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
+
+  const history = useHistory();
+
   const token = getToken();
   let tier;
   if (token) {
@@ -24,11 +46,37 @@ function DashAccount(props) {
     sub = newSub;
   }
 
-  const history = useHistory();
+  console.log("========== UserEmail ============", userEmail);
+
+  const GET_SUBSCRIPTION_ID = gql`
+    query {
+      databankUser(input: { email: $userEmail }) {
+        subscription_id
+      }
+    }
+  `;
+
+  const { _loading, _error, _data } = useQuery(GET_SUBSCRIPTION_ID, {
+    variables: { userEmail: userEmail }
+  });
+
+  console.log("======== response from get_sub_id ============", _data);
 
   const handleSubmit = async (e, input) => {
     e.preventDefault();
     history.push("/data");
+  };
+
+  const handleSubscriptionCancellation = e => {
+    // TODO: grab user's subscription_id with a query to DatabankUsers
+    cancelSub({
+      variables: {
+        newUpdateUserToFreeInput: {
+          email: userEmail,
+          subscription_id: null
+        }
+      }
+    });
   };
 
   console.log("newSub1", newSub);
@@ -56,7 +104,9 @@ function DashAccount(props) {
                     <li className="features-item">Filter data by date</li>
                   </ul>
                   <ButtonDiv>
-                    <ContinueButton2>Cancel Subscription</ContinueButton2>
+                    <ContinueButton2 onClick={handleSubscriptionCancellation}>
+                      Cancel Subscription
+                    </ContinueButton2>
                   </ButtonDiv>
                 </UserTypeContainerDiv>
               </Div2>
