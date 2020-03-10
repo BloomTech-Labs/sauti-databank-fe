@@ -31,35 +31,18 @@ function DashAccount(props) {
     history.push("/data");
   };
 
+  console.log("newSub1", newSub);
   return (
     <>
-      {(tier === "FREE") | (tier === "ADMIN") ? (
+      {tier === "PAID" || tier === "GOV_ROLE" || newSub ? (
         <AccountPageDiv>
-          {tier === "FREE" ? (
+          {tier === "PAID" || newSub ? (
             <>
               <Div>
-                <H1>Need more data?</H1>
+                <H1>Need More Data?</H1>
                 <P>Upgrade to our paid plan to access all material.</P>
               </Div>
               <Div2>
-                <UserTypeContainerDiv>
-                  <div>
-                    <H1>Free Account</H1>
-                    <H2>Free</H2>
-                  </div>
-                  <ul className="features-list">
-                    <li className="features-item">Create an account</li>
-                    <li className="features-item">Change data filters</li>
-                    <li className="features-item">X</li>
-                    <li className="features-item">X</li>
-                    <li className="features-item">X</li>
-                  </ul>
-                  <ButtonDiv>
-                    <ContinueButton2 type="submit" onClick={handleSubmit}>
-                      Continue
-                    </ContinueButton2>
-                  </ButtonDiv>
-                </UserTypeContainerDiv>
                 <UserTypeContainerDiv>
                   <div>
                     <H1>Premium Account</H1>
@@ -73,7 +56,7 @@ function DashAccount(props) {
                     <li className="features-item">Filter data by date</li>
                   </ul>
                   <ButtonDiv>
-                    <PaypalButton />
+                    <ContinueButton2>Cancel Subscription</ContinueButton2>
                   </ButtonDiv>
                 </UserTypeContainerDiv>
               </Div2>
@@ -81,27 +64,13 @@ function DashAccount(props) {
           ) : (
             <>
               <Div>
-                <H1>Sauti Databank Admin</H1>
-                <P>Current user type offerings.</P>
+                <H1>Need More Data?</H1>
+                <P>Upgrade to our paid plan to access all material.</P>
               </Div>
               <Div2>
                 <UserTypeContainerDiv>
                   <div>
-                    <H1>Free Account</H1>
-                    <H2>Free</H2>
-                  </div>
-                  <ul className="features-list">
-                    <li className="features-item">Create an account</li>
-                    <li className="features-item">Change data filters</li>
-                    <li className="features-item">X</li>
-                    <li className="features-item">X</li>
-                    <li className="features-item">X</li>
-                  </ul>
-                </UserTypeContainerDiv>
-                <UserTypeContainerDiv>
-                  <div>
                     <H1>Premium Account</H1>
-                    <H2>$9.99/month</H2>
                   </div>
                   <ul className="features-list">
                     <li className="features-item">Create an account</li>
@@ -116,15 +85,33 @@ function DashAccount(props) {
           )}
         </AccountPageDiv>
       ) : (
-        (tier === "PAID") | sub && (
+        (tier === "FREE") | (tier === "ADMIN") && (
           <AccountPageDiv>
-            {tier === "PAID" ? (
+            {tier === "FREE" ? (
               <>
                 <Div>
-                  <H1>Need More Data?</H1>
+                  <H1>Need more data?</H1>
                   <P>Upgrade to our paid plan to access all material.</P>
                 </Div>
                 <Div2>
+                  <UserTypeContainerDiv>
+                    <div>
+                      <H1>Free Account</H1>
+                      <H2>Free</H2>
+                    </div>
+                    <ul className="features-list">
+                      <li className="features-item">Create an account</li>
+                      <li className="features-item">Change data filters</li>
+                      <li className="features-item">X</li>
+                      <li className="features-item">X</li>
+                      <li className="features-item">X</li>
+                    </ul>
+                    <ButtonDiv>
+                      <ContinueButton2 type="submit" onClick={handleSubmit}>
+                        Continue
+                      </ContinueButton2>
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
                   <UserTypeContainerDiv>
                     <div>
                       <H1>Premium Account</H1>
@@ -140,7 +127,7 @@ function DashAccount(props) {
                       <li className="features-item">Filter data by date</li>
                     </ul>
                     <ButtonDiv>
-                      <ContinueButton2>Cancel Subscription</ContinueButton2>
+                      <PaypalButton />
                     </ButtonDiv>
                   </UserTypeContainerDiv>
                 </Div2>
@@ -148,13 +135,27 @@ function DashAccount(props) {
             ) : (
               <>
                 <Div>
-                  <H1>Need More Data?</H1>
-                  <P>Upgrade to our paid plan to access all material.</P>
+                  <H1>Sauti Databank Admin</H1>
+                  <P>Current user type offerings.</P>
                 </Div>
                 <Div2>
                   <UserTypeContainerDiv>
                     <div>
+                      <H1>Free Account</H1>
+                      <H2>Free</H2>
+                    </div>
+                    <ul className="features-list">
+                      <li className="features-item">Create an account</li>
+                      <li className="features-item">Change data filters</li>
+                      <li className="features-item">X</li>
+                      <li className="features-item">X</li>
+                      <li className="features-item">X</li>
+                    </ul>
+                  </UserTypeContainerDiv>
+                  <UserTypeContainerDiv>
+                    <div>
                       <H1>Premium Account</H1>
+                      <H2>$9.99/month</H2>
                     </div>
                     <ul className="features-list">
                       <li className="features-item">Create an account</li>
