@@ -253,7 +253,14 @@ export default function SignInSide(props) {
             />
 
             <br></br>
-            <Button className="initialize-signup" type="submit">
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
               Sign Up
             </Button>
             <div>
