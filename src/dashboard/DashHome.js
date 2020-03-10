@@ -6,6 +6,8 @@ import { getToken, decodeToken } from "./auth/Auth";
 import DashSignup from "./DashSignup.js";
 import DashAccount from "./DashAccount.js";
 
+import CreateAccount from "./CreateAccount";
+
 import {
   NotSignedInDiv,
   SignedInDiv,
@@ -27,7 +29,7 @@ function DashHome() {
 
   return (
     <>
-      {!signedIn && <DashSignup />}
+      {!signedIn && <CreateAccount />}
       {signedIn && (
         <div>
           {/* <UserHeader>

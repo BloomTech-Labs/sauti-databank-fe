@@ -35,7 +35,9 @@ const GraphContainer = () => {
   const [secondCheckboxOptions, setSecondCheckboxOptions] = useState([]);
 
   const [startDate, setStartDate] = useState("2012-01-01");
+  console.log(startDate);
   const [endDate, setEndDate] = useState("2020-01-08");
+  console.log(endDate);
 
   // useEffect(() => {
   //   ReactGa.initialize("UA-155468784-1");
