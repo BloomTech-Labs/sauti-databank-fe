@@ -154,6 +154,13 @@ export default function FilterBox(props) {
               label: e.label
             });
             // set filters[0]'s category here
+            props.setFilters({
+              ...props.filters,
+              0: {
+                ...props.filters[0],
+                selectedTableColumnName: `${e.value.type}`
+              }
+            });
           }}
         />
         {graphLabels[`${filterBoxIndex.type}`] && (
@@ -173,7 +180,7 @@ export default function FilterBox(props) {
                     props.setFilters({
                       ...props.filters,
                       0: {
-                        selectedCategory: `${filterBoxIndex.type}`,
+                        ...props.filters[0],
                         selectedOption: option
                       }
                     }),
@@ -204,8 +211,17 @@ export default function FilterBox(props) {
               query: e.value.query,
               label: e.label
             });
+            props.setFilters({
+              ...props.filters,
+              1: {
+                ...props.filters[1],
+                selectedTableColumnName: `${e.value.type}`
+                // selectedOption: "None"
+              }
+            });
           }}
         />
+        {/* We don't want options for this one */}
         {/* ------------------------------------------------------------------------------- */}
         {graphLabels[`${filterBoxCrossFilter.type}`] && (
           <CheckboxContainer>
@@ -225,7 +241,7 @@ export default function FilterBox(props) {
                     props.setFilters({
                       ...props.filters,
                       1: {
-                        selectedCategory: `${filterBoxCrossFilter.type}`,
+                        ...props.filters[1],
                         selectedOption: option
                       }
                     }),

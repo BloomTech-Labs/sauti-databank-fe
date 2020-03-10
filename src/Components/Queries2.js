@@ -33,7 +33,27 @@ const GetData = props => {
     props.secondSelectedCheckbox
   );
   console.log(` THREE props.selectedCheckbox`, props.selectedCheckbox);
+  /*
 
+  queryOptions = useState({
+    Users: {
+      "undefined": {
+        "undefined": {
+          queryType: "tradersUsers",
+          thisQuery: firstSelectedCheckbox,
+          QUERY: gql`
+                    query getUsers($queryTraders: newTraderInput){
+                      tradersUsers (input: $queryTraders) {
+                        ${props.index.type}
+                      }
+                    }
+                    
+                    `
+        }
+      }
+    }
+  })
+  */
   if (
     props.index.query === "Users" &&
     !props.crossFilter.type &&
@@ -81,9 +101,9 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
 
     thisQuery = {
       // [props.index.type]: firstQuery,
-      [filters[0].selectedCategory]: filters[0].selectedOption, //firstQuery,
+      [filters[0].selectedTableColumnName]: filters[0].selectedOption, //firstQuery,
       // [props.crossFilter.type]: secondQuery
-      [filters[1].selectedCategory]: filters[1].selectedOption
+      [filters[1].selectedTableColumnName]: filters[1].selectedOption
     };
     console.log("the total queries", thisQuery);
     queryType = "tradersUsers";
@@ -108,7 +128,7 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     thisQuery = {
       // [props.index.type]: firstQuery,
-      [filters[0].selectedCategory]: filters[0].selectedOption,
+      [filters[0].selectedTableColumnName]: filters[0].selectedOption,
       [props.crossFilter.type]: secondQuery
     };
     QUERY = gql`
@@ -131,7 +151,7 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     thisQuery = {
       // [props.index.type]: firstQuery,
-      [filters[0].selectedCategory]: filters[0].selectedOption,
+      [filters[0].selectedTableColumnName]: filters[0].selectedOption,
       [props.crossFilter.type]: secondQuery
     };
     QUERY = gql`
@@ -169,7 +189,7 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     const thirdQuery = selectedCheckbox[props.additionalFilter.type];
     thisQuery = {
       // [props.index.type]: firstQuery,
-      [filters[0].selectedCategory]: filters[0].selectedOption,
+      [filters[0].selectedTableColumnName]: filters[0].selectedOption,
 
       [props.crossFilter.type]: secondQuery,
       [props.additionalFilter.type]: thirdQuery

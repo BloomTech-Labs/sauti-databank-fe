@@ -9,19 +9,19 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries2";
 
 const GraphContainer = () => {
-  // I think heroku crashed as it was stil working before this
+  // My internet died before I could finish cleaning
   const [filters, setFilters] = useState({
     // should eliminate the need to use index and crossFilter in FilterBox and Queries2
     0: {
-      selectedCategory: "",
-      selectedOption: "",
+      selectedCategory: "Gender", // index.type
+      selectedOption: undefined,
       selectedTable: "",
-      // selectedCategory is actually being used for this field
-      selectedTableColumnName: ""
+      // selectedCategory is actually being used for this field at the moment
+      selectedTableColumnName: "gender"
     },
     1: {
-      selectedCategory: "",
-      selectedOption: "",
+      selectedCategory: "", // crossFilter.type
+      selectedOption: undefined,
       selectedTable: "",
       selectedTableColumnName: ""
     },
