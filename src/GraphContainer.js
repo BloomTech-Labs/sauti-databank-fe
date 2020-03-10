@@ -9,6 +9,29 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries2";
 
 const GraphContainer = () => {
+  // I think heroku crashed as it was stil working before this
+  const [filters, setFilters] = useState({
+    // should eliminate the need to use index and crossFilter in FilterBox and Queries2
+    0: {
+      selectedCategory: "",
+      selectedOption: "",
+      selectedTable: "",
+      // selectedCategory is actually being used for this field
+      selectedTableColumnName: ""
+    },
+    1: {
+      selectedCategory: "",
+      selectedOption: "",
+      selectedTable: "",
+      selectedTableColumnName: ""
+    },
+    2: {
+      selectedCategory: "",
+      selectedOption: "",
+      selectedTable: "",
+      selectedTableColumnName: ""
+    }
+  });
   const [index, setIndex] = useState({
     type: "gender",
     query: "Users",
@@ -74,6 +97,7 @@ const GraphContainer = () => {
               endDate={endDate}
               secondSelectedCheckbox={secondSelectedCheckbox}
               firstSelectedCheckbox={firstSelectedCheckbox}
+              filters={filters}
             />
           </div>
           <div className="dropdown-container">
@@ -97,6 +121,8 @@ const GraphContainer = () => {
               setFirstSelectedCheckbox={setFirstSelectedCheckbox}
               setSecondSelectedCheckbox={setSecondSelectedCheckbox}
               secondCheckboxOptions={secondCheckboxOptions}
+              filters={filters}
+              setFilters={setFilters}
             />
           </div>
         </div>

@@ -153,6 +153,7 @@ export default function FilterBox(props) {
               query: e.value.query,
               label: e.label
             });
+            // set filters[0]'s category here
           }}
         />
         {graphLabels[`${filterBoxIndex.type}`] && (
@@ -165,8 +166,16 @@ export default function FilterBox(props) {
                   name="CrossFilter"
                   value={option}
                   onChange={e => (
+                    // change this one
                     props.setFirstSelectedCheckbox({
                       [`${filterBoxIndex.type}`]: option
+                    }),
+                    props.setFilters({
+                      ...props.filters,
+                      0: {
+                        selectedCategory: `${filterBoxIndex.type}`,
+                        selectedOption: option
+                      }
                     }),
                     props.setIndex(filterBoxIndex)
                   )}
@@ -208,8 +217,17 @@ export default function FilterBox(props) {
                   name="CrossFilter"
                   value={option}
                   onChange={e => (
+                    // change this one
+                    // this one is not collecting any data
                     props.setSecondSelectedCheckbox({
                       [`${filterBoxCrossFilter.type}`]: option
+                    }),
+                    props.setFilters({
+                      ...props.filters,
+                      1: {
+                        selectedCategory: `${filterBoxCrossFilter.type}`,
+                        selectedOption: option
+                      }
                     }),
                     props.setCrossFilter(filterBoxCrossFilter)
                   )}
@@ -231,6 +249,7 @@ export default function FilterBox(props) {
                     name="CrossFilter"
                     value={option}
                     onChange={e => {
+                      // change this one
                       props.setSecondSelectedCheckbox(
                         { [`${filterBoxCrossFilter.type}`]: option },
                         props.setCrossFilter(filterBoxCrossFilter)
@@ -295,6 +314,7 @@ export default function FilterBox(props) {
                     name="CrossFilter"
                     value={option}
                     onChange={e => (
+                      // change this one
                       props.setSelectedCheckbox({
                         [`${filterBoxAdditionalFilter.type}`]: option
                       }),
@@ -428,6 +448,11 @@ export default function FilterBox(props) {
             setFilterBoxAdditionalFilter({ type: "", query: "" });
             setFilterBoxAdditionalFilterLabel("");
             props.setAdditionalFilter({ type: "", query: "" });
+
+            props.setFirstSelectedCheckbox({});
+
+            props.setSecondSelectedCheckbox({});
+            // props.
           }}
         >
           Reset

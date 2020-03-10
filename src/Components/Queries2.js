@@ -15,6 +15,7 @@ const GetData = props => {
 
   const {
     firstSelectedCheckbox,
+    filters,
     secondSelectedCheckbox,
     selectedCheckbox,
     index,
@@ -25,6 +26,8 @@ const GetData = props => {
   console.log(`props.crossFilter`, crossFilter);
   console.log(`props.additionalFilter`, props.additionalFilter);
   console.log(" ONE props.firstSelectedCheckbox", props.firstSelectedCheckbox);
+  console.log(" ONE props.filters[0]", filters[0]);
+
   console.log(
     " TWO props.secondSelectedCheckbox",
     props.secondSelectedCheckbox
@@ -51,12 +54,38 @@ const GetData = props => {
     props.crossFilter.query === "Users" &&
     !props.additionalFilter.type
   ) {
-    const firstQuery = firstSelectedCheckbox[props.index.type];
+    // props.index.type = selectedCategory
+    // const firstQuery = firstSelectedCheckbox[props.index.type];
+    // const firstQuery = filters[0].selectedOption
+    /*
+notes inside the first printout
+first query Male gender firstSelectedCheckbox = {gender: "Male"} filters[0] = {selectedCategory: "gender", selectedOption: "Male"}
+first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOption: "Male"}
+
+*/
+    console.log(
+      "first query",
+      /*firstQuery,*/ props.index.type,
+      firstSelectedCheckbox,
+      filters[0]
+    );
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+
+    console.log(
+      "second query",
+      secondQuery,
+      props.crossFilter.type,
+      secondSelectedCheckbox,
+      filters[1]
+    );
+
     thisQuery = {
-      [props.index.type]: firstQuery,
-      [props.crossFilter.type]: secondQuery
+      // [props.index.type]: firstQuery,
+      [filters[0].selectedCategory]: filters[0].selectedOption, //firstQuery,
+      // [props.crossFilter.type]: secondQuery
+      [filters[1].selectedCategory]: filters[1].selectedOption
     };
+    console.log("the total queries", thisQuery);
     queryType = "tradersUsers";
     QUERY = gql`
       query getUsers($queryTraders: newTraderInput){
@@ -72,10 +101,14 @@ const GetData = props => {
     !props.additionalFilter.type
   ) {
     queryType = "sessionsData";
-    const firstQuery = firstSelectedCheckbox[props.index.type];
+    console.log("Sessions Users query");
+    console.log(firstSelectedCheckbox);
+    console.log(filters[0]);
+    // const firstQuery = firstSelectedCheckbox[props.index.type];
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     thisQuery = {
-      [props.index.type]: firstQuery,
+      // [props.index.type]: firstQuery,
+      [filters[0].selectedCategory]: filters[0].selectedOption,
       [props.crossFilter.type]: secondQuery
     };
     QUERY = gql`
@@ -94,10 +127,11 @@ const GetData = props => {
   ) {
     queryType = "sessionsData";
     console.log("correct query???????????????????????");
-    const firstQuery = firstSelectedCheckbox[props.index.type];
+    // const firstQuery = firstSelectedCheckbox[props.index.type];
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     thisQuery = {
-      [props.index.type]: firstQuery,
+      // [props.index.type]: firstQuery,
+      [filters[0].selectedCategory]: filters[0].selectedOption,
       [props.crossFilter.type]: secondQuery
     };
     QUERY = gql`
@@ -130,11 +164,13 @@ const GetData = props => {
     props.crossFilter.query === "Users" &&
     props.additionalFilter.query === "Users"
   ) {
-    const firstQuery = firstSelectedCheckbox[props.index.type];
+    // const firstQuery = firstSelectedCheckbox[props.index.type];
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     const thirdQuery = selectedCheckbox[props.additionalFilter.type];
     thisQuery = {
-      [props.index.type]: firstQuery,
+      // [props.index.type]: firstQuery,
+      [filters[0].selectedCategory]: filters[0].selectedOption,
+
       [props.crossFilter.type]: secondQuery,
       [props.additionalFilter.type]: thirdQuery
     };
@@ -173,7 +209,11 @@ const GetData = props => {
   });
   // [thisQuery]
   //queryType: props.selectedCheckbox
-  if (data) console.log(`returned data`, data[queryType]);
+  if (data) {
+    console.log(`returned data2`, data[queryType]);
+    console.log(firstSelectedCheckbox);
+    console.log(filters);
+  }
 
   if (loading) {
     return (
