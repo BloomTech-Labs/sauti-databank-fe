@@ -27,6 +27,8 @@ import InputBase from "@material-ui/core/InputBase";
 
 import DashLoginModal from "./DashLoginModal";
 
+import Hero from "./Images/Hero-img.jpg";
+
 const initialState = {
   email: "",
   password: "",
@@ -180,8 +182,61 @@ export default function SignInSide(props) {
               InputProps={{ disableUnderline: true }}
             />
 
+            <TextField
+              // variant='outlined'
+              placeholder="Organization"
+              margin="normal"
+              fullWidth
+              name="organization"
+              label="Organization"
+              type="text"
+              id="organization"
+              autoComplete="current-organization"
+              value={user.organization}
+              onChange={handleChange}
+              InputProps={{ disableUnderline: true, className: classes.input }}
+            />
+            <TextField
+              // variant='outlined'
+              margin="normal"
+              fullWidth
+              name="job_position"
+              label="Job Position"
+              type="text"
+              id="job_position"
+              autoComplete="current-job_position"
+              value={user.job_position}
+              onChange={handleChange}
+              InputProps={{ disableUnderline: true, className: classes.input }}
+            />
+            <TextField
+              // variant='outlined'
+              margin="normal"
+              fullWidth
+              name="country"
+              label="Country"
+              type="text"
+              id="country"
+              autoComplete="current-country"
+              value={user.country}
+              onChange={handleChange}
+              InputProps={{ disableUnderline: true, className: classes.input }}
+            />
+            <TextField
+              // variant='outlined'
+              margin="normal"
+              fullWidth
+              name="interest"
+              label="Interest"
+              type="text"
+              id="interest"
+              autoComplete="current-interest"
+              value={user.interest}
+              onChange={handleChange}
+              InputProps={{ disableUnderline: true, className: classes.input }}
+            />
             <FormControl className={classes.margin}>
-              <label>Organization Type</label>
+              <p>Organization Type</p>
               <Select
                 label="Organization Type"
                 labelId="demo-customized-select-label"
@@ -197,60 +252,8 @@ export default function SignInSide(props) {
                 <MenuItem value={"NGO"}>NGO</MenuItem>
                 <MenuItem value={"OTHER"}>OTHER</MenuItem>
               </Select>
+              <label>*required</label>
             </FormControl>
-
-            <TextField
-              // variant='outlined'
-              margin="normal"
-              fullWidth
-              name="organization"
-              label="Organization"
-              type="text"
-              id="organization"
-              autoComplete="current-organization"
-              value={user.organization}
-              onChange={handleChange}
-              InputProps={{ disableUnderline: true }}
-            />
-            <TextField
-              // variant='outlined'
-              margin="normal"
-              fullWidth
-              name="job_position"
-              label="Job Position"
-              type="text"
-              id="job_position"
-              autoComplete="current-job_position"
-              value={user.job_position}
-              onChange={handleChange}
-              InputProps={{ disableUnderline: true }}
-            />
-            <TextField
-              // variant='outlined'
-              margin="normal"
-              fullWidth
-              name="country"
-              label="Country"
-              type="text"
-              id="country"
-              autoComplete="current-country"
-              value={user.country}
-              onChange={handleChange}
-              InputProps={{ disableUnderline: true }}
-            />
-            <TextField
-              // variant='outlined'
-              margin="normal"
-              fullWidth
-              name="interest"
-              label="Interest"
-              type="text"
-              id="interest"
-              autoComplete="current-interest"
-              value={user.interest}
-              onChange={handleChange}
-              InputProps={{ disableUnderline: true }}
-            />
 
             <br></br>
 
@@ -279,7 +282,7 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     backgroundImage:
-      "url(https://res.cloudinary.com/dfulxq7so/image/upload/v1572452572/malawi20100165_cesh8j.jpg)",
+      "url(https://images.unsplash.com/photo-1506682332771-2a887a4387a8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
@@ -304,6 +307,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  input: {
+    border: "1px solid rgb(232, 240, 254)"
   }
 }));
 
