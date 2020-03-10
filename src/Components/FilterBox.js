@@ -7,7 +7,7 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 
-import CalendarModal from "../dashboard/CalendarModal";
+import CalendarModal, { getTodaysDate } from "../dashboard/CalendarModal";
 
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 
@@ -51,7 +51,7 @@ export default function FilterBox(props) {
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
   const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
-  const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
+  const [filterBoxEndDate, setFilterBoxEndDate] = useState(getTodaysDate());
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
@@ -424,7 +424,7 @@ export default function FilterBox(props) {
             setFilterBoxCrossLabel("");
             setFilterBoxCrossFilter({ type: "", query: "Users" });
             setFilterBoxStartDate("2012-01-01");
-            setFilterBoxEndDate("2020-01-08");
+            setFilterBoxEndDate(getTodaysDate());
             setFilterBoxAdditionalFilter({ type: "", query: "" });
             setFilterBoxAdditionalFilterLabel("");
             props.setAdditionalFilter({ type: "", query: "" });
