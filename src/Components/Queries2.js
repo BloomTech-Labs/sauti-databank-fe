@@ -14,25 +14,34 @@ const GetData = props => {
   let thisQuery = {};
 
   const {
-    firstSelectedCheckbox,
+    // firstSelectedCheckbox,
     filters,
-    secondSelectedCheckbox,
-    selectedCheckbox,
-    index,
-    crossFilter
+    // secondSelectedCheckbox,
+    // selectedCheckbox,
+    // index,
+    // crossFilter
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
   } = props;
 
-  console.log(`props.index`, index);
-  console.log(`props.crossFilter`, crossFilter);
-  console.log(`props.additionalFilter`, props.additionalFilter);
-  console.log(" ONE props.firstSelectedCheckbox", props.firstSelectedCheckbox);
-  console.log(" ONE props.filters[0]", filters[0]);
+  // console.log(`props.index`, index);
+  // console.log(`props.crossFilter`, crossFilter);
+  // console.log(`props.additionalFilter`, props.additionalFilter);
+  // console.log(" ONE props.firstSelectedCheckbox", props.firstSelectedCheckbox);
+  // console.log(" ONE props.filters[0]", filters[0]);
 
-  console.log(
-    " TWO props.secondSelectedCheckbox",
-    props.secondSelectedCheckbox
-  );
-  console.log(` THREE props.selectedCheckbox`, props.selectedCheckbox);
+  // console.log(
+  //   " TWO props.secondSelectedCheckbox",
+  //   props.secondSelectedCheckbox
+  // );
+  // console.log(` THREE props.selectedCheckbox`, props.selectedCheckbox);
+
+  console.log("filter 0", filters[0]);
+  console.log("filter 1", filters[1]);
+  console.log("filter 2", filters[2]);
+
   /*
 
   queryOptions = useState({
@@ -54,25 +63,35 @@ const GetData = props => {
     }
   })
   */
+  // setup the filters part first
+  //  setup the queries second
   if (
-    props.index.query === "Users" &&
-    !props.crossFilter.type &&
-    !props.additionalFilter.type
+    filters[0].selectedTable === "Users" &&
+    !filters[1].selectedTableColumnName &&
+    !filters[2].selectedTableColumnName
   ) {
     queryType = "tradersUsers";
-    thisQuery = firstSelectedCheckbox;
+    console.log("just users");
+    console.log(filters[0]);
+    console.log(filters[1]);
+    // console.log("crossFilter type", "|" + props.crossFilter.type + "|")
+
+    // thisQuery = firstSelectedCheckbox;
+    thisQuery = {
+      [filters[0].selectedTableColumnName]: filters[0].selectedOption
+    };
     QUERY = gql`
       query getUsers($queryTraders: newTraderInput){
         tradersUsers (input: $queryTraders) {
-          ${props.index.type}
+          ${filters[0].selectedTableColumnName}
         }
       }
       
       `;
   } else if (
-    props.index.query === "Users" &&
-    props.crossFilter.query === "Users" &&
-    !props.additionalFilter.type
+    filters[0].selectedTable === "Users" &&
+    filters[1].selectedTable === "Users" &&
+    !filters[2].selectedTableColumnName
   ) {
     // props.index.type = selectedCategory
     // const firstQuery = firstSelectedCheckbox[props.index.type];
@@ -85,17 +104,17 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
 */
     console.log(
       "first query",
-      /*firstQuery,*/ props.index.type,
-      firstSelectedCheckbox,
+      // /*firstQuery,*/ props.index.type,
+      // firstSelectedCheckbox,
       filters[0]
     );
-    const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+    // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
 
     console.log(
       "second query",
-      secondQuery,
-      props.crossFilter.type,
-      secondSelectedCheckbox,
+      // secondQuery,
+      // props.crossFilter.type,
+      // secondSelectedCheckbox,
       filters[1]
     );
 
@@ -110,62 +129,76 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     QUERY = gql`
       query getUsers($queryTraders: newTraderInput){
         tradersUsers (input: $queryTraders) {
-          ${props.index.type}
-          ${props.crossFilter.type}
+          # ${props.index.type}
+          # ${props.crossFilter.type}
+          ${filters[0].selectedTableColumnName}
+          ${filters[1].selectedTableColumnName}
+
         }
       }
       `;
   } else if (
-    props.index.query === "Sessions" &&
-    props.crossFilter.query === "Users" &&
-    !props.additionalFilter.type
+    filters[0].selectedTable === "Sessions" &&
+    filters[1].selectedTable === "Users" &&
+    !filters[2].selectedTableColumnName
   ) {
     queryType = "sessionsData";
     console.log("Sessions Users query");
-    console.log(firstSelectedCheckbox);
+    // console.log(firstSelectedCheckbox);
     console.log(filters[0]);
+    console.log(filters[1]);
+
     // const firstQuery = firstSelectedCheckbox[props.index.type];
-    const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+    // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     thisQuery = {
       // [props.index.type]: firstQuery,
       [filters[0].selectedTableColumnName]: filters[0].selectedOption,
-      [props.crossFilter.type]: secondQuery
+      // [props.crossFilter.type]: secondQuery
+      [filters[1].selectedTableColumnName]: filters[1].selectedOption
     };
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
           sessionsData (input: $queryTraders){
-          ${props.index.type}
-          ${props.crossFilter.type}
+          # ${props.index.type}
+          # ${props.crossFilter.type}
+          ${filters[0].selectedTableColumnName}
+          ${filters[1].selectedTableColumnName}
           created_date
         }
       }
       `;
   } else if (
-    props.index.query === "Users" &&
-    props.crossFilter.query === "Sessions" &&
-    !props.additionalFilter.type
+    filters[0].selectedTable === "Users" &&
+    filters[1].selectedTable === "Sessions" &&
+    !filters[2].selectedTableColumnName
   ) {
     queryType = "sessionsData";
     console.log("correct query???????????????????????");
+    console.log(filters[0]);
+    console.log(filters[1]);
     // const firstQuery = firstSelectedCheckbox[props.index.type];
-    const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+    // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     thisQuery = {
       // [props.index.type]: firstQuery,
       [filters[0].selectedTableColumnName]: filters[0].selectedOption,
-      [props.crossFilter.type]: secondQuery
+      // [props.crossFilter.type]: secondQuery
+      [filters[1].selectedTableColumnName]: filters[1].selectedOption
     };
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
         sessionsData(input: $queryTraders){
-          ${props.index.type}
-          ${props.crossFilter.type}
+          # ${props.index.type}
+          # ${props.crossFilter.type}
+          ${filters[0].selectedTableColumnName}
+          ${filters[1].selectedTableColumnName}
+
           created_date
         }
       }`;
   } else if (
-    props.index.query === "Sessions" &&
-    props.crossFilter.query === "Sessions" &&
-    !props.additionalFilter.type
+    filters[0].selectedTable === "Sessions" &&
+    filters[1].selectedTable === "Sessions" &&
+    !filters[2].selectedTableColumnName
   ) {
     queryType = "sessionsData";
     console.log("breaking!!!!!!!!!!!!!!!");
@@ -173,56 +206,74 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
         sessionsData (input: $queryTraders) {
-          ${props.index.type}
-          ${props.crossFilter.type}
+          # ${props.index.type}
+          # ${props.crossFilter.type}
+          ${filters[0].selectedTableColumnName}
+          ${filters[1].selectedTableColumnName}
+
           created_date
         }
       }
       `;
   } else if (
-    props.index.query === "Users" &&
-    props.crossFilter.query === "Users" &&
-    props.additionalFilter.query === "Users"
+    filters[0].selectedTable === "Users" &&
+    filters[1].selectedTable === "Users" &&
+    filters[2].selectedTable === "Users"
   ) {
     // const firstQuery = firstSelectedCheckbox[props.index.type];
-    const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
-    const thirdQuery = selectedCheckbox[props.additionalFilter.type];
+    // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+    // const thirdQuery = selectedCheckbox[props.additionalFilter.type];
     thisQuery = {
       // [props.index.type]: firstQuery,
       [filters[0].selectedTableColumnName]: filters[0].selectedOption,
 
-      [props.crossFilter.type]: secondQuery,
-      [props.additionalFilter.type]: thirdQuery
+      // [props.crossFilter.type]: secondQuery,
+      // [props.additionalFilter.type]: thirdQuery
+      [filters[1].selectedTableColumnName]: filters[1].selectedOption,
+      [filters[2].selectedTableColumnName]: filters[2].selectedOption
     };
     queryType = "tradersUsers";
     QUERY = gql`
         query getUsers($queryTraders: newTraderInput){
           tradersUsers(input: $queryTraders) {
-            ${props.index.type}
-            ${props.crossFilter.type}
+            # ${props.index.type}
+            # ${props.crossFilter.type}
+            ${filters[0].selectedTableColumnName}
+            ${filters[1].selectedTableColumnName}
+
           }
           additionalFilterData: tradersUsers {
-            ${props.additionalFilter.type}
+            # ${props.additionalFilter.type}
+            ${filters[2].selectedTableColumnName}
+
           }
         }
         `;
   } else {
+    console.log("all remaining combinations");
+    console.log(filters);
+    // some combinations break the program
+    // it appears thet if there is a query with nothing asked to return then the query fails
     queryType = "sessionsData";
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
         sessionsData(input: $queryTraders){
-          ${props.index.type}
-          ${props.crossFilter.type}
+          ${filters[0].selectedTableColumnName}
+          ${filters[1].selectedTableColumnName}
+
           created_date
         }
         additionalFilterData: sessionsData{
-            ${props.additionalFilter.type}
+            id
+            ${filters[2].selectedTableColumnName}
+
         }
       }
       `;
   }
 
-  console.log("FINAL QUERY", thisQuery, firstSelectedCheckbox);
+  console.log("FINAL QUERY", thisQuery, /*firstSelectedCheckbox*/ filters);
+  // it would be nice for this to run in a way that doesn't return any data untill the user actually sets up a query
 
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
@@ -231,8 +282,10 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
   //queryType: props.selectedCheckbox
   if (data) {
     console.log(`returned data2`, data[queryType]);
-    console.log(firstSelectedCheckbox);
-    console.log(filters);
+    // console.log(firstSelectedCheckbox);
+    // let filteredByDate = dataParse.filterByDate(data[queryType], filterBoxStartDate, filterBoxEndDate)
+    // console.log("filtered by date", filteredByDate)
+    // console.log(filters);
   }
 
   if (loading) {
@@ -274,36 +327,79 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
   //   filteredData = filteredData.filter(item => item !== null);
   // }
 
+  const filterByDate = (data, startDate, endDate) => {
+    startDate = startDate.replace(/-/g, "");
+    endDate = endDate.replace(/-/g, "");
+    // console.log("about to filter data", data)
+    const filteredData = data.filter(obj => {
+      const objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
+      return objectDate > startDate && objectDate < endDate;
+    });
+
+    return filteredData;
+  };
+
+  // works
+  if (Object.keys(data[`${queryType}`][0]).includes("created_date")) {
+    console.log("ready to filter by date");
+    // before filtering (most requested procedure commodities(Sessions case)) count = 19990
+    // after filtering by Augist 9th 2017 count = 19215
+    // before filtering first item date = 2017-06-20T00:16:28.0
+    // after filtering first item date = 2017-08-10T15:06:33.00
+    const filteredData = filterByDate(
+      data[`${queryType}`],
+      filterBoxStartDate,
+      filterBoxEndDate
+    );
+    console.log("filtered by date", filteredData);
+  }
   const chartData = dataParse(
-    props.index.type,
+    // props.index.type,
+    filters[0].selectedTableColumnName,
     data[`${queryType}`],
-    props.crossFilter.type,
-    props.startDate,
-    props.endDate,
-    props.additionalFilter.type,
-    props.index.query
+    filters[1].selectedTableColumnName,
+    // props.crossFilter.type,
+    // props.startDate,
+    filterBoxStartDate,
+    // props.endDate,
+    filterBoxEndDate,
+    filters[2].selectedTableColumnName,
+    // props.additionalFilter.type,
+    // props.index.query
+    filters[0].selectedTable
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
   // console.log("csvData", chartData.dataStructure);
   // console.log(`cross filter type`, props.crossFilter.type);
 
   console.log("chartdata_____-----", chartData);
 
-  if (props.crossFilter.type !== "") {
+  // if (props.crossFilter.type !== "") {
+  if (filters[1].selectedTableColumnName !== "") {
     return (
       <div>
         <h1 className="graph-title">
           {props.label} by {props.crossLabel}
         </h1>
-        {props.additionalFilter.type && (
+        {/*props.additionalFilter.type*/ filters[2].selectedTableColumnName && (
           <h3 className="graph-title-small">
-            Additional Filter: {props.additionalFilter.label} -{" "}
-            {Object.values(props.selectedCheckbox).length === 0
+            Additional Filter:{" "}
+            {/*props.additionalFilter.label*/ filters[1].selectedCategory} -{" "}
+            {/* selectedCheckbox: {categoryName: optionName }*/}
+            {Object.values(
+              /*props.selectedCheckbox*/ {
+                [filters[2].selectedCategory]: filters[2].selectedOption
+              }
+            ).length === 0
               ? "none"
-              : Object.values(props.selectedCheckbox)[0]}
+              : Object.values(
+                  /*props.selectedCheckbox*/ {
+                    [filters[2].selectedCategory]: filters[2].selectedOption
+                  }
+                )[0]}
           </h3>
         )}
 
-        <Graph
+        {/* <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
           crossFilter={props.crossFilter.type}
@@ -318,22 +414,30 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
           setSecondCheckboxOptions={props.setSecondCheckboxOptions}
-        />
+        /> */}
       </div>
     );
   } else {
     return (
       <div>
         <h1 className="graph-title">{props.label}</h1>
-        {props.additionalFilter.type && (
+        {/*props.additionalFilter.type*/ filters[2].selectedTableColumnName && (
           <h3 className="graph-title-small">
             Additional Filter: {props.additionalFilter.label} -{" "}
-            {Object.values(props.selectedCheckbox).length === 0
+            {Object.values(
+              /*props.selectedCheckbox*/ {
+                [filters[2].selectedCategory]: filters[2].selectedOption
+              }
+            ).length === 0
               ? "none"
-              : Object.values(props.selectedCheckbox)[0]}
+              : Object.values(
+                  /*props.selectedCheckbox*/ {
+                    [filters[2].selectedCategory]: filters[2].selectedOption
+                  }
+                )[0]}
           </h3>
         )}
-        <Graph
+        {/* <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
           additionalFilter={props.additionalFilter.type}
@@ -348,7 +452,7 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
           setSecondCheckboxOptions={props.setSecondCheckboxOptions}
-        />
+        /> */}
       </div>
     );
   }

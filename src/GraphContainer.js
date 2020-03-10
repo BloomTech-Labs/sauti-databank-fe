@@ -7,16 +7,15 @@ import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries2";
+import useCalendar from "../src/hooks/useCalendar";
 
 const GraphContainer = () => {
-  // My internet died before I could finish cleaning
   const [filters, setFilters] = useState({
-    // should eliminate the need to use index and crossFilter in FilterBox and Queries2
+    // default query setup
     0: {
       selectedCategory: "Gender", // index.type
       selectedOption: undefined,
-      selectedTable: "",
-      // selectedCategory is actually being used for this field at the moment
+      selectedTable: "Users",
       selectedTableColumnName: "gender"
     },
     1: {
@@ -27,11 +26,19 @@ const GraphContainer = () => {
     },
     2: {
       selectedCategory: "",
-      selectedOption: "",
+      selectedOption: undefined,
       selectedTable: "",
       selectedTableColumnName: ""
     }
   });
+  // put the date here
+  const {
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
+  } = useCalendar();
+
   const [index, setIndex] = useState({
     type: "gender",
     query: "Users",
@@ -98,6 +105,10 @@ const GraphContainer = () => {
               secondSelectedCheckbox={secondSelectedCheckbox}
               firstSelectedCheckbox={firstSelectedCheckbox}
               filters={filters}
+              filterBoxStartDate={filterBoxStartDate}
+              setFilterBoxStartDate={setFilterBoxStartDate}
+              filterBoxEndDate={filterBoxEndDate}
+              setFilterBoxEndDate={setFilterBoxEndDate}
             />
           </div>
           <div className="dropdown-container">
@@ -123,6 +134,10 @@ const GraphContainer = () => {
               secondCheckboxOptions={secondCheckboxOptions}
               filters={filters}
               setFilters={setFilters}
+              filterBoxStartDate={filterBoxStartDate}
+              setFilterBoxStartDate={setFilterBoxStartDate}
+              filterBoxEndDate={filterBoxEndDate}
+              setFilterBoxEndDate={setFilterBoxEndDate}
             />
           </div>
         </div>
