@@ -212,6 +212,7 @@ const GetData = props => {
     ).map(obj => obj[`${props.additionalFilter.type}`]);
     filteredData = filteredData.filter(item => item !== null);
   }
+
   // console.log("FILTERED DATA QUERIES", filteredData)
   // if (props.crossFilter.type &&
   //   !graphLabels[`${props.crossFilter.type}`]) {
@@ -230,7 +231,8 @@ const GetData = props => {
     props.startDate,
     props.endDate,
     props.additionalFilter.type,
-    props.index.query
+    props.index.query,
+    props.crossFilter.query
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
   // console.log("csvData", chartData.dataStructure);
   // console.log(`cross filter type`, props.crossFilter.type);

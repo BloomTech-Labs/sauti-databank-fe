@@ -12,7 +12,8 @@ const dataParse = (
   startDate,
   endDate,
   additionalFilter,
-  queryType
+  queryType,
+  crossFilterQuery
 ) => {
   // This is bad practice, but function wrapped in try catch incase unknown error occurs, to reload page
   // console.log(`indexBy`, indexBy);
@@ -48,7 +49,8 @@ const dataParse = (
         crossFilter,
         indexBy,
         additionalFilter,
-        queryType
+        queryType,
+        crossFilterQuery
       );
     } else {
       console.log("BIG ELSE DATAPARSE");
@@ -80,7 +82,8 @@ const dataParse = (
           crossFilter,
           indexBy,
           additionalFilter,
-          queryType
+          queryType,
+          crossFilterQuery
         );
       } else {
         //when single filtering with index that is not "Most Requested"

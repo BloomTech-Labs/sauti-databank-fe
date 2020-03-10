@@ -222,9 +222,9 @@ const arr = [
 ];
 const objectify = (key, array) => {
   const arr = [];
-  console.log(array);
+  console.dir(array, { maxArrayLength: null });
   array.forEach(cv => arr.push({ [key]: cv }));
   return arr;
 };
 
-console.log(objectify(name, arr.sort()));
+console.dir(objectify(name, arr.sort()), { maxArrayLength: null });
