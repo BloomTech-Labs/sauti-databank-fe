@@ -26,6 +26,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 
+import styled from "styled-components";
+
 const initialState = {
   email: "",
   password: "",
@@ -140,11 +142,8 @@ export default function SignInSide(props) {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
-            Make an Account
+            <FormTitle>Sign Up</FormTitle>
           </Typography>
           <form
             className={classes.form}
@@ -163,7 +162,7 @@ export default function SignInSide(props) {
               value={user.email}
               onChange={handleChange}
               autoFocus
-              InputProps={{ disableUnderline: true }}
+              InputProps={{ disableUnderline: true, className: classes.input }}
             />
             <TextField
               // variant='outlined'
@@ -176,7 +175,7 @@ export default function SignInSide(props) {
               autoComplete="current-password"
               value={user.password}
               onChange={handleChange}
-              InputProps={{ disableUnderline: true }}
+              InputProps={{ disableUnderline: true, className: classes.input }}
             />
 
             <TextField
@@ -261,16 +260,17 @@ export default function SignInSide(props) {
               color="primary"
               className={classes.submit}
             >
-              Sign Up
+              Submit
             </Button>
             <div>
-              <p>
+              <FormBottomText>
                 Have an account already? <Link to="/login">Login</Link> here.
-              </p>
-              <p>
+              </FormBottomText>
+              <br />
+              <FormBottomText>
                 Don't want to sign up right now? Click{" "}
                 <Link to="/data">Continue</Link> to view our data!
-              </p>
+              </FormBottomText>
             </div>
           </form>
         </div>
@@ -312,7 +312,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2)
   },
   input: {
-    border: "1px solid rgb(232, 240, 254)"
+    fontSize: "1.6rem",
+    borderBottom: "1px solid black"
   }
 }));
 
@@ -327,8 +328,8 @@ const Styles = withStyles(theme => ({
     fontSize: "1.6rem"
   },
   input: {
-    backgroundColor: "rgb(232, 240, 254)",
-    borderRadius: 5,
+    backgroundColor: "white",
+    borderBottom: "1px solid black",
     fontSize: 18,
     margin: "0 auto",
     width: "372px",
@@ -353,3 +354,10 @@ const Styles = withStyles(theme => ({
     }
   }
 }))(InputBase);
+
+const FormBottomText = styled.p`
+  font-size: 1.4rem;
+`;
+const FormTitle = styled.h1`
+  font-size: 3rem;
+`;
