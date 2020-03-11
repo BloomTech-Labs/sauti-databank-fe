@@ -5,6 +5,8 @@ import PaypalButton from "../Components/PaypalButton";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
+import swal from "sweetalert";
+
 import styled from "styled-components";
 import "../index.css";
 
@@ -12,7 +14,7 @@ const CANCEL_USER_SUB = gql`
   mutation updateUserToFree(
     $newUpdateUserToFreeInput: newUpdateUserToFreeInput!
   ) {
-    newUpdateUserToFreeInput(input: $newUpdateUserToFreeInput) {
+    updateUserToFree(input: $newUpdateUserToFreeInput) {
       ... on DatabankUser {
         email
         subscription_id
@@ -25,8 +27,6 @@ const CANCEL_USER_SUB = gql`
 `;
 
 function DashAccount(props) {
-  const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
-
   const history = useHistory();
 
   const token = getToken();
@@ -46,21 +46,21 @@ function DashAccount(props) {
     sub = newSub;
   }
 
-  console.log("========== UserEmail ============", userEmail);
-
   const GET_SUBSCRIPTION_ID = gql`
-    query {
+    query($userEmail: String!) {
       databankUser(input: { email: $userEmail }) {
+        id
+        email
         subscription_id
       }
     }
   `;
 
-  const { _loading, _error, _data } = useQuery(GET_SUBSCRIPTION_ID, {
+  const { data } = useQuery(GET_SUBSCRIPTION_ID, {
     variables: { userEmail: userEmail }
   });
 
-  console.log("======== response from get_sub_id ============", _data);
+  const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
 
   const handleSubmit = async (e, input) => {
     e.preventDefault();
@@ -69,17 +69,25 @@ function DashAccount(props) {
 
   const handleSubscriptionCancellation = e => {
     // TODO: grab user's subscription_id with a query to DatabankUsers
-    cancelSub({
-      variables: {
-        newUpdateUserToFreeInput: {
-          email: userEmail,
-          subscription_id: null
+
+    // newSub should be null unless the user has JUST signed up for premium through paypal.
+    // Once a user has signed out and returned to the app, the users sub ID is tracked by GET_SUBSCRIPTION_ID.
+    if (newSub === null) {
+      cancelSub({
+        variables: {
+          newUpdateUserToFreeInput: {
+            email: userEmail,
+            subscription_id: data.databankUser.subscription_id
+          }
         }
-      }
-    });
+      });
+      // Set the subscription id to null after a user cancels their subscription.
+      data.databankUser.subscription_id = null;
+      history.push("/data");
+      swal({ title: "", text: "You are now a free user", icon: "success" });
+    }
   };
 
-  console.log("newSub1", newSub);
   return (
     <>
       {tier === "PAID" || tier === "GOV_ROLE" || newSub ? (
