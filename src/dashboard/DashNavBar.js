@@ -10,6 +10,7 @@ import DashAccount from "./DashAccount";
 import DashLoginModal from "./DashLoginModal";
 import DashSignupModal from "./DashSignupModal";
 import DashLogout from "./DashLogout";
+import Login from "./Login";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { getToken, decodeToken } from "./auth/Auth";
 
@@ -57,6 +58,7 @@ function DashNav() {
       <Route exact path="/" component={DashHome} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
+      <Route exact path="/login" component={Login} />
       {/* <Route exact path="/services" component={DashAbout} /> */}
       <ProtectedRoute exact path="/myaccount" component={DashAccount} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
