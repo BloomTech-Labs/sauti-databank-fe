@@ -174,6 +174,7 @@ const GetData = props => {
   // [thisQuery]
   //queryType: props.selectedCheckbox
   if (data) console.log(`returned data`, data[queryType]);
+  console.log(`data`, data);
 
   if (loading) {
     return (
