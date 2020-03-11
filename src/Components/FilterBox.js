@@ -426,6 +426,8 @@ export default function FilterBox(props) {
             props.setEndDate("2020-01-08");
             props.setCheckboxOptions([]);
             props.setSelectedCheckbox({});
+            props.setSecondSelectedCheckbox({});
+            props.setFirstSelectedCheckbox({});
             setFilterBoxIndexLabel("Gender");
             setFilterBoxIndex({ type: "gender", query: "Users" });
             setFilterBoxCrossLabel("");
