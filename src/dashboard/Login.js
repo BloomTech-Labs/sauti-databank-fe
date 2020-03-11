@@ -26,97 +26,27 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 
-const initialState = {
-  email: "",
-  password: "",
-  organization: "",
-  job_position: "",
-  country: "",
-  organization_type: "",
-  tier: "",
-  interest: ""
-};
-
-const REGISTER = gql`
-  mutation registerNewUser($newUser: newRegisterInput!) {
-    register(input: $newUser) {
+const LOGIN = gql`
+  mutation registerNewUser($login: newLoginInput!) {
+    login(input: $login) {
       id
       email
-      password
-      tier
-      interest
-      organization
-      job_position
-      country
-      organization_type
       token
+      tier
     }
   }
 `;
 
 export default function SignInSide(props) {
-  const [user, setUser] = useState(initialState);
-  user.tier = "FREE";
-  console.log(user);
-  const history = useHistory();
-  const [createUser, newUser] = useMutation(REGISTER);
-  const {
-    email,
-    password,
-    organization,
-    job_position,
-    country,
-    organization_type,
-    tier,
-    interest
-  } = user;
-
   const classes = useStyles();
+  const history = useHistory();
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  });
+  const [userLoggedIn, { loading, error }] = useMutation(LOGIN);
 
-  const handleChange = event => {
-    event.preventDefault();
-    setUser({
-      ...user,
-      [event.target.name]: event.target.value
-    });
-  };
-
-  const handleSubmit = async (e, input) => {
-    e.preventDefault();
-    if (
-      user.email === "" ||
-      user.password === "" ||
-      user.organization_type === "" ||
-      user.tier === ""
-    ) {
-      swal({
-        title: "Error",
-        text: "Please fill all required fields.",
-        icon: "warning",
-        dangerMode: true
-      });
-    } else {
-      const createdUser = await createUser({
-        variables: { newUser: input }
-      });
-      if (createdUser.data.register.id === null) {
-        swal({
-          title: "Error",
-          text: "Please use a different email.",
-          icon: "warning",
-          dangerMode: true
-        });
-      } else {
-        console.log(createdUser.data.register.id);
-        localStorage.setItem("token", createdUser.data.register.token);
-        GAHandleCreateUser();
-        history.push("/data");
-        swal({ title: "", text: "Success!", icon: "success" });
-      }
-    }
-  };
-
-  if (newUser.loading) {
+  if (loading) {
     return (
       <div className="loader-container">
         <Loader
@@ -130,9 +60,37 @@ export default function SignInSide(props) {
     );
   }
 
-  if (newUser.error) {
+  if (error) {
     return <p>ERROR!</p>;
   }
+
+  const handleChange = event => {
+    event.preventDefault();
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  const handleSubmit = async (e, input) => {
+    e.preventDefault();
+    const newUser = await userLoggedIn({
+      variables: { login: input }
+    });
+    if (newUser.data.login.token !== null) {
+      localStorage.setItem("token", newUser.data.login.token);
+
+      history.push("/data");
+      swal({ title: "", text: "Success!", icon: "success" });
+    } else {
+      swal({
+        title: "Error",
+        text: "Please check that your email and password are correct.",
+        icon: "warning",
+        dangerMode: true
+      });
+    }
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -144,7 +102,7 @@ export default function SignInSide(props) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Make an Account
+            Login
           </Typography>
           <form
             className={classes.form}
@@ -178,82 +136,6 @@ export default function SignInSide(props) {
               onChange={handleChange}
               InputProps={{ disableUnderline: true }}
             />
-
-            <TextField
-              // variant='outlined'
-              placeholder="Organization"
-              margin="normal"
-              fullWidth
-              name="organization"
-              label="Organization"
-              type="text"
-              id="organization"
-              autoComplete="current-organization"
-              value={user.organization}
-              onChange={handleChange}
-              InputProps={{ disableUnderline: true, className: classes.input }}
-            />
-            <TextField
-              // variant='outlined'
-              margin="normal"
-              fullWidth
-              name="job_position"
-              label="Job Position"
-              type="text"
-              id="job_position"
-              autoComplete="current-job_position"
-              value={user.job_position}
-              onChange={handleChange}
-              InputProps={{ disableUnderline: true, className: classes.input }}
-            />
-            <TextField
-              // variant='outlined'
-              margin="normal"
-              fullWidth
-              name="country"
-              label="Country"
-              type="text"
-              id="country"
-              autoComplete="current-country"
-              value={user.country}
-              onChange={handleChange}
-              InputProps={{ disableUnderline: true, className: classes.input }}
-            />
-            <TextField
-              // variant='outlined'
-              margin="normal"
-              fullWidth
-              name="interest"
-              label="Interest"
-              type="text"
-              id="interest"
-              autoComplete="current-interest"
-              value={user.interest}
-              onChange={handleChange}
-              InputProps={{ disableUnderline: true, className: classes.input }}
-            />
-            <FormControl className={classes.margin}>
-              <p>Organization Type</p>
-              <Select
-                label="Organization Type"
-                labelId="demo-customized-select-label"
-                id="demo-customized-select"
-                name="organization_type"
-                placeholder="Organization Type"
-                value={user.organization_type}
-                onChange={handleChange}
-                input={<Styles />}
-              >
-                <MenuItem value={"RESEARCH"}>RESEARCH</MenuItem>
-                <MenuItem value={"GOVERNMENT"}>GOVERNMENT</MenuItem>
-                <MenuItem value={"NGO"}>NGO</MenuItem>
-                <MenuItem value={"OTHER"}>OTHER</MenuItem>
-              </Select>
-              <label>*required</label>
-            </FormControl>
-
-            <br></br>
-
             <Button
               type="submit"
               fullWidth
@@ -261,14 +143,14 @@ export default function SignInSide(props) {
               color="primary"
               className={classes.submit}
             >
-              Sign Up
+              Login
             </Button>
             <div>
               <p>
-                Have an account already? <Link to="/login">Login</Link> here.
+                Don't have an account? <Link to="/">Sign Up</Link> here.
               </p>
               <p>
-                Don't want to sign up right now? Click{" "}
+                Don't want to login right now? Click{" "}
                 <Link to="/data">Continue</Link> to view our data!
               </p>
             </div>
@@ -285,7 +167,7 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     backgroundImage:
-      "url(https://images.unsplash.com/photo-1506682332771-2a887a4387a8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9)",
+      "url(https://images.unsplash.com/photo-1506506637031-5e2cabd00f30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
