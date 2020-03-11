@@ -72,7 +72,7 @@ export default function FilterBox(props) {
       if (e.target.textContent === "Submit") {
         e.preventDefault();
       }
-      props.setIndex(filterBoxIndex);
+      // props.setIndex(filterBoxIndex);
       props.setIndexLabel(filterBoxIndexLabel);
       props.setCrossLabel(filterBoxCrossLabel);
       props.setCrossFilter(filterBoxCrossFilter);

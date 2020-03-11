@@ -13,13 +13,13 @@ const GraphContainer = () => {
   const [filters, setFilters] = useState({
     // default query setup
     0: {
-      selectedCategory: "Gender", // index.type
+      selectedCategory: "Gender", // label
       selectedOption: undefined,
-      selectedTable: "Users",
-      selectedTableColumnName: "gender"
+      selectedTable: "Users", // value.query
+      selectedTableColumnName: "gender" // value.type
     },
     1: {
-      selectedCategory: "", // crossFilter.type
+      selectedCategory: "",
       selectedOption: undefined,
       selectedTable: "",
       selectedTableColumnName: ""
@@ -39,11 +39,11 @@ const GraphContainer = () => {
     setFilterBoxEndDate
   } = useCalendar();
 
-  const [index, setIndex] = useState({
-    type: "gender",
-    query: "Users",
-    label: ""
-  });
+  // const [index, setIndex] = useState({
+  //   type: "gender",
+  //   query: "Users",
+  //   label: ""
+  // });
   const [crossFilter, setCrossFilter] = useState({
     type: "",
     query: "Users",
@@ -54,9 +54,9 @@ const GraphContainer = () => {
     query: "",
     label: ""
   });
-  const [firstSelectedCheckbox, setFirstSelectedCheckbox] = useState({});
-  const [secondSelectedCheckbox, setSecondSelectedCheckbox] = useState({});
-  const [selectedCheckbox, setSelectedCheckbox] = useState({});
+  // const [firstSelectedCheckbox, setFirstSelectedCheckbox] = useState({});
+  // const [secondSelectedCheckbox, setSecondSelectedCheckbox] = useState({});
+  // const [selectedCheckbox, setSelectedCheckbox] = useState({});
 
   const [indexLabel, setIndexLabel] = useState("Gender");
   const [crossLabel, setCrossLabel] = useState("");
@@ -64,8 +64,8 @@ const GraphContainer = () => {
   const [checkboxOptions, setCheckboxOptions] = useState([]);
   const [secondCheckboxOptions, setSecondCheckboxOptions] = useState([]);
 
-  const [startDate, setStartDate] = useState("2012-01-01");
-  const [endDate, setEndDate] = useState("2020-01-08");
+  // const [startDate, setStartDate] = useState("2012-01-01");
+  // const [endDate, setEndDate] = useState("2020-01-08");
 
   // useEffect(() => {
   //   ReactGa.initialize("UA-155468784-1");
@@ -73,9 +73,9 @@ const GraphContainer = () => {
   //   ReactGa.pageview("/");
   // }, []);
 
-  const onChange = event => {
-    setIndex(event.target.value);
-  };
+  // const onChange = event => {
+  //   // setIndex(event.target.value);
+  // };
 
   const onSubmit = e => {
     e.preventDefault();
@@ -91,19 +91,19 @@ const GraphContainer = () => {
         <div className="content-container">
           <div className="chart-container">
             <Queries
-              index={index}
+              // index={index}
               crossFilter={crossFilter}
               label={indexLabel}
               crossLabel={crossLabel}
-              selectedCheckbox={selectedCheckbox}
+              // selectedCheckbox={selectedCheckbox}
               checkboxOptions={checkboxOptions}
               setCheckboxOptions={setCheckboxOptions}
               setSecondCheckboxOptions={setSecondCheckboxOptions}
               additionalFilter={additionalFilter}
-              startDate={startDate}
-              endDate={endDate}
-              secondSelectedCheckbox={secondSelectedCheckbox}
-              firstSelectedCheckbox={firstSelectedCheckbox}
+              // startDate={startDate}
+              // endDate={endDate}
+              // secondSelectedCheckbox={secondSelectedCheckbox}
+              // firstSelectedCheckbox={firstSelectedCheckbox}
               filters={filters}
               filterBoxStartDate={filterBoxStartDate}
               setFilterBoxStartDate={setFilterBoxStartDate}
@@ -113,24 +113,24 @@ const GraphContainer = () => {
           </div>
           <div className="dropdown-container">
             <FilterBox
-              onChange={onChange}
+              // onChange={onChange}
               onSubmit={onSubmit}
-              index={index}
+              // index={index}
               checkboxOptions={checkboxOptions}
               crossFilter={crossFilter}
-              setIndex={setIndex}
+              // setIndex={setIndex}
               setCrossFilter={setCrossFilter}
               setIndexLabel={setIndexLabel}
               setCrossLabel={setCrossLabel}
-              setSelectedCheckbox={setSelectedCheckbox}
+              // setSelectedCheckbox={setSelectedCheckbox}
               setCheckboxOptions={setCheckboxOptions}
               setAdditionalFilter={setAdditionalFilter}
-              startDate={startDate}
-              endDate={endDate}
-              setStartDate={setStartDate}
-              setEndDate={setEndDate}
-              setFirstSelectedCheckbox={setFirstSelectedCheckbox}
-              setSecondSelectedCheckbox={setSecondSelectedCheckbox}
+              // startDate={startDate}
+              // endDate={endDate}
+              // setStartDate={setStartDate}
+              // setEndDate={setEndDate}
+              // setFirstSelectedCheckbox={setFirstSelectedCheckbox}
+              // setSecondSelectedCheckbox={setSecondSelectedCheckbox}
               secondCheckboxOptions={secondCheckboxOptions}
               filters={filters}
               setFilters={setFilters}

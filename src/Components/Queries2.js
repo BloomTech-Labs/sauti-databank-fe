@@ -399,14 +399,20 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           </h3>
         )}
 
-        {/* <Graph
+        <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
-          crossFilter={props.crossFilter.type}
-          additionalFilter={props.additionalFilter.type}
-          selectedCheckbox={props.selectedCheckbox}
+          // crossFilter={props.crossFilter.type}
+          crossFilter={filters[1].selectedCategory}
+          // additionalFilter={props.additionalFilter.type}
+          additionalFilter={filters[2].selectedCategory}
+          // selectedCheckbox={props.selectedCheckbox}
+          selectCheckbox={{
+            [filters[2].selectedCategory]: filters[2].selectedOption
+          }}
           keys={chartData.crossFilterValues}
-          index={props.index.type}
+          // index={props.index.type}
+          index={filters[0].selectedTableColumnName}
           label={props.label}
           groupMode={"grouped"}
           // filteredData={filteredData}
@@ -414,7 +420,7 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
           setSecondCheckboxOptions={props.setSecondCheckboxOptions}
-        /> */}
+        />
       </div>
     );
   } else {
@@ -437,14 +443,20 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
                 )[0]}
           </h3>
         )}
-        {/* <Graph
+        <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
-          additionalFilter={props.additionalFilter.type}
-          selectedCheckbox={props.selectedCheckbox}
-          crossFilter={props.crossFilter.type}
+          // additionalFilter={props.additionalFilter.type}
+          additionalFilter={filters[2].selectedCategory}
+          // selectedCheckbox={props.selectedCheckbox}
+          selectCheckbox={{
+            [filters[2].selectedCategory]: filters[2].selectedOption
+          }}
+          // crossFilter={props.crossFilter.type}
+          crossFilter={filters[1].selectedCategory}
           keys={chartData.keys || chartData.csvKeys}
-          index={props.index.type}
+          // index={props.index.type}
+          index={filters[0].selectedTableColumnName}
           label={props.label}
           groupMode={"stacked"}
           // filteredData={filteredData}
@@ -452,7 +464,7 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
           setSecondCheckboxOptions={props.setSecondCheckboxOptions}
-        /> */}
+        />
       </div>
     );
   }
