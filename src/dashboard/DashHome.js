@@ -7,6 +7,7 @@ import DashSignup from "./DashSignup.js";
 import DashAccount from "./DashAccount.js";
 
 import CreateAccount from "./CreateAccount";
+import Login from "./Login";
 
 import {
   NotSignedInDiv,
@@ -29,15 +30,12 @@ function DashHome() {
 
   return (
     <>
-      {!signedIn && <CreateAccount />}
-      {signedIn && (
-        <div>
-          {/* <UserHeader>
-            Welcome to the Sauti Databank App <UserName>{userEmail}</UserName> !
-          </UserHeader> */}
-          <DashAccount />
-        </div>
+      {!signedIn && (
+        <>
+          <CreateAccount />
+        </>
       )}
+      {signedIn && <DashAccount />}
     </>
   );
 }
