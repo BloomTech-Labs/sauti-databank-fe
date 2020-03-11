@@ -18,7 +18,11 @@ const GetData = props => {
     secondSelectedCheckbox,
     selectedCheckbox,
     index,
-    crossFilter
+    crossFilter,
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
   } = props;
 
   console.log(`props.index`, index);
@@ -93,7 +97,6 @@ const GetData = props => {
     !props.additionalFilter.type
   ) {
     queryType = "sessionsData";
-    console.log("correct query???????????????????????");
     const firstQuery = firstSelectedCheckbox[props.index.type];
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     thisQuery = {
@@ -114,8 +117,12 @@ const GetData = props => {
     !props.additionalFilter.type
   ) {
     queryType = "sessionsData";
-    console.log("breaking!!!!!!!!!!!!!!!");
-    thisQuery = undefined;
+    const firstQuery = firstSelectedCheckbox[props.index.type];
+    const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+    thisQuery = {
+      [props.index.type]: firstQuery,
+      [props.crossFilter.type]: secondQuery
+    };
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
         sessionsData (input: $queryTraders) {
@@ -174,7 +181,7 @@ const GetData = props => {
       `;
   }
 
-  console.log("FINAL QUERY", thisQuery, firstSelectedCheckbox);
+  console.log("FINAL QUERY", thisQuery);
 
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
@@ -200,18 +207,18 @@ const GetData = props => {
 
   // This is how we nab checkbox options.
 
-  let filteredData;
-  if (
-    props.additionalFilter.type &&
-    !graphLabels[`${props.additionalFilter.type}`]
-  ) {
-    removeMultiple(data.additionalFilterData);
-    filteredData = getIndex(
-      data.additionalFilterData,
-      `${props.additionalFilter.type}`
-    ).map(obj => obj[`${props.additionalFilter.type}`]);
-    filteredData = filteredData.filter(item => item !== null);
-  }
+  // let filteredData;
+  // if (
+  //   props.additionalFilter.type &&
+  //   !graphLabels[`${props.additionalFilter.type}`]
+  // ) {
+  //   removeMultiple(data.additionalFilterData);
+  //   filteredData = getIndex(
+  //     data.additionalFilterData,
+  //     `${props.additionalFilter.type}`
+  //   ).map(obj => obj[`${props.additionalFilter.type}`]);
+  //   filteredData = filteredData.filter(item => item !== null);
+  // }
 
   // console.log("FILTERED DATA QUERIES", filteredData)
   // if (props.crossFilter.type &&
@@ -228,8 +235,8 @@ const GetData = props => {
     props.index.type,
     data[`${queryType}`],
     props.crossFilter.type,
-    props.startDate,
-    props.endDate,
+    filterBoxStartDate,
+    filterBoxEndDate,
     props.additionalFilter.type,
     props.index.query,
     props.crossFilter.query
@@ -264,7 +271,7 @@ const GetData = props => {
           index={props.index.type}
           label={props.label}
           groupMode={"grouped"}
-          filteredData={filteredData}
+          // filteredData={filteredData}
           sampleSize={chartData.totalSampleSize}
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
@@ -294,7 +301,7 @@ const GetData = props => {
           index={props.index.type}
           label={props.label}
           groupMode={"stacked"}
-          filteredData={filteredData}
+          // filteredData={filteredData}
           sampleSize={chartData.sampleSize}
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}

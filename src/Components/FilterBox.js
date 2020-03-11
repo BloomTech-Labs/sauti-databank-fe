@@ -19,6 +19,13 @@ export default function FilterBox(props) {
     tier = tier.tier;
   }
 
+  const {
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
+  } = props;
+
   const [filterBoxIndex, setFilterBoxIndex] = useState({
     type: "gender",
     query: "Users",
@@ -45,8 +52,8 @@ export default function FilterBox(props) {
     filterBoxAdditionalFilterLabel,
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
-  const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
-  const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
+  // const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
+  // const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
