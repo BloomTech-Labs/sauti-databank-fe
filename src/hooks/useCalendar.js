@@ -11,4 +11,5 @@ const useCalendar = () => {
     setFilterBoxEndDate
   };
 };
+
 export default useCalendar;

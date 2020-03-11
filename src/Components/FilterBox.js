@@ -7,9 +7,10 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 
-import CalendarModal from "../dashboard/CalendarModal";
+import CalendarModal, { getTodaysDate } from "../dashboard/CalendarModal";
+import useCalendar from "../hooks/useCalendar";
 
-import { decodeToken, getToken } from "../dashboard/auth/Auth";
+import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 
 export default function FilterBox(props) {
   const token = getToken();
@@ -17,6 +18,11 @@ export default function FilterBox(props) {
   if (token) {
     tier = decodeToken(token);
     tier = tier.tier;
+  }
+  const newSub = getSubscription();
+  let sub;
+  if (newSub) {
+    sub = newSub;
   }
 
   const {
@@ -52,8 +58,14 @@ export default function FilterBox(props) {
     filterBoxAdditionalFilterLabel,
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
-  // const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
-  // const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
+
+  const {
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
+  } = useCalendar();
+
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
@@ -377,7 +389,10 @@ export default function FilterBox(props) {
           </>
         )}
 
-        {tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE" ? (
+        {tier === "ADMIN" ||
+        tier === "PAID" ||
+        tier === "GOV_ROLE" ||
+        newSub ? (
           <DateContainer>
             <div>
               <p>Start</p>
@@ -433,7 +448,7 @@ export default function FilterBox(props) {
             setFilterBoxCrossLabel("");
             setFilterBoxCrossFilter({ type: "", query: "Users" });
             setFilterBoxStartDate("2012-01-01");
-            setFilterBoxEndDate("2020-01-08");
+            setFilterBoxEndDate(getTodaysDate());
             setFilterBoxAdditionalFilter({ type: "", query: "" });
             setFilterBoxAdditionalFilterLabel("");
             props.setAdditionalFilter({ type: "", query: "" });

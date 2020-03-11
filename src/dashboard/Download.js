@@ -65,7 +65,7 @@ function Download(props) {
   const handleSubmit = async (e, input) => {
     e.preventDefault();
     props.handleClose();
-    history.push("/services");
+    history.push("/");
   };
 
   return (

@@ -30,7 +30,7 @@ const ModalButton = styled.button`
   border-radius: 5px;
   padding: 2%;
   transition: 0.5s ease;
-  width: 55%;
+  width: 400px;
   margin: 0 auto;
   // margin-top: 5%;
   margin-bottom: 5%;

@@ -10,6 +10,7 @@ import DashAccount from "./DashAccount";
 import DashLoginModal from "./DashLoginModal";
 import DashSignupModal from "./DashSignupModal";
 import DashLogout from "./DashLogout";
+import Login from "./Login";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { getToken, decodeToken } from "./auth/Auth";
 
@@ -45,10 +46,10 @@ function DashNav() {
         </SautiLogo>
         <Navigation>
           {!SignedIn && <Links to="/">HOME</Links>}
-          {SignedIn && <Links to="/">MY ACCOUNT</Links>}
+          {SignedIn && <Links to="/">ACCOUNT</Links>}
           <Links to="/data">DATA</Links>
           {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
-          <LinksLast to="/services">SERVICES</LinksLast>
+          {/* <LinksLast to="/services">SERVICES</LinksLast> */}
           {SignedIn && <Links to="/logout">LOGOUT</Links>}
           {/* <SautiLink href="http://sautiafrica.org/">Sauti</SautiLink> */}
         </Navigation>
@@ -57,7 +58,8 @@ function DashNav() {
       <Route exact path="/" component={DashHome} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
-      <Route exact path="/services" component={DashAbout} />
+      <Route exact path="/login" component={Login} />
+      {/* <Route exact path="/services" component={DashAbout} /> */}
       <ProtectedRoute exact path="/myaccount" component={DashAccount} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
     </>

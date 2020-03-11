@@ -94,6 +94,7 @@ const useStyles = makeStyles(theme => ({
 
 function DashSignup(props) {
   const [user, setUser] = useState(initialState);
+  user.tier = "FREE";
   console.log(user);
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
@@ -147,7 +148,7 @@ function DashSignup(props) {
         console.log(createdUser.data.register.id);
         localStorage.setItem("token", createdUser.data.register.token);
         GAHandleCreateUser();
-        history.push("/");
+        history.push("/data");
         swal({ title: "", text: "Success!", icon: "success" });
       }
     }
@@ -239,7 +240,7 @@ function DashSignup(props) {
             </Select>
           </FormControl>
           <br />
-          <Labels2>select A User Type</Labels2>
+          {/* <Labels2>Select A User Type</Labels2>
           <FormControl className={classes.margin}>
             <Select
               labelId="demo-customized-select-label"
@@ -256,7 +257,7 @@ function DashSignup(props) {
               <MenuItem value={"PAID"}>PAID</MenuItem>
             </Select>
           </FormControl>
-          <br />
+          <br /> */}
           <Button className="initialize-signup" type="submit">
             Sign Up
           </Button>
@@ -273,7 +274,7 @@ export default DashSignup;
 
 // WHOLE PAGE
 const SignupPageContainer = styled.div`
-  // height: 95vh;
+  height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: space-between;
@@ -305,6 +306,12 @@ const FormContainer = styled.div`
   background-color: white;
   self-align: flex-end;
   text-align: center;
+  @media screen and (min-width: 2560px) {
+    width: 50%;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 45%;
+  }
 `;
 const LoginButtonDiv = styled.div`
   margin: 0 auto;
@@ -344,7 +351,7 @@ const Button = styled.button`
   border-radius: 5px;
   padding: 2%;
   transition: 0.5s ease;
-  width: 55%;
+  width: 400px;
   margin: 0 auto;
   margin-top: 5%;
   margin-bottom: 5%;

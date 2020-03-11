@@ -160,6 +160,16 @@ table {
 .hero-img {
   background: url(./dashboard/Images/Hero-img-mediumjpg.jpg) left no-repeat;
 }
+@media screen and (min-width: 2800px) {
+  .hero-img {
+    background: url(./dashboard/Images//Hero-img.jpg) left no-repeat;
+  }
+}
+@media screen and (max-width: 760px) {
+  .hero-img {
+    background: url(./dashboard/Images//Hero-img-small.jpg) left no-repeat;
+  }
+}
 
 /* need this for the filter options */
 ul {
@@ -199,3 +209,91 @@ ul ol {
 
 /* margin-left: 15px;
 } */
+#reset {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+  padding: 5rem 0;
+}
+.container {
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.pricing-table {
+  display: flex;
+  justify-content: space-evenly;
+}
+.table-item {
+  font-size: 2rem;
+  /* text-transform: uppercase; */
+  /* text-align: center; */
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+.table-item::before,
+.table-item::after {
+  content: "";
+  position: absolute;
+  border: 2px solid grey;
+}
+.table-item::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.table-item::after {
+  top: -3px;
+  left: -3px;
+  width: calc(100% + (3px * 2));
+  height: calc(100% + (3px * 2));
+  z-index: -2;
+}
+.table-item i:last-of-type {
+  font-size: 10rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  color: rgb(0, 140, 255);
+}
+.subscription-type {
+  letter-spacing: 1px;
+}
+.features-list {
+  list-style: none;
+  margin: 1.5rem 0;
+  letter-spacing: 1px;
+}
+.features-item {
+  border-top: 0.5px solid lightgrey;
+  font-size: 2rem;
+  line-height: 1.5;
+  padding: 1.5rem 0;
+}
+.features-item:last-child {
+  border-bottom: 0.5px solid lightgrey;
+}
+.subscription-price {
+  display: block;
+  font-size: 3.5rem;
+  color: rgb(3, 128, 3, 0.75);
+}
+.cta {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  border: 2px solid #eb5e52;
+  border-radius: 5px;
+  padding: 1rem 3rem;
+  margin-top: 1.5rem;
+  transition: 0.5s ease;
+}
+.cta:hover {
+  color: white;
+  background-color: #eb5e52;
+  cursor: pointer;
+}

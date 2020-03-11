@@ -6,6 +6,9 @@ import { getToken, decodeToken } from "./auth/Auth";
 import DashSignup from "./DashSignup.js";
 import DashAccount from "./DashAccount.js";
 
+import CreateAccount from "./CreateAccount";
+import Login from "./Login";
+
 import {
   NotSignedInDiv,
   SignedInDiv,
@@ -27,15 +30,12 @@ function DashHome() {
 
   return (
     <>
-      {!signedIn && <DashSignup />}
-      {signedIn && (
-        <SignedInDiv>
-          <UserHeader>
-            Welcome <UserName>{userEmail}</UserName> !
-          </UserHeader>
-          <DashAccount />
-        </SignedInDiv>
+      {!signedIn && (
+        <>
+          <CreateAccount />
+        </>
       )}
+      {signedIn && <DashAccount />}
     </>
   );
 }
