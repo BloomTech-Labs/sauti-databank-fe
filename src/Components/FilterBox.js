@@ -346,19 +346,44 @@ export default function FilterBox(props) {
 
   return (
     <DropdownContainer>
+      {Object.keys(filters).map(filterId => (
+        <FilterSelector
+          key={filterId}
+          filterSelectorName={filters[filterId].nameOfFilter}
+          formatGroupLabel={formatGroupLabel}
+          ControlComponent={ControlComponent}
+          filters={filters}
+          setFilters={setFilters}
+          i={filterId}
+          FilterBoxOptions={FilterBoxOptions}
+          graphLabels={graphLabels}
+        />
+      ))}
+      <div className="btn-container">
+        <Button
+          // className="checkbox-submit-btn"
+          // type="submit"
+          // disabled={loading}
+          onClick={e => {
+            console.log("here");
+            console.log(filters);
+            setFilters({
+              ...filters,
+              [Object.keys(filters).length]: {
+                nameOfFilter: "Data Filter",
+                selectedCategory: "",
+                selectedOption: undefined,
+                selectedTable: "",
+                selectedTableColumnName: ""
+              }
+            });
+          }}
+          style={{ cursor: loading ? "auto" : "pointer" }}
+        >
+          Submit
+        </Button>
+      </div>
       <form>
-        {Object.keys(filters).map(filterId => (
-          <FilterSelector
-            filterSelectorName={filters[filterId].nameOfFilter}
-            formatGroupLabel={formatGroupLabel}
-            ControlComponent={ControlComponent}
-            filters={filters}
-            setFilters={setFilters}
-            i={filterId}
-            FilterBoxOptions={FilterBoxOptions}
-            graphLabels={graphLabels}
-          />
-        ))}
         {/* <FilterSelector
           filterSelectorName={filters[0].nameOfFilter}
           formatGroupLabel={formatGroupLabel}
