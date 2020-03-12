@@ -74,7 +74,6 @@ function DashNav() {
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/account" component={DashAccount} />
       <Route exact path="/signup" component={Signup} />
       {/* <Route exact path="/services" component={DashAbout} /> */}
       <ProtectedRoute exact path="/myaccount" component={DashAccount} />
