@@ -13,18 +13,21 @@ const GraphContainer = () => {
   const [filters, setFilters] = useState({
     // default query setup
     0: {
+      nameOfFilter: "Data Series",
       selectedCategory: "Gender", // label
       selectedOption: undefined,
       selectedTable: "Users", // value.query
       selectedTableColumnName: "gender" // value.type
     },
     1: {
+      nameOfFilter: "Compare SubSamples",
       selectedCategory: "",
       selectedOption: undefined,
       selectedTable: "",
       selectedTableColumnName: ""
     },
     2: {
+      nameOfFilter: "Data Filter",
       selectedCategory: "",
       selectedOption: undefined,
       selectedTable: "",

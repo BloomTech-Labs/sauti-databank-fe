@@ -62,6 +62,8 @@ const ControlComponent = props => (
 
 export default function FilterBox(props) {
   const {
+    filters,
+    setFilters,
     filterBoxStartDate,
     setFilterBoxStartDate,
     filterBoxEndDate,
@@ -344,11 +346,11 @@ export default function FilterBox(props) {
     <DropdownContainer>
       <form>
         <FilterSelector
-          filterSelectorName={"Data Series"}
+          filterSelectorName={filters[0].nameOfFilter}
           formatGroupLabel={formatGroupLabel}
           ControlComponent={ControlComponent}
-          filters={props.filters}
-          setFilters={props.setFilters}
+          filters={filters}
+          setFilters={setFilters}
           i={0}
           FilterBoxOptions={FilterBoxOptions}
           graphLabels={graphLabels}
