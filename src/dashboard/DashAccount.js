@@ -2,11 +2,33 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import PaypalButton from "../Components/PaypalButton";
+import gql from "graphql-tag";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+
+import swal from "sweetalert";
 
 import styled from "styled-components";
 import "../index.css";
 
+const CANCEL_USER_SUB = gql`
+  mutation updateUserToFree(
+    $newUpdateUserToFreeInput: newUpdateUserToFreeInput!
+  ) {
+    updateUserToFree(input: $newUpdateUserToFreeInput) {
+      ... on DatabankUser {
+        email
+        subscription_id
+      }
+      ... on Error {
+        message
+      }
+    }
+  }
+`;
+
 function DashAccount(props) {
+  const history = useHistory();
+
   const token = getToken();
   let tier;
   if (token) {
@@ -24,14 +46,48 @@ function DashAccount(props) {
     sub = newSub;
   }
 
-  const history = useHistory();
+  const GET_SUBSCRIPTION_ID = gql`
+    query($userEmail: String!) {
+      databankUser(input: { email: $userEmail }) {
+        id
+        email
+        subscription_id
+      }
+    }
+  `;
+
+  const { data } = useQuery(GET_SUBSCRIPTION_ID, {
+    variables: { userEmail: userEmail }
+  });
+
+  const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
 
   const handleSubmit = async (e, input) => {
     e.preventDefault();
     history.push("/data");
   };
 
-  console.log("newSub1", newSub);
+  const handleSubscriptionCancellation = e => {
+    // TODO: grab user's subscription_id with a query to DatabankUsers
+
+    // newSub should be null unless the user has JUST signed up for premium through paypal.
+    // Once a user has signed out and returned to the app, the users sub ID is tracked by GET_SUBSCRIPTION_ID.
+    if (newSub === null) {
+      cancelSub({
+        variables: {
+          newUpdateUserToFreeInput: {
+            email: userEmail,
+            subscription_id: data.databankUser.subscription_id
+          }
+        }
+      });
+      // Set the subscription id to null after a user cancels their subscription.
+      data.databankUser.subscription_id = null;
+      history.push("/data");
+      swal({ title: "", text: "You are now a free user", icon: "success" });
+    }
+  };
+
   return (
     <>
       {tier === "PAID" || tier === "GOV_ROLE" || newSub ? (
@@ -56,7 +112,9 @@ function DashAccount(props) {
                     <li className="features-item">Filter data by date</li>
                   </ul>
                   <ButtonDiv>
-                    <ContinueButton2>Cancel Subscription</ContinueButton2>
+                    <ContinueButton2 onClick={handleSubscriptionCancellation}>
+                      Cancel Subscription
+                    </ContinueButton2>
                   </ButtonDiv>
                 </UserTypeContainerDiv>
               </Div2>
