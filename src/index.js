@@ -9,7 +9,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
 (function initAnalytics() {
-  initGA("UA-159664570-1");
+  initGA("UA-158701427-1");
 })();
 
 const client = new ApolloClient({
