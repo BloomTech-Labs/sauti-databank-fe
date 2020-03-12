@@ -3,13 +3,62 @@ import "../App.scss";
 import ReactGa from "react-ga";
 import styled from "styled-components";
 import Dropdown from "react-dropdown";
+import Select, { components } from "react-select";
 import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
+import { colourOptions, groupedOptions } from "./docs/data";
 
 import CalendarModal from "../dashboard/CalendarModal";
 
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
+const groupStyles = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between"
+};
+const groupBadgeStyles = {
+  backgroundColor: "#EBECF0",
+  borderRadius: "2em",
+  color: "#172B4D",
+  display: "inline-block",
+  fontSize: 12,
+  fontWeight: "normal",
+  lineHeight: "1",
+  minWidth: 1,
+  padding: "0.16666666666667em 0.5em",
+  textAlign: "center"
+};
+
+const itemStyle = {
+  fontSize: 15
+};
+// controlling the super categories
+const formatGroupLabel = data => (
+  <div style={groupStyles}>
+    <span style={itemStyle}>{data.label}</span>
+    <span style={groupBadgeStyles}>{data.options.length}</span>
+  </div>
+);
+
+// controls the item the user selects
+const controlStyles = {
+  borderRadius: "1px solid black",
+  // padding: 'px',
+  // margin: "20px",
+
+  // the selected item
+  fontSize: 15,
+  // background: colourOptions[2].color,
+  color: "white"
+};
+
+const ControlComponent = props => (
+  <div style={controlStyles}>
+    {<p>Custom Control</p>}
+    <components.Control {...props} />
+  </div>
+);
 
 export default function FilterBox(props) {
   const {
@@ -18,6 +67,37 @@ export default function FilterBox(props) {
     filterBoxEndDate,
     setFilterBoxEndDate
   } = props;
+  const x = (theSuperCategories, categoriesCollected) => {
+    return theSuperCategories.map(superCategory => {
+      return {
+        label: superCategory.label,
+        options: superCategory.options
+          .map(category => {
+            // console.log(categoriesCollected, category)
+            return {
+              label: !categoriesCollected.includes(category.label)
+                ? category.label
+                : undefined
+            };
+          })
+          .filter(category => category.label !== undefined)
+      };
+    });
+  };
+  // console.log(Object.keys(props.filters).map(filterId => {
+  //   return props.filters[filterId].selectedCategory
+  // })
+
+  // )
+  // const y = x(FilterBoxOptions.superCategories,
+  //   Object.keys(props.filters).map(filterId => {
+  //     return props.filters[filterId].selectedCategory
+  //   })
+  //   .filter(selectedCategory => selectedCategory.length > 0)
+  //   )
+  // console.log(props.filters)
+  // console.log(y)
+
   const token = getToken();
   let tier;
   if (token) {
@@ -30,63 +110,79 @@ export default function FilterBox(props) {
     sub = newSub;
   }
 
-  const [filterBoxIndex, setFilterBoxIndex] = useState({
-    type: "gender",
-    query: "Users",
-    label: ""
-  });
-  // console.log(`filterBoxIndex`, filterBoxIndex);
-  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
-    type: "",
-    query: "Users",
-    label: ""
-  });
-  const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
-    type: "",
-    query: "",
-    label: ""
-  });
+  // const [filterBoxIndex, setFilterBoxIndex] = useState({
+  //   type: "gender",
+  //   query: "Users",
+  //   label: ""
+  // });
+  // // console.log(`filterBoxIndex`, filterBoxIndex);
+  // const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
+  //   type: "",
+  //   query: "Users",
+  //   label: ""
+  // });
+  // const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
+  //   type: "",
+  //   query: "",
+  //   label: ""
+  // });
   // console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
-  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
+  // const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
   // console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
-  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
+  // const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
   // console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
 
-  const [
-    filterBoxAdditionalFilterLabel,
-    setFilterBoxAdditionalFilterLabel
-  ] = useState("");
-
+  // const [
+  //   filterBoxAdditionalFilterLabel,
+  //   setFilterBoxAdditionalFilterLabel
+  // ] = useState("");
+  const [setup, setSetup] = useState(colourOptions[0]);
   const [loading, setLoading] = useState(false);
   const getAvaliableOptions = (options, filters) => {
-    return options.filter(option => {
-      return !Object.keys(filters)
-        .map(filterId => {
-          return filters[filterId].selectedCategory;
-        })
-        .includes(option.label);
-    });
+    // return options.filter(option => {
+    //   return !Object.keys(filters)
+    //     .map(filterId => {
+    //       return filters[filterId].selectedCategory;
+    //     })
+    //     .includes(option.label);
+    // });
   };
+  // controlling the items the user can select from
+  const colourStyles = {
+    control: styles => ({ ...styles, backgroundColor: "white" }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      // const color = chroma(data.color);
+      return {
+        ...styles,
+        backgroundColor: isDisabled ? "red" : "blue",
+        color: "#FFF",
+        cursor: isDisabled ? "not-allowed" : "default",
+        // items to select
+        fontSize: 15
+      };
+    }
+  };
+
   const handleSubmit = useCallback(
     e => {
       if (e.target.textContent === "Submit") {
         e.preventDefault();
       }
       // props.setIndex(filterBoxIndex);
-      props.setIndexLabel(filterBoxIndexLabel);
-      props.setCrossLabel(filterBoxCrossLabel);
-      props.setCrossFilter(filterBoxCrossFilter);
-      props.setAdditionalFilter(filterBoxAdditionalFilter);
+      // props.setIndexLabel(filterBoxIndexLabel);
+      // props.setCrossLabel(filterBoxCrossLabel);
+      // props.setCrossFilter(filterBoxCrossFilter);
+      // props.setAdditionalFilter(filterBoxAdditionalFilter);
       props.setStartDate(filterBoxStartDate);
       props.setEndDate(filterBoxEndDate);
     },
     [
-      filterBoxAdditionalFilter,
-      filterBoxCrossFilter,
-      filterBoxCrossLabel,
+      // filterBoxAdditionalFilter,
+      // filterBoxCrossFilter,
+      // filterBoxCrossLabel,
       filterBoxEndDate,
-      filterBoxIndex,
-      filterBoxIndexLabel,
+      // filterBoxIndex,
+      // filterBoxIndexLabel,
       filterBoxStartDate,
       props
     ]
@@ -94,21 +190,21 @@ export default function FilterBox(props) {
 
   const handleAuto = useCallback(
     e => {
-      props.setIndex(filterBoxIndex);
-      props.setIndexLabel(filterBoxIndexLabel);
-      props.setCrossLabel(filterBoxCrossLabel);
-      props.setCrossFilter(filterBoxCrossFilter);
-      props.setAdditionalFilter(filterBoxAdditionalFilter);
+      // props.setIndex(filterBoxIndex);
+      // props.setIndexLabel(filterBoxIndexLabel);
+      // props.setCrossLabel(filterBoxCrossLabel);
+      // props.setCrossFilter(filterBoxCrossFilter);
+      // props.setAdditionalFilter(filterBoxAdditionalFilter);
       props.setStartDate(filterBoxStartDate);
       props.setEndDate(filterBoxEndDate);
     },
     [
-      filterBoxAdditionalFilter,
-      filterBoxCrossFilter,
-      filterBoxCrossLabel,
+      // filterBoxAdditionalFilter,
+      // filterBoxCrossFilter,
+      // filterBoxCrossLabel,
       filterBoxEndDate,
-      filterBoxIndex,
-      filterBoxIndexLabel,
+      // filterBoxIndex,
+      // filterBoxIndexLabel,
       filterBoxStartDate,
       props
     ]
@@ -150,13 +246,17 @@ export default function FilterBox(props) {
   return (
     <DropdownContainer>
       <form>
-        <p>Choose Category</p>
-        <Dropdown
-          controlClassName="myControlClassName"
-          arrowClassName="myArrowClassName"
-          className="dropdown"
+        <p>Data Series</p>
+        {/* <Select
+          // controlClassName="myControlClassName"
+          // arrowClassName="myArrowClassName"
+          // className="dropdown"
+          className={"basic-single"}
           disabled={loading}
-          options={getAvaliableOptions(FilterBoxOptions.default, props.filters)}
+          options={
+            // getAvaliableOptions(FilterBoxOptions.default, props.filters)
+            options
+          }
           value={props.filters[0].selectedCategory}
           onChange={e => {
             // these were controlling what the options are
@@ -178,6 +278,62 @@ export default function FilterBox(props) {
               }
             });
           }}
+        /> */}
+        {/* <Select
+    
+    defaultValue={colourOptions[1]}
+    options={groupedOptions}
+    formatGroupLabel={formatGroupLabel} /> */}
+        <Select
+          // inputValue={setup}
+          // defaultValue={colourOptions[0]}
+          defaultValue={
+            // FilterBoxOptions.superCategories[0].options[0]
+            { label: props.filters[0].selectedCategory }
+          }
+          // value={}
+          // isClearable
+          formatGroupLabel={formatGroupLabel}
+          components={{ Control: ControlComponent }}
+          // isSearchable
+          onChange={e => {
+            console.log(e.label, props.filters[0]);
+            // console.log(FilterBoxOptions.default[e.label].value)
+            props.setFilters({
+              ...props.filters,
+              0: {
+                ...props.filters[0],
+                selectedCategory: e.label, //option
+                selectedTableColumnName:
+                  FilterBoxOptions.default[e.label].value.type,
+                // selectedTableColumnName: `${e.value.type}`,
+                selectedTable: FilterBoxOptions.default[e.label].value.query,
+                // selectedTable: e.value.query,
+                selectedOption: undefined
+              }
+            });
+
+            {
+              /* FilterBoxOptions.default[props.filters[0].selectedCategory] */
+            }
+
+            // setSetup(e.label)
+          }}
+          name="color"
+          styles={colourStyles}
+          // options={groupedOptions}
+
+          options={
+            // FilterBoxOptions.superCategories
+            x(
+              FilterBoxOptions.superCategories,
+              Object.keys(props.filters)
+                .map(filterId => {
+                  return props.filters[filterId].selectedCategory;
+                })
+                .filter(selectedCategory => selectedCategory.length > 0)
+            )
+          }
         />
         {graphLabels[`${props.filters[0].selectedTableColumnName}`] && (
           <CheckboxContainer>
@@ -205,7 +361,8 @@ export default function FilterBox(props) {
             ))}
           </CheckboxContainer>
         )}
-        <p>Choose Second Category</p>
+        {/*
+        <p>Compare SubSamples</p>
         <Dropdown
           controlClassName="myControlClassName"
           arrowClassName="myArrowClassName"
@@ -228,11 +385,11 @@ export default function FilterBox(props) {
                 selectedOption: undefined
               }
             });
-          }}
+          }} */}
         />
         {/* We don't want options for this one */}
         {/* ------------------------------------------------------------------------------- */}
-        {graphLabels[`${props.filters[1].selectedTableColumnName}`] && (
+        {/* {graphLabels[`${props.filters[1].selectedTableColumnName}`] && (
           <CheckboxContainer>
             <p>Select an option to further filter the data: </p>
             {graphLabels[
@@ -257,14 +414,27 @@ export default function FilterBox(props) {
               </Options>
             ))}
           </CheckboxContainer>
-        )}
+        )} */}
         {/* ------------------------------------------------------------------------------- */}
-
         {/* <> */}
-        <p>Additional Filter</p>
-        {/* <p>Choose Third Category</p> */}
+        {/* for future: more than 1 data filter */}
+        {/*
+          what do worandon woman trade?
+          what doe rwandon women over 50 trade?
 
-        <p className="disclosure">
+          just filter what they already have set up from the first 2 filters
+          they should be able to add another additional filter
+
+          low priority:
+
+            the dates on the calendar should be dynamically set to the dates in the items the categories are filterd
+
+            be able to measure date periods by year
+
+        */}
+        <p>Data Filter</p>
+        {/* <p>Choose Third Category</p> */}
+        {/* <p className="disclosure">
           *This optional filter adjusts samplesize and may not always alter the
           graph appearance.
         </p>
@@ -287,7 +457,7 @@ export default function FilterBox(props) {
                 selectedOption: undefined
               }
             });
-          }}
+          }} */}
         />
         {/* <div
             className="reset-btn"
@@ -302,7 +472,7 @@ export default function FilterBox(props) {
             <p>Clear Additional Filter</p>
           </div> */}
         {/* </> */}
-        {graphLabels[`${props.filters[2].selectedTableColumnName}`] && (
+        {/* {graphLabels[`${props.filters[2].selectedTableColumnName}`] && (
           <CheckboxContainer>
             <p>Select an option to further filter the data: </p>
             {graphLabels[
@@ -327,8 +497,7 @@ export default function FilterBox(props) {
               </Options>
             ))}
           </CheckboxContainer>
-        )}
-
+        )} */}
         {/* {loading ? (
           <Loader
             className="options-loader"
@@ -363,7 +532,6 @@ export default function FilterBox(props) {
               </>
             )
           )} */}
-
         {/* {props.checkboxOptions.length > 1 && (
           <>
             <p>Select an option to further filter the data: </p>
@@ -387,7 +555,6 @@ export default function FilterBox(props) {
             </CheckboxContainer>
           </>
         )} */}
-
         {tier === "ADMIN" ||
         tier === "PAID" ||
         tier === "GOV_ROLE" ||

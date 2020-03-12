@@ -378,7 +378,8 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     return (
       <div>
         <h1 className="graph-title">
-          {props.label} by {props.crossLabel}
+          {/*props.label*/ filters[0].selectedCategory} by{" "}
+          {/*props.crossLabel*/ filters[1].selectedCategory}
         </h1>
         {/*props.additionalFilter.type*/ filters[2].selectedTableColumnName && (
           <h3 className="graph-title-small">

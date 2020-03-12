@@ -44,25 +44,25 @@ const GraphContainer = () => {
   //   query: "Users",
   //   label: ""
   // });
-  const [crossFilter, setCrossFilter] = useState({
-    type: "",
-    query: "Users",
-    label: ""
-  });
-  const [additionalFilter, setAdditionalFilter] = useState({
-    type: "",
-    query: "",
-    label: ""
-  });
+  // const [crossFilter, setCrossFilter] = useState({
+  //   type: "",
+  //   query: "Users",
+  //   label: ""
+  // });
+  // const [additionalFilter, setAdditionalFilter] = useState({
+  //   type: "",
+  //   query: "",
+  //   label: ""
+  // });
   // const [firstSelectedCheckbox, setFirstSelectedCheckbox] = useState({});
   // const [secondSelectedCheckbox, setSecondSelectedCheckbox] = useState({});
   // const [selectedCheckbox, setSelectedCheckbox] = useState({});
 
-  const [indexLabel, setIndexLabel] = useState("Gender");
-  const [crossLabel, setCrossLabel] = useState("");
+  // const [indexLabel, setIndexLabel] = useState("Gender");
+  // const [crossLabel, setCrossLabel] = useState("");
 
-  const [checkboxOptions, setCheckboxOptions] = useState([]);
-  const [secondCheckboxOptions, setSecondCheckboxOptions] = useState([]);
+  // const [checkboxOptions, setCheckboxOptions] = useState([]);
+  // const [secondCheckboxOptions, setSecondCheckboxOptions] = useState([]);
 
   // const [startDate, setStartDate] = useState("2012-01-01");
   // const [endDate, setEndDate] = useState("2020-01-08");
@@ -76,10 +76,30 @@ const GraphContainer = () => {
   // const onChange = event => {
   //   // setIndex(event.target.value);
   // };
-
+  /*
+breaks search(creates an undefined search)
+{0: {…}, 1: {…}, 2: {…}}
+0:
+selectedTableColumnName: "crossing_freq"
+selectedTable: "Users"
+selectedCategory: "Border Crossing Frequency"
+selectedOption: undefined
+__proto__: Object
+1:
+selectedCategory: ""
+selectedOption: undefined
+selectedTable: ""
+selectedTableColumnName: ""
+__proto__: Object
+2:
+selectedCategory: "Most Requested Procedure Commodity Categories"
+selectedOption: undefined
+selectedTable: "Sessions"
+selectedTableColumnName: "procedurecommoditycat"
+*/
   const onSubmit = e => {
     e.preventDefault();
-    setCrossFilter(e.target.value);
+    // setCrossFilter(e.target.value);
   };
 
   return (
@@ -90,16 +110,16 @@ const GraphContainer = () => {
         </div>
         <div className="content-container">
           <div className="chart-container">
-            <Queries
+            {/* <Queries
               // index={index}
-              crossFilter={crossFilter}
-              label={indexLabel}
-              crossLabel={crossLabel}
+              // crossFilter={crossFilter}
+              // label={indexLabel}
+              // crossLabel={crossLabel}
               // selectedCheckbox={selectedCheckbox}
-              checkboxOptions={checkboxOptions}
-              setCheckboxOptions={setCheckboxOptions}
-              setSecondCheckboxOptions={setSecondCheckboxOptions}
-              additionalFilter={additionalFilter}
+              // checkboxOptions={checkboxOptions}
+              // setCheckboxOptions={setCheckboxOptions}
+              // setSecondCheckboxOptions={setSecondCheckboxOptions}
+              // additionalFilter={additionalFilter}
               // startDate={startDate}
               // endDate={endDate}
               // secondSelectedCheckbox={secondSelectedCheckbox}
@@ -109,29 +129,29 @@ const GraphContainer = () => {
               setFilterBoxStartDate={setFilterBoxStartDate}
               filterBoxEndDate={filterBoxEndDate}
               setFilterBoxEndDate={setFilterBoxEndDate}
-            />
+            /> */}
           </div>
           <div className="dropdown-container">
             <FilterBox
               // onChange={onChange}
-              onSubmit={onSubmit}
+              // onSubmit={onSubmit}
               // index={index}
-              checkboxOptions={checkboxOptions}
-              crossFilter={crossFilter}
+              // checkboxOptions={checkboxOptions}
+              // crossFilter={crossFilter}
               // setIndex={setIndex}
-              setCrossFilter={setCrossFilter}
-              setIndexLabel={setIndexLabel}
-              setCrossLabel={setCrossLabel}
+              // setCrossFilter={setCrossFilter}
+              // setIndexLabel={setIndexLabel}
+              // setCrossLabel={setCrossLabel}
               // setSelectedCheckbox={setSelectedCheckbox}
-              setCheckboxOptions={setCheckboxOptions}
-              setAdditionalFilter={setAdditionalFilter}
+              // setCheckboxOptions={setCheckboxOptions}
+              // setAdditionalFilter={setAdditionalFilter}
               // startDate={startDate}
               // endDate={endDate}
               // setStartDate={setStartDate}
               // setEndDate={setEndDate}
               // setFirstSelectedCheckbox={setFirstSelectedCheckbox}
               // setSecondSelectedCheckbox={setSecondSelectedCheckbox}
-              secondCheckboxOptions={secondCheckboxOptions}
+              // secondCheckboxOptions={secondCheckboxOptions}
               filters={filters}
               setFilters={setFilters}
               filterBoxStartDate={filterBoxStartDate}
