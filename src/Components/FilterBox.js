@@ -350,13 +350,15 @@ export default function FilterBox(props) {
         <FilterSelector
           key={filterId}
           filterSelectorName={filters[filterId].nameOfFilter}
-          formatGroupLabel={formatGroupLabel}
-          ControlComponent={ControlComponent}
           filters={filters}
           setFilters={setFilters}
           i={filterId}
-          FilterBoxOptions={FilterBoxOptions}
           graphLabels={graphLabels}
+          // these are the subcomponents used to control the styles of
+          // the react selection component
+          formatGroupLabel={formatGroupLabel}
+          ControlComponent={ControlComponent}
+          FilterBoxOptions={FilterBoxOptions}
         />
       ))}
       <div className="btn-container">
