@@ -97,7 +97,104 @@ export default function FilterBox(props) {
   //   )
   // console.log(props.filters)
   // console.log(y)
+  const FilterSelector = props => {
+    const {
+      filterSelectorName,
+      formatGroupLabel,
+      ControlComponent,
+      filters,
+      setFilters,
+      i,
+      FilterBoxOptions,
+      graphLabels
+    } = props;
 
+    return (
+      <div>
+        <p>{filterSelectorName}</p>
+        <Select
+          // inputValue={setup}
+          // defaultValue={colourOptions[0]}
+          defaultValue={
+            // FilterBoxOptions.superCategories[0].options[0]
+            { label: filters[i].selectedCategory }
+          }
+          // value={}
+          // isClearable
+          formatGroupLabel={formatGroupLabel}
+          components={{ Control: ControlComponent }}
+          // isSearchable
+          onChange={e => {
+            console.log(e.label, filters[i]);
+            // console.log(FilterBoxOptions.default[e.label].value)
+            setFilters({
+              ...filters,
+              [i]: {
+                ...filters[i],
+                selectedCategory: e.label, //option
+                selectedTableColumnName:
+                  FilterBoxOptions.default[e.label].value.type,
+                // selectedTableColumnName: `${e.value.type}`,
+                selectedTable: FilterBoxOptions.default[e.label].value.query,
+                // selectedTable: e.value.query,
+                selectedOption: undefined
+              }
+            });
+
+            // {
+            //   /* FilterBoxOptions.default[props.filters[0].selectedCategory] */
+            // }
+
+            // setSetup(e.label)
+          }}
+          name="color"
+          styles={colourStyles}
+          // options={groupedOptions}
+
+          options={
+            // FilterBoxOptions.superCategories
+            x(
+              FilterBoxOptions.superCategories,
+              Object.keys(filters)
+                .map(filterId => {
+                  return filters[filterId].selectedCategory;
+                })
+                .filter(selectedCategory => selectedCategory.length > 0)
+            )
+          }
+        />
+        {graphLabels[`${filters[i].selectedTableColumnName}`] && (
+          <CheckboxContainer>
+            <p>Select an option to further filter the data: </p>
+            {graphLabels[`${filters[i].selectedTableColumnName}`].labels.map(
+              option => (
+                <Options key={option}>
+                  <input
+                    type="radio"
+                    name="CrossFilter"
+                    value={option}
+                    // seems to need this when this is a compoennt
+                    checked={filters[i].selectedOption === option}
+                    onChange={e => {
+                      console.log(filters);
+                      setFilters({
+                        ...filters,
+                        [i]: {
+                          ...filters[i],
+                          selectedOption: option
+                        }
+                      });
+                    }}
+                  />
+                  <FilterOption>{option}</FilterOption>
+                </Options>
+              )
+            )}
+          </CheckboxContainer>
+        )}
+      </div>
+    );
+  };
   const token = getToken();
   let tier;
   if (token) {
@@ -246,7 +343,17 @@ export default function FilterBox(props) {
   return (
     <DropdownContainer>
       <form>
-        <p>Data Series</p>
+        <FilterSelector
+          filterSelectorName={"Data Series"}
+          formatGroupLabel={formatGroupLabel}
+          ControlComponent={ControlComponent}
+          filters={props.filters}
+          setFilters={props.setFilters}
+          i={0}
+          FilterBoxOptions={FilterBoxOptions}
+          graphLabels={graphLabels}
+        />
+        {/* <p>Data Series</p> */}
         {/* <Select
           // controlClassName="myControlClassName"
           // arrowClassName="myArrowClassName"
@@ -284,6 +391,15 @@ export default function FilterBox(props) {
     defaultValue={colourOptions[1]}
     options={groupedOptions}
     formatGroupLabel={formatGroupLabel} /> */}
+        {/*
+      filterSelectorName="Data Series"
+      formatGroupLabel,
+      ControlComponent,
+      props.filters,
+      i,
+      FilterBoxOptions
+      graphLabels
+      */}
         <Select
           // inputValue={setup}
           // defaultValue={colourOptions[0]}
@@ -313,9 +429,9 @@ export default function FilterBox(props) {
               }
             });
 
-            {
-              /* FilterBoxOptions.default[props.filters[0].selectedCategory] */
-            }
+            // {
+            //   /* FilterBoxOptions.default[props.filters[0].selectedCategory] */
+            // }
 
             // setSetup(e.label)
           }}
