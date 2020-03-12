@@ -1,7 +1,6 @@
 // we will also use this modal in various places within the dashboard so that when somone clicks something you need to sign in for or pay to see it will direct you to the sign up then to the payment options in future releases
 
 import React, { useState } from "react";
-import { GAHandleCreateUser } from "./GoogleAnalytics/gaNewUser";
 import { Redirect, useHistory } from "react-router-dom";
 //import mutation from "../queries/mutation";
 //import { graphql } from "react-apollo";
@@ -147,7 +146,6 @@ function DashSignup(props) {
       } else {
         console.log(createdUser.data.register.id);
         localStorage.setItem("token", createdUser.data.register.token);
-        GAHandleCreateUser();
         history.push("/data");
         swal({ title: "", text: "Success!", icon: "success" });
       }
