@@ -59,12 +59,12 @@ export default function FilterBox(props) {
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
 
-  const {
-    filterBoxStartDate,
-    setFilterBoxStartDate,
-    filterBoxEndDate,
-    setFilterBoxEndDate
-  } = useCalendar();
+  // const {
+  //   filterBoxStartDate,
+  //   setFilterBoxStartDate,
+  //   filterBoxEndDate,
+  //   setFilterBoxEndDate
+  // } = useCalendar();
 
   const [loading, setLoading] = useState(false);
 
