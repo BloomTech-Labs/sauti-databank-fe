@@ -156,7 +156,7 @@ export default function SignInSide(props) {
               fullWidth
               id="email"
               type="text"
-              label="Email"
+              label="* Email"
               name="email"
               autoComplete="email"
               value={user.email}
@@ -169,7 +169,7 @@ export default function SignInSide(props) {
               margin="normal"
               fullWidth
               name="password"
-              label="Password"
+              label="* Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -232,7 +232,7 @@ export default function SignInSide(props) {
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
             <FormControl className={classes.margin}>
-              <p>Organization Type</p>
+              <p>* Organization Type</p>
               <Select
                 label="Organization Type"
                 labelId="demo-customized-select-label"
@@ -248,11 +248,11 @@ export default function SignInSide(props) {
                 <MenuItem value={"NGO"}>NGO</MenuItem>
                 <MenuItem value={"OTHER"}>OTHER</MenuItem>
               </Select>
-              <label>*required</label>
             </FormControl>
-
-            <br></br>
-
+            <br />
+            <br />
+            <RequiredLabel>* = required</RequiredLabel>
+            <br />
             <Button
               type="submit"
               fullWidth
@@ -360,4 +360,7 @@ const FormBottomText = styled.p`
 `;
 const FormTitle = styled.h1`
   font-size: 3rem;
+`;
+const RequiredLabel = styled.label`
+  font-size: 1.4rem;
 `;
