@@ -367,6 +367,7 @@ export default function FilterBox(props) {
           onClick={e => {
             console.log("here");
             console.log(filters);
+            // put in check for how many filters we can add
             setFilters({
               ...filters,
               [Object.keys(filters).length]: {
