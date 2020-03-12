@@ -82,8 +82,7 @@ const GetData = props => {
 
     // thisQuery = firstSelectedCheckbox;
     thisQuery = {
-      [filters[0].selectedTableColumnName]: filters[0].selectedOption,
-      [filters[1].selectedTableColumnName]: filters[1].selectedOption
+      [filters[0].selectedTableColumnName]: filters[0].selectedOption
     };
     QUERY = gql`
       query getUsers($queryTraders: newTraderInput){
@@ -95,11 +94,7 @@ const GetData = props => {
       }
       
       `;
-  } else if (
-    filters[0].selectedTable === "Users" &&
-    filters[1].selectedTable === "Users" &&
-    !filters[2].selectedTableColumnName
-  ) {
+  } else {
     // props.index.type = selectedCategory
     // const firstQuery = firstSelectedCheckbox[props.index.type];
     // const firstQuery = filters[0].selectedOption
@@ -109,168 +104,187 @@ first query Male gender firstSelectedCheckbox = {gender: "Male"} filters[0] = {s
 first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOption: "Male"}
 
 */
-    console.log(
-      "first query",
-      // /*firstQuery,*/ props.index.type,
-      // firstSelectedCheckbox,
-      filters[0]
-    );
+    // console.log(
+    //   "first query",
+    //   // /*firstQuery,*/ props.index.type,
+    //   // firstSelectedCheckbox,
+    //   filters[0]
+    // );
     // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
 
-    console.log(
-      "second query",
-      // secondQuery,
-      // props.crossFilter.type,
-      // secondSelectedCheckbox,
-      filters[1]
-    );
+    // console.log(
+    //   "second query",
+    //   // secondQuery,
+    //   // props.crossFilter.type,
+    //   // secondSelectedCheckbox,
+    //   filters[1]
+    // );
 
+    // 6 or 7 key, value pairs?
     thisQuery = {
       // [props.index.type]: firstQuery,
-      [filters[0].selectedTableColumnName]: filters[0].selectedOption, //firstQuery,
+      // [filters[0].selectedTableColumnName]: filters[0].selectedOption, //firstQuery,
       // [props.crossFilter.type]: secondQuery
-      [filters[1].selectedTableColumnName]: filters[1].selectedOption
+      // [filters[1].selectedTableColumnName]: filters[1].selectedOption
     };
-    console.log("the total queries", thisQuery);
-    queryType = "tradersUsers";
-    QUERY = gql`
-      query getUsers($queryTraders: newTraderInput){
-        tradersUsers (input: $queryTraders) {
-          ${filters[0].selectedTableColumnName}
-          ${filters[1].selectedTableColumnName}
+    Object.keys(filters).forEach(filterId => {
+      thisQuery = {
+        ...thisQuery,
+        [filters[filterId].selectedTableColumnName]:
+          filters[filterId].selectedOption
+      };
+    });
 
-        }
-      }
-      `;
-  } else if (
-    filters[0].selectedTable === "Sessions" &&
-    filters[1].selectedTable === "Users" &&
-    !filters[2].selectedTableColumnName
-  ) {
+    // console.log("the total queries", thisQuery);
     queryType = "sessionsData";
-    console.log("Sessions Users query");
-    // console.log(firstSelectedCheckbox);
-    console.log(filters[0]);
-    console.log(filters[1]);
+    // QUERY = gql`
+    //   query getUsers($queryTraders: newTraderInput){
+    //     tradersUsers (input: $queryTraders) {
+    //       ${filters[0].selectedTableColumnName}
+    //       ${filters[1].selectedTableColumnName}
 
-    // const firstQuery = firstSelectedCheckbox[props.index.type];
-    // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
-    thisQuery = {
-      // [props.index.type]: firstQuery,
-      [filters[0].selectedTableColumnName]: filters[0].selectedOption,
-      // [props.crossFilter.type]: secondQuery
-      [filters[1].selectedTableColumnName]: filters[1].selectedOption
-    };
+    //     }
+    //   }
+    //   `;
     QUERY = gql`
-      query getData($queryTraders: newTraderSessionInput){
-          sessionsData (input: $queryTraders){
-          ${filters[0].selectedTableColumnName}
-          ${filters[1].selectedTableColumnName}
-          created_date
-        }
-      }
-      `;
-  } else if (
-    filters[0].selectedTable === "Users" &&
-    filters[1].selectedTable === "Sessions" &&
-    !filters[2].selectedTableColumnName
-  ) {
-    queryType = "sessionsData";
-    console.log("correct query???????????????????????");
-    console.log(filters[0]);
-    console.log(filters[1]);
-    // const firstQuery = firstSelectedCheckbox[props.index.type];
-    // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
-    thisQuery = {
-      // [props.index.type]: firstQuery,
-      [filters[0].selectedTableColumnName]: filters[0].selectedOption,
-      // [props.crossFilter.type]: secondQuery
-      [filters[1].selectedTableColumnName]: filters[1].selectedOption
-    };
-    QUERY = gql`
-      query getData($queryTraders: newTraderSessionInput){
-        sessionsData(input: $queryTraders){
-          ${filters[0].selectedTableColumnName}
-          ${filters[1].selectedTableColumnName}
-
-          created_date
-        }
-      }`;
-  } else if (
-    filters[0].selectedTable === "Sessions" &&
-    filters[1].selectedTable === "Sessions" &&
-    !filters[2].selectedTableColumnName
-  ) {
-    queryType = "sessionsData";
-    console.log("breaking!!!!!!!!!!!!!!!");
-    thisQuery = undefined;
-    QUERY = gql`
-      query getData($queryTraders: newTraderSessionInput){
-        sessionsData (input: $queryTraders) {
-          ${filters[0].selectedTableColumnName}
-          ${filters[1].selectedTableColumnName}
-
-          created_date
-        }
-      }
-      `;
-  } else if (
-    filters[0].selectedTable === "Users" &&
-    filters[1].selectedTable === "Users" &&
-    filters[2].selectedTable === "Users"
-  ) {
-    // const firstQuery = firstSelectedCheckbox[props.index.type];
-    // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
-    // const thirdQuery = selectedCheckbox[props.additionalFilter.type];
-    thisQuery = {
-      // [props.index.type]: firstQuery,
-      [filters[0].selectedTableColumnName]: filters[0].selectedOption,
-
-      // [props.crossFilter.type]: secondQuery,
-      // [props.additionalFilter.type]: thirdQuery
-      [filters[1].selectedTableColumnName]: filters[1].selectedOption,
-      [filters[2].selectedTableColumnName]: filters[2].selectedOption
-    };
-    queryType = "tradersUsers";
-    // # ${props.index.type}
-    // # ${props.crossFilter.type}
-    // # ${props.additionalFilter.type}
-
-    QUERY = gql`
-        query getUsers($queryTraders: newTraderInput){
-          tradersUsers(input: $queryTraders) {
-            ${filters[0].selectedTableColumnName}
-            ${filters[1].selectedTableColumnName}
-
-          }
-          additionalFilterData: tradersUsers {
-            ${filters[2].selectedTableColumnName}
-
-          }
-        }
-        `;
-  } else {
-    console.log("all remaining combinations");
-    console.log(filters);
-    // some combinations break the program
-    // it appears thet if there is a query with nothing asked to return then the query fails
-    queryType = "sessionsData";
-    QUERY = gql`
-      query getData($queryTraders: newTraderSessionInput){
-        sessionsData(input: $queryTraders){
-          ${filters[0].selectedTableColumnName}
-          ${filters[1].selectedTableColumnName}
-
-          created_date
-        }
-        additionalFilterData: sessionsData{
-            id
-            ${filters[2].selectedTableColumnName}
-
-        }
-      }
-      `;
+       query getData($queryTraders: newTraderSessionInput){
+           sessionsData (input: $queryTraders){
+           ${filters[0].selectedTableColumnName}
+           ${filters[1].selectedTableColumnName}
+           created_date
+         }
+       }
+       `;
   }
+  // else if (
+  //   filters[0].selectedTable === "Sessions" &&
+  //   filters[1].selectedTable === "Users" &&
+  //   !filters[2].selectedTableColumnName
+  // ) {
+  //   queryType = "sessionsData";
+  //   console.log("Sessions Users query");
+  //   // console.log(firstSelectedCheckbox);
+  //   console.log(filters[0]);
+  //   console.log(filters[1]);
+
+  //   // const firstQuery = firstSelectedCheckbox[props.index.type];
+  //   // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+  //   thisQuery = {
+  //     // [props.index.type]: firstQuery,
+  //     [filters[0].selectedTableColumnName]: filters[0].selectedOption,
+  //     // [props.crossFilter.type]: secondQuery
+  //     [filters[1].selectedTableColumnName]: filters[1].selectedOption
+  //   };
+  //   QUERY = gql`
+  //     query getData($queryTraders: newTraderSessionInput){
+  //         sessionsData (input: $queryTraders){
+  //         ${filters[0].selectedTableColumnName}
+  //         ${filters[1].selectedTableColumnName}
+  //         created_date
+  //       }
+  //     }
+  //     `;
+  // } else if (
+  //   filters[0].selectedTable === "Users" &&
+  //   filters[1].selectedTable === "Sessions" &&
+  //   !filters[2].selectedTableColumnName
+  // ) {
+  //   queryType = "sessionsData";
+  //   console.log("correct query???????????????????????");
+  //   console.log(filters[0]);
+  //   console.log(filters[1]);
+  //   // const firstQuery = firstSelectedCheckbox[props.index.type];
+  //   // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+  //   thisQuery = {
+  //     // [props.index.type]: firstQuery,
+  //     [filters[0].selectedTableColumnName]: filters[0].selectedOption,
+  //     // [props.crossFilter.type]: secondQuery
+  //     [filters[1].selectedTableColumnName]: filters[1].selectedOption
+  //   };
+  //   QUERY = gql`
+  //     query getData($queryTraders: newTraderSessionInput){
+  //       sessionsData(input: $queryTraders){
+  //         ${filters[0].selectedTableColumnName}
+  //         ${filters[1].selectedTableColumnName}
+
+  //         created_date
+  //       }
+  //     }`;
+  // } else if (
+  //   filters[0].selectedTable === "Sessions" &&
+  //   filters[1].selectedTable === "Sessions" &&
+  //   !filters[2].selectedTableColumnName
+  // ) {
+  //   queryType = "sessionsData";
+  //   console.log("breaking!!!!!!!!!!!!!!!");
+  //   thisQuery = undefined;
+  //   QUERY = gql`
+  //     query getData($queryTraders: newTraderSessionInput){
+  //       sessionsData (input: $queryTraders) {
+  //         ${filters[0].selectedTableColumnName}
+  //         ${filters[1].selectedTableColumnName}
+
+  //         created_date
+  //       }
+  //     }
+  //     `;
+  // } else if (
+  //   filters[0].selectedTable === "Users" &&
+  //   filters[1].selectedTable === "Users" &&
+  //   filters[2].selectedTable === "Users"
+  // ) {
+  //   // const firstQuery = firstSelectedCheckbox[props.index.type];
+  //   // const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+  //   // const thirdQuery = selectedCheckbox[props.additionalFilter.type];
+  //   thisQuery = {
+  //     // [props.index.type]: firstQuery,
+  //     [filters[0].selectedTableColumnName]: filters[0].selectedOption,
+
+  //     // [props.crossFilter.type]: secondQuery,
+  //     // [props.additionalFilter.type]: thirdQuery
+  //     [filters[1].selectedTableColumnName]: filters[1].selectedOption,
+  //     [filters[2].selectedTableColumnName]: filters[2].selectedOption
+  //   };
+  //   queryType = "tradersUsers";
+  //   // # ${props.index.type}
+  //   // # ${props.crossFilter.type}
+  //   // # ${props.additionalFilter.type}
+
+  //   QUERY = gql`
+  //       query getUsers($queryTraders: newTraderInput){
+  //         tradersUsers(input: $queryTraders) {
+  //           ${filters[0].selectedTableColumnName}
+  //           ${filters[1].selectedTableColumnName}
+
+  //         }
+  //         additionalFilterData: tradersUsers {
+  //           ${filters[2].selectedTableColumnName}
+
+  //         }
+  //       }
+  //       `;
+  // } else {
+  //   console.log("all remaining combinations");
+  //   console.log(filters);
+  //   // some combinations break the program
+  //   // it appears thet if there is a query with nothing asked to return then the query fails
+  //   queryType = "sessionsData";
+  //   QUERY = gql`
+  //     query getData($queryTraders: newTraderSessionInput){
+  //       sessionsData(input: $queryTraders){
+  //         ${filters[0].selectedTableColumnName}
+  //         ${filters[1].selectedTableColumnName}
+
+  //         created_date
+  //       }
+  //       additionalFilterData: sessionsData{
+  //           id
+  //           ${filters[2].selectedTableColumnName}
+
+  //       }
+  //     }
+  //     `;
+  // }
 
   console.log("FINAL QUERY", thisQuery, /*firstSelectedCheckbox*/ filters);
   // it would be nice for this to run in a way that doesn't return any data untill the user actually sets up a query
