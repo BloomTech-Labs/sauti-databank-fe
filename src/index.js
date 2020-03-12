@@ -4,10 +4,13 @@ import "./index.css";
 // import App from "./App";
 import App from "./dashboard/App";
 import { BrowserRouter as Router } from "react-router-dom";
-//comments
-
+import { initGA } from "./dashboard/GoogleAnalytics/index";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+
+(function initAnalytics() {
+  initGA("UA-159664570-1");
+})();
 
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_BACKEND_URL}`,

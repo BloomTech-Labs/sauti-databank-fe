@@ -80,6 +80,9 @@ const Graph = props => {
       Object.values(props.selectedCheckbox)[0]
     })`}`;
 
+  // GA
+  let track = Event(fileName, "Downloaded CSV", `Headers: ${csvHeaders}`, true);
+
   useEffect(() => {
     setCsvFormattedData(csvFormater(props.csvData));
     setCsvHeaders(headers(props.csvData));
@@ -93,6 +96,7 @@ const Graph = props => {
         tier === "GOV_ROLE" ||
         newSub ? (
           <CsvDownloader
+            track={track}
             datas={csvFormattedData}
             columns={csvHeaders}
             filename={fileName}
