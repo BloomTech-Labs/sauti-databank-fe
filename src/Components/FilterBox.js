@@ -64,6 +64,7 @@ export default function FilterBox(props) {
       graphLabels
     } = props;
 
+    console.log(i);
     // styles for the react select component
     const groupStyles = {
       display: "flex",
@@ -156,6 +157,15 @@ export default function FilterBox(props) {
                   selectedTableColumnName:
                     FilterBoxOptions.default[e.label].value.type,
                   // selectedTableColumnName: `${e.value.type}`,
+                  // this set doens't always exist
+
+                  avaliableOptions: Object.keys(graphLabels).includes(
+                    FilterBoxOptions.default[e.label].value.type
+                  )
+                    ? graphLabels[
+                        `${FilterBoxOptions.default[e.label].value.type}`
+                      ].labels
+                    : [],
                   selectedTable: FilterBoxOptions.default[e.label].value.query,
                   // selectedTable: e.value.query,
                   // accees all the options from graphlables
@@ -187,35 +197,52 @@ export default function FilterBox(props) {
               )
             }
           />
-          {graphLabels[`${filters[i].selectedTableColumnName}`] && (
-            <CheckboxContainer>
-              <p>Select an option to further filter the data: </p>
-              {graphLabels[`${filters[i].selectedTableColumnName}`].labels.map(
-                option => (
-                  <Options key={option}>
-                    <input
-                      type="radio"
-                      name="CrossFilter"
-                      value={option}
-                      // seems to need this when this is a compoennt
-                      checked={filters[i].selectedOption === option}
-                      onChange={e => {
-                        // console.log(filters);
-                        setFilters({
-                          ...filters,
-                          [i]: {
-                            ...filters[i],
-                            selectedOption: option
-                          }
-                        });
-                      }}
-                    />
-                    <FilterOption>{option}</FilterOption>
-                  </Options>
-                )
-              )}
-            </CheckboxContainer>
-          )}
+          {/* add a button to show or hide these */}
+          {/* JS likes to pass integers as string to components */}
+          {i !== String(1) &&
+            graphLabels[`${filters[i].selectedTableColumnName}`] && (
+              <CheckboxContainer>
+                <p>Select an option to further filter the data: </p>
+                <button
+                  onClick={() => {
+                    setFilters({
+                      ...filters,
+                      [i]: {
+                        ...filters[i],
+                        showOptions: !filters[i].showOptions
+                      }
+                    });
+                  }}
+                >
+                  {filters[i].showOptions ? "Hide" : "Show"}
+                </button>
+                {filters[i].showOptions &&
+                  graphLabels[
+                    `${filters[i].selectedTableColumnName}`
+                  ].labels.map(option => (
+                    <Options key={option}>
+                      <input
+                        type="radio"
+                        name="CrossFilter"
+                        value={option}
+                        // seems to need this when this is a compoennt
+                        checked={filters[i].selectedOption === option}
+                        onChange={e => {
+                          // console.log(filters);
+                          setFilters({
+                            ...filters,
+                            [i]: {
+                              ...filters[i],
+                              selectedOption: option
+                            }
+                          });
+                        }}
+                      />
+                      <FilterOption>{option}</FilterOption>
+                    </Options>
+                  ))}
+              </CheckboxContainer>
+            )}
         </form>
       </div>
     );
@@ -281,8 +308,9 @@ export default function FilterBox(props) {
       // props.setCrossLabel(filterBoxCrossLabel);
       // props.setCrossFilter(filterBoxCrossFilter);
       // props.setAdditionalFilter(filterBoxAdditionalFilter);
-      props.setStartDate(filterBoxStartDate);
-      props.setEndDate(filterBoxEndDate);
+      // don't exist so don't use
+      setFilterBoxStartDate(filterBoxStartDate);
+      setFilterBoxEndDate(filterBoxEndDate);
     },
     [
       // filterBoxAdditionalFilter,
@@ -292,31 +320,32 @@ export default function FilterBox(props) {
       // filterBoxIndex,
       // filterBoxIndexLabel,
       filterBoxStartDate,
-      props
+      setFilterBoxStartDate,
+      setFilterBoxEndDate
     ]
   );
 
-  const handleAuto = useCallback(
-    e => {
-      // props.setIndex(filterBoxIndex);
-      // props.setIndexLabel(filterBoxIndexLabel);
-      // props.setCrossLabel(filterBoxCrossLabel);
-      // props.setCrossFilter(filterBoxCrossFilter);
-      // props.setAdditionalFilter(filterBoxAdditionalFilter);
-      props.setStartDate(filterBoxStartDate);
-      props.setEndDate(filterBoxEndDate);
-    },
-    [
-      // filterBoxAdditionalFilter,
-      // filterBoxCrossFilter,
-      // filterBoxCrossLabel,
-      filterBoxEndDate,
-      // filterBoxIndex,
-      // filterBoxIndexLabel,
-      filterBoxStartDate,
-      props
-    ]
-  );
+  // const handleAuto = useCallback(
+  //   e => {
+  //     // props.setIndex(filterBoxIndex);
+  //     // props.setIndexLabel(filterBoxIndexLabel);
+  //     // props.setCrossLabel(filterBoxCrossLabel);
+  //     // props.setCrossFilter(filterBoxCrossFilter);
+  //     // props.setAdditionalFilter(filterBoxAdditionalFilter);
+  //     props.setStartDate(filterBoxStartDate);
+  //     props.setEndDate(filterBoxEndDate);
+  //   },
+  //   [
+  //     // filterBoxAdditionalFilter,
+  //     // filterBoxCrossFilter,
+  //     // filterBoxCrossLabel,
+  //     filterBoxEndDate,
+  //     // filterBoxIndex,
+  //     // filterBoxIndexLabel,
+  //     filterBoxStartDate,
+  //     props
+  //   ]
+  // );
   // console.log(
   //   "IMPORTANTTT",
   //   filterBoxAdditionalFilter.type,
@@ -383,8 +412,10 @@ export default function FilterBox(props) {
                 nameOfFilter: "Data Filter",
                 selectedCategory: "",
                 selectedOption: undefined,
+                avaliableOptions: [],
                 selectedTable: "",
-                selectedTableColumnName: ""
+                selectedTableColumnName: "",
+                showOptions: false
               }
             });
           }}
@@ -455,22 +486,28 @@ export default function FilterBox(props) {
                 nameOfFilter: "Data Series",
                 selectedCategory: "Gender", // label
                 selectedOption: undefined,
+                avaliableOptions: [],
                 selectedTable: "Users", // value.query
-                selectedTableColumnName: "gender" // value.type
+                selectedTableColumnName: "gender", // value.type
+                showOptions: false
               },
               1: {
                 nameOfFilter: "Compare SubSamples",
                 selectedCategory: "",
                 selectedOption: undefined,
+                avaliableOptions: [],
                 selectedTable: "",
-                selectedTableColumnName: ""
+                selectedTableColumnName: "",
+                showOptions: false
               },
               2: {
                 nameOfFilter: "Data Filter",
                 selectedCategory: "",
                 selectedOption: undefined,
+                avaliableOptions: [],
                 selectedTable: "",
-                selectedTableColumnName: ""
+                selectedTableColumnName: "",
+                showOptions: false
               }
             });
           }}

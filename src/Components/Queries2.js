@@ -65,25 +65,32 @@ const GetData = props => {
   */
   // setup the filters part first
   //  setup the queries second
+  // type: "gender" column name from the sql table
+  // query: "Users" table name
+
   if (
     filters[0].selectedTable === "Users" &&
-    !filters[1].selectedTableColumnName &&
-    !filters[2].selectedTableColumnName
+    filters[1].selectedTable === "Users" &&
+    filters[2].selectedTable === ""
   ) {
     queryType = "tradersUsers";
     console.log("just users");
-    console.log(filters[0]);
-    console.log(filters[1]);
+    console.log(filters[0].selectedTable);
+    console.log(filters[1].selectedTable);
+    console.log(filters[2].selectedTable);
     // console.log("crossFilter type", "|" + props.crossFilter.type + "|")
 
     // thisQuery = firstSelectedCheckbox;
     thisQuery = {
-      [filters[0].selectedTableColumnName]: filters[0].selectedOption
+      [filters[0].selectedTableColumnName]: filters[0].selectedOption,
+      [filters[1].selectedTableColumnName]: filters[1].selectedOption
     };
     QUERY = gql`
       query getUsers($queryTraders: newTraderInput){
         tradersUsers (input: $queryTraders) {
           ${filters[0].selectedTableColumnName}
+          ${filters[1].selectedTableColumnName}
+
         }
       }
       
@@ -401,8 +408,8 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           // additionalFilter={props.additionalFilter.type}
           additionalFilter={filters[2].selectedCategory}
           // selectedCheckbox={props.selectedCheckbox}
-          selectCheckbox={{
-            [filters[2].selectedCategory]: filters[2].selectedOption
+          selectedCheckbox={{
+            [filters[2].selectedCategory]: filters[2].selectedOption // probably undefined
           }}
           keys={chartData.crossFilterValues}
           // index={props.index.type}
@@ -413,10 +420,11 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           // filteredData={filteredData}
           sampleSize={chartData.totalSampleSize}
           // what do these do?
+          checkboxOptions={filters[2].avaliableOptions}
 
-          checkboxOptions={props.checkboxOptions}
-          setCheckboxOptions={props.setCheckboxOptions}
-          setSecondCheckboxOptions={props.setSecondCheckboxOptions}
+          // checkboxOptions={props.checkboxOptions}
+          // setCheckboxOptions={props.setCheckboxOptions}
+          // setSecondCheckboxOptions={props.setSecondCheckboxOptions}
         />
       </div>
     );
@@ -449,7 +457,7 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           // additionalFilter={props.additionalFilter.type}
           additionalFilter={filters[2].selectedCategory}
           // selectedCheckbox={props.selectedCheckbox}
-          selectCheckbox={{
+          selectedCheckbox={{
             [filters[2].selectedCategory]: filters[2].selectedOption
           }}
           // crossFilter={props.crossFilter.type}
@@ -464,13 +472,16 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           sampleSize={chartData.sampleSize}
           // what do these do?
           // these appear to hold the options the user can select
-          //the checkboxOptions is for the third category of options the user can select
-          //the secondCheckboxOptions is for the second category of options the user can select
+          // the checkboxOptions is for the third category of options the user can select
+          // the secondCheckboxOptions is for the second category of options the user can select
           // general formula for getting the options
           // graphLabels[`${filters[i].selectedTableColumnName}`].labels
-          checkboxOptions={props.checkboxOptions}
-          setCheckboxOptions={props.setCheckboxOptions}
-          setSecondCheckboxOptions={props.setSecondCheckboxOptions}
+          // checkboxOptions={props.checkboxOptions}
+          // must have a list of something
+          checkboxOptions={filters[2].avaliableOptions}
+          // setCheckboxOptions={props.setCheckboxOptions}
+          // doesn't appear to be used in the graph
+          // setSecondCheckboxOptions={props.setSecondCheckboxOptions}
         />
       </div>
     );

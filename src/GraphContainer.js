@@ -39,22 +39,29 @@ const GraphContainer = () => {
       nameOfFilter: "Data Series",
       selectedCategory: "Gender", // label
       selectedOption: undefined,
+      avaliableOptions: [],
       selectedTable: "Users", // value.query
-      selectedTableColumnName: "gender" // value.type
+      selectedTableColumnName: "gender", // value.type
+      showOptions: false
     },
+
     1: {
       nameOfFilter: "Compare SubSamples",
       selectedCategory: "",
       selectedOption: undefined,
+      avaliableOptions: [],
       selectedTable: "",
-      selectedTableColumnName: ""
+      selectedTableColumnName: "",
+      showOptions: false
     },
     2: {
       nameOfFilter: "Data Filter",
       selectedCategory: "",
       selectedOption: undefined,
+      avaliableOptions: [],
       selectedTable: "",
-      selectedTableColumnName: ""
+      selectedTableColumnName: "",
+      showOptions: false
     }
   });
   // put the date here
@@ -136,7 +143,7 @@ selectedTableColumnName: "procedurecommoditycat"
         </div>
         <div className="content-container">
           <div className="chart-container">
-            {/* <Queries
+            <Queries
               // index={index}
               // crossFilter={crossFilter}
               // label={indexLabel}
@@ -155,7 +162,7 @@ selectedTableColumnName: "procedurecommoditycat"
               setFilterBoxStartDate={setFilterBoxStartDate}
               filterBoxEndDate={filterBoxEndDate}
               setFilterBoxEndDate={setFilterBoxEndDate}
-            /> */}
+            />
           </div>
           <div className="dropdown-container">
             <FilterBox
