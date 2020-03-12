@@ -81,12 +81,11 @@ const Graph = props => {
     })`}`;
 
   // GA
-  let track = new Event(
-    fileName,
-    "Downloaded CSV",
-    `Headers: ${csvHeaders}`,
-    true
-  );
+  let track = new Event(fileName, {
+    action: "Downloaded Excel",
+    Label: `Headers: ${csvHeaders}`,
+    userInteraction: true
+  });
 
   useEffect(() => {
     setCsvFormattedData(csvFormater(props.csvData));
