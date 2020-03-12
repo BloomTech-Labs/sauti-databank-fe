@@ -16,12 +16,11 @@ export const urlPageView = url => {
   ReactGA.pageview(`${url}`);
 };
 
-export const Event = (category, action, label, nonInteraction) => {
+export const Event = (category, action, label) => {
   ReactGA.event({
     category,
     action,
-    label,
-    nonInteraction
+    label
   });
 };
 
