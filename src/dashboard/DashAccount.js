@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { urlPageView } from "./GoogleAnalytics/index";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import PaypalButton from "../Components/PaypalButton";
@@ -27,6 +28,11 @@ const CANCEL_USER_SUB = gql`
 `;
 
 function DashAccount(props) {
+  // GA
+  useEffect(() => {
+    urlPageView("/account");
+  });
+
   const history = useHistory();
 
   const token = getToken();
