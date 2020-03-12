@@ -11,14 +11,18 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 const GetData = props => {
   let queryType = "tradersUsers";
   let QUERY;
-  let thisQuery = {};
+  let thisQuery;
 
   const {
     firstSelectedCheckbox,
     secondSelectedCheckbox,
     selectedCheckbox,
     index,
-    crossFilter
+    crossFilter,
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
   } = props;
 
   console.log(`props.index`, index);
@@ -44,7 +48,6 @@ const GetData = props => {
           ${props.index.type}
         }
       }
-      
       `;
   } else if (
     props.index.query === "Users" &&
@@ -71,6 +74,7 @@ const GetData = props => {
     props.crossFilter.query === "Users" &&
     !props.additionalFilter.type
   ) {
+    // currently broken
     queryType = "sessionsData";
     const firstQuery = firstSelectedCheckbox[props.index.type];
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
@@ -93,7 +97,6 @@ const GetData = props => {
     !props.additionalFilter.type
   ) {
     queryType = "sessionsData";
-    console.log("correct query???????????????????????");
     const firstQuery = firstSelectedCheckbox[props.index.type];
     const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
     thisQuery = {
@@ -114,8 +117,12 @@ const GetData = props => {
     !props.additionalFilter.type
   ) {
     queryType = "sessionsData";
-    console.log("breaking!!!!!!!!!!!!!!!");
-    thisQuery = undefined;
+    const firstQuery = firstSelectedCheckbox[props.index.type];
+    const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+    thisQuery = {
+      [props.index.type]: firstQuery,
+      [props.crossFilter.type]: secondQuery
+    };
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
         sessionsData (input: $queryTraders) {
@@ -140,18 +147,26 @@ const GetData = props => {
     };
     queryType = "tradersUsers";
     QUERY = gql`
-        query getUsers($queryTraders: newTraderInput){
-          tradersUsers(input: $queryTraders) {
-            ${props.index.type}
-            ${props.crossFilter.type}
-          }
-          additionalFilterData: tradersUsers {
-            ${props.additionalFilter.type}
-          }
-        }
-        `;
+            query getUsers($queryTraders: newTraderInput){
+              tradersUsers(input: $queryTraders) {
+                ${props.index.type}
+                ${props.crossFilter.type}
+              }
+              additionalFilterData: tradersUsers {
+                ${props.additionalFilter.type}
+              }
+            }
+            `;
   } else {
     queryType = "sessionsData";
+    const firstQuery = firstSelectedCheckbox[props.index.type];
+    const secondQuery = secondSelectedCheckbox[props.crossFilter.type];
+    const thirdQuery = selectedCheckbox[props.additionalFilter.type];
+    thisQuery = {
+      [props.index.type]: firstQuery,
+      [props.crossFilter.type]: secondQuery,
+      [props.additionalFilter.type]: thirdQuery
+    };
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
         sessionsData(input: $queryTraders){
@@ -166,7 +181,7 @@ const GetData = props => {
       `;
   }
 
-  console.log("FINAL QUERY", thisQuery, firstSelectedCheckbox);
+  console.log("FINAL QUERY", thisQuery);
 
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
@@ -174,6 +189,7 @@ const GetData = props => {
   // [thisQuery]
   //queryType: props.selectedCheckbox
   if (data) console.log(`returned data`, data[queryType]);
+  console.log(`data`, data);
 
   if (loading) {
     return (
@@ -195,7 +211,8 @@ const GetData = props => {
   // let filteredData;
   // if (
   //   props.additionalFilter.type &&
-  //   !graphLabels[`${props.additionalFilter.type}`]) {
+  //   !graphLabels[`${props.additionalFilter.type}`]
+  // ) {
   //   removeMultiple(data.additionalFilterData);
   //   filteredData = getIndex(
   //     data.additionalFilterData,
@@ -204,6 +221,7 @@ const GetData = props => {
   //   filteredData = filteredData.filter(item => item !== null);
   // }
 
+  // console.log("FILTERED DATA QUERIES", filteredData)
   // if (props.crossFilter.type &&
   //   !graphLabels[`${props.crossFilter.type}`]) {
   //   removeMultiple(data.sessionsData)
@@ -218,10 +236,11 @@ const GetData = props => {
     props.index.type,
     data[`${queryType}`],
     props.crossFilter.type,
-    props.startDate,
-    props.endDate,
+    filterBoxStartDate,
+    filterBoxEndDate,
     props.additionalFilter.type,
-    props.index.query
+    props.index.query,
+    props.crossFilter.query
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
   // console.log("csvData", chartData.dataStructure);
   // console.log(`cross filter type`, props.crossFilter.type);

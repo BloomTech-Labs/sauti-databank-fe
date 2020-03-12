@@ -7,7 +7,8 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 
-import CalendarModal from "../dashboard/CalendarModal";
+import CalendarModal, { getTodaysDate } from "../dashboard/CalendarModal";
+import useCalendar from "../hooks/useCalendar";
 
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 
@@ -23,6 +24,13 @@ export default function FilterBox(props) {
   if (newSub) {
     sub = newSub;
   }
+
+  const {
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
+  } = props;
 
   const [filterBoxIndex, setFilterBoxIndex] = useState({
     type: "gender",
@@ -50,8 +58,14 @@ export default function FilterBox(props) {
     filterBoxAdditionalFilterLabel,
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
-  const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
-  const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
+
+  // const {
+  //   filterBoxStartDate,
+  //   setFilterBoxStartDate,
+  //   filterBoxEndDate,
+  //   setFilterBoxEndDate
+  // } = useCalendar();
+
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
@@ -130,8 +144,14 @@ export default function FilterBox(props) {
   //   });
   // };
 
-  // console.log("FILTER BOX ADDITIONALFILTER TYPE", filterBoxAdditionalFilter.type);
-  // console.log(" ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES", props.checkboxOptions);
+  console.log(
+    "FILTER BOX ADDITIONALFILTER TYPE",
+    filterBoxAdditionalFilter.type
+  );
+  console.log(
+    " ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES",
+    props.checkboxOptions
+  );
   // console.log(" TWO - props.SECONDCheckboxOptions", props.secondCheckboxOptions);
 
   return (
@@ -279,6 +299,8 @@ export default function FilterBox(props) {
               props.setAdditionalFilter({ type: "", query: "" });
               props.setCheckboxOptions([]);
               props.setSelectedCheckbox({});
+              props.setFirstSelectedCheckbox({});
+              props.setSecondSelectedCheckbox({});
             }}
           >
             <p>Clear Additional Filter</p>
@@ -419,12 +441,14 @@ export default function FilterBox(props) {
             props.setEndDate("2020-01-08");
             props.setCheckboxOptions([]);
             props.setSelectedCheckbox({});
+            props.setSecondSelectedCheckbox({});
+            props.setFirstSelectedCheckbox({});
             setFilterBoxIndexLabel("Gender");
             setFilterBoxIndex({ type: "gender", query: "Users" });
             setFilterBoxCrossLabel("");
             setFilterBoxCrossFilter({ type: "", query: "Users" });
             setFilterBoxStartDate("2012-01-01");
-            setFilterBoxEndDate("2020-01-08");
+            setFilterBoxEndDate(getTodaysDate());
             setFilterBoxAdditionalFilter({ type: "", query: "" });
             setFilterBoxAdditionalFilterLabel("");
             props.setAdditionalFilter({ type: "", query: "" });

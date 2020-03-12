@@ -2,11 +2,33 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import PaypalButton from "../Components/PaypalButton";
+import gql from "graphql-tag";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+
+import swal from "sweetalert";
 
 import styled from "styled-components";
 import "../index.css";
 
+const CANCEL_USER_SUB = gql`
+  mutation updateUserToFree(
+    $newUpdateUserToFreeInput: newUpdateUserToFreeInput!
+  ) {
+    updateUserToFree(input: $newUpdateUserToFreeInput) {
+      ... on DatabankUser {
+        email
+        subscription_id
+      }
+      ... on Error {
+        message
+      }
+    }
+  }
+`;
+
 function DashAccount(props) {
+  const history = useHistory();
+
   const token = getToken();
   let tier;
   if (token) {
@@ -24,42 +46,59 @@ function DashAccount(props) {
     sub = newSub;
   }
 
-  const history = useHistory();
+  const GET_SUBSCRIPTION_ID = gql`
+    query($userEmail: String!) {
+      databankUser(input: { email: $userEmail }) {
+        id
+        email
+        subscription_id
+      }
+    }
+  `;
+
+  const { data } = useQuery(GET_SUBSCRIPTION_ID, {
+    variables: { userEmail: userEmail }
+  });
+
+  const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
 
   const handleSubmit = async (e, input) => {
     e.preventDefault();
     history.push("/data");
   };
 
+  const handleSubscriptionCancellation = e => {
+    // TODO: grab user's subscription_id with a query to DatabankUsers
+
+    // newSub should be null unless the user has JUST signed up for premium through paypal.
+    // Once a user has signed out and returned to the app, the users sub ID is tracked by GET_SUBSCRIPTION_ID.
+    if (newSub === null) {
+      cancelSub({
+        variables: {
+          newUpdateUserToFreeInput: {
+            email: userEmail,
+            subscription_id: data.databankUser.subscription_id
+          }
+        }
+      });
+      // Set the subscription id to null after a user cancels their subscription.
+      data.databankUser.subscription_id = null;
+      history.push("/data");
+      swal({ title: "", text: "You are now a free user", icon: "success" });
+    }
+  };
+
   return (
     <>
-      {(tier === "FREE") | (tier === "ADMIN") ? (
+      {tier === "PAID" || tier === "GOV_ROLE" || newSub ? (
         <AccountPageDiv>
-          {tier === "FREE" ? (
+          {tier === "PAID" || newSub ? (
             <>
               <Div>
-                <H1>Need more data?</H1>
+                <H1>Need More Data?</H1>
                 <P>Upgrade to our paid plan to access all material.</P>
               </Div>
               <Div2>
-                <UserTypeContainerDiv>
-                  <div>
-                    <H1>Free Account</H1>
-                    <H2>Free</H2>
-                  </div>
-                  <ul className="features-list">
-                    <li className="features-item">Create an account</li>
-                    <li className="features-item">Change data filters</li>
-                    <li className="features-item">X</li>
-                    <li className="features-item">X</li>
-                    <li className="features-item">X</li>
-                  </ul>
-                  <ButtonDiv>
-                    <ContinueButton2 type="submit" onClick={handleSubmit}>
-                      Continue
-                    </ContinueButton2>
-                  </ButtonDiv>
-                </UserTypeContainerDiv>
                 <UserTypeContainerDiv>
                   <div>
                     <H1>Premium Account</H1>
@@ -73,7 +112,9 @@ function DashAccount(props) {
                     <li className="features-item">Filter data by date</li>
                   </ul>
                   <ButtonDiv>
-                    <PaypalButton />
+                    <ContinueButton2 onClick={handleSubscriptionCancellation}>
+                      Cancel Subscription
+                    </ContinueButton2>
                   </ButtonDiv>
                 </UserTypeContainerDiv>
               </Div2>
@@ -81,27 +122,13 @@ function DashAccount(props) {
           ) : (
             <>
               <Div>
-                <H1>Sauti Databank Admin</H1>
-                <P>Current user type offerings.</P>
+                <H1>Need More Data?</H1>
+                <P>Upgrade to our paid plan to access all material.</P>
               </Div>
               <Div2>
                 <UserTypeContainerDiv>
                   <div>
-                    <H1>Free Account</H1>
-                    <H2>Free</H2>
-                  </div>
-                  <ul className="features-list">
-                    <li className="features-item">Create an account</li>
-                    <li className="features-item">Change data filters</li>
-                    <li className="features-item">X</li>
-                    <li className="features-item">X</li>
-                    <li className="features-item">X</li>
-                  </ul>
-                </UserTypeContainerDiv>
-                <UserTypeContainerDiv>
-                  <div>
                     <H1>Premium Account</H1>
-                    <H2>$9.99/month</H2>
                   </div>
                   <ul className="features-list">
                     <li className="features-item">Create an account</li>
@@ -116,15 +143,33 @@ function DashAccount(props) {
           )}
         </AccountPageDiv>
       ) : (
-        (tier === "PAID") | sub && (
+        (tier === "FREE") | (tier === "ADMIN") && (
           <AccountPageDiv>
-            {tier === "PAID" ? (
+            {tier === "FREE" ? (
               <>
                 <Div>
-                  <H1>Need More Data?</H1>
+                  <H1>Need more data?</H1>
                   <P>Upgrade to our paid plan to access all material.</P>
                 </Div>
                 <Div2>
+                  <UserTypeContainerDiv>
+                    <div>
+                      <H1>Free Account</H1>
+                      <H2>Free</H2>
+                    </div>
+                    <ul className="features-list">
+                      <li className="features-item">Create an account</li>
+                      <li className="features-item">Change data filters</li>
+                      <li className="features-item">X</li>
+                      <li className="features-item">X</li>
+                      <li className="features-item">X</li>
+                    </ul>
+                    <ButtonDiv>
+                      <ContinueButton2 type="submit" onClick={handleSubmit}>
+                        Continue
+                      </ContinueButton2>
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
                   <UserTypeContainerDiv>
                     <div>
                       <H1>Premium Account</H1>
@@ -140,7 +185,7 @@ function DashAccount(props) {
                       <li className="features-item">Filter data by date</li>
                     </ul>
                     <ButtonDiv>
-                      <ContinueButton2>Cancel Subscription</ContinueButton2>
+                      <PaypalButton />
                     </ButtonDiv>
                   </UserTypeContainerDiv>
                 </Div2>
@@ -148,13 +193,27 @@ function DashAccount(props) {
             ) : (
               <>
                 <Div>
-                  <H1>Need More Data?</H1>
-                  <P>Upgrade to our paid plan to access all material.</P>
+                  <H1>Sauti Databank Admin</H1>
+                  <P>Current user type offerings.</P>
                 </Div>
                 <Div2>
                   <UserTypeContainerDiv>
                     <div>
+                      <H1>Free Account</H1>
+                      <H2>Free</H2>
+                    </div>
+                    <ul className="features-list">
+                      <li className="features-item">Create an account</li>
+                      <li className="features-item">Change data filters</li>
+                      <li className="features-item">X</li>
+                      <li className="features-item">X</li>
+                      <li className="features-item">X</li>
+                    </ul>
+                  </UserTypeContainerDiv>
+                  <UserTypeContainerDiv>
+                    <div>
                       <H1>Premium Account</H1>
+                      <H2>$9.99/month</H2>
                     </div>
                     <ul className="features-list">
                       <li className="features-item">Create an account</li>
