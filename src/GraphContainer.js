@@ -9,6 +9,29 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
 
+// Data Filter
+//  <p className="disclosure">
+// *This optional filter adjusts samplesize and may not always alter the
+// graph appearance.
+// </p>
+//{/* for future: more than 1 data filter */}
+//{
+/*
+          what do worandon woman trade?
+          what doe rwandon women over 50 trade?
+
+          just filter what they already have set up from the first 2 filters
+          they should be able to add another additional filter
+
+          low priority:
+
+            the dates on the calendar should be dynamically set to the dates in the items the categories are filterd
+
+            be able to measure date periods by year
+
+        */
+//}
+
 const GraphContainer = () => {
   const [filters, setFilters] = useState({
     // default query setup

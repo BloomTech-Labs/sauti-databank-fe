@@ -12,53 +12,6 @@ import { colourOptions, groupedOptions } from "./docs/data";
 import CalendarModal from "../dashboard/CalendarModal";
 
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
-const groupStyles = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between"
-};
-const groupBadgeStyles = {
-  backgroundColor: "#EBECF0",
-  borderRadius: "2em",
-  color: "#172B4D",
-  display: "inline-block",
-  fontSize: 12,
-  fontWeight: "normal",
-  lineHeight: "1",
-  minWidth: 1,
-  padding: "0.16666666666667em 0.5em",
-  textAlign: "center"
-};
-
-const itemStyle = {
-  fontSize: 15
-};
-// controlling the super categories
-const formatGroupLabel = data => (
-  <div style={groupStyles}>
-    <span style={itemStyle}>{data.label}</span>
-    <span style={groupBadgeStyles}>{data.options.length}</span>
-  </div>
-);
-
-// controls the item the user selects
-const controlStyles = {
-  borderRadius: "1px solid black",
-  // padding: 'px',
-  // margin: "20px",
-
-  // the selected item
-  fontSize: 15,
-  // background: colourOptions[2].color,
-  color: "white"
-};
-
-const ControlComponent = props => (
-  <div style={controlStyles}>
-    {<p>Custom Control</p>}
-    <components.Control {...props} />
-  </div>
-);
 
 export default function FilterBox(props) {
   const {
@@ -102,14 +55,79 @@ export default function FilterBox(props) {
   const FilterSelector = props => {
     const {
       filterSelectorName,
-      formatGroupLabel,
-      ControlComponent,
+      // formatGroupLabel,
+      // ControlComponent,
       filters,
       setFilters,
       i,
-      FilterBoxOptions,
+      // FilterBoxOptions,
       graphLabels
     } = props;
+
+    // styles for the react select component
+    const groupStyles = {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    };
+    const groupBadgeStyles = {
+      backgroundColor: "#EBECF0",
+      borderRadius: "2em",
+      color: "#172B4D",
+      display: "inline-block",
+      fontSize: 12,
+      fontWeight: "normal",
+      lineHeight: "1",
+      minWidth: 1,
+      padding: "0.16666666666667em 0.5em",
+      textAlign: "center"
+    };
+
+    const itemStyle = {
+      fontSize: 15
+    };
+    // controlling the super categories
+    const formatGroupLabel = data => (
+      <div style={groupStyles}>
+        <span style={itemStyle}>{data.label}</span>
+        <span style={groupBadgeStyles}>{data.options.length}</span>
+      </div>
+    );
+
+    // controls the item the user selects
+    const controlStyles = {
+      borderRadius: "1px solid black",
+      // padding: 'px',
+      // margin: "20px",
+
+      // the selected item
+      fontSize: 15,
+      // background: colourOptions[2].color,
+      color: "white"
+    };
+
+    // controls the items the user can select
+    const colourStyles = {
+      control: styles => ({ ...styles, backgroundColor: "white" }),
+      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+        // const color = chroma(data.color);
+        return {
+          ...styles,
+          backgroundColor: isDisabled ? "red" : "blue",
+          color: "#FFF",
+          cursor: isDisabled ? "not-allowed" : "default",
+          // items to select
+          fontSize: 15
+        };
+      }
+    };
+
+    const ControlComponent = props => (
+      <div style={controlStyles}>
+        {<p>Custom Control</p>}
+        <components.Control {...props} />
+      </div>
+    );
 
     return (
       <div>
@@ -140,6 +158,9 @@ export default function FilterBox(props) {
                   // selectedTableColumnName: `${e.value.type}`,
                   selectedTable: FilterBoxOptions.default[e.label].value.query,
                   // selectedTable: e.value.query,
+                  // accees all the options from graphlables
+                  // and put all of them in here as
+                  // option : false
                   selectedOption: undefined
                 }
               });
@@ -179,7 +200,7 @@ export default function FilterBox(props) {
                       // seems to need this when this is a compoennt
                       checked={filters[i].selectedOption === option}
                       onChange={e => {
-                        console.log(filters);
+                        // console.log(filters);
                         setFilters({
                           ...filters,
                           [i]: {
@@ -249,20 +270,6 @@ export default function FilterBox(props) {
     // });
   };
   // controlling the items the user can select from
-  const colourStyles = {
-    control: styles => ({ ...styles, backgroundColor: "white" }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-      // const color = chroma(data.color);
-      return {
-        ...styles,
-        backgroundColor: isDisabled ? "red" : "blue",
-        color: "#FFF",
-        cursor: isDisabled ? "not-allowed" : "default",
-        // items to select
-        fontSize: 15
-      };
-    }
-  };
 
   const handleSubmit = useCallback(
     e => {
@@ -356,9 +363,9 @@ export default function FilterBox(props) {
           graphLabels={graphLabels}
           // these are the subcomponents used to control the styles of
           // the react selection component
-          formatGroupLabel={formatGroupLabel}
-          ControlComponent={ControlComponent}
-          FilterBoxOptions={FilterBoxOptions}
+          // formatGroupLabel={formatGroupLabel}
+          // ControlComponent={ControlComponent}
+          // FilterBoxOptions={FilterBoxOptions}
         />
       ))}
       <div className="btn-container">
@@ -367,8 +374,8 @@ export default function FilterBox(props) {
           // type="submit"
           // disabled={loading}
           onClick={e => {
-            console.log("here");
-            console.log(filters);
+            // console.log("here");
+            // console.log(filters);
             // put in check for how many filters we can add
             setFilters({
               ...filters,
@@ -383,338 +390,21 @@ export default function FilterBox(props) {
           }}
           style={{ cursor: loading ? "auto" : "pointer" }}
         >
-          Submit
+          Add Additional Filter
         </Button>
       </div>
       <form>
-        {/* <FilterSelector
-          filterSelectorName={filters[0].nameOfFilter}
-          formatGroupLabel={formatGroupLabel}
-          ControlComponent={ControlComponent}
-          filters={filters}
-          setFilters={setFilters}
-          i={0}
-          FilterBoxOptions={FilterBoxOptions}
-          graphLabels={graphLabels}
-        /> */}
-        {/* <p>Data Series</p> */}
-        {/* <Select
-          // controlClassName="myControlClassName"
-          // arrowClassName="myArrowClassName"
-          // className="dropdown"
-          className={"basic-single"}
-          disabled={loading}
-          options={
-            // getAvaliableOptions(FilterBoxOptions.default, props.filters)
-            options
-          }
-          value={props.filters[0].selectedCategory}
-          onChange={e => {
-            // these were controlling what the options are
-            // setFilterBoxIndex(e.value);
-            // setFilterBoxIndexLabel(e.label);
-            // setFilterBoxIndex({
-            //   type: e.value.type,
-            //   query: e.value.query,
-            //   label: e.label
-            // });
-            // set filters[0]'s category here
-            props.setFilters({
-              ...props.filters,
-              0: {
-                selectedTableColumnName: `${e.value.type}`,
-                selectedTable: e.value.query,
-                selectedCategory: e.label,
-                selectedOption: undefined
-              }
-            });
-          }}
-        /> */}
-        {/* <Select
-    
-    defaultValue={colourOptions[1]}
-    options={groupedOptions}
-    formatGroupLabel={formatGroupLabel} /> */}
         {/*
-      filterSelectorName="Data Series"
-      formatGroupLabel,
-      ControlComponent,
-      props.filters,
-      i,
-      FilterBoxOptions
-      graphLabels
-      */}
-        <Select
-          // inputValue={setup}
-          // defaultValue={colourOptions[0]}
-          defaultValue={
-            // FilterBoxOptions.superCategories[0].options[0]
-            { label: props.filters[0].selectedCategory }
-          }
-          // value={}
-          // isClearable
-          formatGroupLabel={formatGroupLabel}
-          components={{ Control: ControlComponent }}
-          // isSearchable
-          onChange={e => {
-            console.log(e.label, props.filters[0]);
-            // console.log(FilterBoxOptions.default[e.label].value)
-            props.setFilters({
-              ...props.filters,
-              0: {
-                ...props.filters[0],
-                selectedCategory: e.label, //option
-                selectedTableColumnName:
-                  FilterBoxOptions.default[e.label].value.type,
-                // selectedTableColumnName: `${e.value.type}`,
-                selectedTable: FilterBoxOptions.default[e.label].value.query,
-                // selectedTable: e.value.query,
-                selectedOption: undefined
-              }
-            });
-
-            // {
-            //   /* FilterBoxOptions.default[props.filters[0].selectedCategory] */
-            // }
-
-            // setSetup(e.label)
-          }}
-          name="color"
-          styles={colourStyles}
-          // options={groupedOptions}
-
-          options={
-            // FilterBoxOptions.superCategories
-            x(
-              FilterBoxOptions.superCategories,
-              Object.keys(props.filters)
-                .map(filterId => {
-                  return props.filters[filterId].selectedCategory;
-                })
-                .filter(selectedCategory => selectedCategory.length > 0)
-            )
-          }
-        />
-        {graphLabels[`${props.filters[0].selectedTableColumnName}`] && (
-          <CheckboxContainer>
-            <p>Select an option to further filter the data: </p>
-            {graphLabels[
-              `${props.filters[0].selectedTableColumnName}`
-            ].labels.map(option => (
-              <Options key={option}>
-                <input
-                  type="radio"
-                  name="CrossFilter"
-                  value={option}
-                  onChange={e =>
-                    props.setFilters({
-                      ...props.filters,
-                      0: {
-                        ...props.filters[0],
-                        selectedOption: option
-                      }
-                    })
-                  }
-                />
-                <FilterOption>{option}</FilterOption>
-              </Options>
-            ))}
-          </CheckboxContainer>
-        )}
-        {/*
-        <p>Compare SubSamples</p>
-        <Dropdown
-          controlClassName="myControlClassName"
-          arrowClassName="myArrowClassName"
-          className="dropdown"
-          disabled={loading}
-          // event attributes
-          options={getAvaliableOptions(FilterBoxOptions.default, props.filters)}
-          value={props.filters[1].selectedCategory}
-          placeholder="Select second option..."
-          onChange={e => {
-            // console.log("second category event", e)
-
-            props.setFilters({
-              ...props.filters,
-              1: {
-                ...props.filters[1],
-                selectedTableColumnName: `${e.value.type}`,
-                selectedTable: e.value.query,
-                selectedCategory: e.label,
-                selectedOption: undefined
-              }
-            });
-          }} */}
-        />
-        {/* We don't want options for this one */}
-        {/* ------------------------------------------------------------------------------- */}
-        {/* {graphLabels[`${props.filters[1].selectedTableColumnName}`] && (
-          <CheckboxContainer>
-            <p>Select an option to further filter the data: </p>
-            {graphLabels[
-              `${props.filters[1].selectedTableColumnName}`
-            ].labels.map(option => (
-              <Options key={option}>
-                <input
-                  type="radio"
-                  name="CrossFilter"
-                  value={option}
-                  onChange={e =>
-                    props.setFilters({
-                      ...props.filters,
-                      1: {
-                        ...props.filters[1],
-                        selectedOption: option
-                      }
-                    })
-                  }
-                />
-                <FilterOption>{option}</FilterOption>
-              </Options>
-            ))}
-          </CheckboxContainer>
-        )} */}
-        {/* ------------------------------------------------------------------------------- */}
-        {/* <> */}
-        {/* for future: more than 1 data filter */}
-        {/*
-          what do worandon woman trade?
-          what doe rwandon women over 50 trade?
-
-          just filter what they already have set up from the first 2 filters
-          they should be able to add another additional filter
-
-          low priority:
-
-            the dates on the calendar should be dynamically set to the dates in the items the categories are filterd
-
-            be able to measure date periods by year
-
-        */}
-        <p>Data Filter</p>
-        {/* <p>Choose Third Category</p> */}
-        {/* <p className="disclosure">
-          *This optional filter adjusts samplesize and may not always alter the
-          graph appearance.
-        </p>
-        <Dropdown
-          controlClassName="myControlClassName"
-          arrowClassName="myArrowClassName"
-          className="dropdown"
-          // disabled={loading}
-          options={getAvaliableOptions(FilterBoxOptions.default, props.filters)}
-          value={props.filters[2].selectedCategory}
-          placeholder="Select a filter..."
-          onChange={e => {
-            props.setFilters({
-              ...props.filters,
-              2: {
-                ...props.filters[2],
-                selectedTableColumnName: `${e.value.type}`,
-                selectedTable: e.value.query,
-                selectedCategory: e.label,
-                selectedOption: undefined
-              }
-            });
-          }} */}
-        />
-        {/* <div
-            className="reset-btn"
-            onClick={() => {
-              setFilterBoxAdditionalFilter({ type: "", query: "" });
-              setFilterBoxAdditionalFilterLabel("");
-              props.setAdditionalFilter({ type: "", query: "" });
-              props.setCheckboxOptions([]);
-              props.setSelectedCheckbox({});
-            }}
-          >
-            <p>Clear Additional Filter</p>
-          </div> */}
-        {/* </> */}
-        {/* {graphLabels[`${props.filters[2].selectedTableColumnName}`] && (
-          <CheckboxContainer>
-            <p>Select an option to further filter the data: </p>
-            {graphLabels[
-              `${props.filters[2].selectedTableColumnName}`
-            ].labels.map(option => (
-              <Options key={option}>
-                <input
-                  type="radio"
-                  name="CrossFilter"
-                  value={option}
-                  onChange={e =>
-                    props.setFilters({
-                      ...props.filters,
-                      2: {
-                        ...props.filters[2],
-                        selectedOption: option
-                      }
-                    })
-                  }
-                />
-                <FilterOption>{option}</FilterOption>
-              </Options>
-            ))}
-          </CheckboxContainer>
-        )} */}
-        {/* {loading ? (
-          <Loader
+        if loading
+        <Loader
             className="options-loader"
             type="Oval"
             color="#708090"
             width={50}
             height={20}
             timeout={120000000}
-          />
-        ) : (
-            props.checkboxOptions.length > 1 && (
-              <>
-                <p>Select an option to further filter the data: </p>
-                <CheckboxContainer>
-                  {props.checkboxOptions.map(option => (
-                    <Options key={option}>
-                      <input
-                        type="radio"
-                        name="CrossFilter"
-                        value={option}
-                        onChange={e => {
-                          props.setSelectedCheckbox(
-                            { [`${filterBoxAdditionalFilter.type}`]: option },
-                            props.setAdditionalFilter(filterBoxAdditionalFilter)
-                          );
-                        }}
-                      />
-                      <FilterOption>{option}</FilterOption>
-                    </Options>
-                  ))}
-                </CheckboxContainer>
-              </>
-            )
-          )} */}
-        {/* {props.checkboxOptions.length > 1 && (
-          <>
-            <p>Select an option to further filter the data: </p>
-            <CheckboxContainer>
-              {props.checkboxOptions.map(option => (
-                <Options key={option}>
-                  <input
-                    type="radio"
-                    name="CrossFilter"
-                    value={option}
-                    onChange={e => {
-                      // props.setSelectedCheckbox(
-                      //   { [`${filterBoxAdditionalFilter.type}`]: option },
-                      //   props.setAdditionalFilter(filterBoxAdditionalFilter)
-                      // );
-                    }}
-                  />
-                  <FilterOption>{option}</FilterOption>
-                </Options>
-              ))}
-            </CheckboxContainer>
-          </>
-        )} */}
+          /> */}
+
         {tier === "ADMIN" ||
         tier === "PAID" ||
         tier === "GOV_ROLE" ||
@@ -759,60 +449,6 @@ export default function FilterBox(props) {
         <p
           className="reset-btn"
           onClick={e => {
-            // props.setIndexLabel("Gender");
-            // props.setIndex({ type: "gender", query: "Users" });
-            // props.setCrossLabel("");
-            // props.setCrossFilter({ type: "", query: "Users" });
-            // props.setStartDate("2012-01-01");
-            // props.setEndDate("2020-01-08");
-            // props.setCheckboxOptions([]);
-            // props.setSelectedCheckbox({});
-            // setFilterBoxIndexLabel("Gender");
-            // setFilterBoxIndex({ type: "gender", query: "Users" });
-            // setFilterBoxCrossLabel("");
-            // setFilterBoxCrossFilter({ type: "", query: "Users" });
-            // setFilterBoxStartDate("2012-01-01");
-            // setFilterBoxEndDate("2020-01-08");
-            // setFilterBoxAdditionalFilter({ type: "", query: "" });
-            // setFilterBoxAdditionalFilterLabel("");
-            // props.setAdditionalFilter({ type: "", query: "" });
-
-            // props.setFirstSelectedCheckbox({});
-
-            // props.setSecondSelectedCheckbox({});
-            // set all the filters to nothing
-            // let newFilters = {};
-            // Object.keys(props.filters).forEach(filterId => {
-            //   // console.log(filterId === 0)
-
-            //   // we still need enought to do a query that returns data upon resetting
-            //   if (filterId === String(0)) {
-            //     newFilters = {
-            //       ...newFilters,
-            //       0: {
-            //         nameOfFilter: "Data Series",
-            //         selectedCategory: "Gender",
-            //         selectedOption: undefined,
-            //         selectedTable: "Users",
-            //         selectedTableColumnName: "gender"
-            //       }
-            //     };
-            //   } else {
-            //     // if(filterId === 0) {
-            //     //   console.log("wrong")
-            //     // }
-            //     newFilters = {
-            //       ...newFilters,
-            //       [filterId]: {
-            //         selectedCategory: "",
-            //         selectedOption: undefined,
-            //         selectedTable: "",
-            //         selectedTableColumnName: ""
-            //       }
-            //     };
-            //   }
-            //   // console.log(newFilters)
-            // });
             props.setFilters({
               // default query setup
               0: {
@@ -837,7 +473,6 @@ export default function FilterBox(props) {
                 selectedTableColumnName: ""
               }
             });
-            // );
           }}
         >
           Reset

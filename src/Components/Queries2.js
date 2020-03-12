@@ -129,8 +129,6 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     QUERY = gql`
       query getUsers($queryTraders: newTraderInput){
         tradersUsers (input: $queryTraders) {
-          # ${props.index.type}
-          # ${props.crossFilter.type}
           ${filters[0].selectedTableColumnName}
           ${filters[1].selectedTableColumnName}
 
@@ -159,8 +157,6 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
           sessionsData (input: $queryTraders){
-          # ${props.index.type}
-          # ${props.crossFilter.type}
           ${filters[0].selectedTableColumnName}
           ${filters[1].selectedTableColumnName}
           created_date
@@ -187,8 +183,6 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
         sessionsData(input: $queryTraders){
-          # ${props.index.type}
-          # ${props.crossFilter.type}
           ${filters[0].selectedTableColumnName}
           ${filters[1].selectedTableColumnName}
 
@@ -206,8 +200,6 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     QUERY = gql`
       query getData($queryTraders: newTraderSessionInput){
         sessionsData (input: $queryTraders) {
-          # ${props.index.type}
-          # ${props.crossFilter.type}
           ${filters[0].selectedTableColumnName}
           ${filters[1].selectedTableColumnName}
 
@@ -233,17 +225,18 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
       [filters[2].selectedTableColumnName]: filters[2].selectedOption
     };
     queryType = "tradersUsers";
+    // # ${props.index.type}
+    // # ${props.crossFilter.type}
+    // # ${props.additionalFilter.type}
+
     QUERY = gql`
         query getUsers($queryTraders: newTraderInput){
           tradersUsers(input: $queryTraders) {
-            # ${props.index.type}
-            # ${props.crossFilter.type}
             ${filters[0].selectedTableColumnName}
             ${filters[1].selectedTableColumnName}
 
           }
           additionalFilterData: tradersUsers {
-            # ${props.additionalFilter.type}
             ${filters[2].selectedTableColumnName}
 
           }
@@ -414,10 +407,13 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           keys={chartData.crossFilterValues}
           // index={props.index.type}
           index={filters[0].selectedTableColumnName}
-          label={props.label}
+          // label={props.label}
+          label={filters[0].selectedCategory}
           groupMode={"grouped"}
           // filteredData={filteredData}
           sampleSize={chartData.totalSampleSize}
+          // what do these do?
+
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
           setSecondCheckboxOptions={props.setSecondCheckboxOptions}
@@ -427,10 +423,13 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
   } else {
     return (
       <div>
-        <h1 className="graph-title">{props.label}</h1>
+        <h1 className="graph-title">
+          {/*props.label*/ filters[0].selectedCategory}
+        </h1>
         {/*props.additionalFilter.type*/ filters[2].selectedTableColumnName && (
           <h3 className="graph-title-small">
-            Additional Filter: {props.additionalFilter.label} -{" "}
+            Additional Filter:{" "}
+            {/*props.additionalFilter.label*/ filters[2].selectedCategory} -{" "}
             {Object.values(
               /*props.selectedCheckbox*/ {
                 [filters[2].selectedCategory]: filters[2].selectedOption
@@ -458,10 +457,17 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
           keys={chartData.keys || chartData.csvKeys}
           // index={props.index.type}
           index={filters[0].selectedTableColumnName}
-          label={props.label}
+          // label={props.label}
+          label={filters[0].selectedCategory}
           groupMode={"stacked"}
           // filteredData={filteredData}
           sampleSize={chartData.sampleSize}
+          // what do these do?
+          // these appear to hold the options the user can select
+          //the checkboxOptions is for the third category of options the user can select
+          //the secondCheckboxOptions is for the second category of options the user can select
+          // general formula for getting the options
+          // graphLabels[`${filters[i].selectedTableColumnName}`].labels
           checkboxOptions={props.checkboxOptions}
           setCheckboxOptions={props.setCheckboxOptions}
           setSecondCheckboxOptions={props.setSecondCheckboxOptions}
