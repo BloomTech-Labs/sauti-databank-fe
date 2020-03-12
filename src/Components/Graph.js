@@ -81,10 +81,10 @@ const Graph = props => {
       Object.values(props.selectedCheckbox)[0]
     })`}`;
 
-  let track = new ReactGA.event({
-    category: `${fileName}`,
-    action: { action: "Downloaded EXCEL" }
-  });
+  // let track = new ReactGA.event({
+  //   category: `${fileName}`,
+  //   action: { action: "Downloaded EXCEL" }
+  // });
 
   useEffect(() => {
     setCsvFormattedData(csvFormater(props.csvData));
@@ -99,7 +99,6 @@ const Graph = props => {
         tier === "GOV_ROLE" ||
         newSub ? (
           <CsvDownloader
-            track={track}
             datas={csvFormattedData}
             columns={csvHeaders}
             filename={fileName}
