@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactGA from "react-ga";
 import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from "react-csv-downloader";
 
@@ -80,12 +81,10 @@ const Graph = props => {
       Object.values(props.selectedCheckbox)[0]
     })`}`;
 
-  // GA
-  let track = new Event(fileName, {
-    action: "Downloaded Excel",
-    Label: `Headers: ${csvHeaders}`,
-    userInteraction: true
-  });
+  // let track = new ReactGA.event({
+  //   category: `${fileName}`,
+  //   action: { action: "Downloaded EXCEL" }
+  // });
 
   useEffect(() => {
     setCsvFormattedData(csvFormater(props.csvData));
@@ -100,7 +99,6 @@ const Graph = props => {
         tier === "GOV_ROLE" ||
         newSub ? (
           <CsvDownloader
-            track={track}
             datas={csvFormattedData}
             columns={csvHeaders}
             filename={fileName}
