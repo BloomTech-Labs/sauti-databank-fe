@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import CsvDownloader from "react-csv-downloader";
-
+import { Event } from "../dashboard/GoogleAnalytics/index";
 import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
 
@@ -26,8 +26,6 @@ const Graph = props => {
 
   const [csvHeaders, setCsvHeaders] = useState([]);
   const [csvFormattedData, setCsvFormattedData] = useState([]);
-
-  console.log("GRAPH PROPS", props);
 
   // useEffect(() => {
   //   if (props.filteredData) {
@@ -82,6 +80,8 @@ const Graph = props => {
       Object.values(props.selectedCheckbox)[0]
     })`}`;
 
+  let track = Event(fileName, "Downloaded Excel");
+
   useEffect(() => {
     setCsvFormattedData(csvFormater(props.csvData));
     setCsvHeaders(headers(props.csvData));
@@ -95,6 +95,7 @@ const Graph = props => {
         tier === "GOV_ROLE" ||
         newSub ? (
           <CsvDownloader
+            track={track}
             datas={csvFormattedData}
             columns={csvHeaders}
             filename={fileName}
