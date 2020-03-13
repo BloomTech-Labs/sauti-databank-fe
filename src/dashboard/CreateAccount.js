@@ -164,7 +164,7 @@ export default function SignInSide(props) {
             onSubmit={e => handleSubmit(e, user)}
           >
             <TextField
-              // variant='outlined'
+              // variant="outlined"
               margin="normal"
               fullWidth
               id="email"
@@ -193,7 +193,6 @@ export default function SignInSide(props) {
 
             <TextField
               // variant='outlined'
-              placeholder="Organization"
               margin="normal"
               fullWidth
               name="organization"
@@ -244,8 +243,11 @@ export default function SignInSide(props) {
               onChange={handleChange}
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
+            <br />
+            <br />
+            <br />
             <FormControl className={classes.margin}>
-              <p>* Organization Type</p>
+              <GreyLabelText>* Organization Type</GreyLabelText>
               <Select
                 label="Organization Type"
                 labelId="demo-customized-select-label"
@@ -264,7 +266,11 @@ export default function SignInSide(props) {
             </FormControl>
             <br />
             <br />
-            <RequiredLabel>* = required</RequiredLabel>
+            <RequiredDiv>
+              <RequiredLabel>
+                <RequiredStar>*</RequiredStar> = required
+              </RequiredLabel>
+            </RequiredDiv>
             <br />
             <Button
               type="submit"
@@ -390,6 +396,9 @@ const UnusedTitle = styled.span`
 const RequiredLabel = styled.label`
   font-size: 1.4rem;
 `;
+const RequiredDiv = styled.div`
+  text-align: center;
+`;
 const UnusedTitleLink = styled(Link)`
   text-decoration: none;
   color: black;
@@ -409,4 +418,11 @@ const LineUnderCurrentTitle = styled.hr`
   background-color: black;
   height: 2px;
   border: none;
+`;
+const RequiredStar = styled.big`
+  color: red;
+  font-size: 1.8rem;
+`;
+const GreyLabelText = styled.p`
+  opacity: 0.8;
 `;
