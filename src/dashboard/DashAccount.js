@@ -33,6 +33,7 @@ function DashAccount(props) {
     urlPageView("/account");
   });
 
+
   const history = useHistory();
 
   const token = getToken();
@@ -88,9 +89,14 @@ function DashAccount(props) {
         }
       });
       // Set the subscription id to null after a user cancels their subscription.
-      data.databankUser.subscription_id = null;
+      data.databankUser.subscription_id = "cancelled";
       history.push("/data");
-      swal({ title: "", text: "You are now a free user", icon: "success" });
+      swal({
+        title: "",
+        text: "Your subcription was successfully cancelled",
+        icon: "success"
+      });
+
     }
   };
 
