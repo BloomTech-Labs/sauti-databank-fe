@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useHistory } from "react-router-dom";
-import { GAHandleCreateUser } from "./GoogleAnalytics/gaNewUser";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";

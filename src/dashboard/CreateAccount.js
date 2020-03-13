@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import { useHistory } from "react-router-dom";
-import { GAHandleCreateUser } from "./GoogleAnalytics/gaNewUser";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -111,7 +109,6 @@ export default function SignInSide(props) {
       } else {
         console.log(createdUser.data.register.id);
         localStorage.setItem("token", createdUser.data.register.token);
-        GAHandleCreateUser();
         history.push("/data");
         swal({ title: "", text: "Success!", icon: "success" });
       }

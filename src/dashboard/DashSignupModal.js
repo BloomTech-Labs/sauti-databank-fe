@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { urlPageView } from "./GoogleAnalytics/index";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -25,6 +26,13 @@ const useStyles = makeStyles(theme => ({
 export default function DashSignupModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
+  //GA
+  useEffect(() => {
+    if (open === true) {
+      return urlPageView("/signup");
+    }
+  });
 
   const handleOpen = () => {
     setOpen(true);

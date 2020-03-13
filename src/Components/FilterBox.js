@@ -25,6 +25,13 @@ export default function FilterBox(props) {
     sub = newSub;
   }
 
+  const {
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
+  } = props;
+
   const [filterBoxIndex, setFilterBoxIndex] = useState({
     type: "gender",
     query: "Users",
@@ -52,12 +59,12 @@ export default function FilterBox(props) {
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
 
-  const {
-    filterBoxStartDate,
-    setFilterBoxStartDate,
-    filterBoxEndDate,
-    setFilterBoxEndDate
-  } = useCalendar();
+  // const {
+  //   filterBoxStartDate,
+  //   setFilterBoxStartDate,
+  //   filterBoxEndDate,
+  //   setFilterBoxEndDate
+  // } = useCalendar();
 
   const [loading, setLoading] = useState(false);
 
@@ -137,8 +144,14 @@ export default function FilterBox(props) {
   //   });
   // };
 
-  // console.log("FILTER BOX ADDITIONALFILTER TYPE", filterBoxAdditionalFilter.type);
-  // console.log(" ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES", props.checkboxOptions);
+  console.log(
+    "FILTER BOX ADDITIONALFILTER TYPE",
+    filterBoxAdditionalFilter.type
+  );
+  console.log(
+    " ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES",
+    props.checkboxOptions
+  );
   // console.log(" TWO - props.SECONDCheckboxOptions", props.secondCheckboxOptions);
 
   return (
@@ -286,6 +299,8 @@ export default function FilterBox(props) {
               props.setAdditionalFilter({ type: "", query: "" });
               props.setCheckboxOptions([]);
               props.setSelectedCheckbox({});
+              props.setFirstSelectedCheckbox({});
+              props.setSecondSelectedCheckbox({});
             }}
           >
             <p>Clear Additional Filter</p>
@@ -426,6 +441,8 @@ export default function FilterBox(props) {
             props.setEndDate("2020-01-08");
             props.setCheckboxOptions([]);
             props.setSelectedCheckbox({});
+            props.setSecondSelectedCheckbox({});
+            props.setFirstSelectedCheckbox({});
             setFilterBoxIndexLabel("Gender");
             setFilterBoxIndex({ type: "gender", query: "Users" });
             setFilterBoxCrossLabel("");

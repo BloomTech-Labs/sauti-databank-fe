@@ -1,6 +1,5 @@
 // display user information for the admin and other basic info for quick access
 import React from "react";
-import { GASignInHandler } from "./GoogleAnalytics/gaSignIn.js";
 import GraphContainer from "../GraphContainer";
 import { getToken, decodeToken } from "./auth/Auth";
 
@@ -20,7 +19,20 @@ function DashHome() {
       <SignedInDiv>
         <UserHeader></UserHeader>
       </SignedInDiv>
-      {signedIn && GASignInHandler(userEmail)}
+      {/* {signedIn && GASignInHandler(userEmail)} */}
+
+      {/* {!signedIn && (
+        <NotSignedInDiv>
+          <UserHeader>Welcome To the Sauti Data App</UserHeader>
+        </NotSignedInDiv>
+      )}
+      {signedIn && (
+        <SignedInDiv>
+          <UserHeader>
+            Hello <UserName>{userEmail}</UserName> !
+          </UserHeader>
+        </SignedInDiv>
+      )} */}
       <GraphContainer />
     </>
   );

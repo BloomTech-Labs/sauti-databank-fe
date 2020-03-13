@@ -6,9 +6,10 @@ import Fade from "@material-ui/core/Fade";
 
 import { Link } from "react-router-dom";
 import Download from "./Download";
-import useCalendar from "../hooks/useCalendar";
 
 import styled from "styled-components";
+
+import useCalendar from "../hooks/useCalendar";
 
 const DateContainer = styled.div`
   margin: 20px 0;
@@ -76,6 +77,9 @@ export default function CalendarModal() {
     setFilterBoxEndDate
   } = useCalendar();
 
+  // const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
+  // const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
+
   const [loading, setLoading] = useState(false);
   console.log("=========== HERE =============");
   return (
@@ -128,7 +132,6 @@ export default function CalendarModal() {
 export function getTodaysDate() {
   const [_, month, day, year] = `${new Date()}`.split(" ");
   return `${year}-${formatMonth(month)}-${day}`;
-
   function formatMonth(month) {
     switch (month) {
       case "Jan":

@@ -7,6 +7,7 @@ import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries2";
+import useCalendar from "../src/hooks/useCalendar";
 
 const GraphContainer = () => {
   const [index, setIndex] = useState({
@@ -38,6 +39,13 @@ const GraphContainer = () => {
   console.log(startDate);
   const [endDate, setEndDate] = useState("2020-01-08");
   console.log(endDate);
+
+  const {
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
+  } = useCalendar();
 
   // useEffect(() => {
   //   ReactGa.initialize("UA-155468784-1");
@@ -76,6 +84,10 @@ const GraphContainer = () => {
               endDate={endDate}
               secondSelectedCheckbox={secondSelectedCheckbox}
               firstSelectedCheckbox={firstSelectedCheckbox}
+              filterBoxStartDate={filterBoxStartDate}
+              setFilterBoxStartDate={setFilterBoxStartDate}
+              filterBoxEndDate={filterBoxEndDate}
+              setFilterBoxEndDate={setFilterBoxEndDate}
             />
           </div>
           <div className="dropdown-container">
@@ -99,6 +111,10 @@ const GraphContainer = () => {
               setFirstSelectedCheckbox={setFirstSelectedCheckbox}
               setSecondSelectedCheckbox={setSecondSelectedCheckbox}
               secondCheckboxOptions={secondCheckboxOptions}
+              filterBoxStartDate={filterBoxStartDate}
+              setFilterBoxStartDate={setFilterBoxStartDate}
+              filterBoxEndDate={filterBoxEndDate}
+              setFilterBoxEndDate={setFilterBoxEndDate}
             />
           </div>
         </div>
