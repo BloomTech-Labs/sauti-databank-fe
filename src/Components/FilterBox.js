@@ -114,45 +114,6 @@ export default function FilterBox(props) {
       props
     ]
   );
-  // console.log(
-  //   "IMPORTANTTT",
-  //   filterBoxAdditionalFilter.type,
-  //   !graphLabels[`${filterBoxAdditionalFilter.type}`]
-  // );
-
-  // useEffect(() => {
-  //   if (
-  //     !graphLabels[`${filterBoxAdditionalFilter.type}`] &&
-  //     filterBoxAdditionalFilter.type
-  //   ) {
-  //     handleAuto();
-  //     setLoading(true);
-  //   }
-  //   /* eslint-disable */
-  // }, [filterBoxAdditionalFilter.type]);
-
-  // useEffect(() => {
-  //   if (props.checkboxOptions.length) {
-  //     setLoading(false);
-  //   }
-  // }, [props.checkboxOptions]);
-
-  // const ClickTracker = index => {
-  //   ReactGa.event({
-  //     category: "Option",
-  //     action: `Clicked a Filter Option: ${index}`
-  //   });
-  // };
-
-  console.log(
-    "FILTER BOX ADDITIONALFILTER TYPE",
-    filterBoxAdditionalFilter.type
-  );
-  console.log(
-    " ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES",
-    props.checkboxOptions
-  );
-  // console.log(" TWO - props.SECONDCheckboxOptions", props.secondCheckboxOptions);
 
   return (
     <div>
