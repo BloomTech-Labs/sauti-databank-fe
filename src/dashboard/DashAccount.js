@@ -33,7 +33,6 @@ function DashAccount(props) {
     urlPageView("/account");
   });
 
-
   const history = useHistory();
 
   const token = getToken();
@@ -96,7 +95,6 @@ function DashAccount(props) {
         text: "Your subcription was successfully cancelled",
         icon: "success"
       });
-
     }
   };
 

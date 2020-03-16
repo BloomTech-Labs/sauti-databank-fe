@@ -297,3 +297,9 @@ ul ol {
   background-color: #eb5e52;
   cursor: pointer;
 }
+.hide {
+  display: none;
+}
+.extend {
+  width: 100%;
+}
