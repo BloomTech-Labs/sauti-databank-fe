@@ -12,14 +12,16 @@ const dataParse = (
   startDate,
   endDate,
   additionalFilter,
-  queryType
+  queryType,
+  crossFilterQuery
 ) => {
   // This is bad practice, but function wrapped in try catch incase unknown error occurs, to reload page
-  // console.log(`indexBy`, indexBy);
-  // console.log(`dataparse`, data);
-  // console.log(`additionalFilter`, additionalFilter);
-  // console.log(`crossFilter`, crossFilter);
-  // console.log(`queryType`, queryType);
+  console.log(`indexBy`, indexBy);
+  console.log(`dataparse`, data);
+  console.log(`additionalFilter`, additionalFilter);
+  console.log(`crossFilter`, crossFilter);
+  console.log(`queryType`, queryType);
+  console.log(`crossFilterQuery`, crossFilterQuery);
   try {
     let dataStructure = [];
     //when single filtering "Most Requested" graph

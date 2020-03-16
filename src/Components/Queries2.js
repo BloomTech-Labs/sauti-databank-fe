@@ -7,7 +7,35 @@ import dataParse from "./dataParse";
 import getIndex from "../DataParseHelpers/getIndex";
 import graphLabels from "./graphLabels";
 import removeMultiple from "../DataParseHelpers/removeMultiple";
-
+/*
+graph shows nothing from this, and the sample size is wrong
+0:
+nameOfFilter: "Data Series"
+selectedCategory: "Most Requested Procedure Commodities"
+selectedOption: undefined
+avaliableOptions: (88) ["Arrow Roots (nduma)", "Avocado", "Avocados", "Bananas", "Bananas - Matoke", "Bananas Cooking", "Bananas Ripe", "Beans", "Brinjals/Eggplant", "Bulls & Cows", "Bulls/Cows", "Cabbage", "Capsicums/pepper", "Carrots", "Cashew Nuts", "Cauliflower", "Chicken (Broiler)", "Chicken (Local)", "Chickens (Local)", "Chillies", "Clothes  & Shoes (New)", "Clothes (New)", "Clothes (Used)", "Clothes and Shoes (New)", "Clothes and Shoes (Used)", "Clothing and Shoes (Used)", "Cosmetics", "Cowpeas", "Cucumber", "Dolichos (Njahi)", "Duck", "Eggs", "Flowers", "Fresh Cassava", "Fresh Nile Perch", "Fresh peas", "Geese", "Goat", "Goats", "Greengrams", "Groundnuts", "Guavas", "Guinea Fowl", "Hides & Skins", "Honey", "Honey (Natural)", "Irish Potatoes", "Kales", "Lemons", "Lime", "Maize", "Maize Cereal", "Maize Flour", "Mangoes", "Meat of bulls/cows/Goats/Sheep", "Milk", "Millet", "Millet Flour", "Mwezi Moja", "New Clothes", "New Clothing and Shoes", "Nile Perch", "Nile Perch Dried or Preserved ", "Omena", "Onions", "Oranges", "Passion fruits", "Pawpaws (papaya)", "Pineapples", "Plastics", "Rice - Husked", "Rice - Processed", "Sheep", "Shoes (New)", "Sorghum", "Sorghum Cereal", "Sorghum Flour", "Sorghum Grains", "Spinach", "Sweet Potatoes", "Tilapia", "Tilapia Dried or Preserved", "Tilapia Fresh", "Timber", "Tomatoes", "Watermelon", "Wheat Flour", "Wheat Grain"]
+selectedTable: "Sessions"
+selectedTableColumnName: "procedurecommodity"
+showOptions: false
+__proto__: Object
+1:
+nameOfFilter: "Compare SubSamples"
+selectedCategory: "Education Level"
+selectedOption: undefined
+avaliableOptions: (4) ["University/College", "Secondary", "Primary", "No formal education"]
+selectedTable: "Users"
+selectedTableColumnName: "education"
+showOptions: false
+__proto__: Object
+2:
+nameOfFilter: "Data Filter"
+selectedCategory: ""
+selectedOption: undefined
+avaliableOptions: []
+selectedTable: ""
+selectedTableColumnName: ""
+showOptions: false
+*/
 const GetData = props => {
   let queryType = "tradersUsers";
   let QUERY;
@@ -26,43 +54,10 @@ const GetData = props => {
     setFilterBoxEndDate
   } = props;
 
-  // console.log(`props.index`, index);
-  // console.log(`props.crossFilter`, crossFilter);
-  // console.log(`props.additionalFilter`, props.additionalFilter);
-  // console.log(" ONE props.firstSelectedCheckbox", props.firstSelectedCheckbox);
-  // console.log(" ONE props.filters[0]", filters[0]);
-
-  // console.log(
-  //   " TWO props.secondSelectedCheckbox",
-  //   props.secondSelectedCheckbox
-  // );
-  // console.log(` THREE props.selectedCheckbox`, props.selectedCheckbox);
-
   console.log("filter 0", filters[0]);
   console.log("filter 1", filters[1]);
   console.log("filter 2", filters[2]);
 
-  /*
-
-  queryOptions = useState({
-    Users: {
-      "undefined": {
-        "undefined": {
-          queryType: "tradersUsers",
-          thisQuery: firstSelectedCheckbox,
-          QUERY: gql`
-                    query getUsers($queryTraders: newTraderInput){
-                      tradersUsers (input: $queryTraders) {
-                        ${props.index.type}
-                      }
-                    }
-                    
-                    `
-        }
-      }
-    }
-  })
-  */
   // setup the filters part first
   //  setup the queries second
   // type: "gender" column name from the sql table
@@ -287,6 +282,9 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
   // }
 
   console.log("FINAL QUERY", thisQuery, /*firstSelectedCheckbox*/ filters);
+  console.log("dates", filterBoxStartDate, filterBoxEndDate);
+  console.log("search kind", queryType);
+
   // it would be nice for this to run in a way that doesn't return any data untill the user actually sets up a query
 
   let { loading, data } = useQuery(QUERY, {
@@ -353,6 +351,7 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     return filteredData;
   };
 
+  // breaks if there is no data
   // works
   if (Object.keys(data[`${queryType}`][0]).includes("created_date")) {
     console.log("ready to filter by date");
@@ -367,6 +366,14 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     );
     console.log("filtered by date", filteredData);
   }
+  // console.log("right before data parse",
+  //           filters[0].selectedTableColumnName,
+  //           data[`${queryType}`],
+  //           filters[1].selectedTableColumnName,
+  //           filterBoxStartDate,
+  //           filterBoxEndDate,
+  //           filters[2].selectedTableColumnName,
+  //           filters[0].selectedTable)
   const chartData = dataParse(
     // props.index.type,
     filters[0].selectedTableColumnName,
@@ -380,7 +387,8 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
     filters[2].selectedTableColumnName,
     // props.additionalFilter.type,
     // props.index.query
-    filters[0].selectedTable
+    filters[0].selectedTable,
+    filters[1].selectedTable
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
   // console.log("csvData", chartData.dataStructure);
   // console.log(`cross filter type`, props.crossFilter.type);

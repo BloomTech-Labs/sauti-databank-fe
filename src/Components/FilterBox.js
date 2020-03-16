@@ -8,6 +8,7 @@ import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 import { colourOptions, groupedOptions } from "./docs/data";
+import { getTodaysDate } from "../dashboard/CalendarModal";
 
 import CalendarModal from "../dashboard/CalendarModal";
 
@@ -39,19 +40,7 @@ export default function FilterBox(props) {
       };
     });
   };
-  // console.log(Object.keys(props.filters).map(filterId => {
-  //   return props.filters[filterId].selectedCategory
-  // })
 
-  // )
-  // const y = x(FilterBoxOptions.superCategories,
-  //   Object.keys(props.filters).map(filterId => {
-  //     return props.filters[filterId].selectedCategory
-  //   })
-  //   .filter(selectedCategory => selectedCategory.length > 0)
-  //   )
-  // console.log(props.filters)
-  // console.log(y)
   const FilterSelector = props => {
     const {
       filterSelectorName,
@@ -510,6 +499,8 @@ export default function FilterBox(props) {
                 showOptions: false
               }
             });
+            setFilterBoxStartDate("2017-01-01");
+            setFilterBoxEndDate(getTodaysDate());
           }}
         >
           Reset

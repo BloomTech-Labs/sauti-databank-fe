@@ -35,6 +35,11 @@ import useCalendar from "../src/hooks/useCalendar";
 const GraphContainer = () => {
   const [filters, setFilters] = useState({
     // default query setup
+    // show or hide is only for the first one
+    // check with russ about changes
+    // first one: show or hide
+    // second one: always hide
+    // all rest: always show
     0: {
       nameOfFilter: "Data Series",
       selectedCategory: "Gender", // label
@@ -164,6 +169,7 @@ selectedTableColumnName: "procedurecommoditycat"
               setFilterBoxEndDate={setFilterBoxEndDate}
             />
           </div>
+          {/* can put a hide/show button here */}
           <div className="dropdown-container">
             <FilterBox
               // onChange={onChange}
