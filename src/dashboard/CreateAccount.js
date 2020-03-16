@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import { useHistory } from "react-router-dom";
-import { GAHandleCreateUser } from "./GoogleAnalytics/gaNewUser";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -111,7 +109,6 @@ export default function SignInSide(props) {
       } else {
         console.log(createdUser.data.register.id);
         localStorage.setItem("token", createdUser.data.register.token);
-        GAHandleCreateUser();
         history.push("/data");
         swal({ title: "", text: "Success!", icon: "success" });
       }
@@ -142,21 +139,37 @@ export default function SignInSide(props) {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            <FormTitle>Sign Up</FormTitle>
-          </Typography>
+          <TitleContainer>
+            <CurrentTitle component="h1" variant="h5">
+              <FormTitle>Sign Up</FormTitle>
+              <LineUnderCurrentTitle />
+            </CurrentTitle>
+            <UnusedTitle component="h1" variant="h5">
+              <FormTitle>
+                <UnusedTitleLink to="/login">Login</UnusedTitleLink>
+              </FormTitle>
+            </UnusedTitle>
+          </TitleContainer>
+          <UnderlineDiv>
+            <LineUnderTitles />
+          </UnderlineDiv>
+          <br />
+          <br />
+          <br />
+          <FormTitleMain>Sign Up</FormTitleMain>
+          <br />
           <form
             className={classes.form}
             noValidate
             onSubmit={e => handleSubmit(e, user)}
           >
             <TextField
-              // variant='outlined'
+              // variant="outlined"
               margin="normal"
               fullWidth
               id="email"
               type="text"
-              label="Email"
+              label="* Email"
               name="email"
               autoComplete="email"
               value={user.email}
@@ -169,7 +182,7 @@ export default function SignInSide(props) {
               margin="normal"
               fullWidth
               name="password"
-              label="Password"
+              label="* Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -180,7 +193,6 @@ export default function SignInSide(props) {
 
             <TextField
               // variant='outlined'
-              placeholder="Organization"
               margin="normal"
               fullWidth
               name="organization"
@@ -231,8 +243,11 @@ export default function SignInSide(props) {
               onChange={handleChange}
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
+            <br />
+            <br />
+            <br />
             <FormControl className={classes.margin}>
-              <p>Organization Type</p>
+              <GreyLabelText>* Organization Type</GreyLabelText>
               <Select
                 label="Organization Type"
                 labelId="demo-customized-select-label"
@@ -248,11 +263,15 @@ export default function SignInSide(props) {
                 <MenuItem value={"NGO"}>NGO</MenuItem>
                 <MenuItem value={"OTHER"}>OTHER</MenuItem>
               </Select>
-              <label>*required</label>
             </FormControl>
-
-            <br></br>
-
+            <br />
+            <br />
+            <RequiredDiv>
+              <RequiredLabel>
+                <RequiredStar>*</RequiredStar> = required
+              </RequiredLabel>
+            </RequiredDiv>
+            <br />
             <Button
               type="submit"
               fullWidth
@@ -358,6 +377,52 @@ const Styles = withStyles(theme => ({
 const FormBottomText = styled.p`
   font-size: 1.4rem;
 `;
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 const FormTitle = styled.h1`
+  font-size: 2rem;
+  margin: 0 3rem;
+`;
+const FormTitleMain = styled.h1`
   font-size: 3rem;
+  margin: 0 3rem;
+`;
+const CurrentTitle = styled.span``;
+const UnusedTitle = styled.span`
+  opacity: 0.5;
+`;
+const RequiredLabel = styled.label`
+  font-size: 1.4rem;
+`;
+const RequiredDiv = styled.div`
+  text-align: center;
+`;
+const UnusedTitleLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+`;
+const UnderlineDiv = styled.div`
+  width: 40%;
+  position: absolute;
+  margin-top: 28px;
+`;
+const LineUnderTitles = styled.hr`
+  width: 100%;
+  opacity: 0.5;
+  position: relative;
+`;
+const LineUnderCurrentTitle = styled.hr`
+  background-color: black;
+  height: 2px;
+  border: none;
+`;
+const RequiredStar = styled.big`
+  color: red;
+  font-size: 1.8rem;
+`;
+const GreyLabelText = styled.p`
+  opacity: 0.8;
 `;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { PageView, Event, GALogin } from "./GoogleAnalytics/index";
 import { Redirect, useHistory } from "react-router-dom";
 import mutation from "../queries/mutation";
 import { graphql } from "react-apollo";
@@ -68,7 +69,9 @@ function DashLogin(props) {
     });
     if (newUser.data.login.token !== null) {
       localStorage.setItem("token", newUser.data.login.token);
-
+      if (newUser) {
+        GALogin(newUser.data.login.tier, newUser.data.login.email);
+      }
       props.handleClose();
       history.push("/data");
       swal({ title: "", text: "Success!", icon: "success" });
