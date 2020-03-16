@@ -117,20 +117,8 @@ export default function FilterBox(props) {
 
   return (
     <div>
-      <a
-        target="_blank"
-        href="https://twitter.com/home?status=This%20photo%20is%20awesome!%20Check%20it%20out:%20pic.twitter.com/9Ee63f7aVp"
-      >
-        Share on Twitter
-      </a>
-      <script
-        async
-        src="https://platform.twitter.com/widgets.js"
-        charset="utf-8"
-      ></script>
-      <br />
-      <br />
-      <br />
+      {/* <a target="_blank" href="https://twitter.com/home?status=This%20photo%20is%20awesome!%20Check%20it%20out:%20pic.twitter.com/9Ee63f7aVp">Share on Twitter</a> */}
+
       <a
         target="_blank"
         href="https://twitter.com/share?ref_src=twsrc%5Etfw"
@@ -139,12 +127,9 @@ export default function FilterBox(props) {
       >
         Tweet
       </a>
-      <script
-        async
-        src="https://platform.twitter.com/widgets.js"
-        charset="utf-8"
-      ></script>
+
       <br />
+
       <div
         class="fb-share-button"
         data-href="https://blissful-pare-60612f.netlify.com/data"
