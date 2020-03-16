@@ -339,33 +339,33 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
   //   filteredData = filteredData.filter(item => item !== null);
   // }
 
-  const filterByDate = (data, startDate, endDate) => {
-    startDate = startDate.replace(/-/g, "");
-    endDate = endDate.replace(/-/g, "");
-    // console.log("about to filter data", data)
-    const filteredData = data.filter(obj => {
-      const objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
-      return objectDate > startDate && objectDate < endDate;
-    });
+  // const filterByDate = (data, startDate, endDate) => {
+  //   startDate = startDate.replace(/-/g, "");
+  //   endDate = endDate.replace(/-/g, "");
+  //   // console.log("about to filter data", data)
+  //   const filteredData = data.filter(obj => {
+  //     const objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
+  //     return objectDate > startDate && objectDate < endDate;
+  //   });
 
-    return filteredData;
-  };
+  //   return filteredData;
+  // };
 
   // breaks if there is no data
   // works
-  if (Object.keys(data[`${queryType}`][0]).includes("created_date")) {
-    console.log("ready to filter by date");
-    // before filtering (most requested procedure commodities(Sessions case)) count = 19990
-    // after filtering by Augist 9th 2017 count = 19215
-    // before filtering first item date = 2017-06-20T00:16:28.0
-    // after filtering first item date = 2017-08-10T15:06:33.00
-    const filteredData = filterByDate(
-      data[`${queryType}`],
-      filterBoxStartDate,
-      filterBoxEndDate
-    );
-    console.log("filtered by date", filteredData);
-  }
+  // if (Object.keys(data[`${queryType}`][0]).includes("created_date")) {
+  //   console.log("ready to filter by date");
+  //   // before filtering (most requested procedure commodities(Sessions case)) count = 19990
+  //   // after filtering by Augist 9th 2017 count = 19215
+  //   // before filtering first item date = 2017-06-20T00:16:28.0
+  //   // after filtering first item date = 2017-08-10T15:06:33.00
+  //   const filteredData = filterByDate(
+  //     data[`${queryType}`],
+  //     filterBoxStartDate,
+  //     filterBoxEndDate
+  //   );
+  //   console.log("filtered by date", filteredData);
+  // }
   // console.log("right before data parse",
   //           filters[0].selectedTableColumnName,
   //           data[`${queryType}`],

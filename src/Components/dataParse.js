@@ -27,6 +27,7 @@ const dataParse = (
     //when single filtering "Most Requested" graph
     if (queryType === "Sessions" && crossFilter === "") {
       data = filterByDate(data, startDate, endDate);
+      data = removeMultiple(data);
       dataStructure = getIndex(data, indexBy);
       console.log(
         "DATAPARSE ONE ----- FIRST FILTER = SESSIONS, CROSSFILTER EMPTY",
@@ -37,6 +38,7 @@ const dataParse = (
     //when cross-filtering "Most Requested" as index
     else if (queryType === "Sessions" && crossFilter !== "") {
       data = filterByDate(data, startDate, endDate);
+      data = removeMultiple(data);
       dataStructure = getIndex(data, indexBy);
       console.log(
         "DATAPARSE TWO -----FIRST FILTER = SESSIONS ---- CROSSFILTER ANYTHING!!!!!!!!!!!!!",
@@ -48,7 +50,8 @@ const dataParse = (
         crossFilter,
         indexBy,
         additionalFilter,
-        queryType
+        queryType,
+        crossFilterQuery
       );
     } else {
       console.log("BIG ELSE DATAPARSE");
@@ -70,6 +73,8 @@ const dataParse = (
       // console.log(dataStructure);
       //when cross-filtering and index is Not "Most Requested"
       if (crossFilter !== "") {
+        data = removeMultiple(data);
+
         console.log(
           "FIRST QUERY = USERS --- BIG ELSE DATAPARSE - IF CROSS ISN'T EMPTY"
         );
@@ -79,10 +84,13 @@ const dataParse = (
           crossFilter,
           indexBy,
           additionalFilter,
-          queryType
+          queryType,
+          crossFilterQuery
         );
       } else {
         //when single filtering with index that is not "Most Requested"
+        data = removeMultiple(data);
+
         console.log(
           "FIRST QUERY = USERS --- BIG ELSE DATAPARSE - IF CROSSFILTER IS EMPTY"
         );
