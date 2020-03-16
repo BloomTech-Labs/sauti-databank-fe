@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { urlPageView } from "./GoogleAnalytics/index";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "./auth/Auth";
-import PaypalButton from "../Components/PaypalButton";
+import PaypalButton from "../Components/paypalButton";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
@@ -88,9 +88,13 @@ function DashAccount(props) {
         }
       });
       // Set the subscription id to null after a user cancels their subscription.
-      data.databankUser.subscription_id = null;
+      data.databankUser.subscription_id = "cancelled";
       history.push("/data");
-      swal({ title: "", text: "You are now a free user", icon: "success" });
+      swal({
+        title: "",
+        text: "Your subcription was successfully cancelled",
+        icon: "success"
+      });
     }
   };
 
