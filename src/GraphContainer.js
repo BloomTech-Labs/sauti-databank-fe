@@ -8,40 +8,93 @@ import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
-
 import styled from "styled-components";
 
+/*
+          what do worandon woman trade?
+          what doe rwandon women over 50 trade?
+
+          just filter what they already have set up from the first 2 filters
+          they should be able to add another additional filter
+
+          low priority:
+
+            the dates on the calendar should be dynamically set to the dates in the items the categories are filterd
+
+            be able to measure date periods by year
+
+sort asending all except for education level options
+and border crossing frequency options
+
+
+
+additional filters:
+default to show
+when next additional filter is picked
+the previous filter is hiding all but the selected one
+
+
+
+append additional filters here
+Additional Filter: Country of Residence - 20-30
+use a newline to separate them
+
+
+
+downloading:
+  export subsample needs to include all from the data series options
+  It not currently doing that
+
+
+
+huge space between title spaces
+*/
+
 const GraphContainer = () => {
-  const [index, setIndex] = useState({
-    type: "gender",
-    query: "Users",
-    label: ""
+  const [filters, setFilters] = useState({
+    // old plan
+    // default query setup
+    // show or hide is only for the first one
+    // check with russ about changes
+    // first one: show or hide
+    // second one: always hide
+    // all rest: always show
+    0: {
+      nameOfFilter: "Data Series",
+      selectedCategory: "Gender", // label
+      selectedOption: undefined,
+      avaliableOptions: [],
+      selectableOptions: {
+        Female: false,
+        male: false
+      },
+      selectedTable: "Users", // value.query
+      selectedTableColumnName: "gender", // value.type
+      showOptions: false
+    },
+
+    1: {
+      nameOfFilter: "Compare SubSamples",
+      selectedCategory: "",
+      selectedOption: undefined,
+      avaliableOptions: [],
+      selectableOptions: {},
+      selectedTable: "Users",
+      selectedTableColumnName: "",
+      showOptions: false
+    },
+    2: {
+      nameOfFilter: "Data Filter",
+      selectedCategory: "",
+      selectedOption: undefined,
+      avaliableOptions: [],
+      selectableOptions: {},
+      selectedTable: "",
+      selectedTableColumnName: "",
+      showOptions: false
+    }
   });
-  const [crossFilter, setCrossFilter] = useState({
-    type: "",
-    query: "Users",
-    label: ""
-  });
-  const [additionalFilter, setAdditionalFilter] = useState({
-    type: "",
-    query: "",
-    label: ""
-  });
-  const [firstSelectedCheckbox, setFirstSelectedCheckbox] = useState({});
-  const [secondSelectedCheckbox, setSecondSelectedCheckbox] = useState({});
-  const [selectedCheckbox, setSelectedCheckbox] = useState({});
-
-  const [indexLabel, setIndexLabel] = useState("Gender");
-  const [crossLabel, setCrossLabel] = useState("");
-
-  const [checkboxOptions, setCheckboxOptions] = useState([]);
-  const [secondCheckboxOptions, setSecondCheckboxOptions] = useState([]);
-
-  const [startDate, setStartDate] = useState("2012-01-01");
-  console.log(startDate);
-  const [endDate, setEndDate] = useState("2020-01-08");
-  console.log(endDate);
-
+  // put the date here
   const {
     filterBoxStartDate,
     setFilterBoxStartDate,
@@ -49,20 +102,27 @@ const GraphContainer = () => {
     setFilterBoxEndDate
   } = useCalendar();
 
-  // useEffect(() => {
-  //   ReactGa.initialize("UA-155468784-1");
-  //   //to report specified pageview:
-  //   ReactGa.pageview("/");
-  // }, []);
-
-  const onChange = event => {
-    setIndex(event.target.value);
-  };
-
-  const onSubmit = e => {
-    e.preventDefault();
-    setCrossFilter(e.target.value);
-  };
+  /*
+breaks search(creates an undefined search)
+{0: {…}, 1: {…}, 2: {…}}
+0:
+selectedTableColumnName: "crossing_freq"
+selectedTable: "Users"
+selectedCategory: "Border Crossing Frequency"
+selectedOption: undefined
+__proto__: Object
+1:
+selectedCategory: ""
+selectedOption: undefined
+selectedTable: ""
+selectedTableColumnName: ""
+__proto__: Object
+2:
+selectedCategory: "Most Requested Procedure Commodity Categories"
+selectedOption: undefined
+selectedTable: "Sessions"
+selectedTableColumnName: "procedurecommoditycat"
+*/
 
   const [hidden, setHidden] = useState(false);
 
@@ -82,50 +142,22 @@ const GraphContainer = () => {
         <div className="content-container">
           <div className={hidden ? "extend" : "chart-container"}>
             <Queries
-              index={index}
-              crossFilter={crossFilter}
-              label={indexLabel}
-              crossLabel={crossLabel}
-              selectedCheckbox={selectedCheckbox}
-              checkboxOptions={checkboxOptions}
-              setCheckboxOptions={setCheckboxOptions}
-              setSecondCheckboxOptions={setSecondCheckboxOptions}
-              additionalFilter={additionalFilter}
-              startDate={startDate}
-              endDate={endDate}
-              secondSelectedCheckbox={secondSelectedCheckbox}
-              firstSelectedCheckbox={firstSelectedCheckbox}
+              filters={filters}
               filterBoxStartDate={filterBoxStartDate}
               setFilterBoxStartDate={setFilterBoxStartDate}
               filterBoxEndDate={filterBoxEndDate}
               setFilterBoxEndDate={setFilterBoxEndDate}
             />
           </div>
+          {/* can put a hide/show button here */}
           <div
             className={
               hidden ? "dropdown-container hide" : "dropdown-container"
             }
           >
             <FilterBox
-              onChange={onChange}
-              onSubmit={onSubmit}
-              index={index}
-              checkboxOptions={checkboxOptions}
-              crossFilter={crossFilter}
-              setIndex={setIndex}
-              setCrossFilter={setCrossFilter}
-              setIndexLabel={setIndexLabel}
-              setCrossLabel={setCrossLabel}
-              setSelectedCheckbox={setSelectedCheckbox}
-              setCheckboxOptions={setCheckboxOptions}
-              setAdditionalFilter={setAdditionalFilter}
-              startDate={startDate}
-              endDate={endDate}
-              setStartDate={setStartDate}
-              setEndDate={setEndDate}
-              setFirstSelectedCheckbox={setFirstSelectedCheckbox}
-              setSecondSelectedCheckbox={setSecondSelectedCheckbox}
-              secondCheckboxOptions={secondCheckboxOptions}
+              filters={filters}
+              setFilters={setFilters}
               filterBoxStartDate={filterBoxStartDate}
               setFilterBoxStartDate={setFilterBoxStartDate}
               filterBoxEndDate={filterBoxEndDate}
