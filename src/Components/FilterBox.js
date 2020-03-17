@@ -121,7 +121,7 @@ export default function FilterBox(props) {
 
       <a
         target="_blank"
-        href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+        href="https://twitter.com/share?ref_src=twsrc%5Etfw?text=this%20website%20is%20awesome!"
         class="twitter-share-button"
         data-show-count="false"
       >
