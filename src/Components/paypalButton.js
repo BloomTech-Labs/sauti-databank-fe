@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { decodeToken } from "../Dashboard/Auth/auth";
+import { decodeToken } from "../dashboard/auth/Auth";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
