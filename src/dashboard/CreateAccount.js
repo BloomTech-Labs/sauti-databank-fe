@@ -57,7 +57,6 @@ const REGISTER = gql`
 export default function SignInSide(props) {
   const [user, setUser] = useState(initialState);
   user.tier = "FREE";
-  console.log(user);
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
   const {
