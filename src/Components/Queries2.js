@@ -39,7 +39,7 @@ showOptions: false
 const GetData = props => {
   let queryType = "tradersUsers";
   let QUERY;
-  let thisQuery = {};
+  let thisQuery;
 
   const {
     // firstSelectedCheckbox,
@@ -320,7 +320,8 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
   // let filteredData;
   // if (
   //   props.additionalFilter.type &&
-  //   !graphLabels[`${props.additionalFilter.type}`]) {
+  //   !graphLabels[`${props.additionalFilter.type}`]
+  // ) {
   //   removeMultiple(data.additionalFilterData);
   //   filteredData = getIndex(
   //     data.additionalFilterData,
@@ -329,6 +330,7 @@ first query Male gender {gender: "Male"} {selectedCategory: "gender", selectedOp
   //   filteredData = filteredData.filter(item => item !== null);
   // }
 
+  // console.log("FILTERED DATA QUERIES", filteredData)
   // if (props.crossFilter.type &&
   //   !graphLabels[`${props.crossFilter.type}`]) {
   //   removeMultiple(data.sessionsData)

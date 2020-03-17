@@ -78,7 +78,8 @@ const setCrossedItems = (
       });
     });
   });
-
+  console.log("function done");
+  console.log("QUERYTYPE", queryType);
   //If graph is "Most Requested" sort from Most to Least requested and provide top 7 objects
   let keyValueArrIndex = [];
   let keyValueArrCross = [];
@@ -108,6 +109,34 @@ const setCrossedItems = (
     dataStructure = newDataStructure;
   }
   // it starts being different here
+  if (
+    graphLabels[`${indexBy}`] &&
+    graphLabels[`${crossFilter}`] &&
+    queryType === "Sessions" &&
+    crossFilterQuery === "Users"
+  ) {
+    console.log(
+      "IF BOTH HAVE GRAPHLABELS AND FIRST FILTER IS SESSIONS AND 2ND FILTER IS USERS"
+    );
+    dataStructure.map(obj => {
+      return keyValueArrIndex.push([
+        obj[`${indexBy}`],
+        Object.values(obj)
+          .slice(1)
+          .reduce((a, b) => a + b)
+      ]);
+    });
+    keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0, 7);
+    keyValueArrIndex.forEach(arr => {
+      for (let i = 0, len = dataStructure.length; i < len; i++) {
+        if (arr[0] === dataStructure[i][`${indexBy}`]) {
+          newDataStructure.push(dataStructure[i]);
+        }
+      }
+    });
+    dataStructure = newDataStructure;
+  }
+
   if (
     graphLabels[`${indexBy}`] &&
     graphLabels[`${crossFilter}`] &&

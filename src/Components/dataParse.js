@@ -90,7 +90,6 @@ const dataParse = (
       //when cross-filtering and index is Not "Most Requested"
       if (crossFilter !== "") {
         data = removeMultiple(data);
-
         console.log(
           "FIRST QUERY = USERS --- BIG ELSE DATAPARSE - IF CROSS ISN'T EMPTY"
         );

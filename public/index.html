@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- FACEBOOK -->
+
+    <meta
+      property="og:url"
+      content="https://blissful-pare-60612f.netlify.com/data"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sauti Databank" />
+    <meta
+      property="og:description"
+      content="Website to show cross-border traders in Africa"
+    />
+    <meta
+      property="og:image"
+      content="http://graphics8.nytimes.com/images/2012/02/19/us/19whitney-span/19whitney-span-articleLarge.jpg"
+    />
+
+    <!-- TWITTER -->
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sauti Databank" />
+    <meta
+      name="twitter:image"
+      content="http://graphics8.nytimes.com/images/2012/02/19/us/19whitney-span/19whitney-span-articleLarge.jpg"
+    />
+
     <!-- INTEGRATION WITH PAYPAL BELOW -->
     <script
       async
@@ -25,20 +51,6 @@
     <!-- End Google Tag Manager -->
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-144131372-1"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "UA-158701427-1");
-      // gtag("config", "UA-144131372-1");
-    </script>
 
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
@@ -80,6 +92,7 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <!-- Google Tag Manager (noscript) -->
+
     <noscript
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-W2V5LRM"
@@ -90,6 +103,14 @@
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
+    <!-- FACEBOOK BODY -->
+    <div id="fb-root"></div>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"
+    ></script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -99,6 +120,32 @@
 
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
+      
     -->
+    <!-- TWITTER BODY -->
+    <script>
+      window.twttr = (function(d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+
+        return t;
+      })(document, "script", "twitter-wjs");
+    </script>
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
   </body>
 </html>
