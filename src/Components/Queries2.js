@@ -25,15 +25,15 @@ const GetData = props => {
     setFilterBoxEndDate
   } = props;
 
-  console.log(`props.index`, index);
-  console.log(`props.crossFilter`, crossFilter);
-  console.log(`props.additionalFilter`, props.additionalFilter);
-  console.log(" ONE props.firstSelectedCheckbox", props.firstSelectedCheckbox);
-  console.log(
-    " TWO props.secondSelectedCheckbox",
-    props.secondSelectedCheckbox
-  );
-  console.log(` THREE props.selectedCheckbox`, props.selectedCheckbox);
+  // console.log(`props.index`, index);
+  // console.log(`props.crossFilter`, crossFilter);
+  // console.log(`props.additionalFilter`, props.additionalFilter);
+  // console.log(" ONE props.firstSelectedCheckbox", props.firstSelectedCheckbox);
+  // console.log(
+  //   " TWO props.secondSelectedCheckbox",
+  //   props.secondSelectedCheckbox
+  // );
+  // console.log(` THREE props.selectedCheckbox`, props.selectedCheckbox);
 
   if (
     props.index.query === "Users" &&
@@ -181,15 +181,15 @@ const GetData = props => {
       `;
   }
 
-  console.log("FINAL QUERY", thisQuery);
+  // console.log("FINAL QUERY", thisQuery);
 
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
   // [thisQuery]
   //queryType: props.selectedCheckbox
-  if (data) console.log(`returned data`, data[queryType]);
-  console.log(`data`, data);
+  // if (data) console.log(`returned data`, data[queryType]);
+  // console.log(`data`, data);
 
   if (loading) {
     return (
@@ -245,7 +245,7 @@ const GetData = props => {
   // console.log("csvData", chartData.dataStructure);
   // console.log(`cross filter type`, props.crossFilter.type);
 
-  console.log("chartdata_____-----", chartData);
+  // console.log("chartdata_____-----", chartData);
 
   if (props.crossFilter.type !== "") {
     return (
