@@ -21,9 +21,6 @@ const GetData = props => {
     setFilterBoxEndDate
   } = props;
 
-  console.log("filter 0", filters[0]);
-  console.log("filter 1", filters[1]);
-  console.log("filter 2", filters[2]);
 
   if (
     filters[0].selectedTable === "Users" &&
@@ -70,19 +67,13 @@ const GetData = props => {
        `;
   }
 
-  console.log("FINAL QUERY", thisQuery, filters);
-  console.log("dates", filterBoxStartDate, filterBoxEndDate);
-  console.log("search kind", queryType);
-
   // it would be nice for this to run in a way that doesn't return any data untill the user actually sets up a query
+
 
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
 
-  if (data) {
-    console.log(`returned data2`, data[queryType]);
-  }
 
   if (loading) {
     return (
@@ -114,7 +105,7 @@ const GetData = props => {
   // console.log("csvData", chartData.dataStructure);
   // console.log(`cross filter type`, props.crossFilter.type);
 
-  console.log("chartdata_____-----", chartData);
+  // console.log("chartdata_____-----", chartData);
 
   if (filters[1].selectedTableColumnName !== "") {
     return (

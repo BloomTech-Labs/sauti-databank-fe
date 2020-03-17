@@ -8,9 +8,9 @@ import { initGA } from "./dashboard/GoogleAnalytics/index";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
-(function initAnalytics() {
-  initGA("UA-158701427-1");
-})();
+// (function initAnalytics() {
+//   initGA("UA-158701427-1");
+// })();
 
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_BACKEND_URL}`,
