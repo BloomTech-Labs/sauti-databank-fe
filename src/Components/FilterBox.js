@@ -44,12 +44,10 @@ export default function FilterBox(props) {
   const FilterSelector = props => {
     const {
       filterSelectorName,
-      // formatGroupLabel,
-      // ControlComponent,
       filters,
       setFilters,
       i,
-      // FilterBoxOptions,
+
       graphLabels
     } = props;
 
@@ -124,20 +122,13 @@ export default function FilterBox(props) {
         <form>
           <p>{filterSelectorName}</p>
           <Select
-            // inputValue={setup}
-            // defaultValue={colourOptions[0]}
-            defaultValue={
-              // FilterBoxOptions.superCategories[0].options[0]
-              { label: filters[i].selectedCategory }
-            }
-            // value={}
+            defaultValue={{ label: filters[i].selectedCategory }}
             // isClearable
             formatGroupLabel={formatGroupLabel}
             components={{ Control: ControlComponent }}
             // isSearchable
             onChange={e => {
               console.log(e.label, filters[i]);
-              // console.log(FilterBoxOptions.default[e.label].value)
               setFilters({
                 ...filters,
                 [i]: {
@@ -145,8 +136,6 @@ export default function FilterBox(props) {
                   selectedCategory: e.label, //option
                   selectedTableColumnName:
                     FilterBoxOptions.default[e.label].value.type,
-                  // selectedTableColumnName: `${e.value.type}`,
-                  // this set doens't always exist
 
                   avaliableOptions: Object.keys(graphLabels).includes(
                     FilterBoxOptions.default[e.label].value.type
@@ -156,35 +145,23 @@ export default function FilterBox(props) {
                       ].labels
                     : [],
                   selectedTable: FilterBoxOptions.default[e.label].value.query,
-                  // selectedTable: e.value.query,
                   // accees all the options from graphlables
                   // and put all of them in here as
                   // option : false
                   selectedOption: undefined
                 }
               });
-
-              // {
-              //   /* FilterBoxOptions.default[props.filters[0].selectedCategory] */
-              // }
-
-              // setSetup(e.label)
             }}
             name="color"
             styles={colourStyles}
-            // options={groupedOptions}
-
-            options={
-              // FilterBoxOptions.superCategories
-              x(
-                FilterBoxOptions.superCategories,
-                Object.keys(filters)
-                  .map(filterId => {
-                    return filters[filterId].selectedCategory;
-                  })
-                  .filter(selectedCategory => selectedCategory.length > 0)
-              )
-            }
+            options={x(
+              FilterBoxOptions.superCategories,
+              Object.keys(filters)
+                .map(filterId => {
+                  return filters[filterId].selectedCategory;
+                })
+                .filter(selectedCategory => selectedCategory.length > 0)
+            )}
           />
           {/* add a button to show or hide these */}
           {/* JS likes to pass integers as string to components */}
@@ -199,7 +176,9 @@ export default function FilterBox(props) {
                       [i]: {
                         ...filters[i],
                         showOptions: !filters[i].showOptions
+                        // selectableOptions:
                       }
+                      // add all the options here
                     });
                   }}
                 >
@@ -217,7 +196,6 @@ export default function FilterBox(props) {
                         // seems to need this when this is a compoennt
                         checked={filters[i].selectedOption === option}
                         onChange={e => {
-                          // console.log(filters);
                           setFilters({
                             ...filters,
                             [i]: {
@@ -248,173 +226,96 @@ export default function FilterBox(props) {
     sub = newSub;
   }
 
-  // const [filterBoxIndex, setFilterBoxIndex] = useState({
-  //   type: "gender",
-  //   query: "Users",
-  //   label: ""
-  // });
-  // // console.log(`filterBoxIndex`, filterBoxIndex);
-  // const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
-  //   type: "",
-  //   query: "Users",
-  //   label: ""
-  // });
-  // const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
-  //   type: "",
-  //   query: "",
-  //   label: ""
-  // });
-  // console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
-  // const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
-  // console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
-  // const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
-  // console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
-
-  // const [
-  //   filterBoxAdditionalFilterLabel,
-  //   setFilterBoxAdditionalFilterLabel
-  // ] = useState("");
   const [setup, setSetup] = useState(colourOptions[0]);
   const [loading, setLoading] = useState(false);
-  const getAvaliableOptions = (options, filters) => {
-    // return options.filter(option => {
-    //   return !Object.keys(filters)
-    //     .map(filterId => {
-    //       return filters[filterId].selectedCategory;
-    //     })
-    //     .includes(option.label);
-    // });
-  };
-  // controlling the items the user can select from
 
   const handleSubmit = useCallback(
     e => {
       if (e.target.textContent === "Submit") {
         e.preventDefault();
       }
-      // props.setIndex(filterBoxIndex);
-      // props.setIndexLabel(filterBoxIndexLabel);
-      // props.setCrossLabel(filterBoxCrossLabel);
-      // props.setCrossFilter(filterBoxCrossFilter);
-      // props.setAdditionalFilter(filterBoxAdditionalFilter);
-      // don't exist so don't use
+
       setFilterBoxStartDate(filterBoxStartDate);
       setFilterBoxEndDate(filterBoxEndDate);
     },
     [
-      // filterBoxAdditionalFilter,
-      // filterBoxCrossFilter,
-      // filterBoxCrossLabel,
       filterBoxEndDate,
-      // filterBoxIndex,
-      // filterBoxIndexLabel,
+
       filterBoxStartDate,
       setFilterBoxStartDate,
       setFilterBoxEndDate
     ]
   );
 
-  // const handleAuto = useCallback(
-  //   e => {
-  //     // props.setIndex(filterBoxIndex);
-  //     // props.setIndexLabel(filterBoxIndexLabel);
-  //     // props.setCrossLabel(filterBoxCrossLabel);
-  //     // props.setCrossFilter(filterBoxCrossFilter);
-  //     // props.setAdditionalFilter(filterBoxAdditionalFilter);
-  //     props.setStartDate(filterBoxStartDate);
-  //     props.setEndDate(filterBoxEndDate);
-  //   },
-  //   [
-  //     // filterBoxAdditionalFilter,
-  //     // filterBoxCrossFilter,
-  //     // filterBoxCrossLabel,
-  //     filterBoxEndDate,
-  //     // filterBoxIndex,
-  //     // filterBoxIndexLabel,
-  //     filterBoxStartDate,
-  //     props
-  //   ]
-  // );
-  // console.log(
-  //   "IMPORTANTTT",
-  //   filterBoxAdditionalFilter.type,
-  //   !graphLabels[`${filterBoxAdditionalFilter.type}`]
-  // );
-
-  // useEffect(() => {
-  //   if (
-  //     !graphLabels[`${filterBoxAdditionalFilter.type}`] &&
-  //     filterBoxAdditionalFilter.type
-  //   ) {
-  //     handleAuto();
-  //     setLoading(true);
-  //   }
-  //   /* eslint-disable */
-  // }, [filterBoxAdditionalFilter.type]);
-
-  // useEffect(() => {
-  //   if (props.checkboxOptions.length) {
-  //     setLoading(false);
-  //   }
-  // }, [props.checkboxOptions]);
-
-  // const ClickTracker = index => {
-  //   ReactGa.event({
-  //     category: "Option",
-  //     action: `Clicked a Filter Option: ${index}`
-  //   });
-  // };
-
-  // console.log("FILTER BOX ADDITIONALFILTER TYPE", filterBoxAdditionalFilter.type);
-  // console.log(" ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES", props.checkboxOptions);
-  // console.log(" TWO - props.SECONDCheckboxOptions", props.secondCheckboxOptions);
-
   return (
-    <DropdownContainer>
-      {Object.keys(filters).map(filterId => (
-        <FilterSelector
-          key={filterId}
-          filterSelectorName={filters[filterId].nameOfFilter}
-          filters={filters}
-          setFilters={setFilters}
-          i={filterId}
-          graphLabels={graphLabels}
-          // these are the subcomponents used to control the styles of
-          // the react selection component
-          // formatGroupLabel={formatGroupLabel}
-          // ControlComponent={ControlComponent}
-          // FilterBoxOptions={FilterBoxOptions}
-        />
-      ))}
-      <div className="btn-container">
-        <Button
-          // className="checkbox-submit-btn"
-          // type="submit"
-          // disabled={loading}
-          onClick={e => {
-            // console.log("here");
-            // console.log(filters);
-            // put in check for how many filters we can add
-            setFilters({
-              ...filters,
-              [Object.keys(filters).length]: {
-                nameOfFilter: "Data Filter",
-                selectedCategory: "",
-                selectedOption: undefined,
-                avaliableOptions: [],
-                selectedTable: "",
-                selectedTableColumnName: "",
-                showOptions: false
-              }
-            });
-          }}
-          style={{ cursor: loading ? "auto" : "pointer" }}
+    <div>
+      {/* <a target="_blank" href="https://twitter.com/home?status=This%20photo%20is%20awesome!%20Check%20it%20out:%20pic.twitter.com/9Ee63f7aVp">Share on Twitter</a> */}
+
+      <a
+        target="_blank"
+        href="https://twitter.com/share?ref_src=twsrc%5Etfw?text=this%20website%20is%20awesome!"
+        class="twitter-share-button"
+        data-show-count="false"
+      >
+        Tweet
+      </a>
+
+      <br />
+
+      <div
+        class="fb-share-button"
+        data-href="https://blissful-pare-60612f.netlify.com/data"
+        data-layout="button"
+        data-size="small"
+      >
+        <a
+          target="_blank"
+          href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+          class="fb-xfbml-parse-ignore"
         >
-          Add Additional Filter
-        </Button>
+          Share
+        </a>
       </div>
-      <form>
-        {/*
+      <DropdownContainer>
+        {Object.keys(filters).map(filterId => (
+          <FilterSelector
+            key={filterId}
+            filterSelectorName={filters[filterId].nameOfFilter}
+            filters={filters}
+            setFilters={setFilters}
+            i={filterId}
+            graphLabels={graphLabels}
+          />
+        ))}
+        <div className="btn-container">
+          <Button
+            // className="checkbox-submit-btn"
+            // type="submit"
+            // disabled={loading}
+            onClick={e => {
+              // console.log("here");
+              // console.log(filters);
+              // put in check for how many filters we can add
+              setFilters({
+                ...filters,
+                [Object.keys(filters).length]: {
+                  nameOfFilter: "Data Filter",
+                  selectedCategory: "",
+                  selectedOption: undefined,
+                  avaliableOptions: [],
+                  selectedTable: "",
+                  selectedTableColumnName: "",
+                  showOptions: false
+                }
+              });
+            }}
+            style={{ cursor: loading ? "auto" : "pointer" }}
+          >
+            Add Additional Filter
+          </Button>
+        </div>
+        <form>
+          {/*
         if loading
         <Loader
             className="options-loader"
@@ -425,88 +326,89 @@ export default function FilterBox(props) {
             timeout={120000000}
           /> */}
 
-        {tier === "ADMIN" ||
-        tier === "PAID" ||
-        tier === "GOV_ROLE" ||
-        newSub ? (
-          <DateContainer>
-            <div>
-              <p>Start</p>
-              <input
-                name="startData"
-                type="date"
-                value={filterBoxStartDate}
-                disabled={loading}
-                onChange={e => setFilterBoxStartDate(e.target.value)}
-              />
-            </div>
-            <div>
-              <p>End</p>
-              <input
-                disabled={loading}
-                name="endData"
-                type="date"
-                value={filterBoxEndDate}
-                id="today"
-                onChange={e => setFilterBoxEndDate(e.target.value)}
-              />
-            </div>
-          </DateContainer>
-        ) : (
-          <CalendarModal />
-        )}
-        <div className="btn-container">
-          <Button
-            className="checkbox-submit-btn"
-            type="submit"
-            disabled={loading}
-            onClick={handleSubmit}
-            style={{ cursor: loading ? "auto" : "pointer" }}
+          {tier === "ADMIN" ||
+          tier === "PAID" ||
+          tier === "GOV_ROLE" ||
+          newSub ? (
+            <DateContainer>
+              <div>
+                <p>Start</p>
+                <input
+                  name="startData"
+                  type="date"
+                  value={filterBoxStartDate}
+                  disabled={loading}
+                  onChange={e => setFilterBoxStartDate(e.target.value)}
+                />
+              </div>
+              <div>
+                <p>End</p>
+                <input
+                  disabled={loading}
+                  name="endData"
+                  type="date"
+                  value={filterBoxEndDate}
+                  id="today"
+                  onChange={e => setFilterBoxEndDate(e.target.value)}
+                />
+              </div>
+            </DateContainer>
+          ) : (
+            <CalendarModal />
+          )}
+          <div className="btn-container">
+            <Button
+              className="checkbox-submit-btn"
+              type="submit"
+              disabled={loading}
+              onClick={handleSubmit}
+              style={{ cursor: loading ? "auto" : "pointer" }}
+            >
+              Submit
+            </Button>
+          </div>
+          <p
+            className="reset-btn"
+            onClick={e => {
+              props.setFilters({
+                // default query setup
+                0: {
+                  nameOfFilter: "Data Series",
+                  selectedCategory: "Gender",
+                  selectedOption: undefined,
+                  avaliableOptions: [],
+                  selectedTable: "Users",
+                  selectedTableColumnName: "gender",
+                  showOptions: false
+                },
+                1: {
+                  nameOfFilter: "Compare SubSamples",
+                  selectedCategory: "",
+                  selectedOption: undefined,
+                  avaliableOptions: [],
+                  selectedTable: "Users",
+                  selectedTableColumnName: "",
+                  showOptions: false
+                },
+                2: {
+                  nameOfFilter: "Data Filter",
+                  selectedCategory: "",
+                  selectedOption: undefined,
+                  avaliableOptions: [],
+                  selectedTable: "",
+                  selectedTableColumnName: "",
+                  showOptions: false
+                }
+              });
+              setFilterBoxStartDate("2017-01-01");
+              setFilterBoxEndDate(getTodaysDate());
+            }}
           >
-            Submit
-          </Button>
-        </div>
-        <p
-          className="reset-btn"
-          onClick={e => {
-            props.setFilters({
-              // default query setup
-              0: {
-                nameOfFilter: "Data Series",
-                selectedCategory: "Gender", // label
-                selectedOption: undefined,
-                avaliableOptions: [],
-                selectedTable: "Users", // value.query
-                selectedTableColumnName: "gender", // value.type
-                showOptions: false
-              },
-              1: {
-                nameOfFilter: "Compare SubSamples",
-                selectedCategory: "",
-                selectedOption: undefined,
-                avaliableOptions: [],
-                selectedTable: "Users",
-                selectedTableColumnName: "",
-                showOptions: false
-              },
-              2: {
-                nameOfFilter: "Data Filter",
-                selectedCategory: "",
-                selectedOption: undefined,
-                avaliableOptions: [],
-                selectedTable: "",
-                selectedTableColumnName: "",
-                showOptions: false
-              }
-            });
-            setFilterBoxStartDate("2017-01-01");
-            setFilterBoxEndDate(getTodaysDate());
-          }}
-        >
-          Reset
-        </p>
-      </form>
-    </DropdownContainer>
+            Reset
+          </p>
+        </form>
+      </DropdownContainer>
+    </div>
   );
 }
 

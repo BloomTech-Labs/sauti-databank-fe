@@ -9,13 +9,7 @@ import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
 import styled from "styled-components";
-// Data Filter
-//  <p className="disclosure">
-// *This optional filter adjusts samplesize and may not always alter the
-// graph appearance.
-// </p>
-//{/* for future: more than 1 data filter */}
-//{
+
 /*
           what do worandon woman trade?
           what doe rwandon women over 50 trade?
@@ -29,11 +23,36 @@ import styled from "styled-components";
 
             be able to measure date periods by year
 
-        */
-//}
+sort asending all except for education level options
+and border crossing frequency options
+
+
+
+additional filters:
+default to show
+when next additional filter is picked
+the previous filter is hiding all but the selected one
+
+
+
+append additional filters here
+Additional Filter: Country of Residence - 20-30
+use a newline to separate them
+
+
+
+downloading:
+  export subsample needs to include all from the data series options
+  It not currently doing that
+
+
+
+huge space between title spaces
+*/
 
 const GraphContainer = () => {
   const [filters, setFilters] = useState({
+    // old plan
     // default query setup
     // show or hide is only for the first one
     // check with russ about changes
@@ -45,6 +64,10 @@ const GraphContainer = () => {
       selectedCategory: "Gender", // label
       selectedOption: undefined,
       avaliableOptions: [],
+      selectableOptions: {
+        Female: false,
+        male: false
+      },
       selectedTable: "Users", // value.query
       selectedTableColumnName: "gender", // value.type
       showOptions: false
@@ -55,6 +78,7 @@ const GraphContainer = () => {
       selectedCategory: "",
       selectedOption: undefined,
       avaliableOptions: [],
+      selectableOptions: {},
       selectedTable: "Users",
       selectedTableColumnName: "",
       showOptions: false
@@ -64,6 +88,7 @@ const GraphContainer = () => {
       selectedCategory: "",
       selectedOption: undefined,
       avaliableOptions: [],
+      selectableOptions: {},
       selectedTable: "",
       selectedTableColumnName: "",
       showOptions: false
@@ -77,43 +102,6 @@ const GraphContainer = () => {
     setFilterBoxEndDate
   } = useCalendar();
 
-  // const [index, setIndex] = useState({
-  //   type: "gender",
-  //   query: "Users",
-  //   label: ""
-  // });
-  // const [crossFilter, setCrossFilter] = useState({
-  //   type: "",
-  //   query: "Users",
-  //   label: ""
-  // });
-  // const [additionalFilter, setAdditionalFilter] = useState({
-  //   type: "",
-  //   query: "",
-  //   label: ""
-  // });
-  // const [firstSelectedCheckbox, setFirstSelectedCheckbox] = useState({});
-  // const [secondSelectedCheckbox, setSecondSelectedCheckbox] = useState({});
-  // const [selectedCheckbox, setSelectedCheckbox] = useState({});
-
-  // const [indexLabel, setIndexLabel] = useState("Gender");
-  // const [crossLabel, setCrossLabel] = useState("");
-
-  // const [checkboxOptions, setCheckboxOptions] = useState([]);
-  // const [secondCheckboxOptions, setSecondCheckboxOptions] = useState([]);
-
-  // const [startDate, setStartDate] = useState("2012-01-01");
-  // const [endDate, setEndDate] = useState("2020-01-08");
-
-  // useEffect(() => {
-  //   ReactGa.initialize("UA-155468784-1");
-  //   //to report specified pageview:
-  //   ReactGa.pageview("/");
-  // }, []);
-
-  // const onChange = event => {
-  //   // setIndex(event.target.value);
-  // };
   /*
 breaks search(creates an undefined search)
 {0: {…}, 1: {…}, 2: {…}}
@@ -135,10 +123,6 @@ selectedOption: undefined
 selectedTable: "Sessions"
 selectedTableColumnName: "procedurecommoditycat"
 */
-  const onSubmit = e => {
-    e.preventDefault();
-    // setCrossFilter(e.target.value);
-  };
 
   const [hidden, setHidden] = useState(false);
 
@@ -158,19 +142,6 @@ selectedTableColumnName: "procedurecommoditycat"
         <div className="content-container">
           <div className={hidden ? "extend" : "chart-container"}>
             <Queries
-              // index={index}
-              // crossFilter={crossFilter}
-              // label={indexLabel}
-              // crossLabel={crossLabel}
-              // selectedCheckbox={selectedCheckbox}
-              // checkboxOptions={checkboxOptions}
-              // setCheckboxOptions={setCheckboxOptions}
-              // setSecondCheckboxOptions={setSecondCheckboxOptions}
-              // additionalFilter={additionalFilter}
-              // startDate={startDate}
-              // endDate={endDate}
-              // secondSelectedCheckbox={secondSelectedCheckbox}
-              // firstSelectedCheckbox={firstSelectedCheckbox}
               filters={filters}
               filterBoxStartDate={filterBoxStartDate}
               setFilterBoxStartDate={setFilterBoxStartDate}
@@ -179,27 +150,12 @@ selectedTableColumnName: "procedurecommoditycat"
             />
           </div>
           {/* can put a hide/show button here */}
-          <div className="dropdown-container">
+          <div
+            className={
+              hidden ? "dropdown-container hide" : "dropdown-container"
+            }
+          >
             <FilterBox
-              // onChange={onChange}
-              // onSubmit={onSubmit}
-              // index={index}
-              // checkboxOptions={checkboxOptions}
-              // crossFilter={crossFilter}
-              // setIndex={setIndex}
-              // setCrossFilter={setCrossFilter}
-              // setIndexLabel={setIndexLabel}
-              // setCrossLabel={setCrossLabel}
-              // setSelectedCheckbox={setSelectedCheckbox}
-              // setCheckboxOptions={setCheckboxOptions}
-              // setAdditionalFilter={setAdditionalFilter}
-              // startDate={startDate}
-              // endDate={endDate}
-              // setStartDate={setStartDate}
-              // setEndDate={setEndDate}
-              // setFirstSelectedCheckbox={setFirstSelectedCheckbox}
-              // setSecondSelectedCheckbox={setSecondSelectedCheckbox}
-              // secondCheckboxOptions={secondCheckboxOptions}
               filters={filters}
               setFilters={setFilters}
               filterBoxStartDate={filterBoxStartDate}
