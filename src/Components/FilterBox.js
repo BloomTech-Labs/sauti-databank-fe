@@ -485,7 +485,7 @@ export default function FilterBox(props) {
                 selectedCategory: "",
                 selectedOption: undefined,
                 avaliableOptions: [],
-                selectedTable: "",
+                selectedTable: "Users",
                 selectedTableColumnName: "",
                 showOptions: false
               },

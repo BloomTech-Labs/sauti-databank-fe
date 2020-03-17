@@ -6,13 +6,15 @@ import getIndex from "./getIndex";
 
 
 */
+// tomorrow start looking in here
 const setCrossedItems = (
   data,
   dataStructure,
   crossFilter,
   indexBy,
   additionalFilter,
-  queryType
+  queryType,
+  crossFilterQuery
 ) => {
   console.log(
     "SET_CROSSED_ITEMS",
@@ -20,7 +22,8 @@ const setCrossedItems = (
     dataStructure,
     crossFilter,
     indexBy,
-    additionalFilter
+    additionalFilter,
+    queryType
   );
   //will be used to store all possible values for the index value, which is referring to a column in the database table
   let indexByValues = [];
@@ -104,6 +107,34 @@ const setCrossedItems = (
     });
     dataStructure = newDataStructure;
   }
+  // it starts being different here
+  if (
+    graphLabels[`${indexBy}`] &&
+    graphLabels[`${crossFilter}`] &&
+    queryType === "Sessions" &&
+    crossFilterQuery === "Users"
+  ) {
+    console.log(
+      "IF BOTH HAVE GRAPHLABELS AND FIRST FILTER IS SESSIONS AND 2ND FILTER IS USERS"
+    );
+    dataStructure.map(obj => {
+      return keyValueArrIndex.push([
+        obj[`${indexBy}`],
+        Object.values(obj)
+          .slice(1)
+          .reduce((a, b) => a + b)
+      ]);
+    });
+    keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0, 7);
+    keyValueArrIndex.forEach(arr => {
+      for (let i = 0, len = dataStructure.length; i < len; i++) {
+        if (arr[0] === dataStructure[i][`${indexBy}`]) {
+          newDataStructure.push(dataStructure[i]);
+        }
+      }
+    });
+    dataStructure = newDataStructure;
+  }
 
   // If CrossFilter is "Most Requested" type, and Index is not:
   if (!graphLabels[`${crossFilter}`] && graphLabels[`${indexBy}`]) {
@@ -130,9 +161,13 @@ const setCrossedItems = (
     });
     dataStructure = newDataStructure;
   }
-
-  if (graphLabels[`${crossFilter}`] && graphLabels[`${indexBy}`]) {
-    console.log("NEW - BOTH GRAPHLABELS");
+  console.log("CROSS FILTER CROSSED ITEMS", crossFilterQuery);
+  if (
+    graphLabels[`${crossFilter}`] &&
+    graphLabels[`${indexBy}`] &&
+    queryType === "Users"
+  ) {
+    console.log("NEW - BOTH GRAPHLABELS - FIRST FILTER IS USERS");
     dataStructure.forEach(obj => {
       let crossKeys = Object.keys(obj);
       let crossValues = Object.values(obj);
@@ -154,7 +189,87 @@ const setCrossedItems = (
     dataStructure = newDataStructure;
   }
 
+  if (
+    graphLabels[`${crossFilter}`] &&
+    graphLabels[`${indexBy}`] &&
+    queryType === "Sessions" &&
+    crossFilterQuery === "Sessions"
+  ) {
+    console.log("IF BOTH FILTERS HAVE GRAPHLABELS AND BOTH ARE SESSIONS");
+    //commodityproduct: "Maize", "KEN": 123, "RWA": 200
+    //commodityproduct: "Beans", "KEN": 152, "RWA": 478
+    dataStructure.map(obj => {
+      if (obj[`${indexBy}`] !== null && obj[`${indexBy}`] !== undefined) {
+        return keyValueArrIndex.push([
+          obj[`${indexBy}`],
+          Object.values(obj)
+            .slice(1)
+            .reduce((a, b) => +a + +b)
+        ]);
+      }
+    });
+    //Sort Index values and take only the top 7
+    keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0, 7);
+    console.log("keyvalArr", keyValueArrIndex);
+    keyValueArrIndex.forEach(arr => {
+      newDataStructure.push({ [indexBy]: arr[0] });
+    });
+    let topSeven = [];
+    newDataStructure.forEach(item => {
+      topSeven.push(item[`${indexBy}`]);
+    });
+    dataStructure = dataStructure.filter(obj =>
+      topSeven.includes(obj[`${indexBy}`])
+    );
+    let keysToSort = Object.keys(dataStructure[0]).slice(1);
+    let tempObj = {};
+    keysToSort.forEach(item => {
+      return (tempObj = { ...tempObj, [`${item}`]: 0 });
+    });
+    keysToSort = tempObj;
+    dataStructure.forEach(obj => {
+      for (var key in obj) {
+        if (Number.isInteger(+obj[key])) keysToSort[key] += Number(obj[key]);
+      }
+    });
+
+    //Sort CrossFilter values and take only the top 7 overall, then put them in the index array to be displayed
+    let crossKeys = Object.keys(keysToSort).filter(
+      item => item !== undefined && item !== "undefined"
+    );
+    let crossValues = Object.values(keysToSort);
+    let tempCrossArr = [];
+    crossKeys.forEach((key, index) => {
+      tempCrossArr.push([key, crossValues[index]]);
+    });
+    let slicedCrossArr = tempCrossArr.sort((a, b) => b[1] - a[1]).slice(0, 7);
+    crossFilterValues = [];
+    slicedCrossArr.forEach(arr => {
+      crossFilterValues.push(arr[0]);
+    });
+    let temp = {};
+    slicedCrossArr.forEach(arr => {
+      temp = { ...temp, [arr[0]]: arr[1] };
+    });
+
+    keysToSort = temp;
+
+    let keysToKeep = Object.keys(keysToSort);
+
+    //Build out datastructure to look as we want it
+    dataStructure.forEach((obj, index) => {
+      let tempObject = { [indexBy]: obj[indexBy] };
+      for (var key in obj) {
+        if (keysToKeep.includes(key)) {
+          tempObject = { ...tempObject, [key]: obj[key] };
+        }
+      }
+      dataStructure[index] = tempObject;
+    });
+  }
+
   //If both Index and CrossFilter are "Most Requested" type:
+
   if (!graphLabels[`${crossFilter}`] && !graphLabels[`${indexBy}`]) {
     console.log("IF BOTH FILTERS HAVE NO GRAPHLABELS");
     //commodityproduct: "Maize", "KEN": 123, "RWA": 200
@@ -228,6 +343,7 @@ const setCrossedItems = (
       dataStructure[index] = tempObject;
     });
   }
+
   console.log("done with graphlabels");
 
   //Remove any nulls incase there are any
