@@ -23,16 +23,17 @@ import DashLoginModal from "./DashLoginModal";
 import "../index.css";
 import { ModalText, FormButton2 } from "./styledComponents/Index";
 
-const initialState = {
-  email: "",
-  password: "",
-  organization: "",
-  job_position: "",
-  country: "",
-  organization_type: "",
-  tier: "",
-  interest: ""
-};
+// const initialState = {
+//   email: "",
+//   password: "",
+//   organization: "",
+//   job_position: "",
+//   country: "",
+//   organization_type: "",
+//   tier: "",
+//   interest: "",
+//   found_by: ""
+// };
 
 const REGISTER = gql`
   mutation registerNewUser($newUser: newRegisterInput!) {
@@ -46,6 +47,7 @@ const REGISTER = gql`
       job_position
       country
       organization_type
+      found_by
       token
     }
   }
@@ -98,7 +100,7 @@ function DashSignup(props) {
     urlPageView("/signup");
   });
 
-  const [user, setUser] = useState(initialState);
+  const [user, setUser] = useState({});
   user.tier = "FREE";
   console.log(user);
   const history = useHistory();
@@ -111,7 +113,8 @@ function DashSignup(props) {
     country,
     organization_type,
     tier,
-    interest
+    interest,
+    found_by
   } = user;
 
   const classes = useStyles();
@@ -240,6 +243,27 @@ function DashSignup(props) {
               <MenuItem value={"RESEARCH"}>RESEARCH</MenuItem>
               <MenuItem value={"GOVERNMENT"}>GOVERNMENT</MenuItem>
               <MenuItem value={"NGO"}>NGO</MenuItem>
+              <MenuItem value={"OTHER"}>OTHER</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl className={classes.margin}>
+            <Labels2>How did you hear about us?</Labels2>
+            <Select
+              labelId="demo-customized-select-label"
+              id="demo-customized-select"
+              name="organization_type"
+              value={found_by}
+              onChange={handleChange}
+              input={<Styles />}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={"Cross_border_Association"}>
+                Cross border Association
+              </MenuItem>
+              <MenuItem value={"University"}>University</MenuItem>
+              <MenuItem value={"Sauti_Staff"}>Sauti Staff</MenuItem>
               <MenuItem value={"OTHER"}>OTHER</MenuItem>
             </Select>
           </FormControl>

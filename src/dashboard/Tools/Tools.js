@@ -128,6 +128,17 @@ class Tools extends Component {
           }
         },
         {
+          headerName: "Found By",
+          field: "found_by",
+          sortable: true,
+          filter: true,
+          width: 100,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
           headerName: "PAYMENT",
           field: "payment",
           sortable: true,

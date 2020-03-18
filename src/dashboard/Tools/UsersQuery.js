@@ -15,6 +15,7 @@ const Users_Query = gql`
       country
       organization_type
       registration_date
+      found_by
     }
   }
 `;

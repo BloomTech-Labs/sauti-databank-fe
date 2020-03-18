@@ -247,6 +247,27 @@ export default function SignInSide(props) {
               </Select>
               <label>*required</label>
             </FormControl>
+            <FormControl className={classes.margin}>
+              <p>How did you hear about us?</p>
+              <Select
+                label="Organization Type"
+                labelId="demo-customized-select-label"
+                id="demo-customized-select"
+                name="organization_type"
+                placeholder="Organization Type"
+                value={user.found_by}
+                onChange={handleChange}
+                input={<Styles />}
+              >
+                <MenuItem value={"Cross_border_Association"}>
+                  Cross border Association
+                </MenuItem>
+                <MenuItem value={"University"}>University</MenuItem>
+                <MenuItem value={"Sauti_Staff"}>Sauti Staff</MenuItem>
+                <MenuItem value={"OTHER"}>OTHER</MenuItem>
+              </Select>
+              <label>*required</label>
+            </FormControl>
 
             <br></br>
 
