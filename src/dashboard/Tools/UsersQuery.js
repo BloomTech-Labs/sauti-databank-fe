@@ -14,6 +14,7 @@ const Users_Query = gql`
       job_position
       country
       organization_type
+      registration_date
     }
   }
 `;
@@ -31,6 +32,18 @@ const UsersQuery = () => {
   }
   console.log(data.allUsers);
 
+  data.allUsers.registration_date = new Date(
+    parseInt(data.allUsers.registration_date)
+  ).toDateString();
+
+  //format date
+  data.allUsers.map(item => {
+    if (item.registration_date !== undefined) {
+      item.registration_date = Date(parseInt(item.registration_date));
+    }
+  });
+
+  //data.allUsers.registration_date =5
   return (
     <>
       <Tools allUsers={data.allUsers} />

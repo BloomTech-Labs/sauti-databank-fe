@@ -117,6 +117,17 @@ class Tools extends Component {
           }
         },
         {
+          headerName: "Registration Date",
+          field: "registration_date",
+          sortable: true,
+          filter: true,
+          width: 130,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
           headerName: "PAYMENT",
           field: "payment",
           sortable: true,
