@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { urlPageView } from "./GoogleAnalytics/index";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "./auth/Auth";
-import PaypalButton from "../Components/paypalButton";
+import PaypalButton from "../Components/PaypalButton";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
