@@ -15,20 +15,3 @@ describe("formatDate()", () => {
     expect(mockFormatDate).toHaveBeenCalledTimes(1);
   });
 });
-
-// test("toBe", () => {
-//   expect().toBe();
-//   expect().not.toBe();
-// });
-
-// test("toEqual", () => {
-//   const expected = {};
-//   const actual = {};
-//   expect(expected).toEqual(actual);
-// });
-
-// test("toMatchObject", () => {
-//   const expected = {};
-//   const actual = {};
-//   expect(expected).toMatchObject(actual);
-// });
