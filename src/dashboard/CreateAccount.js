@@ -26,16 +26,16 @@ import InputBase from "@material-ui/core/InputBase";
 
 import styled from "styled-components";
 
-const initialState = {
-  email: "",
-  password: "",
-  organization: "",
-  job_position: "",
-  country: "",
-  organization_type: "",
-  tier: "",
-  interest: ""
-};
+// const initialState = {
+//   email: "",
+//   password: "",
+//   organization: "",
+//   job_position: "",
+//   country: "",
+//   organization_type: "",
+//   tier: "",
+//   interest: ""
+// };
 
 const REGISTER = gql`
   mutation registerNewUser($newUser: newRegisterInput!) {
@@ -49,13 +49,14 @@ const REGISTER = gql`
       job_position
       country
       organization_type
+      found_by
       token
     }
   }
 `;
 
 export default function SignInSide(props) {
-  const [user, setUser] = useState(initialState);
+  const [user, setUser] = useState({});
   user.tier = "FREE";
   console.log(user);
   const history = useHistory();
@@ -68,7 +69,8 @@ export default function SignInSide(props) {
     country,
     organization_type,
     tier,
-    interest
+    interest,
+    found_by
   } = user;
 
   const classes = useStyles();
@@ -250,20 +252,20 @@ export default function SignInSide(props) {
             <FormControl className={classes.margin}>
               <p>How did you hear about us?</p>
               <Select
-                label="Organization Type"
+                label="Found By"
                 labelId="demo-customized-select-label"
                 id="demo-customized-select"
-                name="organization_type"
-                placeholder="Organization Type"
+                name="found_by"
+                placeholder=""
                 value={user.found_by}
                 onChange={handleChange}
                 input={<Styles />}
               >
-                <MenuItem value={"Cross_border_Association"}>
+                <MenuItem value={"CROSS_BORDER_ASSOCIATION"}>
                   Cross border Association
                 </MenuItem>
-                <MenuItem value={"University"}>University</MenuItem>
-                <MenuItem value={"Sauti_Staff"}>Sauti Staff</MenuItem>
+                <MenuItem value={"UNIVERSITY"}>University</MenuItem>
+                <MenuItem value={"SAUTI_STAFF"}>Sauti Staff</MenuItem>
                 <MenuItem value={"OTHER"}>OTHER</MenuItem>
               </Select>
               <label>*required</label>
