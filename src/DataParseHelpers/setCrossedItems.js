@@ -6,6 +6,7 @@ import getIndex from "./getIndex";
 
 
 */
+// tomorrow start looking in here
 const setCrossedItems = (
   data,
   dataStructure,
@@ -21,7 +22,8 @@ const setCrossedItems = (
     dataStructure,
     crossFilter,
     indexBy,
-    additionalFilter
+    additionalFilter,
+    queryType
   );
   //will be used to store all possible values for the index value, which is referring to a column in the database table
   let indexByValues = [];
@@ -87,6 +89,34 @@ const setCrossedItems = (
   if (!graphLabels[`${indexBy}`] && graphLabels[`${crossFilter}`]) {
     console.log(
       "IF NO GRAPHLABELS FOR FIRST FILTER, CROSSFIILTER HAS GRAPHLABELS"
+    );
+    dataStructure.map(obj => {
+      return keyValueArrIndex.push([
+        obj[`${indexBy}`],
+        Object.values(obj)
+          .slice(1)
+          .reduce((a, b) => a + b)
+      ]);
+    });
+    keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0, 7);
+    keyValueArrIndex.forEach(arr => {
+      for (let i = 0, len = dataStructure.length; i < len; i++) {
+        if (arr[0] === dataStructure[i][`${indexBy}`]) {
+          newDataStructure.push(dataStructure[i]);
+        }
+      }
+    });
+    dataStructure = newDataStructure;
+  }
+  // it starts being different here
+  if (
+    graphLabels[`${indexBy}`] &&
+    graphLabels[`${crossFilter}`] &&
+    queryType === "Sessions" &&
+    crossFilterQuery === "Users"
+  ) {
+    console.log(
+      "IF BOTH HAVE GRAPHLABELS AND FIRST FILTER IS SESSIONS AND 2ND FILTER IS USERS"
     );
     dataStructure.map(obj => {
       return keyValueArrIndex.push([

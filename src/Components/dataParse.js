@@ -16,11 +16,13 @@ const dataParse = (
   crossFilterQuery
 ) => {
   // This is bad practice, but function wrapped in try catch incase unknown error occurs, to reload page
-  // console.log(`indexBy`, indexBy);
-  // console.log(`dataparse`, data);
-  // console.log(`additionalFilter`, additionalFilter);
-  // console.log(`crossFilter`, crossFilter);
-  // console.log(`queryType`, queryType);
+  console.log(`indexBy`, indexBy);
+  console.log(`dataparse`, data);
+  console.log(`crossFilter`, crossFilter);
+
+  console.log(`additionalFilter`, additionalFilter);
+  console.log(`queryType`, queryType);
+  console.log(`crossFilterQuery`, crossFilterQuery);
   try {
     let dataStructure = [];
     //when single filtering "Most Requested" graph
@@ -37,12 +39,27 @@ const dataParse = (
     //when cross-filtering "Most Requested" as index
     else if (queryType === "Sessions" && crossFilter !== "") {
       data = filterByDate(data, startDate, endDate);
+      console.log("data", data);
+
       data = removeMultiple(data);
+      console.log("data", data);
+
       dataStructure = getIndex(data, indexBy);
+      console.log("data", data);
+      console.log("dataStructure", dataStructure);
+
       console.log(
         "DATAPARSE TWO -----FIRST FILTER = SESSIONS ---- CROSSFILTER ANYTHING!!!!!!!!!!!!!",
         dataStructure
       );
+      // console.log("before running setCrossedItems")
+      // console.log("data", data)
+      // console.log("dataStructure", dataStructure)
+      // console.log("crossFilter", crossFilter)
+      // console.log("indexBy", indexBy)
+      // console.log("additionalFilter", additionalFilter)
+      // console.log("queryType", queryType)
+      // console.log("crossFilterQuery", crossFilterQuery)
       return setCrossedItems(
         data,
         dataStructure,
