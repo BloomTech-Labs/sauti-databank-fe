@@ -10,46 +10,6 @@ import Queries from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
 import styled from "styled-components";
 
-/*
-          what do worandon woman trade?
-          what doe rwandon women over 50 trade?
-
-          just filter what they already have set up from the first 2 filters
-          they should be able to add another additional filter
-
-          low priority:
-
-            the dates on the calendar should be dynamically set to the dates in the items the categories are filterd
-
-            be able to measure date periods by year
-
-sort asending all except for education level options
-and border crossing frequency options
-
-
-
-additional filters:
-default to show
-when next additional filter is picked
-the previous filter is hiding all but the selected one
-
-
-
-append additional filters here
-Additional Filter: Country of Residence - 20-30
-use a newline to separate them
-
-
-
-downloading:
-  export subsample needs to include all from the data series options
-  It not currently doing that
-
-
-
-huge space between title spaces
-*/
-
 const GraphContainer = () => {
   const [filters, setFilters] = useState({
     // old plan

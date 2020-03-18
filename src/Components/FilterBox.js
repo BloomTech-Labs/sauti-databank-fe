@@ -9,12 +9,13 @@ import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 import { colourOptions, groupedOptions } from "./docs/data";
 import { getTodaysDate } from "../dashboard/CalendarModal";
-
+import { useHistory } from "react-router-dom";
 import CalendarModal from "../dashboard/CalendarModal";
 
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 
 export default function FilterBox(props) {
+  const History = useHistory();
   const {
     filters,
     setFilters,
@@ -23,6 +24,7 @@ export default function FilterBox(props) {
     filterBoxEndDate,
     setFilterBoxEndDate
   } = props;
+
   const x = (theSuperCategories, categoriesCollected) => {
     return theSuperCategories.map(superCategory => {
       return {
@@ -229,6 +231,46 @@ export default function FilterBox(props) {
   const [setup, setSetup] = useState(colourOptions[0]);
   const [loading, setLoading] = useState(false);
 
+  console.log("filters", filters);
+  let urlSearchParams = {};
+  Object.keys(filters).forEach(filterId => {
+    urlSearchParams = {
+      ...urlSearchParams,
+      ["filter" + String(filterId)]: filters[filterId].selectedTableColumnName
+    };
+  });
+
+  let checkboxes = {};
+  Object.keys(filters).forEach(filterId => {
+    urlSearchParams = {
+      ...urlSearchParams,
+      ["filter" + String(filterId)]: filters[filterId].avaliableOptions
+    };
+  });
+
+  console.log({ urlSearchParams });
+  let useEffectFilterDependencies = Object.keys(filters).map(filterId => {
+    return filters[filterId].selectedTableColumnName;
+  });
+
+  const filterParams = new URLSearchParams({
+    filterOne: filters[0].selectedTableColumnName,
+    filterTwo: filters[1].selectedTableColumnName
+  });
+
+  useEffect(() => {
+    History.push("?" + filterParams.toString());
+  }, [filters[0].selectedTableColumnName, filters[1].selectedTableColumnName]);
+
+  // let params
+  // useEffect(() => {
+  //   params = new URLSearchParams({ ...urlSearchParams });
+  // }, useEffectFilterDependencies)
+
+  // useEffect(() => {
+  //   History.push("?" + params.toString());
+  // }, useEffectFilterDependencies);
+
   const handleSubmit = useCallback(
     e => {
       if (e.target.textContent === "Submit") {
@@ -249,19 +291,13 @@ export default function FilterBox(props) {
 
   return (
     <div>
-      {/* <a target="_blank" href="https://twitter.com/home?status=This%20photo%20is%20awesome!%20Check%20it%20out:%20pic.twitter.com/9Ee63f7aVp">Share on Twitter</a> */}
-
       <a
-        target="_blank"
-        href="https://twitter.com/share?ref_src=twsrc%5Etfw?text=this%20website%20is%20awesome!"
         class="twitter-share-button"
-        data-show-count="false"
+        target="_blank"
+        href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
       >
         Tweet
       </a>
-
-      <br />
-
       <div
         class="fb-share-button"
         data-href="https://blissful-pare-60612f.netlify.com/data"
