@@ -21,7 +21,6 @@ const GetData = props => {
     setFilterBoxEndDate
   } = props;
 
-
   if (
     filters[0].selectedTable === "Users" &&
     filters[1].selectedTable === "Users" &&
@@ -69,11 +68,9 @@ const GetData = props => {
 
   // it would be nice for this to run in a way that doesn't return any data untill the user actually sets up a query
 
-
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
-
 
   if (loading) {
     return (
