@@ -1,5 +1,4 @@
 import React from "react";
-import TestRenderer from "react-test-renderer";
 import { gql } from "apollo-boost";
 import { MockedProvider } from "@apollo/react-testing";
 import { render, cleanup, findByText } from "@testing-library/react";
@@ -7,8 +6,8 @@ import "jest";
 import "jest-extended";
 
 //components
-import Queries from "./Queries";
-import FilterBox from "./FilterBox";
+import Queries from "../Queries";
+import FilterBox from "../FilterBox";
 
 const index = { type: "gender", query: "Users" };
 const crossFilter = { type: "age", query: "Users" };
