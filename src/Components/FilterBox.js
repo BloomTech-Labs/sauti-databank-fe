@@ -116,10 +116,131 @@ export default function FilterBox(props) {
         <components.Control {...props} />
       </div>
     );
+    if (Object.keys(graphLabels).includes(filters[i].selectedTableColumnName)) {
+      console.log("selectable options");
+      console.log(
+        graphLabels[`${filters[i].selectedTableColumnName}`].labels.filter(
+          option =>
+            i >= 2 &&
+            Object.keys(filters[i].selectableOptions)
+              .map(categoryName =>
+                filters[i].selectableOptions[categoryName] === true
+                  ? categoryName
+                  : null
+              )
+              .filter(result => result !== null)
+              .includes(option)
+        )
+      );
+    }
 
+    const ProvideOptions = props => {
+      const { i, filters, graphLabels } = props;
+
+      const ShowOptions = props => {
+        const { i, filters, graphLabels } = props;
+
+        if (filters[i].showOptions) {
+          return (
+            <div>
+              {graphLabels[`${filters[i].selectedTableColumnName}`].labels
+                .filter(
+                  option =>
+                    i >= 2 &&
+                    // taking the espected result and wiping it out
+
+                    // doesn't work in the begining cause nothing has been chosen for the first query
+                    // Object.keys(filters[i].selectableOptions).map(categoryName => categoryName).includes(option)
+                    Object.keys(filters[i].selectableOptions)
+                      .map(categoryName =>
+                        filters[i].selectableOptions[categoryName] === true ||
+                        !filters[i].nextDataFilterHasBeenChosen
+                          ? categoryName
+                          : null
+                      )
+                      .filter(result => result !== null)
+                      .includes(option)
+                )
+                .map(option => (
+                  <Options key={option}>
+                    <input
+                      type="radio"
+                      name="CrossFilter"
+                      value={option}
+                      // seems to need this when this is a compoennt
+                      checked={filters[i].selectedOption === option}
+                      onChange={e => {
+                        let optionFlags = {};
+                        graphLabels[
+                          `${filters[i].selectedTableColumnName}`
+                        ].labels.forEach(option => {
+                          optionFlags = {
+                            ...optionFlags,
+                            [option]: false
+                          };
+                        });
+                        setFilters({
+                          ...filters,
+                          [i]: {
+                            ...filters[i],
+                            selectedOption: option,
+                            selectableOptions: {
+                              ...optionFlags,
+                              [option]: !filters[i].selectableOptions[option]
+                            }
+                          }
+                        });
+                      }}
+                    />
+                    <FilterOption>{option}</FilterOption>
+                  </Options>
+                ))}
+            </div>
+          );
+        }
+      };
+      if (i !== String(1)) {
+        if (graphLabels[`${filters[i].selectedTableColumnName}`]) {
+          return (
+            <CheckboxContainer>
+              <p>Select an option to further filter the data: </p>
+              <button
+                onClick={() => {
+                  setFilters({
+                    ...filters,
+                    [i]: {
+                      ...filters[i],
+                      showOptions: !filters[i].showOptions
+                      // selectableOptions: {...optionFlags}
+                    }
+                    // add all the options here
+                  });
+                }}
+              >
+                {filters[i].showOptions ? "Hide" : "Show"}
+              </button>
+              {/* if it has options to show only show the ones that have */}
+              {}
+            </CheckboxContainer>
+          );
+        }
+      } else {
+        return <div></div>;
+      }
+    };
     return (
       <div>
         <form>
+          {/* 
+          nameOfFilter: "Data Series"
+selectedCategory: "Top Commodity Categories"
+selectedOption: undefined
+avaliableOptions: (25) ["Animal Product", "Animal Products", "Beans", "Cereals - Maize", "Cereals - Other", "Cereals - Rice", "Dry Maize", "Farm Input", "Farm Inputs", "Fruits", "Fuel", "Green Gram", "Imported Rice", "Maharagwe", "Maize Flour", "Matunda", "Mixed Beans", "Nafaka ", "Nafaka Za Mahindi", "Other", "Peas", "Roots & Tubers", "Seeds & Nuts", "Vegetable", "Vegetables"]
+selectableOptions: {Female: false, Male: true}
+selectedTable: "Sessions"
+selectedTableColumnName: "commoditycat"
+showOptions: true
+ */}
           <p>{filterSelectorName}</p>
           <Select
             defaultValue={{ label: filters[i].selectedCategory }}
@@ -129,6 +250,15 @@ export default function FilterBox(props) {
             // isSearchable
             onChange={e => {
               console.log(e.label, filters[i]);
+              let optionFlags = {};
+              graphLabels[
+                `${FilterBoxOptions.default[e.label].value.type}`
+              ].labels.forEach(option => {
+                optionFlags = {
+                  ...optionFlags,
+                  [option]: false
+                };
+              });
               setFilters({
                 ...filters,
                 [i]: {
@@ -148,7 +278,8 @@ export default function FilterBox(props) {
                   // accees all the options from graphlables
                   // and put all of them in here as
                   // option : false
-                  selectedOption: undefined
+                  selectedOption: undefined,
+                  selectableOptions: { ...optionFlags }
                 }
               });
             }}
@@ -176,7 +307,7 @@ export default function FilterBox(props) {
                       [i]: {
                         ...filters[i],
                         showOptions: !filters[i].showOptions
-                        // selectableOptions:
+                        // selectableOptions: {...optionFlags}
                       }
                       // add all the options here
                     });
@@ -184,30 +315,62 @@ export default function FilterBox(props) {
                 >
                   {filters[i].showOptions ? "Hide" : "Show"}
                 </button>
+                {/* if it has options to show only show the ones that have */}
                 {filters[i].showOptions &&
-                  graphLabels[
-                    `${filters[i].selectedTableColumnName}`
-                  ].labels.map(option => (
-                    <Options key={option}>
-                      <input
-                        type="radio"
-                        name="CrossFilter"
-                        value={option}
-                        // seems to need this when this is a compoennt
-                        checked={filters[i].selectedOption === option}
-                        onChange={e => {
-                          setFilters({
-                            ...filters,
-                            [i]: {
-                              ...filters[i],
-                              selectedOption: option
-                            }
-                          });
-                        }}
-                      />
-                      <FilterOption>{option}</FilterOption>
-                    </Options>
-                  ))}
+                  graphLabels[`${filters[i].selectedTableColumnName}`].labels
+                    .filter(
+                      option =>
+                        i >= 2 &&
+                        // taking the espected result and wiping it out
+
+                        // doesn't work in the begining cause nothing has been chosen for the first query
+                        // Object.keys(filters[i].selectableOptions).map(categoryName => categoryName).includes(option)
+                        Object.keys(filters[i].selectableOptions)
+                          .map(categoryName =>
+                            filters[i].selectableOptions[categoryName] ===
+                              true || !filters[i].nextDataFilterHasBeenChosen
+                              ? categoryName
+                              : null
+                          )
+                          .filter(result => result !== null)
+                          .includes(option)
+                    )
+                    .map(option => (
+                      <Options key={option}>
+                        <input
+                          type="radio"
+                          name="CrossFilter"
+                          value={option}
+                          // seems to need this when this is a compoennt
+                          checked={filters[i].selectedOption === option}
+                          onChange={e => {
+                            let optionFlags = {};
+                            graphLabels[
+                              `${filters[i].selectedTableColumnName}`
+                            ].labels.forEach(option => {
+                              optionFlags = {
+                                ...optionFlags,
+                                [option]: false
+                              };
+                            });
+                            setFilters({
+                              ...filters,
+                              [i]: {
+                                ...filters[i],
+                                selectedOption: option,
+                                selectableOptions: {
+                                  ...optionFlags,
+                                  [option]: !filters[i].selectableOptions[
+                                    option
+                                  ]
+                                }
+                              }
+                            });
+                          }}
+                        />
+                        <FilterOption>{option}</FilterOption>
+                      </Options>
+                    ))}
               </CheckboxContainer>
             )}
         </form>
@@ -296,16 +459,23 @@ export default function FilterBox(props) {
               // console.log("here");
               // console.log(filters);
               // put in check for how many filters we can add
+              // assume there is already a data filter selector setup(the current one)
+              const currentDataFilter = Object.keys(filters).length - 1;
               setFilters({
                 ...filters,
+                // [currentDataFilter]: {
+                //   ...filters[currentDataFilter],
+
+                // }
                 [Object.keys(filters).length]: {
                   nameOfFilter: "Data Filter",
                   selectedCategory: "",
                   selectedOption: undefined,
                   avaliableOptions: [],
+                  selectableOptions: {},
                   selectedTable: "",
                   selectedTableColumnName: "",
-                  showOptions: false
+                  showOptions: true
                 }
               });
             }}

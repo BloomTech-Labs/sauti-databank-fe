@@ -25,9 +25,11 @@ import styled from "styled-components";
 
 sort asending all except for education level options
 and border crossing frequency options
+(did manually so not totally sure)
 
 
 
+(working on this one)
 additional filters:
 default to show
 when next additional filter is picked
@@ -70,7 +72,8 @@ const GraphContainer = () => {
       },
       selectedTable: "Users", // value.query
       selectedTableColumnName: "gender", // value.type
-      showOptions: false
+      showOptions: false,
+      nextDataFilterHasBeenChosen: true
     },
 
     1: {
@@ -81,7 +84,8 @@ const GraphContainer = () => {
       selectableOptions: {},
       selectedTable: "Users",
       selectedTableColumnName: "",
-      showOptions: false
+      showOptions: false,
+      nextDataFilterHasBeenChosen: true
     },
     2: {
       nameOfFilter: "Data Filter",
@@ -91,7 +95,8 @@ const GraphContainer = () => {
       selectableOptions: {},
       selectedTable: "",
       selectedTableColumnName: "",
-      showOptions: false
+      showOptions: true,
+      nextDataFilterHasBeenChosen: true
     }
   });
   // put the date here
