@@ -8,10 +8,13 @@ import "react-dropdown/style.css";
 import { withRouter } from "react-router-dom";
 import Queries from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
+// import { useHistory } from "react-router-dom"
 
 import styled from "styled-components";
 
 const GraphContainer = () => {
+  // const History = useHistory()
+  // console.log({ History })
   const [index, setIndex] = useState({
     type: "gender",
     query: "Users",
@@ -54,6 +57,17 @@ const GraphContainer = () => {
   //   //to report specified pageview:
   //   ReactGa.pageview("/");
   // }, []);
+
+  // const params = new URLSearchParams({
+  //   filterOne: index.type,
+  //   filterTwo: crossFilter.type,
+  //   filterThree: additionalFilter.type,
+  // });
+
+  // useEffect(() => {
+  //   History.push("?" + params.toString())
+  //   console.log(document.location.search)
+  // }, [index.type, crossFilter.type, additionalFilter.type])
 
   const onChange = event => {
     setIndex(event.target.value);

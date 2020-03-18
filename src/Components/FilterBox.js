@@ -6,13 +6,15 @@ import Dropdown from "react-dropdown";
 import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
-
+import { useHistory } from "react-router-dom";
 import CalendarModal, { getTodaysDate } from "../dashboard/CalendarModal";
 import useCalendar from "../hooks/useCalendar";
 
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 
 export default function FilterBox(props) {
+  const History = useHistory();
+  console.log({ History });
   const token = getToken();
   let tier;
   if (token) {
@@ -59,14 +61,21 @@ export default function FilterBox(props) {
     setFilterBoxAdditionalFilterLabel
   ] = useState("");
 
-  // const {
-  //   filterBoxStartDate,
-  //   setFilterBoxStartDate,
-  //   filterBoxEndDate,
-  //   setFilterBoxEndDate
-  // } = useCalendar();
-
   const [loading, setLoading] = useState(false);
+
+  const params = new URLSearchParams({
+    filterOne: filterBoxIndex.type,
+    filterTwo: filterBoxCrossFilter.type,
+    filterThree: filterBoxAdditionalFilter.type
+  });
+
+  useEffect(() => {
+    History.push("?" + params.toString());
+  }, [
+    filterBoxIndex.type,
+    filterBoxCrossFilter.type,
+    filterBoxAdditionalFilter.type
+  ]);
 
   const handleSubmit = useCallback(
     e => {
@@ -93,37 +102,12 @@ export default function FilterBox(props) {
     ]
   );
 
-  const handleAuto = useCallback(
-    e => {
-      props.setIndex(filterBoxIndex);
-      props.setIndexLabel(filterBoxIndexLabel);
-      props.setCrossLabel(filterBoxCrossLabel);
-      props.setCrossFilter(filterBoxCrossFilter);
-      props.setAdditionalFilter(filterBoxAdditionalFilter);
-      props.setStartDate(filterBoxStartDate);
-      props.setEndDate(filterBoxEndDate);
-    },
-    [
-      filterBoxAdditionalFilter,
-      filterBoxCrossFilter,
-      filterBoxCrossLabel,
-      filterBoxEndDate,
-      filterBoxIndex,
-      filterBoxIndexLabel,
-      filterBoxStartDate,
-      props
-    ]
-  );
-
   return (
     <div>
-      {/* <a target="_blank" href="https://twitter.com/home?status=This%20photo%20is%20awesome!%20Check%20it%20out:%20pic.twitter.com/9Ee63f7aVp">Share on Twitter</a> */}
-
       <a
-        target="_blank"
-        href="https://twitter.com/share?ref_src=twsrc%5Etfw?text=this%20website%20is%20awesome!"
         class="twitter-share-button"
-        data-show-count="false"
+        target="_blank"
+        href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
       >
         Tweet
       </a>
@@ -320,41 +304,6 @@ export default function FilterBox(props) {
               )}
             </CheckboxContainer>
           )}
-
-          {/* {loading ? (
-          <Loader
-            className="options-loader"
-            type="Oval"
-            color="#708090"
-            width={50}
-            height={20}
-            timeout={120000000}
-          />
-        ) : (
-            props.checkboxOptions.length > 1 && (
-              <>
-                <p>Select an option to further filter the data: </p>
-                <CheckboxContainer>
-                  {props.checkboxOptions.map(option => (
-                    <Options key={option}>
-                      <input
-                        type="radio"
-                        name="CrossFilter"
-                        value={option}
-                        onChange={e => {
-                          props.setSelectedCheckbox(
-                            { [`${filterBoxAdditionalFilter.type}`]: option },
-                            props.setAdditionalFilter(filterBoxAdditionalFilter)
-                          );
-                        }}
-                      />
-                      <FilterOption>{option}</FilterOption>
-                    </Options>
-                  ))}
-                </CheckboxContainer>
-              </>
-            )
-          )} */}
 
           {props.checkboxOptions.length > 1 && (
             <>
