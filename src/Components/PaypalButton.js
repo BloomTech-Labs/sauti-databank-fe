@@ -48,7 +48,7 @@ export default function PaypalButton() {
 
           swal({
             title: "",
-            text: "You are now a premium user!",
+            text: "Your account has been upgraded to premium!",
             icon: "success"
           });
 

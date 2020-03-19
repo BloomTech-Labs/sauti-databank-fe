@@ -67,6 +67,17 @@ A researcher interested in the Sauti Databank is able to see the following Key D
 - Top Commodity Categories
 - Exchange Rate Direction
 
+Other key features include
+
+- Payment processing through Paypal
+- Data downloading into a CSV file
+- User authentication and authorizatoin
+- Admin dashboard to manage users
+- Admin download for user information
+- Social media sharing integration
+- Expanded cross-filtering capabalities
+- Ability to hide or show filters
+
 ## Tech Stack
 
 ### Front-end built using:
@@ -76,8 +87,10 @@ A researcher interested in the Sauti Databank is able to see the following Key D
 - [Nivo](https://nivo.rocks/): Built specifically for React and ontop of d3js, Nivo provides easily-used graph functionality to display accurate dipiction of the data being analyzed.
 - [Apollo](https://www.apollographql.com/): Built to interact with GraphQL backend API's well, Apollo is the platform that enables us to write queries that specify back-end requests which retreives data for smooth transitions in crossfiltration. We utilize Apollo-Boost wrapper for easy interaction between React front-end components and GraphQL back-end.
 - [Sass](https://sass-lang.com/): A CSS compiler helped us iterate more quickly on styling with the efficient use of nesting.
+- [AG-Grid-React](https://www.ag-grid.com/react-grid/)
+- [Material-UI](https://material-ui.com/)
 
-#### Front-end deployed to [Netlify](https://sauti.now.sh/).
+#### Front-end deployed to [Netlify](https://blissful-pare-60612f.netlify.com/data).
 
 #### [Back-end](https://github.com/Lambda-School-Labs/sauti-databank-be) built using:
 
@@ -87,12 +100,14 @@ A researcher interested in the Sauti Databank is able to see the following Key D
 - GraphQL
 - MySQL
 - Jest
+- Apollo Server
 
 Our reasoning behind using the above tools for the back-end build is to make cross-filtering easy and efficient. Alongside Node and Express for operation set up, we are using the GraphQL framework which is a query manipulation language that requests specific data from the database using one single API endpoint.
 
 # APIs
 
-Please see Back-end documentation [here](https://github.com/Lambda-School-Labs/sauti-databank-be/blob/master/README.md).
+- [Paypal Subscriptions API](https://developer.paypal.com/docs/subscriptions/)
+- Please see Back-end documentation [here](https://github.com/Lambda-School-Labs/sauti-databank-be/blob/master/README.md).
 
 # Testing
 

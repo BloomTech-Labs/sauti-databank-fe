@@ -102,7 +102,6 @@ function DashSignup(props) {
 
   const [user, setUser] = useState({});
   user.tier = "FREE";
-  console.log(user);
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
   const {
@@ -153,7 +152,6 @@ function DashSignup(props) {
           dangerMode: true
         });
       } else {
-        console.log(createdUser.data.register.id);
         localStorage.setItem("token", createdUser.data.register.token);
         history.push("/data");
         swal({ title: "", text: "Success!", icon: "success" });
@@ -268,24 +266,6 @@ function DashSignup(props) {
             </Select>
           </FormControl>
           <br />
-          {/* <Labels2>Select A User Type</Labels2>
-          <FormControl className={classes.margin}>
-            <Select
-              labelId="demo-customized-select-label"
-              id="demo-customized-select"
-              value={tier}
-              name="tier"
-              onChange={handleChange}
-              input={<Styles />}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={"FREE"}>FREE</MenuItem>
-              <MenuItem value={"PAID"}>PAID</MenuItem>
-            </Select>
-          </FormControl>
-          <br /> */}
           <Button className="initialize-signup" type="submit">
             Sign Up
           </Button>

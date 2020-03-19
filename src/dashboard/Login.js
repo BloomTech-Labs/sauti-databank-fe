@@ -99,9 +99,25 @@ export default function SignInSide(props) {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            <FormTitle>Login</FormTitle>
-          </Typography>
+          <TitleContainer>
+            <UnusedTitle component="h1" variant="h5">
+              <FormTitle>
+                <UnusedTitleLink to="/">Sign Up</UnusedTitleLink>
+              </FormTitle>
+            </UnusedTitle>
+            <CurrentTitle component="h1" variant="h5">
+              <FormTitle>Login</FormTitle>
+              <LineUnderCurrentTitle />
+            </CurrentTitle>
+          </TitleContainer>
+          <UnderlineDiv>
+            <LineUnderTitles />
+          </UnderlineDiv>
+          <br />
+          <br />
+          <br />
+          <FormTitleMain>Login</FormTitleMain>
+          <br />
           <form
             className={classes.form}
             noValidate
@@ -239,6 +255,42 @@ const Styles = withStyles(theme => ({
 const FormBottomText = styled.p`
   font-size: 1.4rem;
 `;
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 const FormTitle = styled.h1`
+  font-size: 2rem;
+  margin: 0 3rem;
+`;
+const FormTitleMain = styled.h1`
   font-size: 3rem;
+  margin: 0 3rem;
+`;
+const CurrentTitle = styled.span``;
+const UnusedTitle = styled.span`
+  opacity: 0.5;
+`;
+const RequiredLabel = styled.label`
+  font-size: 1.4rem;
+`;
+const UnusedTitleLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+`;
+const UnderlineDiv = styled.div`
+  width: 40%;
+  position: absolute;
+  margin-top: 28px;
+`;
+const LineUnderTitles = styled.hr`
+  width: 100%;
+  opacity: 0.5;
+  position: relative;
+`;
+const LineUnderCurrentTitle = styled.hr`
+  background-color: black;
+  height: 2px;
+  border: none;
 `;

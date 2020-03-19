@@ -3,16 +3,219 @@ import "../App.scss";
 import ReactGa from "react-ga";
 import styled from "styled-components";
 import Dropdown from "react-dropdown";
+import Select, { components } from "react-select";
 import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
-
-import CalendarModal, { getTodaysDate } from "../dashboard/CalendarModal";
-import useCalendar from "../hooks/useCalendar";
+import { colourOptions, groupedOptions } from "./docs/data";
+import { getTodaysDate } from "../dashboard/CalendarModal";
+import { useHistory } from "react-router-dom";
+import CalendarModal from "../dashboard/CalendarModal";
 
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 
 export default function FilterBox(props) {
+  const History = useHistory();
+  const {
+    filters,
+    setFilters,
+    filterBoxStartDate,
+    setFilterBoxStartDate,
+    filterBoxEndDate,
+    setFilterBoxEndDate
+  } = props;
+
+  const x = (theSuperCategories, categoriesCollected) => {
+    return theSuperCategories.map(superCategory => {
+      return {
+        label: superCategory.label,
+        options: superCategory.options
+          .map(category => {
+            // console.log(categoriesCollected, category)
+            return {
+              label: !categoriesCollected.includes(category.label)
+                ? category.label
+                : undefined
+            };
+          })
+          .filter(category => category.label !== undefined)
+      };
+    });
+  };
+
+  const FilterSelector = props => {
+    const {
+      filterSelectorName,
+      filters,
+      setFilters,
+      i,
+
+      graphLabels
+    } = props;
+
+    console.log(i);
+    // styles for the react select component
+    const groupStyles = {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    };
+    const groupBadgeStyles = {
+      backgroundColor: "#EBECF0",
+      borderRadius: "2em",
+      color: "#172B4D",
+      display: "inline-block",
+      fontSize: 12,
+      fontWeight: "normal",
+      lineHeight: "1",
+      minWidth: 1,
+      padding: "0.16666666666667em 0.5em",
+      textAlign: "center"
+    };
+
+    const itemStyle = {
+      fontSize: 15
+    };
+    // controlling the super categories
+    const formatGroupLabel = data => (
+      <div style={groupStyles}>
+        <span style={itemStyle}>{data.label}</span>
+        <span style={groupBadgeStyles}>{data.options.length}</span>
+      </div>
+    );
+
+    // controls the item the user selects
+    const controlStyles = {
+      borderRadius: "1px solid black",
+      // padding: 'px',
+      // margin: "20px",
+
+      // the selected item
+      fontSize: 15,
+      // background: colourOptions[2].color,
+      color: "white"
+    };
+
+    // controls the items the user can select
+    const colourStyles = {
+      control: styles => ({ ...styles, backgroundColor: "white" }),
+      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+        // const color = chroma(data.color);
+        return {
+          ...styles,
+          backgroundColor: isDisabled ? "red" : "blue",
+          color: "#FFF",
+          cursor: isDisabled ? "not-allowed" : "default",
+          // items to select
+          fontSize: 15
+        };
+      }
+    };
+
+    const ControlComponent = props => (
+      <div style={controlStyles}>
+        {<p>Custom Control</p>}
+        <components.Control {...props} />
+      </div>
+    );
+
+    return (
+      <div>
+        <form>
+          <p>{filterSelectorName}</p>
+          <Select
+            defaultValue={{ label: filters[i].selectedCategory }}
+            // isClearable
+            formatGroupLabel={formatGroupLabel}
+            components={{ Control: ControlComponent }}
+            // isSearchable
+            onChange={e => {
+              console.log(e.label, filters[i]);
+              setFilters({
+                ...filters,
+                [i]: {
+                  ...filters[i],
+                  selectedCategory: e.label, //option
+                  selectedTableColumnName:
+                    FilterBoxOptions.default[e.label].value.type,
+
+                  avaliableOptions: Object.keys(graphLabels).includes(
+                    FilterBoxOptions.default[e.label].value.type
+                  )
+                    ? graphLabels[
+                        `${FilterBoxOptions.default[e.label].value.type}`
+                      ].labels
+                    : [],
+                  selectedTable: FilterBoxOptions.default[e.label].value.query,
+                  // accees all the options from graphlables
+                  // and put all of them in here as
+                  // option : false
+                  selectedOption: undefined
+                }
+              });
+            }}
+            name="color"
+            styles={colourStyles}
+            options={x(
+              FilterBoxOptions.superCategories,
+              Object.keys(filters)
+                .map(filterId => {
+                  return filters[filterId].selectedCategory;
+                })
+                .filter(selectedCategory => selectedCategory.length > 0)
+            )}
+          />
+          {/* add a button to show or hide these */}
+          {/* JS likes to pass integers as string to components */}
+          {i !== String(1) &&
+            graphLabels[`${filters[i].selectedTableColumnName}`] && (
+              <CheckboxContainer>
+                <p>Select an option to further filter the data: </p>
+                <button
+                  onClick={() => {
+                    setFilters({
+                      ...filters,
+                      [i]: {
+                        ...filters[i],
+                        showOptions: !filters[i].showOptions
+                        // selectableOptions:
+                      }
+                      // add all the options here
+                    });
+                  }}
+                >
+                  {filters[i].showOptions ? "Hide" : "Show"}
+                </button>
+                {filters[i].showOptions &&
+                  graphLabels[
+                    `${filters[i].selectedTableColumnName}`
+                  ].labels.map(option => (
+                    <Options key={option}>
+                      <input
+                        type="radio"
+                        name="CrossFilter"
+                        value={option}
+                        // seems to need this when this is a compoennt
+                        checked={filters[i].selectedOption === option}
+                        onChange={e => {
+                          setFilters({
+                            ...filters,
+                            [i]: {
+                              ...filters[i],
+                              selectedOption: option
+                            }
+                          });
+                        }}
+                      />
+                      <FilterOption>{option}</FilterOption>
+                    </Options>
+                  ))}
+              </CheckboxContainer>
+            )}
+        </form>
+      </div>
+    );
+  };
   const token = getToken();
   let tier;
   if (token) {
@@ -25,439 +228,223 @@ export default function FilterBox(props) {
     sub = newSub;
   }
 
-  const {
-    filterBoxStartDate,
-    setFilterBoxStartDate,
-    filterBoxEndDate,
-    setFilterBoxEndDate
-  } = props;
-
-  const [filterBoxIndex, setFilterBoxIndex] = useState({
-    type: "gender",
-    query: "Users",
-    label: ""
-  });
-  // console.log(`filterBoxIndex`, filterBoxIndex);
-  const [filterBoxCrossFilter, setFilterBoxCrossFilter] = useState({
-    type: "",
-    query: "Users",
-    label: ""
-  });
-  const [filterBoxAdditionalFilter, setFilterBoxAdditionalFilter] = useState({
-    type: "",
-    query: "",
-    label: ""
-  });
-  // console.log(`filterBoxCrossFilter`, filterBoxCrossFilter);
-  const [filterBoxIndexLabel, setFilterBoxIndexLabel] = useState("Gender");
-  // console.log(`filterBoxIndexLabel`, filterBoxIndexLabel);
-  const [filterBoxCrossLabel, setFilterBoxCrossLabel] = useState("");
-  // console.log(`filterBoxCrossLabel`, filterBoxCrossLabel);
-
-  const [
-    filterBoxAdditionalFilterLabel,
-    setFilterBoxAdditionalFilterLabel
-  ] = useState("");
-
-  // const {
-  //   filterBoxStartDate,
-  //   setFilterBoxStartDate,
-  //   filterBoxEndDate,
-  //   setFilterBoxEndDate
-  // } = useCalendar();
-
+  const [setup, setSetup] = useState(colourOptions[0]);
   const [loading, setLoading] = useState(false);
+
+  console.log("filters", filters);
+  let urlSearchParams = {};
+  Object.keys(filters).forEach(filterId => {
+    urlSearchParams = {
+      ...urlSearchParams,
+      ["filter" + String(filterId)]: filters[filterId].selectedTableColumnName
+    };
+  });
+
+  let checkboxes = {};
+  Object.keys(filters).forEach(filterId => {
+    urlSearchParams = {
+      ...urlSearchParams,
+      ["filter" + String(filterId)]: filters[filterId].avaliableOptions
+    };
+  });
+
+  console.log({ urlSearchParams });
+  let useEffectFilterDependencies = Object.keys(filters).map(filterId => {
+    return filters[filterId].selectedTableColumnName;
+  });
+
+  const filterParams = new URLSearchParams({
+    filterOne: filters[0].selectedTableColumnName,
+    filterTwo: filters[1].selectedTableColumnName
+  });
+
+  useEffect(() => {
+    History.push("?" + filterParams.toString());
+  }, [filters[0].selectedTableColumnName, filters[1].selectedTableColumnName]);
+
+  // let params
+  // useEffect(() => {
+  //   params = new URLSearchParams({ ...urlSearchParams });
+  // }, useEffectFilterDependencies)
+
+  // useEffect(() => {
+  //   History.push("?" + params.toString());
+  // }, useEffectFilterDependencies);
 
   const handleSubmit = useCallback(
     e => {
       if (e.target.textContent === "Submit") {
         e.preventDefault();
       }
-      props.setIndex(filterBoxIndex);
-      props.setIndexLabel(filterBoxIndexLabel);
-      props.setCrossLabel(filterBoxCrossLabel);
-      props.setCrossFilter(filterBoxCrossFilter);
-      props.setAdditionalFilter(filterBoxAdditionalFilter);
-      props.setStartDate(filterBoxStartDate);
-      props.setEndDate(filterBoxEndDate);
+
+      setFilterBoxStartDate(filterBoxStartDate);
+      setFilterBoxEndDate(filterBoxEndDate);
     },
     [
-      filterBoxAdditionalFilter,
-      filterBoxCrossFilter,
-      filterBoxCrossLabel,
       filterBoxEndDate,
-      filterBoxIndex,
-      filterBoxIndexLabel,
+
       filterBoxStartDate,
-      props
+      setFilterBoxStartDate,
+      setFilterBoxEndDate
     ]
   );
-
-  const handleAuto = useCallback(
-    e => {
-      props.setIndex(filterBoxIndex);
-      props.setIndexLabel(filterBoxIndexLabel);
-      props.setCrossLabel(filterBoxCrossLabel);
-      props.setCrossFilter(filterBoxCrossFilter);
-      props.setAdditionalFilter(filterBoxAdditionalFilter);
-      props.setStartDate(filterBoxStartDate);
-      props.setEndDate(filterBoxEndDate);
-    },
-    [
-      filterBoxAdditionalFilter,
-      filterBoxCrossFilter,
-      filterBoxCrossLabel,
-      filterBoxEndDate,
-      filterBoxIndex,
-      filterBoxIndexLabel,
-      filterBoxStartDate,
-      props
-    ]
-  );
-  // console.log(
-  //   "IMPORTANTTT",
-  //   filterBoxAdditionalFilter.type,
-  //   !graphLabels[`${filterBoxAdditionalFilter.type}`]
-  // );
-
-  // useEffect(() => {
-  //   if (
-  //     !graphLabels[`${filterBoxAdditionalFilter.type}`] &&
-  //     filterBoxAdditionalFilter.type
-  //   ) {
-  //     handleAuto();
-  //     setLoading(true);
-  //   }
-  //   /* eslint-disable */
-  // }, [filterBoxAdditionalFilter.type]);
-
-  // useEffect(() => {
-  //   if (props.checkboxOptions.length) {
-  //     setLoading(false);
-  //   }
-  // }, [props.checkboxOptions]);
-
-  // const ClickTracker = index => {
-  //   ReactGa.event({
-  //     category: "Option",
-  //     action: `Clicked a Filter Option: ${index}`
-  //   });
-  // };
-
-  console.log(
-    "FILTER BOX ADDITIONALFILTER TYPE",
-    filterBoxAdditionalFilter.type
-  );
-  console.log(
-    " ONE - props.CheckboxOptions - ADDITIONAL FILTER CHECKBOXES",
-    props.checkboxOptions
-  );
-  // console.log(" TWO - props.SECONDCheckboxOptions", props.secondCheckboxOptions);
 
   return (
-    <DropdownContainer>
-      <form>
-        <p>Choose Category</p>
-        <Dropdown
-          controlClassName="myControlClassName"
-          arrowClassName="myArrowClassName"
-          className="dropdown"
-          disabled={loading}
-          options={FilterBoxOptions.default}
-          value={filterBoxIndexLabel}
-          onChange={e => {
-            setFilterBoxIndex(e.value);
-            setFilterBoxIndexLabel(e.label);
-            setFilterBoxIndex({
-              type: e.value.type,
-              query: e.value.query,
-              label: e.label
-            });
-          }}
-        />
-        {graphLabels[`${filterBoxIndex.type}`] && (
-          <CheckboxContainer>
-            <p>Select an option to further filter the data: </p>
-            {graphLabels[`${filterBoxIndex.type}`].labels.map(option => (
-              <Options key={option}>
-                <input
-                  type="radio"
-                  name="CrossFilter"
-                  value={option}
-                  onChange={e => (
-                    props.setFirstSelectedCheckbox({
-                      [`${filterBoxIndex.type}`]: option
-                    }),
-                    props.setIndex(filterBoxIndex)
-                  )}
-                />
-                <FilterOption>{option}</FilterOption>
-              </Options>
-            ))}
-          </CheckboxContainer>
-        )}
-        <p>Choose Second Category</p>
-        <Dropdown
-          controlClassName="myControlClassName"
-          arrowClassName="myArrowClassName"
-          className="dropdown"
-          disabled={loading}
-          options={FilterBoxOptions.default.filter(
-            obj => obj.label !== filterBoxIndexLabel
-          )}
-          value={filterBoxCrossLabel}
-          placeholder="Select second option..."
-          onChange={e => {
-            setFilterBoxCrossLabel(e.label);
-            setFilterBoxCrossFilter(e.value);
-            setFilterBoxCrossFilter({
-              type: e.value.type,
-              query: e.value.query,
-              label: e.label
-            });
-          }}
-        />
-        {/* ------------------------------------------------------------------------------- */}
-        {graphLabels[`${filterBoxCrossFilter.type}`] && (
-          <CheckboxContainer>
-            <p>Select an option to further filter the data: </p>
-            {graphLabels[`${filterBoxCrossFilter.type}`].labels.map(option => (
-              <Options key={option}>
-                <input
-                  type="radio"
-                  name="CrossFilter"
-                  value={option}
-                  onChange={e => (
-                    props.setSecondSelectedCheckbox({
-                      [`${filterBoxCrossFilter.type}`]: option
-                    }),
-                    props.setCrossFilter(filterBoxCrossFilter)
-                  )}
-                />
-                <FilterOption>{option}</FilterOption>
-              </Options>
-            ))}
-          </CheckboxContainer>
-        )}
-        {/* ------------------------------------------------------------------------------- */}
-        {props.secondCheckboxOptions.length > 1 && (
-          <>
-            <p>Select an option to further filter the data: </p>
-            <CheckboxContainer>
-              {props.secondCheckboxOptions.map(option => (
-                <Options key={option}>
-                  <input
-                    type="radio"
-                    name="CrossFilter"
-                    value={option}
-                    onChange={e => {
-                      props.setSecondSelectedCheckbox(
-                        { [`${filterBoxCrossFilter.type}`]: option },
-                        props.setCrossFilter(filterBoxCrossFilter)
-                      );
-                    }}
-                  />
-                  <FilterOption>{option}</FilterOption>
-                </Options>
-              ))}
-            </CheckboxContainer>
-          </>
-        )}
-        <>
-          <p>Additional Filter</p>
-          <p className="disclosure">
-            *This optional filter adjusts samplesize and may not always alter
-            the graph appearance.
-          </p>
-          <Dropdown
-            controlClassName="myControlClassName"
-            arrowClassName="myArrowClassName"
-            className="dropdown"
-            // disabled={loading}
-            options={FilterBoxOptions.default.filter(
-              obj =>
-                obj.label !== filterBoxIndexLabel &&
-                obj.label !== filterBoxCrossLabel
-            )}
-            value={filterBoxAdditionalFilterLabel}
-            placeholder="Select a filter..."
-            onChange={e => {
-              setFilterBoxAdditionalFilter({
-                type: e.value.type,
-                query: e.value.query,
-                label: e.label
-              });
-              setFilterBoxAdditionalFilterLabel(e.label);
-              props.setCheckboxOptions([]);
-            }}
+    <div>
+      <a
+        class="twitter-share-button"
+        target="_blank"
+        href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
+      >
+        Tweet
+      </a>
+      <div
+        class="fb-share-button"
+        data-href="https://blissful-pare-60612f.netlify.com/data"
+        data-layout="button"
+        data-size="small"
+      >
+        <a
+          target="_blank"
+          href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+          class="fb-xfbml-parse-ignore"
+        >
+          Share
+        </a>
+      </div>
+      <DropdownContainer>
+        {Object.keys(filters).map(filterId => (
+          <FilterSelector
+            key={filterId}
+            filterSelectorName={filters[filterId].nameOfFilter}
+            filters={filters}
+            setFilters={setFilters}
+            i={filterId}
+            graphLabels={graphLabels}
           />
-          <div
-            className="reset-btn"
-            onClick={() => {
-              setFilterBoxAdditionalFilter({ type: "", query: "" });
-              setFilterBoxAdditionalFilterLabel("");
-              props.setAdditionalFilter({ type: "", query: "" });
-              props.setCheckboxOptions([]);
-              props.setSelectedCheckbox({});
-              props.setFirstSelectedCheckbox({});
-              props.setSecondSelectedCheckbox({});
+        ))}
+        <div className="btn-container">
+          <Button
+            // className="checkbox-submit-btn"
+            // type="submit"
+            // disabled={loading}
+            onClick={e => {
+              // console.log("here");
+              // console.log(filters);
+              // put in check for how many filters we can add
+              setFilters({
+                ...filters,
+                [Object.keys(filters).length]: {
+                  nameOfFilter: "Data Filter",
+                  selectedCategory: "",
+                  selectedOption: undefined,
+                  avaliableOptions: [],
+                  selectedTable: "",
+                  selectedTableColumnName: "",
+                  showOptions: false
+                }
+              });
             }}
+            style={{ cursor: loading ? "auto" : "pointer" }}
           >
-            <p>Clear Additional Filter</p>
-          </div>
-        </>
-        {graphLabels[`${filterBoxAdditionalFilter.type}`] && (
-          <CheckboxContainer>
-            <p>Select an option to further filter the data: </p>
-            {graphLabels[`${filterBoxAdditionalFilter.type}`].labels.map(
-              option => (
-                <Options key={option}>
-                  <input
-                    type="radio"
-                    name="CrossFilter"
-                    value={option}
-                    onChange={e => (
-                      props.setSelectedCheckbox({
-                        [`${filterBoxAdditionalFilter.type}`]: option
-                      }),
-                      props.setAdditionalFilter(filterBoxAdditionalFilter)
-                    )}
-                  />
-                  <FilterOption>{option}</FilterOption>
-                </Options>
-              )
-            )}
-          </CheckboxContainer>
-        )}
-
-        {/* {loading ? (
-          <Loader
+            Add Additional Filter
+          </Button>
+        </div>
+        <form>
+          {/*
+        if loading
+        <Loader
             className="options-loader"
             type="Oval"
             color="#708090"
             width={50}
             height={20}
             timeout={120000000}
-          />
-        ) : (
-            props.checkboxOptions.length > 1 && (
-              <>
-                <p>Select an option to further filter the data: </p>
-                <CheckboxContainer>
-                  {props.checkboxOptions.map(option => (
-                    <Options key={option}>
-                      <input
-                        type="radio"
-                        name="CrossFilter"
-                        value={option}
-                        onChange={e => {
-                          props.setSelectedCheckbox(
-                            { [`${filterBoxAdditionalFilter.type}`]: option },
-                            props.setAdditionalFilter(filterBoxAdditionalFilter)
-                          );
-                        }}
-                      />
-                      <FilterOption>{option}</FilterOption>
-                    </Options>
-                  ))}
-                </CheckboxContainer>
-              </>
-            )
-          )} */}
+          /> */}
 
-        {props.checkboxOptions.length > 1 && (
-          <>
-            <p>Select an option to further filter the data: </p>
-            <CheckboxContainer>
-              {props.checkboxOptions.map(option => (
-                <Options key={option}>
-                  <input
-                    type="radio"
-                    name="CrossFilter"
-                    value={option}
-                    onChange={e => {
-                      props.setSelectedCheckbox(
-                        { [`${filterBoxAdditionalFilter.type}`]: option },
-                        props.setAdditionalFilter(filterBoxAdditionalFilter)
-                      );
-                    }}
-                  />
-                  <FilterOption>{option}</FilterOption>
-                </Options>
-              ))}
-            </CheckboxContainer>
-          </>
-        )}
-
-        {tier === "ADMIN" ||
-        tier === "PAID" ||
-        tier === "GOV_ROLE" ||
-        newSub ? (
-          <DateContainer>
-            <div>
-              <p>Start</p>
-              <input
-                name="startData"
-                type="date"
-                value={filterBoxStartDate}
-                disabled={loading}
-                onChange={e => setFilterBoxStartDate(e.target.value)}
-              />
-            </div>
-            <div>
-              <p>End</p>
-              <input
-                disabled={loading}
-                name="endData"
-                type="date"
-                value={filterBoxEndDate}
-                id="today"
-                onChange={e => setFilterBoxEndDate(e.target.value)}
-              />
-            </div>
-          </DateContainer>
-        ) : (
-          <CalendarModal />
-        )}
-        <div className="btn-container">
-          <Button
-            className="checkbox-submit-btn"
-            type="submit"
-            disabled={loading}
-            onClick={handleSubmit}
-            style={{ cursor: loading ? "auto" : "pointer" }}
+          {tier === "ADMIN" ||
+          tier === "PAID" ||
+          tier === "GOV_ROLE" ||
+          newSub ? (
+            <DateContainer>
+              <div>
+                <p>Start</p>
+                <input
+                  name="startData"
+                  type="date"
+                  value={filterBoxStartDate}
+                  disabled={loading}
+                  onChange={e => setFilterBoxStartDate(e.target.value)}
+                />
+              </div>
+              <div>
+                <p>End</p>
+                <input
+                  disabled={loading}
+                  name="endData"
+                  type="date"
+                  value={filterBoxEndDate}
+                  id="today"
+                  onChange={e => setFilterBoxEndDate(e.target.value)}
+                />
+              </div>
+            </DateContainer>
+          ) : (
+            <CalendarModal />
+          )}
+          <div className="btn-container">
+            <Button
+              className="checkbox-submit-btn"
+              type="submit"
+              disabled={loading}
+              onClick={handleSubmit}
+              style={{ cursor: loading ? "auto" : "pointer" }}
+            >
+              Submit
+            </Button>
+          </div>
+          <p
+            className="reset-btn"
+            onClick={e => {
+              props.setFilters({
+                // default query setup
+                0: {
+                  nameOfFilter: "Data Series",
+                  selectedCategory: "Gender",
+                  selectedOption: undefined,
+                  avaliableOptions: [],
+                  selectedTable: "Users",
+                  selectedTableColumnName: "gender",
+                  showOptions: false
+                },
+                1: {
+                  nameOfFilter: "Compare SubSamples",
+                  selectedCategory: "",
+                  selectedOption: undefined,
+                  avaliableOptions: [],
+                  selectedTable: "Users",
+                  selectedTableColumnName: "",
+                  showOptions: false
+                },
+                2: {
+                  nameOfFilter: "Data Filter",
+                  selectedCategory: "",
+                  selectedOption: undefined,
+                  avaliableOptions: [],
+                  selectedTable: "",
+                  selectedTableColumnName: "",
+                  showOptions: false
+                }
+              });
+              setFilterBoxStartDate("2017-01-01");
+              setFilterBoxEndDate(getTodaysDate());
+            }}
           >
-            Submit
-          </Button>
-        </div>
-        <p
-          className="reset-btn"
-          onClick={e => {
-            props.setIndexLabel("Gender");
-            props.setIndex({ type: "gender", query: "Users" });
-            props.setCrossLabel("");
-            props.setCrossFilter({ type: "", query: "Users" });
-            props.setStartDate("2012-01-01");
-            props.setEndDate("2020-01-08");
-            props.setCheckboxOptions([]);
-            props.setSelectedCheckbox({});
-            props.setSecondSelectedCheckbox({});
-            props.setFirstSelectedCheckbox({});
-            setFilterBoxIndexLabel("Gender");
-            setFilterBoxIndex({ type: "gender", query: "Users" });
-            setFilterBoxCrossLabel("");
-            setFilterBoxCrossFilter({ type: "", query: "Users" });
-            setFilterBoxStartDate("2012-01-01");
-            setFilterBoxEndDate(getTodaysDate());
-            setFilterBoxAdditionalFilter({ type: "", query: "" });
-            setFilterBoxAdditionalFilterLabel("");
-            props.setAdditionalFilter({ type: "", query: "" });
-          }}
-        >
-          Reset
-        </p>
-      </form>
-    </DropdownContainer>
+            Reset
+          </p>
+        </form>
+      </DropdownContainer>
+    </div>
   );
 }
 

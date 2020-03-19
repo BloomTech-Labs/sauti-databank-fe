@@ -121,7 +121,7 @@ class Tools extends Component {
           field: "registration_date",
           sortable: true,
           filter: true,
-          width: 130,
+          width: 110,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"

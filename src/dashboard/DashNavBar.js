@@ -47,27 +47,24 @@ function DashNav() {
     <>
       <TopBar>
         <SautiLogo>
-          <SautiLogoText href="http://sautiafrica.org/">
-            <p>
-              Sauti<SautiDot>.</SautiDot>
-            </p>
-          </SautiLogoText>
+          <ReactGA.OutboundLink
+            style={{ textDecoration: "none" }}
+            eventLabel="Outbound Link to http://sautiafrica.org/"
+            to="http://sautiafrica.org/"
+          >
+            <SautiLogoText href="http://sautiafrica.org/">
+              <p>
+                Sauti<SautiDot>.</SautiDot>
+              </p>
+            </SautiLogoText>
+          </ReactGA.OutboundLink>
         </SautiLogo>
         <Navigation>
           {!SignedIn && <Links to="/">HOME</Links>}
           {SignedIn && <Links to="/">ACCOUNT</Links>}
           <Links to="/data">DATA</Links>
           {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
-          {/* <LinksLast to="/services">SERVICES</LinksLast> */}
           {SignedIn && <Links to="/logout">LOGOUT</Links>}
-          {/* <SautiLink href="http://sautiafrica.org/">Sauti</SautiLink> */}
-          <ReactGA.OutboundLink
-            style={{ textDecoration: "none" }}
-            eventLabel="Outbound Link to http://sautiafrica.org/"
-            to="http://sautiafrica.org/"
-          >
-            <SautiLink href="http://sautiafrica.org/">Home</SautiLink>
-          </ReactGA.OutboundLink>
         </Navigation>
       </TopBar>
       <Route exact path="/" component={DashHome} />

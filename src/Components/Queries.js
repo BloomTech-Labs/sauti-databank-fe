@@ -111,6 +111,11 @@ const GetData = props => {
     // fetchPolicy: policyType
   });
   console.log(`returned data`, data);
+  // let timeFilteredData = filterByDate(data, props.startDate, props.endDate)
+  // console.log(timeFilteredData)
+  // console.log(props.filters)
+  // console.log(props.index.type)
+  // console.log(props.crossFilter.type)
 
   if (loading) {
     return (
