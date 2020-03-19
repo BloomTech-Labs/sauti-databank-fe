@@ -19,22 +19,6 @@ import swal from "sweetalert";
 
 import styled from "styled-components";
 
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-
-const initialState = {
-  email: "",
-  password: "",
-  organization: "",
-  job_position: "",
-  country: "",
-  organization_type: "",
-  tier: "",
-  interest: ""
-};
-
 const REGISTER = gql`
   mutation registerNewUser($newUser: newRegisterInput!) {
     register(input: $newUser) {
@@ -47,13 +31,14 @@ const REGISTER = gql`
       job_position
       country
       organization_type
+      found_by
       token
     }
   }
 `;
 
 export default function SignInSide(props) {
-  const [user, setUser] = useState(initialState);
+  const [user, setUser] = useState({});
   user.tier = "FREE";
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
@@ -65,7 +50,8 @@ export default function SignInSide(props) {
     country,
     organization_type,
     tier,
-    interest
+    interest,
+    found_by
   } = user;
 
   const classes = useStyles();
@@ -261,14 +247,30 @@ export default function SignInSide(props) {
                 <MenuItem value={"OTHER"}>OTHER</MenuItem>
               </Select>
             </FormControl>
-            <br />
-            <br />
-            <RequiredDiv>
-              <RequiredLabel>
-                <RequiredStar>*</RequiredStar> = required
-              </RequiredLabel>
-            </RequiredDiv>
-            <br />
+            <FormControl className={classes.margin}>
+              <p>How did you hear about us?</p>
+              <Select
+                label="Found By"
+                labelId="demo-customized-select-label"
+                id="demo-customized-select"
+                name="found_by"
+                placeholder=""
+                value={user.found_by}
+                onChange={handleChange}
+                input={<Styles />}
+              >
+                <MenuItem value={"CROSS_BORDER_ASSOCIATION"}>
+                  Cross border Association
+                </MenuItem>
+                <MenuItem value={"UNIVERSITY"}>University</MenuItem>
+                <MenuItem value={"SAUTI_STAFF"}>Sauti Staff</MenuItem>
+                <MenuItem value={"OTHER"}>OTHER</MenuItem>
+              </Select>
+              <label>*required</label>
+            </FormControl>
+
+            <br></br>
+
             <Button
               type="submit"
               fullWidth

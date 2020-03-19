@@ -76,7 +76,7 @@ class Tools extends Component {
           field: "country",
           sortable: true,
           filter: true,
-          width: 100,
+          width: 80,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -97,6 +97,28 @@ class Tools extends Component {
         {
           headerName: "TIER",
           field: "tier",
+          sortable: true,
+          filter: true,
+          width: 100,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Registration Date",
+          field: "registration_date",
+          sortable: true,
+          filter: true,
+          width: 110,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Found By",
+          field: "found_by",
           sortable: true,
           filter: true,
           width: 100,
