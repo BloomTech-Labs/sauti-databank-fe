@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
-
-import { Redirect, useHistory } from "react-router-dom";
 import { makeStyles, styled } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { withStyles } from "@material-ui/core/styles";
+import InputBase from "@material-ui/core/InputBase";
+import styledComp from "styled-components";
+import swal from "sweetalert";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-
-import { withStyles } from "@material-ui/core/styles";
-import InputBase from "@material-ui/core/InputBase";
-
-import styledComp from "styled-components";
-import swal from "sweetalert";
+import { Redirect, useHistory } from "react-router-dom";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 
 const Styles = withStyles(theme => ({
   root: {

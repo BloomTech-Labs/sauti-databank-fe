@@ -7,21 +7,10 @@ import {
 } from "./GoogleAnalytics/index";
 import GraphContainer from "../GraphContainer";
 import { getToken, decodeToken } from "./auth/Auth";
-import DashSignup from "./DashSignup.js";
 import DashAccount from "./DashAccount.js";
 
 import CreateAccount from "./CreateAccount";
 import Login from "./Login";
-
-import {
-  NotSignedInDiv,
-  SignedInDiv,
-  UserHeader,
-  UserText,
-  UserTypeText,
-  UserName,
-  Header1
-} from "./styledComponents/Index";
 
 function DashHome() {
   const signedIn = getToken();
