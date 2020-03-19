@@ -140,209 +140,79 @@ function DashAccount(props) {
     data.databankUser.paypal_plan === "Bi-annually Plan - $49.99";
   const Yearly = data.databankUser.paypal_plan === "Yearly Plan - $89.99";
 
-  const renderAccountPlans = () => {};
+  console.log(BiAnnually);
 
   return (
     <>
       {tier === "PAID" || tier === "GOV_ROLE" || newSub ? (
         <AccountPageDiv>
           {tier === "PAID" || newSub ? (
-            <>
-              {Monthly ? (
-                <>
-                  <Div>
-                    <h1>Hello, </h1>
-                    <p>Your current and active plan is below</p>
-                  </Div>
-                  <Div2>
-                    <UserTypeContainerDiv>
-                      <PlanHeader>
-                        <h1>Premium</h1>
-                        <h2>Monthly</h2>
-                        <h3>
-                          <span>$9.99</span> every month
-                        </h3>
-                      </PlanHeader>
-                      <FeaturedItems>
-                        <ul className="features-list">
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Create an account
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Change data filters
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Download Data into Excel
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Additional Filter Options
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Filter Data by date
-                          </li>
-                        </ul>
-                      </FeaturedItems>
-                      <ButtonDiv>
-                        {console.log("DATA", data)}
-                        {console.log(
-                          "Next Billing Time",
-                          data.databankUser.p_next_billing_time
-                        )}
-                        {data && data.databankUser.p_next_billing_time ? (
-                          <p>
-                            Your subscription will expire on{" "}
-                            {new Date(
-                              parseInt(data.databankUser.p_next_billing_time)
-                            ).toDateString()}
-                          </p>
-                        ) : (
-                          <ContinueButton2
-                            onClick={handleSubscriptionCancellation}
-                          >
-                            Cancel Subscription
-                          </ContinueButton2>
-                        )}
-                      </ButtonDiv>
-                    </UserTypeContainerDiv>
-                  </Div2>
-                </>
-              ) : null}
-              {BiAnnually ? (
-                <>
-                  <Div>
-                    <h1>Hello, </h1>
-                    <p>Your current and active plan is below</p>
-                  </Div>
-                  <Div2>
-                    <UserTypeContainerDiv>
-                      <PlanHeader>
-                        <h1>Premium</h1>
-                        <h2>Bi-Annually</h2>
-                        <h3>
-                          <span>$49.99</span> every 6 months
-                        </h3>
-                      </PlanHeader>
-                      <FeaturedItems>
-                        <ul className="features-list">
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Create an account
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Change data filters
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Download Data into Excel
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Additional Filter Options
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Filter Data by date
-                          </li>
-                        </ul>
-                      </FeaturedItems>
-                      <ButtonDiv>
-                        {console.log("DATA", data)}
-                        {console.log(
-                          "Next Billing Time",
-                          data.databankUser.p_next_billing_time
-                        )}
-                        {data && data.databankUser.p_next_billing_time ? (
-                          <p>
-                            Your subscription will expire on{" "}
-                            {new Date(
-                              parseInt(data.databankUser.p_next_billing_time)
-                            ).toDateString()}
-                          </p>
-                        ) : (
-                          <ContinueButton2
-                            onClick={handleSubscriptionCancellation}
-                          >
-                            Cancel Subscription
-                          </ContinueButton2>
-                        )}
-                      </ButtonDiv>
-                    </UserTypeContainerDiv>
-                  </Div2>
-                </>
-              ) : null}
-              {Yearly ? (
-                <>
-                  <Div>
-                    <h1>Hello, </h1>
-                    <p>Your current and active plan is below</p>
-                  </Div>
-                  <Div2>
-                    <UserTypeContainerDiv>
-                      <PlanHeader>
-                        <h1>Premium</h1>
-                        <h2>Anually</h2>
-                        <h3>
-                          <span>$89.99</span> every year
-                        </h3>
-                      </PlanHeader>
-                      <FeaturedItems>
-                        <ul className="features-list">
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Create an account
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Change data filters
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Download Data into Excel
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Additional Filter Options
-                          </li>
-                          <li className="features-item">
-                            <CheckMarkSVG />
-                            Filter Data by date
-                          </li>
-                        </ul>
-                      </FeaturedItems>
-                      <ButtonDiv>
-                        {console.log("DATA", data)}
-                        {console.log(
-                          "Next Billing Time",
-                          data.databankUser.p_next_billing_time
-                        )}
-                        {data && data.databankUser.p_next_billing_time ? (
-                          <p>
-                            Your subscription will expire on{" "}
-                            {new Date(
-                              parseInt(data.databankUser.p_next_billing_time)
-                            ).toDateString()}
-                          </p>
-                        ) : (
-                          <ContinueButton2
-                            onClick={handleSubscriptionCancellation}
-                          >
-                            Cancel Subscription
-                          </ContinueButton2>
-                        )}
-                      </ButtonDiv>
-                    </UserTypeContainerDiv>
-                  </Div2>
-                </>
-              ) : null}
-            </>
+            Monthly ? (
+              <React.Fragment>
+                <Div>
+                  <h1>Hello, </h1>
+                  <p>Your current and active plan is below</p>
+                </Div>
+                <Div2>
+                  <UserTypeContainerDiv>
+                    <PlanHeader>
+                      <h1>Premium</h1>
+                      <h2>Monthly</h2>
+                      <h3>
+                        <span>$9.99</span> every month
+                      </h3>
+                    </PlanHeader>
+                    <FeaturedItems>
+                      <ul className="features-list">
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Create an account
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Change data filters
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Download Data into Excel
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Additional Filter Options
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Filter Data by date
+                        </li>
+                      </ul>
+                    </FeaturedItems>
+                    <ButtonDiv>
+                      {console.log("DATA", data)}
+                      {console.log(
+                        "Next Billing Time",
+                        data.databankUser.p_next_billing_time
+                      )}
+                      {data && data.databankUser.p_next_billing_time ? (
+                        <p>
+                          Your subscription will expire on{" "}
+                          {new Date(
+                            parseInt(data.databankUser.p_next_billing_time)
+                          ).toDateString()}
+                        </p>
+                      ) : (
+                        <ContinueButton2
+                          onClick={handleSubscriptionCancellation}
+                        >
+                          Cancel Subscription
+                        </ContinueButton2>
+                      )}
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
+                </Div2>
+              </React.Fragment>
+            ) : null
           ) : (
-            <>
+            <React.Fragment>
               <Div>
                 <h1>Need More Data?</h1>
                 <P>Upgrade to our paid plan to access all material.</P>
@@ -361,7 +231,181 @@ function DashAccount(props) {
                   </ul>
                 </UserTypeContainerDiv>
               </Div2>
-            </>
+            </React.Fragment>
+          )}
+          {tier === "PAID" || newSub ? (
+            BiAnnually ? (
+              <React.Fragment>
+                <Div>
+                  <h1>Hello, </h1>
+                  <p>Your current and active plan is below</p>
+                </Div>
+                <Div2>
+                  <UserTypeContainerDiv>
+                    <PlanHeader>
+                      <h1>Premium</h1>
+                      <h2>Bi-Annually</h2>
+                      <h3>
+                        <span>$49.99</span> every 6 months
+                      </h3>
+                    </PlanHeader>
+                    <FeaturedItems>
+                      <ul className="features-list">
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Create an account
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Change data filters
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Download Data into Excel
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Additional Filter Options
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Filter Data by date
+                        </li>
+                      </ul>
+                    </FeaturedItems>
+                    <ButtonDiv>
+                      {console.log("DATA", data)}
+                      {console.log(
+                        "Next Billing Time",
+                        data.databankUser.p_next_billing_time
+                      )}
+                      {data && data.databankUser.p_next_billing_time ? (
+                        <p>
+                          Your subscription will expire on{" "}
+                          {new Date(
+                            parseInt(data.databankUser.p_next_billing_time)
+                          ).toDateString()}
+                        </p>
+                      ) : (
+                        <ContinueButton2
+                          onClick={handleSubscriptionCancellation}
+                        >
+                          Cancel Subscription
+                        </ContinueButton2>
+                      )}
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
+                </Div2>
+              </React.Fragment>
+            ) : null
+          ) : (
+            <React.Fragment>
+              <Div>
+                <h1>Need More Data?</h1>
+                <P>Upgrade to our paid plan to access all material.</P>
+              </Div>
+              <Div2>
+                <UserTypeContainerDiv>
+                  <div>
+                    <h1>Premium Account</h1>
+                  </div>
+                  <ul className="features-list">
+                    <li className="features-item">Create an account</li>
+                    <li className="features-item">Change data filters</li>
+                    <li className="features-item">Download data into csv</li>
+                    <li className="features-item">Additional filter options</li>
+                    <li className="features-item">Filter data by date</li>
+                  </ul>
+                </UserTypeContainerDiv>
+              </Div2>
+            </React.Fragment>
+          )}
+          {tier === "PAID" || newSub ? (
+            Yearly ? (
+              <React.Fragment>
+                <Div>
+                  <h1>Hello, </h1>
+                  <p>Your current and active plan is below</p>
+                </Div>
+                <Div2>
+                  <UserTypeContainerDiv>
+                    <PlanHeader>
+                      <h1>Premium</h1>
+                      <h2>Anually</h2>
+                      <h3>
+                        <span>$89.99</span> every year
+                      </h3>
+                    </PlanHeader>
+                    <FeaturedItems>
+                      <ul className="features-list">
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Create an account
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Change data filters
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Download Data into Excel
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Additional Filter Options
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Filter Data by date
+                        </li>
+                      </ul>
+                    </FeaturedItems>
+                    <ButtonDiv>
+                      {console.log("DATA", data)}
+                      {console.log(
+                        "Next Billing Time",
+                        data.databankUser.p_next_billing_time
+                      )}
+                      {data && data.databankUser.p_next_billing_time ? (
+                        <p>
+                          Your subscription will expire on{" "}
+                          {new Date(
+                            parseInt(data.databankUser.p_next_billing_time)
+                          ).toDateString()}
+                        </p>
+                      ) : (
+                        <ContinueButton2
+                          onClick={handleSubscriptionCancellation}
+                        >
+                          Cancel Subscription
+                        </ContinueButton2>
+                      )}
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
+                </Div2>
+              </React.Fragment>
+            ) : null
+          ) : (
+            <React.Fragment>
+              <Div>
+                <h1>Need More Data?</h1>
+                <P>Upgrade to our paid plan to access all material.</P>
+              </Div>
+              <Div2>
+                <UserTypeContainerDiv>
+                  <div>
+                    <h1>Premium Account</h1>
+                  </div>
+                  <ul className="features-list">
+                    <li className="features-item">Create an account</li>
+                    <li className="features-item">Change data filters</li>
+                    <li className="features-item">Download data into csv</li>
+                    <li className="features-item">Additional filter options</li>
+                    <li className="features-item">Filter data by date</li>
+                  </ul>
+                </UserTypeContainerDiv>
+              </Div2>
+            </React.Fragment>
           )}
         </AccountPageDiv>
       ) : (
