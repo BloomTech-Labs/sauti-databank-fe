@@ -118,6 +118,7 @@ const REGISTER = gql`
 function CreateUser(props) {
   console.log(props);
   const [addUser, setAddUser] = useState(initialState);
+  console.log(addUser);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -320,7 +321,7 @@ function CreateUser(props) {
                 <Select
                   label="Found By"
                   labelId="demo-customized-select-label"
-                  id="demo-customized-select"
+                  id="found_by"
                   name="found_by"
                   placeholder=""
                   value={found_by}
