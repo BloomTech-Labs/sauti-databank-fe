@@ -718,6 +718,68 @@ function formatDate(date) {
   return new Date(date).toDateString();
 }
 
+const Container = styled.div`
+  padding: 2%;
+  height: 60rem;
+
+  .container-row {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+  }
+
+  .row-column-one {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 20%;
+  }
+  .row-column-two {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 20%;
+  }
+  .row-column-three {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 20%;
+  }
+  .row-column-four {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 20%;
+  }
+  .row-column-five {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 20%;
+  }
+
+  .feature-container {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    .feature-list {
+      span {
+        font-size: 2.2rem;
+      }
+    }
+  }
+`;
+
 const PlanHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -731,6 +793,7 @@ const PlanHeader = styled.div`
   color: #d9d9d9;
 
   h1 {
+    text-align: center;
     font-weight: bold;
     font-size: 3rem;
     letter-spacing: 1px;
