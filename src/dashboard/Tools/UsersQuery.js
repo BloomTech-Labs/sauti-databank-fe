@@ -40,7 +40,11 @@ const UsersQuery = () => {
   //format date
   data.allUsers.map(item => {
     if (item.registration_date !== undefined) {
-      item.registration_date = Date(parseInt(item.registration_date));
+      item.registration_date = Date(parseInt(item.registration_date)).replace(
+        /[a-zA-Z]/g,
+        ""
+      );
+      //();[:%s/^...//]
     }
   });
 
