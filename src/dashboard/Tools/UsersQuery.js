@@ -14,6 +14,8 @@ const Users_Query = gql`
       job_position
       country
       organization_type
+      registration_date
+      found_by
     }
   }
 `;
@@ -31,6 +33,43 @@ const UsersQuery = () => {
   }
   console.log(data.allUsers);
 
+  data.allUsers.registration_date = new Date(
+    parseInt(data.allUsers.registration_date)
+  ).toDateString();
+
+  //format date
+  data.allUsers.map(item => {
+    if (item.registration_date !== undefined) {
+      item.registration_date = Date(parseInt(item.registration_date)).replace(
+        /[a-zA-Z]{0,3}/,
+        ""
+      );
+      //();[:%s/^...//]
+    }
+  });
+
+  // data.allusers = data.allUsers.map(item => {
+  //   console.log("registration_date", item.registration_date);
+  //   if (item.registration_date !== undefined) {
+  //     item.registration_date = new Date(parseInt(item.registration_date));
+  //     console.log(
+  //       "item.registration_date",
+  //       item.registration_date.getFullYear()
+  //     );
+  //     return {
+  //       ...data.allUsers,
+  //       registration_date: `${item.registration_date.getFullYear()}`
+  //     };
+
+  //     // .replace(
+  //     //   /[a-zA-Z]{0,3}/,
+  //     //   ""
+  //     // );
+  //     //();[:%s/^...//]
+  //   }
+  // });
+
+  //data.allUsers.registration_date =5
   return (
     <>
       <Tools allUsers={data.allUsers} />
