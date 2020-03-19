@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { decodeToken } from "../dashboard/auth/Auth";
+import { decodeToken } from "../../dashboard/auth/Auth";
 import { useMutation } from "@apollo/react-hooks";
 import swal from "sweetalert";
 import gql from "graphql-tag";
@@ -22,8 +22,22 @@ const UPDATE_USER_TIER = gql`
   }
 `;
 
-export default function PaypalButton() {
-  const [userUpdated, { loading, error }] = useMutation(UPDATE_USER_TIER);
+const UPDATE_USER_PLAN_NAME = gql`
+  mutation addPaypalPlan($newUserPlan: newAddPaypalPlanInput!) {
+    addPaypalPlan(input: $newUserPlan) {
+      ... on DatabankUser {
+        email
+      }
+      ... on Error {
+        message
+      }
+    }
+  }
+`;
+
+export default function BiAnnuallyButton() {
+  const [userUpdated] = useMutation(UPDATE_USER_TIER);
+  const [addPlan] = useMutation(UPDATE_USER_PLAN_NAME);
   const history = useHistory();
 
   useEffect(function renderPaypalButtons() {
@@ -33,19 +47,17 @@ export default function PaypalButton() {
         style: {
           shape: "pill",
           size: "responsive",
-          color: "blue",
+          color: "black",
           label: "paypal"
         },
 
         createSubscription: function(data, actions) {
           return actions.subscription.create({
-            plan_id: "P-88W9005566465954VLZLJ54Q"
+            plan_id: "P-7EW87242GC634754DLZZGACA"
           });
         },
         // P-72246955VA0534701LZK5PUA
         onApprove: async function(data, actions) {
-          console.log("2", data.subscriptionID, actions);
-
           swal({
             title: "",
             text: "Your account has been upgraded to premium!",
@@ -56,26 +68,31 @@ export default function PaypalButton() {
           const decoded = decodeToken(token);
           decoded.subscription_id = data.subscriptionID;
           localStorage.setItem("xyz", decoded.subscription_id);
-          console.log("decoded", decoded);
           decoded.tier = "PAID";
           delete decoded.iat;
           delete decoded.exp;
-          const editedUser = await userUpdated({
+          await userUpdated({
             variables: { newEditUser: decoded }
           });
+
+          const { id, tier, subscription_id, ...rest } = decoded;
+
+          await addPlan({
+            variables: { newUserPlan: rest }
+          });
+
           history.push("/data");
-          console.log("editeduser", editedUser);
         },
         onError: function(err) {
           // Show an error page here, when an error occurs
           console.error("err", err);
         }
       })
-      .render("#paypal-button-container");
+      .render("#paypal-button-container-biannually");
   }, []);
   return (
     <div
-      id="paypal-button-container"
+      id="paypal-button-container-biannually"
       style={{
         display: "inline-block",
         padding: "1rem 3rem",

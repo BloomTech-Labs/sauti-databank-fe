@@ -269,14 +269,12 @@ ul ol {
   letter-spacing: 1px;
 }
 .features-item {
-  border-top: 0.5px solid lightgrey;
+  border-bottom: 0.5px solid lightgrey;
   font-size: 2rem;
   line-height: 1.5;
   padding: 1.5rem 0;
 }
-.features-item:last-child {
-  border-bottom: 0.5px solid lightgrey;
-}
+
 .subscription-price {
   display: block;
   font-size: 3.5rem;
