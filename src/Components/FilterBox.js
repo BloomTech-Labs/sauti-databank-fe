@@ -9,12 +9,14 @@ import graphLabels from "./graphLabels";
 import Loader from "react-loader-spinner";
 import { colourOptions, groupedOptions } from "./docs/data";
 import { getTodaysDate } from "../dashboard/CalendarModal";
-
+import { useHistory } from "react-router-dom";
 import CalendarModal from "../dashboard/CalendarModal";
 
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
+import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
 export default function FilterBox(props) {
+  const History = useHistory();
   const {
     filters,
     setFilters,
@@ -23,6 +25,7 @@ export default function FilterBox(props) {
     filterBoxEndDate,
     setFilterBoxEndDate
   } = props;
+  const [updateUrlFlag, setUpdateUrlFlag] = useState(false);
   const x = (theSuperCategories, categoriesCollected) => {
     return theSuperCategories.map(superCategory => {
       return {
@@ -168,6 +171,8 @@ export default function FilterBox(props) {
             // seems to need this when this is a compoennt
             checked={isChecked(i, filters, option)}
             onChange={e => {
+              setUpdateUrlFlag(!updateUrlFlag);
+
               changeOption(i, filters, graphLabels, option);
             }}
           />
@@ -300,6 +305,7 @@ export default function FilterBox(props) {
             // isSearchable
             onChange={e => {
               console.log(e.label, filters[i]);
+              setUpdateUrlFlag(!updateUrlFlag);
               let optionFlags = {};
               graphLabels[
                 `${FilterBoxOptions.default[e.label].value.type}`
@@ -408,6 +414,72 @@ export default function FilterBox(props) {
   const [setup, setSetup] = useState(colourOptions[0]);
   const [loading, setLoading] = useState(false);
 
+  console.log("filters", filters);
+  // let checkboxes = {};
+  // Object.keys(filters).forEach(filterId => {
+  //   urlSearchParams = {
+  //     ...urlSearchParams,
+  //     ["filter" + String(filterId)]: filters[filterId].avaliableOptions
+  //   };
+  // });
+
+  // console.log({ urlSearchParams });
+  // let useEffectFilterDependencies = Object.keys(filters).map(filterId => {
+  //   return filters[filterId].selectedTableColumnName;
+  // });
+  // let dependencies = []
+  // for(var i in Object.keys(filters)) {
+  //   dependencies.push(filters[i].selectedTableColumnName)
+  // }
+  // console.log("dependencies", dependencies)
+  // const filterParams = new URLSearchParams({...urlSearchParams});
+  let urlSearchParams = {};
+  Object.keys(filters).forEach(filterId => {
+    urlSearchParams = {
+      ...urlSearchParams,
+      ["filter" + String(filterId)]: `${
+        filters[filterId].selectedTableColumnName
+          ? filters[filterId].selectedTableColumnName
+          : "undefined"
+      },${getSelectedOption(filters, filterId)}`
+    };
+  });
+
+  // "?filter0=gender%2CFemale&filter1=age%2Cundefined&filter2=crossing_freq%2CMonthly&filter3=education%2CSecondary"
+
+  // filter0: {gender, femail}
+  // filter1: {age, nothing}
+  // filter3 ...
+
+  // the default url setup
+  // "?filter0=gender%2Cundefined&filter1=%2Cundefined&filter2=%2Cundefined"
+  // filter0: {gender, nothing}
+  // filter1: {nothing, nothing}
+  let ourSearch = useHistory().location.search;
+  useEffect(() => {
+    // console.log("LOOK AT ME!!!!!!!")
+    // if history already has a search url then
+    // console.log(urlSearchParams)
+    if (ourSearch.length === 0) {
+      History.push(
+        "?" + new URLSearchParams({ ...urlSearchParams }).toString()
+      );
+    }
+  }, [
+    updateUrlFlag
+    // dependencies
+    // filters[0].selectedTableColumnName, filters[1].selectedTableColumnName
+  ]);
+
+  // let params
+  // useEffect(() => {
+  //   params = new URLSearchParams({ ...urlSearchParams });
+  // }, useEffectFilterDependencies)
+
+  // useEffect(() => {
+  //   History.push("?" + params.toString());
+  // }, useEffectFilterDependencies);
+
   const handleSubmit = useCallback(
     e => {
       if (e.target.textContent === "Submit") {
@@ -428,19 +500,13 @@ export default function FilterBox(props) {
 
   return (
     <div>
-      {/* <a target="_blank" href="https://twitter.com/home?status=This%20photo%20is%20awesome!%20Check%20it%20out:%20pic.twitter.com/9Ee63f7aVp">Share on Twitter</a> */}
-
       <a
+        class="twitter-share-button"
         target="_blank"
-        href="https://twitter.com/share?ref_src=twsrc%5Etfw?text=this%20website%20is%20awesome!"
-        className="twitter-share-button"
-        data-show-count="false"
+        href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
       >
         Tweet
       </a>
-
-      <br />
-
       <div
         className="fb-share-button"
         data-href="https://blissful-pare-60612f.netlify.com/data"

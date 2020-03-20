@@ -19,20 +19,6 @@ function DashHome() {
       <SignedInDiv>
         <UserHeader></UserHeader>
       </SignedInDiv>
-      {/* {signedIn && GASignInHandler(userEmail)} */}
-
-      {/* {!signedIn && (
-        <NotSignedInDiv>
-          <UserHeader>Welcome To the Sauti Data App</UserHeader>
-        </NotSignedInDiv>
-      )}
-      {signedIn && (
-        <SignedInDiv>
-          <UserHeader>
-            Hello <UserName>{userEmail}</UserName> !
-          </UserHeader>
-        </SignedInDiv>
-      )} */}
       <GraphContainer />
     </>
   );

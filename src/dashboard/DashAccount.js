@@ -293,7 +293,7 @@ function DashAccount(props) {
 
 export default DashAccount;
 
-function formatDate(date) {
+export function formatDate(date) {
   return new Date(date).toDateString();
 }
 

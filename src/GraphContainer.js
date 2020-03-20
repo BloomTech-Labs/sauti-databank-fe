@@ -10,65 +10,25 @@ import { withRouter, useParams, useHistory } from "react-router-dom";
 import Queries from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
 import styled from "styled-components";
+import graphLabels from "./Components/graphLabels";
+
 import { getAvaliableOptions, getSelectedOption } from "./OptionFunctions";
-/*
-          what do worandon woman trade?
-          what doe rwandon women over 50 trade?
 
-          just filter what they already have set up from the first 2 filters
-          they should be able to add another additional filter
+// redux "prop drilling" style
+// know what filters will have before running this
+/* <GraphContainer
+    x={setupFilter()}
+/>
 
-          low priority:
-
-            the dates on the calendar should be dynamically set to the dates in the items the categories are filterd
-
-            be able to measure date periods by year
-
-sort asending all except for education level options
-and border crossing frequency options
-(did manually so not totally sure)
-
-
-
-
-(seems to work now)
-additional filters:
-default to show
-when next additional filter is picked
-the previous filter is hiding all but the selected one
-
-
-(seems to work now)
-append additional filters here
-Additional Filter: Country of Residence - 20-30
-use a newline to separate them
-
-
-(leave for monday morning meeting with lance)
-downloading:
-  export subsample needs to include all from the data series options
-  It not currently doing that
-  It seems as it's not including all from data series reguardless of wether subsample is chosen or not
-  it's just including a few more if no subsample is chosen
-
-  the items not included so far have no data, so does he want rows
-  filled with zeros
-
-
-
-huge space between title spaces
-
-
-
-
-
-have the download file name and columns(no subsamples) to have column names
-for additional filters
-*/
-
-const GraphContainer = () => {
+setupFilter()
+  if(history.search.length === 0)
+    return default gender search object
+  else
+    return the urls search object
+ */
+const GraphContainer = props => {
   const [url, setUrl] = useState("");
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState({ //useState(props.x)
     // old plan
     // default query setup
     // show or hide is only for the first one
@@ -138,16 +98,57 @@ const GraphContainer = () => {
     1,
     useHistory().location.search.length
   );
+  // "?filter0=gender%2CFemale&filter1=age%2Cundefined&filter2=crossing_freq%2CMonthly&filter3=education%2CSecondary"
+
   let split1 = searchString.split("&");
   // console.log(split1)
+  let newFilterObject = {};
   for (var i in split1) {
     let split2 = split1[i].split("=");
+    let split3 = split2[1].split("%2C");
     console.log(
-      "attribut name",
-      split2[0].replace("%20", " "),
+      "filter name",
+      split2[0],
       "search",
-      split2[1]
+      "table name",
+      split3[0],
+      "option",
+      split3[1]
     );
+    let optionFlags = {};
+    console.log();
+    // get graphLabels[tableName].labels
+    graphLabels[`${split3[0]}`].labels.forEach(option => {
+      optionFlags = {
+        ...optionFlags,
+        [option]: false
+      };
+    });
+
+    // the newFilterObject from the previous round is not
+    // being used to make this one
+
+    // wary of spreading using multiple sources inside the object
+    newFilterObject = {
+      ...newFilterObject,
+      [i]: {
+        // get rid of the "udefined" key
+        // get already setup categories from the default
+        ...filters[i],
+        selectedTableColumnName: split3[0],
+        // may permit more than 1 to be true
+        // get the original set
+        selectableOptions: {
+          ...optionFlags,
+          [split3[1]]: true
+        }
+      }
+      // maybe the original filter could be reconstructed using the url data(filter is read only)
+      // Redux?
+    };
+    console.log("new filter object", newFilterObject);
+
+    // setFilters(newFilterObject)
   }
   // put the date here
   const {

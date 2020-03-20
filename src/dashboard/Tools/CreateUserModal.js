@@ -38,7 +38,7 @@ const ModalButton = styled.button`
   }
 `;
 
-export default function CreateUserModal() {
+export default function CreateUserModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -53,7 +53,7 @@ export default function CreateUserModal() {
   return (
     <div>
       <ModalButton className="nav-login" type="button" onClick={handleOpen}>
-        Create User
+        Create Account
       </ModalButton>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -68,7 +68,7 @@ export default function CreateUserModal() {
         }}
       >
         <Fade in={open}>
-          <CreateUser handleClose={handleClose} />
+          <CreateUser handleClose={handleClose} api={props.params} />
         </Fade>
       </Modal>
     </div>

@@ -62,6 +62,7 @@ const Graph = props => {
         id: `${sampleSize}`,
         displayName: `Sample Size: ${sampleSize}`
       });
+      // finish this
       allHeaders.push({ id: `I am here` });
     } else {
       allHeaders = [

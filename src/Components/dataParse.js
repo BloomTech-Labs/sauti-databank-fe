@@ -16,13 +16,13 @@ const dataParse = (
   crossFilterQuery
 ) => {
   // This is bad practice, but function wrapped in try catch incase unknown error occurs, to reload page
-  console.log(`indexBy`, indexBy);
-  console.log(`dataparse`, data);
-  console.log(`crossFilter`, crossFilter);
+  // console.log(`indexBy`, indexBy);
+  // console.log(`dataparse`, data);
+  // console.log(`crossFilter`, crossFilter);
 
-  console.log(`additionalFilter`, additionalFilter);
-  console.log(`queryType`, queryType);
-  console.log(`crossFilterQuery`, crossFilterQuery);
+  // console.log(`additionalFilter`, additionalFilter);
+  // console.log(`queryType`, queryType);
+  // console.log(`crossFilterQuery`, crossFilterQuery);
   try {
     let dataStructure = [];
     //when single filtering "Most Requested" graph
@@ -30,28 +30,17 @@ const dataParse = (
       data = filterByDate(data, startDate, endDate);
       data = removeMultiple(data);
       dataStructure = getIndex(data, indexBy);
-      console.log(
-        "DATAPARSE ONE ----- FIRST FILTER = SESSIONS, CROSSFILTER EMPTY",
-        dataStructure
-      );
+
       return getMostRequested(data, dataStructure, indexBy);
     }
     //when cross-filtering "Most Requested" as index
     else if (queryType === "Sessions" && crossFilter !== "") {
       data = filterByDate(data, startDate, endDate);
-      console.log("data", data);
 
       data = removeMultiple(data);
-      console.log("data", data);
 
       dataStructure = getIndex(data, indexBy);
-      console.log("data", data);
-      console.log("dataStructure", dataStructure);
 
-      console.log(
-        "DATAPARSE TWO -----FIRST FILTER = SESSIONS ---- CROSSFILTER ANYTHING!!!!!!!!!!!!!",
-        dataStructure
-      );
       // console.log("before running setCrossedItems")
       // console.log("data", data)
       // console.log("dataStructure", dataStructure)
@@ -70,7 +59,6 @@ const dataParse = (
         crossFilterQuery
       );
     } else {
-      console.log("BIG ELSE DATAPARSE");
       //telling function how to format data. See "graphLabels.js"
       if (queryType === "Users") {
         // console.log("FIRST QUERY = USERS - DATASTRUCTURE", dataStructure)
@@ -90,9 +78,7 @@ const dataParse = (
       //when cross-filtering and index is Not "Most Requested"
       if (crossFilter !== "") {
         data = removeMultiple(data);
-        console.log(
-          "FIRST QUERY = USERS --- BIG ELSE DATAPARSE - IF CROSS ISN'T EMPTY"
-        );
+
         return setCrossedItems(
           data,
           dataStructure,
@@ -106,9 +92,6 @@ const dataParse = (
         //when single filtering with index that is not "Most Requested"
         data = removeMultiple(data);
 
-        console.log(
-          "FIRST QUERY = USERS --- BIG ELSE DATAPARSE - IF CROSSFILTER IS EMPTY"
-        );
         // console.log(`dataparse after removeMultiple`, data);
         return setItem(data, dataStructure, indexBy);
       }
