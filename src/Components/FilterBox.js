@@ -116,94 +116,134 @@ export default function FilterBox(props) {
         <components.Control {...props} />
       </div>
     );
-    if (Object.keys(graphLabels).includes(filters[i].selectedTableColumnName)) {
-      console.log("selectable options");
-      console.log(
-        graphLabels[`${filters[i].selectedTableColumnName}`].labels.filter(
-          option =>
-            i >= 2 &&
-            Object.keys(filters[i].selectableOptions)
-              .map(categoryName =>
-                filters[i].selectableOptions[categoryName] === true
-                  ? categoryName
-                  : null
-              )
-              .filter(result => result !== null)
-              .includes(option)
-        )
+
+    // let urlSearchParams = {}
+    // Object.keys(filters).forEach(filterId => {
+    //   // const filterName = 'filter' + String(filterId)
+    //   urlSearchParams = {
+    //     ...urlSearchParams,
+    //     ['filter' + String(filterId)]: filters[filterId].selectedTableColumnName
+    //   }
+    // })
+
+    // let useEffectFilterDependencies = Object.keys(filters).map(filterId => {
+    //   return filters[filterId].selectedTableColumnName
+    // })
+
+    const CategoryOptions = props => {
+      let { i, filters, graphLabels, option } = props;
+      // for options tag
+      const changeOption = (i, filters, graphLabels, option) => {
+        let optionFlags = {};
+        graphLabels[`${filters[i].selectedTableColumnName}`].labels.forEach(
+          option => {
+            optionFlags = {
+              ...optionFlags,
+              [option]: false
+            };
+          }
+        );
+        setFilters({
+          ...filters,
+          [i]: {
+            ...filters[i],
+            // selectedOption: option,
+            selectableOptions: {
+              ...optionFlags,
+              [option]: !filters[i].selectableOptions[option]
+            }
+          }
+        });
+      };
+      const isChecked = (i, filters, option) => {
+        return filters[i].selectableOptions[option] === true;
+      };
+
+      return (
+        <Options key={option}>
+          <input
+            type="radio"
+            name="CrossFilter"
+            value={option}
+            // seems to need this when this is a compoennt
+            checked={isChecked(i, filters, option)}
+            onChange={e => {
+              changeOption(i, filters, graphLabels, option);
+            }}
+          />
+          <FilterOption>{option}</FilterOption>
+        </Options>
       );
-    }
+    };
 
-    const ProvideOptions = props => {
-      const { i, filters, graphLabels } = props;
+    // for CategoryOptionsContainer = RenderCheckContainer
 
-      const ShowOptions = props => {
-        const { i, filters, graphLabels } = props;
+    const RenderCheckContainer = props => {
+      // do all conditional renderings using if statements for now
+      let { i, filters, graphLabels } = props;
+      console.log("RenderCheckContainer", i, filters[i].showOptions);
 
+      const showOptions = (i, filters, graphLabels) => {
+        // if we show we show all
+        // if we hide we show only the selected one
         if (filters[i].showOptions) {
+          // show all items
+          // needs to have show enabled when the selection is folded
+          // if(filters[i].optionHasBeenSelected) {
           return (
-            <div>
-              {graphLabels[`${filters[i].selectedTableColumnName}`].labels
-                .filter(
-                  option =>
-                    i >= 2 &&
-                    // taking the espected result and wiping it out
-
-                    // doesn't work in the begining cause nothing has been chosen for the first query
-                    // Object.keys(filters[i].selectableOptions).map(categoryName => categoryName).includes(option)
-                    Object.keys(filters[i].selectableOptions)
-                      .map(categoryName =>
-                        filters[i].selectableOptions[categoryName] === true ||
-                        !filters[i].nextDataFilterHasBeenChosen
-                          ? categoryName
-                          : null
-                      )
-                      .filter(result => result !== null)
-                      .includes(option)
-                )
-                .map(option => (
-                  <Options key={option}>
-                    <input
-                      type="radio"
-                      name="CrossFilter"
-                      value={option}
-                      // seems to need this when this is a compoennt
-                      checked={filters[i].selectedOption === option}
-                      onChange={e => {
-                        let optionFlags = {};
-                        graphLabels[
-                          `${filters[i].selectedTableColumnName}`
-                        ].labels.forEach(option => {
-                          optionFlags = {
-                            ...optionFlags,
-                            [option]: false
-                          };
-                        });
-                        setFilters({
-                          ...filters,
-                          [i]: {
-                            ...filters[i],
-                            selectedOption: option,
-                            selectableOptions: {
-                              ...optionFlags,
-                              [option]: !filters[i].selectableOptions[option]
-                            }
-                          }
-                        });
-                      }}
-                    />
-                    <FilterOption>{option}</FilterOption>
-                  </Options>
-                ))}
-            </div>
+            graphLabels[`${filters[i].selectedTableColumnName}`].labels
+              // .filter(option => {return filters[i].selectableOptions[option]})
+              .map(option => (
+                <CategoryOptions
+                  i={i}
+                  filters={filters}
+                  graphLabels={graphLabels}
+                  option={option}
+                />
+              ))
           );
+
+          // show all and hide all but the selected one
+
+          // 2 different things are being done when they are both false
+          // show all
+          // fold
+
+          // filters[i].showOptions is false and filters[i].optionHasBeenSelected is true
+          // folding the unselected options shouldn't depend on wether or not we are showing or hiding options
+          // it's just that hiding should only hide unselected items
+          // show hide x-> folding unselected
+        } else {
+          // return null
+          // hide all but the selected one
+          // if(filters[i].optionHasBeenSelected) {
+          return graphLabels[`${filters[i].selectedTableColumnName}`].labels
+            .filter(option => {
+              return filters[i].selectableOptions[option];
+            })
+            .map(option => (
+              <CategoryOptions
+                i={i}
+                filters={filters}
+                graphLabels={graphLabels}
+                option={option}
+              />
+            ));
+
+          // }
+          // return (null)
         }
       };
+
+      // for 3rd filter down
+      // you will be selecting things that don't change the graph except for the sample size
+      // make the default be showing
+      console.log("show options", i, filters[i].showOptions);
       if (i !== String(1)) {
         if (graphLabels[`${filters[i].selectedTableColumnName}`]) {
           return (
             <CheckboxContainer>
-              <p>Select an option to further filter the data: </p>
+              <p>Please pick an option: </p>
               <button
                 onClick={() => {
                   setFilters({
@@ -217,12 +257,31 @@ export default function FilterBox(props) {
                   });
                 }}
               >
+                {/* maybe set this one along with the selected option flag? */}
                 {filters[i].showOptions ? "Hide" : "Show"}
               </button>
-              {/* if it has options to show only show the ones that have */}
-              {}
+              {/*
+                      flag ideas
+                        default additional filter senario
+
+
+                        we have added another additional filter(attribute to each filter)
+                          read the prior one to decide what to render
+                    */}
+              {/* {filters[i].showOptions &&
+                      graphLabels[`${filters[i].selectedTableColumnName}`].labels.map(option => (
+                          <CategoryOptions
+                            i={i}
+                            filters={filters}
+                            graphLabels={graphLabels}
+                            option={option}
+                          />
+                        ))} */}
+              {showOptions(i, filters, graphLabels)}
             </CheckboxContainer>
           );
+        } else {
+          return <div></div>;
         }
       } else {
         return <div></div>;
@@ -231,20 +290,11 @@ export default function FilterBox(props) {
     return (
       <div>
         <form>
-          {/* 
-          nameOfFilter: "Data Series"
-selectedCategory: "Top Commodity Categories"
-selectedOption: undefined
-avaliableOptions: (25) ["Animal Product", "Animal Products", "Beans", "Cereals - Maize", "Cereals - Other", "Cereals - Rice", "Dry Maize", "Farm Input", "Farm Inputs", "Fruits", "Fuel", "Green Gram", "Imported Rice", "Maharagwe", "Maize Flour", "Matunda", "Mixed Beans", "Nafaka ", "Nafaka Za Mahindi", "Other", "Peas", "Roots & Tubers", "Seeds & Nuts", "Vegetable", "Vegetables"]
-selectableOptions: {Female: false, Male: true}
-selectedTable: "Sessions"
-selectedTableColumnName: "commoditycat"
-showOptions: true
- */}
           <p>{filterSelectorName}</p>
           <Select
             defaultValue={{ label: filters[i].selectedCategory }}
             // isClearable
+
             formatGroupLabel={formatGroupLabel}
             components={{ Control: ControlComponent }}
             // isSearchable
@@ -267,13 +317,13 @@ showOptions: true
                   selectedTableColumnName:
                     FilterBoxOptions.default[e.label].value.type,
 
-                  avaliableOptions: Object.keys(graphLabels).includes(
-                    FilterBoxOptions.default[e.label].value.type
-                  )
-                    ? graphLabels[
-                        `${FilterBoxOptions.default[e.label].value.type}`
-                      ].labels
-                    : [],
+                  // avaliableOptions: Object.keys(graphLabels).includes(
+                  //   FilterBoxOptions.default[e.label].value.type
+                  // )
+                  //   ? graphLabels[
+                  //       `${FilterBoxOptions.default[e.label].value.type}`
+                  //     ].labels
+                  //   : [],
                   selectedTable: FilterBoxOptions.default[e.label].value.query,
                   // accees all the options from graphlables
                   // and put all of them in here as
@@ -295,13 +345,15 @@ showOptions: true
             )}
           />
           {/* add a button to show or hide these */}
+
+          {/* this entire code block should be a single component */}
           {/* JS likes to pass integers as string to components */}
-          {i !== String(1) &&
+
+          {/* {i !== String(1) &&
             graphLabels[`${filters[i].selectedTableColumnName}`] && (
               <CheckboxContainer>
                 <p>Select an option to further filter the data: </p>
-                <button
-                  onClick={() => {
+                <button onClick={() => {
                     setFilters({
                       ...filters,
                       [i]: {
@@ -311,68 +363,32 @@ showOptions: true
                       }
                       // add all the options here
                     });
-                  }}
-                >
+                  }}>
                   {filters[i].showOptions ? "Hide" : "Show"}
                 </button>
-                {/* if it has options to show only show the ones that have */}
-                {filters[i].showOptions &&
-                  graphLabels[`${filters[i].selectedTableColumnName}`].labels
-                    .filter(
-                      option =>
-                        i >= 2 &&
-                        // taking the espected result and wiping it out
 
-                        // doesn't work in the begining cause nothing has been chosen for the first query
-                        // Object.keys(filters[i].selectableOptions).map(categoryName => categoryName).includes(option)
-                        Object.keys(filters[i].selectableOptions)
-                          .map(categoryName =>
-                            filters[i].selectableOptions[categoryName] ===
-                              true || !filters[i].nextDataFilterHasBeenChosen
-                              ? categoryName
-                              : null
-                          )
-                          .filter(result => result !== null)
-                          .includes(option)
-                    )
-                    .map(option => (
-                      <Options key={option}>
-                        <input
-                          type="radio"
-                          name="CrossFilter"
-                          value={option}
-                          // seems to need this when this is a compoennt
-                          checked={filters[i].selectedOption === option}
-                          onChange={e => {
-                            let optionFlags = {};
-                            graphLabels[
-                              `${filters[i].selectedTableColumnName}`
-                            ].labels.forEach(option => {
-                              optionFlags = {
-                                ...optionFlags,
-                                [option]: false
-                              };
-                            });
-                            setFilters({
-                              ...filters,
-                              [i]: {
-                                ...filters[i],
-                                selectedOption: option,
-                                selectableOptions: {
-                                  ...optionFlags,
-                                  [option]: !filters[i].selectableOptions[
-                                    option
-                                  ]
-                                }
-                              }
-                            });
-                          }}
-                        />
-                        <FilterOption>{option}</FilterOption>
-                      </Options>
+                {filters[i].showOptions &&
+                  graphLabels[`${filters[i].selectedTableColumnName}`].labels.map(option => (
+                      <CategoryOptions
+                        i={i}
+                        filters={filters}
+                        graphLabels={graphLabels}
+                        option={option}
+                      />
                     ))}
               </CheckboxContainer>
-            )}
+            )} */}
+          {/* {renderCheckContainer(i, filters, graphLabels)} */}
+          <RenderCheckContainer
+            i={i}
+            filters={filters}
+            graphLabels={graphLabels}
+          />
+          {/* <CategoryOptionsContainer
+          i={i}
+          filters={filters}
+          setFilters={setFilters}
+        /> */}
         </form>
       </div>
     );
@@ -417,7 +433,7 @@ showOptions: true
       <a
         target="_blank"
         href="https://twitter.com/share?ref_src=twsrc%5Etfw?text=this%20website%20is%20awesome!"
-        class="twitter-share-button"
+        className="twitter-share-button"
         data-show-count="false"
       >
         Tweet
@@ -426,7 +442,7 @@ showOptions: true
       <br />
 
       <div
-        class="fb-share-button"
+        className="fb-share-button"
         data-href="https://blissful-pare-60612f.netlify.com/data"
         data-layout="button"
         data-size="small"
@@ -434,7 +450,7 @@ showOptions: true
         <a
           target="_blank"
           href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-          class="fb-xfbml-parse-ignore"
+          className="fb-xfbml-parse-ignore"
         >
           Share
         </a>
@@ -463,19 +479,27 @@ showOptions: true
               const currentDataFilter = Object.keys(filters).length - 1;
               setFilters({
                 ...filters,
-                // [currentDataFilter]: {
-                //   ...filters[currentDataFilter],
-
-                // }
+                // make a flag that is only true when this button is clicked on
+                // put the flag on the last additional filter known to the user
+                [currentDataFilter]: {
+                  ...filters[currentDataFilter],
+                  // set to true only if selectableOptions has a selected item
+                  // (the only time optionHasBeenSelected will be true)
+                  showOptions: false
+                  // optionHasBeenSelected: Object.keys(filters[currentDataFilter].selectableOptions).filter(selectableOption => {
+                  //   return filters[currentDataFilter].selectableOptions[selectableOption] === true
+                  // }).length > 0
+                },
                 [Object.keys(filters).length]: {
                   nameOfFilter: "Data Filter",
                   selectedCategory: "",
-                  selectedOption: undefined,
-                  avaliableOptions: [],
+                  // selectedOption: undefined,
+                  // avaliableOptions: [],
                   selectableOptions: {},
                   selectedTable: "",
                   selectedTableColumnName: "",
                   showOptions: true
+                  // optionHasBeenSelected: false
                 }
               });
             }}
@@ -543,38 +567,43 @@ showOptions: true
               props.setFilters({
                 // default query setup
                 0: {
-                  nameOfFilter: "Data Series",
-                  selectedCategory: "Gender",
-                  selectedOption: undefined,
-                  avaliableOptions: [],
-                  selectedTable: "Users",
-                  selectedTableColumnName: "gender",
-                  showOptions: false
+                  ...filters[0]
+                  // nameOfFilter: "Data Series",
+                  // selectedCategory: filters[0].selectedCategory,//"Gender",
+                  // selectableOptions: filters[0].selectedCategory//{},
+                  // selectedTable: "Users",
+                  // selectedTableColumnName: "gender",
+                  // showOptions: false,
+                  // optionHasBeenSelected: false
                 },
                 1: {
                   nameOfFilter: "Compare SubSamples",
                   selectedCategory: "",
-                  selectedOption: undefined,
-                  avaliableOptions: [],
+                  // selectedOption: undefined,
+                  // avaliableOptions: [],
+                  selectableOptions: {},
                   selectedTable: "Users",
                   selectedTableColumnName: "",
-                  showOptions: false
+                  showOptions: false,
+                  optionHasBeenSelected: false
                 },
                 2: {
                   nameOfFilter: "Data Filter",
                   selectedCategory: "",
-                  selectedOption: undefined,
-                  avaliableOptions: [],
+                  // selectedOption: undefined,
+                  // avaliableOptions: [],
+                  selectableOptions: {},
                   selectedTable: "",
                   selectedTableColumnName: "",
-                  showOptions: false
+                  showOptions: true,
+                  optionHasBeenSelected: false
                 }
               });
               setFilterBoxStartDate("2017-01-01");
               setFilterBoxEndDate(getTodaysDate());
             }}
           >
-            Reset
+            Clear Filters
           </p>
         </form>
       </DropdownContainer>

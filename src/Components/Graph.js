@@ -4,6 +4,7 @@ import CsvDownloader from "react-csv-downloader";
 import { Event } from "../dashboard/GoogleAnalytics/index";
 import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
+import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
 import {
   NoAccessText,
@@ -11,6 +12,23 @@ import {
 } from "../dashboard/styledComponents/Index";
 
 const Graph = props => {
+  /*
+            additionalFilter={filters[2].selectedCategory}(done)
+
+          selectedCheckbox={
+            {[filters[2].selectedCategory]: getSelectedOption(filters, 2)}
+          }(done)
+
+          crossFilter={filters[1].selectedCategory}(done)
+
+          index={filters[0].selectedTableColumnName}(done)
+
+          label={filters[0].selectedCategory}(done)
+
+          checkboxOptions={getAvaliableOptions(filters, 2)}
+
+  */
+  let { data, csvData, filters, keys, groupMode, sampleSize } = props;
   console.log("loading graph", props);
   // const tier = getTier();
   const token = getToken();
@@ -38,55 +56,81 @@ const Graph = props => {
   let headers = data => {
     let allHeaders = [];
     //no crossfilter
-    if (!props.crossFilter) {
-      allHeaders = [props.index];
+    if (!filters[1].selectedCategory) {
+      allHeaders = [filters[0].selectedTableColumnName];
       allHeaders.push({
-        id: `${props.sampleSize}`,
-        displayName: `Sample Size: ${props.sampleSize}`
+        id: `${sampleSize}`,
+        displayName: `Sample Size: ${sampleSize}`
       });
+      allHeaders.push({ id: `I am here` });
     } else {
       allHeaders = [
-        { id: `${props.index}`, displayName: `${props.index}` },
-        ...props.keys,
-        { id: `${props.additionalFilter}` },
         {
-          id: `${props.sampleSize}`,
-          displayName: `Sample Size: ${props.sampleSize}`
+          id: `${filters[0].selectedTableColumnName}`,
+          displayName: `${filters[0].selectedTableColumnName}`
+        },
+        ...keys,
+        { id: `${filters[2].selectedCategory}` },
+        // the rest of them should go here
+        {
+          id: `${sampleSize}`,
+          displayName: `Sample Size: ${sampleSize}`
         }
+        // { id: `I am here` }
       ];
     }
     return allHeaders;
   };
 
   let csvFormater = data => {
+    // data is cropped before this function is called
+    console.log("csvFormater", data);
+    // make sure all the options are selected
     //if there's additionalFilter
-    if (props.additionalFilter) {
+    // we need to put on all the additional filters as columns in the download
+    // additionalFilter filters[2].selectedCategory
+    // if we have any additional filters setup then run this
+    //
+    if (Object.keys(filters).length >= 2) {
       data = data.map(obj => {
-        let key = Object.keys(props.selectedCheckbox)[0];
-        let val = Object.values(props.selectedCheckbox)[0];
-        let o = Object.assign({}, obj);
-        o[key] = val;
-        return o;
+        let additionalCategories = {};
+        Object.keys(filters)
+          .filter(filterId => filterId >= 2)
+          .forEach(filterId => {
+            additionalCategories = {
+              ...additionalCategories,
+              [filters[filterId].selectedCategory]: getSelectedOption(
+                filters,
+                filterId
+              )
+            };
+          });
+
+        return { ...obj, ...additionalCategories };
       });
     }
+    console.log(data);
     return data.map(obj => {
       return Object.values(obj);
     });
   };
 
   let fileName = "";
-  fileName = `${props.index && props.index}${props.crossFilter &&
-    "_by_" + props.crossFilter}${props.additionalFilter &&
-    `_where_${props.additionalFilter}:(${
-      Object.values(props.selectedCheckbox)[0]
+  fileName = `${filters[0].selectedTableColumnName &&
+    filters[0].selectedTableColumnName}${filters[1].selectedCategory &&
+    "_by_" + filters[1].selectedCategory}${filters[2].selectedCategory &&
+    `_where_${filters[2].selectedCategory}:(${
+      Object.values({
+        [filters[2].selectedCategory]: getSelectedOption(filters, 2)
+      })[0]
     })`}`;
 
   let track = Event(fileName, "Downloaded Excel");
 
   useEffect(() => {
-    setCsvFormattedData(csvFormater(props.csvData));
-    setCsvHeaders(headers(props.csvData));
-  }, [props.csvData]);
+    setCsvFormattedData(csvFormater(csvData));
+    setCsvHeaders(headers(csvData));
+  }, [csvData]);
 
   return (
     <div className="Graph-Container">
@@ -112,10 +156,10 @@ const Graph = props => {
       </div>
 
       <ResponsiveBar
-        data={props.data}
-        keys={props.keys}
-        indexBy={props.index}
-        groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
+        data={data}
+        keys={keys}
+        indexBy={filters[0].selectedTableColumnName}
+        groupMode={groupMode} // Possibly add toggle selector to change group mode.
         margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
         padding={0.3}
         innerPadding={3}
@@ -142,9 +186,9 @@ const Graph = props => {
           tickPadding: 5,
           tickRotation: 0,
           legend:
-            props.label +
+            filters[0].selectedCategory +
             " (values as percent of total)," +
-            ` sample size = ${props.sampleSize}`,
+            ` sample size = ${sampleSize}`,
           legendPosition: "middle",
           legendOffset: 35
         }}

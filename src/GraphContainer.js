@@ -5,11 +5,12 @@ import ReactGa from "react-ga";
 import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams, useHistory } from "react-router-dom";
+
 import Queries from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
 import styled from "styled-components";
-
+import { getAvaliableOptions, getSelectedOption } from "./OptionFunctions";
 /*
           what do worandon woman trade?
           what doe rwandon women over 50 trade?
@@ -29,30 +30,44 @@ and border crossing frequency options
 
 
 
-(working on this one)
+
+(seems to work now)
 additional filters:
 default to show
 when next additional filter is picked
 the previous filter is hiding all but the selected one
 
 
-
+(seems to work now)
 append additional filters here
 Additional Filter: Country of Residence - 20-30
 use a newline to separate them
 
 
-
+(leave for monday morning meeting with lance)
 downloading:
   export subsample needs to include all from the data series options
   It not currently doing that
+  It seems as it's not including all from data series reguardless of wether subsample is chosen or not
+  it's just including a few more if no subsample is chosen
+
+  the items not included so far have no data, so does he want rows
+  filled with zeros
 
 
 
 huge space between title spaces
+
+
+
+
+
+have the download file name and columns(no subsamples) to have column names
+for additional filters
 */
 
 const GraphContainer = () => {
+  const [url, setUrl] = useState("");
   const [filters, setFilters] = useState({
     // old plan
     // default query setup
@@ -64,41 +79,76 @@ const GraphContainer = () => {
     0: {
       nameOfFilter: "Data Series",
       selectedCategory: "Gender", // label
-      selectedOption: undefined,
-      avaliableOptions: [],
+      // selectedOption: undefined,
+      // avaliableOptions: [],
       selectableOptions: {
         Female: false,
         male: false
       },
       selectedTable: "Users", // value.query
       selectedTableColumnName: "gender", // value.type
-      showOptions: false,
-      nextDataFilterHasBeenChosen: true
+      showOptions: false
     },
 
     1: {
       nameOfFilter: "Compare SubSamples",
       selectedCategory: "",
-      selectedOption: undefined,
-      avaliableOptions: [],
+      // selectedOption: undefined,
+      // avaliableOptions: [],
       selectableOptions: {},
       selectedTable: "Users",
       selectedTableColumnName: "",
-      showOptions: false,
-      nextDataFilterHasBeenChosen: true
+      showOptions: false
     },
     2: {
       nameOfFilter: "Data Filter",
       selectedCategory: "",
-      selectedOption: undefined,
-      avaliableOptions: [],
+      // selectedOption: undefined,
+      // avaliableOptions: [],
       selectableOptions: {},
       selectedTable: "",
       selectedTableColumnName: "",
-      showOptions: true,
-      nextDataFilterHasBeenChosen: true
+      showOptions: true
     }
   });
+
+  let urlSearchParams = {};
+  Object.keys(filters).forEach(filterId => {
+    // const filterName = 'filter' + String(filterId)
+    urlSearchParams = {
+      ...urlSearchParams,
+      ["filter" + String(filterId)]: filters[filterId].selectedTableColumnName
+    };
+  });
+
+  let useEffectFilterDependencies = Object.keys(filters).map(filterId => {
+    return filters[filterId].selectedTableColumnName;
+  });
+
+  console.log(useParams());
+  // const {slug} = useParams()
+  // console.log(slug)
+  // ?filter=1543345434&anotherNameDataSeries=something
+  console.log(urlSearchParams);
+  console.log(useEffectFilterDependencies);
+  console.log(useHistory());
+  // erased ?
+  console.log("query stuff");
+  let searchString = useHistory().location.search.slice(
+    1,
+    useHistory().location.search.length
+  );
+  let split1 = searchString.split("&");
+  // console.log(split1)
+  for (var i in split1) {
+    let split2 = split1[i].split("=");
+    console.log(
+      "attribut name",
+      split2[0].replace("%20", " "),
+      "search",
+      split2[1]
+    );
+  }
   // put the date here
   const {
     filterBoxStartDate,
