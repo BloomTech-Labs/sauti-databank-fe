@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import MonthlyAccount from "./MonthlyAccount";
+import BiAnnuallyAccount from "./BiAnnuallyAccount";
+import YearlyAccount from "./YearlyAccount";
 import CheckMarkSVG from "./Images/CheckMarkSVG";
 import CrossSVG from "./Images/CrossSVG";
 import { urlPageView } from "./GoogleAnalytics/index";
@@ -7,6 +10,8 @@ import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import MonthlyButton from "../Components/Paypal/MonthlyButton";
 import BiAnnuallyButton from "../Components/Paypal/BiannuallyButton";
 import YearlyButton from "../Components/Paypal/YearlyButton";
+import UndrawOptionsSVG from "./Images/undrawOptionsSVG";
+import UndrawInvestmentSVG from "./Images/undrawInvestmentSVG";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -39,8 +44,8 @@ function DashAccount(props) {
   });
 
   const history = useHistory();
-
   const token = getToken();
+
   let tier;
   if (token) {
     tier = decodeToken(token);
@@ -140,431 +145,171 @@ function DashAccount(props) {
     data.databankUser.paypal_plan === "Bi-annually Plan - $49.99";
   const Yearly = data.databankUser.paypal_plan === "Yearly Plan - $89.99";
 
-  console.log(BiAnnually);
+  // const renderAccounts = () => {
+  //   if (Monthly) {
+  //     return (
+  //       <div>
+  //         <MonthlyAccount
+  //           data={data}
+  //           handleSubscriptionCancellation={handleSubscriptionCancellation}
+  //         />
+  //       </div>
+  //     );
+  //   } else if (BiAnnually) {
+  //     return (
+  //       <BiAnnuallyAccount
+  //         data={data}
+  //         handleSubscriptionCancellation={handleSubscriptionCancellation}
+  //       />
+  //     );
+  //   } else if (Yearly) {
+  //     return (
+  //       <YearlyAccount
+  //         data={data}
+  //         handleSubscriptionCancellation={handleSubscriptionCancellation}
+  //       />
+  //     );
+  //   }
+  // };
+
+  //   <React.Fragment>
+  //   <Div>
+  //     <h1>Need More Data?</h1>
+  //     <P>Upgrade to our paid plan to access all material.</P>
+  //   </Div>
+  //   <Div2>
+  //     <UserTypeContainerDiv>
+  //       <div>
+  //         <h1>Premium Account</h1>
+  //       </div>
+  //       <ul className="features-list">
+  //         <li className="features-item">Create an account</li>
+  //         <li className="features-item">Change data filters</li>
+  //         <li className="features-item">Download data into csv</li>
+  //         <li className="features-item">Additional filter options</li>
+  //         <li className="features-item">Filter data by date</li>
+  //       </ul>
+  //     </UserTypeContainerDiv>
+  //   </Div2>
+  // </React.Fragment>
+
+  // {tier === "PAID" || newSub
 
   return (
     <>
       {tier === "PAID" || tier === "GOV_ROLE" || newSub ? (
         <AccountPageDiv>
-          {tier === "PAID" || newSub ? (
-            Monthly ? (
-              <React.Fragment>
-                <Div>
-                  <h1>Hello, </h1>
-                  <p>Your current and active plan is below</p>
-                </Div>
-                <Div2>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Premium</h1>
-                      <h2>Monthly</h2>
-                      <h3>
-                        <span>$9.99</span> every month
-                      </h3>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                    <ButtonDiv>
-                      {console.log("DATA", data)}
-                      {console.log(
-                        "Next Billing Time",
-                        data.databankUser.p_next_billing_time
-                      )}
-                      {data && data.databankUser.p_next_billing_time ? (
-                        <p>
-                          Your subscription will expire on{" "}
-                          {new Date(
-                            parseInt(data.databankUser.p_next_billing_time)
-                          ).toDateString()}
-                        </p>
-                      ) : (
-                        <ContinueButton2
-                          onClick={handleSubscriptionCancellation}
-                        >
-                          Cancel Subscription
-                        </ContinueButton2>
-                      )}
-                    </ButtonDiv>
-                  </UserTypeContainerDiv>
-                </Div2>
-              </React.Fragment>
-            ) : null
-          ) : (
-            <React.Fragment>
-              <Div>
-                <h1>Need More Data?</h1>
-                <P>Upgrade to our paid plan to access all material.</P>
-              </Div>
-              <Div2>
-                <UserTypeContainerDiv>
-                  <div>
-                    <h1>Premium Account</h1>
-                  </div>
-                  <ul className="features-list">
-                    <li className="features-item">Create an account</li>
-                    <li className="features-item">Change data filters</li>
-                    <li className="features-item">Download data into csv</li>
-                    <li className="features-item">Additional filter options</li>
-                    <li className="features-item">Filter data by date</li>
-                  </ul>
-                </UserTypeContainerDiv>
-              </Div2>
-            </React.Fragment>
-          )}
-          {tier === "PAID" || newSub ? (
-            BiAnnually ? (
-              <React.Fragment>
-                <Div>
-                  <h1>Hello, </h1>
-                  <p>Your current and active plan is below</p>
-                </Div>
-                <Div2>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Premium</h1>
-                      <h2>Bi-Annually</h2>
-                      <h3>
-                        <span>$49.99</span> every 6 months
-                      </h3>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                    <ButtonDiv>
-                      {console.log("DATA", data)}
-                      {console.log(
-                        "Next Billing Time",
-                        data.databankUser.p_next_billing_time
-                      )}
-                      {data && data.databankUser.p_next_billing_time ? (
-                        <p>
-                          Your subscription will expire on{" "}
-                          {new Date(
-                            parseInt(data.databankUser.p_next_billing_time)
-                          ).toDateString()}
-                        </p>
-                      ) : (
-                        <ContinueButton2
-                          onClick={handleSubscriptionCancellation}
-                        >
-                          Cancel Subscription
-                        </ContinueButton2>
-                      )}
-                    </ButtonDiv>
-                  </UserTypeContainerDiv>
-                </Div2>
-              </React.Fragment>
-            ) : null
-          ) : (
-            <React.Fragment>
-              <Div>
-                <h1>Need More Data?</h1>
-                <P>Upgrade to our paid plan to access all material.</P>
-              </Div>
-              <Div2>
-                <UserTypeContainerDiv>
-                  <div>
-                    <h1>Premium Account</h1>
-                  </div>
-                  <ul className="features-list">
-                    <li className="features-item">Create an account</li>
-                    <li className="features-item">Change data filters</li>
-                    <li className="features-item">Download data into csv</li>
-                    <li className="features-item">Additional filter options</li>
-                    <li className="features-item">Filter data by date</li>
-                  </ul>
-                </UserTypeContainerDiv>
-              </Div2>
-            </React.Fragment>
-          )}
-          {tier === "PAID" || newSub ? (
-            Yearly ? (
-              <React.Fragment>
-                <Div>
-                  <h1>Hello, </h1>
-                  <p>Your current and active plan is below</p>
-                </Div>
-                <Div2>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Premium</h1>
-                      <h2>Anually</h2>
-                      <h3>
-                        <span>$89.99</span> every year
-                      </h3>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                    <ButtonDiv>
-                      {console.log("DATA", data)}
-                      {console.log(
-                        "Next Billing Time",
-                        data.databankUser.p_next_billing_time
-                      )}
-                      {data && data.databankUser.p_next_billing_time ? (
-                        <p>
-                          Your subscription will expire on{" "}
-                          {new Date(
-                            parseInt(data.databankUser.p_next_billing_time)
-                          ).toDateString()}
-                        </p>
-                      ) : (
-                        <ContinueButton2
-                          onClick={handleSubscriptionCancellation}
-                        >
-                          Cancel Subscription
-                        </ContinueButton2>
-                      )}
-                    </ButtonDiv>
-                  </UserTypeContainerDiv>
-                </Div2>
-              </React.Fragment>
-            ) : null
-          ) : (
-            <React.Fragment>
-              <Div>
-                <h1>Need More Data?</h1>
-                <P>Upgrade to our paid plan to access all material.</P>
-              </Div>
-              <Div2>
-                <UserTypeContainerDiv>
-                  <div>
-                    <h1>Premium Account</h1>
-                  </div>
-                  <ul className="features-list">
-                    <li className="features-item">Create an account</li>
-                    <li className="features-item">Change data filters</li>
-                    <li className="features-item">Download data into csv</li>
-                    <li className="features-item">Additional filter options</li>
-                    <li className="features-item">Filter data by date</li>
-                  </ul>
-                </UserTypeContainerDiv>
-              </Div2>
-            </React.Fragment>
-          )}
+          <div>{tier}</div>
         </AccountPageDiv>
       ) : (
         (tier === "FREE") | (tier === "ADMIN") && (
           <AccountPageDiv>
             {tier === "FREE" ? (
               <>
-                <Div>
-                  <h1>Need more data?</h1>
-                  <p>
-                    Upgrade to one of our paid payment plans to access all
-                    material
-                  </p>
-                </Div>
-                <Div2>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Free Account</h1>
-                      <span>Free</span>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CrossSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CrossSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CrossSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                    <ButtonDiv>
-                      <ContinueButton2 type="submit" onClick={handleSubmit}>
-                        Continue
-                      </ContinueButton2>
-                    </ButtonDiv>
-                  </UserTypeContainerDiv>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Premium</h1>
-                      <h2>Monthly</h2>
-                      <h3>
-                        <span>$9.99</span> every month
-                      </h3>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                    <ButtonDiv>
-                      <MonthlyButton />
-                    </ButtonDiv>
-                  </UserTypeContainerDiv>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Premium</h1>
-                      <h2>Bi-Annually</h2>
-                      <h3>
-                        <span>$49.99</span> every 6 months
-                      </h3>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                    <ButtonDiv>
-                      <BiAnnuallyButton />
-                    </ButtonDiv>
-                  </UserTypeContainerDiv>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Premium</h1>
-                      <h2>Anually</h2>
-                      <h3>
-                        <span>$89.99</span> every year
-                      </h3>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                    <ButtonDiv>
-                      <YearlyButton />
-                    </ButtonDiv>
-                  </UserTypeContainerDiv>
-                </Div2>
+                <Container>
+                  <div className="header-container">
+                    <div className="header-row">
+                      <div className="header-row-col">
+                        <UndrawOptionsSVG />
+                      </div>
+                      <div className="header-row-col">
+                        <h1>Need more data?</h1>
+                        <span>
+                          We know how important data filtering is to your
+                          research
+                        </span>
+                        <span>
+                          Upgrade to our paid plan to access all material
+                        </span>
+                      </div>
+                      <div className="header-row-col">
+                        <UndrawInvestmentSVG />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="account-container">
+                    <div className="account-row">
+                      <div className="account-row-col">
+                        <div className="account-type">
+                          <div className="account-header">
+                            <h2>Free Account</h2>
+                            <h1>Free</h1>
+                          </div>
+                          <div className="account-features">
+                            <div className="account-features-items">
+                              <span>Can Create an account</span>
+                              <span>Access base app</span>
+                              <span>Cross-filter data</span>
+                            </div>
+                          </div>
+                          <div className="account-bottom">
+                            <div className="account-bottom-btn-ctn">
+                              <button type="submit" onClick={handleSubmit}>
+                                Continue
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="account-row-col">
+                        <div className="account-type">
+                          <div className="account-header">
+                            <h2>Premium Account</h2>
+                            <h1>$10/monthly</h1>
+                          </div>
+                          <div className="account-features">
+                            <div className="account-features-items">
+                              <span>Download data into an excel file</span>
+                              <span>Cross-Filter data by date</span>
+                              <span>Additional filtering</span>
+                            </div>
+                          </div>
+                          <div className="account-bottom">
+                            <MonthlyButton />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="account-row-col">
+                        {" "}
+                        <div className="account-type">
+                          <div className="account-header">
+                            <h2>Premium Account</h2>
+                            <h1>$49.99/bi-anually</h1>
+                          </div>
+                          <div className="account-features">
+                            <div className="account-features-items">
+                              <span>Download data into an excel file</span>
+                              <span>Cross-Filter data by date</span>
+                              <span>Additional filtering</span>
+                            </div>
+                          </div>
+                          <div className="account-bottom">
+                            <BiAnnuallyButton />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="account-row-col">
+                        {" "}
+                        <div className="account-type">
+                          <div className="account-header">
+                            <h2>Premium Account</h2>
+                            <h1>$89.99/yearly</h1>
+                          </div>
+                          <div className="account-features">
+                            <div className="account-features-items">
+                              <span>Download data into an excel file</span>
+                              <span>Cross-Filter data by date</span>
+                              <span>Additional filtering</span>
+                            </div>
+                          </div>
+                          <div className="account-bottom">
+                            <YearlyButton />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Container>
               </>
             ) : (
               <>
@@ -719,62 +464,141 @@ function formatDate(date) {
 }
 
 const Container = styled.div`
-  padding: 2%;
-  height: 60rem;
+  height: 100%;
 
-  .container-row {
-    display: flex;
-    height: 100%;
-    flex-direction: row;
-  }
+  .header-container {
+    padding: 2rem;
+    height: 30%;
 
-  .row-column-one {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 20%;
-  }
-  .row-column-two {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 20%;
-  }
-  .row-column-three {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 20%;
-  }
-  .row-column-four {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 20%;
-  }
-  .row-column-five {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 20%;
+    .header-row {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+
+      .header-row-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 33.33%;
+        height: 100%;
+        box-sizing: border-box;
+
+        h1 {
+          color: #000000;
+          letter-spacing: 0.01em;
+          line-height: 8rem;
+          font-size: 4vw;
+          font-weight: bold;
+        }
+
+        span {
+          color: #000000;
+          line-height: 3.4rem;
+          font-size: 1.4vw;
+          font-weight: normal;
+        }
+      }
+    }
   }
 
-  .feature-container {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 100%;
+  .account-container {
+    margin-top: 3rem;
+    height: 50rem;
 
-    .feature-list {
-      span {
-        font-size: 2.2rem;
+    .account-row {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+
+      .account-row-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 25%;
+        height: 100%;
+
+        .account-type {
+          width: 35rem;
+          height: 100%;
+          padding: 2%;
+          box-sizing: border-box;
+          background: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.3);
+          border-radius: 5px;
+          .account-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-left: 1rem;
+            height: 20%;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
+            h2 {
+              font-size: 1.3vw;
+              line-height: 2rem;
+              font-weight: bold;
+            }
+
+            h1 {
+              font-size: 2vw;
+              line-height: 2rem;
+              font-weight: normal;
+            }
+          }
+          .account-features {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 50%;
+
+            .account-features-items {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+
+              span {
+                font-size: 2rem;
+                line-height: 5rem;
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.5);
+              }
+            }
+          }
+          .account-bottom {
+            text-align: center;
+            height: 30%;
+
+            .account-bottom-btn-ctn {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              height: 100%;
+              button {
+                height: 4rem;
+                width: 12rem;
+                font-size: 1.5rem;
+                line-height: 1rem;
+                font-weight: bold;
+                color: #000000;
+                background: #ffffff;
+                border: 2px solid #11736c;
+                box-sizing: border-box;
+                border-radius: 2px;
+
+                &:hover {
+                  background-color: #11736c;
+                  transition: 0.3s ease;
+                  color: #ffffff;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -841,28 +665,14 @@ const Div2 = styled.div`
   display: flex;
   justify-content: space-evenly;
 `;
-const ContinueButton2 = styled.div`
-  display: inline-block;
-  text-decoration: none;
-  color: black;
-  border: 2px solid #eb5e52;
-  border-radius: 5px;
-  padding: 1rem 3rem;
-  margin-top: 2rem;
-  transition: 0.5s ease;
-  &:hover {
-    color: white;
-    background-color: #eb5e52;
-    cursor: pointer;
-  }
-`;
+
 const AccountPageDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 1.8rem;
-  font-weight: normal;
-  margin-bottom: 15%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 `;
+
 const UserTypeContainerDiv = styled.div`
   margin: 2rem;
   display: flex;
@@ -874,24 +684,9 @@ const UserTypeContainerDiv = styled.div`
   height: 600px;
   background: #3d3e40;
   color: #d9d9d9;
-
-  &:nth-child(4) {
-  }
 `;
 
 const P = styled.p`
   font-size: 3rem;
   opacity: 0.75;
-`;
-
-const ButtonDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 25%;
-  width: 100%;
-`;
-
-const Big = styled.big`
-  color: #eb5e52;
 `;

@@ -1,127 +1,152 @@
-// <Container>
-// <div className="container-row">
-//   <div className="row-column-one">
-//     <PlanHeader>
-//       <h1>Databank Features</h1>
-//     </PlanHeader>
-//     <div className="feature-container">
-//       <div className="feature-list">
-//         <span>Create an Account</span>
-//       </div>
-//       <div className="feature-list">
-//         <span>Change data filters</span>
-//       </div>
-//       <div className="feature-list">
-//         <span>Download Data into Excel</span>
-//       </div>
-//       <div className="feature-list">
-//         <span>Additional Filter Options</span>
-//       </div>
-//       <div className="feature-list">
-//         <span>Filter Data by date</span>
-//       </div>
-//     </div>
-//   </div>
-//   <div className="row-column-two">
-//     <PlanHeader>
-//       <h1>Free Account</h1>
-//       <span>Free</span>
-//     </PlanHeader>
-//     <div className="feature-container">
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CrossSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CrossSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CrossSVG />
-//       </div>
-//     </div>
-//   </div>
-//   <div className="row-column-three">
-//     <PlanHeader>
-//       <h1>Premium</h1>
-//       <h2>Monthly</h2>
-//       <h3>
-//         <span>$9.99</span> every month
-//       </h3>
-//     </PlanHeader>
-//     <div className="feature-container">
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//     </div>
-//   </div>
-//   <div className="row-column-four">
-//     <PlanHeader>
-//       <h1>Premium</h1>
-//       <h2>Bi-Annually</h2>
-//       <h3>
-//         <span>$49.99</span> every 6 months
-//       </h3>
-//     </PlanHeader>
-//     <div className="feature-container">
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//     </div>
-//   </div>
-//   <div className="row-column-five">
-//     <PlanHeader>
-//       <h1>Premium</h1>
-//       <h2>Anually</h2>
-//       <h3>
-//         <span>$89.99</span> every year
-//       </h3>
-//     </PlanHeader>
-//     <div className="feature-container">
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//       <div className="feature-list">
-//         <CheckMarkSVG />
-//       </div>
-//     </div>
-//   </div>
-// </div>
-// </Container>
+ <Div>
+                  <h1>Need more data?</h1>
+                  <p>
+                    Upgrade to one of our paid payment plans to access all
+                    material
+                  </p>
+                </Div>
+                <Div2>
+                  <UserTypeContainerDiv>
+                    <PlanHeader>
+                      <h1>Free Account</h1>
+                      <span>Free</span>
+                    </PlanHeader>
+                    <FeaturedItems>
+                      <ul className="features-list">
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Create an account
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Change data filters
+                        </li>
+                        <li className="features-item">
+                          <CrossSVG />
+                          Download Data into Excel
+                        </li>
+                        <li className="features-item">
+                          <CrossSVG />
+                          Additional Filter Options
+                        </li>
+                        <li className="features-item">
+                          <CrossSVG />
+                          Filter Data by date
+                        </li>
+                      </ul>
+                    </FeaturedItems>
+                    <ButtonDiv>
+                      <ContinueButton2 type="submit" onClick={handleSubmit}>
+                        Continue
+                      </ContinueButton2>
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
+                  <UserTypeContainerDiv>
+                    <PlanHeader>
+                      <h1>Premium</h1>
+                      <h2>Monthly</h2>
+                      <h3>
+                        <span>$9.99</span> every month
+                      </h3>
+                    </PlanHeader>
+                    <FeaturedItems>
+                      <ul className="features-list">
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Create an account
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Change data filters
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Download Data into Excel
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Additional Filter Options
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Filter Data by date
+                        </li>
+                      </ul>
+                    </FeaturedItems>
+                    <ButtonDiv>
+                      <MonthlyButton />
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
+                  <UserTypeContainerDiv>
+                    <PlanHeader>
+                      <h1>Premium</h1>
+                      <h2>Bi-Annually</h2>
+                      <h3>
+                        <span>$49.99</span> every 6 months
+                      </h3>
+                    </PlanHeader>
+                    <FeaturedItems>
+                      <ul className="features-list">
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Create an account
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Change data filters
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Download Data into Excel
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Additional Filter Options
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Filter Data by date
+                        </li>
+                      </ul>
+                    </FeaturedItems>
+                    <ButtonDiv>
+                      <BiAnnuallyButton />
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
+                  <UserTypeContainerDiv>
+                    <PlanHeader>
+                      <h1>Premium</h1>
+                      <h2>Anually</h2>
+                      <h3>
+                        <span>$89.99</span> every year
+                      </h3>
+                    </PlanHeader>
+                    <FeaturedItems>
+                      <ul className="features-list">
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Create an account
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Change data filters
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Download Data into Excel
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Additional Filter Options
+                        </li>
+                        <li className="features-item">
+                          <CheckMarkSVG />
+                          Filter Data by date
+                        </li>
+                      </ul>
+                    </FeaturedItems>
+                    <ButtonDiv>
+                      <YearlyButton />
+                    </ButtonDiv>
+                  </UserTypeContainerDiv>
+                </Div2>

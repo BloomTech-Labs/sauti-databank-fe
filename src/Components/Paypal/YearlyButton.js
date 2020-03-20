@@ -45,9 +45,9 @@ export default function YearlyButton() {
       .Buttons({
         env: "sandbox",
         style: {
-          shape: "pill",
+          shape: "rect",
           size: "responsive",
-          color: "black",
+          color: "white",
           label: "paypal"
         },
 
