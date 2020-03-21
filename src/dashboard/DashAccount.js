@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import MonthlyAccount from "./MonthlyAccount";
 import BiAnnuallyAccount from "./BiAnnuallyAccount";
 import YearlyAccount from "./YearlyAccount";
+import { device } from "./styledComponents/responsive";
 import CheckMarkSVG from "./Images/CheckMarkSVG";
 import CrossSVG from "./Images/CrossSVG";
 import { urlPageView } from "./GoogleAnalytics/index";
@@ -10,6 +11,7 @@ import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import MonthlyButton from "../Components/Paypal/MonthlyButton";
 import BiAnnuallyButton from "../Components/Paypal/BiannuallyButton";
 import YearlyButton from "../Components/Paypal/YearlyButton";
+import StandAloneButton from "../Components/Paypal/Standalone";
 import UndrawOptionsSVG from "./Images/undrawOptionsSVG";
 import UndrawInvestmentSVG from "./Images/undrawInvestmentSVG";
 import gql from "graphql-tag";
@@ -237,7 +239,7 @@ function DashAccount(props) {
                           </div>
                           <div className="account-features">
                             <div className="account-features-items">
-                              <span>Can Create an account</span>
+                              <span>Can create an account</span>
                               <span>Access base app</span>
                               <span>Cross-filter data</span>
                             </div>
@@ -265,7 +267,8 @@ function DashAccount(props) {
                             </div>
                           </div>
                           <div className="account-bottom">
-                            <MonthlyButton />
+                            {/* <MonthlyButton /> */}
+                            <StandAloneButton />
                           </div>
                         </div>
                       </div>
@@ -313,141 +316,85 @@ function DashAccount(props) {
               </>
             ) : (
               <>
-                <Div>
-                  <h1>Sauti Databank Admin</h1>
-                  <P>Current user type offerings.</P>
-                </Div>
-                <Div2>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Free Account</h1>
-                      <span>Free</span>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CrossSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CrossSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CrossSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                  </UserTypeContainerDiv>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Premium</h1>
-                      <h2>Monthly</h2>
-                      <h3>
-                        <span>$9.99</span> every month
-                      </h3>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                  </UserTypeContainerDiv>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Premium</h1>
-                      <h2>Bi-Annually</h2>
-                      <h3>
-                        <span>$49.99</span> every 6 months
-                      </h3>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                  </UserTypeContainerDiv>
-                  <UserTypeContainerDiv>
-                    <PlanHeader>
-                      <h1>Premium</h1>
-                      <h2>Anually</h2>
-                      <h3>
-                        <span>$89.99</span> every year
-                      </h3>
-                    </PlanHeader>
-                    <FeaturedItems>
-                      <ul className="features-list">
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Create an account
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Change data filters
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Download Data into Excel
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Additional Filter Options
-                        </li>
-                        <li className="features-item">
-                          <CheckMarkSVG />
-                          Filter Data by date
-                        </li>
-                      </ul>
-                    </FeaturedItems>
-                  </UserTypeContainerDiv>
-                </Div2>
+                <Container>
+                  <div className="header-container">
+                    <div className="header-row">
+                      <div className="header-row-col admin">
+                        <h1>Sauti Databank Admin</h1>
+                        <span>Below is the current user offerings</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="account-container">
+                    <div className="account-row">
+                      <div className="account-row-col">
+                        <div className="account-type">
+                          <div className="account-header">
+                            <h2>Free Account</h2>
+                            <h1>Free</h1>
+                          </div>
+                          <div className="account-features">
+                            <div className="account-features-items">
+                              <span>Can create an account</span>
+                              <span>Access base app</span>
+                              <span>Cross-filter data</span>
+                            </div>
+                          </div>
+                          <div className="account-bottom">
+                            <div className="account-bottom-btn-ctn"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="account-row-col">
+                        <div className="account-type">
+                          <div className="account-header">
+                            <h2>Premium Account</h2>
+                            <h1>$10/monthly</h1>
+                          </div>
+                          <div className="account-features">
+                            <div className="account-features-items">
+                              <span>Download data into an excel file</span>
+                              <span>Cross-Filter data by date</span>
+                              <span>Additional filtering</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="account-row-col">
+                        {" "}
+                        <div className="account-type">
+                          <div className="account-header">
+                            <h2>Premium Account</h2>
+                            <h1>$49.99/bi-anually</h1>
+                          </div>
+                          <div className="account-features">
+                            <div className="account-features-items">
+                              <span>Download data into an excel file</span>
+                              <span>Cross-Filter data by date</span>
+                              <span>Additional filtering</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="account-row-col">
+                        {" "}
+                        <div className="account-type">
+                          <div className="account-header">
+                            <h2>Premium Account</h2>
+                            <h1>$89.99/yearly</h1>
+                          </div>
+                          <div className="account-features">
+                            <div className="account-features-items">
+                              <span>Download data into an excel file</span>
+                              <span>Cross-Filter data by date</span>
+                              <span>Additional filtering</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Container>
               </>
             )}
           </AccountPageDiv>
@@ -466,9 +413,17 @@ function formatDate(date) {
 const Container = styled.div`
   height: 100%;
 
+  @media ${device.laptop} {
+    height: 80%;
+  }
+
   .header-container {
     padding: 2rem;
     height: 30%;
+
+    @media ${device.laptopL} {
+      height: 25%;
+    }
 
     .header-row {
       display: flex;
@@ -499,12 +454,21 @@ const Container = styled.div`
           font-weight: normal;
         }
       }
+
+      .admin {
+        width: 100%;
+      }
     }
   }
 
   .account-container {
     margin-top: 3rem;
     height: 50rem;
+
+    @media ${device.laptopL} {
+      margin-top: 2rem;
+      height: 45rem;
+    }
 
     .account-row {
       display: flex;
@@ -527,6 +491,15 @@ const Container = styled.div`
           background: #ffffff;
           border: 1px solid rgba(0, 0, 0, 0.3);
           border-radius: 5px;
+
+          @media ${device.laptop} {
+            width: 33rem;
+          }
+
+          @media ${device.laptopL} {
+            width: 35rem;
+          }
+
           .account-header {
             display: flex;
             flex-direction: column;

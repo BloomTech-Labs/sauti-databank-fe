@@ -36,15 +36,26 @@ const UPDATE_USER_PLAN_NAME = gql`
   }
 `;
 
-export default function MonthlyButton() {
+export default function StandAloneButton() {
   const [userUpdated] = useMutation(UPDATE_USER_TIER);
   const [addPlan] = useMutation(UPDATE_USER_PLAN_NAME);
 
   const history = useHistory();
 
+  let paypal = window.paypal;
+
+  let FUNDING_SOURCES = [
+    paypal.FUNDING.PAYPAL
+    // paypal.FUNDING.VENMO,
+    // paypal.FUNDING.CREDIT,
+    // paypal.FUNDING.CARD
+  ];
+
   useEffect(function renderPaypalButtons() {
-    window.paypal
-      .Buttons({
+    FUNDING_SOURCES.forEach(function(fundingSource) {
+      // Initialize the buttons
+      let button = paypal.Buttons({
+        fundingSource: fundingSource,
         env: "sandbox",
         style: {
           shape: "rect",
@@ -89,22 +100,18 @@ export default function MonthlyButton() {
           // Show an error page here, when an error occurs
           console.error("err", err);
         }
-      })
-      .render("#paypal-button-container-monthly");
-  }, []);
-  return (
-    <Div
-      id="paypal-button-container-monthly"
-      style={{
-        display: "inline-block",
-        padding: "1rem 3rem",
-        margin: "0 auto"
-      }}
-    ></Div>
-  );
-}
+      });
 
-const Div = styled.div``;
+      if (button.isEligible()) {
+        console.log(button, "BUTTON");
+
+        button.render("#paypal-button-container-monthly");
+      }
+    });
+  }, []);
+
+  return <div id="paypal-button-container-monthly"></div>;
+}
 
 // notes to patch/edit you have to set the body up like this in postman
 
