@@ -93,14 +93,7 @@ export default function MonthlyButton() {
       .render("#paypal-button-container-monthly");
   }, []);
   return (
-    <Div
-      id="paypal-button-container-monthly"
-      style={{
-        display: "inline-block",
-        padding: "1rem 3rem",
-        margin: "0 auto"
-      }}
-    ></Div>
+    <Div id="paypal-button-container-monthly" style={{ padding: "1rem" }}></Div>
   );
 }
 

@@ -8,6 +8,7 @@ import Tools from "./Tools/Tools";
 import UsersQuery from "./Tools/UsersQuery";
 import DashAbout from "./DashAbout";
 import DashAccount from "./DashAccount";
+import DashAccountFree from "./DashAccountFree";
 import DashLoginModal from "./DashLoginModal";
 import DashSignupModal from "./DashSignupModal";
 import DashLogout from "./DashLogout";
@@ -73,7 +74,7 @@ function DashNav() {
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       {/* <Route exact path="/services" component={DashAbout} /> */}
-      <ProtectedRoute exact path="/myaccount" component={DashAccount} />
+      <ProtectedRoute exact path="/myaccount" component={DashAccountFree} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
     </>
   );

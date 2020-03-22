@@ -9,7 +9,7 @@ import GraphContainer from "../GraphContainer";
 import { getToken, decodeToken } from "./auth/Auth";
 import DashSignup from "./DashSignup.js";
 import DashAccount from "./DashAccount.js";
-
+import DashAccountFree from "./DashAccountFree";
 import CreateAccount from "./CreateAccount";
 import Login from "./Login";
 
@@ -49,7 +49,7 @@ function DashHome() {
           <CreateAccount />
         </>
       )}
-      {signedIn && <DashAccount />}
+      {signedIn && <DashAccountFree />}
     </>
   );
 }

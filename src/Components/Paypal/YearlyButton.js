@@ -91,14 +91,7 @@ export default function YearlyButton() {
       .render("#paypal-button-container-yearly");
   }, []);
   return (
-    <div
-      id="paypal-button-container-yearly"
-      style={{
-        display: "inline-block",
-        padding: "1rem 3rem",
-        margin: "0 auto"
-      }}
-    ></div>
+    <div id="paypal-button-container-yearly" style={{ padding: "1rem" }}></div>
   );
 }
 

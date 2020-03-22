@@ -93,11 +93,7 @@ export default function BiAnnuallyButton() {
   return (
     <div
       id="paypal-button-container-biannually"
-      style={{
-        display: "inline-block",
-        padding: "1rem 3rem",
-        margin: "0 auto"
-      }}
+      style={{ padding: "1rem" }}
     ></div>
   );
 }
