@@ -167,3 +167,5 @@ export const AccountPage = styled.div`
     }
   }
 `;
+
+export const UserAccount = styled.div``;

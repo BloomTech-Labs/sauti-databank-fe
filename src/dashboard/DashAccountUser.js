@@ -1,4 +1,5 @@
 import React from "react";
+import FreeAccount from "./FreeAccount";
 import MonthlyAccount from "./MonthlyAccount";
 import BiAnnuallyAccount from "./BiAnnuallyAccount";
 import YearlyAccount from "./YearlyAccount";
@@ -153,7 +154,12 @@ const DashAccountUser = () => {
       />
     );
   } else {
-    return <div>Could not fetch account information.</div>;
+    return (
+      <FreeAccount
+        data={data}
+        handleSubscriptionCancellation={handleSubscriptionCancellation}
+      />
+    );
   }
 };
 
