@@ -4,38 +4,20 @@ import { useHistory } from "react-router-dom";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
-
-import swal from "sweetalert";
-
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
+import swal from "sweetalert";
 
 import styled from "styled-components";
-
-const initialState = {
-  email: "",
-  password: "",
-  organization: "",
-  job_position: "",
-  country: "",
-  organization_type: "",
-  tier: "",
-  interest: ""
-};
 
 const REGISTER = gql`
   mutation registerNewUser($newUser: newRegisterInput!) {
@@ -49,15 +31,15 @@ const REGISTER = gql`
       job_position
       country
       organization_type
+      found_by
       token
     }
   }
 `;
 
 export default function SignInSide(props) {
-  const [user, setUser] = useState(initialState);
+  const [user, setUser] = useState({});
   user.tier = "FREE";
-  console.log(user);
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
   const {
@@ -68,7 +50,8 @@ export default function SignInSide(props) {
     country,
     organization_type,
     tier,
-    interest
+    interest,
+    found_by
   } = user;
 
   const classes = useStyles();
@@ -139,21 +122,37 @@ export default function SignInSide(props) {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            <FormTitle>Sign Up</FormTitle>
-          </Typography>
+          <TitleContainer>
+            <CurrentTitle component="h1" variant="h5">
+              <FormTitle>Sign Up</FormTitle>
+              <LineUnderCurrentTitle />
+            </CurrentTitle>
+            <UnusedTitle component="h1" variant="h5">
+              <FormTitle>
+                <UnusedTitleLink to="/login">Login</UnusedTitleLink>
+              </FormTitle>
+            </UnusedTitle>
+          </TitleContainer>
+          <UnderlineDiv>
+            <LineUnderTitles />
+          </UnderlineDiv>
+          <br />
+          <br />
+          <br />
+          <FormTitleMain>Sign Up</FormTitleMain>
+          <br />
           <form
             className={classes.form}
             noValidate
             onSubmit={e => handleSubmit(e, user)}
           >
             <TextField
-              // variant='outlined'
+              // variant="outlined"
               margin="normal"
               fullWidth
               id="email"
               type="text"
-              label="Email"
+              label="* Email"
               name="email"
               autoComplete="email"
               value={user.email}
@@ -166,7 +165,7 @@ export default function SignInSide(props) {
               margin="normal"
               fullWidth
               name="password"
-              label="Password"
+              label="* Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -177,7 +176,6 @@ export default function SignInSide(props) {
 
             <TextField
               // variant='outlined'
-              placeholder="Organization"
               margin="normal"
               fullWidth
               name="organization"
@@ -228,8 +226,11 @@ export default function SignInSide(props) {
               onChange={handleChange}
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
+            <br />
+            <br />
+            <br />
             <FormControl className={classes.margin}>
-              <p>Organization Type</p>
+              <GreyLabelText>* Organization Type</GreyLabelText>
               <Select
                 label="Organization Type"
                 labelId="demo-customized-select-label"
@@ -243,6 +244,26 @@ export default function SignInSide(props) {
                 <MenuItem value={"RESEARCH"}>RESEARCH</MenuItem>
                 <MenuItem value={"GOVERNMENT"}>GOVERNMENT</MenuItem>
                 <MenuItem value={"NGO"}>NGO</MenuItem>
+                <MenuItem value={"OTHER"}>OTHER</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl className={classes.margin}>
+              <p>How did you hear about us?</p>
+              <Select
+                label="Found By"
+                labelId="demo-customized-select-label"
+                id="demo-customized-select"
+                name="found_by"
+                placeholder=""
+                value={user.found_by}
+                onChange={handleChange}
+                input={<Styles />}
+              >
+                <MenuItem value={"CROSS_BORDER_ASSOCIATION"}>
+                  Cross border Association
+                </MenuItem>
+                <MenuItem value={"UNIVERSITY"}>University</MenuItem>
+                <MenuItem value={"SAUTI_STAFF"}>Sauti Staff</MenuItem>
                 <MenuItem value={"OTHER"}>OTHER</MenuItem>
               </Select>
               <label>*required</label>
@@ -355,6 +376,52 @@ const Styles = withStyles(theme => ({
 const FormBottomText = styled.p`
   font-size: 1.4rem;
 `;
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 const FormTitle = styled.h1`
+  font-size: 2rem;
+  margin: 0 3rem;
+`;
+const FormTitleMain = styled.h1`
   font-size: 3rem;
+  margin: 0 3rem;
+`;
+const CurrentTitle = styled.span``;
+const UnusedTitle = styled.span`
+  opacity: 0.5;
+`;
+const RequiredLabel = styled.label`
+  font-size: 1.4rem;
+`;
+const RequiredDiv = styled.div`
+  text-align: center;
+`;
+const UnusedTitleLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+`;
+const UnderlineDiv = styled.div`
+  width: 40%;
+  position: absolute;
+  margin-top: 28px;
+`;
+const LineUnderTitles = styled.hr`
+  width: 100%;
+  opacity: 0.5;
+  position: relative;
+`;
+const LineUnderCurrentTitle = styled.hr`
+  background-color: black;
+  height: 2px;
+  border: none;
+`;
+const RequiredStar = styled.big`
+  color: red;
+  font-size: 1.8rem;
+`;
+const GreyLabelText = styled.p`
+  opacity: 0.8;
 `;

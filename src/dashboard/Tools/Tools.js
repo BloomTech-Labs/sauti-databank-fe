@@ -2,25 +2,14 @@ import React, { Component } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
-import { AutoWidthCalculator } from "ag-grid-community";
-
 import gridOptions from "./Gridoptions";
-
 import EditModal from "./EditModal";
-import ToolsCreateUser from "./ToolsCreateUser";
-
 import DeleteAccount from "./DeleteAccount";
 import CreateUserModal from "./CreateUserModal";
 
 import styled from "styled-components";
 
-// import {
-//   ToolsInput,
-//   ToolsTitle,
-//   ToolsHeader,
-//   UserDownloadButton,
-//   ToolsGrid
-// } from "../styledComponents/Index";
+import { AutoWidthCalculator } from "ag-grid-community";
 
 class Tools extends Component {
   constructor(props) {
@@ -87,7 +76,7 @@ class Tools extends Component {
           field: "country",
           sortable: true,
           filter: true,
-          width: 100,
+          width: 80,
           cellStyle: {
             "font-size": "2rem",
             "padding-top": ".75rem"
@@ -108,6 +97,28 @@ class Tools extends Component {
         {
           headerName: "TIER",
           field: "tier",
+          sortable: true,
+          filter: true,
+          width: 100,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Registration Date",
+          field: "registration_date",
+          sortable: true,
+          filter: true,
+          width: 110,
+          cellStyle: {
+            "font-size": "2rem",
+            "padding-top": ".75rem"
+          }
+        },
+        {
+          headerName: "Found By",
+          field: "found_by",
           sortable: true,
           filter: true,
           width: 100,

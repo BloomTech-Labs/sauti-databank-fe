@@ -1,10 +1,6 @@
-// we will also use this modal in various places within the dashboard so that when somone clicks something you need to sign in for or pay to see it will direct you to the sign up then to the payment options in future releases
-
 import React, { useState, useEffect } from "react";
 import { urlPageView } from "./GoogleAnalytics/index";
 import { Redirect, useHistory } from "react-router-dom";
-//import mutation from "../queries/mutation";
-//import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -23,17 +19,6 @@ import DashLoginModal from "./DashLoginModal";
 import "../index.css";
 import { ModalText, FormButton2 } from "./styledComponents/Index";
 
-const initialState = {
-  email: "",
-  password: "",
-  organization: "",
-  job_position: "",
-  country: "",
-  organization_type: "",
-  tier: "",
-  interest: ""
-};
-
 const REGISTER = gql`
   mutation registerNewUser($newUser: newRegisterInput!) {
     register(input: $newUser) {
@@ -46,6 +31,7 @@ const REGISTER = gql`
       job_position
       country
       organization_type
+      found_by
       token
     }
   }
@@ -98,9 +84,8 @@ function DashSignup(props) {
     urlPageView("/signup");
   });
 
-  const [user, setUser] = useState(initialState);
+  const [user, setUser] = useState({});
   user.tier = "FREE";
-  console.log(user);
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
   const {
@@ -111,7 +96,8 @@ function DashSignup(props) {
     country,
     organization_type,
     tier,
-    interest
+    interest,
+    found_by
   } = user;
 
   const classes = useStyles();
@@ -150,7 +136,6 @@ function DashSignup(props) {
           dangerMode: true
         });
       } else {
-        console.log(createdUser.data.register.id);
         localStorage.setItem("token", createdUser.data.register.token);
         history.push("/data");
         swal({ title: "", text: "Success!", icon: "success" });
@@ -243,25 +228,28 @@ function DashSignup(props) {
               <MenuItem value={"OTHER"}>OTHER</MenuItem>
             </Select>
           </FormControl>
-          <br />
-          {/* <Labels2>Select A User Type</Labels2>
           <FormControl className={classes.margin}>
+            <Labels2>How did you hear about us?</Labels2>
             <Select
               labelId="demo-customized-select-label"
               id="demo-customized-select"
-              value={tier}
-              name="tier"
+              name="organization_type"
+              value={found_by}
               onChange={handleChange}
               input={<Styles />}
             >
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={"FREE"}>FREE</MenuItem>
-              <MenuItem value={"PAID"}>PAID</MenuItem>
+              <MenuItem value={"Cross_border_Association"}>
+                Cross border Association
+              </MenuItem>
+              <MenuItem value={"University"}>University</MenuItem>
+              <MenuItem value={"Sauti_Staff"}>Sauti Staff</MenuItem>
+              <MenuItem value={"OTHER"}>OTHER</MenuItem>
             </Select>
           </FormControl>
-          <br /> */}
+          <br />
           <Button className="initialize-signup" type="submit">
             Sign Up
           </Button>

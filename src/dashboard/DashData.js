@@ -3,15 +3,7 @@ import React from "react";
 import GraphContainer from "../GraphContainer";
 import { getToken, decodeToken } from "./auth/Auth";
 
-import {
-  NotSignedInDiv,
-  SignedInDiv,
-  UserHeader,
-  UserText,
-  UserTypeText,
-  UserName,
-  Header1
-} from "./styledComponents/Index";
+import { SignedInDiv, UserHeader } from "./styledComponents/Index";
 
 function DashHome() {
   const signedIn = getToken();
@@ -24,18 +16,9 @@ function DashHome() {
 
   return (
     <>
-      {!signedIn && (
-        <NotSignedInDiv>
-          {/* <UserHeader>Welcome To the Sauti Data App</UserHeader> */}
-        </NotSignedInDiv>
-      )}
-      {signedIn && (
-        <SignedInDiv>
-          <UserHeader>
-            {/* Hello <UserName>{userEmail}</UserName> ! */}
-          </UserHeader>
-        </SignedInDiv>
-      )}
+      <SignedInDiv>
+        <UserHeader></UserHeader>
+      </SignedInDiv>
       <GraphContainer />
     </>
   );

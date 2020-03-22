@@ -11,6 +11,7 @@ import {
 } from "../dashboard/styledComponents/Index";
 
 const Graph = props => {
+  console.log("loading graph", props);
   // const tier = getTier();
   const token = getToken();
   let tier;

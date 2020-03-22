@@ -29,6 +29,7 @@
     "react-paypal-button-v2": "^2.6.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
+    "react-select": "^3.0.8",
     "styled-components": "^4.4.1",
     "sweetalert": "^2.1.2"
   },
@@ -50,9 +51,11 @@
     }
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.2.1",
     "husky": "^4.2.3",
     "jest-extended": "^0.11.2",
     "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "react-test-renderer": "^16.13.0"
   }
 }

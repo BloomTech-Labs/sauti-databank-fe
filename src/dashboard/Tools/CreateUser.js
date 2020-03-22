@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
-
-import { Redirect, useHistory } from "react-router-dom";
 import { makeStyles, styled } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { withStyles } from "@material-ui/core/styles";
+import InputBase from "@material-ui/core/InputBase";
+import styledComp from "styled-components";
+import swal from "sweetalert";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-
-import { withStyles } from "@material-ui/core/styles";
-import InputBase from "@material-ui/core/InputBase";
-
-import styledComp from "styled-components";
-import swal from "sweetalert";
+import { Redirect, useHistory } from "react-router-dom";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 
 const Styles = withStyles(theme => ({
   root: {
@@ -77,7 +73,8 @@ const initialState = {
   country: "",
   organization_type: "",
   tier: "",
-  interest: ""
+  interest: "",
+  found_by: ""
 };
 
 //brought in from UsersQuery.js used to update apollo cache
@@ -92,6 +89,7 @@ const Users_Query = gql`
       job_position
       country
       organization_type
+      found_by
     }
   }
 `;
@@ -108,12 +106,15 @@ const REGISTER = gql`
       job_position
       country
       organization_type
+      found_by
     }
   }
 `;
 
 function CreateUser(props) {
+  console.log(props);
   const [addUser, setAddUser] = useState(initialState);
+  console.log(addUser);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -135,7 +136,8 @@ function CreateUser(props) {
     country,
     organization_type,
     tier,
-    interest
+    interest,
+    found_by
   } = addUser;
 
   const handleChange = event => {
@@ -158,7 +160,8 @@ function CreateUser(props) {
       });
     } else {
       const createdUser = await createUser({
-        variables: { newUser: input }
+        variables: { newUser: input },
+        refetchQueries: [{ query: Users_Query }]
       });
       if (createdUser.data.register.id === null) {
         swal({
@@ -308,12 +311,33 @@ function CreateUser(props) {
                   <MenuItem value={"OTHER"}>OTHER</MenuItem>
                 </Select>
               </FormControl>
+
+              <FormControl className={classes.margin}>
+                <p>How did you hear about us?</p>
+                <Select
+                  label="Found By"
+                  labelId="demo-customized-select-label"
+                  id="found_by"
+                  name="found_by"
+                  placeholder=""
+                  value={found_by}
+                  onChange={handleChange}
+                  input={<Styles />}
+                >
+                  <MenuItem value={"CROSS_BORDER_ASSOCIATION"}>
+                    Cross border Association
+                  </MenuItem>
+                  <MenuItem value={"UNIVERSITY"}>University</MenuItem>
+                  <MenuItem value={"SAUTI_STAFF"}>Sauti Staff</MenuItem>
+                  <MenuItem value={"OTHER"}>OTHER</MenuItem>
+                </Select>
+              </FormControl>
             </ColumnDiv>
           </InputColumns>
           <ButtonsDiv className="CreateAccount">
             <CancelButton onClick={props.handleClose}>Cancel</CancelButton>
             <AddButton type="Submit" onClick={e => handleSubmit(e, addUser)}>
-              Create addUser
+              Create Account
             </AddButton>
           </ButtonsDiv>
         </FormDiv>
