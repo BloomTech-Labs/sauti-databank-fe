@@ -15,6 +15,8 @@ const UPDATE_USER_TIER = gql`
         tier
         organization_type
         token
+        subscription_id
+        paypal_plan
       }
       ... on Error {
         message
@@ -58,6 +60,7 @@ export default function MonthlyButton() {
             plan_id: "P-7EN28541UP360613GLZZF7FQ"
           });
         },
+
         onApprove: async function(data, actions) {
           swal({
             title: "",
@@ -73,6 +76,7 @@ export default function MonthlyButton() {
           decoded.tier = "PAID";
           delete decoded.iat;
           delete decoded.exp;
+
           await userUpdated({
             variables: { newEditUser: decoded }
           });
@@ -92,12 +96,16 @@ export default function MonthlyButton() {
       })
       .render("#paypal-button-container-monthly");
   }, []);
-  return (
-    <Div id="paypal-button-container-monthly" style={{ padding: "1rem" }}></Div>
-  );
+  return <Div id="paypal-button-container-monthly"></Div>;
 }
 
-const Div = styled.div``;
+const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 15vw;
+`;
 
 // notes to patch/edit you have to set the body up like this in postman
 

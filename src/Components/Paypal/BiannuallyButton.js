@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { decodeToken } from "../../dashboard/auth/Auth";
 import { useMutation } from "@apollo/react-hooks";
@@ -90,13 +91,16 @@ export default function BiAnnuallyButton() {
       })
       .render("#paypal-button-container-biannually");
   }, []);
-  return (
-    <div
-      id="paypal-button-container-biannually"
-      style={{ padding: "1rem" }}
-    ></div>
-  );
+  return <Div id="paypal-button-container-biannually"></Div>;
 }
+
+const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 15vw;
+`;
 
 // notes to patch/edit you have to set the body up like this in postman
 

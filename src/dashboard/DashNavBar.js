@@ -37,11 +37,15 @@ function DashNav() {
 
   const SignedIn = getToken();
   const token = getToken();
+  let email;
   let tier;
   if (token) {
-    tier = decodeToken(token);
-    tier = tier.tier;
+    let tokenDecoded = decodeToken(token);
+    email = tokenDecoded.email;
+    tier = tokenDecoded.tier;
   }
+
+  console.log(tier, "TIER");
 
   return (
     <>
@@ -65,6 +69,11 @@ function DashNav() {
           <Links to="/data">DATA</Links>
           {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
           {SignedIn && <Links to="/logout">LOGOUT</Links>}
+          {SignedIn && (
+            <span className="loggedInAs">
+              User: <span className="email">{email}</span>
+            </span>
+          )}
         </Navigation>
       </TopBar>
       <Route exact path="/" component={DashHome} />

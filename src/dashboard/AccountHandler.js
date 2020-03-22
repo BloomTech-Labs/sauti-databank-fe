@@ -3,6 +3,7 @@ import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import DashAccountFree from "./DashAccountFree";
 import DashAccountUser from "./DashAccountUser";
 import DashAccountAdmin from "./DashAccountAdmin";
+import { NetworkStatus } from "apollo-boost";
 
 // This component handles the conditionals for the users
 // We can include an else statement if all else fails to throw some error or push them back to login page

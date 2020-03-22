@@ -13,14 +13,24 @@ import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 
 // This components purpose is to potentially turn free users into paid users, capture the subscription ID, and push them to /data
 
-const DashAccountFree = () => {
+const DashAccountFree = props => {
   const token = getToken();
   const history = useHistory();
 
+  let tier;
+  if (token) {
+    tier = decodeToken(token);
+    tier = tier.tier;
+  }
   let userEmail;
   if (token) {
     userEmail = decodeToken(token);
     userEmail = userEmail.email;
+  }
+  const newSub = getSubscription();
+  let sub;
+  if (newSub) {
+    sub = newSub;
   }
 
   const handleSubmit = async (e, input) => {
@@ -98,9 +108,9 @@ const DashAccountFree = () => {
                   </div>
                   <div className="account-features">
                     <div className="account-features-items">
-                      <span>Can create an account</span>
-                      <span>Access base app</span>
-                      <span>Cross-filter data</span>
+                      <span>Can Create an Account</span>
+                      <span>Access Base App</span>
+                      <span>Change Data Filters</span>
                     </div>
                   </div>
                   <div className="account-bottom">
@@ -121,8 +131,9 @@ const DashAccountFree = () => {
                   <div className="account-features">
                     <div className="account-features-items">
                       <span>Download data into an excel file</span>
-                      <span>Cross-Filter data by date</span>
-                      <span>Additional filtering</span>
+                      <span>Change Data Filters</span>
+                      <span>Cross-Filter Data by Date</span>
+                      <span>Additional Filtering Options</span>
                     </div>
                   </div>
                   <div className="account-bottom">
@@ -140,8 +151,9 @@ const DashAccountFree = () => {
                   <div className="account-features">
                     <div className="account-features-items">
                       <span>Download data into an excel file</span>
-                      <span>Cross-Filter data by date</span>
-                      <span>Additional filtering</span>
+                      <span>Change Data Filters</span>
+                      <span>Cross-Filter Data by Date</span>
+                      <span>Additional Filtering Options</span>
                     </div>
                   </div>
                   <div className="account-bottom">
@@ -159,8 +171,9 @@ const DashAccountFree = () => {
                   <div className="account-features">
                     <div className="account-features-items">
                       <span>Download data into an excel file</span>
-                      <span>Cross-Filter data by date</span>
-                      <span>Additional filtering</span>
+                      <span>Change Data Filters</span>
+                      <span>Cross-Filter Data by Date</span>
+                      <span>Additional Filtering Options</span>
                     </div>
                   </div>
                   <div className="account-bottom">
