@@ -61,6 +61,10 @@ const DashAccountFree = () => {
     );
   }
 
+  if (err) {
+    return <h1>ERROR!</h1>;
+  }
+
   return (
     <AccountPage>
       <div className="page-row">

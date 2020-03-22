@@ -7,11 +7,8 @@ import {
 } from "./GoogleAnalytics/index";
 import GraphContainer from "../GraphContainer";
 import { getToken, decodeToken } from "./auth/Auth";
-import DashSignup from "./DashSignup.js";
-import DashAccount from "./DashAccount.js";
-import DashAccountFree from "./DashAccountFree";
 import CreateAccount from "./CreateAccount";
-import Login from "./Login";
+import AccountHandler from "./AccountHandler";
 
 import {
   NotSignedInDiv,
@@ -23,7 +20,7 @@ import {
   Header1
 } from "./styledComponents/Index";
 
-function DashHome() {
+const DashHome = () => {
   const signedIn = getToken();
   const token = getToken();
   let decToken;
@@ -42,16 +39,11 @@ function DashHome() {
     GANotActiveLogin();
   }
 
-  return (
-    <>
-      {!signedIn && (
-        <>
-          <CreateAccount />
-        </>
-      )}
-      {signedIn && <DashAccountFree />}
-    </>
-  );
-}
+  if (!signedIn) {
+    return <CreateAccount />;
+  } else if (signedIn) {
+    return <AccountHandler />;
+  }
+};
 
 export default DashHome;

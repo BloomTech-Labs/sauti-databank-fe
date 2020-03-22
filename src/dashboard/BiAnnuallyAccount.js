@@ -224,11 +224,6 @@ const BiAnnually = props => {
             </ul>
           </FeaturedItems>
           <ButtonDiv>
-            {console.log("DATA", data)}
-            {console.log(
-              "Next Billing Time",
-              data.databankUser.p_next_billing_time
-            )}
             {data && data.databankUser.p_next_billing_time ? (
               <p>
                 Your subscription will expire on{" "}
