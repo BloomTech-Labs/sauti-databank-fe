@@ -38,8 +38,10 @@ const UsersQuery = () => {
   ).toDateString();
 
   //format date
+  console.log(data.allUsers);
   data.allUsers.map(item => {
     if (item.registration_date !== undefined) {
+      console.log(item.registration_date);
       item.registration_date = Date(parseInt(item.registration_date)).replace(
         /[a-zA-Z]{0,3}/,
         ""

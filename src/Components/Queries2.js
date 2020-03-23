@@ -8,6 +8,8 @@ import getIndex from "../DataParseHelpers/getIndex";
 import graphLabels from "./graphLabels";
 import removeMultiple from "../DataParseHelpers/removeMultiple";
 
+import LineGraph from "./LineGraph";
+
 const GetData = props => {
   let queryType = "tradersUsers";
   let QUERY;
@@ -103,6 +105,8 @@ const GetData = props => {
   // console.log(`cross filter type`, props.crossFilter.type);
 
   // console.log("chartdata_____-----", chartData);
+  console.log(`data`, chartData);
+  console.log(`csvData`, chartData.dataStructure);
 
   if (filters[1].selectedTableColumnName !== "") {
     return (
@@ -122,6 +126,7 @@ const GetData = props => {
                 })[0]}
           </h3>
         )}
+        <LineGraph data={data} filter1={filters[1]} />
 
         <Graph
           data={chartData.percentageData}
