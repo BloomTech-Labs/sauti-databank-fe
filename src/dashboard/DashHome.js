@@ -10,7 +10,8 @@ import { getToken, decodeToken } from "./auth/Auth";
 import DashAccount from "./DashAccount.js";
 
 import CreateAccount from "./CreateAccount";
-import Login from "./Login";
+import AccountHandler from "./AccountHandler";
+import LandingPage from "./LandingPage";
 
 function DashHome() {
   const signedIn = getToken();
@@ -31,16 +32,12 @@ function DashHome() {
     GANotActiveLogin();
   }
 
-  return (
-    <>
-      {!signedIn && (
-        <>
-          <CreateAccount />
-        </>
-      )}
-      {signedIn && <DashAccount />}
-    </>
-  );
+  if (!signedIn) {
+    // return <LandingPage />;
+    return <CreateAccount />;
+  } else if (signedIn) {
+    return <AccountHandler />;
+  }
 }
 
 export default DashHome;
