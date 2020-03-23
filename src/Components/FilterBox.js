@@ -456,15 +456,14 @@ export default function FilterBox(props) {
   // filter0: {gender, nothing}
   // filter1: {nothing, nothing}
   let ourSearch = useHistory().location.search;
+  // should not care about initial setup
   useEffect(() => {
-    // console.log("LOOK AT ME!!!!!!!")
+    console.log("LOOK AT ME!!!!!!!");
     // if history already has a search url then
-    // console.log(urlSearchParams)
-    if (ourSearch.length === 0) {
-      History.push(
-        "?" + new URLSearchParams({ ...urlSearchParams }).toString()
-      );
-    }
+    console.log(urlSearchParams);
+    // do we really want a search param updated
+    History.push("?" + new URLSearchParams({ ...urlSearchParams }).toString());
+    // it cannot update an existing url
   }, [
     updateUrlFlag
     // dependencies

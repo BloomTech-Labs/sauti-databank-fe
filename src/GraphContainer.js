@@ -27,8 +27,15 @@ setupFilter()
     return the urls search object
  */
 const GraphContainer = props => {
+  // const bla = () => {
+  // //   if(history.search.length === 0)
+  // //   return default gender search object
+  // // else
+  // //   return the urls search object
+  // }
   const [url, setUrl] = useState("");
-  const [filters, setFilters] = useState({ //useState(props.x)
+  const [filters, setFilters] = useState({
+    // useState(props.x)
     // old plan
     // default query setup
     // show or hide is only for the first one
@@ -94,62 +101,65 @@ const GraphContainer = props => {
   console.log(useHistory());
   // erased ?
   console.log("query stuff");
-  let searchString = useHistory().location.search.slice(
-    1,
-    useHistory().location.search.length
-  );
-  // "?filter0=gender%2CFemale&filter1=age%2Cundefined&filter2=crossing_freq%2CMonthly&filter3=education%2CSecondary"
+  // let searchString = useHistory().location.search.slice(
+  //   1,
+  //   useHistory().location.search.length
+  // );
+  // // "?filter0=gender%2CFemale&filter1=age%2Cundefined&filter2=crossing_freq%2CMonthly&filter3=education%2CSecondary"
 
-  let split1 = searchString.split("&");
-  // console.log(split1)
-  let newFilterObject = {};
-  for (var i in split1) {
-    let split2 = split1[i].split("=");
-    let split3 = split2[1].split("%2C");
-    console.log(
-      "filter name",
-      split2[0],
-      "search",
-      "table name",
-      split3[0],
-      "option",
-      split3[1]
-    );
-    let optionFlags = {};
-    console.log();
-    // get graphLabels[tableName].labels
-    graphLabels[`${split3[0]}`].labels.forEach(option => {
-      optionFlags = {
-        ...optionFlags,
-        [option]: false
-      };
-    });
+  // let split1 = searchString.split("&");
+  // // console.log(split1)
+  // let newFilterObject = {};
+  // for (var i in split1) {
+  //   let split2 = split1[i].split("=");
+  //   let split3 = split2[1].split("%2C");
+  //   console.log(
+  //     "filter name",
+  //     split2[0],
+  //     "search",
+  //     "table name",
+  //     split3[0],
+  //     "option",
+  //     split3[1]
+  //   );
+  //   let optionFlags = {};
+  //   console.log();
+  //   // get graphLabels[tableName].labels
+  //   graphLabels[`${split3[0]}`].labels.forEach(option => {
+  //     optionFlags = {
+  //       ...optionFlags,
+  //       [option]: false
+  //     };
+  //   });
 
-    // the newFilterObject from the previous round is not
-    // being used to make this one
+  //   // the newFilterObject from the previous round is not
+  //   // being used to make this one
 
-    // wary of spreading using multiple sources inside the object
-    newFilterObject = {
-      ...newFilterObject,
-      [i]: {
-        // get rid of the "udefined" key
-        // get already setup categories from the default
-        ...filters[i],
-        selectedTableColumnName: split3[0],
-        // may permit more than 1 to be true
-        // get the original set
-        selectableOptions: {
-          ...optionFlags,
-          [split3[1]]: true
-        }
-      }
-      // maybe the original filter could be reconstructed using the url data(filter is read only)
-      // Redux?
-    };
-    console.log("new filter object", newFilterObject);
+  //   // wary of spreading using multiple sources inside the object
+  //   newFilterObject = {
+  //     ...newFilterObject,
+  //     [i]: {
+  //       // get rid of the "udefined" key
+  //       // get already setup categories from the default
+  //       ...filters[i],
+  //       selectedTableColumnName: split3[0],
+  //       // may permit more than 1 to be true
+  //       // get the original set
+  //       selectableOptions: {
+  //         ...optionFlags,
+  //         [split3[1]]: true
+  //       }
+  //     }
+  //     // maybe the original filter could be reconstructed using the url data(filter is read only)
+  //     // Redux?
+  //   };
+  //   console.log("new filter object", newFilterObject);
 
-    // setFilters(newFilterObject)
-  }
+  // }
+  // useEffect(()=>{
+  //   setFilters(newFilterObject)
+
+  // }, [])
   // put the date here
   const {
     filterBoxStartDate,

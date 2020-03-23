@@ -175,5 +175,27 @@ export const FilterBoxOptions = {
     },
     { label: "Language", value: { type: "language", query: "Users" } },
     { label: "Produce", value: { type: "produce", query: "Users" } }
-  ]
+  ],
+  tableNamesToCategoryName: {
+    gender: "Gender",
+    education: "Education Level",
+    crossing_freq: "Border Crossing Frequency",
+    age: "Age",
+    country_of_residence: "Country of Residence",
+    primary_income: "Primary Income",
+    language: "Language",
+    produce: "Produce",
+    procedurecommodity: "Most Requested Procedure Commodities",
+    procedurecommoditycat: "Most Requested Procedure Commodity Categories",
+    proceduredest: "Requested Procedures for Destination (Imports to:)",
+    procedurerequireddocument:
+      "Most Requested Document Information for Procedures",
+    procedurerelevantagency: "Most Requested Agency Information for Procedures",
+    procedureorigin: "Origin of Traders' Goods",
+    commoditycountry: "Final Destination Country",
+    commoditymarket: "Final Destination Market",
+    commodityproduct: "Top Commodities",
+    commoditycat: "Top Commodity Categories",
+    exchangedirection: "Exchange Rate Direction"
+  }
 };
