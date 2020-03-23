@@ -1,12 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { UserAccount, DivProps } from "./styledComponents/DashAccount";
-import { AutoWidthCalculator } from "ag-grid-community";
 
-const BiAnnuallyAccount = props => {
+const GovAccount = props => {
   const history = useHistory();
-  const data = props.data;
-  const handleSubscriptionCancellation = props.handleSubscriptionCancellation;
 
   const handleReturn = e => {
     e.preventDefault();
@@ -26,8 +23,7 @@ const BiAnnuallyAccount = props => {
           <div className="container-row-col-middle col">
             <div className="account-box">
               <div className="account-box-header">
-                <h1>Premium Account</h1>
-                <span>{data.databankUser.paypal_plan}</span>
+                <h1>Government Account</h1>
               </div>
               <div className="account-box-features">
                 <div className="account-box-features-list">
@@ -41,23 +37,6 @@ const BiAnnuallyAccount = props => {
           </div>
           <div className="container-row-col-bottom col">
             <DivProps props={props}>
-              <div>
-                {data && data.databankUser.p_next_billing_time ? (
-                  <span>
-                    Your subscription will expire on{" "}
-                    {new Date(
-                      parseInt(data.databankUser.p_next_billing_time)
-                    ).toDateString()}
-                  </span>
-                ) : (
-                  <button
-                    className="cancel"
-                    onClick={handleSubscriptionCancellation}
-                  >
-                    Cancel Subscription
-                  </button>
-                )}
-              </div>
               <button className="button-return" onClick={handleReturn}>
                 Return to Data
               </button>
@@ -69,4 +48,4 @@ const BiAnnuallyAccount = props => {
   );
 };
 
-export default BiAnnuallyAccount;
+export default GovAccount;

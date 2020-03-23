@@ -10,6 +10,7 @@ import DashAbout from "./DashAbout";
 import AccountHandler from "./AccountHandler";
 import DashLoginModal from "./DashLoginModal";
 import DashSignupModal from "./DashSignupModal";
+import LandingPage from "./LandingPage";
 import DashLogout from "./DashLogout";
 import Login from "./Login";
 import Signup from "./DashSignup";

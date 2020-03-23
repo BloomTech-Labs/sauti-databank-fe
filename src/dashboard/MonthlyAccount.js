@@ -1,11 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { UserAccount } from "./styledComponents/DashAccount";
+import { UserAccount, DivProps } from "./styledComponents/DashAccount";
+import { AutoWidthCalculator } from "ag-grid-community";
 
 const MonthlyAccount = props => {
   const history = useHistory();
-  const { data } = props.data;
-  const { handleSubscriptionCancellation } = props;
+  const data = props.data;
+  const handleSubscriptionCancellation = props.handleSubscriptionCancellation;
 
   const handleReturn = e => {
     e.preventDefault();
@@ -26,40 +27,46 @@ const MonthlyAccount = props => {
             <div className="account-box">
               <div className="account-box-header">
                 <h1>Premium Account</h1>
+                <span>{data.databankUser.paypal_plan}</span>
               </div>
               <div className="account-box-features">
-                <span>Download data into an excel file</span>
-                <span>Change Data Filters</span>
-                <span>Cross-Filter Data by Date</span>
-                <span>Additional Filtering Options</span>
+                <div className="account-box-features-list">
+                  <span>Download data into an excel file</span>
+                  <span>Change Data Filters</span>
+                  <span>Cross-Filter Data by Date</span>
+                  <span>Additional Filtering Options</span>
+                </div>
               </div>
             </div>
           </div>
           <div className="container-row-col-bottom col">
-            <button className="cancel">Cancel Subscription</button>
-            <button className="button-return" onClick={handleReturn}>
-              Return to Data
-            </button>
+            <DivProps props={props}>
+              <div>
+                {data && data.databankUser.p_next_billing_time ? (
+                  <span>
+                    Your subscription will expire on{" "}
+                    {new Date(
+                      parseInt(data.databankUser.p_next_billing_time)
+                    ).toDateString()}
+                  </span>
+                ) : (
+                  <button
+                    className="cancel"
+                    onClick={handleSubscriptionCancellation}
+                  >
+                    Cancel Subscription
+                  </button>
+                )}
+              </div>
+              <button className="button-return" onClick={handleReturn}>
+                Return to Data
+              </button>
+            </DivProps>
           </div>
         </div>
       </div>
     </UserAccount>
   );
 };
-
-// <ButtonDiv>
-// {data && data.databankUser.p_next_billing_time ? (
-//   <p>
-//     Your subscription will expire on{" "}
-//     {new Date(
-//       parseInt(data.databankUser.p_next_billing_time)
-//     ).toDateString()}
-//   </p>
-// ) : (
-//   <ContinueButton2 onClick={handleSubscriptionCancellation}>
-//     Cancel Subscription
-//   </ContinueButton2>
-// )}
-// </ButtonDiv>
 
 export default MonthlyAccount;

@@ -130,8 +130,6 @@ const DashAccountUser = () => {
     data.databankUser.paypal_plan === "Bi-annually Plan - $49.99";
   const Yearly = data.databankUser.paypal_plan === "Yearly Plan - $89.99";
 
-  console.log(data, "DATA");
-
   if (Monthly) {
     return (
       <MonthlyAccount

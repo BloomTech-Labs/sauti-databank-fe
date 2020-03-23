@@ -3,7 +3,7 @@ import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 import DashAccountFree from "./DashAccountFree";
 import DashAccountUser from "./DashAccountUser";
 import DashAccountAdmin from "./DashAccountAdmin";
-import { NetworkStatus } from "apollo-boost";
+import GovAccount from "./GovAccount";
 
 // This component handles the conditionals for the users
 // We can include an else statement if all else fails to throw some error or push them back to login page
@@ -19,10 +19,12 @@ const AccountHandler = () => {
 
   if (freeUser) {
     return <DashAccountFree />;
-  } else if (paidUser || govUser) {
+  } else if (paidUser) {
     return <DashAccountUser />;
   } else if (adminUser) {
     return <DashAccountAdmin />;
+  } else if (govUser) {
+    return <GovAccount decoded={decoded} />;
   }
 };
 

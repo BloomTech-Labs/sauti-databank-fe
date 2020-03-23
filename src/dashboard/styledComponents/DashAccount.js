@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { device } from "./responsive";
+import { AutoWidthCalculator } from "ag-grid-community";
 
 export const AccountPage = styled.div`
   /* most outer div */
@@ -95,6 +96,16 @@ export const AccountPage = styled.div`
       flex-grow: 1;
       padding: 3%;
 
+      @media ${device.tablet} {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        padding: 3%;
+        -webkit-min-device-pixel-ratio: 1;
+      }
+
       @media ${device.desktopL} {
         padding: 3%;
         -webkit-min-device-pixel-ratio: 1;
@@ -108,9 +119,17 @@ export const AccountPage = styled.div`
           height: 100%;
           flex-direction: row;
 
+          @media ${device.tablet} {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            -webkit-min-device-pixel-ratio: 1;
+          }
+
           @media ${device.laptop} {
             /* 1024px - 1600px */
-
             height: 95%;
             -webkit-min-device-pixel-ratio: 1;
           }
@@ -122,6 +141,16 @@ export const AccountPage = styled.div`
             align-items: center;
             width: 33%;
             margin: 1rem;
+
+            @media ${device.tablet} {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              width: 50vmin;
+              margin: 1rem;
+              -webkit-min-device-pixel-ratio: 1;
+            }
 
             @media ${device.laptop} {
               /* 1024px - 1600px */
@@ -137,6 +166,11 @@ export const AccountPage = styled.div`
               height: 100%;
               width: 85%;
               padding: 2rem;
+
+              @media ${device.tablet} {
+                height: 40rem;
+                -webkit-min-device-pixel-ratio: 1;
+              }
 
               @media ${device.laptop} {
                 /* 1024px - 1600px */
@@ -175,6 +209,7 @@ export const AccountPage = styled.div`
                   }
                 }
               }
+
               .account-features {
                 display: flex;
                 flex-direction: column;
@@ -185,16 +220,27 @@ export const AccountPage = styled.div`
                 .account-features-items {
                   display: flex;
                   flex-direction: column;
-                  justify-content: center;
+                  justify-content: space-evenly;
+                  height: 100%;
+                  width: 100%;
 
                   span {
-                    font-size: 1vw;
-                    line-height: 2.5vw;
+                    font-size: 1.1vw;
                     font-weight: bold;
                     color: rgba(0, 0, 0, 0.5);
+
+                    @media ${device.tablet} {
+                      font-size: 1.5vw;
+                      -webkit-min-device-pixel-ratio: 1;
+                    }
                   }
                 }
               }
+
+              .admin-features {
+                height: 80%;
+              }
+
               .account-bottom {
                 display: flex;
                 justify-content: center;
@@ -248,7 +294,12 @@ export const AccountPage = styled.div`
 `;
 
 export const UserAccount = styled.div`
-  height: 90vh;
+  height: calc(100vh - 7rem);
+
+  :root {
+    font-size: 16px;
+  }
+
   .container {
     display: flex;
     justify-content: center;
@@ -259,7 +310,9 @@ export const UserAccount = styled.div`
       display: flex;
       flex-direction: column;
       height: 80%;
-      width: 50%;
+
+      width: 60vmin;
+      padding: 3em;
 
       .col {
         display: flex;
@@ -289,45 +342,64 @@ export const UserAccount = styled.div`
         }
       }
       .container-row-col-middle {
-        height: 60%;
+        height: 100%;
 
         .account-box {
+          display: flex;
+          flex-direction: column;
           padding: 2rem;
-          height: 80%;
+          height: 95%;
           width: 100%;
           border: 1px solid rgba(0, 0, 0, 0.3);
           box-sizing: border-box;
           border-radius: 5px;
 
           .account-box-header {
+            line-height: 5rem;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
             h1 {
-              font-size: 2vw;
-              margin-bottom: 1vw;
+              font-size: 5em;
+              margin-bottom: 0.5em;
+            }
+
+            span {
+              font-size: 2.5em;
             }
           }
 
           .account-box-features {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            margin-top: 1vw;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
             height: 100%;
+            margin-top: 1vw;
 
-            span {
-              font-weight: bold;
-              color: rgba(0, 0, 0, 0.5);
-              line-height: 2vw;
-              font-size: 1vw;
+            .account-box-features-list {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-evenly;
+              height: 100%;
+              width: 100%;
+
+              span {
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.5);
+                font-size: 1.5vw;
+              }
             }
           }
         }
       }
       .container-row-col-bottom {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         height: 20%;
+
+        span {
+          font-size: 1.3vw;
+        }
 
         .cancel {
           margin: 2rem;
@@ -353,7 +425,7 @@ export const UserAccount = styled.div`
           height: 2vw;
           width: 10vw;
           font-weight: bold;
-          font-size: 1.3rem;
+          font-size: 1vw;
           color: black;
           background: #ffffff;
           border: 2px solid black;
@@ -370,29 +442,21 @@ export const UserAccount = styled.div`
   }
 `;
 
-// <UserAccount>
-// <div className="container">
-//   <div className="container-row">
-//     <div className="container-row-col">
-//       <h1>Account Access</h1>
-//       <span>Benefits included with your account subscription</span>
-//     </div>
-//     <div className="container-row-col">
-//       <div className="account-box">
-//         <div className="account-box-header">
-//           <h1>Premium Account</h1>
-//         </div>
-//         <div className="account-box-features">
-//           <span>Download data into an excel file</span>
-//           <span>Change Data Filters</span>
-//           <span>Cross-Filter Data by Date</span>
-//           <span>Additional Filtering Options</span>
-//         </div>
-//       </div>
-//     </div>
-//     <div className="container-row-col">
-//       <button>Cancel Subscription</button>
-//     </div>
-//   </div>
-// </div>
-// </UserAccount>
+export const DivProps = styled.div`
+  display: ${props =>
+    props.props.data && props.props.data.databankUser.p_next_billing_time
+      ? "flex"
+      : "flex"};
+  flex-direction: ${props =>
+    props.props.data && props.props.data.databankUser.p_next_billing_time
+      ? "column"
+      : "row"};
+  justify-content: ${props =>
+    props.props.data && props.props.data.databankUser.p_next_billing_time
+      ? "center"
+      : "center"};
+  align-items: ${props =>
+    props.props.data && props.props.data.databankUser.p_next_billing_time
+      ? "center"
+      : "center"};
+`;

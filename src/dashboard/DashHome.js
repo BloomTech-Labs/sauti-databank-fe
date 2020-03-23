@@ -9,6 +9,7 @@ import GraphContainer from "../GraphContainer";
 import { getToken, decodeToken } from "./auth/Auth";
 import CreateAccount from "./CreateAccount";
 import AccountHandler from "./AccountHandler";
+import LandingPage from "./LandingPage";
 
 import {
   NotSignedInDiv,
@@ -40,6 +41,7 @@ const DashHome = () => {
   }
 
   if (!signedIn) {
+    // return <LandingPage />;
     return <CreateAccount />;
   } else if (signedIn) {
     return <AccountHandler />;
