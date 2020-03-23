@@ -23,6 +23,26 @@ const GetData = props => {
   } = props;
 
   console.log("filters", filters);
+  // if all tables say users
+  // go to users
+  // else
+  // got to sessions
+  // const getAllTableNames = (filters) => {
+  //   return Object.keys(filters).map(filterId => {
+  //     return filters[filterId].selectedTable
+  //   })
+  // }
+  // console.log()
+  // const areAllUsers = (arrayOfTableNames, targetName) => {
+  //   let count = 0
+  //   arrayOfTableNames.forEach(tableName => {
+  //     if(tableName === targetName) {
+  //       count ++
+  //     }
+  //   })
+  //   return count === arrayOfTableNames.length
+  // }
+
   if (
     filters[0].selectedTable === "Users" &&
     filters[1].selectedTable === "Users" &&

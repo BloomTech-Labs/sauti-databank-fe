@@ -34,73 +34,74 @@ const GraphContainer = props => {
   // //   return the urls search object
   // }
   const [url, setUrl] = useState("");
-  const [filters, setFilters] = useState({
-    // useState(props.x)
-    // old plan
-    // default query setup
-    // show or hide is only for the first one
-    // check with russ about changes
-    // first one: show or hide
-    // second one: always hide
-    // all rest: always show
-    0: {
-      nameOfFilter: "Data Series",
-      selectedCategory: "Gender", // label
-      // selectedOption: undefined,
-      // avaliableOptions: [],
-      selectableOptions: {
-        Female: false,
-        male: false
-      },
-      selectedTable: "Users", // value.query
-      selectedTableColumnName: "gender", // value.type
-      showOptions: false
-    },
+  const [filters, setFilters] = useState(props.filters);
+  console.log("filters", filters);
+  // useState(props.x)
+  // old plan
+  // default query setup
+  // show or hide is only for the first one
+  // check with russ about changes
+  // first one: show or hide
+  // second one: always hide
+  // all rest: always show
+  //   0: {
+  //     nameOfFilter: "Data Series",
+  //     selectedCategory: "Gender", // label
+  //     // selectedOption: undefined,
+  //     // avaliableOptions: [],
+  //     selectableOptions: {
+  //       Female: false,
+  //       male: false
+  //     },
+  //     selectedTable: "Users", // value.query
+  //     selectedTableColumnName: "gender", // value.type
+  //     showOptions: false
+  //   },
 
-    1: {
-      nameOfFilter: "Compare SubSamples",
-      selectedCategory: "",
-      // selectedOption: undefined,
-      // avaliableOptions: [],
-      selectableOptions: {},
-      selectedTable: "Users",
-      selectedTableColumnName: "",
-      showOptions: false
-    },
-    2: {
-      nameOfFilter: "Data Filter",
-      selectedCategory: "",
-      // selectedOption: undefined,
-      // avaliableOptions: [],
-      selectableOptions: {},
-      selectedTable: "",
-      selectedTableColumnName: "",
-      showOptions: true
-    }
-  });
+  //   1: {
+  //     nameOfFilter: "Compare SubSamples",
+  //     selectedCategory: "",
+  //     // selectedOption: undefined,
+  //     // avaliableOptions: [],
+  //     selectableOptions: {},
+  //     selectedTable: "Users",
+  //     selectedTableColumnName: "",
+  //     showOptions: false
+  //   },
+  //   2: {
+  //     nameOfFilter: "Data Filter",
+  //     selectedCategory: "",
+  //     // selectedOption: undefined,
+  //     // avaliableOptions: [],
+  //     selectableOptions: {},
+  //     selectedTable: "",
+  //     selectedTableColumnName: "",
+  //     showOptions: true
+  //   }
+  // });
 
-  let urlSearchParams = {};
-  Object.keys(filters).forEach(filterId => {
-    // const filterName = 'filter' + String(filterId)
-    urlSearchParams = {
-      ...urlSearchParams,
-      ["filter" + String(filterId)]: filters[filterId].selectedTableColumnName
-    };
-  });
+  // let urlSearchParams = {};
+  // Object.keys(filters).forEach(filterId => {
+  //   // const filterName = 'filter' + String(filterId)
+  //   urlSearchParams = {
+  //     ...urlSearchParams,
+  //     ["filter" + String(filterId)]: filters[filterId].selectedTableColumnName
+  //   };
+  // });
 
-  let useEffectFilterDependencies = Object.keys(filters).map(filterId => {
-    return filters[filterId].selectedTableColumnName;
-  });
+  // let useEffectFilterDependencies = Object.keys(filters).map(filterId => {
+  //   return filters[filterId].selectedTableColumnName;
+  // });
 
-  console.log(useParams());
-  // const {slug} = useParams()
-  // console.log(slug)
-  // ?filter=1543345434&anotherNameDataSeries=something
-  console.log(urlSearchParams);
-  console.log(useEffectFilterDependencies);
-  console.log(useHistory());
-  // erased ?
-  console.log("query stuff");
+  // console.log(useParams());
+  // // const {slug} = useParams()
+  // // console.log(slug)
+  // // ?filter=1543345434&anotherNameDataSeries=something
+  // console.log(urlSearchParams);
+  // console.log(useEffectFilterDependencies);
+  // console.log(useHistory());
+  // // erased ?
+  // console.log("query stuff");
   // let searchString = useHistory().location.search.slice(
   //   1,
   //   useHistory().location.search.length
