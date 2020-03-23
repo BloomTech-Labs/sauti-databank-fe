@@ -14,7 +14,8 @@ import {
 const SocialMediaContainer = styled.div`
   display: flex;
   align-items: center;
-  border: 2px solid grey;
+  border: 1px solid grey;
+  padding: 5px;
 `;
 const SocialMediaIconsTwitter = styled.a`
   font-size: 3rem;
@@ -120,7 +121,7 @@ const Graph = props => {
               filename={fileName}
               suffix={`${new Date().toISOString()}`}
             >
-              <DownloadText className="csv-download">Download⯆</DownloadText>
+              <DownloadText className="csv-download">Download</DownloadText>
             </CsvDownloader>
           ) : (
             <>
