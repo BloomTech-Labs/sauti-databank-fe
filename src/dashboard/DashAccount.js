@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { urlPageView } from "./GoogleAnalytics/index";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "./auth/Auth";
@@ -33,6 +33,14 @@ function DashAccount(props) {
   useEffect(() => {
     urlPageView("/account");
   });
+
+  const [cancelledSub, setCancelledSub] = useState(false);
+  useEffect(() => {
+    if (cancelledSub) {
+      // reload the page to show the user their subscription expiration date.
+      window.location.reload();
+    }
+  }, [cancelledSub]);
 
   const history = useHistory();
 
@@ -71,7 +79,9 @@ function DashAccount(props) {
     }
   );
 
-  if (data) console.log("data billing time", data.databankUser);
+  if (data) {
+    console.log("data billing time", data.databankUser);
+  }
   const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
 
   const handleSubmit = async (e, input) => {
@@ -99,7 +109,6 @@ function DashAccount(props) {
 
   const handleSubscriptionCancellation = async e => {
     // TODO: grab user's subscription_id with a query to DatabankUsers
-
     // newSub should be null unless the user has JUST signed up for premium through paypal.
     // Once a user has signed out and returned to the app, the users sub ID is tracked by GET_SUBSCRIPTION_ID.
     if (newSub === null) {
@@ -113,9 +122,8 @@ function DashAccount(props) {
       });
       // Refetch to get the p_next_billing_time and subscription_id
       refetch();
-      // Set the subscription id to null after a user cancels their subscription.
-      // data.databankUser.subscription_id = null;
-      history.push("/data");
+      // trigger a refresh of the page in a useEffect. This is to display to the user their subscription expiration date.
+      setCancelledSub(true);
       swal({
         title: "",
         text: "Subscription cancellation has been processed.",
@@ -162,9 +170,11 @@ function DashAccount(props) {
                     {data && data.databankUser.p_next_billing_time ? (
                       <p>
                         Your subscription will expire on{" "}
-                        {new Date(
-                          parseInt(data.databankUser.p_next_billing_time)
-                        ).toDateString()}
+                        <Big>
+                          {new Date(
+                            parseInt(data.databankUser.p_next_billing_time)
+                          ).toDateString()}
+                        </Big>
                       </p>
                     ) : (
                       <ContinueButton2 onClick={handleSubscriptionCancellation}>
@@ -359,4 +369,5 @@ const ButtonDiv = styled.div`
 `;
 const Big = styled.big`
   color: #eb5e52;
+  font-size: 2rem;
 `;
