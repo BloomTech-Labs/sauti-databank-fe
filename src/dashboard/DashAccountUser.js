@@ -151,13 +151,6 @@ const DashAccountUser = () => {
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
-  } else {
-    return (
-      <FreeAccount
-        data={data}
-        handleSubscriptionCancellation={handleSubscriptionCancellation}
-      />
-    );
   }
 };
 
