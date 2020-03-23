@@ -61,13 +61,13 @@ export default function FilterBox(props) {
       justifyContent: "space-between"
     };
     const groupBadgeStyles = {
-      backgroundColor: "#EBECF0",
+      backgroundColor: "#212121",
       borderRadius: "2em",
-      color: "#172B4D",
+      color: "white",
       display: "inline-block",
       fontSize: 12,
-      fontWeight: "normal",
-      lineHeight: "1",
+      fontWeight: "bold",
+      lineHeight: "1.2",
       minWidth: 1,
       padding: "0.16666666666667em 0.5em",
       textAlign: "center"
@@ -103,9 +103,11 @@ export default function FilterBox(props) {
         // const color = chroma(data.color);
         return {
           ...styles,
-          backgroundColor: isDisabled ? "red" : "blue",
-          color: "#FFF",
-          cursor: isDisabled ? "not-allowed" : "default",
+          backgroundColor: isDisabled ? "red" : "rgba(128, 128, 128, .15)",
+          backgroundColor: isFocused && "rgba(128, 128, 128, .5)",
+          borderBottom: ".25px solid grey",
+          color: "#212121",
+          cursor: isDisabled ? "not-allowed" : "pointer",
           // items to select
           fontSize: 15
         };
@@ -114,7 +116,6 @@ export default function FilterBox(props) {
 
     const ControlComponent = props => (
       <div style={controlStyles}>
-        {<p>Custom Control</p>}
         <components.Control {...props} />
       </div>
     );
@@ -290,8 +291,8 @@ export default function FilterBox(props) {
   );
 
   return (
-    <div>
-      <a
+    <>
+      {/* <a
         class="twitter-share-button"
         target="_blank"
         href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
@@ -311,7 +312,7 @@ export default function FilterBox(props) {
         >
           Share
         </a>
-      </div>
+      </div> */}
       <DropdownContainer>
         {Object.keys(filters).map(filterId => (
           <FilterSelector
@@ -347,7 +348,7 @@ export default function FilterBox(props) {
             }}
             style={{ cursor: loading ? "auto" : "pointer" }}
           >
-            Add Additional Filter
+            Add Filter
           </Button>
         </div>
         <form>
@@ -444,7 +445,7 @@ export default function FilterBox(props) {
           </p>
         </form>
       </DropdownContainer>
-    </div>
+    </>
   );
 }
 
@@ -503,13 +504,16 @@ const Button = styled.button`
   color: #fff;
   font-weight: 400;
   padding: 10px;
+  margin-top: 5px;
   border: none;
-  border-radius: 2px;
+  border-radius: 5px;
   text-align: center;
   align-self: center;
   font-size: 1.5rem;
+  opacity: 0.8;
   :hover {
     cursor: pointer;
+    opacity: 1;
   }
 `;
 
@@ -520,7 +524,7 @@ const DropdownContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 26.9rem;
+  width: 275px;
   p {
     font-size: 1.3rem;
     margin: 10px 0;
@@ -536,6 +540,9 @@ const DropdownContainer = styled.div`
     opacity: 0.7;
     cursor: pointer;
     margin-top: 20px;
+    &:hover {
+      color: black;
+    }
   }
   .dropdown {
     color: $greyColor;

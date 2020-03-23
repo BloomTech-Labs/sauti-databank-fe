@@ -110,7 +110,7 @@ $greyColor: #4d4f52;
 
     .header {
       height: 88px;
-      width: 85vw;
+      width: 100vw;
       background: #212121;
       display: flex;
       align-items: center;
@@ -124,10 +124,10 @@ $greyColor: #4d4f52;
     } //header
 
     .content-container {
-      margin-top: 65px;
       display: flex;
-      justify-content: space-between;
-      width: 100%;
+      justify-content: space-around;
+      width: 98%;
+      margin: 40px auto;
 
       .chart-container {
         width: calc(75% - 40px);

@@ -4,11 +4,28 @@ import CsvDownloader from "react-csv-downloader";
 import { Event } from "../dashboard/GoogleAnalytics/index";
 import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
+import styled from "styled-components";
 
 import {
   NoAccessText,
   DownloadText
 } from "../dashboard/styledComponents/Index";
+
+const SocialMediaContainer = styled.div`
+  display: flex;
+  align-items: center;
+  border: 2px solid grey;
+`;
+const SocialMediaIconsTwitter = styled.a`
+  font-size: 3rem;
+  margin: 0 10px;
+  color: rgb(0, 172, 238);
+`;
+const SocialMediaIconsFacebook = styled.a`
+  font-size: 3rem;
+  margin: 0 10px;
+  color: rgb(59, 89, 152);
+`;
 
 const Graph = props => {
   console.log("loading graph", props);
@@ -90,26 +107,51 @@ const Graph = props => {
 
   return (
     <div className="Graph-Container">
-      <div className="dwnld-btn">
-        {tier === "ADMIN" ||
-        tier === "PAID" ||
-        tier === "GOV_ROLE" ||
-        newSub ? (
-          <CsvDownloader
-            track={track}
-            datas={csvFormattedData}
-            columns={csvHeaders}
-            filename={fileName}
-            suffix={`${new Date().toISOString()}`}
+      <SocialMediaContainer className="social-media-container">
+        <div className="dwnld-btn">
+          {tier === "ADMIN" ||
+          tier === "PAID" ||
+          tier === "GOV_ROLE" ||
+          newSub ? (
+            <CsvDownloader
+              track={track}
+              datas={csvFormattedData}
+              columns={csvHeaders}
+              filename={fileName}
+              suffix={`${new Date().toISOString()}`}
+            >
+              <DownloadText className="csv-download">Download⯆</DownloadText>
+            </CsvDownloader>
+          ) : (
+            <>
+              <DownloadModal />
+            </>
+          )}
+        </div>
+        <div>
+          <SocialMediaIconsTwitter
+            class="twitter-share-button"
+            target="_blank"
+            href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
           >
-            <DownloadText className="csv-download">Download⯆</DownloadText>
-          </CsvDownloader>
-        ) : (
-          <>
-            <DownloadModal />
-          </>
-        )}
-      </div>
+            <i class="fab fa-twitter">share</i>
+          </SocialMediaIconsTwitter>
+        </div>
+        <div
+          class="fb-share-button"
+          data-href="https://blissful-pare-60612f.netlify.com/data"
+          data-layout="button"
+          data-size="small"
+        >
+          <SocialMediaIconsFacebook
+            target="_blank"
+            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+            class="fb-xfbml-parse-ignore"
+          >
+            <i class="fab fa-facebook-square">share</i>
+          </SocialMediaIconsFacebook>
+        </div>
+      </SocialMediaContainer>
 
       <ResponsiveBar
         data={props.data}
