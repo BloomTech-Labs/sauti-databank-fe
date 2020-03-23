@@ -93,12 +93,12 @@ selectedTableColumnName: "procedurecommoditycat"
   return (
     <div className="App">
       <div className="main-container">
-        <TopBar className="header">
+        <div className="header">
           <h1>Informal Cross-Border Trade Data</h1>
-          <FilterHideButton onClick={HideFilters}>
+          {/* <FilterHideButton onClick={HideFilters}>
             {hidden ? <p>Show Filters</p> : <p>Hide Filters</p>}
-          </FilterHideButton>
-        </TopBar>
+          </FilterHideButton> */}
+        </div>
         <div className="content-container">
           <div className={hidden ? "extend" : "chart-container"}>
             <Queries
@@ -110,6 +110,9 @@ selectedTableColumnName: "procedurecommoditycat"
             />
           </div>
           {/* can put a hide/show button here */}
+          <FilterHideButton onClick={HideFilters}>
+            {hidden ? <p>◀</p> : <p>▶</p>}
+          </FilterHideButton>
           <div
             className={
               hidden ? "dropdown-container hide" : "dropdown-container"
@@ -133,21 +136,18 @@ selectedTableColumnName: "procedurecommoditycat"
 export default withRouter(GraphContainer);
 
 const FilterHideButton = styled.button`
-  padding: 20px;
-  width: 200px;
-  border: 2px solid #eb5e52;
+  font-size: 2.5rem;
+  font-weight: bold;
+  border: 1px solid grey;
   border-radius: 5px;
-  background-color: #eb5e52;
-  color: white;
-  margin-right: 20px;
-  transition: 0.5s ease;
+  background-color: white;
+  color: grey;
+  height: 200px;
+  align-self: center;
+  transition: 0.4s ease;
   &:hover {
-    background-color: white;
-    color: black;
+    background-color: grey;
+    color: white;
     cursor: pointer;
   }
-`;
-const TopBar = styled.div`
-  display: flex;
-  justify-content: space-between;
 `;
