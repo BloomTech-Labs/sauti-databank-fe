@@ -4,7 +4,7 @@ import { device } from "./responsive";
 export const AccountPage = styled.div`
   /* most outer div */
   font-family: "Helvetica", sans-serif;
-  height: 90vh;
+  height: calc(100vh - 7rem);
 
   .page-row {
     height: 90vh;
