@@ -7,6 +7,7 @@ import dataParse from "./dataParse";
 import getIndex from "../DataParseHelpers/getIndex";
 import graphLabels from "./graphLabels";
 import removeMultiple from "../DataParseHelpers/removeMultiple";
+import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
 const GetData = props => {
   let queryType = "tradersUsers";
@@ -21,6 +22,27 @@ const GetData = props => {
     setFilterBoxEndDate
   } = props;
 
+  console.log("filters", filters);
+  // if all tables say users
+  // go to users
+  // else
+  // got to sessions
+  // const getAllTableNames = (filters) => {
+  //   return Object.keys(filters).map(filterId => {
+  //     return filters[filterId].selectedTable
+  //   })
+  // }
+  // console.log()
+  // const areAllUsers = (arrayOfTableNames, targetName) => {
+  //   let count = 0
+  //   arrayOfTableNames.forEach(tableName => {
+  //     if(tableName === targetName) {
+  //       count ++
+  //     }
+  //   })
+  //   return count === arrayOfTableNames.length
+  // }
+
   if (
     filters[0].selectedTable === "Users" &&
     filters[1].selectedTable === "Users" &&
@@ -32,7 +54,7 @@ const GetData = props => {
     console.log(filters[1].selectedTable);
     console.log(filters[2].selectedTable);
     thisQuery = {
-      [filters[0].selectedTableColumnName]: filters[0].selectedOption
+      [filters[0].selectedTableColumnName]: getSelectedOption(filters, 0) // filters[0].selectedOption
     };
     QUERY = gql`
       query getUsers($queryTraders: newTraderInput){
@@ -45,12 +67,16 @@ const GetData = props => {
       
       `;
   } else {
+    console.log("query");
     thisQuery = {};
     Object.keys(filters).forEach(filterId => {
       thisQuery = {
         ...thisQuery,
-        [filters[filterId].selectedTableColumnName]:
-          filters[filterId].selectedOption
+        [filters[filterId].selectedTableColumnName]: getSelectedOption(
+          filters,
+          filterId
+        )
+        //filters[filterId].selectedOption
       };
     });
 
@@ -64,6 +90,7 @@ const GetData = props => {
          }
        }
        `;
+    // console.log(thisQuery, queryType, QUERY)
   }
 
   // it would be nice for this to run in a way that doesn't return any data untill the user actually sets up a query
@@ -71,7 +98,7 @@ const GetData = props => {
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
-
+  // console.log(data)
   if (loading) {
     return (
       <div className="loader-container">
@@ -101,75 +128,131 @@ const GetData = props => {
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
   // console.log("csvData", chartData.dataStructure);
   // console.log(`cross filter type`, props.crossFilter.type);
+  if (chartData === 1) {
+    // alert(
+    //   "There was an error getting the data. This can happen if you select too many filters and there is no data for that subset. The page will automatically refresh."
+    // );
+    // console.log(window)
 
+    return (
+      <div>
+        <h1>Try a different search</h1>
+      </div>
+    );
+  }
   // console.log("chartdata_____-----", chartData);
-
+  const makeFilterList = () => {
+    console.log("makeFilterList WAS CALLED");
+    // console.log("filtered list", Object.keys(filters)
+    //                                     .filter(filterId => filterId >= 2)
+    //                                     .map(filterId => (filters[filterId].selectedCategory))
+    //                                     .join("\n"))
+    return Object.keys(filters)
+      .filter(filterId => filterId >= 2)
+      .map(filterId => {
+        return (
+          <p>
+            {filters[filterId].selectedCategory} -{" "}
+            {getSelectedOption(filters, filterId)}
+          </p>
+        );
+      });
+  };
+  /*
+  just priting to the page
+  data series
+    bla
+  subsample
+    bla
+  additional filter
+    bla
+    bla
+  */
   if (filters[1].selectedTableColumnName !== "") {
     return (
       <div>
-        <h1 className="graph-title">
+        <h1 className="graph-title">Data Series</h1>
+        <h2 className="graph-title-small">{filters[0].selectedCategory}</h2>
+        <h1 className="graph-title">Subsample</h1>
+        <h2 className="graph-title-small">{filters[1].selectedCategory}</h2>
+
+        {filters[2].selectedTableColumnName && (
+          <div>
+            <h3 className="graph-title">Additional Filter:</h3>
+            <h3 className="graph-title-small">{makeFilterList()}</h3>
+          </div>
+        )}
+        {/* <h1 className="graph-title">
           {filters[0].selectedCategory} by {filters[1].selectedCategory}
         </h1>
         {filters[2].selectedTableColumnName && (
           <h3 className="graph-title-small">
-            Additional Filter: {filters[1].selectedCategory} -{" "}
-            {Object.values({
-              [filters[2].selectedCategory]: filters[2].selectedOption
+            Additional Filter: {makeFilterList()} */}
+        {/* {filters[1].selectedCategory} -{" "} */}
+        {/* {Object.values({
+              [filters[2].selectedCategory]: getSelectedOption(filters, 2)//filters[2].selectedOption
             }).length === 0
               ? "none"
               : Object.values({
-                  [filters[2].selectedCategory]: filters[2].selectedOption
-                })[0]}
-          </h3>
-        )}
+                  [filters[2].selectedCategory]: getSelectedOption(filters, 2)//filters[2].selectedOption
+                })[0]} */}
+        {/* </h3> */}
+        {/* )} */}
 
         <Graph
           data={chartData.percentageData}
           csvData={chartData.dataStructure}
-          crossFilter={filters[1].selectedCategory}
-          additionalFilter={filters[2].selectedCategory}
-          selectedCheckbox={{
-            [filters[2].selectedCategory]: filters[2].selectedOption
-          }}
+          filters={filters}
+          // crossFilter={filters[1].selectedCategory}
+          // additionalFilter={filters[2].selectedCategory}
+          // selectedCheckbox={{
+          //   [filters[2].selectedCategory]: getSelectedOption(filters, 2)//filters[2].selectedOption
+          // }}
           keys={chartData.crossFilterValues}
-          index={filters[0].selectedTableColumnName}
-          label={filters[0].selectedCategory}
+          // index={filters[0].selectedTableColumnName}
+          // label={filters[0].selectedCategory}
           groupMode={"grouped"}
           sampleSize={chartData.totalSampleSize}
-          checkboxOptions={filters[2].avaliableOptions}
+          // checkboxOptions={
+          //   getAvaliableOptions(filters, 2)
+          //   //filters[2].avaliableOptions
+          // }
         />
       </div>
     );
   } else {
     return (
       <div>
-        <h1 className="graph-title">{filters[0].selectedCategory}</h1>
+        <h1 className="graph-title">Data Series</h1>
+        <h2 className="graph-title-small">{filters[0].selectedCategory}</h2>
+        <h1 className="graph-title">Subsample</h1>
+        <h2 className="graph-title-small">-</h2>
+
         {filters[2].selectedTableColumnName && (
-          <h3 className="graph-title-small">
-            Additional Filter: {filters[2].selectedCategory} -{" "}
-            {Object.values({
-              [filters[2].selectedCategory]: filters[2].selectedOption
-            }).length === 0
-              ? "none"
-              : Object.values({
-                  [filters[2].selectedCategory]: filters[2].selectedOption
-                })[0]}
-          </h3>
+          <div>
+            <h3 className="graph-title">Additional Filter:</h3>
+            <h3 className="graph-title-small">{makeFilterList()}</h3>
+          </div>
         )}
         <Graph
           data={chartData.percentageData}
+          // data is cropped before the graph is called
           csvData={chartData.dataStructure}
-          additionalFilter={filters[2].selectedCategory}
-          selectedCheckbox={{
-            [filters[2].selectedCategory]: filters[2].selectedOption
-          }}
-          crossFilter={filters[1].selectedCategory}
+          filters={filters}
+          // additionalFilter={filters[2].selectedCategory}
+          // selectedCheckbox={{
+          //   [filters[2].selectedCategory]: getSelectedOption(filters, 2)//filters[2].selectedOption
+          // }}
+          // crossFilter={filters[1].selectedCategory}
           keys={chartData.keys || chartData.csvKeys}
-          index={filters[0].selectedTableColumnName}
-          label={filters[0].selectedCategory}
+          // index={filters[0].selectedTableColumnName}
+          // label={filters[0].selectedCategory}
           groupMode={"stacked"}
           sampleSize={chartData.sampleSize}
-          checkboxOptions={filters[2].avaliableOptions}
+          // checkboxOptions={
+          //   getAvaliableOptions(filters, 2)
+          // //  filters[2].avaliableOptions
+          // }
         />
       </div>
     );

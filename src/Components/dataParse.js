@@ -97,10 +97,7 @@ const dataParse = (
       }
     }
   } catch (error) {
-    alert(
-      "There was an error getting the data. This can happen if you select too many filters and there is no data for that subset. The page will automatically refresh."
-    );
-    window.location.reload();
+    return 1;
   }
 };
 

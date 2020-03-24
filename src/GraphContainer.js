@@ -5,58 +5,21 @@ import ReactGa from "react-ga";
 import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams, useHistory } from "react-router-dom";
+
 import Queries from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
 import styled from "styled-components";
 import swal from "sweetalert";
 import ClipboardJS from "clipboard";
+import graphLabels from "./Components/graphLabels";
 
-const GraphContainer = () => {
-  const [filters, setFilters] = useState({
-    // old plan
-    // default query setup
-    // show or hide is only for the first one
-    // check with russ about changes
-    // first one: show or hide
-    // second one: always hide
-    // all rest: always show
-    0: {
-      nameOfFilter: "Data Series",
-      selectedCategory: "Gender", // label
-      selectedOption: undefined,
-      avaliableOptions: [],
-      selectableOptions: {
-        Female: false,
-        male: false
-      },
-      selectedTable: "Users", // value.query
-      selectedTableColumnName: "gender", // value.type
-      showOptions: false
-    },
+import { getAvaliableOptions, getSelectedOption } from "./OptionFunctions";
 
-    1: {
-      nameOfFilter: "Compare SubSamples",
-      selectedCategory: "",
-      selectedOption: undefined,
-      avaliableOptions: [],
-      selectableOptions: {},
-      selectedTable: "Users",
-      selectedTableColumnName: "",
-      showOptions: false
-    },
-    2: {
-      nameOfFilter: "Data Filter",
-      selectedCategory: "",
-      selectedOption: undefined,
-      avaliableOptions: [],
-      selectableOptions: {},
-      selectedTable: "",
-      selectedTableColumnName: "",
-      showOptions: false
-    }
-  });
-  // put the date here
+const GraphContainer = props => {
+  const [url, setUrl] = useState("");
+  const [filters, setFilters] = useState(props.filters);
+
   const {
     filterBoxStartDate,
     setFilterBoxStartDate,

@@ -167,7 +167,9 @@ const GetData = props => {
         </h1>
         {props.additionalFilter.type && (
           <h3 className="graph-title-small">
-            Additional Filter: {props.additionalFilter.label} -{" "}
+            Additional Filter:
+            {/* make a list of all the selected options for the additional filters */}
+            {props.additionalFilter.label} -{" "}
             {Object.values(props.selectedCheckbox).length === 0
               ? "none"
               : Object.values(props.selectedCheckbox)[0]}
