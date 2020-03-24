@@ -151,6 +151,13 @@ const DashAccountUser = props => {
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
+  } else {
+    return (
+      <YearlyAccount
+        data={data}
+        handleSubscriptionCancellation={handleSubscriptionCancellation}
+      />
+    );
   }
 };
 

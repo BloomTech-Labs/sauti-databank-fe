@@ -4,17 +4,6 @@ import GraphContainer from "../GraphContainer";
 import { getToken, decodeToken } from "./auth/Auth";
 
 import { SignedInDiv, UserHeader } from "./styledComponents/Index";
-import swal from "sweetalert";
-import ClipboardJS from "clipboard";
-
-const clipboard = new ClipboardJS(".btn", {
-  text: function() {
-    return document.location.href;
-  }
-});
-clipboard.on("success", function(e) {
-  swal({ title: "", text: "copied url!", icon: "success" });
-});
 
 function DashHome() {
   const signedIn = getToken();
@@ -31,7 +20,6 @@ function DashHome() {
         <UserHeader></UserHeader>
       </SignedInDiv>
       <GraphContainer />
-      <button className="btn">copy url</button>;
     </>
   );
 }

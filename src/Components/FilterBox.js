@@ -296,6 +296,8 @@ export default function FilterBox(props) {
     setFilterBoxEndDate(`${year}-12-31`);
   };
 
+  // const handleChangeMonths = month = e => {}
+
   return (
     <>
       <DropdownContainer>
@@ -377,10 +379,22 @@ export default function FilterBox(props) {
                 </span>
               </StartEndContainer>
               <YearPicker>
-                <button onClick={handleChange("2017")}>2017</button>
-                <button onClick={handleChange("2018")}>2018</button>
-                <button onClick={handleChange("2019")}>2019</button>
-                <button onClick={handleChange("2020")}>2020</button>
+                <MonthButtons onClick={handleChange("2017")}>
+                  3 Mo.
+                </MonthButtons>
+                <MonthButtons onClick={handleChange("2017")}>
+                  6 Mo.
+                </MonthButtons>
+                <MonthButtons onClick={handleChange("2017")}>
+                  9 Mo.
+                </MonthButtons>
+                <MonthButtons onClick={handleChange("2017")}>
+                  12 Mo.
+                </MonthButtons>
+                <YearButtons onClick={handleChange("2017")}>2017</YearButtons>
+                <YearButtons onClick={handleChange("2018")}>2018</YearButtons>
+                <YearButtons onClick={handleChange("2019")}>2019</YearButtons>
+                <YearButtons onClick={handleChange("2020")}>2020</YearButtons>
               </YearPicker>
             </DateContainer>
           ) : (
@@ -494,20 +508,35 @@ const YearPicker = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 5px;
-  button {
-    padding: 5px;
-    width: 25%;
-    background-color: #47837f;
-    color: white;
-    font-size: 1.4rem;
-    font-weight: 500;
-    border: 0.5px solid darkgrey;
-    border-radius: 5px;
-    opacity: 0.75;
-    &:hover {
-      opacity: 1
-      cursor: pointer;
-    }
+`;
+const YearButtons = styled.button`
+  padding: 5px;
+  width: 25%;
+  background-color: #47837f;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border: 0.5px solid darkgrey;
+  border-radius: 5px;
+  opacity: 0.75;
+  &:hover {
+    opacity: 1
+    cursor: pointer;
+  }
+`;
+const MonthButtons = styled.button`
+  padding: 5px;
+  width: 25%;
+  background-color: khaki;
+  color: #212121;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border: 0.5px solid darkgrey;
+  border-radius: 5px;
+  opacity: 0.75;
+  &:hover {
+    opacity: 1
+    cursor: pointer;
   }
 `;
 const Button = styled.button`
