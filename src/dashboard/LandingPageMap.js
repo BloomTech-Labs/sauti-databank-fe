@@ -23,7 +23,7 @@ const LandingPageChoropleth = props => {
 
   const data = [
     {
-      id: "KEN",
+      id: "UGA",
       value: maleTradersKEN.length
     }
   ];
@@ -38,24 +38,25 @@ const LandingPageChoropleth = props => {
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
-      projectionType="equalEarth"
-      projectionScale={188}
-      projectionTranslation={[0.5, 0.5]}
-      projectionRotation={[-34, 0, 0]}
+      projectionType="naturalEarth1"
+      projectionScale={340}
+      projectionTranslation={[0.35, 0.5]}
+      projectionRotation={[-3, -3, 3]}
       enableGraticule={true}
       graticuleLineColor="#dddddd"
       borderWidth={0.5}
       borderColor="#152538"
+      tooltip={function(e) {}}
       legends={[
         {
           anchor: "bottom-left",
           direction: "column",
           justify: true,
-          translateX: 20,
-          translateY: -100,
-          itemsSpacing: 0,
-          itemWidth: 94,
-          itemHeight: 18,
+          translateX: 155,
+          translateY: -53,
+          itemsSpacing: 2,
+          itemWidth: 96,
+          itemHeight: 19,
           itemDirection: "left-to-right",
           itemTextColor: "#444444",
           itemOpacity: 0.85,
