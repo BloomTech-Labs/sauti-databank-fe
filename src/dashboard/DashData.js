@@ -144,16 +144,10 @@ function DashHome() {
             };
           });
 
-          // the newFilterObject from the previous round is not
-          // being used to make this one
-
-          // wary of spreading using multiple sources inside the object
           newFilterObject = {
             ...newFilterObject,
             [i]: {
-              // get rid of the "udefined" key
               // get already setup categories from the default
-              // ...filters[i],
               // attributes that arent set from the url
               ...filterTemplate[i],
               selectedCategory:
@@ -163,8 +157,12 @@ function DashHome() {
                 split3[1] === "undefined"
                   ? { ...optionFlags }
                   : { ...optionFlags, [split3[1]]: true },
-              // selectedTable: //FilterBoxOptions.default[e.label{categoryName}].value.query
+              selectedTable:
+                FilterBoxOptions.default[
+                  FilterBoxOptions.tableNamesToCategoryName[split3[0]]
+                ].value.query,
               // am I settng this right?
+              // this may be messing things up a little
               showOptions: false
             }
             // maybe the original filter could be reconstructed using the url data(filter is read only)

@@ -67,6 +67,7 @@ const GetData = props => {
       
       `;
   } else {
+    console.log("query");
     thisQuery = {};
     Object.keys(filters).forEach(filterId => {
       thisQuery = {
@@ -89,6 +90,7 @@ const GetData = props => {
          }
        }
        `;
+    // console.log(thisQuery, queryType, QUERY)
   }
 
   // it would be nice for this to run in a way that doesn't return any data untill the user actually sets up a query
@@ -96,7 +98,7 @@ const GetData = props => {
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
-
+  // console.log(data)
   if (loading) {
     return (
       <div className="loader-container">
@@ -126,7 +128,18 @@ const GetData = props => {
   ); /// first arg is what we are indexing by, second is data, third is what we are cross-filtering by. Will get changed to dynamic inputs
   // console.log("csvData", chartData.dataStructure);
   // console.log(`cross filter type`, props.crossFilter.type);
+  if (chartData === 1) {
+    // alert(
+    //   "There was an error getting the data. This can happen if you select too many filters and there is no data for that subset. The page will automatically refresh."
+    // );
+    // console.log(window)
 
+    return (
+      <div>
+        <h1>Try a different search</h1>
+      </div>
+    );
+  }
   // console.log("chartdata_____-----", chartData);
   const makeFilterList = () => {
     console.log("makeFilterList WAS CALLED");

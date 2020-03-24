@@ -632,20 +632,14 @@ export default function FilterBox(props) {
               props.setFilters({
                 // default query setup
                 0: {
-                  ...filters[0]
-                  // nameOfFilter: "Data Series",
-                  // selectedCategory: filters[0].selectedCategory,//"Gender",
-                  // selectableOptions: filters[0].selectedCategory//{},
-                  // selectedTable: "Users",
-                  // selectedTableColumnName: "gender",
-                  // showOptions: false,
-                  // optionHasBeenSelected: false
+                  ...filters[0],
+                  nameOfFilter: "Data Series",
+                  // this way they can reset their original selected options
+                  selectableOptions: {}
                 },
                 1: {
                   nameOfFilter: "Compare SubSamples",
                   selectedCategory: "",
-                  // selectedOption: undefined,
-                  // avaliableOptions: [],
                   selectableOptions: {},
                   selectedTable: "Users",
                   selectedTableColumnName: "",
@@ -655,8 +649,6 @@ export default function FilterBox(props) {
                 2: {
                   nameOfFilter: "Data Filter",
                   selectedCategory: "",
-                  // selectedOption: undefined,
-                  // avaliableOptions: [],
                   selectableOptions: {},
                   selectedTable: "",
                   selectedTableColumnName: "",
@@ -666,6 +658,7 @@ export default function FilterBox(props) {
               });
               setFilterBoxStartDate("2017-01-01");
               setFilterBoxEndDate(getTodaysDate());
+              setUpdateUrlFlag(!updateUrlFlag);
             }}
           >
             Clear Filters
