@@ -13,8 +13,7 @@ import { ApolloProvider } from "react-apollo";
 // })();
 
 const client = new ApolloClient({
-  uri: `https://sauti-marketplace-p.herokuapp.com/graphql`,
-  // uri: "https://sauti-databank.herokuapp.com/graphql",
+  uri: `${process.env.REACT_APP_BACKEND_URL}`,
   // uri: "http://localhost:2500/graphql",
   onError: ({ networkError, graphQLErrors }) => {
     console.log("graphQLErrors", graphQLErrors);
