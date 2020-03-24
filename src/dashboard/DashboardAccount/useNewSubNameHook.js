@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import qs from "qs";
 
 export function useNewSubName(newSub) {
+  console.log(newSub, "NEWSUB??");
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
-  const subID = useRef(newSub);
-
   useEffect(() => {
-    // need to access passed in newSub in here then pass it into fetchData
-
     const fetchData = async () => {
+      console.log(newSub, "INSIDE USEeffect?");
       try {
         const url = "https://api.sandbox.paypal.com/v1/oauth2/token";
         const oldData = {
@@ -61,6 +59,6 @@ export function useNewSubName(newSub) {
       }
     };
     fetchData();
-  }, []);
+  }, [newSub]);
   return { response, error };
 }

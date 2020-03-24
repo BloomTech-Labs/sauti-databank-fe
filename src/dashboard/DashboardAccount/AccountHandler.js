@@ -1,6 +1,6 @@
 import React from "react";
 import { getToken, decodeToken, getSubscription } from "../auth/Auth";
-import { getNewSubName } from "./NewSubPaypalPlan";
+import { useNewSubName } from "./useNewSubNameHook";
 import DashAccountFree from "./DashAccountFree";
 import DashAccountUser from "./DashAccountUser";
 import DashAccountAdmin from "./DashAccountAdmin";
@@ -17,6 +17,8 @@ const AccountHandler = () => {
   let paidUser = decoded.tier === "PAID";
   let govUser = decoded.tier === "GOV_ROLE";
   let adminUser = decoded.tier === "ADMIN";
+
+  console.log(useNewSubName("I-SE62AYHA98Y9"), "working?");
 
   if (freeUser) {
     return <DashAccountFree />;
