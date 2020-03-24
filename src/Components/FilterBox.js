@@ -296,7 +296,11 @@ export default function FilterBox(props) {
     setFilterBoxEndDate(`${year}-12-31`);
   };
 
-  // const handleChangeMonths = month = e => {}
+  // const handleChangeQuarterly = quarter = e => {
+  //   e.preventDefault()
+  //   setFilterBoxStartDate(``)
+  //   setFilterBoxEndDate(``)
+  // }
 
   return (
     <>
@@ -313,13 +317,7 @@ export default function FilterBox(props) {
         ))}
         <div className="btn-container">
           <Button
-            // className="checkbox-submit-btn"
-            // type="submit"
-            // disabled={loading}
             onClick={e => {
-              // console.log("here");
-              // console.log(filters);
-              // put in check for how many filters we can add
               setFilters({
                 ...filters,
                 [Object.keys(filters).length]: {
@@ -379,18 +377,11 @@ export default function FilterBox(props) {
                 </span>
               </StartEndContainer>
               <YearPicker>
-                <MonthButtons onClick={handleChange("2017")}>
-                  3 Mo.
-                </MonthButtons>
-                <MonthButtons onClick={handleChange("2017")}>
-                  6 Mo.
-                </MonthButtons>
-                <MonthButtons onClick={handleChange("2017")}>
-                  9 Mo.
-                </MonthButtons>
-                <MonthButtons onClick={handleChange("2017")}>
-                  12 Mo.
-                </MonthButtons>
+                {/* change to quarterly basis */}
+                <MonthButtons onClick={handleChange("2017")}>Q1</MonthButtons>
+                <MonthButtons onClick={handleChange("2017")}>Q2</MonthButtons>
+                <MonthButtons onClick={handleChange("2017")}>Q3</MonthButtons>
+                <MonthButtons onClick={handleChange("2017")}>Q4</MonthButtons>
                 <YearButtons onClick={handleChange("2017")}>2017</YearButtons>
                 <YearButtons onClick={handleChange("2018")}>2018</YearButtons>
                 <YearButtons onClick={handleChange("2019")}>2019</YearButtons>
