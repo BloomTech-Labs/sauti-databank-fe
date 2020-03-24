@@ -99,7 +99,8 @@ const NewSubscriberHandler = props => {
     // TODO: grab user's subscription_id with a query to DatabankUsers
     // newSub should be null unless the user has JUST signed up for premium through paypal.
     // Once a user has signed out and returned to the app, the users sub ID is tracked by GET_SUBSCRIPTION_ID.
-    if (newSub === null) {
+    if (newSub) {
+      console.log(newSub, "NEW SUB SUBSCRIBER HANDLER");
       await cancelSub({
         variables: {
           newUpdateUserToFreeInput: {
@@ -134,6 +135,7 @@ const NewSubscriberHandler = props => {
     return (
       <MonthlyAccount
         data={data}
+        planName={planName}
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
@@ -141,6 +143,7 @@ const NewSubscriberHandler = props => {
     return (
       <BiAnnuallyAccount
         data={data}
+        planName={planName}
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
@@ -148,6 +151,7 @@ const NewSubscriberHandler = props => {
     return (
       <YearlyAccount
         data={data}
+        planName={planName}
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
