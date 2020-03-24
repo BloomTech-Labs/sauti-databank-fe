@@ -90,30 +90,33 @@ const GraphContainer = () => {
             className={hidden ? "extend" : "chart-container"}
           >
             <SocialMediaContainer className="social-media-container">
-              <div>
-                <SocialMediaIconsTwitter
-                  class="twitter-share-button"
-                  target="_blank"
-                  href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
+              <IconContainer>
+                <div>Share:</div>
+                <div>
+                  <SocialMediaIconsTwitter
+                    class="twitter-share-button"
+                    target="_blank"
+                    href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
+                  >
+                    <i class="fab fa-twitter"></i>
+                  </SocialMediaIconsTwitter>
+                </div>
+                <div
+                  class="fb-share-button"
+                  data-href="https://blissful-pare-60612f.netlify.com/data"
+                  data-layout="button"
+                  data-size="small"
                 >
-                  <i class="fab fa-twitter"> Twitter</i>
-                </SocialMediaIconsTwitter>
-              </div>
-              <div
-                class="fb-share-button"
-                data-href="https://blissful-pare-60612f.netlify.com/data"
-                data-layout="button"
-                data-size="small"
-              >
-                <SocialMediaIconsFacebook
-                  target="_blank"
-                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                  class="fb-xfbml-parse-ignore"
-                >
-                  <i class="fab fa-facebook-square"> Facebook</i>
-                </SocialMediaIconsFacebook>
-              </div>
-              <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
+                  <SocialMediaIconsFacebook
+                    target="_blank"
+                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                    class="fb-xfbml-parse-ignore"
+                  >
+                    <i class="fab fa-facebook-square"></i>
+                  </SocialMediaIconsFacebook>
+                </div>
+                <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
+              </IconContainer>
               <FilterHideButton onClick={HideFilters}>
                 {hidden ? <p>Show Filters</p> : <p>Hide Filters</p>}
               </FilterHideButton>
@@ -166,22 +169,30 @@ const FilterHideButton = styled.button`
 const SocialMediaContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  border-top: 2px solid #47837f;
-  border-bottom: 2px solid #47837f;
-  border-left: 2px solid #47837f;
+  justify-content: space-between;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
   padding: 5px;
   margin-bottom: 5px;
 `;
 const SocialMediaIconsTwitter = styled.a`
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin: 0 10px;
   color: rgb(0, 172, 238);
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+  }
 `;
 const SocialMediaIconsFacebook = styled.a`
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin: 0 10px;
   color: rgb(59, 89, 152);
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const CopyUrlButton = styled.button`
@@ -194,12 +205,18 @@ const CopyUrlButton = styled.button`
   width: 95px;
   opacity: 0.75;
   border: none;
+  margin: 0 15px;
   &: hover {
     cursor: pointer;
     opacity: 1;
   }
 `;
 const ContentContainerDiv = styled.div`
-  border-right: 2px solid #47837f;
+  border-right: 1px solid lightgrey;
   margin-right: 2px;
+`;
+const IconContainer = styled.span`
+  display: flex;
+  font-size: 1.8rem;
+  align-items: center;
 `;
