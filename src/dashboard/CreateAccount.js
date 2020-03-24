@@ -90,7 +90,6 @@ export default function SignInSide(props) {
           dangerMode: true
         });
       } else {
-        console.log(createdUser.data.register.id);
         localStorage.setItem("token", createdUser.data.register.token);
         history.push("/data");
         swal({ title: "", text: "Success!", icon: "success" });
