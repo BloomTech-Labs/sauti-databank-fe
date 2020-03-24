@@ -161,9 +161,8 @@ function DashHome() {
                 FilterBoxOptions.default[
                   FilterBoxOptions.tableNamesToCategoryName[split3[0]]
                 ].value.query,
-              // am I settng this right?
-              // this may be messing things up a little
-              showOptions: false
+
+              showOptions: i <= 2 ? filterTemplate[i].showOptions : true
             }
             // maybe the original filter could be reconstructed using the url data(filter is read only)
             // Redux?
@@ -173,7 +172,9 @@ function DashHome() {
             ...newFilterObject,
             [i]: {
               ...filterTemplate[i],
-              showOptions: false
+              showOptions: i <= 2 ? filterTemplate[i].showOptions : true
+
+              // showOptions: false
             }
           };
         }
