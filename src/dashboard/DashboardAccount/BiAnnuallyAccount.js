@@ -4,7 +4,12 @@ import { UserAccount, DivProps } from "../styledComponents/DashAccount";
 
 const BiAnnuallyAccount = props => {
   const history = useHistory();
-  const data = props.data;
+
+  let data;
+  if (props.data) {
+    data = props.data;
+  }
+
   const handleSubscriptionCancellation = props.handleSubscriptionCancellation;
 
   const handleReturn = e => {
@@ -26,7 +31,7 @@ const BiAnnuallyAccount = props => {
             <div className="account-box">
               <div className="account-box-header">
                 <h1>Premium Account</h1>
-                <span>{data.databankUser.paypal_plan}</span>
+                <span>{data.databankUser.paypal_plan || props.planName}</span>
               </div>
               <div className="account-box-features">
                 <div className="account-box-features-list">
