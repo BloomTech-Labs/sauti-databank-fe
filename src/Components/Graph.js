@@ -6,27 +6,6 @@ import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
 import styled from "styled-components";
 
-import {
-  NoAccessText,
-  DownloadText
-} from "../dashboard/styledComponents/Index";
-
-const SocialMediaContainer = styled.div`
-  display: flex;
-  align-items: center;
-  border: 2px solid grey;
-`;
-const SocialMediaIconsTwitter = styled.a`
-  font-size: 3rem;
-  margin: 0 10px;
-  color: rgb(0, 172, 238);
-`;
-const SocialMediaIconsFacebook = styled.a`
-  font-size: 3rem;
-  margin: 0 10px;
-  color: rgb(59, 89, 152);
-`;
-
 const Graph = props => {
   console.log("loading graph", props);
   // const tier = getTier();
@@ -106,131 +85,119 @@ const Graph = props => {
   }, [props.csvData]);
 
   return (
-    <div className="Graph-Container">
-      <SocialMediaContainer className="social-media-container">
-        <div className="dwnld-btn">
-          {tier === "ADMIN" ||
-          tier === "PAID" ||
-          tier === "GOV_ROLE" ||
-          newSub ? (
-            <CsvDownloader
-              track={track}
-              datas={csvFormattedData}
-              columns={csvHeaders}
-              filename={fileName}
-              suffix={`${new Date().toISOString()}`}
-            >
-              <DownloadText className="csv-download">Download⯆</DownloadText>
-            </CsvDownloader>
-          ) : (
-            <>
-              <DownloadModal />
-            </>
-          )}
-        </div>
-        <div>
-          <SocialMediaIconsTwitter
-            class="twitter-share-button"
-            target="_blank"
-            href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
+    <>
+      <div className="dwnld-btn">
+        {tier === "ADMIN" ||
+        tier === "PAID" ||
+        tier === "GOV_ROLE" ||
+        newSub ? (
+          <CsvDownloader
+            track={track}
+            datas={csvFormattedData}
+            columns={csvHeaders}
+            filename={fileName}
+            suffix={`${new Date().toISOString()}`}
           >
-            <i class="fab fa-twitter">share</i>
-          </SocialMediaIconsTwitter>
-        </div>
-        <div
-          class="fb-share-button"
-          data-href="https://blissful-pare-60612f.netlify.com/data"
-          data-layout="button"
-          data-size="small"
-        >
-          <SocialMediaIconsFacebook
-            target="_blank"
-            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-            class="fb-xfbml-parse-ignore"
-          >
-            <i class="fab fa-facebook-square">share</i>
-          </SocialMediaIconsFacebook>
-        </div>
-      </SocialMediaContainer>
-
-      <ResponsiveBar
-        data={props.data}
-        keys={props.keys}
-        indexBy={props.index}
-        groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
-        margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
-        padding={0.3}
-        innerPadding={3}
-        maxValue={100}
-        colors={{ scheme: "nivo" }}
-        borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-        axisTop={null}
-        axisRight={null}
-        tooltip={({ id, value }) => (
-          <strong
-            style={{
-              color: "#000000",
-              fontSize: "15px",
-              fontFamily: "Helvetica"
-            }}
-          >
-            {id}: {value}%
-          </strong>
+            <DownloadText className="csv-download">Download ⯆</DownloadText>
+          </CsvDownloader>
+        ) : (
+          <>
+            <DownloadModal />
+          </>
         )}
-        labelFormat={d => <tspan y={-15}>{d}% </tspan>}
-        labelForm={d => <text>{d}% </text>}
-        axisBottom={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend:
-            props.label +
-            " (values as percent of total)," +
-            ` sample size = ${props.sampleSize}`,
-          legendPosition: "middle",
-          legendOffset: 35
-        }}
-        axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Percentage", // Possibly toggle percentage or number in future release
-          legendPosition: "middle",
-          legendOffset: -60
-        }}
-        labelSkipWidth={0}
-        labelSkipHeight={0}
-        labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-        legends={[
-          {
-            dataFrom: "keys",
-            anchor: "bottom-right",
-            direction: "column",
-            justify: false,
-            translateX: 120,
-            translateY: 0,
-            itemsSpacing: 2,
-            itemWidth: 100,
-            itemHeight: 20,
-            itemDirection: "left-to-right",
-            itemOpacity: 0.85,
-            symbolSize: 20,
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemOpacity: 1
+      </div>
+      <div className="Graph-Container">
+        <ResponsiveBar
+          data={props.data}
+          keys={props.keys}
+          indexBy={props.index}
+          groupMode={props.groupMode} // Possibly add toggle selector to change group mode.
+          margin={{ top: 50, right: 170, bottom: 75, left: 80 }}
+          padding={0.3}
+          innerPadding={3}
+          maxValue={100}
+          colors={{ scheme: "nivo" }}
+          borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          axisTop={null}
+          axisRight={null}
+          tooltip={({ id, value }) => (
+            <strong
+              style={{
+                color: "#000000",
+                fontSize: "15px",
+                fontFamily: "Helvetica"
+              }}
+            >
+              {id}: {value}%
+            </strong>
+          )}
+          labelFormat={d => <tspan y={-15}>{d}% </tspan>}
+          labelForm={d => <text>{d}% </text>}
+          axisBottom={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend:
+              props.label +
+              " (values as percent of total)," +
+              ` sample size = ${props.sampleSize}`,
+            legendPosition: "middle",
+            legendOffset: 35
+          }}
+          axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "Percentage", // Possibly toggle percentage or number in future release
+            legendPosition: "middle",
+            legendOffset: -60
+          }}
+          labelSkipWidth={0}
+          labelSkipHeight={0}
+          labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          legends={[
+            {
+              dataFrom: "keys",
+              anchor: "bottom-right",
+              direction: "column",
+              justify: false,
+              translateX: 120,
+              translateY: 0,
+              itemsSpacing: 2,
+              itemWidth: 100,
+              itemHeight: 20,
+              itemDirection: "left-to-right",
+              itemOpacity: 0.85,
+              symbolSize: 20,
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemOpacity: 1
+                  }
                 }
-              }
-            ]
-          }
-        ]}
-        animate={true}
-        motionStiffness={90}
-        motionDamping={15}
-      />
-    </div>
+              ]
+            }
+          ]}
+          animate={true}
+          motionStiffness={90}
+          motionDamping={15}
+        />
+      </div>
+    </>
   );
 };
 
 export default Graph;
+
+const DownloadText = styled.p`
+  font-size: 1.4rem;
+  opacity: 0.8;
+  margin-top: 4px;
+  margin-left: 2px;
+  width: 100px;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+`;

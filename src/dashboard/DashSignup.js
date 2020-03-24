@@ -15,7 +15,6 @@ import InputBase from "@material-ui/core/InputBase";
 import swal from "sweetalert";
 
 import styled from "styled-components";
-import DashLoginModal from "./DashLoginModal";
 import "../index.css";
 import { ModalText, FormButton2 } from "./styledComponents/Index";
 
@@ -254,9 +253,6 @@ function DashSignup(props) {
             Sign Up
           </Button>
         </Form>
-        <div>
-          <DashLoginModal />
-        </div>
       </FormContainer>
     </SignupPageContainer>
   );

@@ -6,8 +6,7 @@ import Fade from "@material-ui/core/Fade";
 
 import { Link } from "react-router-dom";
 import Download from "./Download";
-
-import { NoAccessText } from "./styledComponents/Index";
+import styled from "styled-components";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -37,7 +36,7 @@ export default function DownloadModal() {
 
   return (
     <div>
-      <NoAccessText onClick={handleOpen}>Download⯆</NoAccessText>
+      <DownloadText onClick={handleOpen}>Download⯆</DownloadText>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -57,3 +56,15 @@ export default function DownloadModal() {
     </div>
   );
 }
+
+const DownloadText = styled.p`
+  font-size: 1.4rem;
+  opacity: 0.8;
+  margin-top: 4px;
+  margin-left: 2px;
+  width: 100px;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+`;

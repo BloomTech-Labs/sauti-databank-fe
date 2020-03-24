@@ -290,29 +290,20 @@ export default function FilterBox(props) {
     ]
   );
 
+  const handleChange = year => e => {
+    e.preventDefault();
+    setFilterBoxStartDate(`${year}-01-01`);
+    setFilterBoxEndDate(`${year}-12-31`);
+  };
+
+  // const handleChangeQuarterly = quarter = e => {
+  //   e.preventDefault()
+  //   setFilterBoxStartDate(``)
+  //   setFilterBoxEndDate(``)
+  // }
+
   return (
     <>
-      {/* <a
-        class="twitter-share-button"
-        target="_blank"
-        href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
-      >
-        Tweet
-      </a>
-      <div
-        class="fb-share-button"
-        data-href="https://blissful-pare-60612f.netlify.com/data"
-        data-layout="button"
-        data-size="small"
-      >
-        <a
-          target="_blank"
-          href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-          class="fb-xfbml-parse-ignore"
-        >
-          Share
-        </a>
-      </div> */}
       <DropdownContainer>
         {Object.keys(filters).map(filterId => (
           <FilterSelector
@@ -326,13 +317,7 @@ export default function FilterBox(props) {
         ))}
         <div className="btn-container">
           <Button
-            // className="checkbox-submit-btn"
-            // type="submit"
-            // disabled={loading}
             onClick={e => {
-              // console.log("here");
-              // console.log(filters);
-              // put in check for how many filters we can add
               setFilters({
                 ...filters,
                 [Object.keys(filters).length]: {
@@ -368,27 +353,40 @@ export default function FilterBox(props) {
           tier === "GOV_ROLE" ||
           newSub ? (
             <DateContainer>
-              <div>
-                <p>Start</p>
-                <input
-                  name="startData"
-                  type="date"
-                  value={filterBoxStartDate}
-                  disabled={loading}
-                  onChange={e => setFilterBoxStartDate(e.target.value)}
-                />
-              </div>
-              <div>
-                <p>End</p>
-                <input
-                  disabled={loading}
-                  name="endData"
-                  type="date"
-                  value={filterBoxEndDate}
-                  id="today"
-                  onChange={e => setFilterBoxEndDate(e.target.value)}
-                />
-              </div>
+              <StartEndContainer>
+                <span>
+                  <p>Start</p>
+                  <input
+                    name="startData"
+                    type="date"
+                    value={filterBoxStartDate}
+                    disabled={loading}
+                    onChange={e => setFilterBoxStartDate(e.target.value)}
+                  />
+                </span>
+                <span>
+                  <p>End</p>
+                  <input
+                    disabled={loading}
+                    name="endData"
+                    type="date"
+                    value={filterBoxEndDate}
+                    id="today"
+                    onChange={e => setFilterBoxEndDate(e.target.value)}
+                  />
+                </span>
+              </StartEndContainer>
+              <YearPicker>
+                {/* change to quarterly basis */}
+                <MonthButtons onClick={handleChange("2017")}>Q1</MonthButtons>
+                <MonthButtons onClick={handleChange("2017")}>Q2</MonthButtons>
+                <MonthButtons onClick={handleChange("2017")}>Q3</MonthButtons>
+                <MonthButtons onClick={handleChange("2017")}>Q4</MonthButtons>
+                <YearButtons onClick={handleChange("2017")}>2017</YearButtons>
+                <YearButtons onClick={handleChange("2018")}>2018</YearButtons>
+                <YearButtons onClick={handleChange("2019")}>2019</YearButtons>
+                <YearButtons onClick={handleChange("2020")}>2020</YearButtons>
+              </YearPicker>
             </DateContainer>
           ) : (
             <CalendarModal />
@@ -472,32 +470,66 @@ const CheckboxContainer = styled.div`
 const DateContainer = styled.div`
   margin: 20px 0;
   display: flex;
-  div {
-    display: flex;
-    flex-direction: column;
-    max-width: 50%;
-    input {
-      font-family: "Helvetica", sans-serif;
-      font-size: 16px;
-      margin: 0;
-      border-radius: 2px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      ::-webkit-inner-spin-button {
-        display: none;
-      }
-      ::-webkit-clear-button {
-        display: none;
-      }
-      ::-webkit-calendar-picker-indicator {
-        opacity: 0.8;
-        cursor: pointer;
-        color: #999;
-      }
+  flex-direction: column;
+  input {
+    font-family: "Helvetica", sans-serif;
+    font-size: 14px;
+    margin: 0;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    padding: 10px 8px;
+    ::-webkit-inner-spin-button {
+      display: none;
+    }
+    ::-webkit-clear-button {
+      display: none;
+    }
+    ::-webkit-calendar-picker-indicator {
+      opacity: 0.8;
+      cursor: pointer;
+      color: #999;
     }
   }
 `;
-
+const StartEndContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const YearPicker = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5px;
+`;
+const YearButtons = styled.button`
+  padding: 5px;
+  width: 25%;
+  background-color: #47837f;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border: 0.5px solid darkgrey;
+  border-radius: 5px;
+  opacity: 0.75;
+  &:hover {
+    opacity: 1
+    cursor: pointer;
+  }
+`;
+const MonthButtons = styled.button`
+  padding: 5px;
+  width: 25%;
+  background-color: khaki;
+  color: #212121;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border: 0.5px solid darkgrey;
+  border-radius: 5px;
+  opacity: 0.75;
+  &:hover {
+    opacity: 1
+    cursor: pointer;
+  }
+`;
 const Button = styled.button`
   background: #47837f;
   width: 40%;
