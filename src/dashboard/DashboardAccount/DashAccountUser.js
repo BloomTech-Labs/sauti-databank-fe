@@ -151,6 +151,8 @@ const DashAccountUser = props => {
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
+  } else {
+    return <div>Error Fetching Account</div>;
   }
 };
 
