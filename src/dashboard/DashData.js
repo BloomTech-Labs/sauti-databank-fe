@@ -53,7 +53,7 @@ function DashHome() {
       history.location.search.length
     );
     let split1 = searchString.split("&");
-    // console.log(split1)
+
     let newFilterObject = {};
 
     for (var i in split1) {
@@ -102,9 +102,6 @@ function DashHome() {
       // initial default
       return defaultFilter;
     } else {
-      // if(history.location.search.length === 0) {
-      //   console.log("wrong way")
-      // }
       // user came to site from twitter, fb, or copy paste link
       // create url based object here
       let searchString = history.location.search.slice(
@@ -117,7 +114,7 @@ function DashHome() {
       // "?filter0=gender%2CFemale&filter1=age%2Cundefined&filter2=crossing_freq%2CMonthly&filter3=education%2CSecondary"
 
       let split1 = searchString.split("&");
-      // console.log(split1)
+
       let newFilterObject = {};
 
       for (var i in split1) {
@@ -134,9 +131,7 @@ function DashHome() {
         );
         if (split3[0] !== "undefined") {
           let optionFlags = {};
-          // what happens when the tablename is not defined?
-          // console.log("split3[0]", split3[0]);
-          // get graphLabels[tableName].labels
+
           graphLabels[`${split3[0]}`].labels.forEach(option => {
             optionFlags = {
               ...optionFlags,
@@ -164,8 +159,6 @@ function DashHome() {
 
               showOptions: i <= 2 ? filterTemplate[i].showOptions : true
             }
-            // maybe the original filter could be reconstructed using the url data(filter is read only)
-            // Redux?
           };
         } else {
           newFilterObject = {
@@ -173,8 +166,6 @@ function DashHome() {
             [i]: {
               ...filterTemplate[i],
               showOptions: i <= 2 ? filterTemplate[i].showOptions : true
-
-              // showOptions: false
             }
           };
         }
