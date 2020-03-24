@@ -7,6 +7,7 @@ import DashData from "./DashData";
 import Tools from "./Tools/Tools";
 import UsersQuery from "./Tools/UsersQuery";
 import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
+import CreateAccount from "./CreateAccount";
 import LandingPage from "./LandingPage";
 import DashLogout from "./DashLogout";
 import Login from "./Login";
@@ -72,11 +73,11 @@ function DashNav() {
           )}
         </Navigation>
       </TopBar>
-      <Route exact path="/" component={DashHome} />
+      <Route exact path="/" component={LandingPage} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={Signup} />
+      <Route exact path="/signup" component={CreateAccount} />
       <ProtectedRoute exact path="/myaccount" component={AccountHandler} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
     </>
