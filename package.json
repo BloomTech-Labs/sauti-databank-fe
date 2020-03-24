@@ -31,6 +31,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
     "react-select": "^3.0.8",
+    "recharts": "^1.8.5",
     "styled-components": "^4.4.1",
     "sweetalert": "^2.1.2"
   },
