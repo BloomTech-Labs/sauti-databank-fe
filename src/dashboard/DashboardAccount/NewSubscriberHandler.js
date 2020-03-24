@@ -9,8 +9,6 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
 
-// This component shows signed in users account information such as what plan they're on
-
 const CANCEL_USER_SUB = gql`
   mutation updateUserToFree(
     $newUpdateUserToFreeInput: newUpdateUserToFreeInput!
@@ -27,7 +25,10 @@ const CANCEL_USER_SUB = gql`
   }
 `;
 
-const DashAccountUser = props => {
+const NewSubscriberHandler = props => {
+  const planName = props.newPaypalSubscriber.response;
+  console.log(props.newPaypalSubscriber.response);
+
   const history = useHistory();
   const token = getToken();
 
@@ -125,10 +126,9 @@ const DashAccountUser = props => {
     }
   };
 
-  const Monthly = data.databankUser.paypal_plan === "Monthly Plan - $9.99";
-  const BiAnnually =
-    data.databankUser.paypal_plan === "Bi-annually Plan - $49.99";
-  const Yearly = data.databankUser.paypal_plan === "Yearly Plan - $89.99";
+  const Monthly = planName === "Monthly Plan - $9.99";
+  const BiAnnually = planName === "Bi-annually Plan - $49.99";
+  const Yearly = planName === "Yearly Plan - $89.99";
 
   if (Monthly) {
     return (
@@ -151,7 +151,9 @@ const DashAccountUser = props => {
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
+  } else {
+    return <div>Loading...</div>;
   }
 };
 
-export default DashAccountUser;
+export default NewSubscriberHandler;

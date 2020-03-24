@@ -3,7 +3,10 @@ import axios from "axios";
 import qs from "qs";
 
 export function useNewSubName(newSub) {
-  console.log(newSub, "NEWSUB??");
+  if (!newSub) {
+    console.log("XYZ is not present");
+  }
+
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 

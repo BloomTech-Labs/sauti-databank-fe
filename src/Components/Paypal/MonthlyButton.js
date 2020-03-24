@@ -70,7 +70,6 @@ export default function MonthlyButton() {
 
           const token = localStorage.getItem("token");
           const decoded = decodeToken(token);
-          console.log(decoded, "DECODED");
           decoded.subscription_id = data.subscriptionID;
           localStorage.setItem("xyz", decoded.subscription_id);
           decoded.tier = "PAID";
