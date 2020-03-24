@@ -1,9 +1,11 @@
 import axios from "axios";
 import qs from "qs";
-import { getSubscription } from "../auth/Auth";
 
-export async function getNewSubName() {
-  const newSub = getSubscription();
+export async function getNewSubName(newSub) {
+  if (!newSub) {
+    return console.log("xyz is not present in local storage");
+  }
+
   const url = "https://api.sandbox.paypal.com/v1/oauth2/token";
   const oldData = {
     grant_type: "client_credentials"

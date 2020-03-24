@@ -1,5 +1,6 @@
 import React from "react";
 import { getToken, decodeToken, getSubscription } from "../auth/Auth";
+import { getNewSubName } from "./NewSubPaypalPlan";
 import DashAccountFree from "./DashAccountFree";
 import DashAccountUser from "./DashAccountUser";
 import DashAccountAdmin from "./DashAccountAdmin";

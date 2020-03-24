@@ -4,7 +4,6 @@ import BiAnnuallyAccount from "./BiAnnuallyAccount";
 import YearlyAccount from "./YearlyAccount";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "../auth/Auth";
-import { getNewSubName } from "./NewSubPaypalPlan";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -28,7 +27,7 @@ const CANCEL_USER_SUB = gql`
   }
 `;
 
-const DashAccountUser = () => {
+const DashAccountUser = props => {
   const history = useHistory();
   const token = getToken();
 
@@ -131,25 +130,22 @@ const DashAccountUser = () => {
   const BiAnnually =
     data.databankUser.paypal_plan === "Bi-annually Plan - $49.99";
   const Yearly = data.databankUser.paypal_plan === "Yearly Plan - $89.99";
-  const newlySub = getNewSubName();
 
-  console.log(newlySub, "DASDASDASDASDASAS");
-
-  if (Monthly || Monthly === newlySub) {
+  if (Monthly) {
     return (
       <MonthlyAccount
         data={data}
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
-  } else if (BiAnnually || BiAnnually === newlySub) {
+  } else if (BiAnnually) {
     return (
       <BiAnnuallyAccount
         data={data}
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
-  } else if (Yearly || Yearly === newlySub) {
+  } else if (Yearly) {
     return (
       <YearlyAccount
         data={data}

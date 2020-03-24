@@ -146,7 +146,7 @@ const DashAccountFree = props => {
                 <div className="account-type">
                   <div className="account-header">
                     <h2>Premium Account</h2>
-                    <h1>$49.99/bi-anually</h1>
+                    <h1>$49.99/bi-annually</h1>
                   </div>
                   <div className="account-features">
                     <div className="account-features-items">
