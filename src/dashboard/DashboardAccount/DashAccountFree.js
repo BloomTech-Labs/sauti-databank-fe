@@ -1,15 +1,15 @@
 import React from "react";
-import { AccountPage } from "./styledComponents/DashAccount";
-import MonthlyButton from "../Components/Paypal/MonthlyButton";
-import BiAnnuallyButton from "../Components/Paypal/BiannuallyButton";
-import YearlyButton from "../Components/Paypal/YearlyButton";
-import UndrawOptionsSVG from "./Images/undrawOptionsSVG";
-import UndrawInvestmentSVG from "./Images/undrawInvestmentSVG";
+import { AccountPage } from "../styledComponents/DashAccount";
+import MonthlyButton from "../../Components/Paypal/MonthlyButton";
+import BiAnnuallyButton from "../../Components/Paypal/BiannuallyButton";
+import YearlyButton from "../../Components/Paypal/YearlyButton";
+import UndrawOptionsSVG from "../Images/undrawOptionsSVG";
+import UndrawInvestmentSVG from "../Images/undrawInvestmentSVG";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import { useHistory } from "react-router-dom";
-import { getToken, decodeToken, getSubscription } from "./auth/Auth";
+import { getToken, decodeToken, getSubscription } from "../auth/Auth";
 
 // This components purpose is to potentially turn free users into paid users, capture the subscription ID, and push them to /data
 

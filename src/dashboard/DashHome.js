@@ -1,4 +1,3 @@
-// display user information for the admin and other basic info for quick access
 import React from "react";
 import {
   GAActiveLogin,
@@ -7,10 +6,8 @@ import {
 } from "./GoogleAnalytics/index";
 import GraphContainer from "../GraphContainer";
 import { getToken, decodeToken } from "./auth/Auth";
-import DashAccount from "./DashAccount.js";
-
 import CreateAccount from "./CreateAccount";
-import AccountHandler from "./AccountHandler";
+import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
 import LandingPage from "./LandingPage";
 
 function DashHome() {

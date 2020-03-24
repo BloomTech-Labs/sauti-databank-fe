@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { device } from "./responsive";
-import { AutoWidthCalculator } from "ag-grid-community";
 
 export const AccountPage = styled.div`
   /* most outer div */

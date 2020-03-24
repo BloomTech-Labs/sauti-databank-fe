@@ -1,9 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { UserAccount, DivProps } from "./styledComponents/DashAccount";
-import { AutoWidthCalculator } from "ag-grid-community";
+import { UserAccount, DivProps } from "../styledComponents/DashAccount";
 
-const BiAnnuallyAccount = props => {
+const YearlyAccount = props => {
   const history = useHistory();
   const data = props.data;
   const handleSubscriptionCancellation = props.handleSubscriptionCancellation;
@@ -69,4 +68,4 @@ const BiAnnuallyAccount = props => {
   );
 };
 
-export default BiAnnuallyAccount;
+export default YearlyAccount;

@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
-import FreeAccount from "./FreeAccount";
+import React, { useEffect, useState } from "react";
 import MonthlyAccount from "./MonthlyAccount";
 import BiAnnuallyAccount from "./BiAnnuallyAccount";
 import YearlyAccount from "./YearlyAccount";
 import { useHistory } from "react-router-dom";
-import { getToken, decodeToken, getSubscription } from "./auth/Auth";
+import { getToken, decodeToken, getSubscription } from "../auth/Auth";
+import { getNewSubName } from "./NewSubPaypalPlan";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
+
 // This component shows signed in users account information such as what plan they're on
+
 const CANCEL_USER_SUB = gql`
   mutation updateUserToFree(
     $newUpdateUserToFreeInput: newUpdateUserToFreeInput!
@@ -25,9 +27,7 @@ const CANCEL_USER_SUB = gql`
     }
   }
 `;
-function formatDate(date) {
-  return new Date(date).toDateString();
-}
+
 const DashAccountUser = () => {
   const history = useHistory();
   const token = getToken();
@@ -55,6 +55,7 @@ const DashAccountUser = () => {
   if (newSub) {
     sub = newSub;
   }
+
   const GET_SUBSCRIPTION_ID = gql`
     query($userEmail: String!) {
       databankUser(input: { email: $userEmail }) {
@@ -66,14 +67,17 @@ const DashAccountUser = () => {
       }
     }
   `;
+
   const { loading: fetching, error: err, data, refetch } = useQuery(
     GET_SUBSCRIPTION_ID,
     {
       variables: { userEmail: userEmail }
     }
   );
+
   if (data) console.log("data billing time", data.databankUser);
   const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
+
   if (fetching) {
     return (
       <div className="loader-container">
@@ -87,9 +91,11 @@ const DashAccountUser = () => {
       </div>
     );
   }
+
   if (err) {
     return <h1>ERROR!</h1>;
   }
+
   const handleSubscriptionCancellation = async e => {
     // TODO: grab user's subscription_id with a query to DatabankUsers
     // newSub should be null unless the user has JUST signed up for premium through paypal.
@@ -104,7 +110,7 @@ const DashAccountUser = () => {
         }
       });
       // Refetch to get the p_next_billing_time and subscription_id
-      await refetch();
+      refetch();
       // trigger a refresh of the page in a useEffect. This is to display to the user their subscription expiration date.
       setCancelledSub(true);
       swal({
@@ -125,35 +131,32 @@ const DashAccountUser = () => {
   const BiAnnually =
     data.databankUser.paypal_plan === "Bi-annually Plan - $49.99";
   const Yearly = data.databankUser.paypal_plan === "Yearly Plan - $89.99";
+  const newlySub = getNewSubName();
 
-  if (Monthly) {
+  console.log(newlySub, "DASDASDASDASDASAS");
+
+  if (Monthly || Monthly === newlySub) {
     return (
       <MonthlyAccount
         data={data}
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
-  } else if (BiAnnually) {
+  } else if (BiAnnually || BiAnnually === newlySub) {
     return (
       <BiAnnuallyAccount
         data={data}
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
-  } else if (Yearly) {
+  } else if (Yearly || Yearly === newlySub) {
     return (
       <YearlyAccount
         data={data}
         handleSubscriptionCancellation={handleSubscriptionCancellation}
       />
     );
-  } else {
-    return (
-      <MonthlyAccount
-        data={data}
-        handleSubscriptionCancellation={handleSubscriptionCancellation}
-      />
-    );
   }
 };
+
 export default DashAccountUser;

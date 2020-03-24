@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountPage } from "./styledComponents/DashAccount";
+import { AccountPage } from "../styledComponents/DashAccount";
 // This component shows user offerings for admins
 const DashAccountAdmin = () => {
   return (

@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { UserAccount, DivProps } from "./styledComponents/DashAccount";
-import { AutoWidthCalculator } from "ag-grid-community";
+import { UserAccount, DivProps } from "../styledComponents/DashAccount";
 
 const MonthlyAccount = props => {
   const history = useHistory();

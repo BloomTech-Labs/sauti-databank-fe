@@ -6,8 +6,7 @@ import DashHome from "./DashHome";
 import DashData from "./DashData";
 import Tools from "./Tools/Tools";
 import UsersQuery from "./Tools/UsersQuery";
-import DashAccount from "./DashAccount";
-import AccountHandler from "./AccountHandler";
+import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
 import LandingPage from "./LandingPage";
 import DashLogout from "./DashLogout";
 import Login from "./Login";
@@ -44,8 +43,6 @@ function DashNav() {
     tier = tokenDecoded.tier;
   }
 
-  console.log(tier, "TIER");
-
   return (
     <>
       <TopBar>
@@ -79,7 +76,6 @@ function DashNav() {
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
-      <ProtectedRoute exact path="/myaccount" component={DashAccount} />
       <Route exact path="/signup" component={Signup} />
       <ProtectedRoute exact path="/myaccount" component={AccountHandler} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />

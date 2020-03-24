@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { UserAccount, DivProps } from "./styledComponents/DashAccount";
+import { UserAccount, DivProps } from "../styledComponents/DashAccount";
 
-const YearlyAccount = props => {
+const BiAnnuallyAccount = props => {
   const history = useHistory();
   const data = props.data;
   const handleSubscriptionCancellation = props.handleSubscriptionCancellation;
@@ -68,4 +68,4 @@ const YearlyAccount = props => {
   );
 };
 
-export default YearlyAccount;
+export default BiAnnuallyAccount;

@@ -1,5 +1,5 @@
 import React from "react";
-import { getToken, decodeToken, getSubscription } from "./auth/Auth";
+import { getToken, decodeToken, getSubscription } from "../auth/Auth";
 import DashAccountFree from "./DashAccountFree";
 import DashAccountUser from "./DashAccountUser";
 import DashAccountAdmin from "./DashAccountAdmin";

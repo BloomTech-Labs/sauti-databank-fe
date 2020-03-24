@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { UserAccount, DivProps } from "./styledComponents/DashAccount";
+import { UserAccount, DivProps } from "../styledComponents/DashAccount";
 
 const GovAccount = props => {
   const history = useHistory();
