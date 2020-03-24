@@ -296,6 +296,8 @@ export default function FilterBox(props) {
     setFilterBoxEndDate(`${year}-12-31`);
   };
 
+  // const handleChangeMonths = month = e => {}
+
   return (
     <>
       <DropdownContainer>
@@ -377,6 +379,10 @@ export default function FilterBox(props) {
                 </span>
               </StartEndContainer>
               <YearPicker>
+                <button onClick={handleChange("2017")}>3 Mo.</button>
+                <button onClick={handleChange("2017")}>6 Mo.</button>
+                <button onClick={handleChange("2017")}>9 Mo.</button>
+                <button onClick={handleChange("2017")}>12 Mo.</button>
                 <button onClick={handleChange("2017")}>2017</button>
                 <button onClick={handleChange("2018")}>2018</button>
                 <button onClick={handleChange("2019")}>2019</button>
