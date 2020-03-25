@@ -25,6 +25,8 @@ const client = new ApolloClient({
   }
 });
 
+console.log("changes for AWS");
+
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Router>
