@@ -24,7 +24,10 @@ const GraphContainer = props => {
     filterBoxStartDate,
     setFilterBoxStartDate,
     filterBoxEndDate,
-    setFilterBoxEndDate
+    setFilterBoxEndDate,
+    changeYear,
+    changeQuarter,
+    getCurrentYear
   } = useCalendar();
 
   const [hidden, setHidden] = useState(false);
@@ -54,7 +57,8 @@ const GraphContainer = props => {
           >
             <SocialMediaContainer className="social-media-container">
               <IconContainer>
-                <div>Share:</div>
+                <ShareDiv>Share:</ShareDiv>
+                <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
                 <div>
                   <SocialMediaIconsTwitter
                     class="twitter-share-button"
@@ -78,7 +82,6 @@ const GraphContainer = props => {
                     <i class="fab fa-facebook-square"></i>
                   </SocialMediaIconsFacebook>
                 </div>
-                <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
               </IconContainer>
               <FilterHideButton onClick={HideFilters}>
                 {hidden ? <p>Show Filters</p> : <p>Hide Filters</p>}
@@ -104,6 +107,9 @@ const GraphContainer = props => {
               setFilterBoxStartDate={setFilterBoxStartDate}
               filterBoxEndDate={filterBoxEndDate}
               setFilterBoxEndDate={setFilterBoxEndDate}
+              changeYear={changeYear}
+              changeQuarter={changeQuarter}
+              getCurrentYear={getCurrentYear}
             />
           </div>
         </div>
@@ -182,4 +188,8 @@ const IconContainer = styled.span`
   display: flex;
   font-size: 1.8rem;
   align-items: center;
+  // margin-left: 100px;
+`;
+const ShareDiv = styled.div`
+  margin-right: 125px;
 `;
