@@ -16,6 +16,8 @@ const Users_Query = gql`
       organization_type
       registration_date
       found_by
+      p_next_billing_time
+      paypal_plan
     }
   }
 `;
@@ -44,7 +46,6 @@ const UsersQuery = () => {
         /[a-zA-Z]{0,3}/,
         ""
       );
-      //();[:%s/^...//]
     }
   });
 

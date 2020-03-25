@@ -128,8 +128,8 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "PAYMENT",
-          field: "payment",
+          headerName: "Plan",
+          field: "paypal_plan",
           sortable: true,
           filter: true,
           width: 100,
@@ -139,8 +139,8 @@ class Tools extends Component {
           }
         },
         {
-          headerName: "STATUS",
-          field: "current",
+          headerName: "Billing Cycle",
+          field: "p_next_billing_time",
           sortable: true,
           filter: true,
           width: 100,
