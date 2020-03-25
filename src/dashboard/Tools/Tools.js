@@ -9,8 +9,6 @@ import CreateUserModal from "./CreateUserModal";
 
 import styled from "styled-components";
 
-import { AutoWidthCalculator } from "ag-grid-community";
-
 class Tools extends Component {
   constructor(props) {
     super(props);

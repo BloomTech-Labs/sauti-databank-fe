@@ -1,73 +1,120 @@
 import React from "react";
-import LandingPageChoropleth from "./LandingPageMap";
-import styled from "styled-components";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import { useHistory } from "react-router-dom";
+import { LandingPageStyles } from "./styledComponents/LandingPage";
+import Image from "./Images/AfricaImageOne.jpg";
+import GraphLine from "./Images/LineGraph";
+import SearchSVG from "./Images/Search";
+import GraphImageDiv from "./styledComponents/GraphImageDiv";
 
-const Traders_Query = gql`
-  query getTraders {
-    allTraders: tradersUsers {
-      gender
-      country_of_residence
-    }
-  }
-`;
+const LandingPage = props => {
+  const history = useHistory();
+  const handleReturn = e => {
+    e.preventDefault();
+    history.push("/data");
+  };
 
-const LandingPage = () => {
-  const { data, loading, error } = useQuery(Traders_Query);
+  const handleCreateAccount = e => {
+    e.preventDefault();
+    history.push("/signup");
+  };
 
-  if (loading) {
-    // remove an image possibly
-    return <div>loading...</div>;
-  }
+  let TopImage = Image;
 
   return (
-    <LandingPageStyles>
+    <LandingPageStyles TopImage={TopImage}>
       <div className="landing-page-row">
         <div className="landing-page-row-col-top">
-          <div className="choropleth">
-            <LandingPageChoropleth
-              data={data}
-              loading={loading}
-              error={error}
-            />
+          <div className="top-col-top">
+            <h2>Data collection and assessment</h2>
+          </div>
+          <div className="top-col-mid">
+            <h1>Examine data gathered from cross-border</h1>
+            <h1>African Traders</h1>
+          </div>
+          <div className="top-col-bot">
+            <button onClick={handleCreateAccount}>Create an account</button>
+            <button onClick={handleReturn}>Go to data</button>
           </div>
         </div>
-        <div className="landing-page-row-col-mid"></div>
-        <div className="landing-page-row-col-bot"></div>
+        <div className="landing-page-row-col-mid">
+          <div className="col-mid-image">
+            <GraphImageDiv />
+          </div>
+        </div>
+        <div className="landing-page-row-col-bot">
+          <div className="bot-col-header">
+            <h2>What we do</h2>
+          </div>
+          <div className="bot-col-disc">
+            <p>
+              Sauti Databank is an organization that collects data from
+              cross-border African traders, bringing reliable information of
+              researchers and government officials
+            </p>
+          </div>
+        </div>
+        <div className="landing-page-row-col-bot-two">
+          <div className="bot-two-row">
+            <div className="bot-two-col">
+              <GraphLine />
+              <div className="col-header">
+                <h2>Dashboard</h2>
+              </div>
+              <div className="col-disc">
+                <p>Explore the data with our interactive dashboard.</p>
+              </div>
+              <div className="col-learn-more">
+                <button>Learn More</button>
+              </div>
+            </div>
+            <div className="bot-two-col">
+              <GraphLine />
+              <div className="col-header">
+                <h2>Data</h2>
+              </div>
+              <div className="col-disc">
+                <p> Download political violence and protest data.</p>
+              </div>
+              <div className="col-learn-more">
+                <button>Learn More</button>
+              </div>
+            </div>
+            <div className="bot-two-col">
+              <SearchSVG />
+              <div className="col-header">
+                <h2>Analysis</h2>
+              </div>
+              <div className="col-disc">
+                <p>Real ACLED reports and infographics.</p>
+              </div>
+              <div className="col-learn-more">
+                <button>Learn More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="landing-page-row-col-bot-footer">
+          <div className="col-bot-footer-row">
+            <div className="col-bot-footer-row-col-top">
+              <p>
+                Sauti Databank is a non-profit organization working to improve
+                the lives of African people trading their goods accross the
+                borders in Kenyan, Ugandan, and Rwandan. We are excited to work
+                with researchers and government officials alike to improve laws
+                and make the lives of traders better.
+              </p>
+            </div>
+            <div className="col-bot-footer-row-col-bot">
+              <div className="footer-col-bot-footer-list">
+                <span>Privacy Policy</span>
+                <span>Terms of Services</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </LandingPageStyles>
   );
 };
-
-const LandingPageStyles = styled.div`
-  height: calc(100vh - 7rem);
-
-  .landing-page-row {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-    .landing-page-row-col-top {
-      height: 50%;
-      background: yellow;
-
-      .choropleth {
-        height: 100%;
-        width: 100%;
-      }
-    }
-
-    .landing-page-row-col-mid {
-      height: 30%;
-      background: green;
-    }
-
-    .landing-page-row-col-bot {
-      height: 20%;
-      background: yellow;
-    }
-  }
-`;
 
 export default LandingPage;
