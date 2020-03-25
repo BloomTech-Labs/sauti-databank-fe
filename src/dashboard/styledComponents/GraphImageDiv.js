@@ -9,7 +9,7 @@ const GraphImageDiv = () => {
 };
 
 const GraphImageStyles = styled.div`
-  border-top: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
   height: 100%;
   width: 100%;
 
