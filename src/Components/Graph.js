@@ -151,6 +151,7 @@ const Graph = props => {
     //
     if (Object.keys(filters).length >= 2) {
       data = data.map(obj => {
+        // calculate the additional filters
         let additionalCategories = {};
         Object.keys(filters)
           .filter(filterId => filterId >= 2)
@@ -165,11 +166,12 @@ const Graph = props => {
           });
 
         return {
-          ...obj,
-          percentage: parseInt(
-            (obj[obj[filters[0].selectedTableColumnName]] / sampleSize) * 100
-          ),
-          ...additionalCategories
+          ...obj, // all minus additional filters
+          percentage: (
+            (obj[obj[filters[0].selectedTableColumnName]] / sampleSize) *
+            100
+          ).toFixed(2),
+          ...additionalCategories // additional filters
         };
       });
     }
