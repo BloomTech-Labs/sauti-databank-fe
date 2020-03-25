@@ -98,7 +98,7 @@ const GetData = props => {
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
-  // console.log(data)
+  console.log("data", data);
   if (loading) {
     return (
       <div className="loader-container">
@@ -140,7 +140,7 @@ const GetData = props => {
       </div>
     );
   }
-  // console.log("chartdata_____-----", chartData);
+  console.log("chartdata_____-----", chartData);
   const makeFilterList = () => {
     console.log("makeFilterList WAS CALLED");
     // console.log("filtered list", Object.keys(filters)

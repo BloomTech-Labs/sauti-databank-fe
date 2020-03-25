@@ -41,8 +41,8 @@ const Graph = props => {
 
   // const [csvHeaders, setCsvHeaders] = useState([]);
   // const [csvFormattedData, setCsvFormattedData] = useState([]);
-
   const [csvDownload, setCsvDownload] = useState([]);
+  // console.log("add other", setupOther(data, csvData))
   // useEffect(() => {
   //   if (props.filteredData) {
   //     props.setCheckboxOptions(props.filteredData);
@@ -108,7 +108,11 @@ const Graph = props => {
         // instead of the subsample keys we put in the total count
         {
           id: `${66}`, // random value
-          displayName: `total count`
+          displayName: `Total Count`
+        },
+        {
+          id: `${67}`, // random value
+          displayName: `% of Sample Size`
         },
 
         ...Object.keys(filters)
@@ -160,12 +164,19 @@ const Graph = props => {
             };
           });
 
-        return { ...obj, ...additionalCategories };
+        return {
+          ...obj,
+          percentage: parseInt(
+            (obj[obj[filters[0].selectedTableColumnName]] / sampleSize) * 100
+          ),
+          ...additionalCategories
+        };
       });
     }
     // dummy sample size
     // data = [...data, {sampleSize: 30}]
     // we already have the data here
+    // add a percentage column here using sampleSize
     console.log(data);
     console.log(makeValues(data));
     console.log(makeHeaders(data));
