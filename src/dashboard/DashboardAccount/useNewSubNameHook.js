@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import qs from "qs";
+dotenv.config();
 
 export function useNewSubName(newSub) {
   if (!newSub) {
@@ -22,6 +24,9 @@ export function useNewSubName(newSub) {
           username: `${process.env.PAYPAL_AUTH_USERNAME}`,
           password: `${process.env.PAYPAL_AUTH_SECRET}`
         };
+
+        // PAYPAL_AUTH_USERNAME = AeMzQ9LYW7d4_DAzYdeegCYOCdsIDuI0nWfno1vGi4tsKp5VBQq893hDSU6FIn47md30k4jC5QDq33xM;
+        // PAYPAL_AUTH_SECRET = ECeUwnnTkSqjK6NIycSLp8joMLgOpof1rQdA4W8NvHqgKQNuNqwgySgGEJr_fq_JFHtzM6Je9Kj8fClA;
 
         const options = {
           method: "post",

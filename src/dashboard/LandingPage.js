@@ -201,7 +201,7 @@ const LandingPageStyles = styled.div`
         button {
           margin: 2vw;
           height: 2vw;
-          width: 10vw;
+          width: 9vw;
           font-weight: 800;
           font-size: 1.6rem;
           color: #ffffff;
