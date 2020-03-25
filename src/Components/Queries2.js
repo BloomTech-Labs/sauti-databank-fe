@@ -22,6 +22,44 @@ const GetData = props => {
     setFilterBoxEndDate
   } = props;
 
+  const filterIsSelected = (filter, i) => {
+    // if the filter is the subsample or the data series
+    // when the category name is selected
+    if (i <= 1) {
+      return filter.selectedCategory.length > 0;
+    } else {
+      // when the category name is selected and an option is selected
+      return (
+        filter.selectedCategory.length > 0 &&
+        // 1 option is selected
+        Object.keys(filter.selectableOptions).filter(
+          selectableOption => filter.selectableOptions[selectableOption]
+        ).length === 1
+      );
+    }
+  };
+  const onlyFirstThreeFiltersAreSelected = filters => {
+    console.log("in onlyFirstThreeFiltersAreSelected");
+    return (
+      Object.keys(filters)
+        .filter(filterId => filterId < 3) // keep 0, 1, and 2
+        .map(filterId => filterIsSelected(filters[filterId], filterId))
+        .filter(result => result === true).length === 3
+    );
+  };
+
+  const isSessions = filters => {
+    console.log("in isSessions");
+
+    // if at least 1 table says "Sessions" we use the sessions table
+    return (
+      Object.keys(filters).filter(
+        filterId => filters[filterId].selectedTable === "Sessions"
+      ).length > 0
+    );
+  };
+  // if (only first 3 filters are selected) and (none of them are Sessions)
+
   console.log("filters", filters);
   // if all tables say users
   // go to users
@@ -42,7 +80,13 @@ const GetData = props => {
   //   })
   //   return count === arrayOfTableNames.length
   // }
-
+  // if only first 3 filters are selected and none of them are Sessions
+  // do tradersUsers query
+  if (onlyFirstThreeFiltersAreSelected(filters) && !isSessions(filters)) {
+    // only use tradersUsers
+    console.log("ONLY USE TRADERSUSERS");
+  }
+  // if you are a free person you can only (use the first 3 filters)
   if (
     filters[0].selectedTable === "Users" &&
     filters[1].selectedTable === "Users" &&

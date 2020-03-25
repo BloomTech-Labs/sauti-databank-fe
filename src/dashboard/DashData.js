@@ -71,6 +71,16 @@ function DashHome() {
     }
     // if all these say undefined then we have a failed
   };
+
+  const convertOptionUrl = option => {
+    if (option.search(/\%2F/) > -1) {
+      return option.replace(/\%2F/g, "/");
+    } else if (option.search(/\+/) > -1) {
+      return option.replace(/\+/g, " ");
+    } else {
+      return option;
+    }
+  };
   const setupFilter = history => {
     // no media link
     console.log(history.location.search.length);
@@ -130,7 +140,7 @@ function DashHome() {
           "table name",
           split3[0],
           "option",
-          split3[1]
+          convertOptionUrl(split3[1])
         );
         if (split3[0] !== "undefined") {
           let optionFlags = {};
@@ -154,9 +164,9 @@ function DashHome() {
                 FilterBoxOptions.tableNamesToCategoryName[split3[0]],
               selectedTableColumnName: split3[0],
               selectableOptions:
-                split3[1] === "undefined"
+                convertOptionUrl(split3[1]) === "undefined"
                   ? { ...optionFlags }
-                  : { ...optionFlags, [split3[1]]: true },
+                  : { ...optionFlags, [convertOptionUrl(split3[1])]: true },
               selectedTable:
                 FilterBoxOptions.default[
                   FilterBoxOptions.tableNamesToCategoryName[split3[0]]
