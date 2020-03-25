@@ -54,7 +54,7 @@ export default function FilterBox(props) {
       graphLabels
     } = props;
 
-    console.log(i);
+    // console.log(i);
     // styles for the react select component
     const groupStyles = {
       display: "flex",
@@ -187,7 +187,7 @@ export default function FilterBox(props) {
     const RenderCheckContainer = props => {
       // do all conditional renderings using if statements for now
       let { i, filters, graphLabels } = props;
-      console.log("RenderCheckContainer", i, filters[i].showOptions);
+      // console.log("RenderCheckContainer", i, filters[i].showOptions);
 
       const showOptions = (i, filters, graphLabels) => {
         // if we show we show all
@@ -244,7 +244,7 @@ export default function FilterBox(props) {
       // for 3rd filter down
       // you will be selecting things that don't change the graph except for the sample size
       // make the default be showing
-      console.log("show options", i, filters[i].showOptions);
+      // console.log("show options", i, filters[i].showOptions);
       if (i !== String(1)) {
         if (graphLabels[`${filters[i].selectedTableColumnName}`]) {
           return (
@@ -305,7 +305,7 @@ export default function FilterBox(props) {
             components={{ Control: ControlComponent }}
             // isSearchable
             onChange={e => {
-              console.log(e.label, filters[i]);
+              // console.log(e.label, filters[i]);
               setUpdateUrlFlag(!updateUrlFlag);
               let optionFlags = {};
               graphLabels[
@@ -415,7 +415,7 @@ export default function FilterBox(props) {
   const [setup, setSetup] = useState(colourOptions[0]);
   const [loading, setLoading] = useState(false);
 
-  console.log("filters", filters);
+  // console.log("filters", filters);
   // let checkboxes = {};
   // Object.keys(filters).forEach(filterId => {
   //   urlSearchParams = {
@@ -459,9 +459,9 @@ export default function FilterBox(props) {
   let ourSearch = useHistory().location.search;
   // should not care about initial setup
   useEffect(() => {
-    console.log("LOOK AT ME!!!!!!!");
+    // console.log("LOOK AT ME!!!!!!!");
     // if history already has a search url then
-    console.log(urlSearchParams);
+    // console.log(urlSearchParams);
     // do we really want a search param updated
     History.push("?" + new URLSearchParams({ ...urlSearchParams }).toString());
     // it cannot update an existing url
@@ -531,31 +531,45 @@ export default function FilterBox(props) {
               // put in check for how many filters we can add
               // assume there is already a data filter selector setup(the current one)
               const currentDataFilter = Object.keys(filters).length - 1;
-              setFilters({
-                ...filters,
-                // make a flag that is only true when this button is clicked on
-                // put the flag on the last additional filter known to the user
-                [currentDataFilter]: {
-                  ...filters[currentDataFilter],
-                  // set to true only if selectableOptions has a selected item
-                  // (the only time optionHasBeenSelected will be true)
-                  showOptions: false
-                  // optionHasBeenSelected: Object.keys(filters[currentDataFilter].selectableOptions).filter(selectableOption => {
-                  //   return filters[currentDataFilter].selectableOptions[selectableOption] === true
-                  // }).length > 0
-                },
-                [Object.keys(filters).length]: {
-                  nameOfFilter: "Data Filter",
-                  selectedCategory: "",
-                  // selectedOption: undefined,
-                  // avaliableOptions: [],
-                  selectableOptions: {},
-                  selectedTable: "",
-                  selectedTableColumnName: "",
-                  showOptions: true
-                  // optionHasBeenSelected: false
-                }
-              });
+
+              if (tier === "FREE" && Object.keys(filters).length >= 3) {
+                // make them pay first
+                // popup a
+                // provind this doesn't work
+                //  window.alert("you have to pay")
+                // return <CalendarModal />
+              } else {
+                // they had 4 or n filters from the twitter/FB link
+                // or they just want to add another filter
+                // if(Object.keys(filters).length >= 3) {
+                //   // alert
+                // }
+                setFilters({
+                  ...filters,
+                  // make a flag that is only true when this button is clicked on
+                  // put the flag on the last additional filter known to the user
+                  [currentDataFilter]: {
+                    ...filters[currentDataFilter],
+                    // set to true only if selectableOptions has a selected item
+                    // (the only time optionHasBeenSelected will be true)
+                    showOptions: false
+                    // optionHasBeenSelected: Object.keys(filters[currentDataFilter].selectableOptions).filter(selectableOption => {
+                    //   return filters[currentDataFilter].selectableOptions[selectableOption] === true
+                    // }).length > 0
+                  },
+                  [Object.keys(filters).length]: {
+                    nameOfFilter: "Data Filter",
+                    selectedCategory: "",
+                    // selectedOption: undefined,
+                    // avaliableOptions: [],
+                    selectableOptions: {},
+                    selectedTable: "",
+                    selectedTableColumnName: "",
+                    showOptions: true
+                    // optionHasBeenSelected: false
+                  }
+                });
+              }
             }}
             style={{ cursor: loading ? "auto" : "pointer" }}
           >

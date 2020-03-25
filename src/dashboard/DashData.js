@@ -72,7 +72,10 @@ function DashHome() {
     // if all these say undefined then we have a failed
   };
 
+  // converts special characters in the option words(University/College, No formal education)
+  // to their other version(%2F -> '/', + -> ' ') as urls prefers special sequences
   const convertOptionUrl = option => {
+    // -1 means the search failed
     if (option.search(/\%2F/) > -1) {
       return option.replace(/\%2F/g, "/");
     } else if (option.search(/\+/) > -1) {
@@ -189,6 +192,7 @@ function DashHome() {
           };
         }
       }
+
       return newFilterObject;
     }
   };

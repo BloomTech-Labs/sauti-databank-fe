@@ -38,18 +38,28 @@ const GetData = props => {
       );
     }
   };
-  const onlyFirstThreeFiltersAreSelected = filters => {
-    console.log("in onlyFirstThreeFiltersAreSelected");
+  const firstThreeFilters = filterIds => {
     return (
-      Object.keys(filters)
-        .filter(filterId => filterId < 3) // keep 0, 1, and 2
+      filterIds.length === 3 &&
+      filterIds[0] == 0 && filterIds[1] == 1 && filterIds[2] == 2
+    );
+  };
+  const onlyFirstThreeFiltersAreSelected = filters => {
+    // console.log("in onlyFirstThreeFiltersAreSelected");
+
+    const filterIds = Object.keys(filters);
+    return (
+      // we only have the first 3 filters
+      firstThreeFilters(filterIds) &&
+      // the filters we have are selected
+      filterIds
         .map(filterId => filterIsSelected(filters[filterId], filterId))
         .filter(result => result === true).length === 3
     );
   };
 
   const isSessions = filters => {
-    console.log("in isSessions");
+    // console.log("in isSessions");
 
     // if at least 1 table says "Sessions" we use the sessions table
     return (
@@ -82,18 +92,14 @@ const GetData = props => {
   // }
   // if only first 3 filters are selected and none of them are Sessions
   // do tradersUsers query
-  if (onlyFirstThreeFiltersAreSelected(filters) && !isSessions(filters)) {
-    // only use tradersUsers
-    console.log("ONLY USE TRADERSUSERS");
-  }
+  // if (onlyFirstThreeFiltersAreSelected(filters) && !isSessions(filters)) {
+  //   // only use tradersUsers
+  //   console.log("ONLY USE TRADERSUSERS");
+  // }
   // if you are a free person you can only (use the first 3 filters)
-  if (
-    filters[0].selectedTable === "Users" &&
-    filters[1].selectedTable === "Users" &&
-    filters[2].selectedTable === ""
-  ) {
+  if (!isSessions(filters)) {
     queryType = "tradersUsers";
-    console.log("just users");
+    console.log("Just Users");
     console.log(filters[0].selectedTable);
     console.log(filters[1].selectedTable);
     console.log(filters[2].selectedTable);
@@ -111,7 +117,7 @@ const GetData = props => {
       
       `;
   } else {
-    console.log("query");
+    console.log("Sessions Table Search");
     thisQuery = {};
     Object.keys(filters).forEach(filterId => {
       thisQuery = {
