@@ -19,9 +19,11 @@ export function useNewSubName(newSub) {
           grant_type: "client_credentials"
         };
         const auth = {
-          username: `${process.env.PAYPAL_AUTH_USERNAME}`,
-          password: `${process.env.PAYPAL_AUTH_SECRET}`
+          username: `${process.env.REACT_APP_PAYPAL_AUTH_USERNAME}`,
+          password: `${process.env.REACT_APP_PAYPAL_AUTH_SECRET}`
         };
+
+        console.log(process.env.REACT_APP_PAYPAL_AUTH_SECRET, "PROCESS ENV");
 
         const options = {
           method: "post",

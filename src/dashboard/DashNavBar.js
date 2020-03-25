@@ -2,15 +2,13 @@ import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 import { NavLink, Route, withRouter } from "react-router-dom";
 import { HistoryListen, PageView } from "./GoogleAnalytics/index";
-import DashHome from "./DashHome";
 import DashData from "./DashData";
-import Tools from "./Tools/Tools";
 import UsersQuery from "./Tools/UsersQuery";
 import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
+import CreateAccount from "./CreateAccount";
 import LandingPage from "./LandingPage";
 import DashLogout from "./DashLogout";
 import Login from "./Login";
-import Signup from "./DashSignup";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { getToken, decodeToken } from "./auth/Auth";
 
@@ -60,8 +58,9 @@ function DashNav() {
           </ReactGA.OutboundLink>
         </SautiLogo>
         <Navigation>
-          {!SignedIn && <Links to="/">HOME</Links>}
-          {SignedIn && <Links to="/">ACCOUNT</Links>}
+          {!SignedIn && <Links to="/login">LOGIN</Links>}
+          {(!SignedIn || SignedIn) && <Links to="/">HOME</Links>}
+          {SignedIn && <Links to="/myaccount">ACCOUNT</Links>}
           <Links to="/data">DATA</Links>
           {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
           {SignedIn && <Links to="/logout">LOGOUT</Links>}
@@ -72,11 +71,11 @@ function DashNav() {
           )}
         </Navigation>
       </TopBar>
-      <Route exact path="/" component={DashHome} />
+      <Route exact path="/" component={LandingPage} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={Signup} />
+      <Route exact path="/signup" component={CreateAccount} />
       <ProtectedRoute exact path="/myaccount" component={AccountHandler} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
     </>

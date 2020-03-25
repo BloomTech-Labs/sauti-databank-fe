@@ -36,7 +36,7 @@ export default function DownloadModal() {
 
   return (
     <div>
-      <DownloadText onClick={handleOpen}>Download⯆</DownloadText>
+      <DownloadText onClick={handleOpen}>Download</DownloadText>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -58,12 +58,18 @@ export default function DownloadModal() {
 }
 
 const DownloadText = styled.p`
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   opacity: 0.8;
-  margin-top: 4px;
-  margin-left: 2px;
   width: 100px;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 0;
+  background-color: #212121b9;
+  color: white;
+  font-weight: 500;
+  text-align: center;
   &:hover {
+    background-color: #212121d3;
     cursor: pointer;
     opacity: 1;
   }

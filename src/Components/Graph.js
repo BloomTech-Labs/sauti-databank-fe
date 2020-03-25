@@ -8,25 +8,8 @@ import styled from "styled-components";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
 const Graph = props => {
-  /*
-            additionalFilter={filters[2].selectedCategory}(done)
-
-          selectedCheckbox={
-            {[filters[2].selectedCategory]: getSelectedOption(filters, 2)}
-          }(done)
-
-          crossFilter={filters[1].selectedCategory}(done)
-
-          index={filters[0].selectedTableColumnName}(done)
-
-          label={filters[0].selectedCategory}(done)
-
-          checkboxOptions={getAvaliableOptions(filters, 2)}
-
-  */
   let { data, csvData, filters, keys, groupMode, sampleSize } = props;
   console.log("loading graph", props);
-  // const tier = getTier();
   const token = getToken();
   let tier;
   if (token) {
@@ -39,59 +22,7 @@ const Graph = props => {
     sub = newSub;
   }
 
-  // const [csvHeaders, setCsvHeaders] = useState([]);
-  // const [csvFormattedData, setCsvFormattedData] = useState([]);
-
   const [csvDownload, setCsvDownload] = useState([]);
-  // useEffect(() => {
-  //   if (props.filteredData) {
-  //     props.setCheckboxOptions(props.filteredData);
-  //   }
-  // }, []);
-
-  //Gets headers for CSV.
-  // let headers = data => {
-  //   let allHeaders = [];
-  //   //no crossfilter
-  //   if (!filters[1].selectedCategory) {
-  //     allHeaders = [filters[0].selectedTableColumnName];
-  //     allHeaders.push({
-  //       id: `${sampleSize}`,
-  //       displayName: `Sample Size: ${sampleSize}`
-  //     });
-  //     // finish this
-  //     // allHeaders.push({ id: `I am here` });
-  //   } else {
-  //     // at this case now
-  //     allHeaders = [
-  //       {
-  //         id: `${filters[0].selectedTableColumnName}`,
-  //         displayName: `${filters[0].selectedTableColumnName}`
-  //       },
-  //       ...keys,
-  //       { id: `${filters[2].selectedCategory}` },
-  //       // the rest of them should go here
-  //       {
-  //         id: `${sampleSize}`,
-  //         displayName: `Sample Size: ${sampleSize}`
-  //       },
-  //       {
-  //         id: `${sampleSize}`,
-  //         displayName: `Sample Size: ${sampleSize}`
-  //       },
-  //       {
-  //         id: `${sampleSize}`,
-  //         displayName: `Sample Size: ${sampleSize}`
-  //       },
-  //       {
-  //         id: `${sampleSize}`,
-  //         displayName: `Sample Size: ${sampleSize}`
-  //       }
-  //       // { id: `I am here` }
-  //     ];
-  //   }
-  //   return allHeaders;
-  // };
 
   let makeValues = data => {
     return data.map(obj => {
@@ -137,14 +68,7 @@ const Graph = props => {
     }
   };
   let csvFormater = data => {
-    // data is cropped before this function is called
     console.log("csvFormater", data, keys);
-    // make sure all the options are selected
-    //if there's additionalFilter
-    // we need to put on all the additional filters as columns in the download
-    // additionalFilter filters[2].selectedCategory
-    // if we have any additional filters setup then run this
-    //
     if (Object.keys(filters).length >= 2) {
       data = data.map(obj => {
         let additionalCategories = {};
@@ -163,59 +87,9 @@ const Graph = props => {
         return { ...obj, ...additionalCategories };
       });
     }
-    // dummy sample size
-    // data = [...data, {sampleSize: 30}]
-    // we already have the data here
-    console.log(data);
-    console.log(makeValues(data));
-    console.log(makeHeaders(data));
-
     return data;
-    // return data.map(obj => {
-    //   return Object.values(obj);
-    // });
   };
-  /*
 
-values
-0: (6) ["Cereals - Maize", "9", "5", "4", "10", "10-20"]
-1: (6) ["Beans", "7", "5", "6", "3", "10-20"]
-2: (6) ["Fruits", "3", "0", "1", "0", "10-20"]
-3: (6) ["Cereals - Rice", "2", "0", "2", "0", "10-20"]
-4: (6) ["Animal Products", "2", "0", "1", "1", "10-20"]
-5: (6) ["Vegetables", "1", "1", "0", "0", "10-20"]
-6: (6) ["Cereals - Maize", "9", "5", "4", "10", "10-20"]
-7: (6) ["Cereals - Maize", "9", "5", "4", "10", "10-20"]
-8: (6) ["Cereals - Maize", "9", "5", "4", "10", "10-20"]
-9: (6) ["Beans", "7", "5", "6", "3", "10-20"]
-10: (6) ["Beans", "7", "5", "6", "3", "10-20"]
-11: (6) ["Beans", "7", "5", "6", "3", "10-20"]
-12: (6) ["Fruits", "3", "0", "1", "0", "10-20"]
-the values from each object
-
-keys
-0: {id: "commoditycat", displayName: "commoditycat"}
-1: "Never"
-2: "Daily"
-3: "Weekly"
-4: "Monthly"
-5: {id: "Age"}
-6: {id: "63", displayName: "Sample Size: 63"}
-7: {id: "63", displayName: "Sample Size: 63"}
-8: {id: "63", displayName: "Sample Size: 63"}
-9: {id: "63", displayName: "Sample Size: 63"}
-
-case !filters[1].selectedCategory
-for filter 0
-  1 object
-for filter 1
-  the options
-
-for filters 2 to n
-  1 object
-
-
-*/
   let fileName = "";
   fileName = `${filters[0].selectedTableColumnName &&
     filters[0].selectedTableColumnName}${filters[1].selectedCategory &&
@@ -229,20 +103,8 @@ for filters 2 to n
   let track = Event(fileName, "Downloaded Excel");
 
   useEffect(() => {
-    // setCsvFormattedData(csvFormater(csvData));
-    // setCsvHeaders(headers(csvData));
     setCsvDownload(csvFormater(csvData));
   }, [csvData]);
-  // console.log("data for download", csvFormattedData, csvHeaders)
-  // console.log("data for download", Object.values(csvDownload), [...Object.keys(csvDownload),
-  // console.log(makeValues(data))
-  // console.log(makeHeaders(data))
-
-  //   {
-  //   id: `${sampleSize}`,
-  //   displayName: `Sample Size: ${sampleSize}`
-  //   }
-  // ])
 
   return (
     <>
@@ -264,7 +126,7 @@ for filters 2 to n
             filename={fileName}
             suffix={`${new Date().toISOString()}`}
           >
-            <DownloadText className="csv-download">Download ⯆</DownloadText>
+            <DownloadText className="csv-download">Download</DownloadText>
           </CsvDownloader>
         ) : (
           <>
@@ -357,12 +219,18 @@ for filters 2 to n
 export default Graph;
 
 const DownloadText = styled.p`
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   opacity: 0.8;
-  margin-top: 4px;
-  margin-left: 2px;
   width: 100px;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 0;
+  background-color: #212121b9;
+  color: white;
+  font-weight: 500;
+  text-align: center;
   &:hover {
+    background-color: #212121d3;
     cursor: pointer;
     opacity: 1;
   }
