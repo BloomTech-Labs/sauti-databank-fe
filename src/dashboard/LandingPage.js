@@ -1,22 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 import Image from "./Images/AfricaImageOne.jpg";
-import GraphImage from "./Images/GraphImage.png";
 import GraphLine from "./Images/LineGraph";
 import SearchSVG from "./Images/Search";
 import GraphImageDiv from "./styledComponents/GraphImageDiv";
-
-// const Traders_Query = gql`
-//   query getTraders {
-//     allTraders: tradersUsers {
-//       gender
-//       country_of_residence
-//     }
-//   }
-// `;
 
 const LandingPage = props => {
   const history = useHistory();
@@ -31,13 +19,6 @@ const LandingPage = props => {
   };
 
   let TopImage = Image;
-
-  // const { data, loading, error } = useQuery(Traders_Query);
-
-  // if (loading) {
-  //   // remove an image possibly
-  //   return <div>loading...</div>;
-  // }
 
   return (
     <LandingPageStyles TopImage={TopImage}>
