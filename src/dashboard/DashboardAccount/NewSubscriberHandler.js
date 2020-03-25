@@ -156,7 +156,17 @@ const NewSubscriberHandler = props => {
       />
     );
   } else {
-    return <div>Loading...</div>;
+    return (
+      <div className="loader-container">
+        <Loader
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={12000}
+        />
+      </div>
+    );
   }
 };
 

@@ -102,7 +102,7 @@ export default function SignInSide(props) {
           <TitleContainer>
             <UnusedTitle component="h1" variant="h5">
               <FormTitle>
-                <UnusedTitleLink to="/">Sign Up</UnusedTitleLink>
+                <UnusedTitleLink to="/signup">Sign Up</UnusedTitleLink>
               </FormTitle>
             </UnusedTitle>
             <CurrentTitle component="h1" variant="h5">

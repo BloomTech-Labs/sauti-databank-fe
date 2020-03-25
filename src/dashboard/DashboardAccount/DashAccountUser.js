@@ -152,12 +152,7 @@ const DashAccountUser = props => {
       />
     );
   } else {
-    return (
-      <YearlyAccount
-        data={data}
-        handleSubscriptionCancellation={handleSubscriptionCancellation}
-      />
-    );
+    return <div>Error Fetching Account</div>;
   }
 };
 
