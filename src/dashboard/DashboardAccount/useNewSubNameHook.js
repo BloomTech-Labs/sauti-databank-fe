@@ -1,8 +1,6 @@
-import dotenv from "dotenv";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import qs from "qs";
-dotenv.config();
 
 export function useNewSubName(newSub) {
   if (!newSub) {
@@ -21,8 +19,8 @@ export function useNewSubName(newSub) {
           grant_type: "client_credentials"
         };
         const auth = {
-          username: `${process.env.PAYPAL_AUTH_USERNAME}`,
-          password: `${process.env.PAYPAL_AUTH_SECRET}`
+          username: `${process.env.REACT_APP_PAYPAL_AUTH_USERNAME}`,
+          password: `${process.env.REACT_APP_PAYPAL_AUTH_SECRET}`
         };
 
         // PAYPAL_AUTH_USERNAME = AeMzQ9LYW7d4_DAzYdeegCYOCdsIDuI0nWfno1vGi4tsKp5VBQq893hDSU6FIn47md30k4jC5QDq33xM;
