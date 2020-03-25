@@ -53,7 +53,7 @@ function DashHome() {
       history.location.search.length
     );
     let split1 = searchString.split("&");
-    // console.log(split1)
+
     let newFilterObject = {};
 
     for (var i in split1) {
@@ -70,6 +70,19 @@ function DashHome() {
       );
     }
     // if all these say undefined then we have a failed
+  };
+
+  // converts special characters in the option words(University/College, No formal education)
+  // to their other version(%2F -> '/', + -> ' ') as urls prefers special sequences
+  const convertOptionUrl = option => {
+    // -1 means the search failed
+    if (option.search(/\%2F/) > -1) {
+      return option.replace(/\%2F/g, "/");
+    } else if (option.search(/\+/) > -1) {
+      return option.replace(/\+/g, " ");
+    } else {
+      return option;
+    }
   };
   const setupFilter = history => {
     // no media link
@@ -102,9 +115,6 @@ function DashHome() {
       // initial default
       return defaultFilter;
     } else {
-      // if(history.location.search.length === 0) {
-      //   console.log("wrong way")
-      // }
       // user came to site from twitter, fb, or copy paste link
       // create url based object here
       let searchString = history.location.search.slice(
@@ -117,7 +127,7 @@ function DashHome() {
       // "?filter0=gender%2CFemale&filter1=age%2Cundefined&filter2=crossing_freq%2CMonthly&filter3=education%2CSecondary"
 
       let split1 = searchString.split("&");
-      // console.log(split1)
+
       let newFilterObject = {};
 
       for (var i in split1) {
@@ -130,13 +140,11 @@ function DashHome() {
           "table name",
           split3[0],
           "option",
-          split3[1]
+          convertOptionUrl(split3[1])
         );
         if (split3[0] !== "undefined") {
           let optionFlags = {};
-          // what happens when the tablename is not defined?
-          // console.log("split3[0]", split3[0]);
-          // get graphLabels[tableName].labels
+
           graphLabels[`${split3[0]}`].labels.forEach(option => {
             optionFlags = {
               ...optionFlags,
@@ -154,9 +162,9 @@ function DashHome() {
                 FilterBoxOptions.tableNamesToCategoryName[split3[0]],
               selectedTableColumnName: split3[0],
               selectableOptions:
-                split3[1] === "undefined"
+                convertOptionUrl(split3[1]) === "undefined"
                   ? { ...optionFlags }
-                  : { ...optionFlags, [split3[1]]: true },
+                  : { ...optionFlags, [convertOptionUrl(split3[1])]: true },
               selectedTable:
                 FilterBoxOptions.default[
                   FilterBoxOptions.tableNamesToCategoryName[split3[0]]
@@ -164,8 +172,6 @@ function DashHome() {
 
               showOptions: i <= 2 ? filterTemplate[i].showOptions : true
             }
-            // maybe the original filter could be reconstructed using the url data(filter is read only)
-            // Redux?
           };
         } else {
           newFilterObject = {
@@ -173,12 +179,11 @@ function DashHome() {
             [i]: {
               ...filterTemplate[i],
               showOptions: i <= 2 ? filterTemplate[i].showOptions : true
-
-              // showOptions: false
             }
           };
         }
       }
+
       return newFilterObject;
     }
   };
