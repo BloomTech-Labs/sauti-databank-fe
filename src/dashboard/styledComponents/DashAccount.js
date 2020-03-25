@@ -402,10 +402,10 @@ export const UserAccount = styled.div`
 
         .cancel {
           margin: 2rem;
-          height: 2vw;
-          width: 10vw;
+          height: 3rem;
+          width: 18rem;
           font-weight: bold;
-          font-size: 1.3rem;
+          font-size: 1.5rem;
           color: #ffffff;
           background: #eb5e52;
           border: 2px solid #eb5e52;
@@ -417,14 +417,48 @@ export const UserAccount = styled.div`
             cursor: pointer;
             border: 1px solid black;
           }
+
+          @media ${device.laptop} {
+                    /* 1024px - 1600px */
+                    height: 4rem;
+                    width: 18rem;
+                    -webkit-min-device-pixel-ratio: 1;
+                  }
+
+                  @media ${device.desktop} {
+                /* 1600px - 2560px */
+                height: 4rem;
+                    width: 18rem;
+                -webkit-min-device-pixel-ratio: 1;
+              }
+
+              @media ${device.desktopL} {
+                /* 2560px - 3115px */
+                font-size: 1.7rem;
+                height: 4.5rem;
+             
+                    width: 19rem;
+                -webkit-min-device-pixel-ratio: 1;
+              }
+
+              @media ${device.desktopXL} {
+                /* greater than 3115px  */
+                height: 5rem;
+                    width: 18rem;
+                -webkit-min-device-pixel-ratio: 1;
+              }
+
+            
+                }
+              }
         }
 
         .button-return {
           margin: 2rem;
-          height: 2vw;
-          width: 10vw;
+          height: 3rem;
+          width: 15rem;
           font-weight: bold;
-          font-size: 1vw;
+          font-size: 1.5rem;
           color: black;
           background: #ffffff;
           border: 2px solid black;
@@ -435,6 +469,36 @@ export const UserAccount = styled.div`
             color: #eb5e52;
             cursor: pointer;
           }
+
+          @media ${device.laptop} {
+                    /* 1024px - 1600px */
+                    height: 4rem;
+                    width: 15rem;
+                    -webkit-min-device-pixel-ratio: 1;
+                  }
+
+                  @media ${device.desktop} {
+                /* 1600px - 2560px */
+                height: 4rem;
+                width: 15rem;
+                -webkit-min-device-pixel-ratio: 1;
+              }
+
+              @media ${device.desktopL} {
+                /* 2560px - 3115px */
+                font-size: 1.7rem;
+                height: 4.5rem;
+                width: 15rem;
+                -webkit-min-device-pixel-ratio: 1;
+              }
+
+              @media ${device.desktopXL} {
+                /* greater than 3115px  */
+                font-size: 1.7rem;
+                height: 5rem;
+                width: 15rem;
+                -webkit-min-device-pixel-ratio: 1;
+              }
         }
       }
     }
