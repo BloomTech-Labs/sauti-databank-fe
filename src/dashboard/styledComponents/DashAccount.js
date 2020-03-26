@@ -522,7 +522,85 @@ export const DivProps = styled.div`
 `;
 
 export const PasswordReset = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   width: 100%;
-  background: red;
+  background: white;
+  box-sizing: border-box;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 40rem;
+    width: 45rem;
+    padding: 1rem;
+    border: 1px solid black;
+
+    .container-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 20%;
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .container-stepper {
+      display: flex;
+      flex-grow: 1;
+    }
+  }
+`;
+
+export const ResetPasswordCodeStyles = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .code-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    .code-container-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 20%;
+
+      h1 {
+        text-transform: uppercase;
+        font-size: 3rem;
+        font-weight: 900;
+      }
+    }
+    .code-container-number-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      flex-grow: 1;
+      background: blue;
+
+      .code-number-box {
+        width: 5rem;
+        height: 9rem;
+        background: grey;
+        font-size: 8rem;
+        padding: 1rem;
+      }
+    }
+  }
 `;

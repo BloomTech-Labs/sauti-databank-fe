@@ -157,8 +157,10 @@ export const LandingPageStyles = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100%;
-        width: 100%;
+        height: 90%;
+        width: 80%;
+        border-radius: 15px;
+        background: #2c2e32;
       }
     }
 
