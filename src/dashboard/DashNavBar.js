@@ -58,10 +58,10 @@ function DashNav() {
           </ReactGA.OutboundLink>
         </SautiLogo>
         <Navigation>
-          {!SignedIn && <Links to="/login">LOGIN</Links>}
           {(!SignedIn || SignedIn) && <Links to="/">HOME</Links>}
           {SignedIn && <Links to="/myaccount">ACCOUNT</Links>}
           <Links to="/data">DATA</Links>
+          {!SignedIn && <Links to="/login">LOGIN</Links>}
           {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
           {SignedIn && <Links to="/logout">LOGOUT</Links>}
           {SignedIn && (
