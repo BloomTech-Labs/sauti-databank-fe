@@ -19,6 +19,8 @@ import swal from "sweetalert";
 
 import styled from "styled-components";
 
+import beans from "../assets/images/beans.jpg";
+
 const REGISTER = gql`
   mutation registerNewUser($newUser: newRegisterInput!) {
     register(input: $newUser) {
@@ -301,8 +303,7 @@ const useStyles = makeStyles(theme => ({
     height: "100vh"
   },
   image: {
-    backgroundImage:
-      "url(https://images.unsplash.com/photo-1506682332771-2a887a4387a8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9)",
+    backgroundImage: `url(${beans})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
