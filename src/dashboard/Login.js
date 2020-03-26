@@ -123,13 +123,14 @@ export default function SignInSide(props) {
             noValidate
             onSubmit={e => handleSubmit(e, user)}
           >
+            <RequiredLabel>Email</RequiredLabel>
             <TextField
               // variant='outlined'
               margin="normal"
               fullWidth
               id="email"
               type="text"
-              label="Email"
+              // label="Email"
               name="email"
               autoComplete="email"
               value={user.email}
@@ -137,12 +138,15 @@ export default function SignInSide(props) {
               autoFocus
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
+            <br />
+            <br />
+            <RequiredLabel>Password</RequiredLabel>
             <TextField
               // variant='outlined'
               margin="normal"
               fullWidth
               name="password"
-              label="Password"
+              // label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -285,9 +289,9 @@ const UnderlineDiv = styled.div`
   margin-top: 28px;
 `;
 const LineUnderTitles = styled.hr`
-  width: 100%;
-  opacity: 0.5;
-  position: relative;
+  // width: 100%;
+  // opacity: 0.5;
+  // position: relative;
 `;
 const LineUnderCurrentTitle = styled.hr`
   background-color: black;
