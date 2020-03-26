@@ -55,38 +55,6 @@ const GraphContainer = props => {
           <ContentContainerDiv
             className={hidden ? "extend" : "chart-container"}
           >
-            <SocialMediaContainer className="social-media-container">
-              <IconContainer>
-                <ShareDiv>Share:</ShareDiv>
-                <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
-                <div>
-                  <SocialMediaIconsTwitter
-                    class="twitter-share-button"
-                    target="_blank"
-                    href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
-                  >
-                    <i class="fab fa-twitter"></i>
-                  </SocialMediaIconsTwitter>
-                </div>
-                <div
-                  class="fb-share-button"
-                  data-href="https://blissful-pare-60612f.netlify.com/data"
-                  data-layout="button"
-                  data-size="small"
-                >
-                  <SocialMediaIconsFacebook
-                    target="_blank"
-                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                    class="fb-xfbml-parse-ignore"
-                  >
-                    <i class="fab fa-facebook-square"></i>
-                  </SocialMediaIconsFacebook>
-                </div>
-              </IconContainer>
-              <FilterHideButton onClick={HideFilters}>
-                {hidden ? <p>Show Filters</p> : <p>Hide Filters</p>}
-              </FilterHideButton>
-            </SocialMediaContainer>
             <Queries
               filters={filters}
               filterBoxStartDate={filterBoxStartDate}
@@ -95,6 +63,11 @@ const GraphContainer = props => {
               setFilterBoxEndDate={setFilterBoxEndDate}
             />
           </ContentContainerDiv>
+          <SocialMediaContainer className="social-media-container">
+            <FilterHideButton onClick={HideFilters}>
+              {hidden ? <p>◀</p> : <p>▶</p>}
+            </FilterHideButton>
+          </SocialMediaContainer>
           <div
             className={
               hidden ? "dropdown-container hide" : "dropdown-container"
@@ -122,14 +95,15 @@ export default withRouter(GraphContainer);
 
 const FilterHideButton = styled.button`
   padding: 8px 5px;
-  background: #eb5e52;
+  background: slategrey;
   font-weight: 400;
   color: white;
   border-radius: 5px;
   font-size: 1.4rem;
-  width: 95px;
+  height: 95px;
   opacity: 0.75;
   border: none;
+  position: absolute;
   &: hover {
     cursor: pointer;
     opacity: 1;
@@ -139,9 +113,7 @@ const SocialMediaContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
-  border-left: 1px solid lightgrey;
+  border-right: 1px;
   padding: 5px;
   margin-bottom: 5px;
 `;
@@ -181,15 +153,12 @@ const CopyUrlButton = styled.button`
   }
 `;
 const ContentContainerDiv = styled.div`
-  border-right: 1px solid lightgrey;
+  // border-right: 1px solid lightgrey;
   margin-right: 2px;
 `;
 const IconContainer = styled.span`
   display: flex;
   font-size: 1.8rem;
   align-items: center;
-  // margin-left: 100px;
 `;
-const ShareDiv = styled.div`
-  margin-right: 125px;
-`;
+const ShareDiv = styled.div``;

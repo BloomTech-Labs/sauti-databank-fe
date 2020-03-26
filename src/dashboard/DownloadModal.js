@@ -64,12 +64,12 @@ const DownloadText = styled.p`
   border: none;
   border-radius: 5px;
   padding: 8px 0;
-  background-color: #212121b9;
+  background-color: slategrey;
   color: white;
   font-weight: 500;
   text-align: center;
   &:hover {
-    background-color: #212121d3;
+    background-color: slategrey;
     cursor: pointer;
     opacity: 1;
   }

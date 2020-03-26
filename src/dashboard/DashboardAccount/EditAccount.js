@@ -164,6 +164,7 @@ const EditModal = props => {
           className="btn btn-info"
         >
           <i class="fas fa-pencil-alt" />
+          <p>Edit Account</p>
         </IconButtons>
       </span>
       <Modal

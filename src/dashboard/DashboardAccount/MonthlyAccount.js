@@ -1,9 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { UserAccount, DivProps } from "../styledComponents/DashAccount";
+import { getToken, decodeToken } from "../auth/Auth";
+import EditAccount from "./EditAccount";
 
 const MonthlyAccount = props => {
   const history = useHistory();
+  const token = getToken();
+
+  const tokenId = decodeToken(token);
 
   let data;
   if (props.data) {
@@ -26,6 +31,7 @@ const MonthlyAccount = props => {
               <h1>Account Access</h1>
               <span>Benefits included with your account subscription</span>
             </div>
+            <EditAccount data={tokenId} />
           </div>
           <div className="container-row-col-middle col">
             <div className="account-box">
