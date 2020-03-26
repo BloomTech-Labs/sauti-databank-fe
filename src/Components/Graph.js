@@ -39,7 +39,11 @@ const Graph = props => {
         // instead of the subsample keys we put in the total count
         {
           id: `${66}`, // random value
-          displayName: `total count`
+          displayName: `Total Count`
+        },
+        {
+          id: `${67}`, // random value
+          displayName: `% of Sample Size`
         },
 
         ...Object.keys(filters)
@@ -71,6 +75,7 @@ const Graph = props => {
     console.log("csvFormater", data, keys);
     if (Object.keys(filters).length >= 2) {
       data = data.map(obj => {
+        // calculate the additional filters
         let additionalCategories = {};
         Object.keys(filters)
           .filter(filterId => filterId >= 2)
@@ -84,9 +89,21 @@ const Graph = props => {
             };
           });
 
-        return { ...obj, ...additionalCategories };
+        return {
+          ...obj, // all minus additional filters
+          percentage: (
+            (obj[obj[filters[0].selectedTableColumnName]] / sampleSize) *
+            100
+          ).toFixed(2),
+          ...additionalCategories // additional filters
+        };
       });
     }
+    // dummy sample size
+    // data = [...data, {sampleSize: 30}]
+    // we already have the data here
+    // add a percentage column here using sampleSize
+
     return data;
   };
 

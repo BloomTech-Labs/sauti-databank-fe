@@ -22,15 +22,60 @@ const GetData = props => {
     setFilterBoxEndDate
   } = props;
 
-  console.log("filters", filters);
+  const filterIsSelected = (filter, i) => {
+    // if the filter is the subsample or the data series
+    // when the category name is selected
+    if (i <= 1) {
+      return filter.selectedCategory.length > 0;
+    } else {
+      // when the category name is selected and an option is selected
+      return (
+        filter.selectedCategory.length > 0 &&
+        // 1 option is selected
+        Object.keys(filter.selectableOptions).filter(
+          selectableOption => filter.selectableOptions[selectableOption]
+        ).length === 1
+      );
+    }
+  };
+  const firstThreeFilters = filterIds => {
+    return (
+      filterIds.length === 3 &&
+      filterIds[0] == 0 &&
+      filterIds[1] == 1 &&
+      filterIds[2] == 2
+    );
+  };
+  const onlyFirstThreeFiltersAreSelected = filters => {
+    // console.log("in onlyFirstThreeFiltersAreSelected");
 
-  if (
-    filters[0].selectedTable === "Users" &&
-    filters[1].selectedTable === "Users" &&
-    filters[2].selectedTable === ""
-  ) {
+    const filterIds = Object.keys(filters);
+    return (
+      // we only have the first 3 filters
+      firstThreeFilters(filterIds) &&
+      // the filters we have are selected
+      filterIds
+        .map(filterId => filterIsSelected(filters[filterId], filterId))
+        .filter(result => result === true).length === 3
+    );
+  };
+
+  const isSessions = filters => {
+    // console.log("in isSessions");
+
+    // if at least 1 table says "Sessions" we use the sessions table
+    return (
+      Object.keys(filters).filter(
+        filterId => filters[filterId].selectedTable === "Sessions"
+      ).length > 0
+    );
+  };
+  // if (only first 3 filters are selected) and (none of them are Sessions)
+
+  console.log("filters", filters);
+  if (!isSessions(filters)) {
     queryType = "tradersUsers";
-    console.log("just users");
+    console.log("Just Users");
     console.log(filters[0].selectedTable);
     console.log(filters[1].selectedTable);
     console.log(filters[2].selectedTable);
@@ -48,7 +93,7 @@ const GetData = props => {
       
       `;
   } else {
-    console.log("query");
+    console.log("Sessions Table Search");
     thisQuery = {};
     Object.keys(filters).forEach(filterId => {
       thisQuery = {
@@ -75,6 +120,7 @@ const GetData = props => {
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
+  console.log("data", data);
   if (loading) {
     return (
       <div className="loader-container">
@@ -109,6 +155,7 @@ const GetData = props => {
       </div>
     );
   }
+  console.log("chartdata_____-----", chartData);
   const makeFilterList = () => {
     console.log("makeFilterList WAS CALLED");
     return Object.keys(filters)

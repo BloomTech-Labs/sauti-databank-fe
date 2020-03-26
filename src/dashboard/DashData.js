@@ -52,6 +52,7 @@ function DashHome() {
       history.location.search.length
     );
     let split1 = searchString.split("&");
+
     let newFilterObject = {};
 
     for (var i in split1) {
@@ -66,6 +67,19 @@ function DashHome() {
         "option",
         split3[1]
       );
+    }
+  };
+
+  // converts special characters in the option words(University/College, No formal education)
+  // to their other version(%2F -> '/', + -> ' ') as urls prefers special sequences
+  const convertOptionUrl = option => {
+    // -1 means the search failed
+    if (option.search(/\%2F/) > -1) {
+      return option.replace(/\%2F/g, "/");
+    } else if (option.search(/\+/) > -1) {
+      return option.replace(/\+/g, " ");
+    } else {
+      return option;
     }
   };
   const setupFilter = history => {
@@ -110,10 +124,11 @@ function DashHome() {
           "table name",
           split3[0],
           "option",
-          split3[1]
+          convertOptionUrl(split3[1])
         );
         if (split3[0] !== "undefined") {
           let optionFlags = {};
+
           graphLabels[`${split3[0]}`].labels.forEach(option => {
             optionFlags = {
               ...optionFlags,
@@ -129,9 +144,9 @@ function DashHome() {
                 FilterBoxOptions.tableNamesToCategoryName[split3[0]],
               selectedTableColumnName: split3[0],
               selectableOptions:
-                split3[1] === "undefined"
+                convertOptionUrl(split3[1]) === "undefined"
                   ? { ...optionFlags }
-                  : { ...optionFlags, [split3[1]]: true },
+                  : { ...optionFlags, [convertOptionUrl(split3[1])]: true },
               selectedTable:
                 FilterBoxOptions.default[
                   FilterBoxOptions.tableNamesToCategoryName[split3[0]]
@@ -150,6 +165,7 @@ function DashHome() {
           };
         }
       }
+
       return newFilterObject;
     }
   };
