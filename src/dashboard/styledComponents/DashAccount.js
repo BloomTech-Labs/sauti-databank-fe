@@ -309,7 +309,6 @@ export const UserAccount = styled.div`
       display: flex;
       flex-direction: column;
       height: 80%;
-
       width: 60vmin;
       padding: 3em;
 
@@ -391,6 +390,7 @@ export const UserAccount = styled.div`
           }
         }
       }
+
       .container-row-col-bottom {
         display: flex;
         flex-direction: column;
@@ -419,38 +419,34 @@ export const UserAccount = styled.div`
           }
 
           @media ${device.laptop} {
-                    /* 1024px - 1600px */
-                    height: 4rem;
-                    width: 18rem;
-                    -webkit-min-device-pixel-ratio: 1;
-                  }
+            /* 1024px - 1600px */
+            height: 4rem;
+            width: 18rem;
+            -webkit-min-device-pixel-ratio: 1;
+          }
 
-                  @media ${device.desktop} {
-                /* 1600px - 2560px */
-                height: 4rem;
-                    width: 18rem;
-                -webkit-min-device-pixel-ratio: 1;
-              }
+          @media ${device.desktop} {
+            /* 1600px - 2560px */
+            height: 4rem;
+            width: 18rem;
+            -webkit-min-device-pixel-ratio: 1;
+          }
 
-              @media ${device.desktopL} {
-                /* 2560px - 3115px */
-                font-size: 1.7rem;
-                height: 4.5rem;
-             
-                    width: 19rem;
-                -webkit-min-device-pixel-ratio: 1;
-              }
+          @media ${device.desktopL} {
+            /* 2560px - 3115px */
+            font-size: 1.7rem;
+            height: 4.5rem;
 
-              @media ${device.desktopXL} {
-                /* greater than 3115px  */
-                height: 5rem;
-                    width: 18rem;
-                -webkit-min-device-pixel-ratio: 1;
-              }
+            width: 19rem;
+            -webkit-min-device-pixel-ratio: 1;
+          }
 
-            
-                }
-              }
+          @media ${device.desktopXL} {
+            /* greater than 3115px  */
+            height: 5rem;
+            width: 18rem;
+            -webkit-min-device-pixel-ratio: 1;
+          }
         }
 
         .button-return {
@@ -465,40 +461,41 @@ export const UserAccount = styled.div`
           text-decoration: none;
           border-radius: 2px;
           transition: 0.5s ease;
+
           &:hover {
             color: #eb5e52;
             cursor: pointer;
           }
 
           @media ${device.laptop} {
-                    /* 1024px - 1600px */
-                    height: 4rem;
-                    width: 15rem;
-                    -webkit-min-device-pixel-ratio: 1;
-                  }
+            /* 1024px - 1600px */
+            height: 4rem;
+            width: 15rem;
+            -webkit-min-device-pixel-ratio: 1;
+          }
 
-                  @media ${device.desktop} {
-                /* 1600px - 2560px */
-                height: 4rem;
-                width: 15rem;
-                -webkit-min-device-pixel-ratio: 1;
-              }
+          @media ${device.desktop} {
+            /* 1600px - 2560px */
+            height: 4rem;
+            width: 15rem;
+            -webkit-min-device-pixel-ratio: 1;
+          }
 
-              @media ${device.desktopL} {
-                /* 2560px - 3115px */
-                font-size: 1.7rem;
-                height: 4.5rem;
-                width: 15rem;
-                -webkit-min-device-pixel-ratio: 1;
-              }
+          @media ${device.desktopL} {
+            /* 2560px - 3115px */
+            font-size: 1.7rem;
+            height: 4.5rem;
+            width: 15rem;
+            -webkit-min-device-pixel-ratio: 1;
+          }
 
-              @media ${device.desktopXL} {
-                /* greater than 3115px  */
-                font-size: 1.7rem;
-                height: 5rem;
-                width: 15rem;
-                -webkit-min-device-pixel-ratio: 1;
-              }
+          @media ${device.desktopXL} {
+            /* greater than 3115px  */
+            font-size: 1.7rem;
+            height: 5rem;
+            width: 15rem;
+            -webkit-min-device-pixel-ratio: 1;
+          }
         }
       }
     }
@@ -522,4 +519,10 @@ export const DivProps = styled.div`
     props.props.data && props.props.data.databankUser.p_next_billing_time
       ? "center"
       : "center"};
+`;
+
+export const PasswordReset = styled.div`
+  height: 100vh;
+  width: 100%;
+  background: red;
 `;
