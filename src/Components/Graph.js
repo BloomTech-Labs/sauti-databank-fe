@@ -148,7 +148,9 @@ const Graph = props => {
                   <SocialMediaIconsTwitter
                     class="twitter-share-button"
                     target="_blank"
-                    href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
+                    href={`https://twitter.com/intent/tweet?text=http://localhost:3000/data${
+                      useHistory().location.search
+                    }`}
                   >
                     <i class="fab fa-twitter"></i>
                   </SocialMediaIconsTwitter>
