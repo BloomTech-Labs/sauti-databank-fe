@@ -14,8 +14,6 @@ dotenv.config();
 //   initGA("UA-158701427-1");
 // })();
 
-console.log(process.env.REACT_APP_BACKEND_URL, "BACKEND URL");
-
 const client = new ApolloClient({
   // uri: `${process.env.REACT_APP_MARKETPLACE_URL}`,
   uri: `${process.env.REACT_APP_BACKEND_URL}`,
