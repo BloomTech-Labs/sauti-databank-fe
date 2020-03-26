@@ -94,6 +94,7 @@ const EDIT = gql`
         job_position
         country
         organization_type
+        password
       }
       ... on Error {
         message
@@ -105,7 +106,7 @@ const EDIT = gql`
 //button on AccountGrid
 const EditModal = props => {
   const [account, setAccount] = useState({});
-  //console.log(`account`, account);
+  console.log(`account`, account);
   //account id added automatically, needed to .put
   account.id = props.data.id;
 
@@ -120,6 +121,7 @@ const EditModal = props => {
   };
 
   const handleSubmit = (event, input) => {
+    console.log(input);
     event.preventDefault();
     createUser({
       variables: { editUser: input },
@@ -209,13 +211,12 @@ const EditModal = props => {
                     value={account.organization}
                     onChange={handleChange}
                   />
-                  <Labels for="jobPosition">Job Position</Labels>
+                  <Labels for="password">Password</Labels>
                   <Inputs
                     type="text"
-                    name="job_position"
-                    id="job_position"
-                    placeholder={props.data.job_position}
-                    value={account.job_position}
+                    name="password"
+                    id="password"
+                    value={account.password}
                     onChange={handleChange}
                   />
                 </ColumnDiv>

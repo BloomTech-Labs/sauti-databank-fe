@@ -12,6 +12,8 @@ import swal from "sweetalert";
 import styled from "styled-components";
 import "../index.css";
 
+import EditModal from "./Tools/EditModal";
+
 const CANCEL_USER_SUB = gql`
   mutation updateUserToFree(
     $newUpdateUserToFreeInput: newUpdateUserToFreeInput!
@@ -140,6 +142,9 @@ function DashAccount(props) {
                 <H1>Need More Data?</H1>
                 <P>Upgrade to our paid plan to access all material.</P>
               </Div>
+              <div>
+                <EditModal />
+              </div>
               <Div2>
                 <UserTypeContainerDiv>
                   <div>
@@ -181,6 +186,9 @@ function DashAccount(props) {
                 <H1>Need More Data?</H1>
                 <P>Upgrade to our paid plan to access all material.</P>
               </Div>
+              <div>
+                <EditModal />
+              </div>
               <Div2>
                 <UserTypeContainerDiv>
                   <div>
