@@ -15,7 +15,15 @@ $greyColor: #4d4f52;
     color: #47837f;
   }
 }
-
+.display-none {
+  display: none;
+}
+.dwnld-btn {
+}
+// .reset-btn {
+//   text-decoration: none;
+//   border: 2px solid grey;
+// }
 .loader-container {
   box-sizing: border-box;
   height: 600px;
@@ -25,21 +33,6 @@ $greyColor: #4d4f52;
   margin-bottom: 75;
   margin-left: 80;
 }
-
-// Button{
-//   background: #47837f;
-//   max-width: 40%;
-//   color: #fff;
-//   font-weight: 400;
-//   padding: 10px;
-//   border: none;
-//   border-radius: 2px;
-//   text-align: center;
-//   font-size: 1.5rem;
-//   :hover {
-//     cursor: pointer;
-//   }
-// }
 
 .loader {
   padding-top: 28%;
@@ -191,6 +184,16 @@ $greyColor: #4d4f52;
         justify-content: center;
         align-items: center;
       }
+    }
+  }
+  .graph-titles-container {
+    display: flex;
+    border: 0.5px solid lightgray;
+    padding: 5px 0;
+    .graph-title-diplay {
+      width: 33.33%;
+      border-right: 0.5px solid lightgray;
+      padding: 0 5px;
     }
   }
 }

@@ -16,6 +16,8 @@ const Users_Query = gql`
       organization_type
       registration_date
       found_by
+      p_next_billing_time
+      paypal_plan
     }
   }
 `;
@@ -33,43 +35,22 @@ const UsersQuery = () => {
   }
   console.log(data.allUsers);
 
-  data.allUsers.registration_date = new Date(
-    parseInt(data.allUsers.registration_date)
-  ).toDateString();
-
-  //format date
   data.allUsers.map(item => {
-    if (item.registration_date !== undefined) {
-      item.registration_date = Date(parseInt(item.registration_date)).replace(
-        /[a-zA-Z]{0,3}/,
-        ""
-      );
-      //();[:%s/^...//]
+    if (item.p_next_billing_time !== null) {
+      item.p_next_billing_time = new Date(Number(item.p_next_billing_time));
+      let newVar = item.p_next_billing_time.toDateString().slice(4, 15);
+      item.p_next_billing_time = newVar;
     }
   });
 
-  // data.allusers = data.allUsers.map(item => {
-  //   console.log("registration_date", item.registration_date);
-  //   if (item.registration_date !== undefined) {
-  //     item.registration_date = new Date(parseInt(item.registration_date));
-  //     console.log(
-  //       "item.registration_date",
-  //       item.registration_date.getFullYear()
-  //     );
-  //     return {
-  //       ...data.allUsers,
-  //       registration_date: `${item.registration_date.getFullYear()}`
-  //     };
+  data.allUsers.map(item => {
+    if (item.registration_date !== undefined) {
+      item.registration_date = new Date(Number(item.registration_date));
+      let newVar = item.registration_date.toDateString().slice(4, 15);
+      item.registration_date = newVar;
+    }
+  });
 
-  //     // .replace(
-  //     //   /[a-zA-Z]{0,3}/,
-  //     //   ""
-  //     // );
-  //     //();[:%s/^...//]
-  //   }
-  // });
-
-  //data.allUsers.registration_date =5
   return (
     <>
       <Tools allUsers={data.allUsers} />

@@ -27,7 +27,7 @@ const dataOrder = {
     ]
   },
   age: {
-    labels: ["60-70", "50-60", "40-50", "30-40", "20-30", "10-20"],
+    labels: ["10-20", "20-30", "30-40", "40-50", "50-60", "60-70"],
     structure: [
       { age: "10-20" },
       { age: "20-30" },
@@ -38,7 +38,7 @@ const dataOrder = {
     ]
   },
   country_of_residence: {
-    labels: ["RWA", "UGA", "KEN", "TZA"],
+    labels: ["KEN", "RWA", "TZA", "UGA"],
     structure: [
       { country_of_residence: "KEN" },
       { country_of_residence: "UGA" },
@@ -51,7 +51,7 @@ const dataOrder = {
     structure: [{ primary_income: "Yes" }, { primary_income: "No" }]
   },
   language: {
-    labels: ["Lukiga", "Kinyarwanda", "Luganda", "Swahili", "English"],
+    labels: ["English", "Kinyarwanda", "Luganda", "Lukiga", "Swahili"],
     structure: [
       { language: "English" },
       { language: "Swahili" },

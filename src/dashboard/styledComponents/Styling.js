@@ -28,7 +28,7 @@ export const TopBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #212121;
+  background-color: #2c2e32;
   width: 100%;
   height: 7rem;
 `;
@@ -84,15 +84,16 @@ export const Navigation = styled.div`
     color: white;
     margin-right: 40px;
     font-family: Helvetica;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
-    letter-spacing: normal;
+    letter-spacing: 1px;
 
     .email {
-      font-size: 1.3rem;
+      letter-spacing: normal;
+      font-size: 1.4rem;
       color: #eb5e52;
     }
   }
@@ -101,13 +102,13 @@ export const Links = styled(Link)`
   text-decoration: none;
   color: white;
   margin-right: 40px;
-  font-family: Helvetica;
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-family: Montserrat;
+  font-size: 1.4rem;
+  font-weight: 1000;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: normal;
+  letter-spacing: 1px;
   &:hover {
     color: #eb5e52;
   }

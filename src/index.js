@@ -15,6 +15,7 @@ dotenv.config();
 // })();
 
 const client = new ApolloClient({
+  // uri: `${process.env.REACT_APP_MARKETPLACE_URL}`,
   uri: `${process.env.REACT_APP_BACKEND_URL}`,
   // uri: "http://localhost:2500/graphql",
   onError: ({ networkError, graphQLErrors }) => {
@@ -22,6 +23,7 @@ const client = new ApolloClient({
     console.log("networkErrors", networkError);
   }
 });
+console.log("debugging");
 
 ReactDOM.render(
   <ApolloProvider client={client}>

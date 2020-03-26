@@ -23,8 +23,7 @@ export function useNewSubName(newSub) {
           password: `${process.env.REACT_APP_PAYPAL_AUTH_SECRET}`
         };
 
-        // PAYPAL_AUTH_USERNAME = AeMzQ9LYW7d4_DAzYdeegCYOCdsIDuI0nWfno1vGi4tsKp5VBQq893hDSU6FIn47md30k4jC5QDq33xM;
-        // PAYPAL_AUTH_SECRET = ECeUwnnTkSqjK6NIycSLp8joMLgOpof1rQdA4W8NvHqgKQNuNqwgySgGEJr_fq_JFHtzM6Je9Kj8fClA;
+        console.log(process.env.REACT_APP_PAYPAL_AUTH_SECRET, "PROCESS ENV");
 
         const options = {
           method: "post",
