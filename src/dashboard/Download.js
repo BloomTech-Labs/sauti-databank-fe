@@ -65,7 +65,13 @@ function Download(props) {
   const handleSubmit = async (e, input) => {
     e.preventDefault();
     props.handleClose();
-    history.push("/");
+    //if logged in push to account page
+    //if not logged in push you to signup
+    if (localStorage.getItem("token")) {
+      history.push("/myaccount");
+    } else {
+      history.push("/signup");
+    }
   };
 
   return (

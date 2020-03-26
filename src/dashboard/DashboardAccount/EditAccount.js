@@ -105,6 +105,7 @@ const EDIT = gql`
 
 //button on AccountGrid
 const EditModal = props => {
+  console.log(props);
   const [account, setAccount] = useState({});
   console.log(`account`, account);
   //account id added automatically, needed to .put
@@ -124,11 +125,9 @@ const EditModal = props => {
     console.log(input);
     event.preventDefault();
     createUser({
-      variables: { editUser: input },
-      refetchQueries: [{ query: Users_Query }]
+      variables: { editUser: input }
     });
     setOpen(false);
-    props.api.api.redrawRows();
   };
 
   if (editUser.loading) {
@@ -165,6 +164,7 @@ const EditModal = props => {
           className="btn btn-info"
         >
           <i class="fas fa-pencil-alt" />
+          <p>Edit Account</p>
         </IconButtons>
       </span>
       <Modal
@@ -191,7 +191,7 @@ const EditModal = props => {
                     placeholder={props.data.id}
                     name={props.data.id}
                     value={account.id}
-                    onChange={handleChange}
+                    // onChange={handleChange}
                   />
                   <Labels for="Email">Email</Labels>
                   <Inputs
@@ -239,25 +239,6 @@ const EditModal = props => {
                     value={account.interest}
                     onChange={handleChange}
                   />
-                  <FormControl className={classes.margin}>
-                    <Labels2 for="Tier">User Type</Labels2>
-                    <Select
-                      id="tier"
-                      name="tier"
-                      value={account.tier}
-                      onChange={handleChange}
-                      placeholder={props.data.tier}
-                      input={<Styles />}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={"FREE"}>FREE</MenuItem>
-                      <MenuItem value={"PAID"}>PAID</MenuItem>
-                      <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
-                      <MenuItem value={"GOV_ROLE"}>GOVERNMENT</MenuItem>
-                    </Select>
-                  </FormControl>
                   <FormControl className={classes.margin}>
                     <Labels2 for="Organization_type">Organization Type</Labels2>
                     <Select

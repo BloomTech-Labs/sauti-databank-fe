@@ -27,6 +27,8 @@ import InputBase from "@material-ui/core/InputBase";
 
 import styled from "styled-components";
 
+import marketfruits from "../assets/images/marketfruits.jpg";
+
 const LOGIN = gql`
   mutation registerNewUser($login: newLoginInput!) {
     login(input: $login) {
@@ -185,8 +187,7 @@ const useStyles = makeStyles(theme => ({
     height: "100vh"
   },
   image: {
-    backgroundImage:
-      "url(https://images.unsplash.com/photo-1506506637031-5e2cabd00f30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)",
+    backgroundImage: `url(${marketfruits})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
