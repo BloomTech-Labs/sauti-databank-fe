@@ -10,6 +10,7 @@ import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "../auth/Auth";
+import EditAccount from "./EditAccount";
 
 // This components purpose is to potentially turn free users into paid users, capture the subscription ID, and push them to /data
 
@@ -17,9 +18,12 @@ const DashAccountFree = props => {
   const token = getToken();
   const history = useHistory();
 
+  const tokenId = decodeToken(token);
+
   let tier;
   if (token) {
     tier = decodeToken(token);
+    console.log(`token info:`, tier);
     tier = tier.tier;
   }
   let userEmail;
@@ -91,9 +95,11 @@ const DashAccountFree = props => {
                 </span>
                 <span>Upgrade to our paid plan to access all material</span>
               </div>
+
               <div className="header-row-col">
                 <UndrawInvestmentSVG />
               </div>
+              <EditAccount data={tokenId} />
             </div>
           </div>
         </div>
@@ -185,6 +191,7 @@ const DashAccountFree = props => {
           </div>
         </div>
       </div>
+      <EditAccount data={tokenId} />
     </AccountPage>
   );
 };
