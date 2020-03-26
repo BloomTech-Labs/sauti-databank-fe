@@ -94,7 +94,7 @@ export const LandingPageStyles = styled.div`
           background: #eb5e52;
           border: 2px solid #eb5e52;
           text-decoration: none;
-          border-radius: 2px;
+          border-radius: 5px;
           transition: 0.5s ease;
           &:hover {
             color: black;
@@ -115,7 +115,7 @@ export const LandingPageStyles = styled.div`
           @media ${device.desktop} {
             /* 1600px - 2560px */
             margin: 2vw;
-            height: 3rem;
+            height: 4rem;
             width: 18rem;
             font-weight: 800;
             font-size: 1.6rem;
@@ -151,15 +151,48 @@ export const LandingPageStyles = styled.div`
       align-items: center;
       flex-direction: row;
       height: 90vh;
-      width: 100vw;
+      width: 100%;
 
       .col-mid-image {
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 80vh;
+        width: 80vw;
+        border-radius: 15px;
+        background: #2c2e32;
 
-        height: 100%;
+        @media ${device.desktop} and (orientation: portrait) {
+          /* 1600px - 2560px */
+          height: 60vh;
+          width: 80vw;
+          -webkit-min-device-pixel-ratio: 1;
+        }
+      }
+
+      @media ${device.laptop} and (orientation: portrait) {
+        /* 1024px - 1600px */
+        -webkit-min-device-pixel-ratio: 1;
+      }
+
+      @media ${device.desktop} and (orientation: portrait) {
+        /* 1600px - 2560px */
+        height: 70vh;
         width: 100%;
+
+        -webkit-min-device-pixel-ratio: 1;
+      }
+
+      @media ${device.desktopL} and (orientation: portrait) {
+        /* 2560px - 3115px */
+
+        -webkit-min-device-pixel-ratio: 1;
+      }
+
+      @media ${device.desktopXL} and (orientation: portrait) {
+        /* greater than 3115px  */
+
+        -webkit-min-device-pixel-ratio: 1;
       }
     }
 
@@ -170,14 +203,15 @@ export const LandingPageStyles = styled.div`
       flex-direction: column;
       border-top: 2px solid rgba(0, 0, 0, 0.1);
       border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-      height: 20rem;
+      height: 30rem;
 
       .bot-col-header {
+        padding: 1rem;
         h2 {
           text-transform: uppercase;
           color: #2c2e32;
           font-weight: 400;
-          font-size: 2rem;
+          font-size: 3rem;
         }
       }
 
@@ -288,7 +322,6 @@ export const LandingPageStyles = styled.div`
           justify-content: center;
           align-items: center;
           height: 50%;
-
           width: 100%;
 
           .footer-col-bot-footer-list {
