@@ -1,36 +1,4 @@
 export const FilterBoxOptions = {
-  // group these by the table(see pick of lance screenshare)
-  /*
-  some of these are selled differerntly than the versions below
-  Key Demographics
-    Primary Language
-    Country of Residence
-    Gender
-    Education
-    Age
-    Cross-Border Trade as Primary Source of Income
-    Border Crossing Frequency
-    Primary Border Crossing
-
-  Information Demand
-    Most Requested Procedures for Commodities
-    Most Requested Procedures for Commodity Categories
-    Requested Procedures for Destination (Imports to:)
-    Most Requested Document Information for Procedures
-    Most Requested Agency Information for Procedures
-   Business Behaviour
-    Final Destination Country
-    Final Destination Market
-    Top Commodity Categories
-    Top Commodities
-    Exchange Rate Direction
-
-  */
-  //  {
-  //   label:
-  // }
-  // putting any other keys in here will result in an input confliction so much use the default key for the remaining
-
   superCategories: [
     {
       label: "Key Demographics",

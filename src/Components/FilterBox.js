@@ -57,7 +57,7 @@ export default function FilterBox(props) {
       graphLabels
     } = props;
 
-    console.log(i);
+    // console.log(i);
     // styles for the react select component
     const groupStyles = {
       display: "flex",
@@ -172,7 +172,7 @@ export default function FilterBox(props) {
     const RenderCheckContainer = props => {
       // do all conditional renderings using if statements for now
       let { i, filters, graphLabels } = props;
-      console.log("RenderCheckContainer", i, filters[i].showOptions);
+      // console.log("RenderCheckContainer", i, filters[i].showOptions);
 
       const showOptions = (i, filters, graphLabels) => {
         if (filters[i].showOptions) {
@@ -250,7 +250,7 @@ export default function FilterBox(props) {
             components={{ Control: ControlComponent }}
             // isSearchable
             onChange={e => {
-              console.log(e.label, filters[i]);
+              // console.log(e.label, filters[i]);
               setUpdateUrlFlag(!updateUrlFlag);
               let optionFlags = {};
               graphLabels[
@@ -327,8 +327,6 @@ export default function FilterBox(props) {
 
   let ourSearch = useHistory().location.search;
   useEffect(() => {
-    console.log("LOOK AT ME!!!!!!!");
-    console.log(urlSearchParams);
     History.push("?" + new URLSearchParams({ ...urlSearchParams }).toString());
   }, [updateUrlFlag]);
 
@@ -367,21 +365,39 @@ export default function FilterBox(props) {
           <Button
             onClick={e => {
               const currentDataFilter = Object.keys(filters).length - 1;
-              setFilters({
-                ...filters,
-                [currentDataFilter]: {
-                  ...filters[currentDataFilter],
-                  showOptions: false
-                },
-                [Object.keys(filters).length]: {
-                  nameOfFilter: "Data Filter",
-                  selectedCategory: "",
-                  selectableOptions: {},
-                  selectedTable: "",
-                  selectedTableColumnName: "",
-                  showOptions: true
-                }
-              });
+
+              if (tier === "FREE" && Object.keys(filters).length >= 3) {
+                // make them pay first
+                // popup a
+                // provind this doesn't work
+                //  window.alert("you have to pay")
+                // return <CalendarModal />
+              } else {
+                // they had 4 or n filters from the twitter/FB link
+                // or they just want to add another filter
+                // if(Object.keys(filters).length >= 3) {
+                //   // alert
+                // }
+                setFilters({
+                  ...filters,
+                  // make a flag that is only true when this button is clicked on
+                  // put the flag on the last additional filter known to the user
+                  [currentDataFilter]: {
+                    ...filters[currentDataFilter],
+                    // set to true only if selectableOptions has a selected item
+                    // (the only time optionHasBeenSelected will be true)
+                    showOptions: false
+                  },
+                  [Object.keys(filters).length]: {
+                    nameOfFilter: "Data Filter",
+                    selectedCategory: "",
+                    selectableOptions: {},
+                    selectedTable: "",
+                    selectedTableColumnName: "",
+                    showOptions: true
+                  }
+                });
+              }
             }}
             style={{ cursor: loading ? "auto" : "pointer" }}
           >
@@ -445,7 +461,7 @@ export default function FilterBox(props) {
           ) : (
             <CalendarModal />
           )}
-          <div className="btn-container">
+          {/* <div className="btn-container">
             <Button
               className="checkbox-submit-btn"
               type="submit"
@@ -455,16 +471,14 @@ export default function FilterBox(props) {
             >
               Submit
             </Button>
-          </div>
-          <p
-            className="reset-btn"
+          </div> */}
+          <ResetButton
+            // className="reset-btn"
             onClick={e => {
               props.setFilters({
-                // default query setup
                 0: {
                   ...filters[0],
                   nameOfFilter: "Data Series",
-                  // this way they can reset their original selected options
                   selectableOptions: {}
                 },
                 1: {
@@ -492,7 +506,7 @@ export default function FilterBox(props) {
             }}
           >
             Clear Filters
-          </p>
+          </ResetButton>
         </form>
       </DropdownContainer>
     </>
@@ -652,5 +666,21 @@ const DropdownContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+`;
+const ResetButton = styled.p`
+  text-decoration: none;
+  padding: 10px 5px;
+  color: white;
+  background-color: slategrey;
+  border: 2px solid slategrey;
+  border-radius: 5px;
+  width: 100px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
   }
 `;

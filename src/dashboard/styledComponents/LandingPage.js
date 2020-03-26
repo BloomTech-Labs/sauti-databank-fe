@@ -157,10 +157,42 @@ export const LandingPageStyles = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 90%;
-        width: 80%;
+        height: 80vh;
+        width: 80vw;
         border-radius: 15px;
         background: #2c2e32;
+
+        @media ${device.desktop} and (orientation: portrait) {
+          /* 1600px - 2560px */
+          height: 60vh;
+          width: 80vw;
+          -webkit-min-device-pixel-ratio: 1;
+        }
+      }
+
+      @media ${device.laptop} and (orientation: portrait) {
+        /* 1024px - 1600px */
+        -webkit-min-device-pixel-ratio: 1;
+      }
+
+      @media ${device.desktop} and (orientation: portrait) {
+        /* 1600px - 2560px */
+        height: 70vh;
+        width: 100%;
+
+        -webkit-min-device-pixel-ratio: 1;
+      }
+
+      @media ${device.desktopL} and (orientation: portrait) {
+        /* 2560px - 3115px */
+
+        -webkit-min-device-pixel-ratio: 1;
+      }
+
+      @media ${device.desktopXL} and (orientation: portrait) {
+        /* greater than 3115px  */
+
+        -webkit-min-device-pixel-ratio: 1;
       }
     }
 
