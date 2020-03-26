@@ -1,4 +1,3 @@
-// display user information for the admin and other basic info for quick access
 import React from "react";
 import { useHistory } from "react-router-dom";
 
@@ -53,7 +52,6 @@ function DashHome() {
       history.location.search.length
     );
     let split1 = searchString.split("&");
-    // console.log(split1)
     let newFilterObject = {};
 
     for (var i in split1) {
@@ -69,17 +67,14 @@ function DashHome() {
         split3[1]
       );
     }
-    // if all these say undefined then we have a failed
   };
   const setupFilter = history => {
-    // no media link
     console.log(history.location.search.length);
     if (history.location.search.length === 0) {
       console.log("got here");
       let defaultFilter = {};
       Object.keys(filterTemplate).forEach(filterId => {
         console.log(typeof filterId);
-        // filterId is the same value in all location for this function
         defaultFilter = {
           ...defaultFilter,
           [filterId]: {
@@ -94,30 +89,15 @@ function DashHome() {
             selectedTableColumnName: filterId === "0" ? "gender" : ""
           }
         };
-        console.log("filter part", defaultFilter);
       });
-      console.log("default filter");
-      console.log(defaultFilter);
-
-      // initial default
       return defaultFilter;
     } else {
-      // if(history.location.search.length === 0) {
-      //   console.log("wrong way")
-      // }
-      // user came to site from twitter, fb, or copy paste link
-      // create url based object here
       let searchString = history.location.search.slice(
         1,
         history.location.search.length
       );
-      // this one has issures
-      // ?filter0=gender%2Cundefined&filter1=undefined%2Cundefined&filter2=age%2C10-20&filter3=crossing_freq%2CDaily&filter4=education%2CPrimary
-
-      // "?filter0=gender%2CFemale&filter1=age%2Cundefined&filter2=crossing_freq%2CMonthly&filter3=education%2CSecondary"
 
       let split1 = searchString.split("&");
-      // console.log(split1)
       let newFilterObject = {};
 
       for (var i in split1) {
@@ -134,9 +114,6 @@ function DashHome() {
         );
         if (split3[0] !== "undefined") {
           let optionFlags = {};
-          // what happens when the tablename is not defined?
-          // console.log("split3[0]", split3[0]);
-          // get graphLabels[tableName].labels
           graphLabels[`${split3[0]}`].labels.forEach(option => {
             optionFlags = {
               ...optionFlags,
@@ -147,8 +124,6 @@ function DashHome() {
           newFilterObject = {
             ...newFilterObject,
             [i]: {
-              // get already setup categories from the default
-              // attributes that arent set from the url
               ...filterTemplate[i],
               selectedCategory:
                 FilterBoxOptions.tableNamesToCategoryName[split3[0]],
@@ -164,8 +139,6 @@ function DashHome() {
 
               showOptions: i <= 2 ? filterTemplate[i].showOptions : true
             }
-            // maybe the original filter could be reconstructed using the url data(filter is read only)
-            // Redux?
           };
         } else {
           newFilterObject = {
@@ -173,8 +146,6 @@ function DashHome() {
             [i]: {
               ...filterTemplate[i],
               showOptions: i <= 2 ? filterTemplate[i].showOptions : true
-
-              // showOptions: false
             }
           };
         }

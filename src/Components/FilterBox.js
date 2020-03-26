@@ -445,7 +445,7 @@ export default function FilterBox(props) {
           ) : (
             <CalendarModal />
           )}
-          <div className="btn-container">
+          {/* <div className="btn-container">
             <Button
               className="checkbox-submit-btn"
               type="submit"
@@ -455,16 +455,14 @@ export default function FilterBox(props) {
             >
               Submit
             </Button>
-          </div>
-          <p
-            className="reset-btn"
+          </div> */}
+          <ResetButton
+            // className="reset-btn"
             onClick={e => {
               props.setFilters({
-                // default query setup
                 0: {
                   ...filters[0],
                   nameOfFilter: "Data Series",
-                  // this way they can reset their original selected options
                   selectableOptions: {}
                 },
                 1: {
@@ -492,7 +490,7 @@ export default function FilterBox(props) {
             }}
           >
             Clear Filters
-          </p>
+          </ResetButton>
         </form>
       </DropdownContainer>
     </>
@@ -652,5 +650,21 @@ const DropdownContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+`;
+const ResetButton = styled.p`
+  text-decoration: none;
+  padding: 10px 5px;
+  color: white;
+  background-color: slategrey;
+  border: 2px solid slategrey;
+  border-radius: 5px;
+  width: 100px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
   }
 `;

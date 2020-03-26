@@ -113,24 +113,78 @@ const Graph = props => {
         tier === "PAID" ||
         tier === "GOV_ROLE" ||
         newSub ? (
-          <CsvDownloader
-            track={track}
-            datas={
-              makeValues(csvDownload)
-              // csvFormattedData
-            }
-            columns={
-              makeHeaders(csvDownload)
-              // csvHeaders
-            }
-            filename={fileName}
-            suffix={`${new Date().toISOString()}`}
-          >
-            <DownloadText className="csv-download">Download</DownloadText>
-          </CsvDownloader>
+          <>
+            <SocialMediaContainer className="social-media-container">
+              <IconContainer>
+                <ShareDiv>Share:</ShareDiv>
+                <CsvDownloader
+                  track={track}
+                  datas={makeValues(csvDownload)}
+                  columns={makeHeaders(csvDownload)}
+                  filename={fileName}
+                  suffix={`${new Date().toISOString()}`}
+                >
+                  <DownloadText className="csv-download">Download</DownloadText>
+                </CsvDownloader>
+                <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
+                <div>
+                  <SocialMediaIconsTwitter
+                    class="twitter-share-button"
+                    target="_blank"
+                    href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
+                  >
+                    <i class="fab fa-twitter"></i>
+                  </SocialMediaIconsTwitter>
+                </div>
+                <div
+                  class="fb-share-button"
+                  data-href="https://blissful-pare-60612f.netlify.com/data"
+                  data-layout="button"
+                  data-size="small"
+                >
+                  <SocialMediaIconsFacebook
+                    target="_blank"
+                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                    class="fb-xfbml-parse-ignore"
+                  >
+                    <i class="fab fa-facebook-square"></i>
+                  </SocialMediaIconsFacebook>
+                </div>
+              </IconContainer>
+            </SocialMediaContainer>
+          </>
         ) : (
           <>
-            <DownloadModal />
+            <SocialMediaContainer className="social-media-container">
+              <IconContainer>
+                <ShareDiv>Share:</ShareDiv>
+                <DownloadModal />
+                <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
+                <div>
+                  <SocialMediaIconsTwitter
+                    class="twitter-share-button"
+                    target="_blank"
+                    href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
+                  >
+                    <i class="fab fa-twitter"></i>
+                  </SocialMediaIconsTwitter>
+                </div>
+                <div
+                  class="fb-share-button"
+                  data-href="https://blissful-pare-60612f.netlify.com/data"
+                  data-layout="button"
+                  data-size="small"
+                >
+                  <SocialMediaIconsFacebook
+                    target="_blank"
+                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                    class="fb-xfbml-parse-ignore"
+                  >
+                    <i class="fab fa-facebook-square"></i>
+                  </SocialMediaIconsFacebook>
+                </div>
+              </IconContainer>
+            </SocialMediaContainer>
           </>
         )}
       </div>
@@ -225,13 +279,86 @@ const DownloadText = styled.p`
   border: none;
   border-radius: 5px;
   padding: 8px 0;
-  background-color: #212121b9;
+  background-color: slategrey;
   color: white;
   font-weight: 500;
   text-align: center;
+  margin: 0 10px;
   &:hover {
-    background-color: #212121d3;
+    background-color: slategrey;
     cursor: pointer;
     opacity: 1;
   }
+`;
+const FilterHideButton = styled.button`
+  padding: 8px 5px;
+  background: #eb5e52;
+  font-weight: 400;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  width: 95px;
+  opacity: 0.75;
+  border: none;
+  &: hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+`;
+const SocialMediaContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 0.5px solid lightgrey;
+  padding: 5px;
+  margin-bottom: 5px;
+  font-size: 1.6rem;
+`;
+const SocialMediaIconsTwitter = styled.a`
+  font-size: 2.5rem;
+  margin: 0 10px;
+  color: rgb(0, 172, 238);
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+  }
+`;
+const SocialMediaIconsFacebook = styled.a`
+  font-size: 2.5rem;
+  margin: 0 10px;
+  color: rgb(59, 89, 152);
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const CopyUrlButton = styled.button`
+  padding: 8px 5px;
+  background: #47837f;
+  font-weight: 400;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  width: 95px;
+  opacity: 0.75;
+  border: none;
+  margin: 0 10px;
+  &: hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+`;
+const ContentContainerDiv = styled.div`
+  border-right: 1px solid lightgrey;
+  margin-right: 2px;
+`;
+const IconContainer = styled.span`
+  display: flex;
+  font-size: 1.8rem;
+  align-items: center;
+`;
+const ShareDiv = styled.div`
+  margin-right: 5px;
 `;

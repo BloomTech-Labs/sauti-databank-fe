@@ -19,21 +19,11 @@ $greyColor: #4d4f52;
   display: none;
 }
 .dwnld-btn {
-  position: absolute;
-  margin-top: -119.5px;
-  margin-left: 67.5px;
-  // border: none;
-  // border-radius: 5px;
-  // padding: 6.5px 0;
-  // background-color: #212121b9;
-  // color: white;
-  // font-weight: 500;
-  // text-align: center;
-  // &:hover {
-  //   background-color: #212121d3;
-  //   cursor: pointer;
-  // }
 }
+// .reset-btn {
+//   text-decoration: none;
+//   border: 2px solid grey;
+// }
 .loader-container {
   box-sizing: border-box;
   height: 600px;
@@ -194,6 +184,16 @@ $greyColor: #4d4f52;
         justify-content: center;
         align-items: center;
       }
+    }
+  }
+  .graph-titles-container {
+    display: flex;
+    border: 0.5px solid lightgray;
+    padding: 5px 0;
+    .graph-title-diplay {
+      width: 33.33%;
+      border-right: 0.5px solid lightgray;
+      padding: 0 5px;
     }
   }
 }
