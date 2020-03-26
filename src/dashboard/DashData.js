@@ -46,38 +46,14 @@ function DashHome() {
     userEmail = userEmail.email;
   }
   const history = useHistory();
-  const isAValidSearchURL = url => {
-    let searchString = history.location.search.slice(
-      1,
-      history.location.search.length
-    );
-    let split1 = searchString.split("&");
 
-    let newFilterObject = {};
-
-    for (var i in split1) {
-      let split2 = split1[i].split("=");
-      let split3 = split2[1].split("%2C");
-      console.log(
-        "filter name",
-        split2[0],
-        "search",
-        "table name",
-        split3[0],
-        "option",
-        split3[1]
-      );
-    }
-  };
-
-  // converts special characters in the option words(University/College, No formal education)
-  // to their other version(%2F -> '/', + -> ' ') as urls prefers special sequences
+  // convert the english word url to option labels the user will see
   const convertOptionUrl = option => {
     // -1 means the search failed
-    if (option.search(/\%2F/) > -1) {
-      return option.replace(/\%2F/g, "/");
-    } else if (option.search(/\+/) > -1) {
-      return option.replace(/\+/g, " ");
+    if (option.search(/forwardslash/) > -1) {
+      return option.replace(/forwardslash/g, "/");
+    } else if (option.search(/whitespace/) > -1) {
+      return option.replace(/whitespace/g, " ");
     } else {
       return option;
     }
@@ -110,13 +86,19 @@ function DashHome() {
         1,
         history.location.search.length
       );
+      // can't use (_, -, &, ^, z) to separate the filter sections
+      // _ is in cross_freq
+      // - is in 10-20
+      // &, ^ aren't accepted by twitter
+      // z is in maize
+      // zaz works
 
-      let split1 = searchString.split("&");
+      let split1 = searchString.split("zaz");
       let newFilterObject = {};
 
       for (var i in split1) {
-        let split2 = split1[i].split("=");
-        let split3 = split2[1].split("%2C");
+        let split2 = split1[i].split("equals");
+        let split3 = split2[1].split("comma");
         console.log(
           "filter name",
           split2[0],

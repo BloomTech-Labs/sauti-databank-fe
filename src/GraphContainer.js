@@ -44,7 +44,7 @@ const GraphContainer = props => {
   clipboard.on("success", function(e) {
     swal({ title: "", text: "copied url!", icon: "success" });
   });
-
+  // ?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalscountry_of_residencecommaKENzazfilter4equalsundefinedcommaundefined
   return (
     <div className="App">
       <div className="main-container">
