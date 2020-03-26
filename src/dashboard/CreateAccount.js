@@ -450,6 +450,6 @@ const RequiredStar = styled.big`
   font-size: 1.4rem;
 `;
 const GreyLabelText = styled.p`
-  opacity: 0.8;
+  // opacity: 0.8;
   font-size: 1.4rem;
 `;
