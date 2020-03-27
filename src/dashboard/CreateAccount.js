@@ -19,7 +19,7 @@ import swal from "sweetalert";
 
 import styled from "styled-components";
 
-import beans from "../assets/images/beans.jpg";
+import beans from "../assets/images/bean.jpg";
 
 const REGISTER = gql`
   mutation registerNewUser($newUser: newRegisterInput!) {
