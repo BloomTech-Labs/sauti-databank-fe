@@ -6,7 +6,7 @@ import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
 import styled from "styled-components";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
-
+import { useHistory } from "react-router-dom";
 const Graph = props => {
   let { data, csvData, filters, keys, groupMode, sampleSize } = props;
   console.log("loading graph", props);
@@ -122,7 +122,7 @@ const Graph = props => {
   useEffect(() => {
     setCsvDownload(csvFormater(csvData));
   }, [csvData]);
-
+  const twitterLink = useHistory().location.search;
   return (
     <>
       <div className="dwnld-btn">
@@ -148,9 +148,7 @@ const Graph = props => {
                   <SocialMediaIconsTwitter
                     class="twitter-share-button"
                     target="_blank"
-                    href={`https://twitter.com/intent/tweet?text=http://localhost:3000/data${
-                      useHistory().location.search
-                    }`}
+                    href={`https://twitter.com/intent/tweet?text=http://localhost:3000/data${twitterLink}`}
                   >
                     <i class="fab fa-twitter"></i>
                   </SocialMediaIconsTwitter>
