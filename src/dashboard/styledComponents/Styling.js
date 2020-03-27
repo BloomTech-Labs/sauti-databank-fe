@@ -24,14 +24,21 @@ export const ContentContainer = styled.div`
   margin: 0 auto;
   font-family: Montserrat;
 `;
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 export const TopBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2c2e32;
   width: 100%;
   height: 7rem;
+  background: #2c2e32;
 `;
+
 export const AccountDiv = styled.div`
   margin: 0% 0% 0% 0.75%;
 `;
@@ -124,7 +131,7 @@ export const LinksLast = styled(Link)`
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  &: hover {
+  &:hover {
     color: #eb5e52;
   }
 `;

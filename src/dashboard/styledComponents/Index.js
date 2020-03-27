@@ -17,7 +17,8 @@ import {
   SautiLink,
   TopBar,
   NoAccessText,
-  DownloadText
+  DownloadText,
+  Container
 } from "./Styling";
 
 // Home Page Styling Import
@@ -163,5 +164,6 @@ export {
   DownloadModalText,
   DownloadModalButtons,
   DownloadModalButtonsX,
-  DownloadModalTextContinue
+  DownloadModalTextContinue,
+  Container
 };

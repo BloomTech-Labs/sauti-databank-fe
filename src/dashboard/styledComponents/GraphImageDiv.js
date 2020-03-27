@@ -9,9 +9,8 @@ const GraphImageDiv = () => {
 };
 
 const GraphImageStyles = styled.div`
-  height: 70vh;
-  width: 70vw;
-
+  height: 100vh;
+  width: 100%;
   background-image: ${props => `url(${props.MiddleImage})`};
   -webkit-background-size: contain;
   -moz-background-size: contain;

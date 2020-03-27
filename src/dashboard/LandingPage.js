@@ -23,36 +23,45 @@ const LandingPage = props => {
   return (
     <LandingPageStyles TopImage={TopImage}>
       <div className="landing-page-row">
-        <div className="landing-page-row-col-top">
-          <div className="top-col-top">
-            <h2>Data collection and assessment</h2>
-          </div>
-          <div className="top-col-mid">
-            <h1>Examine data gathered from cross-border</h1>
-            <h1>African Traders</h1>
-          </div>
-          <div className="top-col-bot">
-            <button onClick={handleCreateAccount}>Create an account</button>
-            <button onClick={handleReturn}>Go to data</button>
-          </div>
-        </div>
-        <div className="landing-page-row-col-mid">
-          <div className="col-mid-image">
-            <GraphImageDiv />
+        <div className="combine">
+          <div className="landing-page-row-col-top">
+            <div className="top-col-top">
+              <h2>Data collection and assessment</h2>
+            </div>
+            <div className="top-col-mid">
+              <h1>Examine data gathered from cross-border</h1>
+              <h1>African Traders</h1>
+            </div>
+            <div className="top-col-bot">
+              <button onClick={handleCreateAccount}>Create an account</button>
+              <button onClick={handleReturn}>Go to data</button>
+            </div>
           </div>
         </div>
+
         <div className="landing-page-row-col-bot">
-          <div className="bot-col-header">
-            <h2>What we do</h2>
-          </div>
-          <div className="bot-col-disc">
-            <p>
-              Sauti Databank is an organization that collects data from
-              cross-border African traders, bringing reliable information of
-              researchers and government officials
-            </p>
+          <div className="row-col-bot-whatwedo">
+            <div className="bot-col-header">
+              <h2>What we do</h2>
+            </div>
+            <div className="bot-col-disc">
+              <p>
+                Sauti Databank is an organization that collects data from
+                cross-border African traders, bringing reliable information of
+                researchers and government officials
+              </p>
+            </div>
           </div>
         </div>
+
+        <div className="landing-page-row-col-mid">
+          <div className="col-bot-image">
+            <div className="img-background">
+              <GraphImageDiv />
+            </div>
+          </div>
+        </div>
+
         <div className="landing-page-row-col-bot-two">
           <div className="bot-two-row">
             <div className="bot-two-col">
@@ -85,7 +94,7 @@ const LandingPage = props => {
                 <h2>Analysis</h2>
               </div>
               <div className="col-disc">
-                <p>Real ACLED reports and infographics.</p>
+                <p>Downloadable data reports into excel.</p>
               </div>
               <div className="col-learn-more">
                 <button>Learn More</button>

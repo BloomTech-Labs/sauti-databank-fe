@@ -20,7 +20,8 @@ import {
   Navigation,
   Links,
   LinksLast,
-  SautiLink
+  SautiLink,
+  Container
 } from "./styledComponents/Index";
 
 function DashNav() {
@@ -43,34 +44,36 @@ function DashNav() {
 
   return (
     <>
-      <TopBar>
-        <SautiLogo>
-          <ReactGA.OutboundLink
-            style={{ textDecoration: "none" }}
-            eventLabel="Outbound Link to http://sautiafrica.org/"
-            to="http://sautiafrica.org/"
-          >
-            <SautiLogoText href="http://sautiafrica.org/">
-              <p>
-                Sauti<SautiDot>.</SautiDot>
-              </p>
-            </SautiLogoText>
-          </ReactGA.OutboundLink>
-        </SautiLogo>
-        <Navigation>
-          {(!SignedIn || SignedIn) && <Links to="/">HOME</Links>}
-          {SignedIn && <Links to="/myaccount">ACCOUNT</Links>}
-          <Links to="/data">DATA</Links>
-          {!SignedIn && <Links to="/login">LOGIN</Links>}
-          {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
-          {SignedIn && <Links to="/logout">LOGOUT</Links>}
-          {SignedIn && (
-            <span className="loggedInAs">
-              User: <span className="email">{email}</span>
-            </span>
-          )}
-        </Navigation>
-      </TopBar>
+      <Container>
+        <TopBar>
+          <SautiLogo>
+            <ReactGA.OutboundLink
+              style={{ textDecoration: "none" }}
+              eventLabel="Outbound Link to http://sautiafrica.org/"
+              to="http://sautiafrica.org/"
+            >
+              <SautiLogoText href="http://sautiafrica.org/">
+                <p>
+                  Sauti<SautiDot>.</SautiDot>
+                </p>
+              </SautiLogoText>
+            </ReactGA.OutboundLink>
+          </SautiLogo>
+          <Navigation>
+            {(!SignedIn || SignedIn) && <Links to="/">HOME</Links>}
+            {SignedIn && <Links to="/myaccount">ACCOUNT</Links>}
+            <Links to="/data">DATA</Links>
+            {!SignedIn && <Links to="/login">LOGIN</Links>}
+            {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
+            {SignedIn && <Links to="/logout">LOGOUT</Links>}
+            {SignedIn && (
+              <span className="loggedInAs">
+                User: <span className="email">{email}</span>
+              </span>
+            )}
+          </Navigation>
+        </TopBar>
+      </Container>
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
