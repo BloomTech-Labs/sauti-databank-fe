@@ -149,7 +149,8 @@ function DashHome() {
             ...newFilterObject,
             [i]: {
               ...filterTemplate[i],
-              showOptions: i <= 1 ? filterTemplate[i].showOptions : false
+              // we want the first additional filter to use the filterTemplate show options
+              showOptions: i <= 2 ? filterTemplate[i].showOptions : false
             }
           };
         }

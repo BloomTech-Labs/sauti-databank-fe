@@ -388,19 +388,13 @@ export default function FilterBox(props) {
           <Button
             onClick={e => {
               const currentDataFilter = Object.keys(filters).length - 1;
+              // console.log('wrong')
+              // console.log(tier)
 
-              if (tier === "FREE" && Object.keys(filters).length >= 3) {
-                // make them pay first
-                // popup a
-                // provind this doesn't work
-                //  window.alert("you have to pay")
-                // return <CalendarModal />
-              } else {
-                // they had 4 or n filters from the twitter/FB link
-                // or they just want to add another filter
-                // if(Object.keys(filters).length >= 3) {
-                //   // alert
-                // }
+              if (
+                tier !== undefined &&
+                (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
+              ) {
                 setFilters({
                   ...filters,
                   // make a flag that is only true when this button is clicked on
@@ -428,6 +422,7 @@ export default function FilterBox(props) {
           </Button>
         </div>
         <form>
+          {/* That if tier is undefined(not logged in)? The reliability of this logic is in questino*/}
           {tier === "ADMIN" ||
           tier === "PAID" ||
           tier === "GOV_ROLE" ||
