@@ -79,9 +79,18 @@ const GetData = props => {
     console.log(filters[0].selectedTable);
     console.log(filters[1].selectedTable);
     console.log(filters[2].selectedTable);
-    thisQuery = {
-      [filters[0].selectedTableColumnName]: getSelectedOption(filters, 0)
-    };
+    Object.keys(filters).forEach(filterId => {
+      if (filterId !== 1) {
+        thisQuery = {
+          ...thisQuery,
+          [filters[filterId].selectedTableColumnName]: getSelectedOption(
+            filters,
+            filterId
+          )
+        };
+      }
+    });
+
     QUERY = gql`
       query getUsers($queryTraders: newTraderInput){
         tradersUsers (input: $queryTraders) {

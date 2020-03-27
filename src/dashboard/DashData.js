@@ -61,7 +61,7 @@ function DashHome() {
   const setupFilter = history => {
     console.log(history.location.search.length);
     if (history.location.search.length === 0) {
-      console.log("got here");
+      // console.log("got here");
       let defaultFilter = {};
       Object.keys(filterTemplate).forEach(filterId => {
         console.log(typeof filterId);
@@ -82,6 +82,7 @@ function DashHome() {
       });
       return defaultFilter;
     } else {
+      // get rid of the "?" at the start of history.location.search
       let searchString = history.location.search.slice(
         1,
         history.location.search.length
@@ -94,6 +95,8 @@ function DashHome() {
       // zaz works
 
       let split1 = searchString.split("zaz");
+
+      // making a new set of filters from the url
       let newFilterObject = {};
 
       for (var i in split1) {
@@ -118,23 +121,27 @@ function DashHome() {
             };
           });
 
+          // includes first data filter
           newFilterObject = {
             ...newFilterObject,
             [i]: {
               ...filterTemplate[i],
               selectedCategory:
+                // The selectedCategory was cleverly calculated.  This could be done better.
                 FilterBoxOptions.tableNamesToCategoryName[split3[0]],
               selectedTableColumnName: split3[0],
               selectableOptions:
-                convertOptionUrl(split3[1]) === "undefined"
+                split3[1] === "undefined"
                   ? { ...optionFlags }
-                  : { ...optionFlags, [convertOptionUrl(split3[1])]: true },
+                  : // only need to alter split3[1] if we are using it
+                    { ...optionFlags, [convertOptionUrl(split3[1])]: true },
               selectedTable:
+                // The selectedTable was really cleverly calculated.  This could also be done better.
                 FilterBoxOptions.default[
                   FilterBoxOptions.tableNamesToCategoryName[split3[0]]
                 ].value.query,
 
-              showOptions: i <= 2 ? filterTemplate[i].showOptions : true
+              showOptions: i <= 1 ? filterTemplate[i].showOptions : false
             }
           };
         } else {
@@ -142,7 +149,7 @@ function DashHome() {
             ...newFilterObject,
             [i]: {
               ...filterTemplate[i],
-              showOptions: i <= 2 ? filterTemplate[i].showOptions : true
+              showOptions: i <= 1 ? filterTemplate[i].showOptions : false
             }
           };
         }
