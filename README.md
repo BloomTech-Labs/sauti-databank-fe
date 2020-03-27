@@ -2,12 +2,16 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/31fdf9089962cf6204ba/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/sauti-databank-fe/maintainability)
 
-You can find our deployed project at: https://sauti.now.sh/
+You can find our deployed project at: https://www.databank.sautiafrica.org/
 
 ## Contributors
 
 |                                                                                                                                                                                                                                                             |                                                                                                                                                                                                                                                               |                                                                                                                                                                                                                                                           |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                                                                                    <img src="https://avatars1.githubusercontent.com/u/52979795?s=400&v=4" width="200" />                                                                                    | <img src="https://avatars3.githubusercontent.com/u/51310083?s=400&v=4" width="200" />                                                                                                                                                                         | <img src="https://avatars3.githubusercontent.com/u/53502963?s=400&v=4" width="200" />                                                                                                                                                                     |
+| Vincent Pagano [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/Vpagano10) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/dylan-mestyanek-593907189/) | Joshua Hill [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/Robdowski) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/robert-carter-72824918a/)            | Moses Samuel [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/sandramkimball) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/sandy-kimball-9b7461192/)  |
+|                                                                                    <img src="https://avatars1.githubusercontent.com/u/52979795?s=400&v=4" width="200" />                                                                                    | <img src="https://avatars3.githubusercontent.com/u/51310083?s=400&v=4" width="200" />                                                                                                                                                                         | <img src="https://avatars3.githubusercontent.com/u/53502963?s=400&v=4" width="200" />                                                                                                                                                                     |
+| Lukas Jaronis [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/dylanmestyanek) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/dylan-mestyanek-593907189/) | David Tauraso [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/Robdowski) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/robert-carter-72824918a/)            | Russell Terry [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/sandramkimball) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/sandy-kimball-9b7461192/)  |
 |                                                                                    <img src="https://avatars1.githubusercontent.com/u/52979795?s=400&v=4" width="200" />                                                                                    | <img src="https://avatars3.githubusercontent.com/u/51310083?s=400&v=4" width="200" />                                                                                                                                                                         | <img src="https://avatars3.githubusercontent.com/u/53502963?s=400&v=4" width="200" />                                                                                                                                                                     |
 | Dylan Mestyanek [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/dylanmestyanek) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/dylan-mestyanek-593907189/) | Robert Carter [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/Robdowski) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/robert-carter-72824918a/)            | Sandra Kimball [<img src="https://img.icons8.com/nolan/64/github.png" width="25">](https://github.com/sandramkimball) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="25">](https://www.linkedin.com/in/sandy-kimball-9b7461192/)  |
 |                                                                                    <img src="https://avatars3.githubusercontent.com/u/50163182?s=400&v=4" width="200" />                                                                                    | <img src="https://avatars0.githubusercontent.com/u/50240571?s=460&v=4" width="200" />                                                                                                                                                                         | <img src="https://avatars1.githubusercontent.com/u/7843803?s=400&v=4" width="200" />                                                                                                                                                                      |
@@ -33,7 +37,7 @@ You can find our deployed project at: https://sauti.now.sh/
 
 ## Project Overview
 
-- [Labs 19 Trello Board](https://trello.com/b/2LXUKk9x/labs-19-sauti-data-bank)
+- [Labs 21 Trello Board](https://trello.com/b/2LXUKk9x/labs-21-sauti-data-bank)
 
 - [Product Canvases](https://www.notion.so/e975f72982c24806a63b4a09840142d1?v=e2ba54cf176244d1b886672103bca454)
 
@@ -89,18 +93,19 @@ Other key features include
 - [Sass](https://sass-lang.com/): A CSS compiler helped us iterate more quickly on styling with the efficient use of nesting.
 - [AG-Grid-React](https://www.ag-grid.com/react-grid/)
 - [Material-UI](https://material-ui.com/)
+- [Paypal](https://developer.paypal.com/docs/)
 
-#### Front-end deployed to [Netlify](https://blissful-pare-60612f.netlify.com/data).
+#### Front-end deployed to [AWS](https://www.databank.sautiafrica.org/).
 
 #### [Back-end](https://github.com/Lambda-School-Labs/sauti-databank-be) built using:
 
 - Node.js
-- Express
+- Apollo-Server-Express
 - Knex
 - GraphQL
 - MySQL
 - Jest
-- Apollo Server
+
 
 Our reasoning behind using the above tools for the back-end build is to make cross-filtering easy and efficient. Alongside Node and Express for operation set up, we are using the GraphQL framework which is a query manipulation language that requests specific data from the database using one single API endpoint.
 
@@ -160,4 +165,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](https://github.com/sauti-databank/back-end) for details on the backend of our project.
+See [Backend Documentation](https://github.com/Lambda-School-Labs/sauti-databank-be) for details on the backend of our project.

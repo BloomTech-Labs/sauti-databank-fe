@@ -6,9 +6,17 @@ import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
 import styled from "styled-components";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
-
+import { useHistory } from "react-router-dom";
 const Graph = props => {
-  let { data, csvData, filters, keys, groupMode, sampleSize } = props;
+  let {
+    data,
+    csvData,
+    filters,
+    keys,
+    groupMode,
+    sampleSize,
+    tableName
+  } = props;
   console.log("loading graph", props);
   const token = getToken();
   let tier;
@@ -122,7 +130,7 @@ const Graph = props => {
   useEffect(() => {
     setCsvDownload(csvFormater(csvData));
   }, [csvData]);
-
+  const twitterLink = useHistory().location.search;
   return (
     <>
       <div className="dwnld-btn">
@@ -148,7 +156,7 @@ const Graph = props => {
                   <SocialMediaIconsTwitter
                     class="twitter-share-button"
                     target="_blank"
-                    href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
+                    href={`https://twitter.com/intent/tweet?text=http://localhost:3000/data${twitterLink}`}
                   >
                     <i class="fab fa-twitter"></i>
                   </SocialMediaIconsTwitter>
@@ -239,7 +247,7 @@ const Graph = props => {
             legend:
               filters[0].selectedCategory +
               " (values as percent of total)," +
-              ` sample size = ${sampleSize}`,
+              ` sample size = ${sampleSize} ${tableName}`,
             legendPosition: "middle",
             legendOffset: 35
           }}

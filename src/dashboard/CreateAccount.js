@@ -19,6 +19,8 @@ import swal from "sweetalert";
 
 import styled from "styled-components";
 
+import beans from "../assets/images/bean.jpg";
+
 const REGISTER = gql`
   mutation registerNewUser($newUser: newRegisterInput!) {
     register(input: $newUser) {
@@ -70,7 +72,8 @@ export default function SignInSide(props) {
       user.email === "" ||
       user.password === "" ||
       user.organization_type === "" ||
-      user.tier === ""
+      user.found_by === ""
+      /* || user.tier === "" */
     ) {
       swal({
         title: "Error",
@@ -145,13 +148,16 @@ export default function SignInSide(props) {
             noValidate
             onSubmit={e => handleSubmit(e, user)}
           >
+            <RequiredLabel>
+              <RequiredStar>*</RequiredStar> Email
+            </RequiredLabel>
             <TextField
               // variant="outlined"
               margin="normal"
               fullWidth
               id="email"
               type="text"
-              label="* Email"
+              // label="* Email"
               name="email"
               autoComplete="email"
               value={user.email}
@@ -159,12 +165,17 @@ export default function SignInSide(props) {
               autoFocus
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
+            <br />
+            <br />
+            <RequiredLabel>
+              <RequiredStar>*</RequiredStar> Password
+            </RequiredLabel>
             <TextField
               // variant='outlined'
               margin="normal"
               fullWidth
               name="password"
-              label="* Password"
+              // label="* Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -172,13 +183,15 @@ export default function SignInSide(props) {
               onChange={handleChange}
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
-
+            <br />
+            <br />
+            <RequiredLabel>Organization</RequiredLabel>
             <TextField
               // variant='outlined'
               margin="normal"
               fullWidth
               name="organization"
-              label="Organization"
+              // label="Organization"
               type="text"
               id="organization"
               autoComplete="current-organization"
@@ -186,12 +199,15 @@ export default function SignInSide(props) {
               onChange={handleChange}
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
+            <br />
+            <br />
+            <RequiredLabel>Job Position</RequiredLabel>
             <TextField
               // variant='outlined'
               margin="normal"
               fullWidth
               name="job_position"
-              label="Job Position"
+              // label="Job Position"
               type="text"
               id="job_position"
               autoComplete="current-job_position"
@@ -199,12 +215,15 @@ export default function SignInSide(props) {
               onChange={handleChange}
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
+            <br />
+            <br />
+            <RequiredLabel>Country</RequiredLabel>
             <TextField
               // variant='outlined'
               margin="normal"
               fullWidth
               name="country"
-              label="Country"
+              // label="Country"
               type="text"
               id="country"
               autoComplete="current-country"
@@ -212,12 +231,15 @@ export default function SignInSide(props) {
               onChange={handleChange}
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
+            <br />
+            <br />
+            <RequiredLabel>Interest</RequiredLabel>
             <TextField
               // variant='outlined'
               margin="normal"
               fullWidth
               name="interest"
-              label="Interest"
+              // label="Interest"
               type="text"
               id="interest"
               autoComplete="current-interest"
@@ -229,7 +251,9 @@ export default function SignInSide(props) {
             <br />
             <br />
             <FormControl className={classes.margin}>
-              <GreyLabelText>* Organization Type</GreyLabelText>
+              <GreyLabelText>
+                <RequiredStar>*</RequiredStar> Organization Type
+              </GreyLabelText>
               <Select
                 label="Organization Type"
                 labelId="demo-customized-select-label"
@@ -246,8 +270,13 @@ export default function SignInSide(props) {
                 <MenuItem value={"OTHER"}>OTHER</MenuItem>
               </Select>
             </FormControl>
+            <br />
+            <br />
+            <br />
             <FormControl className={classes.margin}>
-              <p>How did you hear about us?</p>
+              <GreyLabelText>
+                <RequiredStar>*</RequiredStar> How did you hear about us?
+              </GreyLabelText>
               <Select
                 label="Found By"
                 labelId="demo-customized-select-label"
@@ -265,11 +294,12 @@ export default function SignInSide(props) {
                 <MenuItem value={"SAUTI_STAFF"}>Sauti Staff</MenuItem>
                 <MenuItem value={"OTHER"}>OTHER</MenuItem>
               </Select>
-              <label>*required</label>
+              <br />
+              <RequiredLabel>
+                <RequiredStar>*</RequiredStar> = required
+              </RequiredLabel>
             </FormControl>
-
-            <br></br>
-
+            <br />
             <Button
               type="submit"
               fullWidth
@@ -301,8 +331,7 @@ const useStyles = makeStyles(theme => ({
     height: "100vh"
   },
   image: {
-    backgroundImage:
-      "url(https://images.unsplash.com/photo-1506682332771-2a887a4387a8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9)",
+    backgroundImage: `url(${beans})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
@@ -340,7 +369,6 @@ const Styles = withStyles(theme => ({
       marginTop: theme.spacing(3)
     }
   },
-
   label: {
     fontSize: "1.6rem"
   },
@@ -392,6 +420,7 @@ const UnusedTitle = styled.span`
   opacity: 0.5;
 `;
 const RequiredLabel = styled.label`
+  text-align: center;
   font-size: 1.4rem;
 `;
 const RequiredDiv = styled.div`
@@ -408,9 +437,9 @@ const UnderlineDiv = styled.div`
   margin-top: 28px;
 `;
 const LineUnderTitles = styled.hr`
-  width: 100%;
-  opacity: 0.5;
-  position: relative;
+  // width: 100%;
+  // opacity: 0.5;
+  // position: relative;
 `;
 const LineUnderCurrentTitle = styled.hr`
   background-color: black;
@@ -419,8 +448,9 @@ const LineUnderCurrentTitle = styled.hr`
 `;
 const RequiredStar = styled.big`
   color: red;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
 `;
 const GreyLabelText = styled.p`
-  opacity: 0.8;
+  // opacity: 0.8;
+  font-size: 1.4rem;
 `;
