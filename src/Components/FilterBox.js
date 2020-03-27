@@ -321,13 +321,36 @@ export default function FilterBox(props) {
         filters[filterId].selectedTableColumnName
           ? filters[filterId].selectedTableColumnName
           : "undefined"
-      },${getSelectedOption(filters, filterId)}`
+      }comma${getSelectedOption(filters, filterId)}`
     };
   });
 
   let ourSearch = useHistory().location.search;
+  const inverseConvertOptionUrl = option => {
+    // these come from the selection options the user will see
+    // -1 means the search failed
+    if (option.search(/\//) > -1) {
+      return option.replace(/\//g, "forwardslash");
+    } else if (option.search(/ /) > -1) {
+      return option.replace(/ /g, "whitespace");
+    } else {
+      return option;
+    }
+  };
   useEffect(() => {
-    History.push("?" + new URLSearchParams({ ...urlSearchParams }).toString());
+    console.log(urlSearchParams);
+    let keys = Object.keys(urlSearchParams);
+    let values = Object.values(urlSearchParams).map(value =>
+      inverseConvertOptionUrl(value)
+    );
+    console.log(keys, values);
+
+    const filterStrings = keys
+      .map((key, i) => key + "equals" + values[i])
+      .join("zaz");
+    console.log(filterStrings);
+
+    History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
   }, [updateUrlFlag]);
 
   const handleSubmit = useCallback(
