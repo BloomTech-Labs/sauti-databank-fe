@@ -204,6 +204,7 @@ const GetData = props => {
           keys={chartData.crossFilterValues}
           groupMode={"grouped"}
           sampleSize={chartData.totalSampleSize}
+          tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
         />
       </>
     );
@@ -238,6 +239,7 @@ const GetData = props => {
           keys={chartData.keys || chartData.csvKeys}
           groupMode={"stacked"}
           sampleSize={chartData.sampleSize}
+          tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
         />
       </>
     );

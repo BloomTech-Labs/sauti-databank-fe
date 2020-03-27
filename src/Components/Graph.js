@@ -8,7 +8,15 @@ import styled from "styled-components";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 import { useHistory } from "react-router-dom";
 const Graph = props => {
-  let { data, csvData, filters, keys, groupMode, sampleSize } = props;
+  let {
+    data,
+    csvData,
+    filters,
+    keys,
+    groupMode,
+    sampleSize,
+    tableName
+  } = props;
   console.log("loading graph", props);
   const token = getToken();
   let tier;
@@ -239,7 +247,7 @@ const Graph = props => {
             legend:
               filters[0].selectedCategory +
               " (values as percent of total)," +
-              ` sample size = ${sampleSize}`,
+              ` sample size = ${sampleSize} ${tableName}`,
             legendPosition: "middle",
             legendOffset: 35
           }}
