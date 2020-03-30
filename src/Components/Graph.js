@@ -191,11 +191,11 @@ const Graph = props => {
                   data-layout="button"
                   data-size="small"
                 >
-                  {/* http://localhost:3000/data?filter0equalsgendercommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalsagecomma10-20zazfilter3equalscrossing_freqcommaWeekly */}
+                  {/* https://www.databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalseducationcommaNowhitespaceformalwhitespaceeducation */}
                   {/* https://www.databank.sautiafrica.org/data?fbclid=IwAR2aGZysIQY7R133QGX8yBNGyXDvrPdyPpooab43WIwcwVwEJr5pLV0iqQU */}
                   <SocialMediaIconsFacebook
                     target="_blank"
-                    href="https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data&amp;src=sdkpreparse"
+                    href={`https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`}
                     class="fb-xfbml-parse-ignore"
                   >
                     <i class="fab fa-facebook-square"></i>
