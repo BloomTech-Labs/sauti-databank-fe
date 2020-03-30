@@ -96,7 +96,7 @@ export const Navigation = styled.div`
 
     .email {
       font-size: 1.4rem;
-      font-weight: 600;
+      font-weight: 400;
       font-style: normal;
       font-stretch: normal;
       line-height: normal;
