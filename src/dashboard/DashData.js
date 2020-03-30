@@ -59,6 +59,14 @@ function DashHome() {
     }
   };
   const setupFilter = history => {
+    // search: "?filter0equalsgendercommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalsundefinedcommaundefined"
+    // http://databank.sautiafrica.org/data?filter0equalsgendercommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalsagecomma10-20zazfilter3equalscrossing_freqcommaWeekly
+    // https://t.co/ZBQKNv3gRA?amp=1
+
+    // copy url:
+    // https://www.databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeekly
+    // tweet
+    // http://databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeekly
     console.log("history", history);
     console.log(history.location.search.length);
     if (history.location.search.length === 0) {

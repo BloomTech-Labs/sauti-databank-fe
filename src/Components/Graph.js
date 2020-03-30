@@ -163,7 +163,7 @@ const Graph = props => {
                     class="twitter-share-button"
                     target="_blank"
                     // https://databank.sautiafrica.org/
-                    href={`https://twitter.com/intent/tweet?text=http://databank.sautiafrica.org/data${socialMediaLink}`}
+                    href={`https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`}
                   >
                     <i class="fab fa-twitter"></i>
                   </SocialMediaIconsTwitter>
@@ -187,13 +187,15 @@ const Graph = props => {
                 </div> */}
                 <div
                   class="fb-share-button"
-                  data-href={`http://databank.sautiafrica.org/data${socialMediaLink}`} //"https://blissful-pare-60612f.netlify.com/data"
+                  data-href={`https://www.databank.sautiafrica.org/data${socialMediaLink}`} //"https://blissful-pare-60612f.netlify.com/data"
                   data-layout="button"
                   data-size="small"
                 >
+                  {/* http://localhost:3000/data?filter0equalsgendercommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalsagecomma10-20zazfilter3equalscrossing_freqcommaWeekly */}
+                  {/* https://www.databank.sautiafrica.org/data?fbclid=IwAR2aGZysIQY7R133QGX8yBNGyXDvrPdyPpooab43WIwcwVwEJr5pLV0iqQU */}
                   <SocialMediaIconsFacebook
                     target="_blank"
-                    href="https://www.facebook.com/sharer/sharer.php?u=http://databank.sautiafrica.org/data&amp;src=sdkpreparse"
+                    href="https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data&amp;src=sdkpreparse"
                     class="fb-xfbml-parse-ignore"
                   >
                     <i class="fab fa-facebook-square"></i>
