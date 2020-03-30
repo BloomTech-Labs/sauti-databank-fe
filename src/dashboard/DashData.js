@@ -59,6 +59,7 @@ function DashHome() {
     }
   };
   const setupFilter = history => {
+    console.log("history", history);
     console.log(history.location.search.length);
     if (history.location.search.length === 0) {
       // console.log("got here");

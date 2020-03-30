@@ -133,7 +133,8 @@ const Graph = props => {
   useEffect(() => {
     setCsvDownload(csvFormater(csvData));
   }, [csvData]);
-  const twitterLink = useHistory().location.search;
+  const socialMediaLink = useHistory().location.search;
+  console.log(socialMediaLink);
   return (
     <>
       <div className="dwnld-btn">
@@ -156,16 +157,18 @@ const Graph = props => {
                 </CsvDownloader>
                 <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
                 <div>
+                  {/* https://t.co/7DQbFbQIaS?amp=1 =>  https://www.databank.sautiafrica.org/data */}
+                  {/* https://t.co/9CcenTStx9?amp=1 the search query is removed from the search*/}
                   <SocialMediaIconsTwitter
                     class="twitter-share-button"
                     target="_blank"
                     // https://databank.sautiafrica.org/
-                    href={`https://twitter.com/intent/tweet?text=http://databank.sautiafrica.org/data${twitterLink}`}
+                    href={`https://twitter.com/intent/tweet?text=http://databank.sautiafrica.org/data${socialMediaLink}`}
                   >
                     <i class="fab fa-twitter"></i>
                   </SocialMediaIconsTwitter>
                 </div>
-                <div
+                {/* <div
                   class="fb-share-button"
                   data-href="https://blissful-pare-60612f.netlify.com/data"
                   data-layout="button"
@@ -173,7 +176,24 @@ const Graph = props => {
                 >
                   <SocialMediaIconsFacebook
                     target="_blank"
+                    // data-href={`http://databank.sautiafrica.org/data${twitterLink}`}
                     href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                    class="fb-xfbml-parse-ignore"
+                  >
+                    <i class="fab fa-facebook-square"></i>
+                  </SocialMediaIconsFacebook>
+                  
+
+                </div> */}
+                <div
+                  class="fb-share-button"
+                  data-href={`http://databank.sautiafrica.org/data${socialMediaLink}`} //"https://blissful-pare-60612f.netlify.com/data"
+                  data-layout="button"
+                  data-size="small"
+                >
+                  <SocialMediaIconsFacebook
+                    target="_blank"
+                    href="https://www.facebook.com/sharer/sharer.php?u=http://databank.sautiafrica.org/data&amp;src=sdkpreparse"
                     class="fb-xfbml-parse-ignore"
                   >
                     <i class="fab fa-facebook-square"></i>
