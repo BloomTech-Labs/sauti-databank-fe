@@ -95,8 +95,11 @@ export const Navigation = styled.div`
     margin-right: 4rem;
 
     .email {
-      letter-spacing: normal;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
       color: white;
     }
   }
