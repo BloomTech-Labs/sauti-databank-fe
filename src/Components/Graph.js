@@ -63,6 +63,8 @@ const Graph = props => {
         }
       ];
     } else {
+      // the download for ?filter0equalsexchangedirectioncommaundefinedzazfilter1equalseducationcommaundefinedzazfilter2equalscrossing_freqcommaWeekly
+      // is buggy
       return [
         {
           id: `${filters[0].selectedTableColumnName}`,
@@ -79,6 +81,7 @@ const Graph = props => {
       ];
     }
   };
+  // the download
   let csvFormater = data => {
     console.log("csvFormater", data, keys);
     if (Object.keys(filters).length >= 2) {
@@ -156,7 +159,8 @@ const Graph = props => {
                   <SocialMediaIconsTwitter
                     class="twitter-share-button"
                     target="_blank"
-                    href={`https://twitter.com/intent/tweet?text=http://localhost:3000/data${twitterLink}`}
+                    // https://databank.sautiafrica.org/
+                    href={`https://twitter.com/intent/tweet?text=http://databank.sautiafrica.org/data${twitterLink}`}
                   >
                     <i class="fab fa-twitter"></i>
                   </SocialMediaIconsTwitter>
