@@ -3,6 +3,7 @@ import { urlPageView } from "./GoogleAnalytics/index";
 import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "./auth/Auth";
 //import PaypalButton from "../Components/PaypalButton";
+import PaypalButton from "../Components/paypalButton";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -11,6 +12,8 @@ import swal from "sweetalert";
 
 import styled from "styled-components";
 import "../index.css";
+
+import EditModal from "./Tools/EditModal";
 
 const CANCEL_USER_SUB = gql`
   mutation updateUserToFree(
@@ -140,6 +143,9 @@ function DashAccount(props) {
                 <H1>Need More Data?</H1>
                 <P>Upgrade to our paid plan to access all material.</P>
               </Div>
+              <div>
+                <EditModal />
+              </div>
               <Div2>
                 <UserTypeContainerDiv>
                   <div>
@@ -181,6 +187,9 @@ function DashAccount(props) {
                 <H1>Need More Data?</H1>
                 <P>Upgrade to our paid plan to access all material.</P>
               </Div>
+              <div>
+                <EditModal />
+              </div>
               <Div2>
                 <UserTypeContainerDiv>
                   <div>

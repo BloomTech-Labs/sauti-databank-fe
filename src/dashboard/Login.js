@@ -27,6 +27,8 @@ import InputBase from "@material-ui/core/InputBase";
 
 import styled from "styled-components";
 
+import market from "../assets/images/market.jpg";
+
 const LOGIN = gql`
   mutation registerNewUser($login: newLoginInput!) {
     login(input: $login) {
@@ -102,7 +104,7 @@ export default function SignInSide(props) {
           <TitleContainer>
             <UnusedTitle component="h1" variant="h5">
               <FormTitle>
-                <UnusedTitleLink to="/">Sign Up</UnusedTitleLink>
+                <UnusedTitleLink to="/signup">Sign Up</UnusedTitleLink>
               </FormTitle>
             </UnusedTitle>
             <CurrentTitle component="h1" variant="h5">
@@ -123,13 +125,14 @@ export default function SignInSide(props) {
             noValidate
             onSubmit={e => handleSubmit(e, user)}
           >
+            <RequiredLabel>Email</RequiredLabel>
             <TextField
               // variant='outlined'
               margin="normal"
               fullWidth
               id="email"
               type="text"
-              label="Email"
+              // label="Email"
               name="email"
               autoComplete="email"
               value={user.email}
@@ -137,12 +140,15 @@ export default function SignInSide(props) {
               autoFocus
               InputProps={{ disableUnderline: true, className: classes.input }}
             />
+            <br />
+            <br />
+            <RequiredLabel>Password</RequiredLabel>
             <TextField
               // variant='outlined'
               margin="normal"
               fullWidth
               name="password"
-              label="Password"
+              // label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -181,8 +187,7 @@ const useStyles = makeStyles(theme => ({
     height: "100vh"
   },
   image: {
-    backgroundImage:
-      "url(https://images.unsplash.com/photo-1506506637031-5e2cabd00f30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)",
+    backgroundImage: `url(${market})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
@@ -285,9 +290,9 @@ const UnderlineDiv = styled.div`
   margin-top: 28px;
 `;
 const LineUnderTitles = styled.hr`
-  width: 100%;
-  opacity: 0.5;
-  position: relative;
+  // width: 100%;
+  // opacity: 0.5;
+  // position: relative;
 `;
 const LineUnderCurrentTitle = styled.hr`
   background-color: black;

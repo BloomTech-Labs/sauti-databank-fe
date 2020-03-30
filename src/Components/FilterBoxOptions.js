@@ -1,60 +1,28 @@
 export const FilterBoxOptions = {
-  // group these by the table(see pick of lance screenshare)
-  /*
-  some of these are selled differerntly than the versions below
-  Key Demographics
-    Primary Language
-    Country of Residence
-    Gender
-    Education
-    Age
-    Cross-Border Trade as Primary Source of Income
-    Border Crossing Frequency
-    Primary Border Crossing
-
-  Information Demand
-    Most Requested Procedures for Commodities
-    Most Requested Procedures for Commodity Categories
-    Requested Procedures for Destination (Imports to:)
-    Most Requested Document Information for Procedures
-    Most Requested Agency Information for Procedures
-   Business Behaviour
-    Final Destination Country
-    Final Destination Market
-    Top Commodity Categories
-    Top Commodities
-    Exchange Rate Direction
-
-  */
-  //  {
-  //   label:
-  // }
-  // putting any other keys in here will result in an input confliction so much use the default key for the remaining
-
   superCategories: [
     {
       label: "Key Demographics",
       options: [
         {
-          label: "Gender"
-        },
-        {
-          label: "Education Level"
+          label: "Age"
         },
         {
           label: "Border Crossing Frequency"
         },
         {
-          label: "Age"
-        },
-        {
           label: "Country of Residence"
         },
         {
-          label: "Primary Income"
+          label: "Education Level"
+        },
+        {
+          label: "Gender"
         },
         {
           label: "Language"
+        },
+        {
+          label: "Primary Income"
         },
         {
           label: "Produce"
@@ -65,6 +33,12 @@ export const FilterBoxOptions = {
       label: "Information Demand",
       options: [
         {
+          label: "Most Requested Agency Information for Procedures"
+        },
+        {
+          label: "Most Requested Document Information for Procedures"
+        },
+        {
           label: "Most Requested Procedure Commodities"
         },
         {
@@ -72,12 +46,6 @@ export const FilterBoxOptions = {
         },
         {
           label: "Requested Procedures for Destination (Imports to:)"
-        },
-        {
-          label: "Most Requested Document Information for Procedures"
-        },
-        {
-          label: "Most Requested Agency Information for Procedures"
         }
       ]
     },
@@ -85,7 +53,7 @@ export const FilterBoxOptions = {
       label: "Business Behaviour",
       options: [
         {
-          label: "Origin of Traders' Goods"
+          label: "Exchange Rate Direction"
         },
         {
           label: "Final Destination Country"
@@ -94,13 +62,13 @@ export const FilterBoxOptions = {
           label: "Final Destination Market"
         },
         {
+          label: "Origin of Traders' Goods"
+        },
+        {
           label: "Top Commodities"
         },
         {
           label: "Top Commodity Categories"
-        },
-        {
-          label: "Exchange Rate Direction"
         }
       ]
     }
@@ -175,5 +143,27 @@ export const FilterBoxOptions = {
     },
     { label: "Language", value: { type: "language", query: "Users" } },
     { label: "Produce", value: { type: "produce", query: "Users" } }
-  ]
+  ],
+  tableNamesToCategoryName: {
+    gender: "Gender",
+    education: "Education Level",
+    crossing_freq: "Border Crossing Frequency",
+    age: "Age",
+    country_of_residence: "Country of Residence",
+    primary_income: "Primary Income",
+    language: "Language",
+    produce: "Produce",
+    procedurecommodity: "Most Requested Procedure Commodities",
+    procedurecommoditycat: "Most Requested Procedure Commodity Categories",
+    proceduredest: "Requested Procedures for Destination (Imports to:)",
+    procedurerequireddocument:
+      "Most Requested Document Information for Procedures",
+    procedurerelevantagency: "Most Requested Agency Information for Procedures",
+    procedureorigin: "Origin of Traders' Goods",
+    commoditycountry: "Final Destination Country",
+    commoditymarket: "Final Destination Market",
+    commodityproduct: "Top Commodities",
+    commoditycat: "Top Commodity Categories",
+    exchangedirection: "Exchange Rate Direction"
+  }
 };

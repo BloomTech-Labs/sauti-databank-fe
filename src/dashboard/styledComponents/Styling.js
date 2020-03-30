@@ -24,14 +24,21 @@ export const ContentContainer = styled.div`
   margin: 0 auto;
   font-family: Montserrat;
 `;
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 export const TopBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #212121;
   width: 100%;
-  height: 70px;
+  height: 7rem;
+  background: #2c2e32;
 `;
+
 export const AccountDiv = styled.div`
   margin: 0% 0% 0% 0.75%;
 `;
@@ -53,6 +60,7 @@ export const AccountLinks = styled(Link)`
 `;
 // Sauti Logo in Nav Styling
 export const SautiLogo = styled.div`
+  align-items: center;
   font-family: Montserrat;
   font-size: 3rem;
   font-weight: 1000;
@@ -75,20 +83,40 @@ export const SautiDot = styled.span`
 // Nav and Links Styling
 export const Navigation = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-evenly;
+  .loggedInAs {
+    text-transform: uppercase;
+    color: white;
+    margin-right: 40px;
+    font-family: Helvetica;
+    font-size: 1.4rem;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 1px;
+
+    .email {
+      letter-spacing: normal;
+      font-size: 1.4rem;
+      color: #eb5e52;
+    }
+  }
 `;
 export const Links = styled(Link)`
   text-decoration: none;
   color: white;
   margin-right: 40px;
-  font-family: Helvetica;
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-family: Montserrat;
+  font-size: 1.4rem;
+  font-weight: 1000;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: normal;
-  &: hover {
+  letter-spacing: 1px;
+  &:hover {
     color: #eb5e52;
   }
 `;
@@ -103,7 +131,7 @@ export const LinksLast = styled(Link)`
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  &: hover {
+  &:hover {
     color: #eb5e52;
   }
 `;

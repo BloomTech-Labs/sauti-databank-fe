@@ -5,84 +5,30 @@ import ReactGa from "react-ga";
 import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams, useHistory } from "react-router-dom";
+
 import Queries from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
 import styled from "styled-components";
+import swal from "sweetalert";
+import ClipboardJS from "clipboard";
+import graphLabels from "./Components/graphLabels";
 
-const GraphContainer = () => {
-  const [filters, setFilters] = useState({
-    // old plan
-    // default query setup
-    // show or hide is only for the first one
-    // check with russ about changes
-    // first one: show or hide
-    // second one: always hide
-    // all rest: always show
-    0: {
-      nameOfFilter: "Data Series",
-      selectedCategory: "Gender", // label
-      selectedOption: undefined,
-      avaliableOptions: [],
-      selectableOptions: {
-        Female: false,
-        male: false
-      },
-      selectedTable: "Users", // value.query
-      selectedTableColumnName: "gender", // value.type
-      showOptions: false
-    },
+import { getAvaliableOptions, getSelectedOption } from "./OptionFunctions";
 
-    1: {
-      nameOfFilter: "Compare SubSamples",
-      selectedCategory: "",
-      selectedOption: undefined,
-      avaliableOptions: [],
-      selectableOptions: {},
-      selectedTable: "Users",
-      selectedTableColumnName: "",
-      showOptions: false
-    },
-    2: {
-      nameOfFilter: "Data Filter",
-      selectedCategory: "",
-      selectedOption: undefined,
-      avaliableOptions: [],
-      selectableOptions: {},
-      selectedTable: "",
-      selectedTableColumnName: "",
-      showOptions: false
-    }
-  });
-  // put the date here
+const GraphContainer = props => {
+  const [url, setUrl] = useState("");
+  const [filters, setFilters] = useState(props.filters);
+
   const {
     filterBoxStartDate,
     setFilterBoxStartDate,
     filterBoxEndDate,
-    setFilterBoxEndDate
+    setFilterBoxEndDate,
+    changeYear,
+    changeQuarter,
+    getCurrentYear
   } = useCalendar();
-
-  /*
-breaks search(creates an undefined search)
-{0: {…}, 1: {…}, 2: {…}}
-0:
-selectedTableColumnName: "crossing_freq"
-selectedTable: "Users"
-selectedCategory: "Border Crossing Frequency"
-selectedOption: undefined
-__proto__: Object
-1:
-selectedCategory: ""
-selectedOption: undefined
-selectedTable: ""
-selectedTableColumnName: ""
-__proto__: Object
-2:
-selectedCategory: "Most Requested Procedure Commodity Categories"
-selectedOption: undefined
-selectedTable: "Sessions"
-selectedTableColumnName: "procedurecommoditycat"
-*/
 
   const [hidden, setHidden] = useState(false);
 
@@ -90,17 +36,25 @@ selectedTableColumnName: "procedurecommoditycat"
     setHidden(!hidden);
   }
 
+  const clipboard = new ClipboardJS(".btn", {
+    text: function() {
+      return document.location.href;
+    }
+  });
+  clipboard.on("success", function(e) {
+    swal({ title: "", text: "copied url!", icon: "success" });
+  });
+  // ?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalscountry_of_residencecommaKENzazfilter4equalsundefinedcommaundefined
   return (
     <div className="App">
       <div className="main-container">
-        <TopBar className="header">
+        <div className="header">
           <h1>Informal Cross-Border Trade Data</h1>
-          <FilterHideButton onClick={HideFilters}>
-            {hidden ? <p>Show Filters</p> : <p>Hide Filters</p>}
-          </FilterHideButton>
-        </TopBar>
+        </div>
         <div className="content-container">
-          <div className={hidden ? "extend" : "chart-container"}>
+          <ContentContainerDiv
+            className={hidden ? "extend" : "chart-container"}
+          >
             <Queries
               filters={filters}
               filterBoxStartDate={filterBoxStartDate}
@@ -108,8 +62,12 @@ selectedTableColumnName: "procedurecommoditycat"
               filterBoxEndDate={filterBoxEndDate}
               setFilterBoxEndDate={setFilterBoxEndDate}
             />
-          </div>
-          {/* can put a hide/show button here */}
+          </ContentContainerDiv>
+          <SocialMediaContainer className="social-media-container">
+            <FilterHideButton onClick={HideFilters}>
+              {hidden ? <p>◀</p> : <p>▶</p>}
+            </FilterHideButton>
+          </SocialMediaContainer>
           <div
             className={
               hidden ? "dropdown-container hide" : "dropdown-container"
@@ -122,6 +80,9 @@ selectedTableColumnName: "procedurecommoditycat"
               setFilterBoxStartDate={setFilterBoxStartDate}
               filterBoxEndDate={filterBoxEndDate}
               setFilterBoxEndDate={setFilterBoxEndDate}
+              changeYear={changeYear}
+              changeQuarter={changeQuarter}
+              getCurrentYear={getCurrentYear}
             />
           </div>
         </div>
@@ -133,21 +94,71 @@ selectedTableColumnName: "procedurecommoditycat"
 export default withRouter(GraphContainer);
 
 const FilterHideButton = styled.button`
-  padding: 20px;
-  width: 200px;
-  border: 2px solid #eb5e52;
-  border-radius: 5px;
-  background-color: #eb5e52;
+  padding: 8px 5px;
+  background: slategrey;
+  font-weight: 400;
   color: white;
-  margin-right: 20px;
-  transition: 0.5s ease;
-  &:hover {
-    background-color: white;
-    color: black;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  height: 95px;
+  opacity: 0.75;
+  border: none;
+  position: absolute;
+  &: hover {
     cursor: pointer;
+    opacity: 1;
   }
 `;
-const TopBar = styled.div`
+const SocialMediaContainer = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  border-right: 1px;
+  padding: 5px;
+  margin-bottom: 5px;
 `;
+const SocialMediaIconsTwitter = styled.a`
+  font-size: 2.5rem;
+  margin: 0 10px;
+  color: rgb(0, 172, 238);
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+  }
+`;
+const SocialMediaIconsFacebook = styled.a`
+  font-size: 2.5rem;
+  margin: 0 10px;
+  color: rgb(59, 89, 152);
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const CopyUrlButton = styled.button`
+  padding: 8px 5px;
+  background: #47837f;
+  font-weight: 400;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  width: 95px;
+  opacity: 0.75;
+  border: none;
+  margin: 0 15px;
+  &: hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+`;
+const ContentContainerDiv = styled.div`
+  // border-right: 1px solid lightgrey;
+  margin-right: 2px;
+`;
+const IconContainer = styled.span`
+  display: flex;
+  font-size: 1.8rem;
+  align-items: center;
+`;
+const ShareDiv = styled.div``;
