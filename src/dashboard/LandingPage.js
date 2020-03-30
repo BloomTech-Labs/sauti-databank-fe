@@ -2,11 +2,13 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { LandingPageStyles } from "./styledComponents/LandingPage";
 import Image from "./Images/AfricaImageOne.jpg";
-import GraphLine from "./Images/LineGraph";
+import BarGraph from "./Images/BarGraph";
 import SearchSVG from "./Images/Search";
+import DashboardSVG from "./Images/DashboardSVG";
 import GraphImageDiv from "./styledComponents/GraphImageDiv";
 
 const LandingPage = props => {
+  let thisLocation = props.history.location.pathname;
   const history = useHistory();
   const handleReturn = e => {
     e.preventDefault();
@@ -47,7 +49,7 @@ const LandingPage = props => {
             <div className="bot-col-disc">
               <p>
                 Sauti Databank is an organization that collects data from
-                cross-border African traders, bringing reliable information of
+                cross-border African traders, bringing reliable information to
                 researchers and government officials
               </p>
             </div>
@@ -65,7 +67,7 @@ const LandingPage = props => {
         <div className="landing-page-row-col-bot-two">
           <div className="bot-two-row">
             <div className="bot-two-col">
-              <GraphLine />
+              <DashboardSVG />
               <div className="col-header">
                 <h2>Dashboard</h2>
               </div>
@@ -77,7 +79,7 @@ const LandingPage = props => {
               </div>
             </div>
             <div className="bot-two-col">
-              <GraphLine />
+              <BarGraph />
               <div className="col-header">
                 <h2>Data</h2>
               </div>

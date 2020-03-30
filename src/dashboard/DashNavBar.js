@@ -11,6 +11,7 @@ import DashLogout from "./DashLogout";
 import Login from "./Login";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { getToken, decodeToken } from "./auth/Auth";
+import UserSVG from "./Images/UserSVG";
 
 import {
   TopBar,
@@ -42,10 +43,13 @@ function DashNav() {
     tier = tokenDecoded.tier;
   }
 
+  const isLandingPage = window.location.href ? "http://localhost:3000/" : null;
+  console.log(isLandingPage, "IS LANDING PAGE");
+
   return (
     <>
       <Container>
-        <TopBar>
+        <TopBar LandingPage={LandingPage.props}>
           <SautiLogo>
             <ReactGA.OutboundLink
               style={{ textDecoration: "none" }}
@@ -67,9 +71,10 @@ function DashNav() {
             {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
             {SignedIn && <Links to="/logout">LOGOUT</Links>}
             {SignedIn && (
-              <span className="loggedInAs">
-                User: <span className="email">{email}</span>
-              </span>
+              <div className="loggedInAs">
+                <UserSVG />
+                <span className="email">{email}</span>
+              </div>
             )}
           </Navigation>
         </TopBar>

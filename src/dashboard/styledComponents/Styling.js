@@ -37,6 +37,7 @@ export const TopBar = styled.div`
   width: 100%;
   height: 7rem;
   background: #2c2e32;
+  background: ${props => console.log(props.LandingPage, "INSIDE STYLING")};
 `;
 
 export const AccountDiv = styled.div`
@@ -86,22 +87,17 @@ export const Navigation = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+
   .loggedInAs {
-    text-transform: uppercase;
-    color: white;
-    margin-right: 40px;
-    font-family: Helvetica;
-    font-size: 1.4rem;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4rem;
 
     .email {
       letter-spacing: normal;
-      font-size: 1.4rem;
-      color: #eb5e52;
+      font-size: 1.5rem;
+      color: white;
     }
   }
 `;
