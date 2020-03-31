@@ -16,6 +16,7 @@ import CheckBox from "./CheckBox";
 
 const LineGraph = ({ data, filter0 }) => {
   console.log(data.sessionsData);
+
   let lineArray = data.sessionsData;
 
   //Make an array of x values
@@ -39,14 +40,14 @@ const LineGraph = ({ data, filter0 }) => {
   console.log(lineArray);
   // eliminate null values
   const lineNonNull = [];
-  if (lineArray.length > 0) {
-    for (let i = 0; i < lineArray.length; i++) {
-      //console.log(lineArray[i][selectedTableColumnName])
-      if (lineArray[i][selectedTableColumnName] !== null) {
-        lineNonNull.push(lineArray[i]);
-      }
+
+  for (let i = 0; i < lineArray.length; i++) {
+    //console.log(lineArray[i][selectedTableColumnName])
+    if (lineArray[i][selectedTableColumnName] !== null) {
+      lineNonNull.push(lineArray[i]);
     }
   }
+
   console.log(lineNonNull);
   //convert date to year-month
   lineNonNull.map(item => {

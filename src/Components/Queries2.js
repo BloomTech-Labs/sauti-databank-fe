@@ -9,7 +9,7 @@ import graphLabels from "./graphLabels";
 import removeMultiple from "../DataParseHelpers/removeMultiple";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
-import LineGraph from "./LineGraph";
+import LineGraphButton from "./LineGraphButton";
 
 const GetData = props => {
   let queryType = "tradersUsers";
@@ -180,11 +180,12 @@ const GetData = props => {
         );
       });
   };
+
   if (filters[1].selectedTableColumnName !== "") {
-    console.log("graph184");
+    //console.log("graph184");
     return (
       <>
-        <LineGraph data={data} filter1={filters[1]} />
+        <LineGraphButton data={data} filter0={filters[0]} />
         <div className="graph-titles-container">
           <div className="graph-title-diplay">
             <h1 className="graph-title">Data Series</h1>
@@ -216,7 +217,7 @@ const GetData = props => {
   } else {
     return (
       <>
-        <LineGraph data={data} filter0={filters[0]} />
+        <LineGraphButton data={data} filter0={filters[0]} />
         <div className="graph-titles-container">
           <div className="graph-title-diplay">
             <h1 className="graph-title">Data Series</h1>
