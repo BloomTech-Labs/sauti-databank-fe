@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { useState } from "react";
 import {
   LineChart,
   Line,
@@ -9,6 +9,8 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
+
+import CheckBox from "./CheckBox";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -21,19 +23,28 @@ const LineGraph = ({ data, filter0 }) => {
   console.log(filter0);
   console.log(keysArray);
   console.log(typeof keysArray);
-  for (let i = 0; i < keysArray; i++) {
-    console.log(keysArray[i]);
+  //make checkboxes for graph
+  const checkboxes = [];
+  for (let i = 0; i < keysArray.length; i++) {
+    checkboxes.push({
+      name: keysArray[i],
+      key: `checkbox[i]`,
+      label: keysArray[i]
+    });
   }
+
   //get selected Table ColumnName
   const selectedTableColumnName = filter0.selectedTableColumnName;
   console.log(filter0.selectedTableColumnName);
   console.log(lineArray);
   // eliminate null values
   const lineNonNull = [];
-  for (let i = 0; i < lineArray.length; i++) {
-    //console.log(lineArray[i][selectedTableColumnName])
-    if (lineArray[i][selectedTableColumnName] !== null) {
-      lineNonNull.push(lineArray[i]);
+  if (lineArray.length > 0) {
+    for (let i = 0; i < lineArray.length; i++) {
+      //console.log(lineArray[i][selectedTableColumnName])
+      if (lineArray[i][selectedTableColumnName] !== null) {
+        lineNonNull.push(lineArray[i]);
+      }
     }
   }
   console.log(lineNonNull);
@@ -116,6 +127,39 @@ const LineGraph = ({ data, filter0 }) => {
   console.log(datesAmounts);
 
   //combine date and quantity of cat
+  // let currentYM = "2017-01";
+  // const dateCatArray = [];
+  // let objectCombined = {};
+  // function combineAmountsToDates(o) {
+  //   for (let key of Object.keys(o)) {
+  //     let yearMo = key.slice(0, 7);
+  //     let cat = key.slice(7, 20);
+  //     let obj = {};
+  //     obj["date"] = yearMo;
+  //     obj[cat] = o[key];
+  //     let currentObj = {};
+  //     currentObj[cat] = o[key];
+
+  //     dateObj = {};
+  //     dateObj["date"] = currentYM;
+  //     //console.log('currentYM', currentYM)
+  //     //console.log('yearMo', yearMo)
+  //     if (yearMo === currentYM) {
+  //       objectCombined = {
+  //         ...dateObj,
+  //         ...objectCombined,
+  //         ...currentObj
+  //       };
+  //       dateCatArray.push(objectCombined);
+  //     } else {
+  //       currentYM = yearMo;
+  //       console.log(obj)
+  //       dateCatArray.push(obj);
+  //     }
+  //   }
+  // }
+
+  //combine date and quantity of cat
   let currentYM = "2017-01";
   const dateCatArray = [];
   let objectCombined = {};
@@ -126,7 +170,6 @@ const LineGraph = ({ data, filter0 }) => {
       let obj = {};
       obj["date"] = yearMo;
       obj[cat] = o[key];
-
       let currentObj = {};
       currentObj[cat] = o[key];
 
@@ -134,32 +177,56 @@ const LineGraph = ({ data, filter0 }) => {
       dateObj["date"] = currentYM;
       //console.log('currentYM', currentYM)
       //console.log('yearMo', yearMo)
-      if (yearMo === currentYM) {
-        objectCombined = {
-          ...dateObj,
-          ...objectCombined,
-          ...currentObj
-        };
-        dateCatArray.push(objectCombined);
-      } else {
-        currentYM = yearMo;
-        dateCatArray.push(obj);
-      }
+      // if (yearMo === currentYM) {
+      //   objectCombined = {
+      //     ...dateObj,
+      //     ...objectCombined,
+      //     ...currentObj
+      //   };
+      //   dateCatArray.push(objectCombined);
+      // } else {
+      currentYM = yearMo;
+      console.log(obj);
+      dateCatArray.push(obj);
+      // }
     }
   }
 
   combineAmountsToDates(datesAmounts);
+  console.log(datesAmounts);
   console.log(dateCatArray);
   console.log(typeof dateCatArray);
 
   //combine together to create object
+  let usedDates = [];
+  let itemDate = {};
+  let allCombined = [];
   for (let i = 0; i < dateCatArray.length; i++) {
     let date = dateCatArray[i].date;
-    let currentDate = dateCatArray[i - 1];
-    if (data === currentDate) {
-      console.log(currentDate);
+
+    if (usedDates.includes(date)) {
+      console.log("included");
+      itemDate = {
+        ...itemDate,
+        ...dateCatArray[i]
+      };
+      allCombined.push(itemDate);
+      console.log(itemDate);
+    } else {
+      console.log("not included");
+      let arraykeys = Object.keys(dateCatArray[i]);
+      let arrayValues = Object.values(dateCatArray[i]);
+      console.log(arraykeys);
+      let newDate = {};
+      newDate["date"] = date;
+      newDate[arraykeys[1]] = arrayValues[1];
+      console.log(newDate);
+      itemDate = newDate;
+      usedDates.push(date);
+      allCombined.push(itemDate);
     }
   }
+  console.log(allCombined);
 
   var arrangedData = {};
   const newDateArra = dateCatArray.map(function(v, i) {
@@ -195,31 +262,60 @@ const LineGraph = ({ data, filter0 }) => {
 
   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
+  const [checkedItems, setCheckedItems] = useState(new Map());
+
+  // const CheckBoxHandle = e => {
+  //   const item = e.target.name,
+  //   const isChecked = e.target.checked;
+  //   setChecked(prevState => ({ checkedItems: prevState.setChecked(item, isChecked) }));
+  // }
+  const handleChange = event => {
+    setCheckedItems(checkedItems =>
+      checkedItems.set(event.target.name, event.target.checked)
+    );
+    console.log("checkedItems: ", checkedItems);
+  };
+
   return (
-    <LineChart
-      width={800}
-      height={500}
-      data={dateCatArray}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="date" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line
+    <>
+      <LineChart
+        width={800}
+        height={500}
+        data={allCombined}
+        // data={dateCatArray}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="date" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        {/* <Line
         type="monotone"
-        dataKey="Beans"
+        dataKey="Millet"
         stroke="#8884d8"
         activeDot={{ r: 8 }}
       />
-      <Line type="monotone" dataKey="Peas" stroke="#82ca9d" />
-    </LineChart>
+      <Line type="monotone" dataKey="Peas" stroke="#82ca9d" /> */}
+        <Line type="monotone" dataKey="Uganda Revenu" stroke="#8875d9" />
+      </LineChart>
+      <React.Fragment>
+        {checkboxes.map(option => (
+          <label key={option.key}>
+            <CheckBox
+              name={option.name}
+              checked={checkedItems.get(option.name)}
+              onChange={handleChange}
+            />
+          </label>
+        ))}
+      </React.Fragment>
+    </>
   );
 };
 
