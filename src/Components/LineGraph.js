@@ -262,18 +262,23 @@ const LineGraph = ({ data, filter0 }) => {
 
   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
-  const [checkedItems, setCheckedItems] = useState(new Map());
+  const [checkedItems, setCheckedItems] = useState({});
+  console.log(`const checkedItems`, checkedItems);
 
-  // const CheckBoxHandle = e => {
-  //   const item = e.target.name,
-  //   const isChecked = e.target.checked;
-  //   setChecked(prevState => ({ checkedItems: prevState.setChecked(item, isChecked) }));
-  // }
+  //checkboxs to display individual lines
   const handleChange = event => {
-    setCheckedItems(checkedItems =>
-      checkedItems.set(event.target.name, event.target.checked)
-    );
+    console.log(event.target.checked);
+    console.log(checkedItems);
+    console.log(Object.keys(checkedItems));
+    setCheckedItems({
+      ...checkedItems,
+      [event.target.name]: event.target.checked
+    });
     console.log("checkedItems: ", checkedItems);
+  };
+
+  const handleReset = event => {
+    setCheckedItems({});
   };
 
   return (
@@ -302,16 +307,18 @@ const LineGraph = ({ data, filter0 }) => {
         activeDot={{ r: 8 }}
       />
       <Line type="monotone" dataKey="Peas" stroke="#82ca9d" /> */}
-        <Line type="monotone" dataKey="Uganda Revenu" stroke="#8875d9" />
+        <Line type="monotone" dataKey="" stroke="#8875d9" />
       </LineChart>
+      <button onClick={handleReset}>Reset</button>
       <React.Fragment>
         {checkboxes.map(option => (
           <label key={option.key}>
             <CheckBox
               name={option.name}
-              checked={checkedItems.get(option.name)}
+              checked={checkedItems[option.name]}
               onChange={handleChange}
             />
+            {option.name}
           </label>
         ))}
       </React.Fragment>
