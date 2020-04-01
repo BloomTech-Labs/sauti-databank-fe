@@ -2,6 +2,8 @@
 
 :root {
   font-size: 62.5%;
+  /* maybe put media query here */
+  width: 900px;
 }
 
 body {
@@ -19,6 +21,7 @@ code {
 }
 
 .App {
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
