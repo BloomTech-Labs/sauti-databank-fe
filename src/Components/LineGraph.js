@@ -48,7 +48,8 @@ const LineGraph = ({ data, filter0 }) => {
     }
   }
 
-  console.log(lineNonNull);
+  // console.log(lineNonNull);
+
   //convert date to year-month
   lineNonNull.map(item => {
     item["created_date"] = item.created_date.substring(0, 7);
@@ -134,7 +135,7 @@ const LineGraph = ({ data, filter0 }) => {
   function combineAmountsToDates(o) {
     for (let key of Object.keys(o)) {
       let yearMo = key.slice(0, 7);
-      let cat = key.slice(7, 20);
+      let cat = key.slice(7, 100);
       let obj = {};
       obj["date"] = yearMo;
       obj[cat] = o[key];
@@ -153,6 +154,7 @@ const LineGraph = ({ data, filter0 }) => {
   combineAmountsToDates(datesAmounts);
   // console.log(datesAmounts);
   console.log(dateCatArray);
+  console.log(Object.values(dateCatArray));
   // console.log(typeof dateCatArray);
 
   //combine together to create object
@@ -255,6 +257,8 @@ const LineGraph = ({ data, filter0 }) => {
   const three = display[3];
   const four = display[4];
   const five = display[5];
+
+  //zero = 'Cereals - Ric'
 
   //checkboxs to display individual lines
   const handleChange = event => {

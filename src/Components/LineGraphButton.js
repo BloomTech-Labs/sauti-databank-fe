@@ -11,14 +11,6 @@ const LineGraphButton = ({ sdata, filter0 }) => {
   console.log(filter0.selectedCategory);
   console.log(filter0.selectedTableColumnName);
 
-  // const QUERY = gql`
-  // query getData($queryTraders: newTraderSessionInput){
-  //       sessionsData (input: $queryTraders){
-  //       filter0.selectedTableColumnName
-  //       created_date
-  //     }
-  //   }`
-
   const SESSIONS_QUERY = gql`
 query getData {
   sessionsData {
