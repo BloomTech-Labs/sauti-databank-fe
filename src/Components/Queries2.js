@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Graph from "./Graph";
@@ -10,8 +10,15 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
 import LineGraphButton from "./LineGraphButton";
+import LineGraph from "./LineGraph";
 
 const GetData = props => {
+  //LineGraph button
+  const [open, setOpen] = useState(false);
+  const buttonHandle = e => {
+    setOpen(!open);
+  };
+
   let queryType = "tradersUsers";
   let QUERY;
   let thisQuery;
@@ -181,11 +188,15 @@ const GetData = props => {
       });
   };
 
-  if (filters[1].selectedTableColumnName !== "") {
+  if (filters[1].selectedTableColumnName !== "" && open === false) {
     //console.log("graph184");
     return (
       <>
-        <LineGraphButton sdata={data} filter0={filters[0]} />
+        <LineGraphButton
+          buttonHandle={buttonHandle}
+          sdata={data}
+          filter0={filters[0]}
+        />
         <div className="graph-titles-container">
           <div className="graph-title-diplay">
             <h1 className="graph-title">Data Series</h1>
@@ -214,10 +225,14 @@ const GetData = props => {
         />
       </>
     );
-  } else {
+  } else if (open === false) {
     return (
       <>
-        <LineGraphButton sdata={data} filter0={filters[0]} />
+        <LineGraphButton
+          buttonHandle={buttonHandle}
+          sdata={data}
+          filter0={filters[0]}
+        />
         <div className="graph-titles-container">
           <div className="graph-title-diplay">
             <h1 className="graph-title">Data Series</h1>
@@ -250,6 +265,10 @@ const GetData = props => {
           tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
         />
       </>
+    );
+  } else {
+    return (
+      <LineGraph data={data} filter0={filters[0]} buttonHandle={buttonHandle} />
     );
   }
 };

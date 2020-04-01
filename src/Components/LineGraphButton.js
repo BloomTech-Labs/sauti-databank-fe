@@ -5,11 +5,11 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Loader from "react-loader-spinner";
 
-const LineGraphButton = ({ sdata, filter0 }) => {
+const LineGraphButton = ({ sdata, filter0, buttonHandle }) => {
   const [open, setOpen] = useState(false);
 
-  console.log(filter0.selectedCategory);
-  console.log(filter0.selectedTableColumnName);
+  // console.log(filter0.selectedCategory);
+  // console.log(filter0.selectedTableColumnName);
 
   const SESSIONS_QUERY = gql`
 query getData {
@@ -39,15 +39,23 @@ query getData {
     return <p>error</p>;
   }
 
-  const buttonHandle = e => {
-    setOpen(!open);
+  const renderUpdate = buttonHandle => {
+    if (buttonHandle) {
+      return (
+        <LineGraph data={sdata} filter0={filter0} buttonHandle={buttonHandle} />
+      );
+    } else {
+      return null;
+    }
   };
+
+  console.log(sdata.sessionsData);
   if (sdata.sessionsData) {
     return (
       <>
         <button onClick={buttonHandle}>
           Display Line Graph
-          <LineGraph data={sdata} filter0={filter0} />
+          {renderUpdate()}
         </button>
       </>
     );

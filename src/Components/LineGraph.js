@@ -14,7 +14,7 @@ import CheckBox from "./CheckBox";
 
 // Data Series will need to be Sessions for chart to work
 
-const LineGraph = ({ data, filter0 }) => {
+const LineGraph = ({ data, filter0, buttonHandle }) => {
   console.log(data.sessionsData);
 
   let lineArray = data.sessionsData;
@@ -274,6 +274,7 @@ const LineGraph = ({ data, filter0 }) => {
 
   return (
     <>
+      <button onClick={buttonHandle}>Display Bar Chart</button>
       <LineChart
         width={1000}
         height={400}
