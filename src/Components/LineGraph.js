@@ -21,9 +21,9 @@ const LineGraph = ({ data, filter0 }) => {
 
   //Make an array of x values
   const keysArray = Object.keys(filter0.selectableOptions);
-  console.log(filter0);
-  console.log(keysArray);
-  console.log(typeof keysArray);
+  // console.log(filter0);
+  // console.log(keysArray);
+  // console.log(typeof keysArray);
   //make checkboxes for graph
   const checkboxes = [];
   for (let i = 0; i < keysArray.length; i++) {
@@ -36,8 +36,8 @@ const LineGraph = ({ data, filter0 }) => {
 
   //get selected Table ColumnName
   const selectedTableColumnName = filter0.selectedTableColumnName;
-  console.log(filter0.selectedTableColumnName);
-  console.log(lineArray);
+  // console.log(filter0.selectedTableColumnName);
+  // console.log(lineArray);
   // eliminate null values
   const lineNonNull = [];
 
@@ -128,39 +128,6 @@ const LineGraph = ({ data, filter0 }) => {
   console.log(datesAmounts);
 
   //combine date and quantity of cat
-  // let currentYM = "2017-01";
-  // const dateCatArray = [];
-  // let objectCombined = {};
-  // function combineAmountsToDates(o) {
-  //   for (let key of Object.keys(o)) {
-  //     let yearMo = key.slice(0, 7);
-  //     let cat = key.slice(7, 20);
-  //     let obj = {};
-  //     obj["date"] = yearMo;
-  //     obj[cat] = o[key];
-  //     let currentObj = {};
-  //     currentObj[cat] = o[key];
-
-  //     dateObj = {};
-  //     dateObj["date"] = currentYM;
-  //     //console.log('currentYM', currentYM)
-  //     //console.log('yearMo', yearMo)
-  //     if (yearMo === currentYM) {
-  //       objectCombined = {
-  //         ...dateObj,
-  //         ...objectCombined,
-  //         ...currentObj
-  //       };
-  //       dateCatArray.push(objectCombined);
-  //     } else {
-  //       currentYM = yearMo;
-  //       console.log(obj)
-  //       dateCatArray.push(obj);
-  //     }
-  //   }
-  // }
-
-  //combine date and quantity of cat
   let currentYM = "2017-01";
   const dateCatArray = [];
   let objectCombined = {};
@@ -176,27 +143,17 @@ const LineGraph = ({ data, filter0 }) => {
 
       dateObj = {};
       dateObj["date"] = currentYM;
-      //console.log('currentYM', currentYM)
-      //console.log('yearMo', yearMo)
-      // if (yearMo === currentYM) {
-      //   objectCombined = {
-      //     ...dateObj,
-      //     ...objectCombined,
-      //     ...currentObj
-      //   };
-      //   dateCatArray.push(objectCombined);
-      // } else {
       currentYM = yearMo;
-      console.log(obj);
+      // console.log(obj);
       dateCatArray.push(obj);
       // }
     }
   }
 
   combineAmountsToDates(datesAmounts);
-  console.log(datesAmounts);
+  // console.log(datesAmounts);
   console.log(dateCatArray);
-  console.log(typeof dateCatArray);
+  // console.log(typeof dateCatArray);
 
   //combine together to create object
   let usedDates = [];
@@ -206,22 +163,23 @@ const LineGraph = ({ data, filter0 }) => {
     let date = dateCatArray[i].date;
 
     if (usedDates.includes(date)) {
-      console.log("included");
+      //console.log("included");
       itemDate = {
         ...itemDate,
         ...dateCatArray[i]
       };
       allCombined.push(itemDate);
-      console.log(itemDate);
+      //console.log(itemDate);
     } else {
+      // allCombined.push(itemDate);
       console.log("not included");
       let arraykeys = Object.keys(dateCatArray[i]);
       let arrayValues = Object.values(dateCatArray[i]);
-      console.log(arraykeys);
+      // console.log(arraykeys);
       let newDate = {};
       newDate["date"] = date;
       newDate[arraykeys[1]] = arrayValues[1];
-      console.log(newDate);
+      //console.log(newDate);
       itemDate = newDate;
       usedDates.push(date);
       allCombined.push(itemDate);
@@ -229,13 +187,28 @@ const LineGraph = ({ data, filter0 }) => {
   }
   console.log(allCombined);
 
+  //   if($date[i] == $date[i+1]) {
+  //     //push date to array
+  // }
+
+  let enterDate = [];
+  let updated = [];
+  for (let i = 0; i < allCombined.length; i++) {
+    if (
+      i + 1 < allCombined.length &&
+      allCombined[i].date !== allCombined[i + 1].date
+    ) {
+      updated.push(allCombined[i]);
+    }
+  }
+  console.log(updated);
+  console.log(itemDate);
+
   var arrangedData = {};
   const newDateArra = dateCatArray.map(function(v, i) {
     //console.log(v)
     let currentDate = v["date"];
-    //  let obj = {}
-    //  obj['date'] = currentDate
-    //  console.log(obj)
+
     for (let i = 0; i < dateCatArray.length; i++)
       if (dateCatArray[i]["date"] === currentDate) {
         // console.log(Object.keys(v))
@@ -263,19 +236,32 @@ const LineGraph = ({ data, filter0 }) => {
 
   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
-  const [checkedItems, setCheckedItems] = useState({});
-  console.log(`const checkedItems`, checkedItems);
+  const [checkedItems, setCheckedItems] = useState([]);
+
+  let display = [];
+  if (Object.entries(checkedItems).length > 0) {
+    for (let i = 0; i < Object.entries(checkedItems).length; i++) {
+      let bbb = Object.entries(checkedItems)[i];
+      if (bbb.includes(true)) {
+        display.push(bbb[0]);
+      }
+    }
+  }
+
+  // items to display on line chart
+  const zero = display[0];
+  const one = display[1];
+  const two = display[2];
+  const three = display[3];
+  const four = display[4];
+  const five = display[5];
 
   //checkboxs to display individual lines
   const handleChange = event => {
-    console.log(event.target.checked);
-    console.log(checkedItems);
-    console.log(Object.keys(checkedItems));
     setCheckedItems({
       ...checkedItems,
       [event.target.name]: event.target.checked
     });
-    console.log("checkedItems: ", checkedItems);
   };
 
   const handleReset = event => {
@@ -285,10 +271,10 @@ const LineGraph = ({ data, filter0 }) => {
   return (
     <>
       <LineChart
-        width={800}
-        height={500}
-        data={allCombined}
-        // data={dateCatArray}
+        width={1000}
+        height={400}
+        data={updated}
+        //data={allCombined}
         margin={{
           top: 5,
           right: 30,
@@ -301,14 +287,17 @@ const LineGraph = ({ data, filter0 }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        {/* <Line
-        type="monotone"
-        dataKey="Millet"
-        stroke="#8884d8"
-        activeDot={{ r: 8 }}
-      />
-      <Line type="monotone" dataKey="Peas" stroke="#82ca9d" /> */}
-        <Line type="monotone" dataKey="" stroke="#8875d9" />
+        <Line
+          type="monotone"
+          dataKey={zero}
+          stroke="blue"
+          dot={false}
+          // activeDot={{ r: 8 }}
+        />
+        <Line type="monotone" dataKey={one} stroke="purple" dot={false} />
+        <Line type="monotone" dataKey={two} stroke="orange" dot={false} />
+        <Line type="monotone" dataKey={three} stroke="green" dot={false} />
+        <Line type="monotone" dataKey={four} stroke="red" dot={false} />
       </LineChart>
       <button onClick={handleReset}>Reset</button>
       <React.Fragment>

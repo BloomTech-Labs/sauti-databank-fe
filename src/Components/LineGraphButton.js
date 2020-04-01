@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import LineGraph from "./LineGraph";
 
 const LineGraphButton = ({ data, filter0 }) => {
-  console.log(data.sessionsData);
-  if (data.sessionsData.length > 0) {
-    console.log("first");
+  const [open, setOpen] = useState(false);
+
+  const buttonHandle = e => {
+    setOpen(!open);
+  };
+  if (data.sessionsData) {
     return (
       <>
-        <LineGraph data={data} filter0={filter0} />
+        <button onClick={buttonHandle}>
+          Display Line Graph
+          <LineGraph data={data} filter0={filter0} />
+        </button>
       </>
     );
   } else {
