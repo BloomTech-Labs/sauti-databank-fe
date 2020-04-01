@@ -63,6 +63,8 @@ const Graph = props => {
         }
       ];
     } else {
+      // the download for ?filter0equalsexchangedirectioncommaundefinedzazfilter1equalseducationcommaundefinedzazfilter2equalscrossing_freqcommaWeekly
+      // is buggy
       return [
         {
           id: `${filters[0].selectedTableColumnName}`,
@@ -79,8 +81,32 @@ const Graph = props => {
       ];
     }
   };
+  // the download
   let csvFormater = data => {
-    console.log("csvFormater", data, keys);
+    console.log("csvFormater", data, keys, filters);
+    // the subsample case is messed up
+    // if the user selected a subsample
+    if (filters[1].selectedCategory.length > 0) {
+      // clean up the duplicate rows containing dataItem[filters[0].selectedTableColumnName]] as a value
+      let newData = [];
+      let newDataCache = {};
+      data.forEach(dataItem => {
+        // if dataItem[filters[0].selectedTableColumnName] is in object.keys(newDataCache)
+        // assume dataItem[filters[0].selectedTableColumnName] exists
+        if (!newDataCache[dataItem[filters[0].selectedTableColumnName]]) {
+          newData = [...newData, dataItem];
+          newDataCache = {
+            ...newDataCache,
+            [dataItem[filters[0].selectedTableColumnName]]: 1
+          };
+        }
+      });
+      // console.log(newData)
+      data = newData;
+      // data = data.filter(dataItem => dataItem[filters[0].selectedTableColumnName])
+    }
+
+    // works fine for both cases
     if (Object.keys(filters).length >= 2) {
       data = data.map(obj => {
         // calculate the additional filters
@@ -97,21 +123,31 @@ const Graph = props => {
             };
           });
 
-        return {
-          ...obj, // all minus additional filters
-          percentage: (
-            (obj[obj[filters[0].selectedTableColumnName]] / sampleSize) *
-            100
-          ).toFixed(2),
-          ...additionalCategories // additional filters
-        };
+        // case for the non subsamples
+        if (filters[1].selectedCategory.length === 0) {
+          return {
+            ...obj, // all minus additional filters
+            percentage: (
+              (obj[obj[filters[0].selectedTableColumnName]] / sampleSize) *
+              100
+            ).toFixed(2),
+            ...additionalCategories // additional filters
+          };
+        } else {
+          // the subsamples(filters[1]) don't have an item count for calculating percentages
+
+          return {
+            ...obj, // all minus additional filters
+            ...additionalCategories // additional filters
+          };
+        }
       });
     }
     // dummy sample size
     // data = [...data, {sampleSize: 30}]
     // we already have the data here
     // add a percentage column here using sampleSize
-
+    console.log(data, sampleSize);
     return data;
   };
 
@@ -130,7 +166,8 @@ const Graph = props => {
   useEffect(() => {
     setCsvDownload(csvFormater(csvData));
   }, [csvData]);
-  const twitterLink = useHistory().location.search;
+  const socialMediaLink = useHistory().location.search;
+  console.log(socialMediaLink);
   return (
     <>
       <div className="dwnld-btn">
@@ -153,15 +190,18 @@ const Graph = props => {
                 </CsvDownloader>
                 <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
                 <div>
+                  {/* https://t.co/7DQbFbQIaS?amp=1 =>  https://www.databank.sautiafrica.org/data */}
+                  {/* https://t.co/9CcenTStx9?amp=1 the search query is removed from the search*/}
                   <SocialMediaIconsTwitter
                     class="twitter-share-button"
                     target="_blank"
-                    href={`https://twitter.com/intent/tweet?text=http://localhost:3000/data${twitterLink}`}
+                    // https://databank.sautiafrica.org/
+                    href={`https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`}
                   >
                     <i class="fab fa-twitter"></i>
                   </SocialMediaIconsTwitter>
                 </div>
-                <div
+                {/* <div
                   class="fb-share-button"
                   data-href="https://blissful-pare-60612f.netlify.com/data"
                   data-layout="button"
@@ -169,9 +209,29 @@ const Graph = props => {
                 >
                   <SocialMediaIconsFacebook
                     target="_blank"
+                    // data-href={`http://databank.sautiafrica.org/data${twitterLink}`}
                     href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
                     class="fb-xfbml-parse-ignore"
                   >
+                    <i class="fab fa-facebook-square"></i>
+                  </SocialMediaIconsFacebook>
+                  
+
+                </div> */}
+                <div
+                  class="fb-share-button"
+                  data-href={`https://www.databank.sautiafrica.org/data${socialMediaLink}`} //"https://blissful-pare-60612f.netlify.com/data"
+                  data-layout="button"
+                  data-size="small"
+                >
+                  {/* https://www.databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalseducationcommaNowhitespaceformalwhitespaceeducation */}
+                  {/* https://www.databank.sautiafrica.org/data?fbclid=IwAR2aGZysIQY7R133QGX8yBNGyXDvrPdyPpooab43WIwcwVwEJr5pLV0iqQU */}
+                  <SocialMediaIconsFacebook
+                    target="_blank"
+                    href={`https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`}
+                    class="fb-xfbml-parse-ignore"
+                  >
+                    {/* https://www.databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalseducationcommaNowhitespaceformalwhitespaceeducation&fbclid=IwAR3ywHMhE7RFDpQEQc7jUCMbRWe8_EoQjlVKHLOaGJGUR2ZGN6EhBDPgHlU */}
                     <i class="fab fa-facebook-square"></i>
                   </SocialMediaIconsFacebook>
                 </div>

@@ -59,6 +59,15 @@ function DashHome() {
     }
   };
   const setupFilter = history => {
+    // search: "?filter0equalsgendercommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalsundefinedcommaundefined"
+    // http://databank.sautiafrica.org/data?filter0equalsgendercommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalsagecomma10-20zazfilter3equalscrossing_freqcommaWeekly
+    // https://t.co/ZBQKNv3gRA?amp=1
+
+    // copy url:
+    // https://www.databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeekly
+    // tweet
+    // http://databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeekly
+    console.log("history", history);
     console.log(history.location.search.length);
     if (history.location.search.length === 0) {
       // console.log("got here");
@@ -82,11 +91,22 @@ function DashHome() {
       });
       return defaultFilter;
     } else {
+      // https://www.databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalseducationcommaNowhitespaceformalwhitespaceeducation&fbclid=IwAR3ywHMhE7RFDpQEQc7jUCMbRWe8_EoQjlVKHLOaGJGUR2ZGN6EhBDPgHlU
+      // http://localhost:3000/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalseducationcommaNowhitespaceformalwhitespaceeducatio
       // get rid of the "?" at the start of history.location.search
       let searchString = history.location.search.slice(
         1,
         history.location.search.length
       );
+      console.log("searching", searchString.search("&fbclid"));
+
+      // facebook case
+      // prove &fbclid is in the url
+      if (searchString.search("&fbclid") > -1) {
+        let locationOfSplit = searchString.search("&fbclid");
+        searchString = searchString.slice(0, locationOfSplit);
+        console.log(searchString);
+      }
       // can't use (_, -, &, ^, z) to separate the filter sections
       // _ is in cross_freq
       // - is in 10-20
