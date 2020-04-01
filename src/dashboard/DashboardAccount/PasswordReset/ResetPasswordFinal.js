@@ -108,7 +108,7 @@ const ResetPasswordFinal = props => {
           fullWidth
           size="large"
           id="password"
-          type="text"
+          type="password"
           label="Password"
           name="password"
           autoComplete="Password"
