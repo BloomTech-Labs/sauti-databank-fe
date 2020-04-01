@@ -185,7 +185,7 @@ const GetData = props => {
     //console.log("graph184");
     return (
       <>
-        <LineGraphButton data={data} filter0={filters[0]} />
+        <LineGraphButton sdata={data} filter0={filters[0]} />
         <div className="graph-titles-container">
           <div className="graph-title-diplay">
             <h1 className="graph-title">Data Series</h1>
@@ -217,7 +217,7 @@ const GetData = props => {
   } else {
     return (
       <>
-        <LineGraphButton data={data} filter0={filters[0]} />
+        <LineGraphButton sdata={data} filter0={filters[0]} />
         <div className="graph-titles-container">
           <div className="graph-title-diplay">
             <h1 className="graph-title">Data Series</h1>
