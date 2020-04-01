@@ -30,7 +30,6 @@ function DashHome() {
   }
 
   if (!signedIn) {
-    // return <LandingPage />;
     return <CreateAccount />;
   } else if (signedIn) {
     return <AccountHandler />;

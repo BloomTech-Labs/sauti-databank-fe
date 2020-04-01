@@ -10,8 +10,11 @@ import LandingPage from "./LandingPage";
 import DashLogout from "./DashLogout";
 import Login from "./Login";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import CodeRoute from "./DashboardAccount/PasswordReset/auth/CodeRoute";
 import { getToken, decodeToken } from "./auth/Auth";
 import UserSVG from "./Images/UserSVG";
+import ForgotPassword from "./DashboardAccount/PasswordReset/ForgotPassword";
+import ResetPasswordContainer from "./DashboardAccount/PasswordReset/ResetPasswordContainer";
 
 import {
   TopBar,
@@ -84,8 +87,14 @@ function DashNav() {
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={CreateAccount} />
+      <Route exact path="/passwordreset" component={ForgotPassword} />
       <ProtectedRoute exact path="/myaccount" component={AccountHandler} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
+      <CodeRoute
+        exact
+        path="/password-verification"
+        component={ResetPasswordContainer}
+      />
     </>
   );
 }
