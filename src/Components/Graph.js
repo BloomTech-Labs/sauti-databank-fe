@@ -83,7 +83,30 @@ const Graph = props => {
   };
   // the download
   let csvFormater = data => {
-    console.log("csvFormater", data, keys);
+    console.log("csvFormater", data, keys, filters);
+    // the subsample case is messed up
+    // if the user selected a subsample
+    if (filters[1].selectedCategory.length > 0) {
+      // clean up the duplicate rows containing dataItem[filters[0].selectedTableColumnName]] as a value
+      let newData = [];
+      let newDataCache = {};
+      data.forEach(dataItem => {
+        // if dataItem[filters[0].selectedTableColumnName] is in object.keys(newDataCache)
+        // assume dataItem[filters[0].selectedTableColumnName] exists
+        if (!newDataCache[dataItem[filters[0].selectedTableColumnName]]) {
+          newData = [...newData, dataItem];
+          newDataCache = {
+            ...newDataCache,
+            [dataItem[filters[0].selectedTableColumnName]]: 1
+          };
+        }
+      });
+      // console.log(newData)
+      data = newData;
+      // data = data.filter(dataItem => dataItem[filters[0].selectedTableColumnName])
+    }
+
+    // works fine for both cases
     if (Object.keys(filters).length >= 2) {
       data = data.map(obj => {
         // calculate the additional filters
@@ -100,21 +123,31 @@ const Graph = props => {
             };
           });
 
-        return {
-          ...obj, // all minus additional filters
-          percentage: (
-            (obj[obj[filters[0].selectedTableColumnName]] / sampleSize) *
-            100
-          ).toFixed(2),
-          ...additionalCategories // additional filters
-        };
+        // case for the non subsamples
+        if (filters[1].selectedCategory.length === 0) {
+          return {
+            ...obj, // all minus additional filters
+            percentage: (
+              (obj[obj[filters[0].selectedTableColumnName]] / sampleSize) *
+              100
+            ).toFixed(2),
+            ...additionalCategories // additional filters
+          };
+        } else {
+          // the subsamples(filters[1]) don't have an item count for calculating percentages
+
+          return {
+            ...obj, // all minus additional filters
+            ...additionalCategories // additional filters
+          };
+        }
       });
     }
     // dummy sample size
     // data = [...data, {sampleSize: 30}]
     // we already have the data here
     // add a percentage column here using sampleSize
-
+    console.log(data, sampleSize);
     return data;
   };
 
