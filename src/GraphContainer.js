@@ -7,7 +7,7 @@ import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter, useParams, useHistory } from "react-router-dom";
 
-import Queries from "./Components/Queries2";
+import Queries2 from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
 import styled from "styled-components";
 import swal from "sweetalert";
@@ -55,7 +55,7 @@ const GraphContainer = props => {
           <ContentContainerDiv
             className={hidden ? "extend" : "chart-container"}
           >
-            <Queries
+            <Queries2
               filters={filters}
               filterBoxStartDate={filterBoxStartDate}
               setFilterBoxStartDate={setFilterBoxStartDate}

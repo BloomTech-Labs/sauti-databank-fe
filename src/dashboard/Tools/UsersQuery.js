@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Tools from "./Tools";
+import Loader from "react-loader-spinner";
 
 const Users_Query = gql`
   query UsersQ {
@@ -27,7 +28,17 @@ const UsersQuery = () => {
 
   //must enter loading
   if (loading) {
-    return <p>Loading</p>;
+    return (
+      <div className="loader-container">
+        <Loader
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={100000}
+        />
+      </div>
+    );
   }
 
   if (error) {
