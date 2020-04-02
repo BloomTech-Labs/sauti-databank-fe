@@ -42,9 +42,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //get selected Table ColumnName
   const selectedTableColumnName = filter0.selectedTableColumnName;
-  // console.log(filter0.selectedTableColumnName);
-  // console.log(lineArray);
-  // eliminate null values
+
+  // 1. eliminate null values
   const lineNonNull = [];
 
   for (let i = 0; i < lineArray.length; i++) {
@@ -56,41 +55,41 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   // console.log(lineNonNull);
 
-  //convert date to year-month
+  //2. convert date to year-month
   lineNonNull.map(item => {
     item["created_date"] = item.created_date.substring(0, 7);
   });
   console.log(typeof lineNonNull);
 
-  //Group together by year-month
-  const reduceBy = (objectArray, property) => {
-    return objectArray.reduce(function(total, obj) {
-      let key = obj[property];
-      if (!total[key]) {
-        total[key] = [];
-      }
-      total[key].push(obj);
-      return total;
-    }, {});
-  };
-  let groupedPeople = reduceBy(lineNonNull, "created_date");
-  console.log(groupedPeople);
+  //3. Group together by year-month
+  // const reduceBy = (objectArray, property) => {
+  //   return objectArray.reduce(function(total, obj) {
+  //     let key = obj[property];
+  //     if (!total[key]) {
+  //       total[key] = [];
+  //     }
+  //     total[key].push(obj);
+  //     return total;
+  //   }, {});
+  // };
+  // let groupedPeople = reduceBy(lineNonNull, "created_date");
+  // console.log(groupedPeople);
 
   //Makes Array of dates
-  let dateObj = {};
-  let dateArray = [];
-  function mObj(o) {
-    for (let key of Object.keys(o)) {
-      dateArray.push({ date: key });
-      // dateObj[key] = mapper(o[key])
-    }
-  }
+  // let dateObj = {};
+  // let dateArray = [];
+  // function mObj(o) {
+  //   for (let key of Object.keys(o)) {
+  //     dateArray.push({ date: key });
+  //     // dateObj[key] = mapper(o[key])
+  //   }
+  // }
 
-  mObj(groupedPeople);
+  // mObj(groupedPeople);
 
-  console.log(dateArray);
+  //console.log(dateArray);
 
-  //Group categories together with date
+  //3. Group categories together with date
   const reduceBy1 = (objectArray, property, property1) => {
     return objectArray.reduce(function(total, obj) {
       let key = obj[property] + obj[property1];
@@ -110,10 +109,11 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     "created_date",
     selectedTableColumnName
   );
-  console.log(groupedPeople1);
 
-  // get total amount per month
-  //map through obj and get length or arrays
+  console.log(`lineNonNull`, lineNonNull);
+
+  // 4. get total amount per month
+  //map through obj and get length of arrays
   let datesAmounts = {};
 
   function mapObj(mapper, o) {
@@ -128,8 +128,9 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   console.log(datesAmounts);
 
-  //combine date and quantity of cat
+  //5. combine date and quantity of cat
   let currentYM = "2017-01";
+  let dateObj = {};
   const dateCatArray = [];
   let objectCombined = {};
   function combineAmountsToDates(o) {
@@ -139,13 +140,13 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       let obj = {};
       obj["date"] = yearMo;
       obj[cat] = o[key];
-      let currentObj = {};
-      currentObj[cat] = o[key];
+      // let currentObj = {};
+      // currentObj[cat] = o[key];
 
-      dateObj = {};
-      dateObj["date"] = currentYM;
-      currentYM = yearMo;
-      // console.log(obj);
+      // dateObj = {};
+      // dateObj["date"] = currentYM;
+      // currentYM = yearMo;
+      console.log(obj);
       dateCatArray.push(obj);
       // }
     }
@@ -157,7 +158,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   console.log(Object.values(dateCatArray));
   // console.log(typeof dateCatArray);
 
-  //combine together to create object for Monthly data
+  //6. combine together to create object for Monthly data
   let usedDates = [];
   let itemDate = {};
   let allCombined = [];

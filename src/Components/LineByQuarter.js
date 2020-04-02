@@ -1,52 +1,6 @@
 import React from "react";
 
 const LineByQuarter = ({ lineNonNull, selectedTableColumnName }) => {
-  // console.log(data.sessionsData);
-  // const [quarter, setQuarter] = useState(false);
-
-  // const quarterHandle = () => {
-  //   setQuarter(!quarter);
-  // };
-
-  // let lineArray = data.sessionsData;
-
-  // //Make an array of x values
-  // const keysArray = Object.keys(filter0.selectableOptions);
-  // // console.log(filter0);
-  // // console.log(keysArray);
-  // // console.log(typeof keysArray);
-  // //make checkboxes for graph
-  // const checkboxes = [];
-  // for (let i = 0; i < keysArray.length; i++) {
-  //   checkboxes.push({
-  //     name: keysArray[i],
-  //     key: `checkbox[i]`,
-  //     label: keysArray[i]
-  //   });
-  // }
-
-  // //get selected Table ColumnName
-  // const selectedTableColumnName = filter0.selectedTableColumnName;
-  // // console.log(filter0.selectedTableColumnName);
-  // // console.log(lineArray);
-  // // eliminate null values
-  // const lineNonNull = [];
-
-  // for (let i = 0; i < lineArray.length; i++) {
-  //   //console.log(lineArray[i][selectedTableColumnName])
-  //   if (lineArray[i][selectedTableColumnName] !== null) {
-  //     lineNonNull.push(lineArray[i]);
-  //   }
-  // }
-
-  // // console.log(lineNonNull);
-
-  // //convert date to year-month
-  // lineNonNull.map(item => {
-  //   item["created_date"] = item.created_date.substring(0, 7);
-  // });
-  // console.log(typeof lineNonNull);
-
   //created_date: "2017-06"  -> 2017-Q2
   //|| month === '02' || month || '03'
   let byQuarter = [];
@@ -71,24 +25,9 @@ const LineByQuarter = ({ lineNonNull, selectedTableColumnName }) => {
       byQuarter.push(item);
     }
   }
-  // console.log(byQuarter)
 
-  //Group into Quarters
-  const reduceBy = (objectArray, property) => {
-    return objectArray.reduce(function(total, obj) {
-      let key = obj[property];
-      if (!total[key]) {
-        total[key] = [];
-      }
-      total[key].push(obj);
-      return total;
-    }, {});
-  };
-  let groupedQtr = reduceBy(lineNonNull, "created_date");
-  console.log(groupedQtr);
-
-  //Put categories together by Quarter
-  const reduceBy1 = (objectArray, property, property1) => {
+  //3. Put categories together by Quarter
+  const catByQtr = (objectArray, property, property1) => {
     return objectArray.reduce(function(total, obj) {
       let key = obj[property] + obj[property1];
       //combine date and cat type to make a new key
@@ -97,16 +36,105 @@ const LineByQuarter = ({ lineNonNull, selectedTableColumnName }) => {
       if (!total[key]) {
         total[key] = [];
       }
-      //if year-mo, then push obj
+      //if year-qtr, then push obj
       total[key].push(obj);
       return total;
     }, {});
   };
-  let groupedPeople1 = reduceBy1(
-    groupedQtr,
+  //console.log(`groupedQtr`, groupedQtr)
+  console.log(typeof groupedQtr);
+
+  console.log(`selectedTableColumnName`, selectedTableColumnName);
+  let groupedItems = catByQtr(
+    lineNonNull,
     "created_date",
     selectedTableColumnName
   );
+  console.log(groupedItems);
+
+  //4.  get total amount per item in each quarter
+  //map through obj and get length of arrays
+  let qtrAmounts = {};
+
+  function mapObj(mapper, o) {
+    for (let key of Object.keys(o)) {
+      qtrAmounts[key] = mapper(o[key]);
+    }
+  }
+
+  mapObj(function length(val) {
+    return val.length;
+  }, groupedItems);
+
+  console.log(qtrAmounts);
+
+  //5. combine categories by quarter
+  let currentYM = "2017-Q1";
+  let qtrObj = {};
+  const dateCatArray = [];
+  let objectCombined = {};
+  function combineAmountsToQtr(o) {
+    for (let key of Object.keys(o)) {
+      let yearQtr = key.slice(0, 7);
+      let cat = key.slice(7, 100);
+      let obj = {};
+      obj["date"] = yearQtr;
+      obj[cat] = o[key];
+
+      dateCatArray.push(obj);
+      // }
+    }
+  }
+
+  combineAmountsToQtr(qtrAmounts);
+  // console.log(datesAmounts);
+  console.log(dateCatArray);
+  console.log(Object.values(dateCatArray));
+
+  //6. combine together to create object for Monthly data
+  let usedDates = [];
+  let itemDate = {};
+  let allCombined = [];
+  for (let i = 0; i < dateCatArray.length; i++) {
+    let date = dateCatArray[i].date;
+
+    if (usedDates.includes(date)) {
+      //console.log("included");
+      itemDate = {
+        ...itemDate,
+        ...dateCatArray[i]
+      };
+      allCombined.push(itemDate);
+      //console.log(itemDate);
+    } else {
+      // allCombined.push(itemDate);
+      console.log("not included");
+      let arraykeys = Object.keys(dateCatArray[i]);
+      let arrayValues = Object.values(dateCatArray[i]);
+      // console.log(arraykeys);
+      let newDate = {};
+      newDate["date"] = date;
+      newDate[arraykeys[1]] = arrayValues[1];
+      //console.log(newDate);
+      itemDate = newDate;
+      usedDates.push(date);
+      allCombined.push(itemDate);
+    }
+  }
+  console.log(`allCombined`, allCombined);
+
+  //6. update array
+  let updatedQtr = [];
+  for (let i = 0; i < allCombined.length; i++) {
+    if (
+      i + 1 < allCombined.length &&
+      allCombined[i].date !== allCombined[i + 1].date
+    ) {
+      updatedQtr.push(allCombined[i]);
+    }
+  }
+  console.log(updatedQtr);
+  console.log(itemDate);
 
   return <></>;
 };
