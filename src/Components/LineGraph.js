@@ -11,11 +11,17 @@ import {
 } from "recharts";
 
 import CheckBox from "./CheckBox";
+import LineByQuarter from "./LineByQuarter";
 
 // Data Series will need to be Sessions for chart to work
 
 const LineGraph = ({ data, filter0, buttonHandle }) => {
   console.log(data.sessionsData);
+  const [quarter, setQuarter] = useState(false);
+
+  const quarterHandle = () => {
+    setQuarter(!quarter);
+  };
 
   let lineArray = data.sessionsData;
 
@@ -56,19 +62,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   });
   console.log(typeof lineNonNull);
 
-  //Group by date
-  // Array.prototype.groupedBy = function(prop){
-  // return this.reduce(function(groups,item){
-  //   const val = item[prop]
-  //   groups[val] = groups[val]||[]
-  //   groups[val].push(item)
-  //   return groups
-  // }, {})
-  // }
-  // const groupedBy = lineNonNull.groupedBy('created_date')
-  // console.log(groupedBy)
-  // console.log(typeof groupedBy)
-
+  //Group together by year-month
   const reduceBy = (objectArray, property) => {
     return objectArray.reduce(function(total, obj) {
       let key = obj[property];
@@ -82,6 +76,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   let groupedPeople = reduceBy(lineNonNull, "created_date");
   console.log(groupedPeople);
 
+  //Makes Array of dates
   let dateObj = {};
   let dateArray = [];
   function mObj(o) {
@@ -95,12 +90,17 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   console.log(dateArray);
 
+  //Group categories together with date
   const reduceBy1 = (objectArray, property, property1) => {
     return objectArray.reduce(function(total, obj) {
       let key = obj[property] + obj[property1];
+      //combine date and cat type to make a new key
+
+      //make a new object if the year-mo and category not existing
       if (!total[key]) {
         total[key] = [];
       }
+      //if year-mo, then push obj
       total[key].push(obj);
       return total;
     }, {});
@@ -157,7 +157,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   console.log(Object.values(dateCatArray));
   // console.log(typeof dateCatArray);
 
-  //combine together to create object
+  //combine together to create object for Monthly data
   let usedDates = [];
   let itemDate = {};
   let allCombined = [];
@@ -187,7 +187,45 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       allCombined.push(itemDate);
     }
   }
-  console.log(allCombined);
+  console.log(`allCombined`, allCombined);
+
+  //combine together to create object for Quarterly Data
+  // let quarterDates = [];
+  // let itemQuarter = dateCatArray[0];
+  // console.log(itemQuarter)
+  // let qtrCombined = [];
+  // for (let i = 1; i < dateCatArray.length; i++) {
+  //   let date = dateCatArray[i].date;
+  //   let month = date.slice(5, 8);
+  //   // console.log(`month`,month)
+  //   // console.log(typeof month)
+  //   // let previousItemMo = dateCatArray[i - 1].date.slice(5, 8);
+  //   // console.log(`previousMonth`,previousItemMo)
+
+  //   if (month === "01" || month === "04" || month === "07" || month === "10"){
+  //    // console.log("new");
+  //     // itemQuarter = {
+  //     //   ...itemQuarter,
+  //     //   ...dateCatArray[i]
+  //     // };
+  //     // qtrCombined.push(itemQuarter);
+  //     //console.log(itemDate);
+  //   } else {
+  //     // allCombined.push(itemDate);
+  //     console.log("add to object");
+  //     // let arraykeys = Object.keys(dateCatArray[i]);
+  //     // let arrayValues = Object.values(dateCatArray[i]);
+  //     // // console.log(arraykeys);
+  //     // let newDate = {};
+  //     // newDate["date"] = date;
+  //     // newDate[arraykeys[1]] = arrayValues[1];
+  //     //console.log(newDate);
+  //     itemQuarter = dateCatArray[i];
+
+  //     qtrCombined.push(itemQuarter);
+  //   }
+  // }
+  // console.log(`qtrCombined`, qtrCombined);
 
   //   if($date[i] == $date[i+1]) {
   //     //push date to array
@@ -274,7 +312,12 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   return (
     <>
+      <LineByQuarter
+        lineNonNull={lineNonNull}
+        selectedTableColumnName={selectedTableColumnName}
+      />
       <button onClick={buttonHandle}>Display Bar Chart</button>
+      <button allCombined={allCombined}>By Quarter</button>
       <LineChart
         width={1000}
         height={400}
