@@ -145,7 +145,7 @@ export default function SignInSide(props) {
           <br />
           <form
             className={classes.form}
-            noValidate
+            validate
             onSubmit={e => handleSubmit(e, user)}
           >
             <RequiredLabel>
@@ -156,7 +156,7 @@ export default function SignInSide(props) {
               margin="normal"
               fullWidth
               id="email"
-              type="text"
+              type="email"
               // label="* Email"
               name="email"
               autoComplete="email"

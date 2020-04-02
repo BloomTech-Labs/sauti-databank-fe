@@ -537,11 +537,11 @@ export const PasswordReset = styled.div`
     height: 40rem;
     width: 45rem;
     padding: 1rem;
-    border: 1px solid black;
+    border: 1px solid lightgrey;
 
     .container-header {
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
       align-items: center;
       flex-direction: column;
       height: 20%;
@@ -577,13 +577,13 @@ export const ResetPasswordCodeStyles = styled.div`
     .code-container-header {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-end;
       height: 20%;
 
       h1 {
         text-transform: uppercase;
-        font-size: 3rem;
-        font-weight: 900;
+        font-size: 2rem;
+        font-weight: 500;
       }
     }
     .code-container-number-container {
@@ -592,14 +592,21 @@ export const ResetPasswordCodeStyles = styled.div`
       justify-content: space-around;
       align-items: center;
       flex-grow: 1;
-      background: blue;
 
-      .code-number-box {
+      input {
         width: 5rem;
         height: 9rem;
-        background: grey;
         font-size: 8rem;
         padding: 1rem;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 2px solid #ddd;
+
+        &[placeholder]:focus::-webkit-input-placeholder {
+          transition: opacity 0.5s 0s ease;
+          opacity: 0;
+        }
       }
     }
   }

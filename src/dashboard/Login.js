@@ -174,6 +174,11 @@ export default function SignInSide(props) {
                 Don't want to login right now? Click{" "}
                 <Link to="/data">Continue</Link> to view our data!
               </FormBottomText>
+              <br />
+              <FormBottomText>
+                Forgot your password? Click{" "}
+                <Link to="/passwordreset">Reset Password</Link>
+              </FormBottomText>
             </div>
           </form>
         </div>
