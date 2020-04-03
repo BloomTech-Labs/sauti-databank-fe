@@ -14,7 +14,7 @@ const LineGraphButton = ({ sdata, filter0, buttonHandle }) => {
     }
   };
 
-  console.log(sdata.sessionsData);
+  //console.log(sdata.sessionsData);
   if (sdata.sessionsData) {
     return (
       <>

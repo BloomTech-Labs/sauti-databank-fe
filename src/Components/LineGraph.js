@@ -16,10 +16,7 @@ import "../Components/scss/lineGraph.scss";
 // Data Series will need to be Sessions for chart to work
 
 const LineGraph = ({ data, filter0, buttonHandle }) => {
-  console.log(data.sessionsData);
   const [isQuarter, setQuarter] = useState(false);
-
-  console.log(`isQuarter`, isQuarter);
 
   const quarterHandle = e => {
     e.preventDefault();
@@ -46,21 +43,15 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   // 1. eliminate null values
   const lineNonNull = [];
   for (let i = 0; i < lineArray.length; i++) {
-    // console.log(lineArray[i][selectedTableColumnName])
     if (lineArray[i][selectedTableColumnName] !== null) {
       lineNonNull.push(lineArray[i]);
-      // console.log(lineNonNull)
     }
   }
 
-  //   // console.log(lineNonNull);
-
-  console.log(lineNonNull, `lineNonNull`);
   // 2. convert date to year-month
   lineNonNull.map(item => {
     item["created_date"] = item.created_date.substring(0, 7);
   });
-  console.log(lineNonNull);
 
   //FOR MONTHLY DISPLAY
   //3. Group categories together with date
@@ -83,8 +74,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     selectedTableColumnName
   );
 
-  // console.log(`lineNonNull`, lineNonNull);
-
   // 4. get total amount per month
   //map through obj and get length of arrays
   let datesAmounts = {};
@@ -98,8 +87,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   mapObj(function length(val) {
     return val.length;
   }, groupedPeople1);
-
-  //   //console.log(datesAmounts);
 
   //5. combine date and quantity of categories
   let currentYM = "2017-01";
@@ -119,17 +106,13 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       // dateObj = {};
       // dateObj["date"] = currentYM;
       // currentYM = yearMo;
-      //console.log(obj);
+
       dateCatArray.push(obj);
       // }
     }
   }
-  console.log(dateCatArray, `dateCatArray`);
+
   combineAmountsToDates(datesAmounts);
-  //   // console.log(datesAmounts);
-  //   // console.log(dateCatArray);
-  //   // console.log(Object.values(dateCatArray));
-  //   // console.log(typeof dateCatArray);
 
   //6. combine together to create object for Monthly data
   let usedDates = [];
@@ -138,29 +121,23 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   for (let i = 0; i < dateCatArray.length; i++) {
     let date = dateCatArray[i].date;
     if (usedDates.includes(date)) {
-      //console.log("included");
       itemDate = {
         ...itemDate,
         ...dateCatArray[i]
       };
       allCombined.push(itemDate);
-      //console.log(itemDate);
     } else {
-      // allCombined.push(itemDate);
-      // console.log("not included");
       let arraykeys = Object.keys(dateCatArray[i]);
       let arrayValues = Object.values(dateCatArray[i]);
-      // console.log(arraykeys);
       let newDate = {};
       newDate["date"] = date;
       newDate[arraykeys[1]] = arrayValues[1];
-      //console.log(newDate);
       itemDate = newDate;
       usedDates.push(date);
       allCombined.push(itemDate);
     }
   }
-  console.log(`allCombined updated`, allCombined);
+  //console.log(`allCombined updated`, allCombined);
 
   let enterDate = [];
   let updated = [];
@@ -175,26 +152,18 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //  Quarterly Data
 
-  //const lineArrayQtr = data.sessionsData
-
   // 1. eliminate null values
   const lineNonNullQtr = [];
   for (let i = 0; i < lineArray.length; i++) {
-    //console.log(lineArray[i][selectedTableColumnName])
     if (data.sessionsData[i][selectedTableColumnName] !== null) {
       lineNonNullQtr.push(data.sessionsData[i]);
     }
   }
 
-  //   // console.log(lineNonNullQtr);
-
-  console.log(lineNonNullQtr, `lineNonNullQtr`);
   //2. grab only year-mo
   lineNonNullQtr.map(item => {
     item["created_date"] = item.created_date.substring(0, 7);
   });
-
-  console.log(lineNonNullQtr);
 
   const byQuarter = lineNonNullQtr;
   //created_date: "2017-06"  -> 2017-Q2
@@ -206,30 +175,23 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     if (month === "01" || month === "02" || month === "03") {
       item["created_qtr"] = item["created_date"].slice(0, 5);
       item["created_qtr"] = item["created_qtr"].concat("Q1");
-      console.log(item);
-      //byQuarter.push(item);
     } else if (month === "04" || month === "05" || month === "06") {
       item["created_qtr"] = item["created_date"].slice(0, 5);
       item["created_qtr"] = item["created_qtr"].concat("Q2");
-      // byQuarter.push(item);
     } else if (month === "07" || month === "08" || month === "09") {
       item["created_qtr"] = item["created_date"].slice(0, 5);
       item["created_qtr"] = item["created_qtr"].concat("Q3");
-      // byQuarter.push(item);
     } else if (month === "10" || month === "11" || month === "12") {
       item["created_qtr"] = item["created_date"].slice(0, 5);
       item["created_qtr"] = item["created_qtr"].concat("Q4");
-      // byQuarter.push(item);
     }
   }
-  console.log(`byQuarter`, byQuarter);
-  console.log(`nonnull`, lineNonNull);
+
   //3. Put categories together by Quarter
   const catByQtr = (objectArray, property, property1) => {
     return objectArray.reduce(function(total, obj) {
-      console.log(obj);
       let key = obj[property] + obj[property1];
-      console.log(key);
+
       //combine date and cat type to make a new key
 
       //make a new object if the year-mo and category not existing
@@ -242,13 +204,11 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }, {});
   };
 
-  console.log(`selectedTableColumnName`, selectedTableColumnName);
   let groupedItems = catByQtr(
     byQuarter,
     "created_qtr",
     selectedTableColumnName
   );
-  console.log(groupedItems);
 
   // 4.  get total amount per item in each quarter
   // map through obj and get length of arrays
@@ -263,8 +223,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     return val.length;
   }, groupedItems);
 
-  console.log(qtrAmounts);
-
   //5. combine categories by quarter
   //let currentYM = "2017-Q1";
   let qtrObj = {};
@@ -273,7 +231,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   function combineAmountsToQtr(o) {
     for (let key of Object.keys(o)) {
       let yearQtr = key.slice(0, 7);
-      console.log(yearQtr);
       let cat = key.slice(7, 100);
       let obj = {};
       obj["date"] = yearQtr;
@@ -285,9 +242,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   combineAmountsToQtr(qtrAmounts);
-  // console.log(datesAmounts);
-  console.log(dateCatArrayQtr);
-  console.log(Object.values(dateCatArrayQtr));
 
   //6. combine together to create object for Monthly data
   let usedDatesQtr = [];
@@ -297,23 +251,19 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     let date = dateCatArrayQtr[i].date;
 
     if (usedDatesQtr.includes(date)) {
-      //console.log("included");
       itemDateQtr = {
         ...itemDateQtr,
         ...dateCatArrayQtr[i]
       };
       allCombinedQtr.push(itemDateQtr);
-      //console.log(itemDate);
     } else {
-      // allCombinedQtr.push(itemDate);
-      console.log("not included");
       let arraykeys = Object.keys(dateCatArrayQtr[i]);
       let arrayValues = Object.values(dateCatArrayQtr[i]);
-      // console.log(arraykeys);
+
       let newDate = {};
       newDate["date"] = date;
       newDate[arraykeys[1]] = arrayValues[1];
-      //console.log(newDate);
+
       itemDateQtr = newDate;
       usedDatesQtr.push(date);
       allCombinedQtr.push(itemDateQtr);
@@ -331,8 +281,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       updatedQtr.push(allCombinedQtr[i]);
     }
   }
-  console.log(updatedQtr);
-  console.log(updated);
 
   //   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
