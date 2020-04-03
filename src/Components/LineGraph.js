@@ -11,8 +11,7 @@ import {
 } from "recharts";
 
 import CheckBox from "./CheckBox";
-import LineByQuarter from "./LineByQuarter";
-import LineMonthly from "./LineMonthly";
+import "../Components/scss/lineGraph.scss";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -409,36 +408,31 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     setCheckedItems({});
   };
 
-  //const quarterData = LineByQuarter(lineNonNull, selectedTableColumnName)
-
-  // if (isQuarter === false) {
-  //   return (
-  //     <>
-  //       <button onClick={buttonHandle}>Display Bar Chart</button>
-  //       <button onClick={quarterHandle}>Quarterly</button>
-  //       <LineMonthly
-  //         data={data}
-  //         filter0={filter0}
-  //         buttonHandle={buttonHandle}
-  //       />
-  //     </>
-  //   );
-  // } else {
   return (
     <>
-      {/* <button onClick={buttonHandle}>Display Bar Chart</button>
-        <button onClick={quarterHandle}>Monthly</button> */}
-      {/* <LineByQuarter
-          data={data}
-          filter0={filter0}
-          buttonHandle={buttonHandle}
-        /> */}
       <button onClick={buttonHandle}>Display Bar Chart</button>
-      <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button>
+      <div className="toggleDateContainer">
+        <p
+          className={!isQuarter ? "monthBtnOn" : "monthBtnOff"}
+          onClick={() => setQuarter(!isQuarter)}
+        >
+          {" "}
+          Monthly
+        </p>
+        <p
+          className={isQuarter ? "monthBtnOn" : "monthBtnOff"}
+          onClick={() => setQuarter(!isQuarter)}
+        >
+          {" "}
+          Quarterly
+        </p>
+      </div>
+
+      {/* <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button> */}
 
       <LineChart
         width={1000}
-        height={400}
+        height={600}
         data={isQuarter ? updatedQtr : updated}
         margin={{
           top: 5,
