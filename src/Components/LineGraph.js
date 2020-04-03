@@ -284,7 +284,9 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
-  const [checkedItems, setCheckedItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState({});
+  console.log(checkedItems);
+  console.log(typeof checkedItems);
 
   let display = [];
   if (Object.entries(checkedItems).length > 0) {
@@ -314,6 +316,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //To reset all selected checkboxes
   const handleReset = event => {
+    console.log("reset");
     setCheckedItems({});
   };
 
@@ -338,48 +341,52 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       </div>
 
       {/* <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button> */}
+      <ResponsiveContainer width="95%" height={600}>
+        <LineChart
+          data={isQuarter ? updatedQtr : updated}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey={zero}
+            stroke="blue"
+            dot={false}
+            // activeDot={{ r: 8 }}
+          />
+          <Line type="monotone" dataKey={one} stroke="purple" dot={false} />
+          <Line type="monotone" dataKey={two} stroke="orange" dot={false} />
+          <Line type="monotone" dataKey={three} stroke="green" dot={false} />
+          <Line type="monotone" dataKey={four} stroke="red" dot={false} />
+        </LineChart>
+      </ResponsiveContainer>
+      <button className="buttonReset" onClick={() => setCheckedItems({})}>
+        Reset
+      </button>
+      <div className="boxes">
+        <React.Fragment>
+          {checkboxes.map(option => (
+            <label key={option.key}>
+              <CheckBox
+                name={option.name}
+                checked={checkedItems[option.name]}
+                onChange={handleChange}
+              />
 
-      <LineChart
-        width={1000}
-        height={600}
-        data={isQuarter ? updatedQtr : updated}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey={zero}
-          stroke="blue"
-          dot={false}
-          // activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" dataKey={one} stroke="purple" dot={false} />
-        <Line type="monotone" dataKey={two} stroke="orange" dot={false} />
-        <Line type="monotone" dataKey={three} stroke="green" dot={false} />
-        <Line type="monotone" dataKey={four} stroke="red" dot={false} />
-      </LineChart>
-
-      <React.Fragment>
-        {checkboxes.map(option => (
-          <label key={option.key}>
-            <CheckBox
-              name={option.name}
-              checked={checkedItems[option.name]}
-              onChange={handleChange}
-            />
-            {option.name}
-          </label>
-        ))}
-      </React.Fragment>
+              {option.name}
+            </label>
+          ))}
+        </React.Fragment>
+      </div>
     </>
   );
 };
