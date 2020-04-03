@@ -62,45 +62,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   });
   console.log(lineNonNull);
 
-  // let dateArray = []
-  // for(let i=0; i<lineNonNull.length; i++){
-  //   // let item = lineNonNull[i].created_date.substring(0, 7)
-  //   // lineNonNull[i]["created_date"] = item
-  //   // dateArray.push(lineNonNull[i])
-  //    console.log(lineNonNull[i])
-  //   console.log(dateArray)
-  // }
-
-  // console.log(dateArray)
-  //console.log(typeof lineNonNull);
-
-  //3. Group together by year-month
-  // const reduceBy = (objectArray, property) => {
-  //   return objectArray.reduce(function(total, obj) {
-  //     let key = obj[property];
-  //     if (!total[key]) {
-  //       total[key] = [];
-  //     }
-  //     total[key].push(obj);
-  //     return total;
-  //   }, {});
-  // };
-  // let groupedPeople = reduceBy(lineNonNull, "created_date");
-  // console.log(groupedPeople);
-
-  //   //Makes Array of dates
-  //   // let dateObj = {};
-  //   // let dateArray = [];
-  //   // function mObj(o) {
-  //   //   for (let key of Object.keys(o)) {
-  //   //     dateArray.push({ date: key });
-  //   //     // dateObj[key] = mapper(o[key])
-  //   //   }
-  //   // }
-
-  //   // mObj(groupedPeople);
-
-  //   //console.log(dateArray);
   //FOR MONTHLY DISPLAY
   //3. Group categories together with date
   const reduceBy1 = (objectArray, property, property1) => {
