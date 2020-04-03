@@ -338,35 +338,34 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       </div>
 
       {/* <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button> */}
-
-      <LineChart
-        width={1000}
-        height={600}
-        data={isQuarter ? updatedQtr : updated}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey={zero}
-          stroke="blue"
-          dot={false}
-          // activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" dataKey={one} stroke="purple" dot={false} />
-        <Line type="monotone" dataKey={two} stroke="orange" dot={false} />
-        <Line type="monotone" dataKey={three} stroke="green" dot={false} />
-        <Line type="monotone" dataKey={four} stroke="red" dot={false} />
-      </LineChart>
+      <ResponsiveContainer width="95%" height={600}>
+        <LineChart
+          data={isQuarter ? updatedQtr : updated}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey={zero}
+            stroke="blue"
+            dot={false}
+            // activeDot={{ r: 8 }}
+          />
+          <Line type="monotone" dataKey={one} stroke="purple" dot={false} />
+          <Line type="monotone" dataKey={two} stroke="orange" dot={false} />
+          <Line type="monotone" dataKey={three} stroke="green" dot={false} />
+          <Line type="monotone" dataKey={four} stroke="red" dot={false} />
+        </LineChart>
+      </ResponsiveContainer>
 
       <React.Fragment>
         {checkboxes.map(option => (
