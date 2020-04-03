@@ -32,3 +32,19 @@
     }
   }
 }
+.buttonReset {
+  margin-left: 5%;
+}
+
+.boxes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  width: 80%;
+  margin-left: 10%;
+}
+label {
+  font-size: 2.2rem;
+  margin: 0.5% 1%;
+}

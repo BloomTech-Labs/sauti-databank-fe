@@ -284,7 +284,9 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
-  const [checkedItems, setCheckedItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState({});
+  console.log(checkedItems);
+  console.log(typeof checkedItems);
 
   let display = [];
   if (Object.entries(checkedItems).length > 0) {
@@ -314,6 +316,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //To reset all selected checkboxes
   const handleReset = event => {
+    console.log("reset");
     setCheckedItems({});
   };
 
@@ -366,19 +369,24 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
           <Line type="monotone" dataKey={four} stroke="red" dot={false} />
         </LineChart>
       </ResponsiveContainer>
+      <button className="buttonReset" onClick={() => setCheckedItems({})}>
+        Reset
+      </button>
+      <div className="boxes">
+        <React.Fragment>
+          {checkboxes.map(option => (
+            <label key={option.key}>
+              <CheckBox
+                name={option.name}
+                checked={checkedItems[option.name]}
+                onChange={handleChange}
+              />
 
-      <React.Fragment>
-        {checkboxes.map(option => (
-          <label key={option.key}>
-            <CheckBox
-              name={option.name}
-              checked={checkedItems[option.name]}
-              onChange={handleChange}
-            />
-            {option.name}
-          </label>
-        ))}
-      </React.Fragment>
+              {option.name}
+            </label>
+          ))}
+        </React.Fragment>
+      </div>
     </>
   );
 };
