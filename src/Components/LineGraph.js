@@ -12,6 +12,7 @@ import {
 
 import CheckBox from "./CheckBox";
 import "../Components/scss/lineGraph.scss";
+import Graph from "./Graph";
 
 // Data Series will need to be Sessions for chart to work
 

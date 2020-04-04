@@ -17,7 +17,9 @@ const Graph = props => {
     sampleSize,
     tableName
   } = props;
-  console.log("loading graph", props);
+
+  console.log("loading graph", filters);
+  //console.log("loading graph",props.children.props.filters);
   const token = getToken();
   let tier;
   if (token) {
@@ -29,6 +31,8 @@ const Graph = props => {
   if (newSub) {
     sub = newSub;
   }
+
+  console.log(`filters`, filters);
 
   const [csvDownload, setCsvDownload] = useState([]);
 
