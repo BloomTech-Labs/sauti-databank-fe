@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import Graph from "./Graph";
+
 import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
 import getIndex from "../DataParseHelpers/getIndex";
@@ -15,6 +15,7 @@ import LineGraph from "./LineGraph";
 const GetData = props => {
   //LineGraph button
   const [open, setOpen] = useState(false);
+
   const buttonHandle = e => {
     setOpen(!open);
   };
@@ -188,89 +189,21 @@ const GetData = props => {
       });
   };
 
-  if (filters[1].selectedTableColumnName !== "" && open === false) {
-    //console.log("graph184");
-    return (
-      <>
-        <LineGraphButton
-          buttonHandle={buttonHandle}
-          sdata={data}
-          filter0={filters[0]}
-        />
-        <div className="graph-titles-container">
-          <div className="graph-title-diplay">
-            <h1 className="graph-title">Data Series</h1>
-            <h2 className="graph-title-small">{filters[0].selectedCategory}</h2>
-          </div>
-          <div className="graph-title-diplay">
-            <h1 className="graph-title">Subsample</h1>
-            <h2 className="graph-title-small">{filters[1].selectedCategory}</h2>
-          </div>
-          {filters[2].selectedTableColumnName && (
-            <div className="graph-title-diplay">
-              <h3 className="graph-title">Additional Filter</h3>
-              <h3 className="graph-title-small">{makeFilterList()}</h3>
-            </div>
-          )}
-        </div>
-
-        <Graph
-          data={chartData.percentageData}
-          csvData={chartData.dataStructure}
-          filters={filters}
-          keys={chartData.crossFilterValues}
-          groupMode={"grouped"}
-          sampleSize={chartData.totalSampleSize}
-          tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
-        />
-      </>
-    );
-  } else if (open === false) {
-    return (
-      <>
-        <LineGraphButton
-          buttonHandle={buttonHandle}
-          sdata={data}
-          filter0={filters[0]}
-        />
-        <div className="graph-titles-container">
-          <div className="graph-title-diplay">
-            <h1 className="graph-title">Data Series</h1>
-            <h2 className="graph-title-small">{filters[0].selectedCategory}</h2>
-          </div>
-          <div className="graph-title-diplay">
-            <h1 className="graph-title">Subsample</h1>
-            <h2 className="graph-title-small">{filters[1].selectedCategory}</h2>
-          </div>
-
-          {filters[2].selectedTableColumnName ? (
-            <div className="graph-title-diplay">
-              <h3 className="graph-title">Additional Filter</h3>
-              <h3 className="graph-title-small">{makeFilterList()}</h3>
-            </div>
-          ) : (
-            <div className="graph-title-diplay">
-              <h3 className="graph-title">Additional Filter</h3>
-            </div>
-          )}
-        </div>
-
-        <Graph
-          data={chartData.percentageData}
-          csvData={chartData.dataStructure}
-          filters={filters}
-          keys={chartData.keys || chartData.csvKeys}
-          groupMode={"stacked"}
-          sampleSize={chartData.sampleSize}
-          tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
-        />
-      </>
-    );
-  } else {
-    return (
-      <LineGraph data={data} filter0={filters[0]} buttonHandle={buttonHandle} />
-    );
-  }
+  //console.log("graph184");
+  return (
+    <>
+      <LineGraphButton
+        data={data}
+        chartData={chartData}
+        filters={filters}
+        queryType={queryType}
+        makeFilterList={makeFilterList}
+        buttonHandle={buttonHandle}
+        open={open}
+        setOpen={setOpen}
+      />
+    </>
+  );
 };
 
 export default GetData;
