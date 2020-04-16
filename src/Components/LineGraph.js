@@ -19,10 +19,10 @@ import Graph from "./Graph";
 const LineGraph = ({ data, filter0, buttonHandle }) => {
   const [isQuarter, setQuarter] = useState(false);
 
-  const quarterHandle = e => {
-    e.preventDefault();
-    setQuarter(!isQuarter);
-  };
+  // const quarterHandle = e => {
+  //   e.preventDefault();
+  //   setQuarter(!isQuarter);
+  // };
 
   const lineArray = data.sessionsData;
 
@@ -54,6 +54,12 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     item["created_date"] = item.created_date.substring(0, 7);
   });
 
+  //2.a. created_year
+  lineNonNull.map(item => {
+    item["created_year"] = item.created_date.substring(0, 4);
+  });
+
+  console.log(`lineNonNull`, lineNonNull);
   //FOR MONTHLY DISPLAY
   //3. Group categories together with date
   const reduceBy1 = (objectArray, property, property1) => {
@@ -69,12 +75,20 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       return total;
     }, {});
   };
+  //By year-month
   let groupedPeople1 = reduceBy1(
     lineNonNull,
     "created_date",
     selectedTableColumnName
   );
 
+  //By year
+  let groupedYear = reduceBy1(
+    lineNonNull,
+    "created_year",
+    selectedTableColumnName
+  );
+  console.log(`groupedYear`, groupedYear);
   // 4. get total amount per month
   //map through obj and get length of arrays
   let datesAmounts = {};
@@ -88,8 +102,23 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   mapObj(function length(val) {
     return val.length;
   }, groupedPeople1);
+  console.log(`Monthly`, groupedPeople1);
 
-  //5. combine date and quantity of categories
+  //By year
+  let yearAmounts = {};
+
+  function mapYear(mapper, o) {
+    for (let key of Object.keys(o)) {
+      yearAmounts[key] = mapper(o[key]);
+    }
+  }
+
+  mapYear(function length(val) {
+    return val.length;
+  }, groupedYear);
+  console.log(`groupedYear`, groupedYear);
+
+  //5. combine date and quantity of categories, Monthly
   let currentYM = "2017-01";
   let dateObj = {};
   const dateCatArray = [];
@@ -114,6 +143,26 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   combineAmountsToDates(datesAmounts);
+
+  //Yearly
+  const yearCatArray = [];
+  // let objectCombined = {};
+  function combineAmountsToYear(o) {
+    for (let key of Object.keys(o)) {
+      let year = key.slice(0, 4);
+      let cat = key.slice(4, 100);
+      let obj = {};
+      obj["date"] = year;
+      obj[cat] = o[key];
+
+      yearCatArray.push(obj);
+      // }
+    }
+  }
+
+  combineAmountsToYear(yearAmounts);
+
+  console.log(`yearCatArray`, yearCatArray);
 
   //6. combine together to create object for Monthly data
   let usedDates = [];
@@ -140,7 +189,32 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
   //console.log(`allCombined updated`, allCombined);
 
-  let enterDate = [];
+  //6.a. combine together to create object for Yearly data
+  let usedYears = [];
+  let itemYear = {};
+  let allCombinedYears = [];
+  for (let i = 0; i < yearCatArray.length; i++) {
+    let date = yearCatArray[i].date;
+    if (usedYears.includes(date)) {
+      itemYear = {
+        ...itemYear,
+        ...yearCatArray[i]
+      };
+      allCombinedYears.push(itemYear);
+    } else {
+      let arraykeys = Object.keys(yearCatArray[i]);
+      let arrayValues = Object.values(yearCatArray[i]);
+      let newDate = {};
+      newDate["date"] = date;
+      newDate[arraykeys[1]] = arrayValues[1];
+      itemYear = newDate;
+      usedYears.push(date);
+      allCombinedYears.push(itemYear);
+    }
+  }
+  console.log(`allCombined updated`, allCombinedYears);
+
+  //Update Monthly
   let updated = [];
   for (let i = 0; i < allCombined.length; i++) {
     if (
@@ -150,6 +224,18 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       updated.push(allCombined[i]);
     }
   }
+
+  //Update Yearly
+  let updatedYearly = [];
+  for (let i = 0; i < allCombinedYears.length; i++) {
+    if (
+      i + 1 < allCombinedYears.length &&
+      allCombinedYears[i].date !== allCombinedYears[i + 1].date
+    ) {
+      updatedYearly.push(allCombinedYears[i]);
+    }
+  }
+  console.log(`yearly`, updatedYearly);
 
   //  Quarterly Data
 
@@ -339,12 +425,19 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
           {" "}
           Quarterly
         </p>
+        <p
+          className={isQuarter ? "monthBtnOn" : "monthBtnOff"}
+          onClick={() => setQuarter(!isQuarter)}
+        >
+          {" "}
+          Yearly
+        </p>
       </div>
 
       {/* <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button> */}
       <ResponsiveContainer width="95%" height={600}>
         <LineChart
-          data={isQuarter ? updatedQtr : updated}
+          data={isQuarter ? updatedYearly : updated}
           margin={{
             top: 5,
             right: 30,
