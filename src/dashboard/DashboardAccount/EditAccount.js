@@ -16,6 +16,7 @@ import InputBase from "@material-ui/core/InputBase";
 import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
+import swal from "sweetalert";
 
 import styledComp from "styled-components";
 import { Typography } from "@material-ui/core";
@@ -130,6 +131,7 @@ const EditModal = props => {
       variables: { editUser: input }
     });
     setOpen(false);
+    swal({ title: "", text: "Success!", icon: "success" });
   };
 
   if (editUser.loading) {
