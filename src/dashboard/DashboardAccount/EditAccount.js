@@ -206,7 +206,7 @@ const EditModal = props => {
                   />
                   <Labels for="password">Password</Labels>
                   <Inputs
-                    type="text"
+                    type="password"
                     name="password"
                     id="password"
                     value={account.password}
