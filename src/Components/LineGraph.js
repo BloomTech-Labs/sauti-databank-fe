@@ -235,7 +235,74 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       updatedYearly.push(allCombinedYears[i]);
     }
   }
+  console.log(allCombinedYears);
   console.log(`yearly`, updatedYearly);
+
+  //Find highest value
+  console.log(updatedYearly);
+  let allYearValues = [];
+  // for (let i = 0; i < updatedYearly.length; i++) {
+  //   let item = updatedYearly[i];
+  //   let values = Object.values(item);
+  //   for (let i = 0; i < values.length; i++) {
+  //     if (typeof values[i] !== "string") {
+  //       allYearValues.push(values[i]);
+  //     }
+  //   }
+  // }
+
+  function highestValue(array, newArray) {
+    for (let i = 0; i < array.length; i++) {
+      let item = array[i];
+      let values = Object.values(item);
+      for (let i = 0; i < values.length; i++) {
+        if (typeof values[i] !== "string") {
+          newArray.push(values[i]);
+        }
+      }
+    }
+    return Math.max(...newArray);
+  }
+
+  let yrNewArray = [];
+  const yearlyHighest = highestValue(updatedYearly, yrNewArray);
+  console.log(updatedYearly);
+  console.log(yearlyHighest);
+  // console.log(yrNewArray)
+
+  //console.log(allYearValues);
+  //const highestYrValue = Math.max(...allYearValues);
+  //console.log(highestYrValue);
+
+  function hundredScale(array, high) {
+    for (let i = 0; i < array.length; i++) {
+      let item = array[i];
+      for (let key in item) {
+        if (key !== "date") {
+          item[key] = (item[key] / high) * 100;
+          item[key] = item[key].toFixed(2);
+        }
+      }
+    }
+    return array;
+  }
+
+  const year100 = hundredScale(updatedYearly, yearlyHighest);
+  console.log(year100);
+
+  // for (let i=0; i < updatedYearly.length; i++){
+  //   let item = updatedYearly[i]
+  //   let obj = {}
+  //   for(let key in item){
+  //     if (key !== 'date'){
+  //        item[key] = item[key]/highestYrValue*100
+  //        item[key] = item[key].toFixed(2)
+  //     }
+
+  //   }
+  //   console.log(item)
+  // }
+  // console.log(updatedYearly)
 
   //  Quarterly Data
 
@@ -392,6 +459,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const three = display[3];
   const four = display[4];
   const five = display[5];
+  const six = display[6];
+  const seven = display[7];
 
   //checkboxs to display individual lines
   const handleChange = event => {
@@ -437,7 +506,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       {/* <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button> */}
       <ResponsiveContainer width="95%" height={600}>
         <LineChart
-          data={isQuarter ? updatedYearly : updated}
+          data={isQuarter ? year100 : updated}
           margin={{
             top: 5,
             right: 30,
