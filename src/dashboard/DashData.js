@@ -181,9 +181,9 @@ function DashHome() {
   };
   return (
     <>
-      <SignedInDiv>
+      {/* <SignedInDiv>
         <UserHeader></UserHeader>
-      </SignedInDiv>
+      </SignedInDiv> */}
       <GraphContainer filters={setupFilter(history)} />
     </>
   );
