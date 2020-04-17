@@ -17,8 +17,6 @@ import Graph from "./Graph";
 // Data Series will need to be Sessions for chart to work
 
 const LineGraph = ({ data, filter0, buttonHandle }) => {
-  const [isQuarter, setQuarter] = useState(false);
-
   // const quarterHandle = e => {
   //   e.preventDefault();
   //   setQuarter(!isQuarter);
@@ -488,28 +486,32 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     console.log("reset");
     setCheckedItems({});
   };
+  const [time, setTime] = useState(month100);
+
+  console.log(time);
+  console.log(month100);
 
   return (
     <>
       <button onClick={buttonHandle}>Display Bar Chart</button>
       <div className="toggleDateContainer">
         <p
-          className={!isQuarter ? "monthBtnOn" : "monthBtnOff"}
-          onClick={() => setQuarter(!isQuarter)}
+          className={time === month100 ? "monthBtnOn" : "monthBtnOff"}
+          onClick={() => setTime(month100)}
         >
           {" "}
           Monthly
         </p>
         <p
-          className={isQuarter ? "monthBtnOn" : "monthBtnOff"}
-          onClick={() => setQuarter(!isQuarter)}
+          className={time === quarter100 ? "monthBtnOn" : "monthBtnOff"}
+          onClick={() => setTime(quarter100)}
         >
           {" "}
           Quarterly
         </p>
         <p
-          className={isQuarter ? "monthBtnOn" : "monthBtnOff"}
-          onClick={() => setQuarter(!isQuarter)}
+          className={time === year100 ? "monthBtnOn" : "monthBtnOff"}
+          onClick={() => setTime(year100)}
         >
           {" "}
           Yearly
@@ -519,7 +521,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       {/* <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button> */}
       <ResponsiveContainer width="95%" height={600}>
         <LineChart
-          data={isQuarter ? quarter100 : month100}
+          data={time}
           margin={{
             top: 5,
             right: 30,
