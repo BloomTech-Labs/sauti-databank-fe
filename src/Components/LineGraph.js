@@ -539,6 +539,9 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
           <Line type="monotone" dataKey={two} stroke="orange" dot={false} />
           <Line type="monotone" dataKey={three} stroke="green" dot={false} />
           <Line type="monotone" dataKey={four} stroke="red" dot={false} />
+          <Line type="monotone" dataKey={five} stroke="tan" dot={false} />
+          <Line type="monotone" dataKey={six} stroke="yellow" dot={false} />
+          <Line type="monotone" dataKey={seven} stroke="brown" dot={false} />
         </LineChart>
       </ResponsiveContainer>
       <button className="buttonReset" onClick={() => setCheckedItems({})}>
