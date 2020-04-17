@@ -445,6 +445,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
+  const qtrHighest = highestValue(updatedQtr);
+  const quarter100 = hundredScale(updatedQtr, qtrHighest);
+  console.log(qtrHighest);
+  console.log(quarter100);
   //   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
   const [checkedItems, setCheckedItems] = useState({});
@@ -515,7 +519,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       {/* <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button> */}
       <ResponsiveContainer width="95%" height={600}>
         <LineChart
-          data={isQuarter ? year100 : updated}
+          data={isQuarter ? quarter100 : month100}
           margin={{
             top: 5,
             right: 30,
