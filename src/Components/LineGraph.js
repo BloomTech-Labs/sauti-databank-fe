@@ -251,22 +251,28 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   //   }
   // }
 
-  function highestValue(array, newArray) {
+  function highestValue(array) {
+    let newArray = [];
     for (let i = 0; i < array.length; i++) {
       let item = array[i];
+      console.log(item);
       let values = Object.values(item);
+      console.log(values);
       for (let i = 0; i < values.length; i++) {
         if (typeof values[i] !== "string") {
+          console.log(values[i]);
           newArray.push(values[i]);
         }
       }
     }
+    console.log(newArray);
     return Math.max(...newArray);
   }
 
-  let yrNewArray = [];
-  const yearlyHighest = highestValue(updatedYearly, yrNewArray);
-  console.log(updatedYearly);
+  // let yrNewArray = [];
+  const yearlyHighest = highestValue(updatedYearly);
+  const monthlyHighest = highestValue(updated);
+  console.log(monthlyHighest);
   console.log(yearlyHighest);
   // console.log(yrNewArray)
 
@@ -288,7 +294,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   const year100 = hundredScale(updatedYearly, yearlyHighest);
+  const month100 = hundredScale(updated, monthlyHighest);
   console.log(year100);
+  console.log(updated);
+  console.log(month100);
 
   // for (let i=0; i < updatedYearly.length; i++){
   //   let item = updatedYearly[i]
@@ -516,7 +525,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis />
+          <YAxis type="number" domain={[0, 100]} />
           <Tooltip />
           <Legend />
           <Line
