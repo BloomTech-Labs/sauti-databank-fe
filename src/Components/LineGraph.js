@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -14,14 +14,14 @@ import CheckBox from "./CheckBox";
 import "../Components/scss/lineGraph.scss";
 import Graph from "./Graph";
 
+import topChecked from "./LineGraphHelpers/topChecked";
+
 // Data Series will need to be Sessions for chart to work
 
-const LineGraph = ({ data, filter0, buttonHandle }) => {
-  // const quarterHandle = e => {
-  //   e.preventDefault();
-  //   setQuarter(!isQuarter);
-  // };
+//top 7 should be checked
+//y-axis recalculate 100 based upon what is checked
 
+const LineGraph = ({ data, filter0, buttonHandle }) => {
   const lineArray = data.sessionsData;
 
   //Make an array of options that can be selected.
@@ -57,7 +57,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     item["created_year"] = item.created_date.substring(0, 4);
   });
 
-  console.log(`lineNonNull`, lineNonNull);
+  // console.log(`lineNonNull`, lineNonNull);
   //FOR MONTHLY DISPLAY
   //3. Group categories together with date
   const reduceBy1 = (objectArray, property, property1) => {
@@ -74,44 +74,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }, {});
   };
 
-  //addup amounts for top 7
-  const totalAmounts = (objectArray, property) => {
-    return objectArray.reduce(function(total, obj) {
-      //cat type to make a new key
-      let key = obj[property];
-      //make a new object if the year-mo and category not existing
-      if (!total[key]) {
-        total[key] = [];
-      }
-      //if cat then push obj
-      total[key].push(obj);
-      return total;
-    }, {});
-  };
-  //total
-  let sumAll = totalAmounts(lineNonNull, selectedTableColumnName);
-  //return key and length
-  const totalArray = [];
-  for (let key in sumAll) {
-    let value = sumAll[key].length;
-    let obj = {};
-    obj[value] = key;
-    totalArray.push(obj);
-  }
-
-  //sort array by amounts
-  const sortedArray = totalArray.sort();
-
-  //put categories in an array by top 7
   const keysInOrder = [];
-  for (let i = 0; i < sortedArray.length; i++) {
-    if (i < 7) {
-      let cat = Object.values(sortedArray[i]);
-      console.log(cat);
-      keysInOrder.push(cat[0]);
-    }
-  }
-  console.log(keysInOrder);
+  topChecked(lineNonNull, selectedTableColumnName, keysInOrder);
 
   //By year-month
   let groupedPeople1 = reduceBy1(
@@ -332,13 +296,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     return array;
   }
 
+  //use updated yearly initially, then use selected items.
+  console.log(`checkedItems`, checkedItems);
   const year100 = hundredScale(updatedYearly, yearlyHighest);
   const month100 = hundredScale(updated, monthlyHighest);
-  console.log(year100);
-  console.log(updated);
-  console.log(month100);
-
-  // console.log(updatedYearly)
 
   //  Quarterly Data
 
@@ -459,7 +420,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       allCombinedQtr.push(itemDateQtr);
     }
   }
-  console.log(`allCombinedQtr`, allCombinedQtr);
+  //console.log(`allCombinedQtr`, allCombinedQtr);
 
   //6. update array
   const updatedQtr = [];
@@ -474,38 +435,42 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   const qtrHighest = highestValue(updatedQtr);
   const quarter100 = hundredScale(updatedQtr, qtrHighest);
-  console.log(qtrHighest);
-  console.log(quarter100);
+  // console.log(qtrHighest);
+  // console.log(quarter100);
   //   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
   //make initial state of top 7 {beans: true}
   //but in order
-  console.log(year100.length);
-  console.log(typeof year100);
+  // console.log(year100.length);
+  // console.log(typeof year100);
   for (let i = 0; i < year100; i++) {
     //let item = year100[i]
-    console.log("itemmmm");
+    //console.log("itemmmm");
     // console.log(item)
   }
 
   for (let key of year100) {
-    console.log(key);
+    // console.log(key);
   }
 
   //keysInOrder to key:true
-  console.log(keysInOrder);
+
   let top7 = {};
   for (let i = 0; i < keysInOrder.length; i++) {
     let obj = {};
-    console.log(keysInOrder[i]);
+
     obj[keysInOrder[i]] = true;
-    console.log(obj);
+
     top7 = { ...top7, ...obj };
   }
+
+  // useEffect((top7)=> {
+  //   setCheckedItems(top7)
+  // }, [top7])
+
   console.log(top7);
   const [checkedItems, setCheckedItems] = useState(top7);
   console.log(checkedItems);
-  console.log(typeof checkedItems);
 
   let display = [];
   if (Object.entries(checkedItems).length > 0) {
