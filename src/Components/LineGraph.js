@@ -12,9 +12,8 @@ import {
 
 import CheckBox from "./CheckBox";
 import "../Components/scss/lineGraph.scss";
-import Graph from "./Graph";
 
-import topChecked from "./LineGraphHelpers/topChecked";
+import { topChecked } from "./LineGraphHelpers/topChecked";
 import { highestValue, hundredScale } from "./LineGraphHelpers/scale100";
 
 // Data Series will need to be Sessions for chart to work
@@ -48,6 +47,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
+  console.log(lineNonNull);
   // 2. convert date to year-month
   lineNonNull.map(item => {
     item["created_date"] = item.created_date.substring(0, 7);

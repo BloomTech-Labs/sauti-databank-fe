@@ -1,6 +1,6 @@
 //addup amounts for top 7
 //  top 7 of selected filter
-const topchecked = (lineNonNull, selectedTableColumnName, keysInOrder) => {
+export function topChecked(lineNonNull, selectedTableColumnName, keysInOrder) {
   const totalAmounts = (objectArray, property) => {
     return objectArray.reduce(function(total, obj) {
       //cat type to make a new key
@@ -16,6 +16,7 @@ const topchecked = (lineNonNull, selectedTableColumnName, keysInOrder) => {
   };
 
   let sumAll = totalAmounts(lineNonNull, selectedTableColumnName);
+  console.log(sumAll);
   //return key and length
   const totalArray = [];
   for (let key in sumAll) {
@@ -38,5 +39,4 @@ const topchecked = (lineNonNull, selectedTableColumnName, keysInOrder) => {
     }
   }
   return keysInOrder;
-};
-export default topchecked;
+}
