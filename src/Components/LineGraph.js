@@ -15,6 +15,7 @@ import "../Components/scss/lineGraph.scss";
 import Graph from "./Graph";
 
 import topChecked from "./LineGraphHelpers/topChecked";
+import { highestValue, hundredScale } from "./LineGraphHelpers/scale100";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -245,56 +246,11 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   //Find highest value
   console.log(updatedYearly);
   let allYearValues = [];
-  // for (let i = 0; i < updatedYearly.length; i++) {
-  //   let item = updatedYearly[i];
-  //   let values = Object.values(item);
-  //   for (let i = 0; i < values.length; i++) {
-  //     if (typeof values[i] !== "string") {
-  //       allYearValues.push(values[i]);
-  //     }
-  //   }
-  // }
 
-  function highestValue(array) {
-    let newArray = [];
-    for (let i = 0; i < array.length; i++) {
-      let item = array[i];
-
-      let values = Object.values(item);
-
-      for (let i = 0; i < values.length; i++) {
-        if (typeof values[i] !== "string") {
-          newArray.push(values[i]);
-        }
-      }
-    }
-    console.log(newArray);
-    return Math.max(...newArray);
-  }
-
-  // let yrNewArray = [];
   const yearlyHighest = highestValue(updatedYearly);
   const monthlyHighest = highestValue(updated);
   console.log(monthlyHighest);
   console.log(yearlyHighest);
-  // console.log(yrNewArray)
-
-  //console.log(allYearValues);
-  //const highestYrValue = Math.max(...allYearValues);
-  //console.log(highestYrValue);
-
-  function hundredScale(array, high) {
-    for (let i = 0; i < array.length; i++) {
-      let item = array[i];
-      for (let key in item) {
-        if (key !== "date") {
-          item[key] = (item[key] / high) * 100;
-          item[key] = item[key].toFixed(2);
-        }
-      }
-    }
-    return array;
-  }
 
   //use updated yearly initially, then use selected items.
   console.log(`checkedItems`, checkedItems);
@@ -443,24 +399,22 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   //but in order
   // console.log(year100.length);
   // console.log(typeof year100);
-  for (let i = 0; i < year100; i++) {
-    //let item = year100[i]
-    //console.log("itemmmm");
-    // console.log(item)
-  }
+  // for (let i = 0; i < year100; i++) {
+  //   //let item = year100[i]
+  //   //console.log("itemmmm");
+  //   // console.log(item)
+  // }
 
-  for (let key of year100) {
-    // console.log(key);
-  }
+  // for (let key of year100) {
+  //   // console.log(key);
+  // }
 
   //keysInOrder to key:true
 
   let top7 = {};
   for (let i = 0; i < keysInOrder.length; i++) {
     let obj = {};
-
     obj[keysInOrder[i]] = true;
-
     top7 = { ...top7, ...obj };
   }
 
