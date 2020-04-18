@@ -73,6 +73,46 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       return total;
     }, {});
   };
+
+  //addup amounts for top 7
+  const totalAmounts = (objectArray, property) => {
+    return objectArray.reduce(function(total, obj) {
+      //cat type to make a new key
+      let key = obj[property];
+      //make a new object if the year-mo and category not existing
+      if (!total[key]) {
+        total[key] = [];
+      }
+      //if cat then push obj
+      total[key].push(obj);
+      return total;
+    }, {});
+  };
+  //total
+  let sumAll = totalAmounts(lineNonNull, selectedTableColumnName);
+  //return key and length
+  const totalArray = [];
+  for (let key in sumAll) {
+    let value = sumAll[key].length;
+    let obj = {};
+    obj[value] = key;
+    totalArray.push(obj);
+  }
+
+  //sort array by amounts
+  const sortedArray = totalArray.sort();
+
+  //put categories in an array by top 7
+  const keysInOrder = [];
+  for (let i = 0; i < sortedArray.length; i++) {
+    if (i < 7) {
+      let cat = Object.values(sortedArray[i]);
+      console.log(cat);
+      keysInOrder.push(cat[0]);
+    }
+  }
+  console.log(keysInOrder);
+
   //By year-month
   let groupedPeople1 = reduceBy1(
     lineNonNull,
@@ -110,6 +150,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       yearAmounts[key] = mapper(o[key]);
     }
   }
+  console.log(yearAmounts);
 
   mapYear(function length(val) {
     return val.length;
@@ -117,10 +158,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   console.log(`groupedYear`, groupedYear);
 
   //5. combine date and quantity of categories, Monthly
-  let currentYM = "2017-01";
-  let dateObj = {};
+  // let currentYM = "2017-01";
+  // let dateObj = {};
   const dateCatArray = [];
-  let objectCombined = {};
+  //let objectCombined = {};
   function combineAmountsToDates(o) {
     for (let key of Object.keys(o)) {
       let yearMo = key.slice(0, 7);
@@ -225,6 +266,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //Update Yearly
   let updatedYearly = [];
+  let update7 = [];
   for (let i = 0; i < allCombinedYears.length; i++) {
     if (
       i + 1 < allCombinedYears.length &&
@@ -253,12 +295,11 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     let newArray = [];
     for (let i = 0; i < array.length; i++) {
       let item = array[i];
-      console.log(item);
+
       let values = Object.values(item);
-      console.log(values);
+
       for (let i = 0; i < values.length; i++) {
         if (typeof values[i] !== "string") {
-          console.log(values[i]);
           newArray.push(values[i]);
         }
       }
@@ -297,18 +338,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   console.log(updated);
   console.log(month100);
 
-  // for (let i=0; i < updatedYearly.length; i++){
-  //   let item = updatedYearly[i]
-  //   let obj = {}
-  //   for(let key in item){
-  //     if (key !== 'date'){
-  //        item[key] = item[key]/highestYrValue*100
-  //        item[key] = item[key].toFixed(2)
-  //     }
-
-  //   }
-  //   console.log(item)
-  // }
   // console.log(updatedYearly)
 
   //  Quarterly Data
@@ -386,7 +415,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //5. combine categories by quarter
   //let currentYM = "2017-Q1";
-  let qtrObj = {};
+  //let qtrObj = {};
   const dateCatArrayQtr = [];
   //let objectCombined = {};
   function combineAmountsToQtr(o) {
@@ -449,7 +478,32 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   console.log(quarter100);
   //   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
-  const [checkedItems, setCheckedItems] = useState({});
+  //make initial state of top 7 {beans: true}
+  //but in order
+  console.log(year100.length);
+  console.log(typeof year100);
+  for (let i = 0; i < year100; i++) {
+    //let item = year100[i]
+    console.log("itemmmm");
+    // console.log(item)
+  }
+
+  for (let key of year100) {
+    console.log(key);
+  }
+
+  //keysInOrder to key:true
+  console.log(keysInOrder);
+  let top7 = {};
+  for (let i = 0; i < keysInOrder.length; i++) {
+    let obj = {};
+    console.log(keysInOrder[i]);
+    obj[keysInOrder[i]] = true;
+    console.log(obj);
+    top7 = { ...top7, ...obj };
+  }
+  console.log(top7);
+  const [checkedItems, setCheckedItems] = useState(top7);
   console.log(checkedItems);
   console.log(typeof checkedItems);
 
@@ -463,6 +517,15 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
+  //checkboxs to display individual lines
+  const handleChange = event => {
+    console.log(event);
+    setCheckedItems({
+      ...checkedItems,
+      [event.target.name]: event.target.checked
+    });
+  };
+
   // items to display on line chart
   const zero = display[0];
   const one = display[1];
@@ -472,14 +535,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const five = display[5];
   const six = display[6];
   const seven = display[7];
-
-  //checkboxs to display individual lines
-  const handleChange = event => {
-    setCheckedItems({
-      ...checkedItems,
-      [event.target.name]: event.target.checked
-    });
-  };
 
   //To reset all selected checkboxes
   const handleReset = event => {
