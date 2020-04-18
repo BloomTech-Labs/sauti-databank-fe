@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   LineChart,
   Line,
@@ -13,7 +13,7 @@ import {
 import CheckBox from "./CheckBox";
 import "../Components/scss/lineGraph.scss";
 
-import { topChecked } from "./LineGraphHelpers/topChecked";
+import { topChecked, sumAll } from "./LineGraphHelpers/topChecked";
 import { highestValue, hundredScale } from "./LineGraphHelpers/scale100";
 
 // Data Series will need to be Sessions for chart to work
@@ -28,14 +28,14 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const keysArray = Object.keys(filter0.selectableOptions);
 
   //make checkbox options for graph
-  const checkboxes = [];
-  for (let i = 0; i < keysArray.length; i++) {
-    checkboxes.push({
-      name: keysArray[i],
-      key: `checkbox[i]`,
-      label: keysArray[i]
-    });
-  }
+  // const checkboxes = [];
+  // for (let i = 0; i < keysArray.length; i++) {
+  //   checkboxes.push({
+  //     name: keysArray[i],
+  //     key: `checkbox[i]`,
+  //     label: keysArray[i]
+  //   });
+  // }
 
   //get option selected from the first filter
   const selectedTableColumnName = filter0.selectedTableColumnName;
@@ -77,6 +77,32 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   const keysInOrder = [];
   topChecked(lineNonNull, selectedTableColumnName, keysInOrder);
+  console.log(keysInOrder);
+
+  // checkboxToDisplay(allBoxes)
+  // allBoxes1
+  console.log(`allBoxes`, sumAll);
+
+  //a checkbox is created for each category that has more than 10 data points
+  let allBoxes = [];
+  for (let key in sumAll) {
+    if (sumAll[key].length > 10) {
+      allBoxes.push(key);
+    }
+  }
+  allBoxes = allBoxes.sort();
+  console.log(allBoxes);
+  console.log(keysArray);
+
+  const checkboxes = [];
+  for (let i = 0; i < allBoxes.length; i++) {
+    console.log(allBoxes[i]);
+    checkboxes.push({
+      name: allBoxes[i],
+      key: `checkbox[i]`,
+      label: allBoxes[i]
+    });
+  }
 
   //By year-month
   let groupedPeople1 = reduceBy1(

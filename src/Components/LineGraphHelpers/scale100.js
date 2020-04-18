@@ -16,6 +16,7 @@ export function highestValue(array) {
 }
 
 export function hundredScale(array, high) {
+  console.log(array);
   for (let i = 0; i < array.length; i++) {
     let item = array[i];
     for (let key in item) {
