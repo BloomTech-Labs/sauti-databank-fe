@@ -153,8 +153,6 @@ export const AccountPage = styled.div`
             .account-type {
               box-sizing: border-box;
               background: #ffffff;
-              border: 1px solid rgba(0, 0, 0, 0.3);
-              border-radius: 5px;
               height: 100%;
               width: 85%;
               padding: 2rem;

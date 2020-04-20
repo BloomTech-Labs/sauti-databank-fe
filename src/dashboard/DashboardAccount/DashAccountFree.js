@@ -12,9 +12,47 @@ import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "../auth/Auth";
 import EditAccount from "./EditAccount";
 
+// Material UI Imports
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+
 // This components purpose is to potentially turn free users into paid users, capture the subscription ID, and push them to /data
+// Making this component more responsive by implementing Material UI cards.
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 340,
+    minHeight: 500
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)"
+  },
+  title: {
+    fontSize: "3rem",
+    fontWeight: 400,
+    letterSpacing: "1px"
+  },
+  subtitle1: {
+    fontSize: "2.2rem",
+    fontWeight: 600
+  },
+  pos: {
+    marginBottom: 12,
+    fontSize: "2.2rem",
+    fontWeight: 600
+  }
+});
 
 const DashAccountFree = props => {
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
   const token = getToken();
   const history = useHistory();
 
@@ -110,82 +148,254 @@ const DashAccountFree = props => {
             <div className="account-row">
               <div className="account-row-col">
                 <div className="account-type">
-                  <div className="account-header">
-                    <h2>Free Account</h2>
-                    <h1>Free</h1>
+                  <div className="card-shadow1">
+                    <Card className={classes.root}>
+                      <CardContent>
+                        <Typography
+                          className={classes.subtitle1}
+                          variant="h3"
+                          component="h3"
+                          gutterBottom
+                        >
+                          Free Account
+                        </Typography>
+                        <div className="free-border">
+                          <Typography
+                            className={classes.title}
+                            variant="h1"
+                            component="h3"
+                          >
+                            Free
+                          </Typography>
+                        </div>
+                        <div className="free-perk1">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Can Create an Account
+                          </Typography>
+                        </div>
+                        <div className="free-perk2">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Access Base App
+                          </Typography>
+                        </div>
+                        <div className="free-perk3">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Change Data Filters
+                          </Typography>
+                        </div>
+                      </CardContent>
+                      <CardActions>
+                        <div className="account-bottom">
+                          <div className="account-bottom-btn-ctn">
+                            <button type="submit" onClick={handleSubmit}>
+                              Continue
+                            </button>
+                          </div>
+                        </div>
+                      </CardActions>
+                    </Card>
                   </div>
-                  <div className="account-features">
-                    <div className="account-features-items">
-                      <span>Can Create an Account</span>
-                      <span>Access Base App</span>
-                      <span>Change Data Filters</span>
-                    </div>
-                  </div>
-                  <div className="account-bottom">
-                    <div className="account-bottom-btn-ctn">
-                      <button type="submit" onClick={handleSubmit}>
-                        Continue
-                      </button>
-                    </div>
+                </div>
+              </div>
+
+              <div className="account-row-col">
+                <div className="account-type">
+                  <div className="card-shadow2">
+                    <Card className={classes.root}>
+                      <CardContent>
+                        <Typography
+                          className={classes.subtitle1}
+                          variant="h3"
+                          component="h3"
+                          gutterBottom
+                        >
+                          Premium Account
+                        </Typography>
+                        <div className="free-border">
+                          <Typography
+                            className={classes.title}
+                            variant="h1"
+                            component="h3"
+                          >
+                            $10/monthly
+                          </Typography>
+                        </div>
+                        <div className="free-perk1">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Download data into an excel file
+                          </Typography>
+                        </div>
+                        <div className="free-perk2">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Change Data Filters
+                          </Typography>
+                        </div>
+                        <div className="free-perk3">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Cross-Filter Data by Date
+                          </Typography>
+                        </div>
+                        <div className="free-perk3">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Additional Filtering Options
+                          </Typography>
+                        </div>
+                      </CardContent>
+                      <CardActions>
+                        <div className="account-bottom">
+                          <MonthlyButton />
+                        </div>
+                      </CardActions>
+                    </Card>
                   </div>
                 </div>
               </div>
               <div className="account-row-col">
                 <div className="account-type">
-                  <div className="account-header">
-                    <h2>Premium Account</h2>
-                    <h1>$10/monthly</h1>
-                  </div>
-                  <div className="account-features">
-                    <div className="account-features-items">
-                      <span>Download data into an excel file</span>
-                      <span>Change Data Filters</span>
-                      <span>Cross-Filter Data by Date</span>
-                      <span>Additional Filtering Options</span>
-                    </div>
-                  </div>
-                  <div className="account-bottom">
-                    <MonthlyButton />
+                  <div className="card-shadow3">
+                    <Card className={classes.root}>
+                      <CardContent>
+                        <Typography
+                          className={classes.subtitle1}
+                          variant="h3"
+                          component="h3"
+                          gutterBottom
+                        >
+                          Premium Account
+                        </Typography>
+                        <div className="free-border">
+                          <Typography
+                            className={classes.title}
+                            variant="h1"
+                            component="h3"
+                          >
+                            $49.99/bi-annually
+                          </Typography>
+                        </div>
+                        <div className="free-perk1">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Download data into an excel file
+                          </Typography>
+                        </div>
+                        <div className="free-perk2">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Change Data Filters
+                          </Typography>
+                        </div>
+                        <div className="free-perk3">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Cross-Filter Data by Date
+                          </Typography>
+                        </div>
+                        <div className="free-perk3">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Additional Filtering Options
+                          </Typography>
+                        </div>
+                      </CardContent>
+                      <CardActions>
+                        <div className="account-bottom">
+                          <BiAnnuallyButton />
+                        </div>
+                      </CardActions>
+                    </Card>
                   </div>
                 </div>
               </div>
               <div className="account-row-col">
-                {" "}
                 <div className="account-type">
-                  <div className="account-header">
-                    <h2>Premium Account</h2>
-                    <h1>$49.99/bi-annually</h1>
-                  </div>
-                  <div className="account-features">
-                    <div className="account-features-items">
-                      <span>Download data into an excel file</span>
-                      <span>Change Data Filters</span>
-                      <span>Cross-Filter Data by Date</span>
-                      <span>Additional Filtering Options</span>
-                    </div>
-                  </div>
-                  <div className="account-bottom">
-                    <BiAnnuallyButton />
-                  </div>
-                </div>
-              </div>
-              <div className="account-row-col">
-                {" "}
-                <div className="account-type">
-                  <div className="account-header">
-                    <h2>Premium Account</h2>
-                    <h1>$89.99/yearly</h1>
-                  </div>
-                  <div className="account-features">
-                    <div className="account-features-items">
-                      <span>Download data into an excel file</span>
-                      <span>Change Data Filters</span>
-                      <span>Cross-Filter Data by Date</span>
-                      <span>Additional Filtering Options</span>
-                    </div>
-                  </div>
-                  <div className="account-bottom">
-                    <YearlyButton />
+                  <div className="card-shadow4">
+                    <Card className={classes.root}>
+                      <CardContent>
+                        <Typography
+                          className={classes.subtitle1}
+                          variant="h3"
+                          component="h3"
+                          gutterBottom
+                        >
+                          Premium Account
+                        </Typography>
+                        <div className="free-border">
+                          <Typography
+                            className={classes.title}
+                            variant="h1"
+                            component="h3"
+                          >
+                            $89.99/yearly
+                          </Typography>
+                        </div>
+                        <div className="free-perk1">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Download data into an excel file
+                          </Typography>
+                        </div>
+                        <div className="free-perk2">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Change Data Filters
+                          </Typography>
+                        </div>
+                        <div className="free-perk3">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Cross-Filter Data by Date
+                          </Typography>
+                        </div>
+                        <div className="free-perk3">
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            Additional Filtering Options
+                          </Typography>
+                        </div>
+                      </CardContent>
+                      <CardActions>
+                        <div className="account-bottom">
+                          <YearlyButton />
+                        </div>
+                      </CardActions>
+                    </Card>
                   </div>
                 </div>
               </div>
@@ -193,7 +403,6 @@ const DashAccountFree = props => {
           </div>
         </div>
       </div>
-      {/* <EditAccount data={tokenId} /> */}
     </AccountPage>
   );
 };
