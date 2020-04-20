@@ -45,8 +45,11 @@ function hundredScale(array, high) {
 }
 
 function checkedHigh(time, currentHighs, previousHigh, checkedItems, selected) {
-  console.log(`checkItems`, checkedItems);
+  console.log(`time`, time);
+  console.log(`currentHighs`, currentHighs);
   console.log(`previousHigh`, previousHigh);
+  console.log(`checkItems`, checkedItems);
+  console.log(`selected`, selected);
   for (let key in checkedItems) {
     if (key === selected) {
       let current = checkedItems[key];
@@ -80,11 +83,11 @@ function checkedHigh(time, currentHighs, previousHigh, checkedItems, selected) {
     for (let key in item) {
       if (key !== "date") {
         let updateValue = item[key];
-        console.log(updateValue);
+        //console.log(updateValue);
         let ogNum = Math.round((updateValue / 100) * previousHigh);
-        console.log(ogNum);
+        //console.log(ogNum);
         let newPercent = Math.round((ogNum / max) * 100);
-        console.log(newPercent);
+        //console.log(newPercent);
         item[key] = newPercent;
       }
     }

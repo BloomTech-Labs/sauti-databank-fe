@@ -468,6 +468,17 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     setTime(quarter100);
     setCurrentHighs(quarterHighs);
     setPrevioustHigh(qtrCurrentHigh);
+    let adjustedSelectQtr = [];
+    if (previousHigh !== qtrCurrentHigh) {
+      adjustedSelectQtr = checkedHigh(
+        quarter100,
+        quarterHighs,
+        qtrCurrentHigh,
+        checkedItems
+      );
+    }
+    console.log(adjustedSelectQtr);
+    //setTime(adjustedSelectQtr);
   }
 
   function yrOnClick(event) {
@@ -503,13 +514,17 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const six = display[6];
   const seven = display[7];
 
+  let allFalse = [];
+
+  // function toFalse(){
+  //   for (let key in checkedItems) {
+  //   checkedItems[key] = false;
+  // }}
+
   //To reset all selected checkboxes
   const handleReset = event => {
     console.log(checkedItems);
 
-    for (let key in checkedItems) {
-      checkedItems[key] = false;
-    }
     console.log(checkedItems);
     setCheckedItems(checkedItems);
   };
