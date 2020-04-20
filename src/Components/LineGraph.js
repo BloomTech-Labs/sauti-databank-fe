@@ -14,7 +14,11 @@ import CheckBox from "./CheckBox";
 import "../Components/scss/lineGraph.scss";
 
 import { topChecked, sumAll } from "./LineGraphHelpers/topChecked";
-import { highestValue, hundredScale } from "./LineGraphHelpers/scale100";
+import {
+  highestValue,
+  hundredScale,
+  checkedHigh
+} from "./LineGraphHelpers/scale100";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -26,16 +30,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //Make an array of options that can be selected.
   const keysArray = Object.keys(filter0.selectableOptions);
-
-  //make checkbox options for graph
-  // const checkboxes = [];
-  // for (let i = 0; i < keysArray.length; i++) {
-  //   checkboxes.push({
-  //     name: keysArray[i],
-  //     key: `checkbox[i]`,
-  //     label: keysArray[i]
-  //   });
-  // }
 
   //get option selected from the first filter
   const selectedTableColumnName = filter0.selectedTableColumnName;
@@ -257,7 +251,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //Update Yearly
   let updatedYearly = [];
-  let update7 = [];
+  // let update7 = [];
   for (let i = 0; i < allCombinedYears.length; i++) {
     if (
       i + 1 < allCombinedYears.length &&
@@ -272,17 +266,29 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   //Find highest value
   console.log(updatedYearly);
   let allYearValues = [];
+  console.log(updatedYearly);
 
   const yearlyHighest = highestValue(updatedYearly);
   const monthlyHighest = highestValue(updated);
+  //  const monthlyHighest = max
+  //  console.log(allEntries)
+
   console.log(monthlyHighest);
   console.log(yearlyHighest);
 
   //use updated yearly initially, then use selected items.
-  console.log(`checkedItems`, checkedItems);
-  const year100 = hundredScale(updatedYearly, yearlyHighest);
-  const month100 = hundredScale(updated, monthlyHighest);
+  // console.log(`checkedItems`, checkedItems);
+  const yearAll = hundredScale(updatedYearly, yearlyHighest);
+  const year100 = yearAll.array;
+  const yearHighs = yearAll.highNumerical;
+  const yrCurrentHigh = yearAll.high;
+  // console.log(`yearHighs`,yrCurrentHigh)
 
+  const monthAll = hundredScale(updated, monthlyHighest);
+  const month100 = monthAll.array;
+  const monthHighs = monthAll.highNumerical;
+  const moCurrentHigh = monthAll.high;
+  //console.log(`monthHighs`,moCurrentHigh)
   //  Quarterly Data
 
   // 1. eliminate null values
@@ -357,10 +363,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }, groupedItems);
 
   //5. combine categories by quarter
-  //let currentYM = "2017-Q1";
-  //let qtrObj = {};
+
   const dateCatArrayQtr = [];
-  //let objectCombined = {};
   function combineAmountsToQtr(o) {
     for (let key of Object.keys(o)) {
       let yearQtr = key.slice(0, 7);
@@ -402,7 +406,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       allCombinedQtr.push(itemDateQtr);
     }
   }
-  //console.log(`allCombinedQtr`, allCombinedQtr);
 
   //6. update array
   const updatedQtr = [];
@@ -416,26 +419,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   const qtrHighest = highestValue(updatedQtr);
-  const quarter100 = hundredScale(updatedQtr, qtrHighest);
-  // console.log(qtrHighest);
-  // console.log(quarter100);
-  //   //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
-
-  //make initial state of top 7 {beans: true}
-  //but in order
-  // console.log(year100.length);
-  // console.log(typeof year100);
-  // for (let i = 0; i < year100; i++) {
-  //   //let item = year100[i]
-  //   //console.log("itemmmm");
-  //   // console.log(item)
-  // }
-
-  // for (let key of year100) {
-  //   // console.log(key);
-  // }
-
-  //keysInOrder to key:true
+  const quarterAll = hundredScale(updatedQtr, qtrHighest);
+  const quarter100 = quarterAll.array;
+  const quarterHighs = quarterAll.highNumerical;
+  const qtrCurrentHigh = quarterAll.high;
 
   let top7 = {};
   for (let i = 0; i < keysInOrder.length; i++) {
@@ -444,13 +431,16 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     top7 = { ...top7, ...obj };
   }
 
-  // useEffect((top7)=> {
-  //   setCheckedItems(top7)
-  // }, [top7])
-
-  console.log(top7);
+  const [time, setTime] = useState(month100);
+  //console.log(top7);
   const [checkedItems, setCheckedItems] = useState(top7);
-  console.log(checkedItems);
+  //console.log(checkedItems);
+
+  // const selectedHigh = checkedHigh(checkedItems)
+  //  console.log(selectedHigh)
+  // console.log(`updated`,updated)
+  // const new100 = hundredScale(updated, selectedHigh)
+  // console.log(`updated`,updated)
 
   let display = [];
   if (Object.entries(checkedItems).length > 0) {
@@ -486,10 +476,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     console.log("reset");
     setCheckedItems({});
   };
-  const [time, setTime] = useState(month100);
-
-  console.log(time);
-  console.log(month100);
 
   return (
     <>
