@@ -162,7 +162,7 @@ const EditModal = props => {
         <IconButtons
           style={{ height: 20, lineHeight: 0.5 }}
           onClick={e => handleOpen(e, props.data)}
-          className="btn btn-info"
+          // className="btn btn-info"
         >
           <i class="fas fa-pencil-alt" />
         </IconButtons>

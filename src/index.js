@@ -17,6 +17,7 @@ dotenv.config();
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_BACKEND_URL}`,
   // uri: "http://localhost:2500/graphql",
+  // uri: "https://sauti-databank.herokuapp.com/graphql",
   onError: ({ networkError, graphQLErrors }) => {
     console.log("graphQLErrors", graphQLErrors);
     console.log("networkErrors", networkError);

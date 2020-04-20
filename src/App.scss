@@ -1,5 +1,4 @@
 $greyColor: #4d4f52;
-
 .Graph-Container {
   height: 600px;
   position: relative;
@@ -15,11 +14,14 @@ $greyColor: #4d4f52;
     color: #47837f;
   }
 }
+
 .display-none {
   display: none;
 }
+
 .dwnld-btn {
 }
+
 // .reset-btn {
 //   text-decoration: none;
 //   border: 2px solid grey;
@@ -53,7 +55,6 @@ $greyColor: #4d4f52;
     height: 100px;
     align-items: center;
     justify-content: space-evenly;
-
     .Sauti-Logo {
       font-family: Montserrat;
       font-size: 3rem;
@@ -66,12 +67,10 @@ $greyColor: #4d4f52;
       color: white;
       margin-left: 40px;
       text-decoration: none;
-
       a {
         text-decoration: none;
         color: white;
       }
-
       span {
         color: #eb5e52;
       }
@@ -93,22 +92,18 @@ $greyColor: #4d4f52;
       }
     }
   }
-
   .main-container {
     display: flex;
     flex-direction: column;
     align-content: center;
     margin-top: 0px;
     margin-bottom: 100px;
-
     .header {
       height: 88px;
       width: 100vw;
-
       background: #212121;
       display: flex;
       align-items: center;
-
       h1 {
         font-size: 28px;
         color: #ffffff;
@@ -116,19 +111,15 @@ $greyColor: #4d4f52;
         margin-left: 20px;
       }
     } //header
-
     .content-container {
       display: flex;
       justify-content: space-around;
       width: 98%;
       margin: 40px auto;
-
       .chart-container {
         width: calc(75% - 40px);
-
         .Chart {
           height: 500px;
-
           h2 {
             padding-bottom: 35px;
             font-family: Helvetica;
@@ -140,23 +131,19 @@ $greyColor: #4d4f52;
             letter-spacing: normal;
             color: $greyColor;
           }
-
           .lineCont {
             display: flex;
             padding-bottom: 20px;
-
             .lineOne {
               margin-left: 40px;
               border-bottom: 1px solid #d0d2d6;
               width: 50%;
             }
-
             .lineTwo {
               border-bottom: 4px solid #d0d2d6;
               width: 50%;
             }
           }
-
           .method-title {
             padding: 50px 40px 20px 0px;
             font-family: Helvetica;
@@ -168,7 +155,6 @@ $greyColor: #4d4f52;
             letter-spacing: normal;
             color: $greyColor;
           }
-
           p {
             padding: 10px 0px 10px 40px;
             font-family: Helvetica, sans-serif;
@@ -179,7 +165,6 @@ $greyColor: #4d4f52;
           }
         }
       }
-
       .options-loader {
         display: flex;
         justify-content: center;
@@ -196,5 +181,43 @@ $greyColor: #4d4f52;
       border-right: 0.5px solid lightgray;
       padding: 0 5px;
     }
+  }
+}
+
+.account-page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h1 {
+    text-align: left;
+    font-size: 4.5rem;
+    margin-bottom: 4%;
+  }
+  p {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-row-col-admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    text-align: left;
+    font-size: 4.5rem;
+    margin-bottom: 4%;
+  }
+  p {
+    font-size: 1.7rem;
+    line-height: 1.5;
   }
 }

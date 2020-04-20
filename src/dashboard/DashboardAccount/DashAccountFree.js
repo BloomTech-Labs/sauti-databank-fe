@@ -88,12 +88,14 @@ const DashAccountFree = props => {
               <div className="header-row-col">
                 <UndrawOptionsSVG />
               </div>
-              <div className="header-row-col">
+              <div className="account-page-header">
                 <h1>Need more data?</h1>
-                <span>
-                  We know how important data filtering is to your research
-                </span>
-                <span>Upgrade to our paid plan to access all material</span>
+                <div className="account-descript">
+                  <p>
+                    We know how important data filtering is to your research.
+                  </p>
+                  <p>Upgrade to our paid plan to access all material.</p>
+                </div>
               </div>
 
               <div className="header-row-col">
@@ -191,7 +193,7 @@ const DashAccountFree = props => {
           </div>
         </div>
       </div>
-      <EditAccount data={tokenId} />
+      {/* <EditAccount data={tokenId} /> */}
     </AccountPage>
   );
 };
