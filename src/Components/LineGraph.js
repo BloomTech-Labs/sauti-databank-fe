@@ -439,7 +439,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   console.log(`previousHighs`, previousHigh);
   //console.log(top7);
   const [checkedItems, setCheckedItems] = useState(top7);
-  //console.log(checkedItems);
+  console.log(`setCheckedItems`, checkedItems);
 
   // const selectedHigh = checkedHigh(checkedItems)
   //  console.log(selectedHigh)
@@ -505,8 +505,13 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //To reset all selected checkboxes
   const handleReset = event => {
-    console.log("reset");
-    setCheckedItems({});
+    console.log(checkedItems);
+
+    for (let key in checkedItems) {
+      checkedItems[key] = false;
+    }
+    console.log(checkedItems);
+    setCheckedItems(checkedItems);
   };
 
   return (
@@ -575,7 +580,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
           <Line type="monotone" dataKey={seven} stroke="brown" dot={false} />
         </LineChart>
       </ResponsiveContainer>
-      <button className="buttonReset" onClick={() => setCheckedItems({})}>
+      <button className="buttonReset" onClick={handleReset}>
         Reset
       </button>
       <div className="boxes">
