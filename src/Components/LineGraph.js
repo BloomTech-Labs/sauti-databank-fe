@@ -432,6 +432,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   const [time, setTime] = useState(month100);
+  const [currentHighs, setCurrentHighs] = useState(monthHighs);
+  const [previousHigh, setPrevioustHigh] = useState(moCurrentHigh);
   //console.log(top7);
   const [checkedItems, setCheckedItems] = useState(top7);
   //console.log(checkedItems);
@@ -453,13 +455,15 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   //checkboxs to display individual lines
-  const handleChange = event => {
-    console.log(event);
-    setCheckedItems({
+  async function handleChange(event) {
+    let selected = event.target.name;
+    await setCheckedItems({
       ...checkedItems,
       [event.target.name]: event.target.checked
     });
-  };
+    await checkedHigh(time, currentHighs, previousHigh, checkedItems, selected);
+    console.log(time, currentHighs);
+  }
 
   // items to display on line chart
   const zero = display[0];
@@ -484,6 +488,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         <p
           className={time === month100 ? "monthBtnOn" : "monthBtnOff"}
           onClick={() => setTime(month100)}
+          onClick={() => setCurrentHighs(monthHighs)}
+          onClick={() => setPrevioustHigh(moCurrentHigh)}
         >
           {" "}
           Monthly
@@ -491,6 +497,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         <p
           className={time === quarter100 ? "monthBtnOn" : "monthBtnOff"}
           onClick={() => setTime(quarter100)}
+          onClick={() => setCurrentHighs(quarterHighs)}
+          onClick={() => setPrevioustHigh(qtrCurrentHigh)}
         >
           {" "}
           Quarterly
@@ -498,6 +506,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         <p
           className={time === year100 ? "monthBtnOn" : "monthBtnOff"}
           onClick={() => setTime(year100)}
+          onClick={() => setCurrentHighs(yearHighs)}
+          onClick={() => setPrevioustHigh(yrCurrentHigh)}
         >
           {" "}
           Yearly

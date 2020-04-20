@@ -22,23 +22,18 @@ function highestValue(array) {
       }
     }
   }
-  console.log(newArray);
   max = Math.max(...newArray);
   return max;
 }
 
 function hundredScale(array, high) {
-  console.log(`updated`, array);
   let highNumerical = [];
   for (let i = 0; i < array.length; i++) {
-    //   console.log(array[i])
-    //   newValues.push(array[i]);
     let item = array[i];
     for (let key in item) {
       if (key !== "date") {
         let keyValue = {};
         keyValue[key] = item[key];
-        console.log(keyValue);
         highNumerical.push(keyValue);
         item[key] = (item[key] / high) * 100;
         //round to 2 decimal
@@ -49,30 +44,55 @@ function hundredScale(array, high) {
   return { array, highNumerical, high };
 }
 
-function checkedHigh(checkedItems) {
-  console.log(allEntriesYr);
-  console.log(allEntriesQtr);
-  console.log(allEntriesMo);
-  console.log(checkedItems);
-  let selectedArray = [];
-  let theHigh = [];
+function checkedHigh(time, currentHighs, previousHigh, checkedItems, selected) {
+  console.log(`checkItems`, checkedItems);
+  for (let key in checkedItems) {
+    if (key === selected) {
+      let current = checkedItems[key];
+      console.log(`current`, current);
+      checkedItems[key] = !current;
+    }
+    console.log(checkedItems);
+  }
   let keyArray = [];
   for (let key in checkedItems) {
     if (checkedItems[key] === true) keyArray.push(key);
   }
-  for (let i = 0; i < allEntriesMo.length; i++) {
-    let set = allEntriesMo[i];
-    console.log(set[1]);
-    if (keyArray.includes(set[1][0])) {
-      selectedArray.push(set[1]);
+  console.log(keyArray);
+
+  let selectedValues = [];
+  for (let i = 0; i < currentHighs.length; i++) {
+    let key = Object.keys(currentHighs[i]);
+    //console.log(key)
+    if (keyArray.includes(key[0])) {
+      //console.log('it includes key')
+      //console.log(currentHighs[i])
+      let item = Object.values(currentHighs[i]);
+      selectedValues.push(item[0]);
     }
   }
-  for (let i = 0; i < selectedArray.length; i++) {
-    let item = selectedArray[i][1];
-    theHigh.push(item);
+  //console.log(selectedValues)
+  let max = Math.max(...selectedValues);
+  console.log(time);
+  for (let i = 0; i < time.length; i++) {
+    let item = time[i];
+    for (let key in item) {
+      if (key !== "date") {
+        let updateValue = item[key];
+        // console.log(updateValue)
+        let ogNum = Math.round((updateValue / 100) * previousHigh);
+        let newPercent = (ogNum * max) / 100;
+        item[key] = newPercent;
+      }
+    }
   }
-  let newMax = Math.max(...theHigh);
-  return newMax;
+  console.log(time);
+  //   for (let i = 0; i < selectedArray.length; i++) {
+  //     let item = selectedArray[i][1];
+  //     theHigh.push(item);
+  //   }
+  //   let newMax = Math.max(...theHigh);
+  //   return newMax;
   //return hundredScale(newValues, newMax)
 }
 export { highestValue, hundredScale, checkedHigh };
