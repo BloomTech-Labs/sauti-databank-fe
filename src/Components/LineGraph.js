@@ -432,8 +432,11 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   const [time, setTime] = useState(month100);
+  console.log(time);
   const [currentHighs, setCurrentHighs] = useState(monthHighs);
+  console.log(`currentHighs`, currentHighs);
   const [previousHigh, setPrevioustHigh] = useState(moCurrentHigh);
+  console.log(`previousHighs`, previousHigh);
   //console.log(top7);
   const [checkedItems, setCheckedItems] = useState(top7);
   //console.log(checkedItems);
@@ -454,15 +457,40 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
+  //multiple functions onClick
+  function moOnClick(event) {
+    setTime(month100);
+    setCurrentHighs(monthHighs);
+    setPrevioustHigh(moCurrentHigh);
+  }
+
+  function qtrOnClick(event) {
+    setTime(quarter100);
+    setCurrentHighs(quarterHighs);
+    setPrevioustHigh(qtrCurrentHigh);
+  }
+
+  function yrOnClick(event) {
+    setTime(year100);
+    setCurrentHighs(yearHighs);
+    setPrevioustHigh(yrCurrentHigh);
+  }
+
   //checkboxs to display individual lines
-  async function handleChange(event) {
+  function handleChange(event) {
     let selected = event.target.name;
-    await setCheckedItems({
+    setCheckedItems({
       ...checkedItems,
       [event.target.name]: event.target.checked
     });
-    await checkedHigh(time, currentHighs, previousHigh, checkedItems, selected);
-    console.log(time, currentHighs);
+    const adjustedSelect = checkedHigh(
+      time,
+      currentHighs,
+      previousHigh,
+      checkedItems,
+      selected
+    );
+    setTime(adjustedSelect);
   }
 
   // items to display on line chart
@@ -487,27 +515,28 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       <div className="toggleDateContainer">
         <p
           className={time === month100 ? "monthBtnOn" : "monthBtnOff"}
-          onClick={() => setTime(month100)}
-          onClick={() => setCurrentHighs(monthHighs)}
-          onClick={() => setPrevioustHigh(moCurrentHigh)}
+          onClick={moOnClick}
+          // onClick={() => setTime(month100)}
+          // onClick={() => setCurrentHighs(monthHighs)}
+          // onClick={() => setPrevioustHigh(moCurrentHigh)}
         >
           {" "}
           Monthly
         </p>
         <p
           className={time === quarter100 ? "monthBtnOn" : "monthBtnOff"}
-          onClick={() => setTime(quarter100)}
-          onClick={() => setCurrentHighs(quarterHighs)}
-          onClick={() => setPrevioustHigh(qtrCurrentHigh)}
+          onClick={qtrOnClick}
+          // onClick={() => setCurrentHighs(quarterHighs)}
+          // onClick={() => setPrevioustHigh(qtrCurrentHigh)}
         >
           {" "}
           Quarterly
         </p>
         <p
           className={time === year100 ? "monthBtnOn" : "monthBtnOff"}
-          onClick={() => setTime(year100)}
-          onClick={() => setCurrentHighs(yearHighs)}
-          onClick={() => setPrevioustHigh(yrCurrentHigh)}
+          onClick={yrOnClick}
+          // onClick={() => setCurrentHighs(yearHighs)}
+          // onClick={() => setPrevioustHigh(yrCurrentHigh)}
         >
           {" "}
           Yearly
@@ -556,7 +585,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
               <CheckBox
                 name={option.name}
                 checked={checkedItems[option.name]}
-                onChange={handleChange}
+                handleChange={handleChange}
               />
 
               {option.name}
