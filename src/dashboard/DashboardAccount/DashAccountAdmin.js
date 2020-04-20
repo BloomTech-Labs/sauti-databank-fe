@@ -8,9 +8,9 @@ const DashAccountAdmin = () => {
         <div className="page-row-col-top">
           <div className="header-container">
             <div className="header-row">
-              <div className="header-row-col admin">
+              <div className="header-row-col-admin">
                 <h1>User Account Types</h1>
-                <span>Account types available to our customers</span>
+                <p>Account types available to our customers</p>
               </div>
             </div>
           </div>

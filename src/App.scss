@@ -198,3 +198,26 @@ $greyColor: #4d4f52;
     line-height: 1.5;
   }
 }
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-row-col-admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    text-align: left;
+    font-size: 4.5rem;
+    margin-bottom: 4%;
+  }
+  p {
+    font-size: 1.7rem;
+    line-height: 1.5;
+  }
+}
