@@ -121,7 +121,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       datesAmounts[key] = mapper(o[key]);
     }
   }
-
+  console.log(`datesAmounts`, datesAmounts);
   mapObj(function length(val) {
     return val.length;
   }, groupedPeople1);
@@ -140,7 +140,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   mapYear(function length(val) {
     return val.length;
   }, groupedYear);
-  console.log(`groupedYear`, groupedYear);
+  //console.log(`groupedYear`, groupedYear);
 
   //5. combine date and quantity of categories, Monthly
   // let currentYM = "2017-01";
@@ -165,7 +165,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       // }
     }
   }
-
+  console.log(`dateCatArray`, dateCatArray);
   combineAmountsToDates(datesAmounts);
 
   //Yearly
@@ -211,7 +211,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       allCombined.push(itemDate);
     }
   }
-  //console.log(`allCombined updated`, allCombined);
+  console.log(`allCombined updated`, allCombined);
 
   //6.a. combine together to create object for Yearly data
   let usedYears = [];
@@ -330,9 +330,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const catByQtr = (objectArray, property, property1) => {
     return objectArray.reduce(function(total, obj) {
       let key = obj[property] + obj[property1];
-
       //combine date and cat type to make a new key
-
+      //console.log(`obj`, obj)
       //make a new object if the year-mo and category not existing
       if (!total[key]) {
         total[key] = [];

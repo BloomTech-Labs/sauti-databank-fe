@@ -26,21 +26,48 @@ function highestValue(array) {
   return max;
 }
 
-function hundredScale(array, high) {
-  let highNumerical = [];
-  for (let i = 0; i < array.length; i++) {
-    let item = array[i];
-    for (let key in item) {
-      if (key !== "date") {
-        let keyValue = {};
-        keyValue[key] = item[key];
-        highNumerical.push(keyValue);
-        item[key] = (item[key] / high) * 100;
-        //round to 2 decimal
-        item[key] = item[key].toFixed(2);
-      }
+function addArray(item) {
+  let numArray = [];
+  let period;
+  for (let key in item) {
+    //console.log(item);
+
+    if (key !== "date") {
+      numArray.push(item[key]);
+    } else {
+      item["period"] = 0;
     }
   }
+  //console.log(numArray);
+  let total = numArray.reduce(function(a, b) {
+    return a + b;
+  }, 0);
+  //console.log(period);
+
+  item["period"] = total;
+  console.log(item);
+}
+
+function hundredScale(array, high) {
+  let highNumerical = [];
+  //let numArray = []
+  for (let i = 0; i < array.length; i++) {
+    let item = array[i];
+    //console.log(array[i])
+    addArray(item);
+  }
+
+  //   for (let key in item) {
+  //     if (key !== "date") {
+  //       let keyValue = {};
+  //       keyValue[key] = item[key];
+  //       highNumerical.push(keyValue);
+  //       item[key] = (item[key] / high) * 100;
+  //       //round to 2 decimal
+  //       item[key] = item[key].toFixed(2);
+  //     }
+  //   }
+  //}
   return { array, highNumerical, high };
 }
 
