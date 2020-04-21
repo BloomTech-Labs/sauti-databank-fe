@@ -43,12 +43,16 @@ function addArray(item) {
     return a + b;
   }, 0);
   //console.log(period);
-
+  for (let key in item) {
+    if (key !== "date") {
+      item[key] = (item[key] / total) * 100;
+    }
+  }
   item["period"] = total;
   console.log(item);
 }
 
-function hundredScale(array, high) {
+function hundredScale(array) {
   let highNumerical = [];
   //let numArray = []
   for (let i = 0; i < array.length; i++) {
@@ -68,7 +72,7 @@ function hundredScale(array, high) {
   //     }
   //   }
   //}
-  return { array, highNumerical, high };
+  return { array, highNumerical };
 }
 
 function checkedHigh(time, currentHighs, previousHigh, checkedItems, selected) {

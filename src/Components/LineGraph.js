@@ -278,13 +278,13 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //use updated yearly initially, then use selected items.
   // console.log(`checkedItems`, checkedItems);
-  const yearAll = hundredScale(updatedYearly, yearlyHighest);
+  const yearAll = hundredScale(updatedYearly);
   const year100 = yearAll.array;
   const yearHighs = yearAll.highNumerical;
   const yrCurrentHigh = yearAll.high;
   // console.log(`yearHighs`,yrCurrentHigh)
 
-  const monthAll = hundredScale(updated, monthlyHighest);
+  const monthAll = hundredScale(updated);
   const month100 = monthAll.array;
   const monthHighs = monthAll.highNumerical;
   const moCurrentHigh = monthAll.high;
@@ -527,7 +527,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     console.log(checkedItems);
     setCheckedItems(checkedItems);
   };
-
+  console.log(`time`, time);
   return (
     <>
       <button onClick={buttonHandle}>Display Bar Chart</button>
