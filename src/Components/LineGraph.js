@@ -32,7 +32,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   // 1. eliminate null values
   const lineNonNull = [];
   for (let i = 0; i < lineArray.length; i++) {
-    if (lineArray[i][selectedTableColumnName] !== null) {
+    if (
+      lineArray[i][selectedTableColumnName] !== null &&
+      lineArray[i][selectedTableColumnName] !== ""
+    ) {
       lineNonNull.push(lineArray[i]);
     }
   }
@@ -257,7 +260,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   // 1. eliminate null values
   const lineNonNullQtr = [];
   for (let i = 0; i < lineArray.length; i++) {
-    if (data.sessionsData[i][selectedTableColumnName] !== null) {
+    if (
+      data.sessionsData[i][selectedTableColumnName] !== null &&
+      data.sessionsData[i][selectedTableColumnName] !== ""
+    ) {
       lineNonNullQtr.push(data.sessionsData[i]);
     }
   }
@@ -393,10 +399,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   const [time, setTime] = useState(month100);
 
-  // const [currentHighs, setCurrentHighs] = useState(monthHighs);
-
-  // const [previousHigh, setPrevioustHigh] = useState(moCurrentHigh);
-
   const [checkedItems, setCheckedItems] = useState(top7);
 
   let display = [];
@@ -412,29 +414,14 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   //multiple functions onClick
   function moOnClick(event) {
     setTime(month100);
-    // setCurrentHighs(monthHighs);
-    // setPrevioustHigh(moCurrentHigh);
   }
 
   function qtrOnClick(event) {
     setTime(quarter100);
-    // setCurrentHighs(quarterHighs);
-    // setPrevioustHigh(qtrCurrentHigh);
-    //let adjustedSelectQtr = [];
-    // if (previousHigh !== qtrCurrentHigh) {
-    //   adjustedSelectQtr = checkedHigh(
-    //     quarter100,
-    //     quarterHighs,
-    //     qtrCurrentHigh,
-    //     checkedItems
-    //   );
-    // }
   }
 
   function yrOnClick(event) {
     setTime(year100);
-    // setCurrentHighs(yearHighs);
-    // setPrevioustHigh(yrCurrentHigh);
   }
 
   //checkboxs to display individual lines
