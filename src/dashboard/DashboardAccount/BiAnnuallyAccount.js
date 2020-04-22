@@ -36,6 +36,11 @@ const useStyles = makeStyles({
     marginBottom: 12,
     fontSize: "2.2rem",
     fontWeight: 600
+  },
+  pos1: {
+    fontSize: "1.5rem",
+    fontWeight: 500,
+    lineHeight: "2"
   }
 });
 
@@ -65,7 +70,6 @@ const BiAnnuallyAccount = props => {
           <div className="container-row-col-top-col">
             <div>
               <h1>Account Access</h1>
-              <p>Benefits included with your account subscription</p>
             </div>
           </div>
           <div className="container-row-col-middle col">
@@ -91,6 +95,14 @@ const BiAnnuallyAccount = props => {
                         component="h3"
                       >
                         {data.databankUser.paypal_plan || props.planName}
+                      </Typography>
+                      <Typography
+                        className={classes.pos1}
+                        variant="h6"
+                        component="h6"
+                        gutterBottom
+                      >
+                        Benefits included with your account subscription
                       </Typography>
                     </div>
                     <div className="free-perk1">
