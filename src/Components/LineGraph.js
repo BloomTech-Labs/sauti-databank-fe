@@ -14,11 +14,7 @@ import CheckBox from "./CheckBox";
 import "../Components/scss/lineGraph.scss";
 
 import { topChecked, sumAll } from "./LineGraphHelpers/topChecked";
-import {
-  highestValue,
-  hundredScale,
-  checkedHigh
-} from "./LineGraphHelpers/scale100";
+import { hundredScale } from "./LineGraphHelpers/scale100";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -41,7 +37,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
-  console.log(lineNonNull);
   // 2. convert date to year-month
   lineNonNull.map(item => {
     item["created_date"] = item.created_date.substring(0, 7);
@@ -52,7 +47,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     item["created_year"] = item.created_date.substring(0, 4);
   });
 
-  // console.log(`lineNonNull`, lineNonNull);
   //FOR MONTHLY DISPLAY
   //3. Group categories together with date
   const reduceBy1 = (objectArray, property, property1) => {
@@ -71,11 +65,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   const keysInOrder = [];
   topChecked(lineNonNull, selectedTableColumnName, keysInOrder);
-  console.log(keysInOrder);
-
-  // checkboxToDisplay(allBoxes)
-  // allBoxes1
-  console.log(`allBoxes`, sumAll);
 
   //a checkbox is created for each category that has more than 10 data points
   let allBoxes = [];
@@ -85,12 +74,9 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
   allBoxes = allBoxes.sort();
-  console.log(allBoxes);
-  console.log(keysArray);
 
   const checkboxes = [];
   for (let i = 0; i < allBoxes.length; i++) {
-    console.log(allBoxes[i]);
     checkboxes.push({
       name: allBoxes[i],
       key: `checkbox[i]`,
@@ -111,7 +97,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     "created_year",
     selectedTableColumnName
   );
-  console.log(`groupedYear`, groupedYear);
+
   // 4. get total amount per month
   //map through obj and get length of arrays
   let datesAmounts = {};
@@ -121,11 +107,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       datesAmounts[key] = mapper(o[key]);
     }
   }
-  console.log(`datesAmounts`, datesAmounts);
+
   mapObj(function length(val) {
     return val.length;
   }, groupedPeople1);
-  console.log(`Monthly`, groupedPeople1);
 
   //By year
   let yearAmounts = {};
@@ -135,12 +120,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       yearAmounts[key] = mapper(o[key]);
     }
   }
-  console.log(yearAmounts);
 
   mapYear(function length(val) {
     return val.length;
   }, groupedYear);
-  //console.log(`groupedYear`, groupedYear);
 
   //5. combine date and quantity of categories, Monthly
   // let currentYM = "2017-01";
@@ -154,18 +137,11 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       let obj = {};
       obj["date"] = yearMo;
       obj[cat] = o[key];
-      // let currentObj = {};
-      // currentObj[cat] = o[key];
-
-      // dateObj = {};
-      // dateObj["date"] = currentYM;
-      // currentYM = yearMo;
 
       dateCatArray.push(obj);
-      // }
     }
   }
-  console.log(`dateCatArray`, dateCatArray);
+
   combineAmountsToDates(datesAmounts);
 
   //Yearly
@@ -185,8 +161,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   combineAmountsToYear(yearAmounts);
-
-  console.log(`yearCatArray`, yearCatArray);
 
   //6. combine together to create object for Monthly data
   let usedDates = [];
@@ -211,7 +185,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       allCombined.push(itemDate);
     }
   }
-  console.log(`allCombined updated`, allCombined);
 
   //6.a. combine together to create object for Yearly data
   let usedYears = [];
@@ -236,7 +209,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       allCombinedYears.push(itemYear);
     }
   }
-  console.log(`allCombined updated`, allCombinedYears);
 
   //Update Monthly
   let updated = [];
@@ -260,35 +232,26 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       updatedYearly.push(allCombinedYears[i]);
     }
   }
-  console.log(allCombinedYears);
-  console.log(`yearly`, updatedYearly);
 
   //Find highest value
-  console.log(updatedYearly);
-  let allYearValues = [];
-  console.log(updatedYearly);
 
-  const yearlyHighest = highestValue(updatedYearly);
-  const monthlyHighest = highestValue(updated);
-  //  const monthlyHighest = max
-  //  console.log(allEntries)
+  // let allYearValues = [];
 
-  console.log(monthlyHighest);
-  console.log(yearlyHighest);
+  // const yearlyHighest = highestValue(updatedYearly);
+  // const monthlyHighest = highestValue(updated);
 
   //use updated yearly initially, then use selected items.
-  // console.log(`checkedItems`, checkedItems);
+
   const yearAll = hundredScale(updatedYearly);
   const year100 = yearAll.array;
   const yearHighs = yearAll.highNumerical;
   const yrCurrentHigh = yearAll.high;
-  // console.log(`yearHighs`,yrCurrentHigh)
 
   const monthAll = hundredScale(updated);
   const month100 = monthAll.array;
-  const monthHighs = monthAll.highNumerical;
-  const moCurrentHigh = monthAll.high;
-  //console.log(`monthHighs`,moCurrentHigh)
+  // const monthHighs = monthAll.highNumerical;
+  // const moCurrentHigh = monthAll.high;
+
   //  Quarterly Data
 
   // 1. eliminate null values
@@ -305,9 +268,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   });
 
   const byQuarter = lineNonNullQtr;
-  //created_date: "2017-06"  -> 2017-Q2
-  //|| month === '02' || month || '03'
-  // let byQuarter = [];
+
   for (let i = 0; i < byQuarter.length; i++) {
     let month = byQuarter[i]["created_date"].slice(5, 7);
     let item = byQuarter[i];
@@ -331,7 +292,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     return objectArray.reduce(function(total, obj) {
       let key = obj[property] + obj[property1];
       //combine date and cat type to make a new key
-      //console.log(`obj`, obj)
+
       //make a new object if the year-mo and category not existing
       if (!total[key]) {
         total[key] = [];
@@ -417,11 +378,11 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
-  const qtrHighest = highestValue(updatedQtr);
-  const quarterAll = hundredScale(updatedQtr, qtrHighest);
+  // const qtrHighest = highestValue(updatedQtr);
+  const quarterAll = hundredScale(updatedQtr);
   const quarter100 = quarterAll.array;
-  const quarterHighs = quarterAll.highNumerical;
-  const qtrCurrentHigh = quarterAll.high;
+  // const quarterHighs = quarterAll.highNumerical;
+  // const qtrCurrentHigh = quarterAll.high;
 
   let top7 = {};
   for (let i = 0; i < keysInOrder.length; i++) {
@@ -431,20 +392,12 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   const [time, setTime] = useState(month100);
-  console.log(time);
-  const [currentHighs, setCurrentHighs] = useState(monthHighs);
-  console.log(`currentHighs`, currentHighs);
-  const [previousHigh, setPrevioustHigh] = useState(moCurrentHigh);
-  console.log(`previousHighs`, previousHigh);
-  //console.log(top7);
-  const [checkedItems, setCheckedItems] = useState(top7);
-  console.log(`setCheckedItems`, checkedItems);
 
-  // const selectedHigh = checkedHigh(checkedItems)
-  //  console.log(selectedHigh)
-  // console.log(`updated`,updated)
-  // const new100 = hundredScale(updated, selectedHigh)
-  // console.log(`updated`,updated)
+  // const [currentHighs, setCurrentHighs] = useState(monthHighs);
+
+  // const [previousHigh, setPrevioustHigh] = useState(moCurrentHigh);
+
+  const [checkedItems, setCheckedItems] = useState(top7);
 
   let display = [];
   if (Object.entries(checkedItems).length > 0) {
@@ -459,31 +412,29 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   //multiple functions onClick
   function moOnClick(event) {
     setTime(month100);
-    setCurrentHighs(monthHighs);
-    setPrevioustHigh(moCurrentHigh);
+    // setCurrentHighs(monthHighs);
+    // setPrevioustHigh(moCurrentHigh);
   }
 
   function qtrOnClick(event) {
     setTime(quarter100);
-    setCurrentHighs(quarterHighs);
-    setPrevioustHigh(qtrCurrentHigh);
-    let adjustedSelectQtr = [];
-    if (previousHigh !== qtrCurrentHigh) {
-      adjustedSelectQtr = checkedHigh(
-        quarter100,
-        quarterHighs,
-        qtrCurrentHigh,
-        checkedItems
-      );
-    }
-    console.log(adjustedSelectQtr);
-    //setTime(adjustedSelectQtr);
+    // setCurrentHighs(quarterHighs);
+    // setPrevioustHigh(qtrCurrentHigh);
+    //let adjustedSelectQtr = [];
+    // if (previousHigh !== qtrCurrentHigh) {
+    //   adjustedSelectQtr = checkedHigh(
+    //     quarter100,
+    //     quarterHighs,
+    //     qtrCurrentHigh,
+    //     checkedItems
+    //   );
+    // }
   }
 
   function yrOnClick(event) {
     setTime(year100);
-    setCurrentHighs(yearHighs);
-    setPrevioustHigh(yrCurrentHigh);
+    // setCurrentHighs(yearHighs);
+    // setPrevioustHigh(yrCurrentHigh);
   }
 
   //checkboxs to display individual lines
@@ -493,14 +444,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       ...checkedItems,
       [event.target.name]: event.target.checked
     });
-    const adjustedSelect = checkedHigh(
-      time,
-      currentHighs,
-      previousHigh,
-      checkedItems,
-      selected
-    );
-    setTime(adjustedSelect);
   }
 
   // items to display on line chart
@@ -513,21 +456,11 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const six = display[6];
   const seven = display[7];
 
-  let allFalse = [];
-
-  // function toFalse(){
-  //   for (let key in checkedItems) {
-  //   checkedItems[key] = false;
-  // }}
-
   //To reset all selected checkboxes
   const handleReset = event => {
-    console.log(checkedItems);
-
-    console.log(checkedItems);
     setCheckedItems(checkedItems);
   };
-  console.log(`time`, time);
+
   return (
     <>
       <button onClick={buttonHandle}>Display Bar Chart</button>
@@ -535,9 +468,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         <p
           className={time === month100 ? "monthBtnOn" : "monthBtnOff"}
           onClick={moOnClick}
-          // onClick={() => setTime(month100)}
-          // onClick={() => setCurrentHighs(monthHighs)}
-          // onClick={() => setPrevioustHigh(moCurrentHigh)}
         >
           {" "}
           Monthly
@@ -545,8 +475,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         <p
           className={time === quarter100 ? "monthBtnOn" : "monthBtnOff"}
           onClick={qtrOnClick}
-          // onClick={() => setCurrentHighs(quarterHighs)}
-          // onClick={() => setPrevioustHigh(qtrCurrentHigh)}
         >
           {" "}
           Quarterly
@@ -554,8 +482,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         <p
           className={time === year100 ? "monthBtnOn" : "monthBtnOff"}
           onClick={yrOnClick}
-          // onClick={() => setCurrentHighs(yearHighs)}
-          // onClick={() => setPrevioustHigh(yrCurrentHigh)}
         >
           {" "}
           Yearly
@@ -575,7 +501,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis type="number" domain={[0, 100]} />
+          <YAxis type="number" />
           <Tooltip />
           <Legend />
           <Line

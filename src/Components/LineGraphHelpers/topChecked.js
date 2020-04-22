@@ -17,7 +17,7 @@ function topChecked(lineNonNull, selectedTableColumnName, keysInOrder) {
   };
 
   sumAll = totalAmounts(lineNonNull, selectedTableColumnName);
-  console.log(sumAll);
+
   //return key and length
   const totalArray = [];
   for (let key in sumAll) {
@@ -29,17 +29,14 @@ function topChecked(lineNonNull, selectedTableColumnName, keysInOrder) {
       totalArray.push(obj);
     }
   }
-  console.log(totalArray);
 
   //sort array by amounts
   const sortedArray = totalArray.sort();
-  console.log(sortedArray);
   //put categories in an array by top 7
   //const keysInOrder = [];
   for (let i = 0; i < sortedArray.length; i++) {
     if (i < 7) {
       let cat = Object.values(sortedArray[i]);
-      console.log(cat);
       keysInOrder.push(cat[0]);
     }
   }
