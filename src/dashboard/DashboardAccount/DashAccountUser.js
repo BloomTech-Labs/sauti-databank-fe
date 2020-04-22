@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import MonthlyAccount from "./MonthlyAccount";
 import BiAnnuallyAccount from "./BiAnnuallyAccount";
 import YearlyAccount from "./YearlyAccount";
-import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "../auth/Auth";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
-import EditAccount from "./EditAccount";
 
 // This component shows signed in users account information such as what plan they're on
 
@@ -29,10 +27,7 @@ const CANCEL_USER_SUB = gql`
 `;
 
 const DashAccountUser = props => {
-  const history = useHistory();
   const token = getToken();
-
-  const tokenId = decodeToken(token);
 
   const [cancelledSub, setCancelledSub] = useState(false);
   useEffect(() => {

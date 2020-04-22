@@ -153,8 +153,6 @@ export const AccountPage = styled.div`
             .account-type {
               box-sizing: border-box;
               background: #ffffff;
-              border: 1px solid rgba(0, 0, 0, 0.3);
-              border-radius: 5px;
               height: 100%;
               width: 85%;
               padding: 2rem;
@@ -341,9 +339,6 @@ export const UserAccount = styled.div`
           padding: 2rem;
           height: 95%;
           width: 100%;
-          border: 1px solid rgba(0, 0, 0, 0.3);
-          box-sizing: border-box;
-          border-radius: 5px;
 
           .account-box-header {
             line-height: 5rem;
@@ -384,11 +379,7 @@ export const UserAccount = styled.div`
         }
       }
 
-      .container-row-col-bottom {
-        display: flex;
-        flex-direction: column;
-        height: 20%;
-
+      .container-row-col-bottom-col {
         span {
           font-size: 1.3vw;
         }
