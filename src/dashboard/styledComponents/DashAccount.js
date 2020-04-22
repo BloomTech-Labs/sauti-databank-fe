@@ -37,13 +37,6 @@ export const AccountPage = styled.div`
             width: 33.33%;
             box-sizing: border-box;
 
-            h1 {
-              color: #000000;
-              letter-spacing: 0.01em;
-              line-height: 6vw;
-              font-size: 3vw;
-              font-weight: bold;
-
               @media ${device.desktopL} {
                 line-height: 4vw;
                 -webkit-min-device-pixel-ratio: 1;

@@ -8,6 +8,7 @@ import Fade from "@material-ui/core/Fade";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Button from "@material-ui/core/Button";
 
 import { withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
@@ -15,8 +16,10 @@ import InputBase from "@material-ui/core/InputBase";
 import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
+import swal from "sweetalert";
 
 import styledComp from "styled-components";
+import { Typography } from "@material-ui/core";
 
 const Styles = withStyles(theme => ({
   root: {
@@ -128,6 +131,7 @@ const EditModal = props => {
       variables: { editUser: input }
     });
     setOpen(false);
+    swal({ title: "", text: "Success!", icon: "success" });
   };
 
   if (editUser.loading) {
@@ -161,10 +165,10 @@ const EditModal = props => {
         <IconButtons
           style={{ height: 20, lineHeight: 0.5 }}
           onClick={e => handleOpen(e, props.data)}
-          className="btn btn-info"
         >
-          <i class="fas fa-pencil-alt" />
-          <p>Edit Account</p>
+          <Button variant="contained">
+            <Typography variant="h6">Edit Account</Typography>
+          </Button>
         </IconButtons>
       </span>
       <Modal
@@ -184,15 +188,6 @@ const EditModal = props => {
             <FormDiv>
               <InputColumns>
                 <ColumnDiv>
-                  <Labels for="Id">Id</Labels>
-                  <Inputs
-                    type="text"
-                    id="id"
-                    placeholder={props.data.id}
-                    name={props.data.id}
-                    value={account.id}
-                    // onChange={handleChange}
-                  />
                   <Labels for="Email">Email</Labels>
                   <Inputs
                     type="email"
@@ -213,7 +208,7 @@ const EditModal = props => {
                   />
                   <Labels for="password">Password</Labels>
                   <Inputs
-                    type="text"
+                    type="password"
                     name="password"
                     id="password"
                     value={account.password}
