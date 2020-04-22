@@ -19,7 +19,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 
 // This components purpose is to potentially turn free users into paid users, capture the subscription ID, and push them to /data
 // Making this component more responsive by implementing Material UI cards.
