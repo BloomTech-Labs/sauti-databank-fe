@@ -4,9 +4,7 @@ import { AccountPage } from "../styledComponents/DashAccount";
 //Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 // Making this component more responsive by implementing Material UI cards
@@ -39,7 +37,6 @@ const useStyles = makeStyles({
 // This component shows user offerings for admins
 const DashAccountAdmin = () => {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
   return (
     <AccountPage>
       <div className="page-row">
