@@ -15,6 +15,7 @@ import "../Components/scss/lineGraph.scss";
 
 import { topChecked, sumAll } from "./LineGraphHelpers/topChecked";
 import { hundredScale } from "./LineGraphHelpers/scale100";
+import { getHighestSelected } from "./LineGraphHelpers/selectedCheckboxes";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -411,6 +412,30 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
+  console.log(`display`, display);
+  // function getHighestSelected(time, display) {
+  //   console.log(display);
+  //   let highestArray = [];
+  //   for (let i = 0; i < time.length; i++) {
+  //     let item = time[i];
+  //     for (let key in item) {
+  //       if (display.includes(key)) {
+  //         //console.log(key)
+  //         let value = item[key];
+  //         value = parseFloat(value);
+  //         highestArray.push(value);
+  //       }
+  //     }
+  //   }
+  //   console.log(highestArray);
+  //   let maxValue = Math.max(...highestArray);
+  //   return maxValue;
+  // }
+
+  let highest = getHighestSelected(time, display);
+
+  console.log(`highest`, highest);
+
   //multiple functions onClick
   function moOnClick(event) {
     setTime(month100);
@@ -426,6 +451,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //checkboxs to display individual lines
   function handleChange(event) {
+    console.log(event.target.name);
     let selected = event.target.name;
     setCheckedItems({
       ...checkedItems,
@@ -488,7 +514,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis type="number" />
+          <YAxis type="number" domain={[0, highest]} />
           <Tooltip />
           <Legend />
           <Line

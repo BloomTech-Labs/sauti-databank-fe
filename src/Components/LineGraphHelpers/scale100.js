@@ -1,7 +1,3 @@
-let allEntriesMo = [];
-let allEntriesQtr = [];
-let allEntriesYr = [];
-let max;
 // function highestValue(array) {
 //   let newArray = [];
 //   for (let i = 0; i < array.length; i++) {
