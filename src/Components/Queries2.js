@@ -4,13 +4,11 @@ import { gql } from "apollo-boost";
 
 import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
-import getIndex from "../DataParseHelpers/getIndex";
-import graphLabels from "./graphLabels";
-import removeMultiple from "../DataParseHelpers/removeMultiple";
-import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
-
+import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
-import LineGraph from "./LineGraph";
+
+import { getQuery } from "../redux/actions/queriesAction";
+import { connect } from "react-redux";
 
 const GetData = props => {
   //LineGraph button
@@ -206,4 +204,10 @@ const GetData = props => {
   );
 };
 
-export default GetData;
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+export default connect(mapStateToProps, { getQuery })(GetData);
