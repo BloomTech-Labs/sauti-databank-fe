@@ -17,6 +17,8 @@ import { topChecked, sumAll } from "./LineGraphHelpers/topChecked";
 import { hundredScale } from "./LineGraphHelpers/scale100";
 import { getHighestSelected } from "./LineGraphHelpers/selectedCheckboxes";
 
+import DateSlider from "./LineGraphHelpers/DateSlider";
+
 // Data Series will need to be Sessions for chart to work
 
 //top 7 should be checked
@@ -412,26 +414,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
-  console.log(`display`, display);
-  // function getHighestSelected(time, display) {
-  //   console.log(display);
-  //   let highestArray = [];
-  //   for (let i = 0; i < time.length; i++) {
-  //     let item = time[i];
-  //     for (let key in item) {
-  //       if (display.includes(key)) {
-  //         //console.log(key)
-  //         let value = item[key];
-  //         value = parseFloat(value);
-  //         highestArray.push(value);
-  //       }
-  //     }
-  //   }
-  //   console.log(highestArray);
-  //   let maxValue = Math.max(...highestArray);
-  //   return maxValue;
-  // }
-
   let highest = getHighestSelected(time, display);
 
   console.log(`highest`, highest);
@@ -551,6 +533,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
           ))}
         </React.Fragment>
       </div>
+      <DateSlider time={time} />
     </>
   );
 };

@@ -32,7 +32,6 @@ const LineGraphButton = ({
         </>
       );
     } else {
-      console.log(`renderUpdate`, open);
       return <button onClick={() => setOpen(!open)}>Display Line Graph</button>;
     }
   };
