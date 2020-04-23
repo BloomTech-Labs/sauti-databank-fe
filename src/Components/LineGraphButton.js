@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import LineGraph from "./LineGraph";
 import Graph from "./Graph";
 
-const LineGraphButton = ({
-  data,
-  chartData,
-  filters,
-  queryType,
-  makeFilterList,
-  buttonHandle,
-  open,
-  setOpen
-}) => {
-  const graphItems = filters[1].selectedTableColumnName !== "";
+import { connect } from "react-redux";
 
+const LineGraphButton = props => {
+  const {
+    data,
+    chartData,
+    filters,
+    queryType,
+    makeFilterList,
+    buttonHandle,
+    open,
+    setOpen
+  } = props;
+  const graphItems = filters[1].selectedTableColumnName !== "";
+  console.log("LINEGRAPHBUTTON DATA PROP", props);
   // const buttonHandle = e => {
   //   setOpen(!open);
   // };
@@ -124,4 +127,11 @@ const LineGraphButton = ({
   }
 };
 
-export default LineGraphButton;
+const mapStateToProps = state => {
+  return {
+    isLoading: state.isLoading,
+    queryData: state.data
+  };
+};
+
+export default connect(mapStateToProps, {})(LineGraphButton);
