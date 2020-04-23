@@ -14,19 +14,17 @@ const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
 const DateSlider = props => {
   let first = props.time[0].date;
   first = first.replace(/-/g, "");
-  console.log(first);
+
   let last = props.time[props.time.length - 1].date;
   last = last.replace(/-/g, "");
-  console.log(last);
 
-  let lowest = 2017;
-  let highest = 2019;
-  // let lowest = Math.min(...physical_id)
+  let maxValue = last - first;
+  console.log(maxValue);
 
-  // let highest = Math.max(...physical_id)
-
-  let highestList = [];
-  let finalList = [];
+  console.log(props.time.length);
+  const totalPeriods = props.time.length;
+  const stepBy = maxValue / totalPeriods;
+  console.log(stepBy);
 
   // function onAfterChange(value) {
   //   grid.map(e => {
@@ -58,21 +56,21 @@ const DateSlider = props => {
           <p>Select date range</p>
           <Slider
             range
-            min={2017.06}
-            max={2019}
-            step={0.01}
-            defaultValue={[2017.06, 2019]}
+            min={0}
+            max={maxValue}
+            step={stepBy}
+            defaultValue={[0, maxValue]}
             // onAfterChange={onAfterChange}
           />
         </div>
       </div>
-      <RangePicker
+      {/* <RangePicker
         defaultValue={[
           moment("2015/01/01", dateFormat),
           moment("2015/01/01", dateFormat)
         ]}
         format={dateFormat}
-      />
+      /> */}
     </>
   );
 };
