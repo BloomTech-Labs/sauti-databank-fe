@@ -138,6 +138,13 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
+  // useEffect(() => {
+  //   if (!loading) {
+  //     console.log("this is the data passing to getQuery", data)
+  //     return props.getQuery(data);
+  //   }
+  // }, [data]);
+
   useEffect(() => {
     props.getQuery(data);
   }, [data]);
@@ -194,18 +201,24 @@ const GetData = props => {
   };
 
   //console.log("graph184");
+  //needs to know to rerender (upate or useEffect)
+  // is added to redux state but is not triggering another rerender
   return (
     <>
-      <LineGraphButton
-        data={data}
-        chartData={chartData}
-        filters={filters}
-        queryType={queryType}
-        makeFilterList={makeFilterList}
-        buttonHandle={buttonHandle}
-        open={open}
-        setOpen={setOpen}
-      />
+      {props.data ? (
+        <LineGraphButton
+          // data={data}
+          chartData={chartData}
+          filters={filters}
+          queryType={queryType}
+          makeFilterList={makeFilterList}
+          buttonHandle={buttonHandle}
+          open={open}
+          setOpen={setOpen}
+        />
+      ) : (
+        <h1>Loading</h1>
+      )}
     </>
   );
 };
