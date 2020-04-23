@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.scss";
 import "./index.css";
-import ReactGa from "react-ga";
-import Navbar from "./Components/Navbar";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
 import { withRouter, useParams, useHistory } from "react-router-dom";
