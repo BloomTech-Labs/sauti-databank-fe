@@ -1,8 +1,24 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Slider } from "antd";
+import { DatePicker } from "antd";
+import moment from "moment";
 
-const DateSlider = () => {
+const { RangePicker } = DatePicker;
+
+const dateFormat = "YYYY/MM/DD";
+const monthFormat = "YYYY/MM";
+
+const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
+
+const DateSlider = props => {
+  let first = props.time[0].date;
+  first = first.replace(/-/g, "");
+  console.log(first);
+  let last = props.time[props.time.length - 1].date;
+  last = last.replace(/-/g, "");
+  console.log(last);
+
   let lowest = 2017;
   let highest = 2019;
   // let lowest = Math.min(...physical_id)
@@ -42,14 +58,21 @@ const DateSlider = () => {
           <p>Select date range</p>
           <Slider
             range
-            min={lowest}
-            max={highest}
-            step={10}
-            defaultValue={[lowest, highest]}
+            min={2017.06}
+            max={2019}
+            step={0.01}
+            defaultValue={[2017.06, 2019]}
             // onAfterChange={onAfterChange}
           />
         </div>
       </div>
+      <RangePicker
+        defaultValue={[
+          moment("2015/01/01", dateFormat),
+          moment("2015/01/01", dateFormat)
+        ]}
+        format={dateFormat}
+      />
     </>
   );
 };
