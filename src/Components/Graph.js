@@ -5,7 +5,6 @@ import { Event } from "../dashboard/GoogleAnalytics/index";
 import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
 import styled from "styled-components";
-import { LandingPageStyles } from "../dashboard/styledComponents/LandingPage";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 import { useHistory } from "react-router-dom";
 const Graph = props => {
