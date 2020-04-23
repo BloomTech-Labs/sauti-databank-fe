@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { initGA } from "./dashboard/GoogleAnalytics/index";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+
 dotenv.config();
 
 // (function initAnalytics() {
