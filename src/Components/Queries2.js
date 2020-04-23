@@ -137,11 +137,12 @@ const GetData = props => {
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
-  console.log("data", data);
 
   useEffect(() => {
     props.getQuery(data);
   }, [data]);
+
+  console.log("data", data);
 
   if (loading) {
     return (
