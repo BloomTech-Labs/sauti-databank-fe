@@ -138,6 +138,11 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
   console.log("data", data);
+
+  useEffect(() => {
+    props.getQuery(data);
+  }, [data]);
+
   if (loading) {
     return (
       <div className="loader-container">

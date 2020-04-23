@@ -5,6 +5,12 @@ const initialState = {
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case QUERIES:
+      console.log(action);
+      return {
+        ...state,
+        data: action.payload
+      };
     default:
       return state;
   }
