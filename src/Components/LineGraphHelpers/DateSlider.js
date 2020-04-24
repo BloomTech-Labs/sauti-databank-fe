@@ -1,43 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
 import { Slider } from "antd";
 import { DatePicker } from "antd";
-import moment from "moment";
+// import moment from "moment";
 
-const { RangePicker } = DatePicker;
+// const { RangePicker } = DatePicker;
 
-const dateFormat = "YYYY/MM/DD";
-const monthFormat = "YYYY/MM";
+// const dateFormat = "YYYY/MM/DD";
+// const monthFormat = "YYYY/MM";
 
-const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
+// const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
 
 const DateSlider = props => {
   let first = props.time[0].date;
-  first = first.replace(/-/g, "");
-
   let last = props.time[props.time.length - 1].date;
-  last = last.replace(/-/g, "");
+  const [displayDate, setDisplayDate] = useState([`${first} - ${last}`]);
 
-  let maxValue = last - first;
-  console.log(maxValue);
+  function onAfterChange() {}
 
-  console.log(props.time.length);
+  let numStart = first.replace(/-/g, "");
+  let numLast = last.replace(/-/g, "");
+  let maxValue = numLast - numStart;
+
+  console.log(props.time);
   const totalPeriods = props.time.length;
-  const stepBy = maxValue / totalPeriods;
+  let stepBy = maxValue / totalPeriods;
+  stepBy = stepBy.toFixed(2);
   console.log(stepBy);
 
-  // function onAfterChange(value) {
-  //   grid.map(e => {
-  //     if (e.physical_id <= value[1]) {
-  //       return highestList.push(e)
-  //     }
-  //   })
-  //   highestList.map(e => {
-  //     if (e.physical_id >= value[0]) {
-  //       return finalList.push(e)
-  //     }
-  //   })
-  // }
+  let allPeriodsArray = [];
+  for (let i = 0; i < props.time.length; i++) {
+    let item = props.time[i];
+    for (let key in item) {
+      if (key === "date") {
+        allPeriodsArray.push(item[key]);
+      }
+    }
+  }
+  console.log(allPeriodsArray);
+
+  function onChange() {}
+
+  function onAfterChange() {}
 
   const toggleSensor = () => {
     let x = document.getElementById("slider");
@@ -52,6 +56,11 @@ const DateSlider = props => {
     <>
       <button onClick={toggleSensor}></button>
       <div id="slider">
+        <div>
+          <h2>Selected Range</h2>
+          {/* <p>{first} - {last}</p>  */}
+          <p>{displayDate}</p>
+        </div>
         <div className="sensorSlider">
           <p>Select date range</p>
           <Slider
@@ -60,7 +69,7 @@ const DateSlider = props => {
             max={maxValue}
             step={stepBy}
             defaultValue={[0, maxValue]}
-            // onAfterChange={onAfterChange}
+            onAfterChange={onAfterChange}
           />
         </div>
       </div>
