@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "antd/dist/antd.css";
 import { Slider } from "antd";
 import { DatePicker } from "antd";
@@ -11,34 +11,19 @@ import { DatePicker } from "antd";
 
 // const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
 
-const DateSlider = ({
-  time,
-  range,
-  setRange,
-  totalPeriods,
-  allPeriodsArray
-}) => {
-  //const totalPeriods = time.length;
-
-  // let allPeriodsArray = [];
-  // for (let i = 0; i < time.length; i++) {
-  //   let item = time[i];
-  //   for (let key in item) {
-  //     if (key === "date") {
-  //       allPeriodsArray.push(item[key]);
-  //     }
-  //   }
-  // }
-  // // setRange([
-  // //   `${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`
-  // // ])
-  // console.log(allPeriodsArray);
-  //   const [displayDate, setDisplayDate] = useState([
-  //   `${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`
-  // ]);
+const DateSlider = ({ range, setRange, totalPeriods, allPeriodsArray }) => {
+  console.log(allPeriodsArray);
   function onChange(event) {
     setRange(`${allPeriodsArray[event[0]]} - ${allPeriodsArray[event[1] - 1]}`);
   }
+
+  useEffect(
+    allPeriodsArray => {
+      console.log(allPeriodsArray);
+      // setRange(`${allPeriodsArray[event[0]]} - ${allPeriodsArray[event[1] - 1]}`)
+    },
+    [allPeriodsArray]
+  );
 
   return (
     <>

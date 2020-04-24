@@ -408,6 +408,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const [checkedItems, setCheckedItems] = useState(top7);
 
   //Find range for slider
+  //should run after time period is updated
   let allPeriodsArray = [];
   const rangeValues = getTotalPeriods(time, allPeriodsArray);
   const totalPeriods = rangeValues.periodsAmount;
@@ -549,7 +550,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         </React.Fragment>
       </div>
       <DateSlider
-        time={time}
         range={range}
         setRange={setRange}
         totalPeriods={totalPeriods}
