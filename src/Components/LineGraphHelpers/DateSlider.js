@@ -11,50 +11,41 @@ import { DatePicker } from "antd";
 
 // const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
 
-const DateSlider = props => {
-  function onAfterChange() {}
+const DateSlider = ({
+  time,
+  range,
+  setRange,
+  totalPeriods,
+  allPeriodsArray
+}) => {
+  //const totalPeriods = time.length;
 
-  const totalPeriods = props.time.length;
-
-  let allPeriodsArray = [];
-  for (let i = 0; i < props.time.length; i++) {
-    let item = props.time[i];
-    for (let key in item) {
-      if (key === "date") {
-        allPeriodsArray.push(item[key]);
-      }
-    }
-  }
-  console.log(allPeriodsArray);
-  const [displayDate, setDisplayDate] = useState([
-    `${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`
-  ]);
+  // let allPeriodsArray = [];
+  // for (let i = 0; i < time.length; i++) {
+  //   let item = time[i];
+  //   for (let key in item) {
+  //     if (key === "date") {
+  //       allPeriodsArray.push(item[key]);
+  //     }
+  //   }
+  // }
+  // // setRange([
+  // //   `${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`
+  // // ])
+  // console.log(allPeriodsArray);
+  //   const [displayDate, setDisplayDate] = useState([
+  //   `${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`
+  // ]);
   function onChange(event) {
-    console.log(allPeriodsArray[event[1] - 1]);
-    setDisplayDate(
-      `${allPeriodsArray[event[0]]} - ${allPeriodsArray[event[1] - 1]}`
-    );
+    setRange(`${allPeriodsArray[event[0]]} - ${allPeriodsArray[event[1] - 1]}`);
   }
-
-  function onAfterChange() {}
-
-  const toggleSensor = () => {
-    let x = document.getElementById("slider");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  };
 
   return (
     <>
-      <button onClick={toggleSensor}></button>
       <div id="slider">
         <div>
           <h2>Selected Range</h2>
-          {/* <p>{first} - {last}</p>  */}
-          <p>{displayDate}</p>
+          <p>{range}</p>
         </div>
         <div className="sensorSlider">
           <p>Select date range</p>

@@ -18,6 +18,7 @@ import { hundredScale } from "./LineGraphHelpers/scale100";
 import { getHighestSelected } from "./LineGraphHelpers/selectedCheckboxes";
 
 import DateSlider from "./LineGraphHelpers/DateSlider";
+import { getTotalPeriods } from "./LineGraphHelpers/Range";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -42,6 +43,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       lineNonNull.push(lineArray[i]);
     }
   }
+  //console.log(lineNonNull)
 
   // 2. convert date to year-month
   lineNonNull.map(item => {
@@ -401,8 +403,21 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   const [time, setTime] = useState(month100);
+  console.log(time);
 
   const [checkedItems, setCheckedItems] = useState(top7);
+
+  //Find range for slider
+  let allPeriodsArray = [];
+  const rangeValues = getTotalPeriods(time, allPeriodsArray);
+  const totalPeriods = rangeValues.periodsAmount;
+
+  allPeriodsArray = rangeValues.allPeriodsArray;
+
+  console.log(allPeriodsArray);
+  const [range, setRange] = useState([
+    `${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`
+  ]);
 
   let display = [];
   if (Object.entries(checkedItems).length > 0) {
@@ -533,7 +548,13 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
           ))}
         </React.Fragment>
       </div>
-      <DateSlider time={time} />
+      <DateSlider
+        time={time}
+        range={range}
+        setRange={setRange}
+        totalPeriods={totalPeriods}
+        allPeriodsArray={allPeriodsArray}
+      />
     </>
   );
 };
