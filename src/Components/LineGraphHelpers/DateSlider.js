@@ -12,21 +12,9 @@ import { DatePicker } from "antd";
 // const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
 
 const DateSlider = props => {
-  let first = props.time[0].date;
-  let last = props.time[props.time.length - 1].date;
-  const [displayDate, setDisplayDate] = useState([`${first} - ${last}`]);
-
   function onAfterChange() {}
 
-  let numStart = first.replace(/-/g, "");
-  let numLast = last.replace(/-/g, "");
-  let maxValue = numLast - numStart;
-
-  console.log(props.time);
   const totalPeriods = props.time.length;
-  let stepBy = maxValue / totalPeriods;
-  stepBy = stepBy.toFixed(2);
-  console.log(stepBy);
 
   let allPeriodsArray = [];
   for (let i = 0; i < props.time.length; i++) {
@@ -38,8 +26,15 @@ const DateSlider = props => {
     }
   }
   console.log(allPeriodsArray);
-
-  function onChange() {}
+  const [displayDate, setDisplayDate] = useState([
+    `${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`
+  ]);
+  function onChange(event) {
+    console.log(allPeriodsArray[event[1] - 1]);
+    setDisplayDate(
+      `${allPeriodsArray[event[0]]} - ${allPeriodsArray[event[1] - 1]}`
+    );
+  }
 
   function onAfterChange() {}
 
@@ -66,10 +61,10 @@ const DateSlider = props => {
           <Slider
             range
             min={0}
-            max={maxValue}
-            step={stepBy}
-            defaultValue={[0, maxValue]}
-            onAfterChange={onAfterChange}
+            max={totalPeriods}
+            step={1}
+            defaultValue={[0, totalPeriods]}
+            onChange={onChange}
           />
         </div>
       </div>
