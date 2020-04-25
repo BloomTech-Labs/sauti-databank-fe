@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import "antd/dist/antd.css";
 import { Slider } from "antd";
-import { DatePicker } from "antd";
+import "antd/dist/antd.css";
+
+import SliderDisplay from "./SliderDisplay";
 // import moment from "moment";
 
 // const { RangePicker } = DatePicker;
@@ -12,18 +13,25 @@ import { DatePicker } from "antd";
 // const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
 
 const DateSlider = ({ range, setRange, totalPeriods, allPeriodsArray }) => {
-  console.log(allPeriodsArray);
+  // console.log(`allPeriods`,allPeriodsArray, `totalPeriods`,totalPeriods);
+  // console.log(`range`,range)
   function onChange(event) {
+    console.log(`onChange`, event);
     setRange(`${allPeriodsArray[event[0]]} - ${allPeriodsArray[event[1] - 1]}`);
   }
+  //with useEffect totalPeriods in Slider is not updating
+  //without useEffect range and total periods do not update
+  // useEffect(() => {
+  //     console.log(allPeriodsArray);
 
-  useEffect(
-    allPeriodsArray => {
-      console.log(allPeriodsArray);
-      // setRange(`${allPeriodsArray[event[0]]} - ${allPeriodsArray[event[1] - 1]}`)
-    },
-    [allPeriodsArray]
-  );
+  //   },
+  //   [allPeriodsArray]
+  // );
+
+  function onAfterChange(value) {
+    console.log("onAfterChange: ", value);
+    // setRange(`${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`)
+  }
 
   return (
     <>
@@ -32,7 +40,12 @@ const DateSlider = ({ range, setRange, totalPeriods, allPeriodsArray }) => {
           <h2>Selected Range</h2>
           <p>{range}</p>
         </div>
-        <div className="sensorSlider">
+        <SliderDisplay
+          totalPeriods={totalPeriods}
+          onChange={onChange}
+          onAfterChange={onAfterChange}
+        />
+        {/* <div className="sensorSlider">
           <p>Select date range</p>
           <Slider
             range
@@ -42,7 +55,7 @@ const DateSlider = ({ range, setRange, totalPeriods, allPeriodsArray }) => {
             defaultValue={[0, totalPeriods]}
             onChange={onChange}
           />
-        </div>
+        </div> */}
       </div>
       {/* <RangePicker
         defaultValue={[

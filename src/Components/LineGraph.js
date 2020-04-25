@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -241,19 +241,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
-  //Find highest value
-
-  // let allYearValues = [];
-
-  // const yearlyHighest = highestValue(updatedYearly);
-  // const monthlyHighest = highestValue(updated);
-
   //use updated yearly initially, then use selected items.
 
   const yearAll = hundredScale(updatedYearly);
   const year100 = yearAll.array;
-  const yearHighs = yearAll.highNumerical;
-  const yrCurrentHigh = yearAll.high;
 
   const monthAll = hundredScale(updated);
   const month100 = monthAll.array;
@@ -403,7 +394,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   const [time, setTime] = useState(month100);
-  console.log(time);
+  console.log(`time`, time);
 
   const [checkedItems, setCheckedItems] = useState(top7);
 
@@ -415,10 +406,16 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   allPeriodsArray = rangeValues.allPeriodsArray;
 
-  console.log(allPeriodsArray);
+  console.log(`allPeriodsArray`, allPeriodsArray);
   const [range, setRange] = useState([
     `${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`
   ]);
+  console.log(`range`, range);
+
+  //Sets range for Slider, after time is changed
+  useEffect(() => {
+    setRange([`${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`]);
+  }, [time]);
 
   let display = [];
   if (Object.entries(checkedItems).length > 0) {
@@ -554,6 +551,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         setRange={setRange}
         totalPeriods={totalPeriods}
         allPeriodsArray={allPeriodsArray}
+        time={time}
       />
     </>
   );

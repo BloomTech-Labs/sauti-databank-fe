@@ -1,5 +1,6 @@
 //get the total periods in time and an array of all periods
 function getTotalPeriods(time, allPeriodsArray) {
+  console.log("Range");
   let periodsAmount = time.length;
   for (let i = 0; i < time.length; i++) {
     let item = time[i];

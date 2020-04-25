@@ -1,5 +1,5 @@
 function getHighestSelected(time, display) {
-  console.log(`first 1`, display);
+  //console.log(`first 1`, display);
   let highestArray = [];
   for (let i = 0; i < time.length; i++) {
     let item = time[i];
@@ -13,9 +13,9 @@ function getHighestSelected(time, display) {
       }
     }
   }
-  console.log(highestArray);
+  //console.log(highestArray);
   let maxValue = Math.max(...highestArray);
-  console.log(maxValue);
+  //console.log(maxValue);
   return maxValue;
 }
 export { getHighestSelected };

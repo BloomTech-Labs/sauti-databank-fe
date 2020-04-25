@@ -19,9 +19,7 @@ const LineGraphButton = ({
   // };
 
   const renderUpdate = () => {
-    console.log(open);
     if (open === true) {
-      console.log("display Line Graph");
       return (
         <>
           <LineGraph
@@ -36,12 +34,8 @@ const LineGraphButton = ({
     }
   };
 
-  console.log(graphItems);
-
   const renderGraph = () => {
-    console.log(graphItems);
     if (graphItems === true && open === false) {
-      console.log("true");
       return (
         <Graph
           data={chartData.percentageData}
@@ -54,7 +48,6 @@ const LineGraphButton = ({
         />
       );
     } else if (graphItems === false && open === false) {
-      console.log("false");
       return (
         <Graph
           data={chartData.percentageData}
@@ -70,7 +63,6 @@ const LineGraphButton = ({
       return null;
     }
   };
-  console.log(`renderGraph`, renderGraph());
 
   //console.log(sdata.sessionsData);
   if (data.sessionsData) {
