@@ -408,13 +408,14 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   console.log(`allPeriodsArray`, allPeriodsArray);
   const [range, setRange] = useState([
-    `${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`
+    allPeriodsArray[0],
+    allPeriodsArray[totalPeriods - 1]
   ]);
   console.log(`range`, range);
 
   //Sets range for Slider, after time is changed
   useEffect(() => {
-    setRange([`${allPeriodsArray[0]} - ${allPeriodsArray[totalPeriods - 1]}`]);
+    setRange([allPeriodsArray[0], allPeriodsArray[totalPeriods - 1]]);
   }, [time]);
 
   let display = [];
@@ -552,6 +553,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         totalPeriods={totalPeriods}
         allPeriodsArray={allPeriodsArray}
         time={time}
+        setTime={setTime}
       />
     </>
   );
