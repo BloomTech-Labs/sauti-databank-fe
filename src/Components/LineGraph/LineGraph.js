@@ -10,15 +10,15 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-import CheckBox from "./CheckBox";
-import "../Components/scss/lineGraph.scss";
+import CheckBox from "../CheckBox";
+import "../../Components/scss/lineGraph.scss";
 
-import { topChecked, sumAll } from "./LineGraphHelpers/topChecked";
-import { hundredScale } from "./LineGraphHelpers/scale100";
-import { getHighestSelected } from "./LineGraphHelpers/selectedCheckboxes";
+import { topChecked, sumAll } from "../LineGraphHelpers/topChecked";
+import { hundredScale } from "../LineGraphHelpers/scale100";
+import { getHighestSelected } from "../LineGraphHelpers/selectedCheckboxes";
 
-import DateSlider from "./LineGraphHelpers/DateSlider";
-import { getTotalPeriods } from "./LineGraphHelpers/Range";
+import DateSlider from "./DateSlider";
+import { getTotalPeriods } from "../LineGraphHelpers/Range";
 
 // Data Series will need to be Sessions for chart to work
 

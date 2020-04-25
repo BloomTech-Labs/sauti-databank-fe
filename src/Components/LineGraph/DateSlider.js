@@ -19,14 +19,6 @@ const DateSlider = ({ range, setRange, totalPeriods, allPeriodsArray }) => {
     console.log(`onChange`, event);
     setRange(`${allPeriodsArray[event[0]]} - ${allPeriodsArray[event[1] - 1]}`);
   }
-  //with useEffect totalPeriods in Slider is not updating
-  //without useEffect range and total periods do not update
-  // useEffect(() => {
-  //     console.log(allPeriodsArray);
-
-  //   },
-  //   [allPeriodsArray]
-  // );
 
   function onAfterChange(value) {
     console.log("onAfterChange: ", value);

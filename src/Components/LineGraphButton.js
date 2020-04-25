@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LineGraph from "./LineGraph";
+import LineGraph from "./LineGraph/LineGraph";
 import Graph from "./Graph";
 
 const LineGraphButton = ({

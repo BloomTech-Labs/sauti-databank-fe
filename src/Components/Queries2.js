@@ -10,7 +10,7 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
 import LineGraphButton from "./LineGraphButton";
-import LineGraph from "./LineGraph";
+import LineGraph from "./LineGraph/LineGraph";
 
 const GetData = props => {
   //LineGraph button

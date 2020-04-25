@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Slider } from "antd";
 //import { DatePicker } from "antd";
 
@@ -6,7 +6,7 @@ const SliderDisplay = ({ totalPeriods, onChange, onAfterChange }) => {
   console.log(`totalPeriods`, totalPeriods);
 
   return (
-    <div className="sensorSlider">
+    <div className="Slider">
       <p>Select date range</p>
       <Slider
         range
