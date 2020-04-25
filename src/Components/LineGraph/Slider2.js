@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 
+import { updateRange } from "../LineGraphHelpers/updateRange";
+
 const useStyles = makeStyles({
   root: {
     width: 600
@@ -39,20 +41,7 @@ export default function RangeSlider({
     setValue(newValue);
   };
 
-  console.log(`value`, value);
-  let rangeTime = [];
-  function updateRange(time, value) {
-    let newArray = Object.values(time);
-    for (let i = 0; i < newArray.length; i++) {
-      if (i >= value[0] && i <= value[1] + 1) {
-        rangeTime.push(newArray[i]);
-      }
-    }
-    return rangeTime;
-  }
-
   function onAfterChange() {
-    console.log("onAfterChange");
     setTime(updateRange(time, value));
   }
 
