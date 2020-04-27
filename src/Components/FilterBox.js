@@ -479,17 +479,7 @@ export default function FilterBox(props) {
           ) : (
             <CalendarModal />
           )}
-          {/* <div className="btn-container">
-            <Button
-              className="checkbox-submit-btn"
-              type="submit"
-              disabled={loading}
-              onClick={handleSubmit}
-              style={{ cursor: loading ? "auto" : "pointer" }}
-            >
-              Submit
-            </Button>
-          </div> */}
+
           <ResetButton
             // className="reset-btn"
             onClick={e => {

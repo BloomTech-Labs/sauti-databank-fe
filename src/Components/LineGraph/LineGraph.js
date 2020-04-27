@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -10,11 +10,15 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-import CheckBox from "./CheckBox";
-import "../Components/scss/lineGraph.scss";
+import CheckBox from "../CheckBox";
+import "../../Components/scss/lineGraph.scss";
 
-import { topChecked, sumAll } from "./LineGraphHelpers/topChecked";
-import { hundredScale } from "./LineGraphHelpers/scale100";
+import { topChecked, sumAll } from "../LineGraphHelpers/topChecked";
+import { hundredScale } from "../LineGraphHelpers/scale100";
+import { getHighestSelected } from "../LineGraphHelpers/selectedCheckboxes";
+
+import DateSlider from "./DateSlider";
+import { getRangePeriods } from "../LineGraphHelpers/Range";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -236,19 +240,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
-  //Find highest value
-
-  // let allYearValues = [];
-
-  // const yearlyHighest = highestValue(updatedYearly);
-  // const monthlyHighest = highestValue(updated);
-
   //use updated yearly initially, then use selected items.
 
   const yearAll = hundredScale(updatedYearly);
   const year100 = yearAll.array;
-  const yearHighs = yearAll.highNumerical;
-  const yrCurrentHigh = yearAll.high;
 
   const monthAll = hundredScale(updated);
   const month100 = monthAll.array;
@@ -398,8 +393,28 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   const [time, setTime] = useState(month100);
+  const [timeInUse, setTimeInUse] = useState(month100);
 
   const [checkedItems, setCheckedItems] = useState(top7);
+
+  //Find range for slider
+  //should run after time period is updated
+  let allPeriodsArray = [];
+  const rangeValues = getRangePeriods(time, allPeriodsArray);
+  const totalRangePeriods = rangeValues.periodsAmount;
+  allPeriodsArray = rangeValues.allPeriodsArray;
+
+  //numbers displayed above the slider
+  //displays first and last of all periods in selected range
+  const [range, setRange] = useState([
+    allPeriodsArray[0],
+    allPeriodsArray[totalRangePeriods - 1]
+  ]);
+
+  //Sets range for Slider, after time is changed
+  useEffect(() => {
+    setRange([allPeriodsArray[0], allPeriodsArray[totalRangePeriods - 1]]);
+  }, [time]);
 
   let display = [];
   if (Object.entries(checkedItems).length > 0) {
@@ -411,17 +426,22 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
     }
   }
 
+  let highest = getHighestSelected(time, display);
+
   //multiple functions onClick
   function moOnClick(event) {
     setTime(month100);
+    setTimeInUse(month100);
   }
 
   function qtrOnClick(event) {
     setTime(quarter100);
+    setTimeInUse(quarter100);
   }
 
   function yrOnClick(event) {
     setTime(year100);
+    setTimeInUse(year100);
   }
 
   //checkboxs to display individual lines
@@ -488,7 +508,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis type="number" />
+          <YAxis type="number" domain={[0, highest]} />
           <Tooltip />
           <Legend />
           <Line
@@ -525,6 +545,15 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
           ))}
         </React.Fragment>
       </div>
+      <DateSlider
+        range={range}
+        setRange={setRange}
+        totalRangePeriods={totalRangePeriods}
+        allPeriodsArray={allPeriodsArray}
+        timeInUse={timeInUse}
+        time={time}
+        setTime={setTime}
+      />
     </>
   );
 };

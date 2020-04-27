@@ -10,7 +10,7 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
 import LineGraphButton from "./LineGraphButton";
-import LineGraph from "./LineGraph";
+import LineGraph from "./LineGraph/LineGraph";
 
 const GetData = props => {
   //LineGraph button
@@ -82,13 +82,13 @@ const GetData = props => {
   };
   // if (only first 3 filters are selected) and (none of them are Sessions)
 
-  console.log("filters", filters);
+  //console.log("filters", filters);
   if (!isSessions(filters)) {
     queryType = "tradersUsers";
-    console.log("Just Users");
-    console.log(filters[0].selectedTable);
-    console.log(filters[1].selectedTable);
-    console.log(filters[2].selectedTable);
+    // console.log("Just Users");
+    // console.log(filters[0].selectedTable);
+    // console.log(filters[1].selectedTable);
+    // console.log(filters[2].selectedTable);
     Object.keys(filters).forEach(filterId => {
       if (filterId !== 1) {
         thisQuery = {
@@ -112,7 +112,7 @@ const GetData = props => {
       
       `;
   } else {
-    console.log("Sessions Table Search");
+    //  console.log("Sessions Table Search");
     thisQuery = {};
     Object.keys(filters).forEach(filterId => {
       thisQuery = {
@@ -139,7 +139,7 @@ const GetData = props => {
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
-  console.log("data", data);
+  //console.log("data", data);
   if (loading) {
     return (
       <div className="loader-container">
@@ -174,9 +174,9 @@ const GetData = props => {
       </div>
     );
   }
-  console.log("chartdata_____-----", chartData);
+  // console.log("chartdata_____-----", chartData);
   const makeFilterList = () => {
-    console.log("makeFilterList WAS CALLED");
+    //  console.log("makeFilterList WAS CALLED");
     return Object.keys(filters)
       .filter(filterId => filterId >= 2)
       .map(filterId => {
