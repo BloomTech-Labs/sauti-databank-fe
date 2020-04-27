@@ -47,7 +47,6 @@ function DashNav() {
   }
 
   const isLandingPage = window.location.href ? "http://localhost:3000/" : null;
-  console.log(isLandingPage, "IS LANDING PAGE");
 
   return (
     <>
