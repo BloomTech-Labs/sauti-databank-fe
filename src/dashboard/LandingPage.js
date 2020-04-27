@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { LandingPageStyles } from "./styledComponents/LandingPage";
-import Image from "./Images/AfricaImageOne.jpg";
+import Image from "./Images/landing-age-hero-img.png";
 import BarGraph from "./Images/BarGraph";
 import SearchSVG from "./Images/Search";
 import DashboardSVG from "./Images/DashboardSVG";

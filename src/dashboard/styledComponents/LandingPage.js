@@ -13,7 +13,7 @@ export const LandingPageStyles = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: 45vh;
       background: linear-gradient(
           rgba(255, 255, 255, 0.1),
           rgba(255, 255, 255, 0.1)
@@ -25,13 +25,10 @@ export const LandingPageStyles = styled.div`
       background-size: cover;
       background-repeat: no-repeat;
       background-position: 20% 20%;
+      border-top: 2px solid rgba(0, 0, 0, 0.1);
     }
 
-    .landing-page-row-col-top {
-      background: linear-gradient(
-        rgba(255, 255, 255, 0.7),
-        rgba(255, 255, 255, 0.7)
-      );
+    
 
       .top-col-top {
         display: flex;
@@ -42,7 +39,7 @@ export const LandingPageStyles = styled.div`
         h2 {
           color: #2c2e32;
           font-weight: 400;
-          font-size: 3rem;
+          font-size: 2.5rem;
 
           @media ${device.desktopXL} {
             /* greater than 3115px  */
@@ -64,7 +61,7 @@ export const LandingPageStyles = styled.div`
           color: #2c2e32;
           padding: 0.5rem;
           font-weight: 800;
-          font-size: 4rem;
+          font-size: 3rem;
 
           @media ${device.desktopXL} {
             /* greater than 3115px  */
@@ -81,6 +78,7 @@ export const LandingPageStyles = styled.div`
         align-items: center;
         width: 100%;
         height: 33.33%;
+        margin-top: 2%;
 
         button {
           font-family: Montserrat;
@@ -195,6 +193,7 @@ export const LandingPageStyles = styled.div`
       border-top: 2px solid rgba(0, 0, 0, 0.1);
       border-bottom: 2px solid rgba(0, 0, 0, 0.1);
       height: 30rem;
+      
 
       .bot-col-header {
         padding: 1rem;
