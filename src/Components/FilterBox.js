@@ -35,7 +35,6 @@ export default function FilterBox(props) {
         label: superCategory.label,
         options: superCategory.options
           .map(category => {
-            // console.log(categoriesCollected, category)
             return {
               label: !categoriesCollected.includes(category.label)
                 ? category.label
@@ -57,7 +56,6 @@ export default function FilterBox(props) {
       graphLabels
     } = props;
 
-    // console.log(i);
     // styles for the react select component
     const groupStyles = {
       display: "flex",
@@ -172,22 +170,19 @@ export default function FilterBox(props) {
     const RenderCheckContainer = props => {
       // do all conditional renderings using if statements for now
       let { i, filters, graphLabels } = props;
-      // console.log("RenderCheckContainer", i, filters[i].showOptions);
 
       const showOptions = (i, filters, graphLabels) => {
         if (filters[i].showOptions) {
-          return (
-            graphLabels[`${filters[i].selectedTableColumnName}`].labels
-              // .filter(option => {return filters[i].selectableOptions[option]})
-              .map(option => (
-                <CategoryOptions
-                  i={i}
-                  filters={filters}
-                  graphLabels={graphLabels}
-                  option={option}
-                />
-              ))
-          );
+          return graphLabels[
+            `${filters[i].selectedTableColumnName}`
+          ].labels.map(option => (
+            <CategoryOptions
+              i={i}
+              filters={filters}
+              graphLabels={graphLabels}
+              option={option}
+            />
+          ));
         } else {
           return graphLabels[`${filters[i].selectedTableColumnName}`].labels
             .filter(option => {
@@ -204,7 +199,6 @@ export default function FilterBox(props) {
         }
       };
 
-      console.log("show options", i, filters[i].showOptions);
       if (i !== String(1)) {
         if (graphLabels[`${filters[i].selectedTableColumnName}`]) {
           return (
@@ -217,7 +211,6 @@ export default function FilterBox(props) {
                     [i]: {
                       ...filters[i],
                       showOptions: !filters[i].showOptions
-                      // selectableOptions: {...optionFlags}
                     }
                     // add all the options here
                   });
@@ -250,7 +243,6 @@ export default function FilterBox(props) {
             components={{ Control: ControlComponent }}
             // isSearchable
             onChange={e => {
-              // console.log(e.label, filters[i]);
               setUpdateUrlFlag(!updateUrlFlag);
               let optionFlags = {};
               graphLabels[
@@ -311,8 +303,6 @@ export default function FilterBox(props) {
   const [setup, setSetup] = useState(colourOptions[0]);
   const [loading, setLoading] = useState(false);
 
-  console.log("filters", filters);
-
   let urlSearchParams = {};
   Object.keys(filters).forEach(filterId => {
     urlSearchParams = {
@@ -338,17 +328,14 @@ export default function FilterBox(props) {
     }
   };
   useEffect(() => {
-    console.log(urlSearchParams);
     let keys = Object.keys(urlSearchParams);
     let values = Object.values(urlSearchParams).map(value =>
       inverseConvertOptionUrl(value)
     );
-    console.log(keys, values);
 
     const filterStrings = keys
       .map((key, i) => key + "equals" + values[i])
       .join("zaz");
-    console.log(filterStrings);
 
     History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
   }, [updateUrlFlag]);
@@ -388,8 +375,6 @@ export default function FilterBox(props) {
           <Button
             onClick={e => {
               const currentDataFilter = Object.keys(filters).length - 1;
-              // console.log('wrong')
-              // console.log(tier)
 
               if (
                 tier !== undefined &&
@@ -479,17 +464,7 @@ export default function FilterBox(props) {
           ) : (
             <CalendarModal />
           )}
-          {/* <div className="btn-container">
-            <Button
-              className="checkbox-submit-btn"
-              type="submit"
-              disabled={loading}
-              onClick={handleSubmit}
-              style={{ cursor: loading ? "auto" : "pointer" }}
-            >
-              Submit
-            </Button>
-          </div> */}
+
           <ResetButton
             // className="reset-btn"
             onClick={e => {

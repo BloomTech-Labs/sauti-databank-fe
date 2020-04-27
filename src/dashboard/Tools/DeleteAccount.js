@@ -4,11 +4,11 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-import { ModalButtons } from "../styledComponents/Index";
+// import { ModalButtons } from "../styledComponents/Index";
 import styled from "styled-components";
 
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
 import { ContentContainer } from "../styledComponents/Index";
@@ -125,7 +125,7 @@ const DeleteAccount = props => {
           onClick={handleOpen}
           className="btn btn-info"
         >
-          <i class="icon-trash"></i>
+          <i className="icon-trash"></i>
         </IconButtons>
       </span>
       <Modal

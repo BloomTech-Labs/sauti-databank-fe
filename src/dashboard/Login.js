@@ -8,20 +8,20 @@ import Loader from "react-loader-spinner";
 
 import swal from "sweetalert";
 
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import FormControl from "@material-ui/core/FormControl";
+// import Select from "@material-ui/core/Select";
 
-import Avatar from "@material-ui/core/Avatar";
+// import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Checkbox from "@material-ui/core/Checkbox";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
+// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+// import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 
@@ -224,43 +224,43 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Styles = withStyles(theme => ({
-  root: {
-    "label + &": {
-      marginTop: theme.spacing(3)
-    }
-  },
+// const Styles = withStyles(theme => ({
+//   root: {
+//     "label + &": {
+//       marginTop: theme.spacing(3)
+//     }
+//   },
 
-  label: {
-    fontSize: "1.6rem"
-  },
-  input: {
-    backgroundColor: "rgb(232, 240, 254)",
-    borderRadius: 5,
-    fontSize: 18,
-    margin: "0 auto",
-    width: "372px",
-    padding: "14px 20px 14px 8px",
-    transition: theme.transitions.create(["border-color", "box-shadow"]),
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(","),
-    "&:focus": {
-      borderRadius: 4,
-      borderColor: "white",
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
-    }
-  }
-}))(InputBase);
+//   label: {
+//     fontSize: "1.6rem"
+//   },
+//   input: {
+//     backgroundColor: "rgb(232, 240, 254)",
+//     borderRadius: 5,
+//     fontSize: 18,
+//     margin: "0 auto",
+//     width: "372px",
+//     padding: "14px 20px 14px 8px",
+//     transition: theme.transitions.create(["border-color", "box-shadow"]),
+//     fontFamily: [
+//       "-apple-system",
+//       "BlinkMacSystemFont",
+//       '"Segoe UI"',
+//       "Roboto",
+//       '"Helvetica Neue"',
+//       "Arial",
+//       "sans-serif",
+//       '"Apple Color Emoji"',
+//       '"Segoe UI Emoji"',
+//       '"Segoe UI Symbol"'
+//     ].join(","),
+//     "&:focus": {
+//       borderRadius: 4,
+//       borderColor: "white",
+//       boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
+//     }
+//   }
+// }))(InputBase);
 
 const FormBottomText = styled.p`
   font-size: 1.4rem;

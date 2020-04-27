@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import { makeStyles, styled } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -13,7 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
 import styledComp from "styled-components";
@@ -106,7 +106,6 @@ const EDIT = gql`
 //button on AccountGrid
 const EditModal = props => {
   const [account, setAccount] = useState({});
-  console.log(`account`, account);
   //account id added automatically, needed to .put
   account.id = props.data.id;
 
@@ -121,7 +120,6 @@ const EditModal = props => {
   };
 
   const handleSubmit = (event, input) => {
-    console.log(input);
     event.preventDefault();
     createUser({
       variables: { editUser: input },
@@ -162,9 +160,8 @@ const EditModal = props => {
         <IconButtons
           style={{ height: 20, lineHeight: 0.5 }}
           onClick={e => handleOpen(e, props.data)}
-          // className="btn btn-info"
         >
-          <i class="fas fa-pencil-alt" />
+          <i className="fas fa-pencil-alt" />
         </IconButtons>
       </span>
       <Modal

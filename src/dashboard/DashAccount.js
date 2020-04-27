@@ -74,7 +74,6 @@ function DashAccount(props) {
     }
   );
 
-  if (data) console.log("data billing time", data.databankUser);
   const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
 
   const handleSubmit = async (e, input) => {
@@ -160,11 +159,6 @@ function DashAccount(props) {
                     <li className="features-item">Filter data by date</li>
                   </ul>
                   <ButtonDiv>
-                    {console.log("DATA", data)}
-                    {console.log(
-                      "Next Billing Time",
-                      data.databankUser.p_next_billing_time
-                    )}
                     {data && data.databankUser.p_next_billing_time ? (
                       <p>
                         Your subscription will expire on{" "}

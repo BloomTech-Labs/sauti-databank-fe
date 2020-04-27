@@ -1,48 +1,37 @@
-import React, { useState } from "react";
-import LineGraph from "./LineGraph";
+import React from "react";
+import LineGraph from "./LineGraph/LineGraph";
 import Graph from "./Graph";
 
-const LineGraphButton = ({
-  data,
-  chartData,
-  filters,
-  queryType,
-  makeFilterList,
-  buttonHandle,
-  open,
-  setOpen
-}) => {
+import { useSelector } from "react-redux";
+
+const LineGraphButton = props => {
+  const {
+    chartData,
+    filters,
+    queryType,
+    makeFilterList,
+    buttonHandle,
+    open,
+    setOpen
+  } = props;
   const graphItems = filters[1].selectedTableColumnName !== "";
 
-  // const buttonHandle = e => {
-  //   setOpen(!open);
-  // };
+  const data = useSelector(state => state.queriesReducer.dataInfo);
 
   const renderUpdate = () => {
-    console.log(open);
     if (open === true) {
-      console.log("display Line Graph");
       return (
         <>
-          <LineGraph
-            data={data}
-            filter0={filters[0]}
-            buttonHandle={buttonHandle}
-          />
+          <LineGraph filter0={filters[0]} buttonHandle={buttonHandle} />
         </>
       );
     } else {
-      console.log(`renderUpdate`, open);
       return <button onClick={() => setOpen(!open)}>Display Line Graph</button>;
     }
   };
 
-  console.log(graphItems);
-
   const renderGraph = () => {
-    console.log(graphItems);
     if (graphItems === true && open === false) {
-      console.log("true");
       return (
         <Graph
           data={chartData.percentageData}
@@ -55,7 +44,6 @@ const LineGraphButton = ({
         />
       );
     } else if (graphItems === false && open === false) {
-      console.log("false");
       return (
         <Graph
           data={chartData.percentageData}
@@ -71,10 +59,8 @@ const LineGraphButton = ({
       return null;
     }
   };
-  console.log(`renderGraph`, renderGraph());
 
-  //console.log(sdata.sessionsData);
-  if (data.sessionsData) {
+  if (data.payload && data.payload.sessionsData) {
     return (
       <>
         <div className="graph-titles-container">

@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { device } from "../../dashboard/styledComponents/responsive";
 import { useHistory } from "react-router-dom";
 import { decodeToken } from "../../dashboard/auth/Auth";
 import { useMutation } from "@apollo/react-hooks";

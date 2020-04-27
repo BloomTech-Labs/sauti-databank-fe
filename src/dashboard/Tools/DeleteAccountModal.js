@@ -6,8 +6,8 @@ import Fade from "@material-ui/core/Fade";
 
 import CreateUser from "./CreateUser";
 
-import { ModalButtons } from "../styledComponents/Index";
-import styled from "styled-components";
+// import { ModalButtons } from "../styledComponents/Index";
+// import styled from "styled-components";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -43,7 +43,7 @@ export default function CreateUserModal() {
           onClick={e => deleteHandler(e, props.data.id)}
           className="btn btn-info"
         >
-          <i class="icon-trash"></i>
+          <i className="icon-trash"></i>
         </IconButtons>
       </span>
       <Modal
