@@ -26,9 +26,9 @@ import { getRangePeriods } from "../LineGraphHelpers/Range";
 //top 7 should be checked
 //y-axis recalculate 100 based upon what is checked
 
-const LineGraph = ({ filter0, buttonHandle }) => {
-  const data = useSelector(state => state.queriesReducer.dataInfo);
-  const lineArray = data.payload.sessionsData || [];
+const LineGraph = ({ filter0, buttonHandle, data }) => {
+  //const data = useSelector(state => state.queriesReducer.dataInfo);
+  const lineArray = data.sessionsData || [];
 
   //Make an array of options that can be selected.
   const keysArray = Object.keys(filter0.selectableOptions);
