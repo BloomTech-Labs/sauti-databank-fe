@@ -21,7 +21,7 @@ const DateSlider = ({
 
   function onAfterChange(value) {
     console.log("onAfterChange: ", value);
-    setTime(updateRange(time, value));
+    setTime(updateRange(timeInUse, value));
   }
 
   return (
@@ -33,6 +33,7 @@ const DateSlider = ({
         </div>
         <SliderDisplay
           totalRangePeriods={totalRangePeriods}
+          timeInUse={timeInUse}
           onChange={onChange}
           onAfterChange={onAfterChange}
         />

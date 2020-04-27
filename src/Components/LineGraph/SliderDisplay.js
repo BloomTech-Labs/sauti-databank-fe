@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Slider } from "antd";
-//import { DatePicker } from "antd";
+import { timeInUsePeriodsArray } from "../LineGraphHelpers/updateRange";
 
-const SliderDisplay = ({ totalRangePeriods, onChange, onAfterChange }) => {
+const SliderDisplay = ({
+  totalRangePeriods,
+  onChange,
+  onAfterChange,
+  timeInUse
+}) => {
   console.log(`totalRangePeriods`, totalRangePeriods);
+  const [defaultSelect, setDefaultSelect] = useState([0, totalRangePeriods]);
+
+  let rangeOptions = timeInUsePeriodsArray(timeInUse);
+  const timeInUsePeriods = rangeOptions.length;
+
+  useEffect(() => {
+    setDefaultSelect([0, timeInUsePeriods]);
+  }, [timeInUsePeriods]);
 
   return (
     <div className="Slider">
@@ -11,9 +24,9 @@ const SliderDisplay = ({ totalRangePeriods, onChange, onAfterChange }) => {
       <Slider
         range
         min={0}
-        max={totalRangePeriods}
+        max={timeInUsePeriods}
         step={1}
-        defaultValue={[0, totalRangePeriods]}
+        defaultValue={defaultSelect}
         onChange={onChange}
         onAfterChange={onAfterChange}
       />
