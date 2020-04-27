@@ -8,7 +8,6 @@ const SliderDisplay = ({
   onAfterChange,
   timeInUse
 }) => {
-  console.log(`totalRangePeriods`, totalRangePeriods);
   const [defaultSelect, setDefaultSelect] = useState([0, totalRangePeriods]);
 
   let rangeOptions = timeInUsePeriodsArray(timeInUse);

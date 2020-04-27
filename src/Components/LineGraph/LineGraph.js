@@ -43,7 +43,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       lineNonNull.push(lineArray[i]);
     }
   }
-  //console.log(lineNonNull)
 
   // 2. convert date to year-month
   lineNonNull.map(item => {
@@ -396,8 +395,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const [time, setTime] = useState(month100);
   const [timeInUse, setTimeInUse] = useState(month100);
 
-  console.log(`time`, time);
-
   const [checkedItems, setCheckedItems] = useState(top7);
 
   //Find range for slider
@@ -431,8 +428,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   let highest = getHighestSelected(time, display);
 
-  console.log(`highest`, highest);
-
   //multiple functions onClick
   function moOnClick(event) {
     setTime(month100);
@@ -451,7 +446,6 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
 
   //checkboxs to display individual lines
   function handleChange(event) {
-    console.log(event.target.name);
     let selected = event.target.name;
     setCheckedItems({
       ...checkedItems,
