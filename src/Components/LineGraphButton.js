@@ -22,11 +22,7 @@ const LineGraphButton = props => {
     if (open === true) {
       return (
         <>
-          <LineGraph
-            data={data}
-            filter0={filters[0]}
-            buttonHandle={buttonHandle}
-          />
+          <LineGraph filter0={filters[0]} buttonHandle={buttonHandle} />
         </>
       );
     } else {
@@ -64,7 +60,7 @@ const LineGraphButton = props => {
     }
   };
 
-  if (data.sessionsData) {
+  if (data.payload && data.payload.sessionsData) {
     return (
       <>
         <div className="graph-titles-container">

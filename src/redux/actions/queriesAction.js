@@ -15,16 +15,3 @@ export const getQuery = data => dispatch => {
   }
   query(data);
 };
-
-// export const getQuery = (data)=>{
-//   return dispatch =>{
-//     dispatch({type:LOADQUERY});
-//   async function query(queryData){
-//   try{
-//     dispatch({ type: QUERIES, payload: queryData });
-//   }catch(error){
-//    console.log(error);
-//    return error ;
-//   }}
-//   query(data)
-//   }}
