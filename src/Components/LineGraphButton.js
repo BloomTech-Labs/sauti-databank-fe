@@ -2,10 +2,11 @@ import React from "react";
 import LineGraph from "./LineGraph/LineGraph";
 import Graph from "./Graph";
 
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const LineGraphButton = props => {
   const {
+    data,
     chartData,
     filters,
     queryType,
@@ -16,13 +17,17 @@ const LineGraphButton = props => {
   } = props;
   const graphItems = filters[1].selectedTableColumnName !== "";
 
-  const data = useSelector(state => state.queriesReducer.dataInfo);
+  // const data = useSelector(state => state.queriesReducer.dataInfo);
 
   const renderUpdate = () => {
     if (open === true) {
       return (
         <>
-          <LineGraph filter0={filters[0]} buttonHandle={buttonHandle} />
+          <LineGraph
+            filter0={filters[0]}
+            buttonHandle={buttonHandle}
+            data={data}
+          />
         </>
       );
     } else {
@@ -60,7 +65,7 @@ const LineGraphButton = props => {
     }
   };
 
-  if (data.payload && data.payload.sessionsData) {
+  if (data.sessionsData) {
     return (
       <>
         <div className="graph-titles-container">
