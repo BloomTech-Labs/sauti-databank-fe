@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
   LineChart,
   Line,
@@ -25,8 +26,9 @@ import { getRangePeriods } from "../LineGraphHelpers/Range";
 //top 7 should be checked
 //y-axis recalculate 100 based upon what is checked
 
-const LineGraph = ({ data, filter0, buttonHandle }) => {
-  const lineArray = data.sessionsData;
+const LineGraph = ({ filter0, buttonHandle }) => {
+  const data = useSelector(state => state.queriesReducer.dataInfo);
+  const lineArray = data.payload.sessionsData || [];
 
   //Make an array of options that can be selected.
   const keysArray = Object.keys(filter0.selectableOptions);
@@ -35,6 +37,7 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const selectedTableColumnName = filter0.selectedTableColumnName;
   // 1. eliminate null values
   const lineNonNull = [];
+
   for (let i = 0; i < lineArray.length; i++) {
     if (
       lineArray[i][selectedTableColumnName] !== null &&
@@ -256,10 +259,10 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   const lineNonNullQtr = [];
   for (let i = 0; i < lineArray.length; i++) {
     if (
-      data.sessionsData[i][selectedTableColumnName] !== null &&
-      data.sessionsData[i][selectedTableColumnName] !== ""
+      data.payload.sessionsData[i][selectedTableColumnName] !== null &&
+      data.payload.sessionsData[i][selectedTableColumnName] !== ""
     ) {
-      lineNonNullQtr.push(data.sessionsData[i]);
+      lineNonNullQtr.push(data.payload.sessionsData[i]);
     }
   }
 

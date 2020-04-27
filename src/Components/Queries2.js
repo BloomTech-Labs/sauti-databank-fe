@@ -4,17 +4,19 @@ import { gql } from "apollo-boost";
 
 import Loader from "react-loader-spinner";
 import dataParse from "./dataParse";
-import getIndex from "../DataParseHelpers/getIndex";
-import graphLabels from "./graphLabels";
-import removeMultiple from "../DataParseHelpers/removeMultiple";
-import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
-
+import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
-import LineGraph from "./LineGraph/LineGraph";
+
+import { getQuery } from "../redux/actions/queriesAction";
+import { useSelector, useDispatch } from "react-redux";
 
 const GetData = props => {
   //LineGraph button
   const [open, setOpen] = useState(false);
+
+  useSelector(state => state.queriesReducer);
+
+  const dispatch = useDispatch();
 
   const buttonHandle = e => {
     setOpen(!open);
@@ -57,8 +59,6 @@ const GetData = props => {
     );
   };
   const onlyFirstThreeFiltersAreSelected = filters => {
-    // console.log("in onlyFirstThreeFiltersAreSelected");
-
     const filterIds = Object.keys(filters);
     return (
       // we only have the first 3 filters
@@ -71,8 +71,6 @@ const GetData = props => {
   };
 
   const isSessions = filters => {
-    // console.log("in isSessions");
-
     // if at least 1 table says "Sessions" we use the sessions table
     return (
       Object.keys(filters).filter(
@@ -82,13 +80,8 @@ const GetData = props => {
   };
   // if (only first 3 filters are selected) and (none of them are Sessions)
 
-  //console.log("filters", filters);
   if (!isSessions(filters)) {
     queryType = "tradersUsers";
-    // console.log("Just Users");
-    // console.log(filters[0].selectedTable);
-    // console.log(filters[1].selectedTable);
-    // console.log(filters[2].selectedTable);
     Object.keys(filters).forEach(filterId => {
       if (filterId !== 1) {
         thisQuery = {
@@ -112,7 +105,6 @@ const GetData = props => {
       
       `;
   } else {
-    //  console.log("Sessions Table Search");
     thisQuery = {};
     Object.keys(filters).forEach(filterId => {
       thisQuery = {
@@ -139,7 +131,11 @@ const GetData = props => {
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
-  //console.log("data", data);
+
+  useEffect(() => {
+    dispatch(getQuery(data));
+  }, [data]);
+
   if (loading) {
     return (
       <div className="loader-container">
@@ -174,9 +170,8 @@ const GetData = props => {
       </div>
     );
   }
-  // console.log("chartdata_____-----", chartData);
+
   const makeFilterList = () => {
-    //  console.log("makeFilterList WAS CALLED");
     return Object.keys(filters)
       .filter(filterId => filterId >= 2)
       .map(filterId => {
@@ -189,11 +184,9 @@ const GetData = props => {
       });
   };
 
-  //console.log("graph184");
   return (
     <>
       <LineGraphButton
-        data={data}
         chartData={chartData}
         filters={filters}
         queryType={queryType}

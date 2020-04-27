@@ -191,11 +191,6 @@ class Tools extends Component {
     };
   }
 
-  componentDidMount = () => {
-    console.log(this.props);
-    //this.props.fetchAccounts()
-  };
-
   onGridSizeChanged = params => {
     var gridWidth = document.getElementById("grid-wrapper").offsetWidth;
     var columnsToShow = [];

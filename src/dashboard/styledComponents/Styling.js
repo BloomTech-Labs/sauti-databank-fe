@@ -37,7 +37,6 @@ export const TopBar = styled.div`
   width: 100%;
   height: 7rem;
   background: #2c2e32;
-  background: ${props => console.log(props.LandingPage, "INSIDE STYLING")};
 `;
 
 export const AccountDiv = styled.div`

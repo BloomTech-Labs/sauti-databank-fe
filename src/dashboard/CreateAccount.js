@@ -10,7 +10,7 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Avatar from "@material-ui/core/Avatar";
+// import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -44,17 +44,17 @@ export default function SignInSide(props) {
   user.tier = "FREE";
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
-  const {
-    email,
-    password,
-    organization,
-    job_position,
-    country,
-    organization_type,
-    tier,
-    interest,
-    found_by
-  } = user;
+  // const {
+  //   email,
+  //   password,
+  //   organization,
+  //   job_position,
+  //   country,
+  //   organization_type,
+  //   tier,
+  //   interest,
+  //   found_by
+  // } = user;
 
   const classes = useStyles();
 

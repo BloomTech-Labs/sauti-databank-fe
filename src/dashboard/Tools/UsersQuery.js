@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Tools from "./Tools";
@@ -44,7 +44,6 @@ const UsersQuery = () => {
   if (error) {
     return <p>error</p>;
   }
-  console.log(data.allUsers);
 
   data.allUsers.map(item => {
     if (item.p_next_billing_time !== null) {

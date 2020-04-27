@@ -5,7 +5,7 @@ import { Event } from "../dashboard/GoogleAnalytics/index";
 import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
 import styled from "styled-components";
-import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
+import { getSelectedOption } from "../OptionFunctions";
 import { useHistory } from "react-router-dom";
 const Graph = props => {
   let {
@@ -18,8 +18,6 @@ const Graph = props => {
     tableName
   } = props;
 
-  console.log("loading graph", filters);
-  //console.log("loading graph",props.children.props.filters);
   const token = getToken();
   let tier;
   if (token) {
@@ -31,8 +29,6 @@ const Graph = props => {
   if (newSub) {
     sub = newSub;
   }
-
-  console.log(`filters`, filters);
 
   const [csvDownload, setCsvDownload] = useState([]);
 
@@ -67,8 +63,6 @@ const Graph = props => {
         }
       ];
     } else {
-      // the download for ?filter0equalsexchangedirectioncommaundefinedzazfilter1equalseducationcommaundefinedzazfilter2equalscrossing_freqcommaWeekly
-      // is buggy
       return [
         {
           id: `${filters[0].selectedTableColumnName}`,
@@ -87,7 +81,6 @@ const Graph = props => {
   };
   // the download
   let csvFormater = data => {
-    console.log("csvFormater", data, keys, filters);
     // the subsample case is messed up
     // if the user selected a subsample
     if (filters[1].selectedCategory.length > 0) {
@@ -105,9 +98,7 @@ const Graph = props => {
           };
         }
       });
-      // console.log(newData)
       data = newData;
-      // data = data.filter(dataItem => dataItem[filters[0].selectedTableColumnName])
     }
 
     // works fine for both cases
@@ -151,7 +142,6 @@ const Graph = props => {
     // data = [...data, {sampleSize: 30}]
     // we already have the data here
     // add a percentage column here using sampleSize
-    console.log(data, sampleSize);
     return data;
   };
 
@@ -171,7 +161,6 @@ const Graph = props => {
     setCsvDownload(csvFormater(csvData));
   }, [csvData]);
   const socialMediaLink = useHistory().location.search;
-  console.log(socialMediaLink);
   return (
     <>
       <div className="dwnld-btn">
@@ -194,49 +183,26 @@ const Graph = props => {
                 </CsvDownloader>
                 <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
                 <div>
-                  {/* https://t.co/7DQbFbQIaS?amp=1 =>  https://www.databank.sautiafrica.org/data */}
-                  {/* https://t.co/9CcenTStx9?amp=1 the search query is removed from the search*/}
                   <SocialMediaIconsTwitter
-                    class="twitter-share-button"
+                    className="twitter-share-button"
                     target="_blank"
-                    // https://databank.sautiafrica.org/
                     href={`https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`}
                   >
-                    <i class="fab fa-twitter"></i>
+                    <i className="fab fa-twitter"></i>
                   </SocialMediaIconsTwitter>
                 </div>
-                {/* <div
-                  class="fb-share-button"
-                  data-href="https://blissful-pare-60612f.netlify.com/data"
-                  data-layout="button"
-                  data-size="small"
-                >
-                  <SocialMediaIconsFacebook
-                    target="_blank"
-                    // data-href={`http://databank.sautiafrica.org/data${twitterLink}`}
-                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                    class="fb-xfbml-parse-ignore"
-                  >
-                    <i class="fab fa-facebook-square"></i>
-                  </SocialMediaIconsFacebook>
-                  
-
-                </div> */}
                 <div
-                  class="fb-share-button"
-                  data-href={`https://www.databank.sautiafrica.org/data${socialMediaLink}`} //"https://blissful-pare-60612f.netlify.com/data"
+                  className="fb-share-button"
+                  data-href={`https://www.databank.sautiafrica.org/data${socialMediaLink}`}
                   data-layout="button"
                   data-size="small"
                 >
-                  {/* https://www.databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalseducationcommaNowhitespaceformalwhitespaceeducation */}
-                  {/* https://www.databank.sautiafrica.org/data?fbclid=IwAR2aGZysIQY7R133QGX8yBNGyXDvrPdyPpooab43WIwcwVwEJr5pLV0iqQU */}
                   <SocialMediaIconsFacebook
                     target="_blank"
                     href={`https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`}
-                    class="fb-xfbml-parse-ignore"
+                    className="fb-xfbml-parse-ignore"
                   >
-                    {/* https://www.databank.sautiafrica.org/data?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalseducationcommaNowhitespaceformalwhitespaceeducation&fbclid=IwAR3ywHMhE7RFDpQEQc7jUCMbRWe8_EoQjlVKHLOaGJGUR2ZGN6EhBDPgHlU */}
-                    <i class="fab fa-facebook-square"></i>
+                    <i className="fab fa-facebook-square"></i>
                   </SocialMediaIconsFacebook>
                 </div>
               </IconContainer>
@@ -251,15 +217,15 @@ const Graph = props => {
                 <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
                 <div>
                   <SocialMediaIconsTwitter
-                    class="twitter-share-button"
+                    className="twitter-share-button"
                     target="_blank"
                     href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
                   >
-                    <i class="fab fa-twitter"></i>
+                    <i className="fab fa-twitter"></i>
                   </SocialMediaIconsTwitter>
                 </div>
                 <div
-                  class="fb-share-button"
+                  className="fb-share-button"
                   data-href="https://blissful-pare-60612f.netlify.com/data"
                   data-layout="button"
                   data-size="small"
@@ -267,9 +233,9 @@ const Graph = props => {
                   <SocialMediaIconsFacebook
                     target="_blank"
                     href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                    class="fb-xfbml-parse-ignore"
+                    className="fb-xfbml-parse-ignore"
                   >
-                    <i class="fab fa-facebook-square"></i>
+                    <i className="fab fa-facebook-square"></i>
                   </SocialMediaIconsFacebook>
                 </div>
               </IconContainer>

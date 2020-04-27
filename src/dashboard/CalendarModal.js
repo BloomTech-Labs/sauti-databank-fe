@@ -4,12 +4,11 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-import { Link } from "react-router-dom";
 import Download from "./Download";
 
 import styled from "styled-components";
 
-import useCalendar, { getTodaysDate } from "../hooks/useCalendar";
+import useCalendar from "../hooks/useCalendar";
 
 const DateContainer = styled.div`
   margin: 20px 0;
@@ -66,9 +65,9 @@ export default function CalendarModal() {
     setOpen(false);
   };
 
-  const handleCloseContinue = props => {
-    setOpen(false);
-  };
+  // const handleCloseContinue = props => {
+  //   setOpen(false);
+  // };
 
   const {
     filterBoxStartDate,
@@ -81,7 +80,6 @@ export default function CalendarModal() {
   // const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
 
   const [loading, setLoading] = useState(false);
-  console.log("=========== HERE =============");
   return (
     <div>
       <div>

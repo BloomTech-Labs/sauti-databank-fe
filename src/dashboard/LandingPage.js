@@ -8,7 +8,7 @@ import DashboardSVG from "./Images/DashboardSVG";
 import GraphImageDiv from "./styledComponents/GraphImageDiv";
 
 const LandingPage = props => {
-  let thisLocation = props.history.location.pathname;
+  // let thisLocation = props.history.location.pathname;
   const history = useHistory();
   const handleReturn = e => {
     e.preventDefault();
