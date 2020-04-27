@@ -6,7 +6,6 @@ const initialState = {
   error: ""
 };
 const reducer = (state = initialState, action) => {
-  console.log("reducer State", state);
   switch (action.type) {
     case LOADQUERY:
       return {
@@ -16,7 +15,6 @@ const reducer = (state = initialState, action) => {
         error: ""
       };
     case QUERIES:
-      console.log(action);
       return {
         ...state,
         dataInfo: action,
@@ -24,7 +22,6 @@ const reducer = (state = initialState, action) => {
         error: ""
       };
     case ERROR:
-      console.log(action);
       return {
         ...state,
         isLoading: false,

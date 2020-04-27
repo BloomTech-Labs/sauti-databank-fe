@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { makeStyles, styled } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -14,7 +14,7 @@ import { withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
 
@@ -70,20 +70,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Users_Query = gql`
-  query UsersQ {
-    allUsers: databankUsers {
-      id
-      email
-      interest
-      tier
-      organization
-      job_position
-      country
-      organization_type
-    }
-  }
-`;
+// const Users_Query = gql`
+//   query UsersQ {
+//     allUsers: databankUsers {
+//       id
+//       email
+//       interest
+//       tier
+//       organization
+//       job_position
+//       country
+//       organization_type
+//     }
+//   }
+// `;
 
 const EDIT = gql`
   mutation editUserData($editUser: newEditUserInput!) {
@@ -108,9 +108,7 @@ const EDIT = gql`
 
 //button on AccountGrid
 const EditModal = props => {
-  console.log(props);
   const [account, setAccount] = useState({});
-  console.log(`account`, account);
   //account id added automatically, needed to .put
   account.id = props.data.id;
 
@@ -125,7 +123,6 @@ const EditModal = props => {
   };
 
   const handleSubmit = (event, input) => {
-    console.log(input);
     event.preventDefault();
     createUser({
       variables: { editUser: input }

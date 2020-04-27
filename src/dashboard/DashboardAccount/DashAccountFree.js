@@ -58,7 +58,6 @@ const DashAccountFree = props => {
   let tier;
   if (token) {
     tier = decodeToken(token);
-    console.log(`token info:`, tier);
     tier = tier.tier;
   }
   let userEmail;
