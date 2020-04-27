@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 
-import { updateRange } from "../LineGraphHelpers/updateRange";
+import {
+  updateRange,
+  timeInUsePeriodsArray
+} from "../LineGraphHelpers/updateRange";
 
 const useStyles = makeStyles({
   root: {
@@ -11,38 +14,38 @@ const useStyles = makeStyles({
   }
 });
 
-function valuetext(range) {
-  return `${range}°C`;
-}
+// function valuetext(range) {
+//   return `${range}°C`;
+// }
 
+//Data loads value is 0 - totalRangePeriods, makes length of slider
+//value should always be based on total length of time period being used.
 export default function RangeSlider({
-  totalPeriods,
+  totalRangePeriods,
   range,
   setRange,
-  allPeriodsArray,
-  time,
+  timeInUse,
   setTime
 }) {
-  console.log(`totalPeriods Slider2`, totalPeriods);
   const classes = useStyles();
-  const [value, setValue] = React.useState([0, totalPeriods]);
+  const [value, setValue] = useState([0, totalRangePeriods]);
 
+  //when changing time period, slider will reset to give full range of new time period
   useEffect(() => {
-    setValue([0, totalPeriods]);
-  }, [totalPeriods]);
+    setValue([0, totalRangePeriods]);
+  }, [timeInUse]);
 
-  //   function onChangeSlider(event) {
-  //     console.log(`onChange`, event);
-  //     setRange(`${allPeriodsArray[event[0]]} - ${allPeriodsArray[event[1] - 1]}`);
-  //   }
+  //all options of time period being used
+  let rangeOptions = timeInUsePeriodsArray(timeInUse);
 
   const handleChange = (event, newValue) => {
-    setRange([allPeriodsArray[value[0]], allPeriodsArray[value[1] - 1]]);
+    setRange([rangeOptions[value[0]], rangeOptions[value[1] - 1]]);
     setValue(newValue);
   };
 
+  //updates chart based on selected values for all available values in timeInUse
   function onAfterChange() {
-    setTime(updateRange(time, value));
+    setTime(updateRange(timeInUse, value));
   }
 
   return (
@@ -54,10 +57,9 @@ export default function RangeSlider({
         value={value}
         onChange={handleChange}
         onClick={onAfterChange}
-        //  onChange={onChangeSlider}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
-        getAriaValueText={valuetext}
+        //  getAriaValueText={valuetext}
       />
     </div>
   );

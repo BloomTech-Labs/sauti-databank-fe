@@ -18,7 +18,7 @@ import { hundredScale } from "../LineGraphHelpers/scale100";
 import { getHighestSelected } from "../LineGraphHelpers/selectedCheckboxes";
 
 import DateSlider from "./DateSlider";
-import { getTotalPeriods } from "../LineGraphHelpers/Range";
+import { getRangePeriods } from "../LineGraphHelpers/Range";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -394,6 +394,8 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   }
 
   const [time, setTime] = useState(month100);
+  const [timeInUse, setTimeInUse] = useState(month100);
+
   console.log(`time`, time);
 
   const [checkedItems, setCheckedItems] = useState(top7);
@@ -401,21 +403,20 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   //Find range for slider
   //should run after time period is updated
   let allPeriodsArray = [];
-  const rangeValues = getTotalPeriods(time, allPeriodsArray);
-  const totalPeriods = rangeValues.periodsAmount;
-
+  const rangeValues = getRangePeriods(time, allPeriodsArray);
+  const totalRangePeriods = rangeValues.periodsAmount;
   allPeriodsArray = rangeValues.allPeriodsArray;
 
-  console.log(`allPeriodsArray`, allPeriodsArray);
+  //numbers displayed above the slider
+  //displays first and last of all periods in selected range
   const [range, setRange] = useState([
     allPeriodsArray[0],
-    allPeriodsArray[totalPeriods - 1]
+    allPeriodsArray[totalRangePeriods - 1]
   ]);
-  console.log(`range`, range);
 
   //Sets range for Slider, after time is changed
   useEffect(() => {
-    setRange([allPeriodsArray[0], allPeriodsArray[totalPeriods - 1]]);
+    setRange([allPeriodsArray[0], allPeriodsArray[totalRangePeriods - 1]]);
   }, [time]);
 
   let display = [];
@@ -435,14 +436,17 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
   //multiple functions onClick
   function moOnClick(event) {
     setTime(month100);
+    setTimeInUse(month100);
   }
 
   function qtrOnClick(event) {
     setTime(quarter100);
+    setTimeInUse(quarter100);
   }
 
   function yrOnClick(event) {
     setTime(year100);
+    setTimeInUse(year100);
   }
 
   //checkboxs to display individual lines
@@ -550,8 +554,9 @@ const LineGraph = ({ data, filter0, buttonHandle }) => {
       <DateSlider
         range={range}
         setRange={setRange}
-        totalPeriods={totalPeriods}
+        totalRangePeriods={totalRangePeriods}
         allPeriodsArray={allPeriodsArray}
+        timeInUse={timeInUse}
         time={time}
         setTime={setTime}
       />

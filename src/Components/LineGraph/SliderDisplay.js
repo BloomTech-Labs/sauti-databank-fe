@@ -2,8 +2,8 @@ import React from "react";
 import { Slider } from "antd";
 //import { DatePicker } from "antd";
 
-const SliderDisplay = ({ totalPeriods, onChange, onAfterChange }) => {
-  console.log(`totalPeriods`, totalPeriods);
+const SliderDisplay = ({ totalRangePeriods, onChange, onAfterChange }) => {
+  console.log(`totalRangePeriods`, totalRangePeriods);
 
   return (
     <div className="Slider">
@@ -11,9 +11,9 @@ const SliderDisplay = ({ totalPeriods, onChange, onAfterChange }) => {
       <Slider
         range
         min={0}
-        max={totalPeriods}
+        max={totalRangePeriods}
         step={1}
-        defaultValue={[0, totalPeriods]}
+        defaultValue={[0, totalRangePeriods]}
         onChange={onChange}
         onAfterChange={onAfterChange}
       />
