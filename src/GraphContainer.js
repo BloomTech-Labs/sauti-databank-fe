@@ -13,6 +13,7 @@ import ClipboardJS from "clipboard";
 import graphLabels from "./Components/graphLabels";
 
 import { getAvaliableOptions, getSelectedOption } from "./OptionFunctions";
+import { Footer } from "./Components/Footer";
 
 const GraphContainer = props => {
   const [url, setUrl] = useState("");
@@ -85,6 +86,7 @@ const GraphContainer = props => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
