@@ -132,9 +132,9 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
-  useEffect(() => {
-    dispatch(getQuery(data));
-  }, [data]);
+  // useEffect(() => {
+  //   dispatch(getQuery(data));
+  // }, [data]);
 
   if (loading) {
     return (
@@ -194,6 +194,7 @@ const GetData = props => {
         buttonHandle={buttonHandle}
         open={open}
         setOpen={setOpen}
+        data={data}
       />
     </>
   );

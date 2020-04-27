@@ -28,10 +28,10 @@ import { getRangePeriods } from "../LineGraphHelpers/Range";
 
 const LineGraph = ({ filter0, buttonHandle, data }) => {
   //const data = useSelector(state => state.queriesReducer.dataInfo);
-  const lineArray = data.sessionsData || [];
+  const lineArray = data.sessionsData;
 
   //Make an array of options that can be selected.
-  const keysArray = Object.keys(filter0.selectableOptions);
+  // const keysArray = Object.keys(filter0.selectableOptions);
 
   //get option selected from the first filter
   const selectedTableColumnName = filter0.selectedTableColumnName;
@@ -259,10 +259,10 @@ const LineGraph = ({ filter0, buttonHandle, data }) => {
   const lineNonNullQtr = [];
   for (let i = 0; i < lineArray.length; i++) {
     if (
-      data.payload.sessionsData[i][selectedTableColumnName] !== null &&
-      data.payload.sessionsData[i][selectedTableColumnName] !== ""
+      data.sessionsData[i][selectedTableColumnName] !== null &&
+      data.sessionsData[i][selectedTableColumnName] !== ""
     ) {
-      lineNonNullQtr.push(data.payload.sessionsData[i]);
+      lineNonNullQtr.push(data.sessionsData[i]);
     }
   }
 
