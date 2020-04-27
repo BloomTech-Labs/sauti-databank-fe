@@ -14,11 +14,9 @@ const GetData = props => {
   //LineGraph button
   const [open, setOpen] = useState(false);
 
-  const hereIsData = useSelector(state => state.queriesReducer);
+  useSelector(state => state.queriesReducer);
 
   const dispatch = useDispatch();
-
-  console.log(hereIsData, "here is data");
 
   const buttonHandle = e => {
     setOpen(!open);
@@ -61,8 +59,6 @@ const GetData = props => {
     );
   };
   const onlyFirstThreeFiltersAreSelected = filters => {
-    // console.log("in onlyFirstThreeFiltersAreSelected");
-
     const filterIds = Object.keys(filters);
     return (
       // we only have the first 3 filters
@@ -75,8 +71,6 @@ const GetData = props => {
   };
 
   const isSessions = filters => {
-    // console.log("in isSessions");
-
     // if at least 1 table says "Sessions" we use the sessions table
     return (
       Object.keys(filters).filter(
@@ -86,13 +80,8 @@ const GetData = props => {
   };
   // if (only first 3 filters are selected) and (none of them are Sessions)
 
-  console.log("filters", filters);
   if (!isSessions(filters)) {
     queryType = "tradersUsers";
-    console.log("Just Users");
-    console.log(filters[0].selectedTable);
-    console.log(filters[1].selectedTable);
-    console.log(filters[2].selectedTable);
     Object.keys(filters).forEach(filterId => {
       if (filterId !== 1) {
         thisQuery = {
@@ -116,7 +105,6 @@ const GetData = props => {
       
       `;
   } else {
-    console.log("Sessions Table Search");
     thisQuery = {};
     Object.keys(filters).forEach(filterId => {
       thisQuery = {
@@ -147,8 +135,6 @@ const GetData = props => {
   useEffect(() => {
     dispatch(getQuery(data));
   }, [data]);
-
-  console.log("data", data);
 
   if (loading) {
     return (
@@ -184,9 +170,8 @@ const GetData = props => {
       </div>
     );
   }
-  console.log("chartdata_____-----", chartData);
+
   const makeFilterList = () => {
-    console.log("makeFilterList WAS CALLED");
     return Object.keys(filters)
       .filter(filterId => filterId >= 2)
       .map(filterId => {
@@ -199,9 +184,6 @@ const GetData = props => {
       });
   };
 
-  //console.log("graph184");
-  //needs to know to rerender (upate or useEffect)
-  // is added to redux state but is not triggering another rerender
   return (
     <>
       <LineGraphButton
