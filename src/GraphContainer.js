@@ -15,6 +15,9 @@ import graphLabels from "./Components/graphLabels";
 import { getAvaliableOptions, getSelectedOption } from "./OptionFunctions";
 import { Footer } from "./Components/Footer";
 
+import { getQuery } from "../src/redux/actions/queriesAction";
+import { connect } from "react-redux";
+
 const GraphContainer = props => {
   const [url, setUrl] = useState("");
   const [filters, setFilters] = useState(props.filters);
@@ -91,7 +94,14 @@ const GraphContainer = props => {
   );
 };
 
-export default withRouter(GraphContainer);
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+export default withRouter(
+  connect(mapStateToProps, { getQuery })(GraphContainer)
+);
 
 const FilterHideButton = styled.button`
   padding: 8px 5px;

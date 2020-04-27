@@ -8,11 +8,17 @@ import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
 
 import { getQuery } from "../redux/actions/queriesAction";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const GetData = props => {
   //LineGraph button
   const [open, setOpen] = useState(false);
+
+  const hereIsData = useSelector(state => state.queriesReducer);
+
+  const dispatch = useDispatch();
+
+  console.log(hereIsData, "here is data");
 
   const buttonHandle = e => {
     setOpen(!open);
@@ -139,7 +145,7 @@ const GetData = props => {
   });
 
   useEffect(() => {
-    props.getQuery(data);
+    dispatch(getQuery(data));
   }, [data]);
 
   console.log("data", data);
@@ -194,10 +200,11 @@ const GetData = props => {
   };
 
   //console.log("graph184");
+  //needs to know to rerender (upate or useEffect)
+  // is added to redux state but is not triggering another rerender
   return (
     <>
       <LineGraphButton
-        data={data}
         chartData={chartData}
         filters={filters}
         queryType={queryType}
@@ -210,10 +217,4 @@ const GetData = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    ...state
-  };
-};
-
-export default connect(mapStateToProps, { getQuery })(GetData);
+export default GetData;

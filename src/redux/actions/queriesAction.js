@@ -1,14 +1,30 @@
 export const QUERIES = "QUERIES";
 export const LOADQUERY = "LOADQUERY";
+export const ERROR = "ERROR";
 
 export const getQuery = data => dispatch => {
+  console.log(data, "this is the data in the actions");
   dispatch({ type: LOADQUERY });
   async function query(queryData) {
     try {
-      return dispatch({ type: QUERIES, payload: queryData });
+      console.log(queryData, "its hitting the try");
+      dispatch({ type: QUERIES, payload: queryData });
     } catch (err) {
-      throw Error(err);
+      dispatch({ type: ERROR, payload: "error" });
     }
   }
   query(data);
 };
+
+// export const getQuery = (data)=>{
+//   return dispatch =>{
+//     dispatch({type:LOADQUERY});
+//   async function query(queryData){
+//   try{
+//     dispatch({ type: QUERIES, payload: queryData });
+//   }catch(error){
+//    console.log(error);
+//    return error ;
+//   }}
+//   query(data)
+//   }}
