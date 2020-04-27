@@ -13,6 +13,7 @@ import ClipboardJS from "clipboard";
 import graphLabels from "./Components/graphLabels";
 
 import { getAvaliableOptions, getSelectedOption } from "./OptionFunctions";
+import { Footer } from "./Components/Footer";
 
 import { getQuery } from "../src/redux/actions/queriesAction";
 import { connect } from "react-redux";
@@ -88,6 +89,7 @@ const GraphContainer = props => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
