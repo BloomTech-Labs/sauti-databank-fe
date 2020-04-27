@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import LineGraph from "./LineGraph";
 import Graph from "./Graph";
 
@@ -15,17 +15,11 @@ const LineGraphButton = props => {
     setOpen
   } = props;
   const graphItems = filters[1].selectedTableColumnName !== "";
-  console.log("LINEGRAPHBUTTON DATA PROP", props.data);
-  // const buttonHandle = e => {
-  //   setOpen(!open);
-  // };
 
   const data = useSelector(state => state.queriesReducer.dataInfo);
 
   const renderUpdate = () => {
-    console.log(open);
     if (open === true) {
-      console.log("display Line Graph");
       return (
         <>
           <LineGraph
@@ -36,17 +30,12 @@ const LineGraphButton = props => {
         </>
       );
     } else {
-      console.log(`renderUpdate`, open);
       return <button onClick={() => setOpen(!open)}>Display Line Graph</button>;
     }
   };
 
-  console.log(graphItems);
-
   const renderGraph = () => {
-    console.log(graphItems);
     if (graphItems === true && open === false) {
-      console.log("true");
       return (
         <Graph
           data={chartData.percentageData}
@@ -59,7 +48,6 @@ const LineGraphButton = props => {
         />
       );
     } else if (graphItems === false && open === false) {
-      console.log("false");
       return (
         <Graph
           data={chartData.percentageData}
@@ -75,9 +63,7 @@ const LineGraphButton = props => {
       return null;
     }
   };
-  console.log(`renderGraph`, renderGraph());
 
-  //console.log(sdata.sessionsData);
   if (data.sessionsData) {
     return (
       <>
