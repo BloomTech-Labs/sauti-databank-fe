@@ -10,13 +10,14 @@ import {
 
 const useStyles = makeStyles({
   root: {
-    width: 600
+    width: 600,
+    marginLeft: "5%"
+  },
+  rangeSlider: {
+    fontSize: "2rem",
+    paddingBottom: "2%"
   }
 });
-
-// function valuetext(range) {
-//   return `${range}°C`;
-// }
 
 //Data loads value is 0 - totalRangePeriods, makes length of slider
 //value should always be based on total length of time period being used.
@@ -37,6 +38,7 @@ export default function RangeSlider({
 
   //all options of time period being used
   let rangeOptions = timeInUsePeriodsArray(timeInUse);
+  const max = rangeOptions.length;
 
   const handleChange = (event, newValue) => {
     setRange([rangeOptions[value[0]], rangeOptions[value[1] - 1]]);
@@ -50,16 +52,15 @@ export default function RangeSlider({
 
   return (
     <div className={classes.root}>
-      <Typography id="range-slider" gutterBottom>
-        <p>{`${range[0]} - ${range[1]}`}</p>
-      </Typography>
+      <div className={classes.rangeSlider}>{`${range[0]} - ${range[1]}`}</div>
       <Slider
         value={value}
         onChange={handleChange}
         onClick={onAfterChange}
-        valueLabelDisplay="auto"
         aria-labelledby="range-slider"
-        //  getAriaValueText={valuetext}
+        marks
+        min={0}
+        max={max}
       />
     </div>
   );
