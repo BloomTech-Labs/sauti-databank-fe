@@ -28,15 +28,15 @@ const DateSlider = ({
     <>
       <div id="slider">
         <div>
-          <h2>Selected Range</h2>
-          <p>{`${range[0]} - ${range[1]}`}</p>
+          {/* <h2>Selected Range</h2>
+          <p>{`${range[0]} - ${range[1]}`}</p> */}
         </div>
-        <SliderDisplay
+        {/* <SliderDisplay
           totalRangePeriods={totalRangePeriods}
           timeInUse={timeInUse}
           onChange={onChange}
           onAfterChange={onAfterChange}
-        />
+        /> */}
         <Slider2
           totalRangePeriods={totalRangePeriods}
           range={range}
