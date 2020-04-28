@@ -92,7 +92,7 @@ const LineGraphButton = props => {
     return (
       <>
         <p>No Line Graph Available</p>
-
+        <p>Line Graph not Available with 'Key Demographics' Data Series</p>
         <div className="graph-titles-container">
           <div className="graph-title-diplay">
             <h1 className="graph-title">Data Series</h1>
