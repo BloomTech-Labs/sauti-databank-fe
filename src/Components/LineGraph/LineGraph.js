@@ -228,9 +228,10 @@ const LineGraph = ({ filter0, buttonHandle, data }) => {
       allCombined[i].date !== allCombined[i + 1].date
     ) {
       updated.push(allCombined[i]);
+    } else if (i + 1 === allCombined.length) {
+      updated.push(allCombined[i]);
     }
   }
-
   //Update Yearly
   let updatedYearly = [];
   // let update7 = [];
@@ -239,6 +240,8 @@ const LineGraph = ({ filter0, buttonHandle, data }) => {
       i + 1 < allCombinedYears.length &&
       allCombinedYears[i].date !== allCombinedYears[i + 1].date
     ) {
+      updatedYearly.push(allCombinedYears[i]);
+    } else if (i + 1 === allCombinedYears.length) {
       updatedYearly.push(allCombinedYears[i]);
     }
   }
@@ -378,6 +381,8 @@ const LineGraph = ({ filter0, buttonHandle, data }) => {
       i + 1 < allCombinedQtr.length &&
       allCombinedQtr[i].date !== allCombinedQtr[i + 1].date
     ) {
+      updatedQtr.push(allCombinedQtr[i]);
+    } else if (i + 1 === allCombinedQtr.length) {
       updatedQtr.push(allCombinedQtr[i]);
     }
   }
