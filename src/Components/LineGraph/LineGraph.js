@@ -26,7 +26,7 @@ import { getRangePeriods } from "../LineGraphHelpers/Range";
 //top 7 should be checked
 //y-axis recalculate 100 based upon what is checked
 
-const LineGraph = ({ filter0, buttonHandle, data }) => {
+const LineGraph = ({ filter0, buttonBar, data }) => {
   //const data = useSelector(state => state.queriesReducer.dataInfo);
   const lineArray = data.sessionsData;
 
@@ -478,7 +478,7 @@ const LineGraph = ({ filter0, buttonHandle, data }) => {
 
   return (
     <>
-      <button onClick={buttonHandle}>Display Bar Chart</button>
+      <button onClick={buttonBar}>Display Bar Chart</button>
       <div className="toggleDateContainer">
         <p
           className={time === month100 ? "monthBtnOn" : "monthBtnOff"}
