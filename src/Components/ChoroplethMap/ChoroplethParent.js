@@ -7,9 +7,9 @@ function ChoroplethParent() {
   return (
     <>
       <React.Fragment>
-        <h2>World Map with d3-geo</h2>
+        <h2>Sauti Map</h2>
         <AfricaMap data={data} property={property} />
-        <h2>Select property to highlight</h2>
+        <h2>Select Country</h2>
         <select
           value={property}
           onChange={event => setProperty(event.target.value)}
