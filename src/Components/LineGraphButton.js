@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import LineGraph from "./LineGraph/LineGraph";
 import Graph from "./Graph";
-import ChoroMapData from "../Components/ChoroplethMap/ChoroMapData";
+import ChoroplethParent from "../Components/ChoroplethMap/ChoroplethParent";
+
 import "./scss/lineGraphButton.scss";
 // import { useSelector } from "react-redux";
 
@@ -65,12 +66,14 @@ const LineGraphButton = props => {
     if (open === "choropleth") {
       return (
         <>
-          <ChoroMapData
-            filter0={filters[0]}
-            buttonBar={buttonBar}
-            buttonLine={buttonLine}
-            buttonDotMap={buttonDotMap}
-            data={data}
+          <ChoroplethParent
+            // filter0={filters[0]}
+            // buttonBar={buttonBar}
+            // buttonLine={buttonLine}
+            // buttonDotMap={buttonDotMap}
+            // data={data}
+            width={900}
+            height={500}
           />
         </>
       );
