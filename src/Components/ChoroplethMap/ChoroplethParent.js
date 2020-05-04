@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import AfricaMap from "./AfricaMap";
 import data from "./africa.json";
+import { choroplethDataParse } from "./choroplethDataParse";
 
-function ChoroplethParent() {
+function ChoroplethParent({ gqlData }) {
+  console.log(`gqlData`, gqlData);
+
+  choroplethDataParse(gqlData);
+
   const [property, setProperty] = useState("pop_est");
   return (
     <>

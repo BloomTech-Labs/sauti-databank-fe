@@ -8,7 +8,7 @@ import "./scss/lineGraphButton.scss";
 const LineGraphButton = props => {
   const { data, chartData, filters, queryType, open, setOpen } = props;
   const graphItems = filters[1].selectedTableColumnName !== "";
-
+  console.log(data);
   const buttonBar = e => {
     e.preventDefault();
     setOpen("bar");
@@ -48,7 +48,12 @@ const LineGraphButton = props => {
     if (open === "choropleth") {
       return (
         <>
-          <ChoroplethParent width={900} height={500} />
+          <ChoroplethParent
+            gqlData={data}
+            filters={filters}
+            width={900}
+            height={500}
+          />
         </>
       );
     } else {
