@@ -12,15 +12,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 const GetData = props => {
   //LineGraph button
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState("bar");
 
   useSelector(state => state.queriesReducer);
 
   const dispatch = useDispatch();
 
-  const buttonHandle = e => {
-    setOpen(!open);
-  };
+  // const buttonHandle = e => {
+  //   setOpen(!open);
+  // };
 
   let queryType = "tradersUsers";
   let QUERY;
@@ -191,7 +191,7 @@ const GetData = props => {
         filters={filters}
         queryType={queryType}
         makeFilterList={makeFilterList}
-        buttonHandle={buttonHandle}
+        // buttonHandle={buttonHandle}
         open={open}
         setOpen={setOpen}
         data={data}
