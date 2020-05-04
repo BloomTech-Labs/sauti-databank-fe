@@ -4,33 +4,15 @@ import Graph from "./Graph";
 import ChoroplethParent from "../Components/ChoroplethMap/ChoroplethParent";
 
 import "./scss/lineGraphButton.scss";
-// import { useSelector } from "react-redux";
 
 const LineGraphButton = props => {
-  const {
-    data,
-    chartData,
-    filters,
-    queryType,
-    makeFilterList,
-    // buttonHandle,
-    open,
-    setOpen
-  } = props;
+  const { data, chartData, filters, queryType, open, setOpen } = props;
   const graphItems = filters[1].selectedTableColumnName !== "";
-
-  // const data = useSelector(state => state.queriesReducer.dataInfo);
-  //const [open, setOpen] =useState("bar")
 
   const buttonBar = e => {
     e.preventDefault();
     setOpen("bar");
     renderBar();
-  };
-
-  const buttonLine = e => {
-    e.preventDefault();
-    setOpen("line");
   };
 
   const buttonChoroMap = e => {
@@ -66,15 +48,7 @@ const LineGraphButton = props => {
     if (open === "choropleth") {
       return (
         <>
-          <ChoroplethParent
-            // filter0={filters[0]}
-            // buttonBar={buttonBar}
-            // buttonLine={buttonLine}
-            // buttonDotMap={buttonDotMap}
-            // data={data}
-            width={900}
-            height={500}
-          />
+          <ChoroplethParent width={900} height={500} />
         </>
       );
     } else {
@@ -91,13 +65,6 @@ const LineGraphButton = props => {
       return (
         <>
           <h1>Dot Map</h1>
-          {/* <ChoroMapData
-            filter0={filters[0]}
-            buttonBar={buttonBar}
-            buttonLine={buttonLine}
-            buttonDotMap={buttonDotMap}
-            data={data}
-          /> */}
         </>
       );
     } else {

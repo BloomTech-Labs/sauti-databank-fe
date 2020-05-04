@@ -2,12 +2,8 @@ import React, { useRef, useEffect, useState } from "react";
 import { select, geoPath, geoOrthographic, min, max, scaleLinear } from "d3";
 import useResizeObserver from "./useResizeObserver";
 import "../scss/choropleth.scss";
-/**
- * Component that renders a map of Germany.
- */
 
 function GeoChart({ data, property }) {
-  console.log(data.features);
   //use select from d3
   //useRef to access DOM element and pass to D3
   const svgRef = useRef();
@@ -22,7 +18,6 @@ function GeoChart({ data, property }) {
     //find min and max of filter selected
     const minProp = min(data.features, feature => feature.properties[property]);
     const maxProp = max(data.features, feature => feature.properties[property]);
-    console.log(minProp, maxProp);
     //map country to color based on scale
     const colorScale = scaleLinear()
       .domain([minProp, maxProp])
@@ -32,7 +27,6 @@ function GeoChart({ data, property }) {
     // but fall back to getBoundingClientRect, if no dimensions yet.
     const { width, height } =
       dimensions || wrapperRef.current.getBoundingClientRect();
-    console.log(`wrapperRef`, wrapperRef);
 
     // projects geo-coordinates on a 2D plane
     //https://github.com/d3/d3-geo
