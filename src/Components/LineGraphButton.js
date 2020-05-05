@@ -58,7 +58,7 @@ const LineGraphButton = props => {
       );
     } else {
       return (
-        <button onClick={() => setOpen("choropleth")}>
+        <button className="choro-map" onClick={() => setOpen("choropleth")}>
           Display ChoroplethMap
         </button>
       );
@@ -73,7 +73,11 @@ const LineGraphButton = props => {
         </>
       );
     } else {
-      return <button onClick={() => setOpen("dot")}>Display Dot map</button>;
+      return (
+        <button className="bubble-map" onClick={() => setOpen("dot")}>
+          Display Dot map
+        </button>
+      );
     }
   };
 

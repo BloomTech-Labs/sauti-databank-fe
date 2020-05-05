@@ -4,6 +4,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -253,6 +256,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 5,
@@ -354,6 +360,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -469,6 +478,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 4,
@@ -585,6 +597,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 4,
@@ -723,6 +738,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -845,6 +863,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -982,6 +1003,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 4,
@@ -1107,6 +1131,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 2,
@@ -1305,6 +1332,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 5,
@@ -1396,6 +1426,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -1534,6 +1567,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 2,
@@ -1652,6 +1688,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 4,
@@ -1756,6 +1795,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 2,
@@ -1891,6 +1933,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 4,
@@ -1998,6 +2043,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -2099,6 +2147,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -2245,6 +2296,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 6,
@@ -2337,6 +2391,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 6,
@@ -2432,6 +2489,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 4,
@@ -2631,6 +2691,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 4,
@@ -2734,6 +2797,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -2866,6 +2932,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 6,
@@ -2954,6 +3023,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -3094,6 +3166,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -3219,6 +3294,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -3371,6 +3449,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -3524,6 +3605,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -3639,6 +3723,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 6,
@@ -3743,6 +3830,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -3877,6 +3967,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -4089,6 +4182,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 2,
@@ -4223,6 +4319,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 7,
@@ -4327,6 +4426,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -4482,6 +4584,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -4621,6 +4726,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -4741,6 +4849,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 4,
@@ -4839,6 +4950,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 5,
@@ -4939,6 +5053,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 6,
@@ -5051,6 +5168,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 4,
@@ -5138,6 +5258,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -5272,6 +5395,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 6,
@@ -5367,6 +5493,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -5708,6 +5837,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 2,
@@ -5880,6 +6012,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -6017,6 +6152,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 0,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
