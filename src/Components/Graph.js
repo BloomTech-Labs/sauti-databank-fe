@@ -17,7 +17,23 @@ const Graph = props => {
     sampleSize,
     tableName
   } = props;
-
+  console.log(
+    "Bar Chart",
+    `data`,
+    data,
+    `csvData`,
+    csvData,
+    `filters`,
+    filters,
+    `keys`,
+    keys,
+    `groupMode`,
+    groupMode,
+    `sampleSize`,
+    sampleSize,
+    `tableName`,
+    tableName
+  );
   const token = getToken();
   let tier;
   if (token) {

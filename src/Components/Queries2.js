@@ -150,47 +150,51 @@ const GetData = props => {
     );
   }
 
-  const chartData = dataParse(
-    filters[0].selectedTableColumnName,
-    data[`${queryType}`],
-    filters[1].selectedTableColumnName,
+  //   const chartData = dataParse(
+  //     filters[0].selectedTableColumnName,
+  //     data[`${queryType}`],
+  //     filters[1].selectedTableColumnName,
 
-    filterBoxStartDate,
+  //     filterBoxStartDate,
 
-    filterBoxEndDate,
-    filters[2].selectedTableColumnName,
+  //     filterBoxEndDate,
+  //     filters[2].selectedTableColumnName,
 
-    filters[0].selectedTable,
-    filters[1].selectedTable
-  );
-  if (chartData === 1) {
-    return (
-      <div>
-        <h1>Try a different search</h1>
-      </div>
-    );
-  }
+  //     filters[0].selectedTable,
+  //     filters[1].selectedTable
+  //   );
+  //  console.log('chartdata', chartData)
 
-  const makeFilterList = () => {
-    return Object.keys(filters)
-      .filter(filterId => filterId >= 2)
-      .map(filterId => {
-        return (
-          <p>
-            {filters[filterId].selectedCategory} -{" "}
-            {getSelectedOption(filters, filterId)}
-          </p>
-        );
-      });
-  };
+  //   if (chartData === 1) {
+  //     return (
+  //       <div>
+  //         <h1>Try a different search</h1>
+  //       </div>
+  //     );
+  //   }
+
+  //   const makeFilterList = () => {
+  //     return Object.keys(filters)
+  //       .filter(filterId => filterId >= 2)
+  //       .map(filterId => {
+  //         return (
+  //           <p>
+  //             {filters[filterId].selectedCategory} -{" "}
+  //             {getSelectedOption(filters, filterId)}
+  //           </p>
+  //         );
+  //       });
+  //   };
 
   return (
     <>
       <LineGraphButton
-        chartData={chartData}
+        //chartData={chartData}
         filters={filters}
         queryType={queryType}
-        makeFilterList={makeFilterList}
+        filterBoxStartDate={filterBoxStartDate}
+        filterBoxEndDate={filterBoxEndDate}
+        // makeFilterList={makeFilterList}
         // buttonHandle={buttonHandle}
         open={open}
         setOpen={setOpen}

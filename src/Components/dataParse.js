@@ -4,6 +4,7 @@ import removeMultiple from "../DataParseHelpers/removeMultiple";
 import getMostRequested from "../DataParseHelpers/getMostRequested";
 import setCrossedItems from "../DataParseHelpers/setCrossedItems";
 import setItem from "../DataParseHelpers/setItem";
+import { filterByDate } from "../DataParseHelpers/filterByDate";
 
 const dataParse = (
   indexBy,
@@ -16,13 +17,23 @@ const dataParse = (
   crossFilterQuery
 ) => {
   try {
+    //  console.log('DataParse 7', indexBy,
+    //  data,
+    // crossFilter,
+    // startDate,
+    // endDate,
+    // additionalFilter,
+    // queryType,
+    // crossFilterQuery)
     let dataStructure = [];
     //when single filtering "Most Requested" graph
     if (queryType === "Sessions" && crossFilter === "") {
       data = filterByDate(data, startDate, endDate);
+      // console.log(`filterByDate`, data)
       data = removeMultiple(data);
+      // console.log(`removemultiple`, data)
       dataStructure = getIndex(data, indexBy);
-
+      //console.log(`Data`, data, `dataStructure`,dataStructure, `indexBy`, indexBy)
       return getMostRequested(data, dataStructure, indexBy);
     }
     //when cross-filtering "Most Requested" as index
@@ -73,16 +84,18 @@ const dataParse = (
   }
 };
 
-const filterByDate = (data, startDate, endDate) => {
-  startDate = startDate.replace(/-/g, "");
-  endDate = endDate.replace(/-/g, "");
-
-  const filteredData = data.filter(obj => {
-    const objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
-    return objectDate > startDate && objectDate < endDate;
-  });
-
-  return filteredData;
-};
+// const filterByDate = (data, startDate, endDate) => {
+//   //console.log(`filterByDate`, data, startDate, endDate)
+//   startDate = startDate.replace(/-/g, "");
+//   endDate = endDate.replace(/-/g, "");
+//   console.log(`filterByDate data`, data, startDate, endDate)
+//   const filteredData = data.filter(obj => {
+//     const objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
+//     //console.log(`objectDate`, objectDate)
+//     return objectDate > startDate && objectDate < endDate;
+//   });
+//   console.log(`filteredData`, filteredData)
+//   return filteredData;
+// };
 
 export default dataParse;
