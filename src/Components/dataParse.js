@@ -17,17 +17,32 @@ const dataParse = (
   crossFilterQuery
 ) => {
   try {
-    //  console.log('DataParse 7', indexBy,
-    //  data,
-    // crossFilter,
-    // startDate,
-    // endDate,
-    // additionalFilter,
-    // queryType,
-    // crossFilterQuery)
+    console.log(
+      "DataParse 7",
+      indexBy,
+      data,
+      crossFilter,
+      startDate,
+      endDate,
+      additionalFilter,
+      queryType,
+      crossFilterQuery
+    );
     let dataStructure = [];
     //when single filtering "Most Requested" graph
+    console.log(indexBy);
+    let newArray = [];
     if (queryType === "Sessions" && crossFilter === "") {
+      for (let i = 0; i < data.length; i++) {
+        let obj = data[i];
+
+        if (obj[indexBy] !== null) {
+          newArray.push(obj);
+        }
+      }
+      console.log(newArray);
+      // data = data.filter(e => console.log(e.indexBy) )
+      // console.log(data)
       data = filterByDate(data, startDate, endDate);
       // console.log(`filterByDate`, data)
       data = removeMultiple(data);

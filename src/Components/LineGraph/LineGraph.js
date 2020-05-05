@@ -27,6 +27,7 @@ import { getRangePeriods } from "../LineGraphHelpers/Range";
 //y-axis recalculate 100 based upon what is checked
 
 const LineGraph = ({ filter0, buttonBar, data }) => {
+  console.log(data);
   //const data = useSelector(state => state.queriesReducer.dataInfo);
   const lineArray = data.sessionsData;
 
@@ -46,7 +47,7 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
       lineNonNull.push(lineArray[i]);
     }
   }
-
+  console.log(`lineNonNull`, lineNonNull);
   // 2. convert date to year-month
   lineNonNull.map(item => {
     item["created_date"] = item.created_date.substring(0, 7);
