@@ -161,6 +161,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 0,
+        "finalDestinationCountry": 3,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 6,
@@ -2512,6 +2515,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 51.3,
+        "finalDestinationCountry": 35,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 2,
@@ -3991,6 +3997,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 30.2,
+        "finalDestinationCountry": 21,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -5465,6 +5474,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 1.4,
+        "finalDestinationCountry": 5,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,
@@ -5590,6 +5602,9 @@
     {
       "type": "Feature",
       "properties": {
+        "countryOfResidence": 17.1,
+        "finalDestinationCountry": 33,
+        "finalDestinationMarket": 0,
         "scalerank": 1,
         "featurecla": "Admin-0 country",
         "labelrank": 3,

@@ -8,7 +8,7 @@ function ChoroplethParent({ gqlData }) {
 
   choroplethDataParse(gqlData);
 
-  const [property, setProperty] = useState("pop_est");
+  const [property, setProperty] = useState("countryOfResidence");
   return (
     <>
       <React.Fragment>
@@ -19,9 +19,13 @@ function ChoroplethParent({ gqlData }) {
           value={property}
           onChange={event => setProperty(event.target.value)}
         >
-          <option value="pop_est">Population</option>
-          <option value="name_len">Name length</option>
-          <option value="gdp_md_est">GDP</option>
+          <option value="countryOfResidence">Country of Residence</option>
+          <option value="finalDestinationCountry">
+            Final Destination Country
+          </option>
+          <option value="finalDestinationMarket">
+            Final Destination Market
+          </option>
         </select>
       </React.Fragment>
     </>
