@@ -131,18 +131,19 @@ const GetData = props => {
   // useEffect(()=>{
   // (queryType="sessionsData") ? seperateMultiples(data, queryType) : console.log("no data")
 
-  if (data !== undefined && Object.keys(data) === "sessionsData") {
-    console.log("send to seperateMultiples");
-    seperateMultiples(data, queryType);
-  } else {
-    console.log("no data");
-  }
+  // if (data !== undefined && Object.keys(data)[0] === "sessionsData") {
+  //    // console.log("====AFTER DEFINED=====",Object.keys(data))
+  //   // console.log("send to seperateMultiples");
+  //   seperateMultiples(data, queryType);
+  // } else {
+  //   // console.log("no data");
+  // }
 
   //  data && Object.keys(data) === "sessionsData"
   //   ? filterByDate(data, filterBoxStartDate, filterBoxEndDate)
   //  : console.log("no data");
   // }, [data, filterBoxStartDate, filterBoxEndDate])
-  console.log(data);
+  // console.log(data);
 
   // useEffect(() => {
   //   dispatch(getQuery(data));s

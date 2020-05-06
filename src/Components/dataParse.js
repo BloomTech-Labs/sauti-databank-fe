@@ -29,7 +29,7 @@ const dataParse = (
   );
   let dataStructure = [];
   //when single filtering "Most Requested" graph
-  console.log(indexBy);
+  // console.log(indexBy);
   //remove multiples should happen prior to filterByDate
   //multiples should also be given a date
 
@@ -67,7 +67,7 @@ const dataParse = (
       });
     }
     if (crossFilter !== "") {
-      data = removeMultiple(data);
+      // data = removeMultiple(data);
 
       return setCrossedItems(
         data,
@@ -80,7 +80,7 @@ const dataParse = (
       );
     } else {
       //when single filtering with index that is not "Most Requested"
-      data = removeMultiple(data);
+      // data = removeMultiple(data);
 
       // console.log(`dataparse after removeMultiple`, data);
       return setItem(data, dataStructure, indexBy);
