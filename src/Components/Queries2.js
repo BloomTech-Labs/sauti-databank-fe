@@ -136,9 +136,9 @@ const GetData = props => {
   // data = removeNulls(data)
   // console.log(data)
 
-  useEffect(() => {
-    dispatch(getQuery(data));
-  }, [data]);
+  // useEffect(() => {
+  //   dispatch(getQuery(data));
+  // }, [data]);
 
   if (loading) {
     return (
