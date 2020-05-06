@@ -3,9 +3,9 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
 import Loader from "react-loader-spinner";
-import dataParse from "./dataParse";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
+import { seperateMultiples } from "./queriesParcer";
 
 import { getQuery } from "../redux/actions/queriesAction";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,13 +14,7 @@ const GetData = props => {
   //LineGraph button
   const [open, setOpen] = useState("bar");
 
-  useSelector(state => state.queriesReducer);
-
   const dispatch = useDispatch();
-
-  // const buttonHandle = e => {
-  //   setOpen(!open);
-  // };
 
   let queryType = "tradersUsers";
   let QUERY;
@@ -132,9 +126,19 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
-  // useEffect(() => {
-  //   dispatch(getQuery(data));
-  // }, [data]);
+  // data ? console.log(filters[0]) : console.log("no data")
+
+  // (queryType="sessionsData") ? seperateMultiples(data, queryType) : console.log("no data")
+  data && queryType === "sessionsData"
+    ? seperateMultiples(data, queryType)
+    : console.log("no data");
+
+  // data = removeNulls(data)
+  // console.log(data)
+
+  useEffect(() => {
+    dispatch(getQuery(data));
+  }, [data]);
 
   if (loading) {
     return (
@@ -188,7 +192,7 @@ const GetData = props => {
 
   return (
     <>
-      <LineGraphButton
+      {/* <LineGraphButton
         //chartData={chartData}
         filters={filters}
         queryType={queryType}
@@ -199,7 +203,7 @@ const GetData = props => {
         open={open}
         setOpen={setOpen}
         data={data}
-      />
+      /> */}
     </>
   );
 };

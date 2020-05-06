@@ -16,7 +16,7 @@ const dataParse = (
   queryType,
   crossFilterQuery
 ) => {
-  try {
+  
     console.log(
       "DataParse 7",
       indexBy,
@@ -31,21 +31,24 @@ const dataParse = (
     let dataStructure = [];
     //when single filtering "Most Requested" graph
     console.log(indexBy);
+    //remove multiples should happen prior to filterByDate
+    //multiples should also be given a date
+    
     let newArray = [];
     if (queryType === "Sessions" && crossFilter === "") {
-      for (let i = 0; i < data.length; i++) {
-        let obj = data[i];
+      // for (let i = 0; i < data.length; i++) {
+      //   let obj = data[i];
 
-        if (obj[indexBy] !== null) {
-          newArray.push(obj);
-        }
-      }
-      console.log(newArray);
+      //   if (obj[indexBy] !== null) {
+      //     newArray.push(obj);
+      //   }
+      // }
+      // console.log(newArray);
       // data = data.filter(e => console.log(e.indexBy) )
       // console.log(data)
-      data = filterByDate(data, startDate, endDate);
+     // data = filterByDate(data, startDate, endDate);
       // console.log(`filterByDate`, data)
-      data = removeMultiple(data);
+     // data = removeMultiple(data);
       // console.log(`removemultiple`, data)
       dataStructure = getIndex(data, indexBy);
       //console.log(`Data`, data, `dataStructure`,dataStructure, `indexBy`, indexBy)
@@ -93,12 +96,9 @@ const dataParse = (
         // console.log(`dataparse after removeMultiple`, data);
         return setItem(data, dataStructure, indexBy);
       }
-    }
-  } catch (error) {
-    return 1;
-  }
+ 
 };
-
+}
 // const filterByDate = (data, startDate, endDate) => {
 //   //console.log(`filterByDate`, data, startDate, endDate)
 //   startDate = startDate.replace(/-/g, "");
