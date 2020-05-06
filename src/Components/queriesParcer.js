@@ -1,25 +1,30 @@
-function seperateMultiples(data, queryType) {
-  console.log(data);
-  console.log(queryType);
-  let newData = data[queryType];
-  let keys = Object.keys(newData[0]);
+function seperateMultiples(data) {
+  let allData = data["sessionsData"];
+  let finalData = data["sessionsData"];
+  console.log(allData);
+  let keys = Object.keys(allData[0]);
   console.log(keys);
-  let tempData = newData.map(item => item);
-  console.log(tempData);
   keys.forEach(key => {
-    tempData.map(obj => {
+    allData.map(obj => {
+      //let datePair = {'created_date':obj['created_date']}
+      //console.log(datePair)
       if (obj[key] && obj[key].includes(",")) {
-        console.log(obj[key]);
-        console.log(obj);
+        //console.log(obj[key]);
+        //puts into an array
         let split = obj[key].split(",");
-        obj[key] = split[0];
-        split.splice(1).forEach(value => {
-          // console.log({[key]:value})
-          newData.push({ [key]: value });
+        // console.log(split);
+        //remove first
+        split.shift();
+        //keep unique items
+        let unique = [...new Set(split)];
+        // console.log(unique);
+        // obj[key] = split[0];
+        unique.forEach(value => {
+          finalData.push({ created_date: obj["created_date"], [key]: value });
         });
       }
     });
   });
-  console.log(tempData);
+  console.log(finalData);
 }
 export { seperateMultiples };
