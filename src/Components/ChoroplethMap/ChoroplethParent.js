@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AfricaMap from "./AfricaMap";
-import data from "./africa.json";
+import data from "./africaData2.json";
 import { choroplethDataParse } from "./choroplethDataParse";
 
 function ChoroplethParent({ gqlData }) {

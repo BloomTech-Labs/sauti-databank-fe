@@ -39,7 +39,9 @@ const LineGraphButton = props => {
       );
     } else {
       return (
-        <button onClick={() => setOpen("line")}>Display Line Graph</button>
+        <button className="line-btn" onClick={() => setOpen("line")}>
+          Display Line Graph
+        </button>
       );
     }
   };
@@ -111,7 +113,11 @@ const LineGraphButton = props => {
         </>
       );
     } else if (open !== "bar") {
-      return <button onClick={() => setOpen("bar")}>Display Bar Chart</button>;
+      return (
+        <button className="bar-btn" onClick={() => setOpen("bar")}>
+          Display Bar Chart
+        </button>
+      );
     }
   };
 

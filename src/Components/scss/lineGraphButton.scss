@@ -2,6 +2,48 @@
   display: none;
 }
 
+.line-btn {
+  font-family: Montserrat;
+  margin: 2vw;
+  height: 3rem;
+  width: 20rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #ffffff;
+  border: 1px solid #eb5e52;
+  background: #eb5e52;
+  text-decoration: none;
+  transition: 0.5s ease;
+  border-radius: 5px;
+  &:hover {
+    border: 1px solid #2c2e32;
+    color: #eb5e52;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+}
+
+.bar-btn {
+  font-family: Montserrat;
+  margin: 2vw;
+  height: 3rem;
+  width: 20rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #ffffff;
+  border: 1px solid #eb5e52;
+  background: #eb5e52;
+  text-decoration: none;
+  transition: 0.5s ease;
+  border-radius: 5px;
+  &:hover {
+    border: 1px solid #2c2e32;
+    color: #eb5e52;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+}
+
 .choro-map {
   font-family: Montserrat;
   margin: 2vw;

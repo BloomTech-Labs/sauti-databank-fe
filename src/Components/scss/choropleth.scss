@@ -13,4 +13,15 @@
     stroke-width: 1px;
     cursor: pointer;
   }
+  svg .label {
+    font-family: "Roboto", sans-serif;
+  }
+}
+
+h2 {
+  margin-bottom: 5rem;
+  border: 1px solid #2c2e32;
+  color: #ffffff;
+  background-color: #2c2e32;
+  padding: 1%;
 }

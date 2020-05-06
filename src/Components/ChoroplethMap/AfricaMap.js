@@ -76,8 +76,8 @@ function GeoChart({ data, property }) {
             feature.properties[property].toLocaleString()
       )
       //where on the screen to place the text
-      .attr("x", 10)
-      .attr("y", 100);
+      .attr("x", 450)
+      .attr("y", 250);
   }, [data, dimensions, property, selectedCountry]);
 
   return (
