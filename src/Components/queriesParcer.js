@@ -29,4 +29,5 @@ function seperateMultiples(data, queryType) {
   });
   console.log(finalData);
 }
+
 export { seperateMultiples };

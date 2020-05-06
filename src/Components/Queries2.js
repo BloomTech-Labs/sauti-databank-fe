@@ -6,7 +6,7 @@ import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
 import { seperateMultiples } from "./queriesParcer";
-import { filterByDate } from "../DataParseHelpers/filterByDate";
+//import { filterByDate } from "../DataParseHelpers/filterByDate";
 
 import { getQuery } from "../redux/actions/queriesAction";
 import { useSelector, useDispatch } from "react-redux";
@@ -131,20 +131,22 @@ const GetData = props => {
   // useEffect(()=>{
   // (queryType="sessionsData") ? seperateMultiples(data, queryType) : console.log("no data")
 
-  data && Object.keys(data) === "sessionsData"
-    ? seperateMultiples(data, queryType)
-    : console.log("no data");
+  if (data !== undefined && Object.keys(data) === "sessionsData") {
+    console.log("send to seperateMultiples");
+    seperateMultiples(data, queryType);
+  } else {
+    console.log("no data");
+  }
 
-  console.log(filterBoxStartDate, filterBoxEndDate);
-
-  // data && Object.keys(data) === "sessionsData"
+  //  data && Object.keys(data) === "sessionsData"
   //   ? filterByDate(data, filterBoxStartDate, filterBoxEndDate)
-  //   : console.log("no data");
+  //  : console.log("no data");
   // }, [data, filterBoxStartDate, filterBoxEndDate])
   console.log(data);
 
   // useEffect(() => {
-  //   dispatch(getQuery(data));
+  //   dispatch(getQuery(data));s
+
   // }, [data]);
 
   if (loading) {

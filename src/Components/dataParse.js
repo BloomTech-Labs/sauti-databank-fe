@@ -35,12 +35,10 @@ const dataParse = (
 
   let newArray = [];
   if (queryType === "Sessions" && crossFilter === "") {
-    // data = data.filter(e => console.log(e.indexBy));
-
-    data = filterByDate(data, startDate, endDate);
+    //filter by date
+    //data = filterByDate(data, startDate, endDate);
     // console.log(`filterByDate`, data);
-    //data = removeMultiple(data);
-    //console.log(`removemultiple`, data);
+
     dataStructure = getIndex(data, indexBy);
     //console.log(`Data`, data, `dataStructure`,dataStructure, `indexBy`, indexBy)
     return getMostRequested(data, dataStructure, indexBy);
