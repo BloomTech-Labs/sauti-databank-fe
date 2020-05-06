@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
 import { seperateMultiples } from "./queriesParcer";
+import { filterByDate } from "../DataParseHelpers/filterByDate";
 
 import { getQuery } from "../redux/actions/queriesAction";
 import { useSelector, useDispatch } from "react-redux";
@@ -127,14 +128,20 @@ const GetData = props => {
   });
 
   // data ? console.log(filters[0]) : console.log("no data")
-
+  // useEffect(()=>{
   // (queryType="sessionsData") ? seperateMultiples(data, queryType) : console.log("no data")
-  data && queryType === "sessionsData"
+
+  data && Object.keys(data) === "sessionsData"
     ? seperateMultiples(data, queryType)
     : console.log("no data");
 
-  // data = removeNulls(data)
-  // console.log(data)
+  console.log(filterBoxStartDate, filterBoxEndDate);
+
+  // data && Object.keys(data) === "sessionsData"
+  //   ? filterByDate(data, filterBoxStartDate, filterBoxEndDate)
+  //   : console.log("no data");
+  // }, [data, filterBoxStartDate, filterBoxEndDate])
+  console.log(data);
 
   // useEffect(() => {
   //   dispatch(getQuery(data));
@@ -192,7 +199,7 @@ const GetData = props => {
 
   return (
     <>
-      {/* <LineGraphButton
+      <LineGraphButton
         //chartData={chartData}
         filters={filters}
         queryType={queryType}
@@ -203,7 +210,7 @@ const GetData = props => {
         open={open}
         setOpen={setOpen}
         data={data}
-      /> */}
+      />
     </>
   );
 };

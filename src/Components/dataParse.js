@@ -35,21 +35,21 @@ const dataParse = (
 
   let newArray = [];
   if (queryType === "Sessions" && crossFilter === "") {
-    data = data.filter(e => console.log(e.indexBy));
+    // data = data.filter(e => console.log(e.indexBy));
 
     data = filterByDate(data, startDate, endDate);
-    console.log(`filterByDate`, data);
-    data = removeMultiple(data);
-    console.log(`removemultiple`, data);
+    // console.log(`filterByDate`, data);
+    //data = removeMultiple(data);
+    //console.log(`removemultiple`, data);
     dataStructure = getIndex(data, indexBy);
     //console.log(`Data`, data, `dataStructure`,dataStructure, `indexBy`, indexBy)
     return getMostRequested(data, dataStructure, indexBy);
   }
   //when cross-filtering "Most Requested" as index
   else if (queryType === "Sessions" && crossFilter !== "") {
-    data = filterByDate(data, startDate, endDate);
+    // data = filterByDate(data, startDate, endDate);
 
-    data = removeMultiple(data);
+    // data = removeMultiple(data);
 
     dataStructure = getIndex(data, indexBy);
 
@@ -89,18 +89,5 @@ const dataParse = (
     }
   }
 };
-// const filterByDate = (data, startDate, endDate) => {
-//   //console.log(`filterByDate`, data, startDate, endDate)
-//   startDate = startDate.replace(/-/g, "");
-//   endDate = endDate.replace(/-/g, "");
-//   console.log(`filterByDate data`, data, startDate, endDate)
-//   const filteredData = data.filter(obj => {
-//     const objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
-//     //console.log(`objectDate`, objectDate)
-//     return objectDate > startDate && objectDate < endDate;
-//   });
-//   console.log(`filteredData`, filteredData)
-//   return filteredData;
-// };
 
 export default dataParse;

@@ -1,9 +1,11 @@
-function seperateMultiples(data) {
-  let allData = data["sessionsData"];
-  let finalData = data["sessionsData"];
+function seperateMultiples(data, queryType) {
+  console.log(queryType);
+  let allData = data[queryType];
+  let finalData = data[queryType];
+  console.log(data);
   console.log(allData);
   let keys = Object.keys(allData[0]);
-  console.log(keys);
+  console.log(Object.keys(allData));
   keys.forEach(key => {
     allData.map(obj => {
       //let datePair = {'created_date':obj['created_date']}
@@ -13,7 +15,7 @@ function seperateMultiples(data) {
         //puts into an array
         let split = obj[key].split(",");
         // console.log(split);
-        //remove first
+        //remove first, because already included.
         split.shift();
         //keep unique items
         let unique = [...new Set(split)];
