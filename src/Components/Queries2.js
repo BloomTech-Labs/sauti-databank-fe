@@ -203,13 +203,10 @@ const GetData = props => {
   return (
     <>
       <LineGraphButton
-        //chartData={chartData}
         filters={filters}
         queryType={queryType}
         filterBoxStartDate={filterBoxStartDate}
         filterBoxEndDate={filterBoxEndDate}
-        // makeFilterList={makeFilterList}
-        // buttonHandle={buttonHandle}
         open={open}
         setOpen={setOpen}
         data={data}

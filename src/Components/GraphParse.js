@@ -1,6 +1,7 @@
 import React from "react";
 import dataParse from "./dataParse";
 import Graph from "./Graph";
+import { filterByDate } from "../DataParseHelpers/filterByDate";
 
 const GraphParse = ({
   data,
@@ -17,6 +18,11 @@ const GraphParse = ({
     filterBoxStartDate,
     filterBoxEndDate
   );
+
+  console.log("before filterByDate", data);
+  data = filterByDate(data, filterBoxStartDate, filterBoxEndDate);
+  console.log("afterFilterByDate", data);
+
   const chartData = dataParse(
     filters[0].selectedTableColumnName,
     data[`${queryType}`],
