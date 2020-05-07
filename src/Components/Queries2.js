@@ -127,10 +127,12 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
+  console.log("data before it goes into the filter", data);
+
   if (
     queryType === "sessionsData" &&
     filters[1].selectedCategory === "" &&
-    data
+    data.sessionsData
   ) {
     const nonNull = [];
     let values = data.sessionsData;
@@ -147,6 +149,8 @@ const GetData = props => {
 
     data = { sessionsData: nonNull };
   }
+
+  console.log("data after it comes out of the filter", data);
 
   // data ? console.log(filters[0]) : console.log("no data")
   // useEffect(()=>{
