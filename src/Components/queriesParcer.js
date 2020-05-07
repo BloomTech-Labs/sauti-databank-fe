@@ -27,7 +27,7 @@ function seperateMultiples(data, queryType) {
       }
     });
   });
-  console.log(finalData);
+  //console.log(finalData);
 }
 
 export { seperateMultiples };

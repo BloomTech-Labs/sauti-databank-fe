@@ -127,27 +127,14 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
-  // data ? console.log(filters[0]) : console.log("no data")
-  // useEffect(()=>{
-  // (queryType="sessionsData") ? seperateMultiples(data, queryType) : console.log("no data")
-
-  if (data !== undefined && Object.keys(data) === "sessionsData") {
-    console.log("send to seperateMultiples");
+  if (data !== undefined && Object.keys(data)[0] === "sessionsData") {
+    //  console.log("send to seperateMultiples");
     seperateMultiples(data, queryType);
   } else {
     console.log("no data");
   }
 
-  //  data && Object.keys(data) === "sessionsData"
-  //   ? filterByDate(data, filterBoxStartDate, filterBoxEndDate)
-  //  : console.log("no data");
-  // }, [data, filterBoxStartDate, filterBoxEndDate])
   console.log(data);
-
-  // useEffect(() => {
-  //   dispatch(getQuery(data));s
-
-  // }, [data]);
 
   if (loading) {
     return (
@@ -162,42 +149,6 @@ const GetData = props => {
       </div>
     );
   }
-
-  //   const chartData = dataParse(
-  //     filters[0].selectedTableColumnName,
-  //     data[`${queryType}`],
-  //     filters[1].selectedTableColumnName,
-
-  //     filterBoxStartDate,
-
-  //     filterBoxEndDate,
-  //     filters[2].selectedTableColumnName,
-
-  //     filters[0].selectedTable,
-  //     filters[1].selectedTable
-  //   );
-  //  console.log('chartdata', chartData)
-
-  //   if (chartData === 1) {
-  //     return (
-  //       <div>
-  //         <h1>Try a different search</h1>
-  //       </div>
-  //     );
-  //   }
-
-  //   const makeFilterList = () => {
-  //     return Object.keys(filters)
-  //       .filter(filterId => filterId >= 2)
-  //       .map(filterId => {
-  //         return (
-  //           <p>
-  //             {filters[filterId].selectedCategory} -{" "}
-  //             {getSelectedOption(filters, filterId)}
-  //           </p>
-  //         );
-  //       });
-  //   };
 
   return (
     <>
