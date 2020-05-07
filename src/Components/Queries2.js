@@ -127,6 +127,27 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
+  if (
+    queryType === "sessionsData" &&
+    filters[1].selectedCategory === "" &&
+    data
+  ) {
+    const nonNull = [];
+    let values = data.sessionsData;
+    const selectedTableColumnName = filters[0].selectedTableColumnName;
+
+    for (let i = 0; i < values.length; i++) {
+      if (
+        values[i][selectedTableColumnName] !== null &&
+        values[i][selectedTableColumnName] !== ""
+      ) {
+        nonNull.push(values[i]);
+      }
+    }
+
+    data = { sessionsData: nonNull };
+  }
+
   // data ? console.log(filters[0]) : console.log("no data")
   // useEffect(()=>{
   // (queryType="sessionsData") ? seperateMultiples(data, queryType) : console.log("no data")
