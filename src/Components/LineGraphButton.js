@@ -85,7 +85,7 @@ const LineGraphButton = props => {
     }
   };
 
-  if (data.sessionsData) {
+  if (data && data.sessionsData) {
     return (
       <>
         {renderBar()}

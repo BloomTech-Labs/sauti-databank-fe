@@ -129,26 +129,33 @@ const GetData = props => {
 
   console.log("data before it goes into the filter", data);
 
-  if (
-    queryType === "sessionsData" &&
-    filters[1].selectedCategory === "" &&
-    data.sessionsData
-  ) {
-    const nonNull = [];
-    let values = data.sessionsData;
-    const selectedTableColumnName = filters[0].selectedTableColumnName;
+  // let something1 = {}
 
-    for (let i = 0; i < values.length; i++) {
-      if (
-        values[i][selectedTableColumnName] !== null &&
-        values[i][selectedTableColumnName] !== ""
-      ) {
-        nonNull.push(values[i]);
-      }
-    }
+  // if (
+  //   queryType === "sessionsData" &&
+  //   filters[1].selectedCategory === "" &&
+  //   data &&
+  //   data.sessionsData
+  // ) {
+  //   const notNull = [];
+  //   let values = data.sessionsData;
+  //   const selectedTableColumnName = filters[0].selectedTableColumnName;
+  //   console.log("keyword2 data before the for loop", data)
+  //   for (let i = 0; i < values.length; i++) {
+  //     if (
+  //       values[i][selectedTableColumnName] !== null &&
+  //       values[i][selectedTableColumnName] !== ""
+  //     ) {
+  //       notNull.push(values[i]);
+  //     }
+  //   }
+  //   console.log("keyword2 data after the for loop", notNull)
+  //   something1 = { sessionsData: notNull };
+  //   console.log("keyword2 data after being assigned notNull", data)
+  // }
 
-    data = { sessionsData: nonNull };
-  }
+  // const something2 = something1
+  // console.log("keyword2 something2", something2)
 
   console.log("data after it comes out of the filter", data);
 
