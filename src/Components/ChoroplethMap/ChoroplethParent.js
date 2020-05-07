@@ -12,9 +12,9 @@ function ChoroplethParent({ gqlData }) {
   return (
     <>
       <React.Fragment>
-        <h2>Sauti Map</h2>
+        <h2 className="choro-parent-h2">Sauti Map</h2>
         <AfricaMap data={data} property={property} />
-        <h2>Select Country</h2>
+        <h2 className="choro-parent-h2">Select Country</h2>
         <select
           value={property}
           onChange={event => setProperty(event.target.value)}
