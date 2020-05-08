@@ -27,9 +27,10 @@ import { getRangePeriods } from "../LineGraphHelpers/Range";
 //y-axis recalculate 100 based upon what is checked
 
 const LineGraph = ({ filter0, buttonBar, data }) => {
-  console.log(data);
+  console.log("keyword data enters linegraph", data);
   //const data = useSelector(state => state.queriesReducer.dataInfo);
   const lineArray = data.sessionsData;
+  console.log("keyword data after lineArray is assigned", data);
 
   //Make an array of options that can be selected.
   // const keysArray = Object.keys(filter0.selectableOptions);
@@ -37,17 +38,18 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
   //get option selected from the first filter
   const selectedTableColumnName = filter0.selectedTableColumnName;
   // 1. eliminate null values
-  const lineNonNull = [];
+  // const lineNonNull = [];
+  const lineNonNull = lineArray;
 
-  for (let i = 0; i < lineArray.length; i++) {
-    if (
-      lineArray[i][selectedTableColumnName] !== null &&
-      lineArray[i][selectedTableColumnName] !== ""
-    ) {
-      lineNonNull.push(lineArray[i]);
-    }
-  }
-  console.log(`lineNonNull`, lineNonNull);
+  // for (let i = 0; i < lineArray.length; i++) {
+  //   if (
+  //     lineArray[i][selectedTableColumnName] !== null &&
+  //     lineArray[i][selectedTableColumnName] !== ""
+  //   ) {
+  //     lineNonNull.push(lineArray[i]);
+  //   }
+  // }
+  // console.log(`lineNonNull`, lineNonNull);
   // 2. convert date to year-month
   lineNonNull.map(item => {
     item["created_date"] = item.created_date.substring(0, 7);

@@ -2,10 +2,10 @@ function seperateMultiples(data, queryType) {
   console.log(queryType);
   let allData = data[queryType];
   let finalData = data[queryType];
-  console.log(data);
-  console.log(allData);
+  // console.log(data);
+  // console.log(allData);
   let keys = Object.keys(allData[0]);
-  console.log(Object.keys(allData));
+  // console.log(Object.keys(allData));
   keys.forEach(key => {
     allData.map(obj => {
       //let datePair = {'created_date':obj['created_date']}

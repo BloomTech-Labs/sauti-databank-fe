@@ -127,14 +127,50 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
-  if (data !== undefined && Object.keys(data)[0] === "sessionsData") {
-    //  console.log("send to seperateMultiples");
-    seperateMultiples(data, queryType);
-  } else {
-    console.log("no data");
+  console.log("data before it goes into the filter", data);
+
+  //put if no data
+  if (
+    data !== undefined &&
+    queryType === "sessionsData" &&
+    filters[1].selectedCategory === "" &&
+    data.sessionsData
+  ) {
+    const nonNull = [];
+    let values = data.sessionsData;
+    const selectedTableColumnName = filters[0].selectedTableColumnName;
+
+    for (let i = 0; i < values.length; i++) {
+      if (
+        values[i][selectedTableColumnName] !== null &&
+        values[i][selectedTableColumnName] !== ""
+      ) {
+        nonNull.push(values[i]);
+      }
+    }
+
+    data = { sessionsData: nonNull };
   }
 
-  console.log(data);
+  console.log("data after it comes out of the filter", data);
+
+  // data ? console.log(filters[0]) : console.log("no data")
+  // useEffect(()=>{
+  // (queryType="sessionsData") ? seperateMultiples(data, queryType) : console.log("no data")
+
+  // if (data !== undefined && Object.keys(data)[0] === "sessionsData") {
+  //    // console.log("====AFTER DEFINED=====",Object.keys(data))
+  //   // console.log("send to seperateMultiples");
+  //   seperateMultiples(data, queryType);
+  // } else {
+  //   // console.log("no data");
+  // }
+
+  //  data && Object.keys(data) === "sessionsData"
+  //   ? filterByDate(data, filterBoxStartDate, filterBoxEndDate)
+  //  : console.log("no data");
+  // }, [data, filterBoxStartDate, filterBoxEndDate])
+  // console.log(data);
 
   if (loading) {
     return (
@@ -153,13 +189,10 @@ const GetData = props => {
   return (
     <>
       <LineGraphButton
-        //chartData={chartData}
         filters={filters}
         queryType={queryType}
         filterBoxStartDate={filterBoxStartDate}
         filterBoxEndDate={filterBoxEndDate}
-        // makeFilterList={makeFilterList}
-        // buttonHandle={buttonHandle}
         open={open}
         setOpen={setOpen}
         data={data}
