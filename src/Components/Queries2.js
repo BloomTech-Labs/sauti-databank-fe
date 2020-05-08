@@ -5,6 +5,7 @@ import { gql } from "apollo-boost";
 import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
+import { separateMultiples } from "./queriesParcer";
 
 const GetData = props => {
   //LineGraph button
@@ -133,6 +134,8 @@ const GetData = props => {
     }
     data = { sessionsData: notNull };
   }
+
+  data ? separateMultiples(data, queryType) : console.log("no data");
 
   if (loading) {
     return (
