@@ -149,6 +149,7 @@ const GetData = props => {
       </div>
     );
   }
+  console.log(data);
 
   const chartData = dataParse(
     filters[0].selectedTableColumnName,
