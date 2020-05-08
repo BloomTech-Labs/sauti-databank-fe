@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import LineGraph from "./LineGraph/LineGraph";
 import GraphParse from "./GraphParse";
 import ChoroplethParent from "../Components/ChoroplethMap/ChoroplethParent";
-import { useSelector } from "react-redux";
 
 import "./scss/lineGraphButton.scss";
 
@@ -16,10 +15,6 @@ const LineGraphButton = props => {
     filterBoxStartDate,
     filterBoxEndDate
   } = props;
-  console.log(`data`, data);
-
-  const reduxData = useSelector(state => state.queriesReducer.dataInfo);
-  console.log(reduxData);
 
   const renderLine = () => {
     if (open === "line") {

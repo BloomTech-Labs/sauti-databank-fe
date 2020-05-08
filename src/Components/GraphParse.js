@@ -10,21 +10,9 @@ const GraphParse = ({
   filterBoxStartDate,
   filterBoxEndDate
 }) => {
-  console.log(
-    "Graph Parser 5",
-    data,
-    filters,
-    queryType,
-    filterBoxStartDate,
-    filterBoxEndDate
-  );
-
-  console.log("keywordfilterBoxStartDate", filterBoxStartDate);
-  console.log("keyword before filterByDate", data);
   if (queryType === "sessionsData") {
     data = filterByDate(data, filterBoxStartDate, filterBoxEndDate);
   }
-  console.log("keyword after FilterByDate", data);
 
   const chartData = dataParse(
     filters[0].selectedTableColumnName,
@@ -39,8 +27,7 @@ const GraphParse = ({
     filters[0].selectedTable,
     filters[1].selectedTable
   );
-  console.log(`chartdata`, chartData);
-  console.log(`chartdata`, chartData.percentageData);
+
   const graphItems = filters[1].selectedTableColumnName !== "";
   if (graphItems === true) {
     return (

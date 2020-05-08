@@ -5,7 +5,6 @@ import { gql } from "apollo-boost";
 import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
-import { seperateMultiples } from "./queriesParcer";
 
 const GetData = props => {
   //LineGraph button
@@ -15,13 +14,7 @@ const GetData = props => {
   let QUERY;
   let thisQuery;
 
-  const {
-    filters,
-    filterBoxStartDate,
-    setFilterBoxStartDate,
-    filterBoxEndDate,
-    setFilterBoxEndDate
-  } = props;
+  const { filters, filterBoxStartDate, filterBoxEndDate } = props;
 
   const filterIsSelected = (filter, i) => {
     // if the filter is the subsample or the data series
@@ -130,7 +123,6 @@ const GetData = props => {
     const notNull = [];
     let values = data.sessionsData;
     const selectedTableColumnName = filters[0].selectedTableColumnName;
-    console.log("keyword2 data before the for loop", data);
     for (let i = 0; i < values.length; i++) {
       if (
         values[i][selectedTableColumnName] !== null &&
@@ -139,12 +131,8 @@ const GetData = props => {
         notNull.push(values[i]);
       }
     }
-    console.log("keyword2 data after the for loop", notNull);
     data = { sessionsData: notNull };
-    console.log("keyword2 data after being assigned notNull", data);
   }
-
-  console.log("data after it comes out of the filter", data);
 
   if (loading) {
     return (
