@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AfricaMap from "./AfricaMap";
-import data from "./africaData2.json";
+import dataOne from "./africaData1.json";
+import dataTwo from "./africaData2.json";
 import { choroplethDataParse } from "./choroplethDataParse";
 
 function ChoroplethParent({ gqlData }) {
@@ -8,12 +9,23 @@ function ChoroplethParent({ gqlData }) {
 
   choroplethDataParse(gqlData);
 
+  const [map, setMap] = useState(dataOne);
+
   const [property, setProperty] = useState("countryOfResidence");
+
+  function handleChanges() {
+    setMap(dataTwo);
+  }
+
   return (
     <>
       <React.Fragment>
         <h2 className="choro-parent-h2">Sauti Map</h2>
-        <AfricaMap data={data} property={property} />
+        <AfricaMap
+          handleChanges={handleChanges}
+          data={map}
+          property={property}
+        />
         <h2 className="choro-parent-h2">Select Country</h2>
         <select
           value={property}

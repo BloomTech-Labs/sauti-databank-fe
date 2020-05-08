@@ -3,7 +3,7 @@ import { select, geoPath, geoOrthographic, min, max, scaleLinear } from "d3";
 import useResizeObserver from "./useResizeObserver";
 import "../scss/choropleth.scss";
 
-function GeoChart({ data, property }) {
+function GeoChart({ data, handleChanges, property }) {
   //use select from d3
   //useRef to access DOM element and pass to D3
   const svgRef = useRef();
@@ -83,7 +83,7 @@ function GeoChart({ data, property }) {
   return (
     <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
       {/* declare className, not to interfere with other svg styling */}
-      <div className="d3">
+      <div onMouseEnter={handleChanges} className="d3">
         <svg ref={svgRef}></svg>
       </div>
     </div>
