@@ -19,6 +19,7 @@ const GraphParse = ({
     filterBoxEndDate
   );
 
+  console.log("keywordfilterBoxStartDate", filterBoxStartDate);
   console.log("keyword before filterByDate", data);
   if (queryType === "sessionsData") {
     data = filterByDate(data, filterBoxStartDate, filterBoxEndDate);

@@ -6,16 +6,10 @@ import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
 import { seperateMultiples } from "./queriesParcer";
-//import { filterByDate } from "../DataParseHelpers/filterByDate";
-
-import { getQuery } from "../redux/actions/queriesAction";
-import { useSelector, useDispatch } from "react-redux";
 
 const GetData = props => {
   //LineGraph button
   const [open, setOpen] = useState("bar");
-
-  const dispatch = useDispatch();
 
   let queryType = "tradersUsers";
   let QUERY;
@@ -127,50 +121,30 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
-  console.log("data before it goes into the filter", data);
-
-  //put if no data
   if (
-    data !== undefined &&
     queryType === "sessionsData" &&
     filters[1].selectedCategory === "" &&
+    data &&
     data.sessionsData
   ) {
-    const nonNull = [];
+    const notNull = [];
     let values = data.sessionsData;
     const selectedTableColumnName = filters[0].selectedTableColumnName;
-
+    console.log("keyword2 data before the for loop", data);
     for (let i = 0; i < values.length; i++) {
       if (
         values[i][selectedTableColumnName] !== null &&
         values[i][selectedTableColumnName] !== ""
       ) {
-        nonNull.push(values[i]);
+        notNull.push(values[i]);
       }
     }
-
-    data = { sessionsData: nonNull };
+    console.log("keyword2 data after the for loop", notNull);
+    data = { sessionsData: notNull };
+    console.log("keyword2 data after being assigned notNull", data);
   }
 
   console.log("data after it comes out of the filter", data);
-
-  // data ? console.log(filters[0]) : console.log("no data")
-  // useEffect(()=>{
-  // (queryType="sessionsData") ? seperateMultiples(data, queryType) : console.log("no data")
-
-  // if (data !== undefined && Object.keys(data)[0] === "sessionsData") {
-  //    // console.log("====AFTER DEFINED=====",Object.keys(data))
-  //   // console.log("send to seperateMultiples");
-  //   seperateMultiples(data, queryType);
-  // } else {
-  //   // console.log("no data");
-  // }
-
-  //  data && Object.keys(data) === "sessionsData"
-  //   ? filterByDate(data, filterBoxStartDate, filterBoxEndDate)
-  //  : console.log("no data");
-  // }, [data, filterBoxStartDate, filterBoxEndDate])
-  // console.log(data);
 
   if (loading) {
     return (
