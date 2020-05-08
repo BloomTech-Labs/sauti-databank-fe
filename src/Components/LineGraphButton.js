@@ -8,7 +8,7 @@ import "./scss/lineGraphButton.scss";
 const LineGraphButton = props => {
   const { data, chartData, filters, queryType, open, setOpen } = props;
   const graphItems = filters[1].selectedTableColumnName !== "";
-
+  console.log(data);
   const buttonBar = e => {
     e.preventDefault();
     setOpen("bar");
@@ -39,7 +39,9 @@ const LineGraphButton = props => {
       );
     } else {
       return (
-        <button onClick={() => setOpen("line")}>Display Line Graph</button>
+        <button className="line-btn" onClick={() => setOpen("line")}>
+          Display Line Graph
+        </button>
       );
     }
   };
@@ -48,12 +50,17 @@ const LineGraphButton = props => {
     if (open === "choropleth") {
       return (
         <>
-          <ChoroplethParent width={900} height={500} />
+          <ChoroplethParent
+            gqlData={data}
+            filters={filters}
+            width={900}
+            height={500}
+          />
         </>
       );
     } else {
       return (
-        <button onClick={() => setOpen("choropleth")}>
+        <button className="choro-map" onClick={() => setOpen("choropleth")}>
           Display ChoroplethMap
         </button>
       );
@@ -68,7 +75,11 @@ const LineGraphButton = props => {
         </>
       );
     } else {
-      return <button onClick={() => setOpen("dot")}>Display Dot map</button>;
+      return (
+        <button className="bubble-map" onClick={() => setOpen("dot")}>
+          Display Dot map
+        </button>
+      );
     }
   };
 
@@ -102,7 +113,11 @@ const LineGraphButton = props => {
         </>
       );
     } else if (open !== "bar") {
-      return <button onClick={() => setOpen("bar")}>Display Bar Chart</button>;
+      return (
+        <button className="bar-btn" onClick={() => setOpen("bar")}>
+          Display Bar Chart
+        </button>
+      );
     }
   };
 
