@@ -3,7 +3,7 @@ import { select, geoPath, geoOrthographic, min, max, scaleLinear } from "d3";
 import useResizeObserver from "./useResizeObserver";
 import "../scss/choropleth.scss";
 
-function GeoChart({ data, property }) {
+function GeoChart({ data, handleChanges, property }) {
   //use select from d3
   //useRef to access DOM element and pass to D3
   const svgRef = useRef();
@@ -21,7 +21,7 @@ function GeoChart({ data, property }) {
     //map country to color based on scale
     const colorScale = scaleLinear()
       .domain([minProp, maxProp])
-      .range(["#ccc", "blue"]);
+      .range(["#FFF5F2", "#eb5e52"]);
 
     // use resized dimensions, to zoom in
     // but fall back to getBoundingClientRect, if no dimensions yet.
@@ -76,14 +76,14 @@ function GeoChart({ data, property }) {
             feature.properties[property].toLocaleString()
       )
       //where on the screen to place the text
-      .attr("x", 10)
-      .attr("y", 100);
+      .attr("x", 450)
+      .attr("y", 250);
   }, [data, dimensions, property, selectedCountry]);
 
   return (
     <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
       {/* declare className, not to interfere with other svg styling */}
-      <div className="d3">
+      <div onMouseEnter={handleChanges} className="d3">
         <svg ref={svgRef}></svg>
       </div>
     </div>
