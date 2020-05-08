@@ -6,7 +6,7 @@ function removeMultiple(data) {
   keys.forEach(key => {
     tempData.map(obj => {
       if (obj[key] && obj[key].includes(",")) {
-        console.log(obj[key]);
+        //console.log(obj[key]);
         let split = obj[key].split(",");
         obj[key] = split[0];
         split.splice(1).forEach(value => {

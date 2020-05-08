@@ -116,7 +116,7 @@ const GetData = props => {
   });
 
   if (
-    queryType === "sessionsData" &&
+    // queryType === "sessionsData" &&
     filters[1].selectedCategory === "" &&
     data &&
     data.sessionsData
@@ -135,7 +135,9 @@ const GetData = props => {
     data = { sessionsData: notNull };
   }
 
-  data ? separateMultiples(data, queryType) : console.log("no data");
+  console.log(data);
+
+  // data ? data = separateMultiples(data, queryType) : console.log("no data");
 
   if (loading) {
     return (

@@ -36,6 +36,7 @@ const dataParse = (
   if (queryType === "Sessions" && crossFilter === "") {
     //filter by date
     //data = filterByDate(data, startDate, endDate);
+    data = removeMultiple(data);
 
     dataStructure = getIndex(data, indexBy);
 
@@ -45,7 +46,7 @@ const dataParse = (
   else if (queryType === "Sessions" && crossFilter !== "") {
     // data = filterByDate(data, startDate, endDate);
 
-    // data = removeMultiple(data);
+    data = removeMultiple(data);
 
     dataStructure = getIndex(data, indexBy);
 
@@ -65,7 +66,7 @@ const dataParse = (
       });
     }
     if (crossFilter !== "") {
-      // data = removeMultiple(data);
+      data = removeMultiple(data);
 
       return setCrossedItems(
         data,
@@ -78,7 +79,7 @@ const dataParse = (
       );
     } else {
       //when single filtering with index that is not "Most Requested"
-      // data = removeMultiple(data);
+      data = removeMultiple(data);
 
       return setItem(data, dataStructure, indexBy);
     }
