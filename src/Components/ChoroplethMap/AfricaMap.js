@@ -3,7 +3,7 @@ import { select, geoPath, geoOrthographic, min, max, scaleLinear } from "d3";
 import useResizeObserver from "./useResizeObserver";
 import "../scss/choropleth.scss";
 
-function GeoChart({ data, handleChanges, property }) {
+function GeoChart({ data, handleChanges, dataView, property }) {
   //use select from d3
   //useRef to access DOM element and pass to D3
   const svgRef = useRef();
@@ -27,11 +27,10 @@ function GeoChart({ data, handleChanges, property }) {
     // but fall back to getBoundingClientRect, if no dimensions yet.
     const { width, height } =
       dimensions || wrapperRef.current.getBoundingClientRect();
-
     // projects geo-coordinates on a 2D plane
     //https://github.com/d3/d3-geo
     const projection = geoOrthographic()
-      .fitSize([width, height], selectedCountry || data)
+      .fitSize([width, height], selectedCountry || dataView)
       //precision makes zoom in and out smooth
       .precision(5000);
 
@@ -78,7 +77,7 @@ function GeoChart({ data, handleChanges, property }) {
       //where on the screen to place the text
       .attr("x", 450)
       .attr("y", 250);
-  }, [data, dimensions, property, selectedCountry]);
+  }, [data, dimensions, property, selectedCountry, dataView]);
 
   return (
     <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
