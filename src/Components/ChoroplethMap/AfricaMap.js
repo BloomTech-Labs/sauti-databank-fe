@@ -1,7 +1,18 @@
 import React, { useRef, useEffect, useState } from "react";
-import { select, geoPath, geoOrthographic, min, max, scaleLinear } from "d3";
+import {
+  select,
+  geoPath,
+  geoOrthographic,
+  min,
+  max,
+  scaleLinear,
+  map
+} from "d3";
 import useResizeObserver from "./useResizeObserver";
+import dataTwo from "./africaData2.json";
 import "../scss/choropleth.scss";
+
+import { countryRank } from "./mapParcer";
 
 function GeoChart({ data, handleChanges, dataView, property }) {
   //use select from d3
@@ -10,6 +21,8 @@ function GeoChart({ data, handleChanges, dataView, property }) {
   const wrapperRef = useRef();
   const dimensions = useResizeObserver(wrapperRef);
   const [selectedCountry, setSelectedCountry] = useState(null);
+
+  countryRank(dataTwo, property);
 
   // will be called initially and on every data change
   useEffect(() => {
@@ -56,7 +69,7 @@ function GeoChart({ data, handleChanges, dataView, property }) {
       .duration(3000)
       .attr("fill", feature => colorScale(feature.properties[property]))
       .attr("d", feature => pathGenerator(feature));
-
+    console.log(`svg`, svg);
     // display text
     svg
       .selectAll(".label")
@@ -77,6 +90,46 @@ function GeoChart({ data, handleChanges, dataView, property }) {
       //where on the screen to place the text
       .attr("x", 450)
       .attr("y", 250);
+
+    svg
+      .selectAll(".legendText")
+      //selectedCountry come from state
+      .data(dataTwo.features)
+      //render a text element
+      .join("text")
+      //selected country gets a class name of .label
+      .attr("class", "legendText")
+      //text will be name and display
+      .text(
+        feature =>
+          feature &&
+          feature.properties.name +
+            ": " +
+            feature.properties[property].toLocaleString()
+      )
+      //where on the screen to place the text
+      .attr("x", 600)
+      .attr("y", 100);
+
+    svg
+      .selectAll(".legendText")
+      //selectedCountry come from state
+      .data(dataTwo.features)
+      //render a text element
+      .join("text")
+      //selected country gets a class name of .label
+      .attr("class", "legendText")
+      //text will be name and display
+      .text(
+        feature =>
+          feature &&
+          feature.properties.name +
+            ": " +
+            feature.properties[property].toLocaleString()
+      )
+      //where on the screen to place the text
+      .attr("x", 600)
+      .attr("y", 100);
   }, [data, dimensions, property, selectedCountry, dataView]);
 
   return (
