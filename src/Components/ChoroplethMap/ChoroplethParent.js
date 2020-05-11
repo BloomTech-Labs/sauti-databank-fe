@@ -23,7 +23,8 @@ function ChoroplethParent({ gqlData }) {
         <h2 className="choro-parent-h2">Sauti Map</h2>
         <AfricaMap
           handleChanges={handleChanges}
-          data={map}
+          dataView={map}
+          data={dataOne}
           property={property}
         />
         <h2 className="choro-parent-h2">Select Country</h2>
