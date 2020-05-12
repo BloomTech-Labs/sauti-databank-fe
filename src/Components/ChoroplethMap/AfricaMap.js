@@ -23,11 +23,17 @@ function GeoChart({ data, handleChanges, dataView, property }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   const results = countryRank(dataTwo, property);
-  // console.log(results[0][1])
-  // const text0 = results[0]
-
-  const text0 = getValues(results, 0);
-  console.log(text0);
+  console.log(results);
+  let text0;
+  let text1;
+  let text2;
+  let text3;
+  if (results.length > 1) {
+    text0 = getValues(results, 0);
+    text1 = getValues(results, 1);
+    text2 = getValues(results, 2);
+    text3 = getValues(results, 3);
+  }
 
   // will be called initially and on every data change
   useEffect(() => {
@@ -57,6 +63,9 @@ function GeoChart({ data, handleChanges, dataView, property }) {
 
     // render each country
 
+    // console.log(results[0][1])
+    // const text0 = results[0]
+
     svg
       .selectAll(".country")
       //sync county in svg with data.features
@@ -74,7 +83,7 @@ function GeoChart({ data, handleChanges, dataView, property }) {
       .duration(3000)
       .attr("fill", feature => colorScale(feature.properties[property]))
       .attr("d", feature => pathGenerator(feature));
-    console.log(`svg`, svg);
+
     // display text
     svg
       .selectAll(".label")
@@ -95,47 +104,82 @@ function GeoChart({ data, handleChanges, dataView, property }) {
       //where on the screen to place the text
       .attr("x", 450)
       .attr("y", 250);
-
+    console.log(`text0`, text0);
     svg
-      .selectAll(".legendText")
+      .selectAll(".text0")
       //selectedCountry come from state
-      .data(dataTwo.features)
+      .data([text0])
       //render a text element
       .join("text")
       //selected country gets a class name of .label
-      .attr("class", "legendText")
+      .attr("class", "legendText0")
       //text will be name and display
-      .text(
-        feature =>
-          feature &&
-          feature.properties.name +
-            ": " +
-            feature.properties[property].toLocaleString()
-      )
+      .text(text0[0] + ": " + text0[1] + "%")
       //where on the screen to place the text
-      .attr("x", 600)
+      .attr("x", 750)
       .attr("y", 100);
 
     svg
-      .selectAll(".legendText")
+      .selectAll(".text1")
       //selectedCountry come from state
-      .data(dataTwo.features)
+      .data([text1])
       //render a text element
       .join("text")
       //selected country gets a class name of .label
-      .attr("class", "legendText")
+      .attr("class", "legendText1")
       //text will be name and display
-      .text(
-        feature =>
-          feature &&
-          feature.properties.name +
-            ": " +
-            feature.properties[property].toLocaleString()
-      )
+      .text(text1[0] + ": " + text1[1] + "%")
       //where on the screen to place the text
-      .attr("x", 600)
-      .attr("y", 100);
-  }, [data, dimensions, property, selectedCountry, dataView]);
+      .attr("x", 750)
+      .attr("y", 115);
+
+    svg
+      .selectAll(".text2")
+      //selectedCountry come from state
+      .data([text2])
+      //render a text element
+      .join("text")
+      //selected country gets a class name of .label
+      .attr("class", "legendText2")
+      //text will be name and display
+      .text(text2[0] + ": " + text2[1] + "%")
+      //where on the screen to place the text
+      .attr("x", 950)
+      .attr("y", 130);
+
+    svg
+      .selectAll(".text3")
+      //selectedCountry come from state
+      .data([text3])
+      //render a text element
+      .join("text")
+      //selected country gets a class name of .label
+      .attr("class", "legendText3")
+      //text will be name and display
+      .text(text3[0] + ": " + text3[1] + "%")
+      //where on the screen to place the text
+      .attr("x", 750)
+      .attr("y", 145);
+
+    console.log(`svg`, svg);
+    // svg
+    // .selectAll(".text4")
+    // //selectedCountry come from state
+    // .data(text4)
+    // //render a text element
+    // .join("text")
+    // //selected country gets a class name of .label
+    // .attr("class", "legendText")
+    // //text will be name and display
+    // .text(
+    //   text4[0] +
+    //       ": " +
+    //       text4[1] +"%"
+    // )
+    // //where on the screen to place the text
+    // .attr("x", 750)
+    // .attr("y", 100);
+  }, [data, dimensions, property, selectedCountry, dataView, results]);
 
   return (
     <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
