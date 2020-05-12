@@ -12,6 +12,15 @@ function countryRank(dataTwo, property) {
     }
   }
   console.log(countries);
-  //return countries
+  console.log(countries.sort(inOrder));
+  return countries;
 }
 export { countryRank };
+
+//puts object of counties and values in order
+function inOrder(a, b) {
+  let aNum = Object.values(a)[0];
+  let bNum = Object.values(b)[0];
+
+  return bNum - aNum;
+}
