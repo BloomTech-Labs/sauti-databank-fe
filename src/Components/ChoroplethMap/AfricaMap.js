@@ -12,7 +12,7 @@ import useResizeObserver from "./useResizeObserver";
 import dataTwo from "./africaData2.json";
 import "../scss/choropleth.scss";
 
-import { countryRank } from "./mapParcer";
+import { countryRank, getValues } from "./mapParcer";
 
 function GeoChart({ data, handleChanges, dataView, property }) {
   //use select from d3
@@ -22,7 +22,12 @@ function GeoChart({ data, handleChanges, dataView, property }) {
   const dimensions = useResizeObserver(wrapperRef);
   const [selectedCountry, setSelectedCountry] = useState(null);
 
-  countryRank(dataTwo, property);
+  const results = countryRank(dataTwo, property);
+  // console.log(results[0][1])
+  // const text0 = results[0]
+
+  const text0 = getValues(results, 0);
+  console.log(text0);
 
   // will be called initially and on every data change
   useEffect(() => {
