@@ -23,10 +23,17 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   const results = countryRank(dataTwo, property);
-  const allResults = arrayValues(results);
+  console.log(`property`, property);
+  console.log(`results`, results);
+
+  const [allResults, setResults] = useState(arrayValues(results));
+  console.log(`allResults`, allResults);
 
   function changeProperty(event) {
+    setResults([0, 0, 0, 0]);
     setProperty(event.target.value);
+    //setResults(arrayValues(results))
+    console.log("in ChangeProperty");
   }
 
   // will be called initially and on every data change

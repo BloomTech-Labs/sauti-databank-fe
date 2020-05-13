@@ -1,7 +1,6 @@
 function countryRank(dataTwo, property) {
   let countries = [];
   const arrayData = dataTwo.features;
-  // console.log(property)
   for (let i = 0; i < arrayData.length; i++) {
     let item = arrayData[i]["properties"];
     let name = item["name"];
@@ -13,6 +12,8 @@ function countryRank(dataTwo, property) {
   }
   countries = countries.sort(inOrder);
   //const countriesArray = Object.entries(countries)
+  let final = arrayValues(countries);
+  console.log(`final`, final);
   return countries;
 }
 
@@ -25,7 +26,6 @@ function inOrder(a, b) {
 }
 
 function arrayValues(results) {
-  console.log(results[0]);
   const newResults = results.map(e => Object.entries(e)[0]);
   return newResults;
 }

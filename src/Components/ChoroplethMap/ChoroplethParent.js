@@ -5,8 +5,6 @@ import dataTwo from "./africaData2.json";
 import { choroplethDataParse } from "./choroplethDataParse";
 
 function ChoroplethParent({ gqlData }) {
-  console.log(`gqlData`, gqlData);
-
   choroplethDataParse(gqlData);
 
   const [map, setMap] = useState(dataOne);
