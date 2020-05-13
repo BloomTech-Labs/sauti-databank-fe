@@ -1,6 +1,5 @@
 import graphLabels from "./graphLabels";
 import getIndex from "../DataParseHelpers/getIndex";
-// import removeMultiple from "../DataParseHelpers/removeMultiple";
 import getMostRequested from "../DataParseHelpers/getMostRequested";
 import setCrossedItems from "../DataParseHelpers/setCrossedItems";
 import setItem from "../DataParseHelpers/setItem";
