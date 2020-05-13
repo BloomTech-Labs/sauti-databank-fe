@@ -1,40 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import LineGraph from "./LineGraph/LineGraph";
-import Graph from "./Graph";
+import GraphParse from "./GraphParse";
 import ChoroplethParent from "../Components/ChoroplethMap/ChoroplethParent";
 
 import "./scss/lineGraphButton.scss";
 
 const LineGraphButton = props => {
-  const { data, chartData, filters, queryType, open, setOpen } = props;
-  const graphItems = filters[1].selectedTableColumnName !== "";
-  console.log(data);
-  const buttonBar = e => {
-    e.preventDefault();
-    setOpen("bar");
-    renderBar();
-  };
-
-  const buttonChoroMap = e => {
-    e.preventDefault();
-    setOpen("choropleth");
-  };
-  const buttonDotMap = e => {
-    e.preventDefault();
-    setOpen("dot");
-  };
+  const {
+    data,
+    filters,
+    open,
+    setOpen,
+    queryType,
+    filterBoxStartDate,
+    filterBoxEndDate
+  } = props;
 
   const renderLine = () => {
     if (open === "line") {
       return (
         <>
-          <LineGraph
-            filter0={filters[0]}
-            buttonBar={buttonBar}
-            buttonChoroMap={buttonChoroMap}
-            buttonDotMap={buttonDotMap}
-            data={data}
-          />
+          <LineGraph filter0={filters[0]} data={data} />
         </>
       );
     } else {
@@ -84,33 +70,16 @@ const LineGraphButton = props => {
   };
 
   const renderBar = () => {
-    if (graphItems === true && open === "bar") {
+    if (open === "bar") {
       return (
-        <>
-          <Graph
-            data={chartData.percentageData}
-            csvData={chartData.dataStructure}
-            filters={filters}
-            keys={chartData.crossFilterValues}
-            groupMode={"grouped"}
-            sampleSize={chartData.totalSampleSize}
-            tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
-          />
-        </>
-      );
-    } else if (graphItems === false && open === "bar") {
-      return (
-        <>
-          <Graph
-            data={chartData.percentageData}
-            csvData={chartData.dataStructure}
-            filters={filters}
-            keys={chartData.keys || chartData.csvKeys}
-            groupMode={"stacked"}
-            sampleSize={chartData.sampleSize}
-            tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
-          />
-        </>
+        <GraphParse
+          data={data}
+          filters={filters}
+          open={open}
+          queryType={queryType}
+          filterBoxStartDate={filterBoxStartDate}
+          filterBoxEndDate={filterBoxEndDate}
+        />
       );
     } else if (open !== "bar") {
       return (
@@ -121,11 +90,11 @@ const LineGraphButton = props => {
     }
   };
 
-  if (data.sessionsData) {
+  if (data && data.sessionsData) {
     return (
       <>
-        {renderLine()}
         {renderBar()}
+        {renderLine()}
         {renderChoroplethMap()}
         {renderDotMap()}
       </>
