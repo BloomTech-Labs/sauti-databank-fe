@@ -17,6 +17,11 @@ function ChoroplethParent({ gqlData }) {
     setMap(dataTwo);
   }
 
+  // function changeProperty(event){
+
+  //   setProperty(event.target.value)
+  // }
+
   return (
     <>
       <React.Fragment>
@@ -26,11 +31,12 @@ function ChoroplethParent({ gqlData }) {
           dataView={map}
           data={dataOne}
           property={property}
+          setProperty={setProperty}
         />
-        <h2 className="choro-parent-h2">Select Country</h2>
+        {/* <h2 className="choro-parent-h2">Select Country</h2>
         <select
           value={property}
-          onChange={event => setProperty(event.target.value)}
+          onChange={changeProperty}
         >
           <option value="countryOfResidence">Country of Residence</option>
           <option value="finalDestinationCountry">
@@ -39,7 +45,7 @@ function ChoroplethParent({ gqlData }) {
           <option value="finalDestinationMarket">
             Final Destination Market
           </option>
-        </select>
+        </select> */}
       </React.Fragment>
     </>
   );

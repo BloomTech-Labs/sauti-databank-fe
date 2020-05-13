@@ -11,7 +11,6 @@ function countryRank(dataTwo, property) {
       countries.push(obj);
     }
   }
-  console.log(countries);
   countries = countries.sort(inOrder);
   //const countriesArray = Object.entries(countries)
   return countries;
@@ -25,11 +24,16 @@ function inOrder(a, b) {
   return bNum - aNum;
 }
 
-function getValues(results, num) {
+function arrayValues(results) {
   console.log(results[0]);
+  const newResults = results.map(e => Object.entries(e)[0]);
+  return newResults;
+}
+
+function getValues(results, num) {
   let ct = Object.entries(results[num]);
   ct = ct[0];
   return ct;
 }
 
-export { countryRank, getValues };
+export { countryRank, getValues, arrayValues };

@@ -12,9 +12,9 @@ import useResizeObserver from "./useResizeObserver";
 import dataTwo from "./africaData2.json";
 import "../scss/choropleth.scss";
 
-import { countryRank, getValues } from "./mapParcer";
+import { countryRank, getValues, arrayValues } from "./mapParcer";
 
-function GeoChart({ data, handleChanges, dataView, property }) {
+function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
   //use select from d3
   //useRef to access DOM element and pass to D3
   const svgRef = useRef();
@@ -23,16 +23,10 @@ function GeoChart({ data, handleChanges, dataView, property }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   const results = countryRank(dataTwo, property);
-  console.log(results);
-  let text0;
-  let text1;
-  let text2;
-  let text3;
-  if (results.length > 1) {
-    text0 = getValues(results, 0);
-    text1 = getValues(results, 1);
-    text2 = getValues(results, 2);
-    text3 = getValues(results, 3);
+  const allResults = arrayValues(results);
+
+  function changeProperty(event) {
+    setProperty(event.target.value);
   }
 
   // will be called initially and on every data change
@@ -62,9 +56,6 @@ function GeoChart({ data, handleChanges, dataView, property }) {
     const pathGenerator = geoPath().projection(projection);
 
     // render each country
-
-    // console.log(results[0][1])
-    // const text0 = results[0]
 
     svg
       .selectAll(".country")
@@ -104,17 +95,37 @@ function GeoChart({ data, handleChanges, dataView, property }) {
       //where on the screen to place the text
       .attr("x", 450)
       .attr("y", 250);
-    console.log(`text0`, text0);
+
     svg
       .selectAll(".text0")
       //selectedCountry come from state
-      .data([text0])
+      .data(allResults[0])
       //render a text element
-      .join("text")
+      //.join("text")
+      .join(
+        //add attr to circles entering, not existing
+        enter =>
+          enter
+            .append("text")
+            .attr("r", value => value)
+            .attr("x", 750)
+            .attr("y", 100)
+            .attr("stroke", "black"),
+        //updates existing elements
+        update =>
+          update
+            .attr("class", "updated")
+            .attr("x", 800)
+            .attr("y", 100)
+            .attr("stroke", "green"),
+        //default, do not need, but could use to animate exiting elements
+        exit => exit.remove()
+      )
+
       //selected country gets a class name of .label
-      .attr("class", "legendText0")
+      // .attr("class", "legendText0")
       //text will be name and display
-      .text(text0[0] + ": " + text0[1] + "%")
+      .text(allResults[0][0] + ": " + allResults[0][1] + "%")
       //where on the screen to place the text
       .attr("x", 750)
       .attr("y", 100);
@@ -122,13 +133,13 @@ function GeoChart({ data, handleChanges, dataView, property }) {
     svg
       .selectAll(".text1")
       //selectedCountry come from state
-      .data([text1])
+      .data(allResults[1])
       //render a text element
       .join("text")
       //selected country gets a class name of .label
-      .attr("class", "legendText1")
+      // .attr("class", "legendText1")
       //text will be name and display
-      .text(text1[0] + ": " + text1[1] + "%")
+      .text(allResults[1][0] + ": " + allResults[1][1] + "%")
       //where on the screen to place the text
       .attr("x", 750)
       .attr("y", 115);
@@ -136,13 +147,13 @@ function GeoChart({ data, handleChanges, dataView, property }) {
     svg
       .selectAll(".text2")
       //selectedCountry come from state
-      .data([text2])
+      .data(allResults[2])
       //render a text element
       .join("text")
       //selected country gets a class name of .label
-      .attr("class", "legendText2")
+      //.attr("class", "legendText2")
       //text will be name and display
-      .text(text2[0] + ": " + text2[1] + "%")
+      .text(allResults[2][0] + ": " + allResults[2][1] + "%")
       //where on the screen to place the text
       .attr("x", 950)
       .attr("y", 130);
@@ -150,18 +161,17 @@ function GeoChart({ data, handleChanges, dataView, property }) {
     svg
       .selectAll(".text3")
       //selectedCountry come from state
-      .data([text3])
+      .data(allResults[3])
       //render a text element
       .join("text")
       //selected country gets a class name of .label
       .attr("class", "legendText3")
       //text will be name and display
-      .text(text3[0] + ": " + text3[1] + "%")
+      .text(allResults[3][0] + ": " + allResults[3][1] + "%")
       //where on the screen to place the text
       .attr("x", 750)
       .attr("y", 145);
 
-    console.log(`svg`, svg);
     // svg
     // .selectAll(".text4")
     // //selectedCountry come from state
@@ -182,12 +192,22 @@ function GeoChart({ data, handleChanges, dataView, property }) {
   }, [data, dimensions, property, selectedCountry, dataView, results]);
 
   return (
-    <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
-      {/* declare className, not to interfere with other svg styling */}
-      <div onMouseEnter={handleChanges} className="d3">
-        <svg ref={svgRef}></svg>
+    <>
+      <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
+        {/* declare className, not to interfere with other svg styling */}
+        <div onMouseEnter={handleChanges} className="d3">
+          <svg ref={svgRef}></svg>
+        </div>
       </div>
-    </div>
+      <h2 className="choro-parent-h2">Select Country</h2>
+      <select value={property} onChange={changeProperty}>
+        <option value="countryOfResidence">Country of Residence</option>
+        <option value="finalDestinationCountry">
+          Final Destination Country
+        </option>
+        <option value="finalDestinationMarket">Final Destination Market</option>
+      </select>
+    </>
   );
 }
 
