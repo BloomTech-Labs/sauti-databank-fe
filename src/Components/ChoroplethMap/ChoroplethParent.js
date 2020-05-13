@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AfricaMap from "./AfricaMap";
-import data from "./africa.json";
+import dataOne from "./africaData1.json";
+import dataTwo from "./africaData2.json";
 import { choroplethDataParse } from "./choroplethDataParse";
 
 function ChoroplethParent({ gqlData }) {
@@ -8,20 +9,36 @@ function ChoroplethParent({ gqlData }) {
 
   choroplethDataParse(gqlData);
 
-  const [property, setProperty] = useState("pop_est");
+  const [map, setMap] = useState(dataOne);
+
+  const [property, setProperty] = useState("countryOfResidence");
+
+  function handleChanges() {
+    setMap(dataTwo);
+  }
+
   return (
     <>
       <React.Fragment>
-        <h2>Sauti Map</h2>
-        <AfricaMap data={data} property={property} />
-        <h2>Select Country</h2>
+        <h2 className="choro-parent-h2">Sauti Map</h2>
+        <AfricaMap
+          handleChanges={handleChanges}
+          dataView={map}
+          data={dataOne}
+          property={property}
+        />
+        <h2 className="choro-parent-h2">Select Country</h2>
         <select
           value={property}
           onChange={event => setProperty(event.target.value)}
         >
-          <option value="pop_est">Population</option>
-          <option value="name_len">Name length</option>
-          <option value="gdp_md_est">GDP</option>
+          <option value="countryOfResidence">Country of Residence</option>
+          <option value="finalDestinationCountry">
+            Final Destination Country
+          </option>
+          <option value="finalDestinationMarket">
+            Final Destination Market
+          </option>
         </select>
       </React.Fragment>
     </>

@@ -1,6 +1,6 @@
 import graphLabels from "./graphLabels";
 import getIndex from "../DataParseHelpers/getIndex";
-import removeMultiple from "../DataParseHelpers/removeMultiple";
+// import removeMultiple from "../DataParseHelpers/removeMultiple";
 import getMostRequested from "../DataParseHelpers/getMostRequested";
 import setCrossedItems from "../DataParseHelpers/setCrossedItems";
 import setItem from "../DataParseHelpers/setItem";
@@ -36,7 +36,7 @@ const dataParse = (
   if (queryType === "Sessions" && crossFilter === "") {
     //filter by date
     //data = filterByDate(data, startDate, endDate);
-    data = removeMultiple(data);
+    // data = removeMultiple(data);
 
     dataStructure = getIndex(data, indexBy);
 
@@ -46,7 +46,7 @@ const dataParse = (
   else if (queryType === "Sessions" && crossFilter !== "") {
     // data = filterByDate(data, startDate, endDate);
 
-    data = removeMultiple(data);
+    // data = removeMultiple(data);
 
     dataStructure = getIndex(data, indexBy);
 
@@ -66,7 +66,7 @@ const dataParse = (
       });
     }
     if (crossFilter !== "") {
-      data = removeMultiple(data);
+      // data = removeMultiple(data);
 
       return setCrossedItems(
         data,
@@ -79,7 +79,7 @@ const dataParse = (
       );
     } else {
       //when single filtering with index that is not "Most Requested"
-      data = removeMultiple(data);
+      // data = removeMultiple(data);
 
       return setItem(data, dataStructure, indexBy);
     }

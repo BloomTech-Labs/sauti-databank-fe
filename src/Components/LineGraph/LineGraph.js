@@ -464,7 +464,6 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
 
   return (
     <>
-      <button onClick={buttonBar}>Display Bar Chart</button>
       <div className="toggleDateContainer">
         <p
           className={time === month100 ? "monthBtnOn" : "monthBtnOff"}

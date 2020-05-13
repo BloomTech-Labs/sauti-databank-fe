@@ -25,7 +25,9 @@ const LineGraphButton = props => {
       );
     } else {
       return (
-        <button onClick={() => setOpen("line")}>Display Line Graph</button>
+        <button className="line-btn" onClick={() => setOpen("line")}>
+          Display Line Graph
+        </button>
       );
     }
   };
@@ -44,7 +46,7 @@ const LineGraphButton = props => {
       );
     } else {
       return (
-        <button onClick={() => setOpen("choropleth")}>
+        <button className="choro-map" onClick={() => setOpen("choropleth")}>
           Display ChoroplethMap
         </button>
       );
@@ -59,7 +61,11 @@ const LineGraphButton = props => {
         </>
       );
     } else {
-      return <button onClick={() => setOpen("dot")}>Display Dot map</button>;
+      return (
+        <button className="bubble-map" onClick={() => setOpen("dot")}>
+          Display Dot map
+        </button>
+      );
     }
   };
 
@@ -75,8 +81,12 @@ const LineGraphButton = props => {
           filterBoxEndDate={filterBoxEndDate}
         />
       );
-    } else {
-      return <button onClick={() => setOpen("bar")}>Display Bar Chart</button>;
+    } else if (open !== "bar") {
+      return (
+        <button className="bar-btn" onClick={() => setOpen("bar")}>
+          Display Bar Chart
+        </button>
+      );
     }
   };
 
