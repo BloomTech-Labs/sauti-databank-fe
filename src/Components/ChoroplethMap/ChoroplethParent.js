@@ -9,16 +9,11 @@ function ChoroplethParent({ gqlData }) {
 
   const [map, setMap] = useState(dataOne);
 
-  const [property, setProperty] = useState("countryOfResidence");
+  const [property, setProperty] = useState("start");
 
   function handleChanges() {
     setMap(dataTwo);
   }
-
-  // function changeProperty(event){
-
-  //   setProperty(event.target.value)
-  // }
 
   return (
     <>
@@ -31,19 +26,6 @@ function ChoroplethParent({ gqlData }) {
           property={property}
           setProperty={setProperty}
         />
-        {/* <h2 className="choro-parent-h2">Select Country</h2>
-        <select
-          value={property}
-          onChange={changeProperty}
-        >
-          <option value="countryOfResidence">Country of Residence</option>
-          <option value="finalDestinationCountry">
-            Final Destination Country
-          </option>
-          <option value="finalDestinationMarket">
-            Final Destination Market
-          </option>
-        </select> */}
       </React.Fragment>
     </>
   );

@@ -12,7 +12,7 @@ import useResizeObserver from "./useResizeObserver";
 import dataTwo from "./africaData2.json";
 import "../scss/choropleth.scss";
 
-import { countryRank, getValues, arrayValues } from "./mapParcer";
+import { countryRank } from "./mapParcer";
 
 function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
   //use select from d3
@@ -24,20 +24,15 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
 
   console.log(`selectedCountry`, selectedCountry);
 
+  //must start as empty array or will render country % many times.
   const [allResults, setResults] = useState([]);
-  //countryRank(dataTwo, property)
-  console.log(`allResults`, allResults);
 
   function changeProperty(event) {
     setProperty(event.target.value);
     setResults(countryRank(dataTwo, event.target.value));
-    //  console.log("in ChangeProperty");
   }
 
-  // console.log(`allresults0`, allResults[0])
-  // will be called initially and on every data change
   useEffect(() => {
-    console.log("useEffect");
     //need to work with D3
     const svg = select(svgRef.current);
     //find min and max of filter selected
@@ -46,8 +41,8 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
     //map country to color based on scale
     const colorScale = scaleLinear()
       .domain([minProp, maxProp])
-      .range(["#eb5e52", "#691800"]);
-    //.range(["#FFF5F2", "#eb5e52"])
+      .range(["#f4af90", "#A2181D"]);
+    //#eb5e52
 
     // use resized dimensions, to zoom in
     // but fall back to getBoundingClientRect, if no dimensions yet.
@@ -64,7 +59,6 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
     const pathGenerator = geoPath().projection(projection);
 
     // render each country
-
     svg
       .selectAll(".country")
       //sync county in svg with data.features
@@ -104,53 +98,13 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       .attr("x", 450)
       .attr("y", 250);
 
-    //   svg
-    // .selectAll(".text1")
-    // //selectedCountry come from state
-    // .data(dataTwo.features)
-    // //render a text element
-    // .join("text")
-    // //selected country gets a class name of .label
-    // // .attr("class", "legendText1")
-    // //text will be name and display
-    // .transition()
-    // .text(
-    //   feature =>
-    //     feature &&
-    //     feature.properties.name +
-    //       ": " +
-    //       feature.properties[property].toLocaleString()
-    // )
-    // //where on the screen to place the text
-    // .attr("x", 750)
-    // .attr("y", 115 );
-
     svg
       .selectAll(".text1")
       //selectedCountry come from state
       .data(allResults)
       //render a text element
       //.join("text")
-      .join(
-        "text"
-        //add attr to circles entering, not existing
-        // enter =>
-        //   enter
-        //     .append("text")
-        //     //d attribute (array allResults), i = index of element
-        //     .attr("x", 750)
-        //     .attr("y", (d, i) => (i * 20) + 60)
-        //     .attr("stroke", "black"),
-        // //updates existing elements
-        // update =>
-        //   update
-        //     .attr("class", "updated")
-        //     .attr("x", 800)
-        //     .attr("y", 100)
-        //     .attr("stroke", "green"),
-        // //default, do not need, but could use to animate exiting elements
-        // exit => exit.remove()
-      )
+      .join("text")
       //selected country gets a class name of .label
       .attr("class", "text1")
       //text will be name and display, from d element take i value
@@ -159,49 +113,7 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       .attr("fill", (d, i) => colorScale(allResults[i][1]))
       //where on the screen to place the text
       .attr("x", "80%")
-      .attr("y", (d, i) => i * 20 + 60);
-
-    // svg
-    //   .selectAll(".country2")
-    //   //selectedCountry come from state
-    //   .data(allResults[1])
-    //   //render a text element
-    //   .join("text")
-    //   //selected country gets a class name of .label
-    //    .attr("class", "country2")
-    //   //text will be name and display
-    //   .text(allResults[1][0] + ": " + allResults[1][1] + "%")
-    //   //where on the screen to place the text
-    //   .attr("x", 750)
-    //   .attr("y", 115);
-
-    // svg
-    //   .selectAll(".text2")
-    //   //selectedCountry come from state
-    //   .data(allResults[2])
-    //   //render a text element
-    //   .join("text")
-    //   //selected country gets a class name of .label
-    //   //.attr("class", "legendText2")
-    //   //text will be name and display
-    //   .text(allResults[2][0] + ": " + allResults[2][1] + "%")
-    //   //where on the screen to place the text
-    //   .attr("x", 950)
-    //   .attr("y", 130);
-
-    // svg
-    //   .selectAll(".text3")
-    //   //selectedCountry come from state
-    //   .data(allResults[3])
-    //   //render a text element
-    //   .join("text")
-    //   //selected country gets a class name of .label
-    //   //.attr("class", "legendText3")
-    //   //text will be name and display
-    //   .text(allResults[3][0] + ": " + allResults[3][1] + "%")
-    //   //where on the screen to place the text
-    //   .attr("x", 750)
-    //   .attr("y", 145);
+      .attr("y", (d, i) => i * 25 + 60);
   }, [data, dimensions, property, selectedCountry, dataView, allResults]);
 
   return (
@@ -214,11 +126,12 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       </div>
       <h2 className="choro-parent-h2">Select Country</h2>
       <select value={property} onChange={changeProperty}>
+        <option value="">Please Select a Filter</option>
         <option value="countryOfResidence">Country of Residence</option>
         <option value="finalDestinationCountry">
           Final Destination Country
         </option>
-        <option value="finalDestinationMarket">Final Destination Market</option>
+        {/* <option value="finalDestinationMarket">Final Destination Market</option> */}
       </select>
     </>
   );
