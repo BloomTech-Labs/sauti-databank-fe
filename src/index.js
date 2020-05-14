@@ -15,6 +15,7 @@ dotenv.config();
 const store = createStore(reducer, applyMiddleware(thunk));
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_BACKEND_URL}`,
+  //uri: "localhost:2500/graphql",
   onError: ({ networkError, graphQLErrors }) => {
     console.log("graphQLErrors", graphQLErrors);
     console.log("networkErrors", networkError);
