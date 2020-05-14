@@ -111,7 +111,7 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       //text will be name and display, from d element take i value
       .text((d, i) => allResults[i][0] + ": " + allResults[i][1] + "%")
       //match color with percentage
-      .attr("fill", (d, i) => colorScale(allResults[i][1]))
+      .attr("stroke", (d, i) => colorScale(allResults[i][1]))
       //where on the screen to place the text
       .attr("x", "80%")
       .attr("y", (d, i) => i * 28 + 60);
