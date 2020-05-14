@@ -14,7 +14,7 @@ function countryRank(dataTwo, property) {
   //const countriesArray = Object.entries(countries)
   let final = arrayValues(countries);
   console.log(`final`, final);
-  return countries;
+  return final;
 }
 
 //puts object of counties and values in order

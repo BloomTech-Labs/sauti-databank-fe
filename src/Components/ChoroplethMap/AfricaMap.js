@@ -22,22 +22,22 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
   const dimensions = useResizeObserver(wrapperRef);
   const [selectedCountry, setSelectedCountry] = useState(null);
 
-  const results = countryRank(dataTwo, property);
-  console.log(`property`, property);
-  console.log(`results`, results);
+  console.log(`selectedCountry`, selectedCountry);
 
-  const [allResults, setResults] = useState(arrayValues(results));
+  const [allResults, setResults] = useState([]);
+  //countryRank(dataTwo, property)
   console.log(`allResults`, allResults);
 
   function changeProperty(event) {
-    setResults([0, 0, 0, 0]);
     setProperty(event.target.value);
-    //setResults(arrayValues(results))
-    console.log("in ChangeProperty");
+    setResults(countryRank(dataTwo, event.target.value));
+    //  console.log("in ChangeProperty");
   }
 
+  // console.log(`allresults0`, allResults[0])
   // will be called initially and on every data change
   useEffect(() => {
+    console.log("useEffect");
     //need to work with D3
     const svg = select(svgRef.current);
     //find min and max of filter selected
@@ -46,7 +46,8 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
     //map country to color based on scale
     const colorScale = scaleLinear()
       .domain([minProp, maxProp])
-      .range(["#FFF5F2", "#eb5e52"]);
+      .range(["#eb5e52", "#691800"]);
+    //.range(["#FFF5F2", "#eb5e52"])
 
     // use resized dimensions, to zoom in
     // but fall back to getBoundingClientRect, if no dimensions yet.
@@ -103,100 +104,105 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       .attr("x", 450)
       .attr("y", 250);
 
-    svg
-      .selectAll(".text0")
-      //selectedCountry come from state
-      .data(allResults[0])
-      //render a text element
-      //.join("text")
-      .join(
-        //add attr to circles entering, not existing
-        enter =>
-          enter
-            .append("text")
-            .attr("r", value => value)
-            .attr("x", 750)
-            .attr("y", 100)
-            .attr("stroke", "black"),
-        //updates existing elements
-        update =>
-          update
-            .attr("class", "updated")
-            .attr("x", 800)
-            .attr("y", 100)
-            .attr("stroke", "green"),
-        //default, do not need, but could use to animate exiting elements
-        exit => exit.remove()
-      )
-
-      //selected country gets a class name of .label
-      // .attr("class", "legendText0")
-      //text will be name and display
-      .text(allResults[0][0] + ": " + allResults[0][1] + "%")
-      //where on the screen to place the text
-      .attr("x", 750)
-      .attr("y", 100);
+    //   svg
+    // .selectAll(".text1")
+    // //selectedCountry come from state
+    // .data(dataTwo.features)
+    // //render a text element
+    // .join("text")
+    // //selected country gets a class name of .label
+    // // .attr("class", "legendText1")
+    // //text will be name and display
+    // .transition()
+    // .text(
+    //   feature =>
+    //     feature &&
+    //     feature.properties.name +
+    //       ": " +
+    //       feature.properties[property].toLocaleString()
+    // )
+    // //where on the screen to place the text
+    // .attr("x", 750)
+    // .attr("y", 115 );
 
     svg
       .selectAll(".text1")
       //selectedCountry come from state
-      .data(allResults[1])
+      .data(allResults)
       //render a text element
-      .join("text")
+      //.join("text")
+      .join(
+        "text"
+        //add attr to circles entering, not existing
+        // enter =>
+        //   enter
+        //     .append("text")
+        //     //d attribute (array allResults), i = index of element
+        //     .attr("x", 750)
+        //     .attr("y", (d, i) => (i * 20) + 60)
+        //     .attr("stroke", "black"),
+        // //updates existing elements
+        // update =>
+        //   update
+        //     .attr("class", "updated")
+        //     .attr("x", 800)
+        //     .attr("y", 100)
+        //     .attr("stroke", "green"),
+        // //default, do not need, but could use to animate exiting elements
+        // exit => exit.remove()
+      )
       //selected country gets a class name of .label
-      // .attr("class", "legendText1")
-      //text will be name and display
-      .text(allResults[1][0] + ": " + allResults[1][1] + "%")
+      .attr("class", "text1")
+      //text will be name and display, from d element take i value
+      .text((d, i) => allResults[i][0] + ": " + allResults[i][1] + "%")
+      //match color with percentage
+      .attr("fill", (d, i) => colorScale(allResults[i][1]))
       //where on the screen to place the text
-      .attr("x", 750)
-      .attr("y", 115);
-
-    svg
-      .selectAll(".text2")
-      //selectedCountry come from state
-      .data(allResults[2])
-      //render a text element
-      .join("text")
-      //selected country gets a class name of .label
-      //.attr("class", "legendText2")
-      //text will be name and display
-      .text(allResults[2][0] + ": " + allResults[2][1] + "%")
-      //where on the screen to place the text
-      .attr("x", 950)
-      .attr("y", 130);
-
-    svg
-      .selectAll(".text3")
-      //selectedCountry come from state
-      .data(allResults[3])
-      //render a text element
-      .join("text")
-      //selected country gets a class name of .label
-      .attr("class", "legendText3")
-      //text will be name and display
-      .text(allResults[3][0] + ": " + allResults[3][1] + "%")
-      //where on the screen to place the text
-      .attr("x", 750)
-      .attr("y", 145);
+      .attr("x", "80%")
+      .attr("y", (d, i) => i * 20 + 60);
 
     // svg
-    // .selectAll(".text4")
-    // //selectedCountry come from state
-    // .data(text4)
-    // //render a text element
-    // .join("text")
-    // //selected country gets a class name of .label
-    // .attr("class", "legendText")
-    // //text will be name and display
-    // .text(
-    //   text4[0] +
-    //       ": " +
-    //       text4[1] +"%"
-    // )
-    // //where on the screen to place the text
-    // .attr("x", 750)
-    // .attr("y", 100);
-  }, [data, dimensions, property, selectedCountry, dataView, results]);
+    //   .selectAll(".country2")
+    //   //selectedCountry come from state
+    //   .data(allResults[1])
+    //   //render a text element
+    //   .join("text")
+    //   //selected country gets a class name of .label
+    //    .attr("class", "country2")
+    //   //text will be name and display
+    //   .text(allResults[1][0] + ": " + allResults[1][1] + "%")
+    //   //where on the screen to place the text
+    //   .attr("x", 750)
+    //   .attr("y", 115);
+
+    // svg
+    //   .selectAll(".text2")
+    //   //selectedCountry come from state
+    //   .data(allResults[2])
+    //   //render a text element
+    //   .join("text")
+    //   //selected country gets a class name of .label
+    //   //.attr("class", "legendText2")
+    //   //text will be name and display
+    //   .text(allResults[2][0] + ": " + allResults[2][1] + "%")
+    //   //where on the screen to place the text
+    //   .attr("x", 950)
+    //   .attr("y", 130);
+
+    // svg
+    //   .selectAll(".text3")
+    //   //selectedCountry come from state
+    //   .data(allResults[3])
+    //   //render a text element
+    //   .join("text")
+    //   //selected country gets a class name of .label
+    //   //.attr("class", "legendText3")
+    //   //text will be name and display
+    //   .text(allResults[3][0] + ": " + allResults[3][1] + "%")
+    //   //where on the screen to place the text
+    //   .attr("x", 750)
+    //   .attr("y", 145);
+  }, [data, dimensions, property, selectedCountry, dataView, allResults]);
 
   return (
     <>
