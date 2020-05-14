@@ -21,13 +21,14 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
   const wrapperRef = useRef();
   const dimensions = useResizeObserver(wrapperRef);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [maxColor, setMaxColor] = useState("#FBEEEE");
+  const [maxColor, setMaxColor] = useState("rgb(232, 193, 160)");
 
   //must start as empty array or will render country % many times.
   const [allResults, setResults] = useState([]);
 
   function changeProperty(event) {
     setMaxColor("#A2181D");
+    //"#A2181D"
     setProperty(event.target.value);
     setResults(countryRank(dataTwo, event.target.value));
   }
@@ -41,8 +42,8 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
     //map country to color based on scale
     const colorScale = scaleLinear()
       .domain([minProp, maxProp])
-      .range(["#f4af90", maxColor]);
-    //#eb5e52
+      .range(["rgb(232, 193, 160)", maxColor]);
+    //#eb5e52 , #FBEEEE, #f4af90, #FAF1CB, fill: rgb(232, 193, 160)
 
     // use resized dimensions, to zoom in
     // but fall back to getBoundingClientRect, if no dimensions yet.
@@ -113,7 +114,7 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       .attr("fill", (d, i) => colorScale(allResults[i][1]))
       //where on the screen to place the text
       .attr("x", "80%")
-      .attr("y", (d, i) => i * 25 + 60);
+      .attr("y", (d, i) => i * 28 + 60);
   }, [data, dimensions, property, selectedCountry, dataView, allResults]);
 
   return (

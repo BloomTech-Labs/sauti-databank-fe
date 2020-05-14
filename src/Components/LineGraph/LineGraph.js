@@ -27,8 +27,7 @@ import { getRangePeriods } from "../LineGraphHelpers/Range";
 //y-axis recalculate 100 based upon what is checked
 
 const LineGraph = ({ filter0, buttonBar, data }) => {
-  //const data = useSelector(state => state.queriesReducer.dataInfo);
-  const lineArray = data.sessionsData;
+  const lineArray = [...data.sessionsData];
 
   //Make an array of options that can be selected.
   // const keysArray = Object.keys(filter0.selectableOptions);
@@ -36,24 +35,11 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
   //get option selected from the first filter
   const selectedTableColumnName = filter0.selectedTableColumnName;
   // 1. eliminate null values
-  const lineNonNull = [];
 
-  for (let i = 0; i < lineArray.length; i++) {
-    if (
-      lineArray[i][selectedTableColumnName] !== null &&
-      lineArray[i][selectedTableColumnName] !== ""
-    ) {
-      lineNonNull.push(lineArray[i]);
-    }
-  }
+  let lineNonNull = lineArray;
 
-  // 2. convert date to year-month
   lineNonNull.map(item => {
-    item["created_date"] = item.created_date.substring(0, 7);
-  });
-
-  //2.a. created_year
-  lineNonNull.map(item => {
+    item["created_mo"] = item.created_date.substring(0, 7);
     item["created_year"] = item.created_date.substring(0, 4);
   });
 
@@ -97,7 +83,7 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
   //By year-month
   let groupedPeople1 = reduceBy1(
     lineNonNull,
-    "created_date",
+    "created_mo",
     selectedTableColumnName
   );
 
@@ -259,37 +245,37 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
   //  Quarterly Data
 
   // 1. eliminate null values
-  const lineNonNullQtr = [];
-  for (let i = 0; i < lineArray.length; i++) {
-    if (
-      data.sessionsData[i][selectedTableColumnName] !== null &&
-      data.sessionsData[i][selectedTableColumnName] !== ""
-    ) {
-      lineNonNullQtr.push(data.sessionsData[i]);
-    }
-  }
+  const lineNonNullQtr = lineNonNull;
+  // for (let i = 0; i < lineArray.length; i++) {
+  //   if (
+  //     data.sessionsData[i][selectedTableColumnName] !== null &&
+  //     data.sessionsData[i][selectedTableColumnName] !== ""
+  //   ) {
+  //     lineNonNullQtr.push(data.sessionsData[i]);
+  //   }
+  // }
 
   //2. grab only year-mo
-  lineNonNullQtr.map(item => {
-    item["created_date"] = item.created_date.substring(0, 7);
-  });
+  // lineNonNullQtr.map(item => {
+  //   item["created_date"] = item.created_date.substring(0, 7);
+  // });
 
-  const byQuarter = lineNonNullQtr;
+  const byQuarter = lineNonNull;
 
   for (let i = 0; i < byQuarter.length; i++) {
-    let month = byQuarter[i]["created_date"].slice(5, 7);
+    let month = byQuarter[i]["created_mo"].slice(5, 7);
     let item = byQuarter[i];
     if (month === "01" || month === "02" || month === "03") {
-      item["created_qtr"] = item["created_date"].slice(0, 5);
+      item["created_qtr"] = item["created_mo"].slice(0, 5);
       item["created_qtr"] = item["created_qtr"].concat("Q1");
     } else if (month === "04" || month === "05" || month === "06") {
-      item["created_qtr"] = item["created_date"].slice(0, 5);
+      item["created_qtr"] = item["created_mo"].slice(0, 5);
       item["created_qtr"] = item["created_qtr"].concat("Q2");
     } else if (month === "07" || month === "08" || month === "09") {
-      item["created_qtr"] = item["created_date"].slice(0, 5);
+      item["created_qtr"] = item["created_mo"].slice(0, 5);
       item["created_qtr"] = item["created_qtr"].concat("Q3");
     } else if (month === "10" || month === "11" || month === "12") {
-      item["created_qtr"] = item["created_date"].slice(0, 5);
+      item["created_qtr"] = item["created_mo"].slice(0, 5);
       item["created_qtr"] = item["created_qtr"].concat("Q4");
     }
   }
@@ -478,7 +464,6 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
 
   return (
     <>
-      <button onClick={buttonBar}>Display Bar Chart</button>
       <div className="toggleDateContainer">
         <p
           className={time === month100 ? "monthBtnOn" : "monthBtnOff"}
