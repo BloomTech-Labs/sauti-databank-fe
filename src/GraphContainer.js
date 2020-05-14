@@ -10,9 +10,7 @@ import useCalendar from "../src/hooks/useCalendar";
 import styled from "styled-components";
 import swal from "sweetalert";
 import ClipboardJS from "clipboard";
-import graphLabels from "./Components/graphLabels";
 
-import { getAvaliableOptions, getSelectedOption } from "./OptionFunctions";
 import { Footer } from "./Components/Footer";
 
 import { getQuery } from "../src/redux/actions/queriesAction";
@@ -50,8 +48,13 @@ const GraphContainer = props => {
   return (
     <div className="App">
       <div className="main-container">
-        <div className="header">
-          <h1>Informal Cross-Border Trade Data</h1>
+        <div className="main-header">
+          <div className="header">
+            <h1>Informal Cross-Border Trade Data</h1>
+          </div>
+          <div className="data-header">
+            <p>Data Set | Placeholder | For Active Data Filters</p>
+          </div>
         </div>
         <div className="content-container">
           <ContentContainerDiv
@@ -146,29 +149,7 @@ const SocialMediaIconsFacebook = styled.a`
   }
 `;
 
-const CopyUrlButton = styled.button`
-  padding: 8px 5px;
-  background: #47837f;
-  font-weight: 400;
-  color: white;
-  border-radius: 5px;
-  font-size: 1.4rem;
-  width: 95px;
-  opacity: 0.75;
-  border: none;
-  margin: 0 15px;
-  &: hover {
-    cursor: pointer;
-    opacity: 1;
-  }
-`;
 const ContentContainerDiv = styled.div`
   // border-right: 1px solid lightgrey;
   margin-right: 2px;
 `;
-const IconContainer = styled.span`
-  display: flex;
-  font-size: 1.8rem;
-  align-items: center;
-`;
-const ShareDiv = styled.div``;

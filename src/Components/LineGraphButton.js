@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import LineGraph from "./LineGraph/LineGraph";
 import Graph from "./Graph";
 import ChoroplethParent from "../Components/ChoroplethMap/ChoroplethParent";
-
+import graphImage from "../assets/images/linegraph.png";
+import mapImage from "../assets/images/map.png";
+import barImage from "../assets/images/barchart.png";
 import "./scss/lineGraphButton.scss";
 
 const LineGraphButton = props => {
@@ -40,7 +42,7 @@ const LineGraphButton = props => {
     } else {
       return (
         <button className="line-btn" onClick={() => setOpen("line")}>
-          Display Line Graph
+          <img src={graphImage} />
         </button>
       );
     }
@@ -61,7 +63,7 @@ const LineGraphButton = props => {
     } else {
       return (
         <button className="choro-map" onClick={() => setOpen("choropleth")}>
-          Display ChoroplethMap
+          <img src={mapImage} />
         </button>
       );
     }
@@ -115,7 +117,7 @@ const LineGraphButton = props => {
     } else if (open !== "bar") {
       return (
         <button className="bar-btn" onClick={() => setOpen("bar")}>
-          Display Bar Chart
+          <img src={barImage} />
         </button>
       );
     }
@@ -124,10 +126,12 @@ const LineGraphButton = props => {
   if (data.sessionsData) {
     return (
       <>
+        {renderChoroplethMap()}
         {renderLine()}
         {renderBar()}
-        {renderChoroplethMap()}
         {renderDotMap()}
+        {/* {renderBar()} */}
+        {/* {renderChoroplethMap()} */}
       </>
     );
   } else {
@@ -135,8 +139,9 @@ const LineGraphButton = props => {
       <>
         <p>Line Graph not Available with 'Key Demographics' Data Series</p>
         {renderBar()}
-        {renderChoroplethMap()}
         {renderDotMap()}
+        {renderChoroplethMap()}
+        {/* {renderDotMap()} */}
       </>
     );
   }

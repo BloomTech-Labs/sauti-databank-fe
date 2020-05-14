@@ -98,21 +98,35 @@ $greyColor: #4d4f52;
     align-content: center;
     margin-top: 0px;
     margin-bottom: 100px;
-    .header {
-      height: 88px;
-      width: 100vw;
-      background: #212121;
+    .main-header {
       display: flex;
       align-items: center;
-      h1 {
-        font-size: 28px;
-        color: #ffffff;
-        font-family: Helvetica, sans-serif;
-        margin-left: 20px;
+      .header {
+        height: 50px;
+        width: 25vw;
+        background: #2c2e32;
+        h1 {
+          font-size: 22px;
+          color: #ffffff;
+          font-family: Helvetica, sans-serif;
+          margin-left: 20px;
+        }
+      } //header
+      .data-header {
+        height: 50px;
+        width: 74.1vw;
+        background: #f5f5f5;
+        p {
+          padding-left: 1.5%;
+          font-size: 21px;
+          color: #070707;
+          font-family: Helvetica, sans-serif;
+        }
       }
-    } //header
+    }
     .content-container {
       display: flex;
+      flex-direction: row-reverse;
       justify-content: space-around;
       width: 98%;
       margin: 40px auto;
