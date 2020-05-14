@@ -27,7 +27,7 @@ function ChoroplethParent({ gqlData }) {
           data={dataOne}
           property={property}
         />
-        <h2 className="choro-parent-h2">Select Country</h2>
+        <h2 className="choro-parent-h2">Select a Country</h2>
         <select
           value={property}
           onChange={event => setProperty(event.target.value)}

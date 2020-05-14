@@ -3,36 +3,18 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
 import Loader from "react-loader-spinner";
-import dataParse from "./dataParse";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
-
-import { getQuery } from "../redux/actions/queriesAction";
-import { useSelector, useDispatch } from "react-redux";
 
 const GetData = props => {
   //LineGraph button
   const [open, setOpen] = useState("bar");
 
-  useSelector(state => state.queriesReducer);
-
-  const dispatch = useDispatch();
-
-  // const buttonHandle = e => {
-  //   setOpen(!open);
-  // };
-
   let queryType = "tradersUsers";
   let QUERY;
   let thisQuery;
 
-  const {
-    filters,
-    filterBoxStartDate,
-    setFilterBoxStartDate,
-    filterBoxEndDate,
-    setFilterBoxEndDate
-  } = props;
+  const { filters, filterBoxStartDate, filterBoxEndDate } = props;
 
   const filterIsSelected = (filter, i) => {
     // if the filter is the subsample or the data series
@@ -132,9 +114,25 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
-  // useEffect(() => {
-  //   dispatch(getQuery(data));
-  // }, [data]);
+  if (
+    // queryType === "sessionsData" &&
+    filters[1].selectedCategory === "" &&
+    data &&
+    data.sessionsData
+  ) {
+    const notNull = [];
+    let values = data.sessionsData;
+    const selectedTableColumnName = filters[0].selectedTableColumnName;
+    for (let i = 0; i < values.length; i++) {
+      if (
+        values[i][selectedTableColumnName] !== null &&
+        values[i][selectedTableColumnName] !== ""
+      ) {
+        notNull.push(values[i]);
+      }
+    }
+    data = { sessionsData: notNull };
+  }
 
   if (loading) {
     return (
@@ -151,48 +149,13 @@ const GetData = props => {
   }
   console.log(data);
 
-  const chartData = dataParse(
-    filters[0].selectedTableColumnName,
-    data[`${queryType}`],
-    filters[1].selectedTableColumnName,
-
-    filterBoxStartDate,
-
-    filterBoxEndDate,
-    filters[2].selectedTableColumnName,
-
-    filters[0].selectedTable,
-    filters[1].selectedTable
-  );
-  if (chartData === 1) {
-    return (
-      <div>
-        <h1>Try a different search</h1>
-      </div>
-    );
-  }
-
-  const makeFilterList = () => {
-    return Object.keys(filters)
-      .filter(filterId => filterId >= 2)
-      .map(filterId => {
-        return (
-          <p>
-            {filters[filterId].selectedCategory} -{" "}
-            {getSelectedOption(filters, filterId)}
-          </p>
-        );
-      });
-  };
-
   return (
     <>
       <LineGraphButton
-        chartData={chartData}
         filters={filters}
         queryType={queryType}
-        makeFilterList={makeFilterList}
-        // buttonHandle={buttonHandle}
+        filterBoxStartDate={filterBoxStartDate}
+        filterBoxEndDate={filterBoxEndDate}
         open={open}
         setOpen={setOpen}
         data={data}
