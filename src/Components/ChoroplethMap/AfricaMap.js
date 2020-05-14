@@ -21,13 +21,13 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
   const wrapperRef = useRef();
   const dimensions = useResizeObserver(wrapperRef);
   const [selectedCountry, setSelectedCountry] = useState(null);
-
-  console.log(`selectedCountry`, selectedCountry);
+  const [maxColor, setMaxColor] = useState("#FBEEEE");
 
   //must start as empty array or will render country % many times.
   const [allResults, setResults] = useState([]);
 
   function changeProperty(event) {
+    setMaxColor("#A2181D");
     setProperty(event.target.value);
     setResults(countryRank(dataTwo, event.target.value));
   }
@@ -41,7 +41,7 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
     //map country to color based on scale
     const colorScale = scaleLinear()
       .domain([minProp, maxProp])
-      .range(["#f4af90", "#A2181D"]);
+      .range(["#f4af90", maxColor]);
     //#eb5e52
 
     // use resized dimensions, to zoom in
@@ -95,8 +95,8 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
             feature.properties[property].toLocaleString()
       )
       //where on the screen to place the text
-      .attr("x", 450)
-      .attr("y", 250);
+      .attr("x", "50%")
+      .attr("y", "50%");
 
     svg
       .selectAll(".text1")
@@ -126,7 +126,7 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       </div>
       <h2 className="choro-parent-h2">Select Country</h2>
       <select value={property} onChange={changeProperty}>
-        <option value="">Please Select a Filter</option>
+        <option value="start">Please Select a Filter</option>
         <option value="countryOfResidence">Country of Residence</option>
         <option value="finalDestinationCountry">
           Final Destination Country
