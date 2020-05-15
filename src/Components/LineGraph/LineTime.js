@@ -11,38 +11,26 @@ import {
 } from "recharts";
 
 import CheckBox from "../CheckBox";
-import { getRangePeriods } from "../LineGraphHelpers/Range";
+
 import { getHighestSelected } from "../LineGraphHelpers/selectedCheckboxes";
-import DateSlider from "./DateSlider";
 
 import "../../Components/scss/lineGraph.scss";
+import LineRange from "./LineRange";
 
 const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
-  const [time, setTime] = useState(month100);
-  const [timeInUse, setTimeInUse] = useState(month100);
-  const [checkedItems, setCheckedItems] = useState(top7);
+  console.log(`month100`, month100);
+  const [time, setTime] = useState([]);
+  const [timeInUse, setTimeInUse] = useState([]);
+  const [checkedItems, setCheckedItems] = useState([]);
 
-  //Find range for slider
-  //should run after time period is updated
-  let allPeriodsArray = [];
-  const rangeValues = getRangePeriods(time, allPeriodsArray);
-  const totalRangePeriods = rangeValues.periodsAmount;
-  allPeriodsArray = rangeValues.allPeriodsArray;
-
-  //numbers displayed above the slider
-  //displays first and last of all periods in selected range
-  const [range, setRange] = useState([
-    allPeriodsArray[0],
-    allPeriodsArray[totalRangePeriods - 1]
-  ]);
-
-  //Sets range for Slider, after time is changed
   useEffect(() => {
-    setRange([allPeriodsArray[0], allPeriodsArray[totalRangePeriods - 1]]);
-  }, [time]);
+    setTime(month100);
+    setCheckedItems(top7);
+    setTimeInUse(month100);
+  }, [month100, top7]);
 
   let display = [];
-  if (Object.entries(checkedItems).length > 0) {
+  if (checkedItems && Object.entries(checkedItems).length > 0) {
     for (let i = 0; i < Object.entries(checkedItems).length; i++) {
       let bbb = Object.entries(checkedItems)[i];
       if (bbb.includes(true)) {
@@ -166,15 +154,7 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
           ))}
         </React.Fragment>
       </div>
-      <DateSlider
-        range={range}
-        setRange={setRange}
-        totalRangePeriods={totalRangePeriods}
-        allPeriodsArray={allPeriodsArray}
-        timeInUse={timeInUse}
-        time={time}
-        setTime={setTime}
-      />
+      <LineRange timeInUse={timeInUse} time={time} setTime={setTime} />
     </>
   );
 };
