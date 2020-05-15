@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "antd/dist/antd.css";
 
 import SliderDisplay from "./SliderDisplay";
@@ -18,6 +18,10 @@ const DateSlider = ({
   function onChange(event) {
     setRange([allPeriodsArray[event[0]], allPeriodsArray[event[1] - 1]]);
   }
+
+  useEffect(() => {
+    setRange([allPeriodsArray[0], allPeriodsArray[totalRangePeriods - 1]]);
+  }, [time]);
 
   function onAfterChange(value) {
     console.log("onAfterChange: ", value);
