@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-
+import React from "react";
 import { topChecked, sumAll } from "../LineGraphHelpers/topChecked";
 import { hundredScale } from "../LineGraphHelpers/scale100";
 
@@ -21,7 +19,13 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
   const selectedTableColumnName = filter0.selectedTableColumnName;
   // 1. eliminate null values
 
-  let lineNonNull = lineArray;
+  let lineNonNull = [];
+  for (let i = 0; i < lineArray.length; i++) {
+    let obj = lineArray[i];
+    if (!Object.values(obj).includes(null)) {
+      lineNonNull.push(obj);
+    }
+  }
 
   lineNonNull.map(item => {
     item["created_mo"] = item.created_date.substring(0, 7);
@@ -224,27 +228,8 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
 
   const monthAll = hundredScale(updated);
   const month100 = monthAll.array;
-  // const monthHighs = monthAll.highNumerical;
-  // const moCurrentHigh = monthAll.high;
 
-  //  Quarterly Data
-
-  // 1. eliminate null values
-  const lineNonNullQtr = lineNonNull;
-  // for (let i = 0; i < lineArray.length; i++) {
-  //   if (
-  //     data.sessionsData[i][selectedTableColumnName] !== null &&
-  //     data.sessionsData[i][selectedTableColumnName] !== ""
-  //   ) {
-  //     lineNonNullQtr.push(data.sessionsData[i]);
-  //   }
-  // }
-
-  //2. grab only year-mo
-  // lineNonNullQtr.map(item => {
-  //   item["created_date"] = item.created_date.substring(0, 7);
-  // });
-
+  //Quarterly
   const byQuarter = lineNonNull;
 
   for (let i = 0; i < byQuarter.length; i++) {
@@ -358,11 +343,8 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
     }
   }
 
-  // const qtrHighest = highestValue(updatedQtr);
   const quarterAll = hundredScale(updatedQtr);
   const quarter100 = quarterAll.array;
-  // const quarterHighs = quarterAll.highNumerical;
-  // const qtrCurrentHigh = quarterAll.high;
 
   let top7 = {};
   for (let i = 0; i < keysInOrder.length; i++) {
@@ -380,8 +362,6 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
         top7={top7}
         checkboxes={checkboxes}
       />
-
-      {/* <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button> */}
     </>
   );
 };

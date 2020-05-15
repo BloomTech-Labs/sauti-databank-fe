@@ -18,7 +18,6 @@ import "../../Components/scss/lineGraph.scss";
 import LineRange from "./LineRange";
 
 const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
-  console.log(`month100`, month100);
   const [time, setTime] = useState([]);
   const [timeInUse, setTimeInUse] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
