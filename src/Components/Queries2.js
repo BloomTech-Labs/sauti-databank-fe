@@ -147,7 +147,6 @@ const GetData = props => {
       </div>
     );
   }
-  console.log(data);
 
   return (
     <>

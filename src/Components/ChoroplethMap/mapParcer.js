@@ -13,7 +13,6 @@ function countryRank(dataTwo, property) {
   countries = countries.sort(inOrder);
   //const countriesArray = Object.entries(countries)
   let final = arrayValues(countries);
-  console.log(`final`, final);
   return final;
 }
 

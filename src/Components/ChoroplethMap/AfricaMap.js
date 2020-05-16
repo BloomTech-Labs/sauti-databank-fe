@@ -24,16 +24,11 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [maxColor, setMaxColor] = useState("#F3EED9");
 
-  //must start as empty array or will render country % many times.
+  //must start as empty array or will render text many times.
   const [allResults, setResults] = useState([]);
-  //console.log(allResults)
-  //let myString = "Kenya: 51.3% \ Uganda: 40% \ Rwanda: 30%"
-  let rectDim = 50;
-  console.log(rectDim);
 
   function changeProperty(event) {
     setMaxColor("#A2181D");
-    //"#A2181D"
     setProperty(event.target.value);
     setResults(countryRank(dataTwo, event.target.value));
   }
@@ -43,7 +38,6 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
     const svg = select(svgRef.current);
     //find min and max of filter selected
     let minProp = min(data.features, feature => feature.properties[property]);
-
     let maxProp = max(data.features, feature => feature.properties[property]);
 
     //map country to color based on scale
@@ -106,6 +100,7 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       .attr("x", "50%")
       .attr("y", "50%");
 
+    //creates a rectangle for each data point
     svg
       .selectAll("rect")
       .data(allResults)
@@ -133,7 +128,6 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       .attr("class", "text1")
       //text will be name and display, from d element take i value
       .text((d, i) => allResults[i][0] + ": " + allResults[i][1] + "%")
-
       //match color with percentage
       .attr("stroke", (d, i) => colorScale(allResults[i][1]))
       //where on the screen to place the text

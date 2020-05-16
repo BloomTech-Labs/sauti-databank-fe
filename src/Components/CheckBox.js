@@ -6,8 +6,6 @@ const Checkbox = ({
   checked = false,
   handleChange
 }) => {
-  //console.log("Checkbox: ", name, checked);
-
   return (
     <input type={type} name={name} checked={checked} onChange={handleChange} />
   );

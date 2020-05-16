@@ -95,7 +95,6 @@ const DeleteAccount = props => {
       variables: { delete_user: input },
       refetchQueries: [{ query: Users_Query }]
     });
-    console.log(input);
     props.params.api.redrawRows();
   };
 
