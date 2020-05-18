@@ -53,7 +53,7 @@ const GraphContainer = props => {
             <h1>Informal Cross-Border Trade Data</h1>
           </div>
           <div className="data-header">
-            <p>Data Set | Placeholder | For Active Data Filters</p>
+            {/* <p>Data Set | Placeholder | For Active Data Filters</p> */}
           </div>
         </div>
         <div className="content-container">
@@ -69,7 +69,6 @@ const GraphContainer = props => {
             />
           </ContentContainerDiv>
           <SocialMediaContainer className="social-media-container">
-            {/* look into arrow color or svg to replace */}
             <FilterHideButton onClick={HideFilters}>
               {hidden ? <p>►</p> : <p>◄</p>}
             </FilterHideButton>

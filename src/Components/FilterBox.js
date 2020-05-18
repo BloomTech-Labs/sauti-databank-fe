@@ -11,14 +11,6 @@ import CalendarModal from "../dashboard/CalendarModal";
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
-//Material UI imports
-import { makeStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
 export default function FilterBox(props) {
   const History = useHistory();
   const {
@@ -49,17 +41,6 @@ export default function FilterBox(props) {
       };
     });
   };
-
-  //MaterialUI styling
-  const useStyles = makeStyles(theme => ({
-    root: {
-      width: "100%"
-    },
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      fontWeight: theme.typography.fontWeightRegular
-    }
-  }));
 
   const FilterSelector = props => {
     const {
@@ -373,63 +354,9 @@ export default function FilterBox(props) {
     ]
   );
 
-  const classes = useStyles();
-
-  //This is Material UI components
   return (
     <>
       <DropdownContainer>
-        {/* Starts MaterialUI component */}
-        <div className={classes.root}>
-          <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography className={classes.heading}>
-                Expansion Panel 1
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-            >
-              <Typography className={classes.heading}>
-                Expansion Panel 2
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel3a-content"
-              id="panel3a-header"
-            >
-              <Typography className={classes.heading}>
-                Expansion Panel 3
-              </Typography>
-            </ExpansionPanelSummary>
-          </ExpansionPanel>
-        </div>
-        {/* ends material ui component */}
         {Object.keys(filters).map(filterId => (
           <FilterSelector
             key={filterId}
