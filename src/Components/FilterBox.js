@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "../App.scss";
-import ReactGa from "react-ga";
 import styled from "styled-components";
-import Dropdown from "react-dropdown";
 import Select, { components } from "react-select";
 import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
-import Loader from "react-loader-spinner";
 import { colourOptions, groupedOptions } from "./docs/data";
 import useCalendar, { getTodaysDate } from "../hooks/useCalendar";
 import { useHistory } from "react-router-dom";
 import CalendarModal from "../dashboard/CalendarModal";
-
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 
@@ -90,7 +86,7 @@ export default function FilterBox(props) {
     const controlStyles = {
       borderRadius: "1px solid black",
 
-      fontSize: 15,
+      fontSize: 14,
       // background: colourOptions[2].color,
       color: "white"
     };
@@ -108,7 +104,7 @@ export default function FilterBox(props) {
           color: "#212121",
           cursor: isDisabled ? "not-allowed" : "pointer",
           // items to select
-          fontSize: 15
+          fontSize: 12
         };
       }
     };
@@ -154,7 +150,7 @@ export default function FilterBox(props) {
             type="radio"
             name="CrossFilter"
             value={option}
-            // seems to need this when this is a compoennt
+            // seems to need this when this is a component
             checked={isChecked(i, filters, option)}
             onChange={e => {
               setUpdateUrlFlag(!updateUrlFlag);

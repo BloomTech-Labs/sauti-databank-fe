@@ -45,8 +45,10 @@ $greyColor: #4d4f52;
 
 .App {
   .graph-title {
-    font-size: 2rem;
-    font-family: "Helvetica", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
   }
   .TopBar {
     display: flex;
@@ -98,21 +100,36 @@ $greyColor: #4d4f52;
     align-content: center;
     margin-top: 0px;
     margin-bottom: 100px;
-    .header {
-      height: 88px;
-      width: 100vw;
-      background: #212121;
+    .main-header {
       display: flex;
       align-items: center;
-      h1 {
-        font-size: 28px;
-        color: #ffffff;
-        font-family: Helvetica, sans-serif;
-        margin-left: 20px;
+      .header {
+        height: 50px;
+        width: 25vw;
+        background: #2c2e32;
+        h1 {
+          font-family: "Montserrat", sans-serif;
+          font-size: 18px;
+          font-weight: 600;
+          color: #ffffff;
+          margin-left: 20px;
+        }
+      } //header
+      .data-header {
+        height: 50px;
+        width: 74.1vw;
+        background: #f5f5f5;
+        p {
+          padding-left: 1.5%;
+          font-size: 21px;
+          color: #070707;
+          font-family: Helvetica, sans-serif;
+        }
       }
-    } //header
+    }
     .content-container {
       display: flex;
+      flex-direction: row-reverse;
       justify-content: space-around;
       width: 98%;
       margin: 40px auto;
@@ -174,12 +191,19 @@ $greyColor: #4d4f52;
   }
   .graph-titles-container {
     display: flex;
-    border: 0.5px solid lightgray;
-    padding: 5px 0;
+    width: 75%;
+    height: 4vw;
+    position: absolute;
+    top: 10%;
+    // align-items: center;
+    .graph-title-small {
+      font-size: 1.1rem;
+      padding: 0 0 0 10px;
+    }
     .graph-title-diplay {
-      width: 33.33%;
-      border-right: 0.5px solid lightgray;
-      padding: 0 5px;
+      display: flex;
+      width: 35%;
+      margin: 0;
     }
   }
 }

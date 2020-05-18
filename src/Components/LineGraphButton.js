@@ -2,7 +2,9 @@ import React from "react";
 import LineGraph from "./LineGraph/LineGraph";
 import GraphParse from "./GraphParse";
 import ChoroplethParent from "../Components/ChoroplethMap/ChoroplethParent";
-
+import graphImage from "../assets/images/linegraph.png";
+import mapImage from "../assets/images/map.png";
+import barImage from "../assets/images/barchart.png";
 import "./scss/lineGraphButton.scss";
 
 const LineGraphButton = props => {
@@ -47,7 +49,7 @@ const LineGraphButton = props => {
     } else {
       return (
         <button className="line-btn" onClick={() => setOpen("line")}>
-          Display Line Graph
+          <img src={graphImage} />
         </button>
       );
     }
@@ -68,7 +70,7 @@ const LineGraphButton = props => {
     } else {
       return (
         <button className="choro-map" onClick={() => setOpen("choropleth")}>
-          Display ChoroplethMap
+          <img src={mapImage} />
         </button>
       );
     }
@@ -84,7 +86,7 @@ const LineGraphButton = props => {
     } else {
       return (
         <button className="bubble-map" onClick={() => setOpen("dot")}>
-          Display Dot map
+          <img src={mapImage} />
         </button>
       );
     }
@@ -96,20 +98,20 @@ const LineGraphButton = props => {
         <>
           <div className="graph-titles-container">
             <div className="graph-title-diplay">
-              <h1 className="graph-title">Data Series</h1>
+              <h3 className="graph-title">Data Series:</h3>
               <h2 className="graph-title-small">
-                {filters[0].selectedCategory}
+                {filters[0].selectedCategory} |
               </h2>
             </div>
             <div className="graph-title-diplay">
-              <h1 className="graph-title">Subsample</h1>
+              <h3 className="graph-title">Subsample:</h3>
               <h2 className="graph-title-small">
-                {filters[1].selectedCategory}
+                {filters[1].selectedCategory} |
               </h2>
             </div>
             {filters[2].selectedTableColumnName && (
               <div className="graph-title-diplay">
-                <h3 className="graph-title">Additional Filter</h3>
+                <h3 className="graph-title">Additional Filter:</h3>
                 <h3 className="graph-title-small">{makeFilterList()}</h3>
               </div>
             )}
@@ -127,28 +129,28 @@ const LineGraphButton = props => {
     } else if (open !== "bar") {
       return (
         <button className="bar-btn" onClick={() => setOpen("bar")}>
-          Display Bar Chart
+          <img src={barImage} />
         </button>
       );
     }
   };
 
-  if (data && data.sessionsData) {
+  if (data.sessionsData) {
     return (
       <>
-        {renderBar()}
         {renderLine()}
         {renderChoroplethMap()}
         {renderDotMap()}
+        {renderBar()}
       </>
     );
   } else {
     return (
       <>
         <p>Line Graph not Available with 'Key Demographics' Data Series</p>
+        {renderDotMap()}
         {renderBar()}
         {renderChoroplethMap()}
-        {renderDotMap()}
       </>
     );
   }

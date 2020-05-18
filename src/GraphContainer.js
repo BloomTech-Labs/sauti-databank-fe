@@ -10,9 +10,7 @@ import useCalendar from "../src/hooks/useCalendar";
 import styled from "styled-components";
 import swal from "sweetalert";
 import ClipboardJS from "clipboard";
-import graphLabels from "./Components/graphLabels";
 
-import { getAvaliableOptions, getSelectedOption } from "./OptionFunctions";
 import { Footer } from "./Components/Footer";
 
 const GraphContainer = props => {
@@ -47,8 +45,13 @@ const GraphContainer = props => {
   return (
     <div className="App">
       <div className="main-container">
-        <div className="header">
-          <h1>Informal Cross-Border Trade Data</h1>
+        <div className="main-header">
+          <div className="header">
+            <h1>Informal Cross-Border Trade Data</h1>
+          </div>
+          <div className="data-header">
+            {/* <p>Data Set | Placeholder | For Active Data Filters</p> */}
+          </div>
         </div>
         <div className="content-container">
           <ContentContainerDiv
@@ -64,7 +67,7 @@ const GraphContainer = props => {
           </ContentContainerDiv>
           <SocialMediaContainer className="social-media-container">
             <FilterHideButton onClick={HideFilters}>
-              {hidden ? <p>◀</p> : <p>▶</p>}
+              {hidden ? <p>►</p> : <p>◄</p>}
             </FilterHideButton>
           </SocialMediaContainer>
           <div
@@ -94,19 +97,22 @@ const GraphContainer = props => {
 export default GraphContainer;
 
 const FilterHideButton = styled.button`
-  padding: 8px 5px;
-  background: slategrey;
+  padding: 3.5px 5px;
+  background: #2c2e32;
   font-weight: 400;
-  color: white;
+  color: #ffffff;
   border-radius: 5px;
   font-size: 1.4rem;
-  height: 95px;
+  height: 30px;
   opacity: 0.75;
   border: none;
   position: absolute;
   &: hover {
     cursor: pointer;
     opacity: 1;
+  }
+  p {
+    height: 24px;
   }
 `;
 const SocialMediaContainer = styled.div`
@@ -136,29 +142,7 @@ const SocialMediaIconsFacebook = styled.a`
   }
 `;
 
-const CopyUrlButton = styled.button`
-  padding: 8px 5px;
-  background: #47837f;
-  font-weight: 400;
-  color: white;
-  border-radius: 5px;
-  font-size: 1.4rem;
-  width: 95px;
-  opacity: 0.75;
-  border: none;
-  margin: 0 15px;
-  &: hover {
-    cursor: pointer;
-    opacity: 1;
-  }
-`;
 const ContentContainerDiv = styled.div`
   // border-right: 1px solid lightgrey;
   margin-right: 2px;
 `;
-const IconContainer = styled.span`
-  display: flex;
-  font-size: 1.8rem;
-  align-items: center;
-`;
-const ShareDiv = styled.div``;
