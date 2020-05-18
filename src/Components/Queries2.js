@@ -147,7 +147,20 @@ const GetData = props => {
       </div>
     );
   }
-  console.log(data);
+
+  const makeFilterList = () => {
+    console.log("makeFilterList WAS CALLED");
+    return Object.keys(filters)
+      .filter(filterId => filterId >= 2)
+      .map(filterId => {
+        return (
+          <p>
+            {filters[filterId].selectedCategory} -{" "}
+            {getSelectedOption(filters, filterId)}
+          </p>
+        );
+      });
+  };
 
   return (
     <>
@@ -159,6 +172,7 @@ const GetData = props => {
         open={open}
         setOpen={setOpen}
         data={data}
+        makeFilterList={makeFilterList}
       />
     </>
   );

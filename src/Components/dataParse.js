@@ -15,17 +15,6 @@ const dataParse = (
   queryType,
   crossFilterQuery
 ) => {
-  console.log(
-    "DataParse 7",
-    indexBy,
-    data,
-    crossFilter,
-    startDate,
-    endDate,
-    additionalFilter,
-    queryType,
-    crossFilterQuery
-  );
   let dataStructure = [];
   //when single filtering "Most Requested" graph
   //remove multiples should happen prior to filterByDate

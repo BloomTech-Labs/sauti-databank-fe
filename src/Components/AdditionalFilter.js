@@ -29,7 +29,6 @@ const AdditionalFilter = () => {
           setFilterBoxAdditionalFilterLabel(e.label);
           props.setCheckboxOptions([]);
           ClickTracker(e.value.type);
-          console.log("event", e);
         }}
       />
       <div

@@ -15,13 +15,34 @@ const LineGraphButton = props => {
     setOpen,
     queryType,
     filterBoxStartDate,
-    filterBoxEndDate
+    filterBoxEndDate,
+    makeFilterList
   } = props;
 
   const renderLine = () => {
     if (open === "line") {
       return (
         <>
+          <div className="graph-titles-container">
+            <div className="graph-title-diplay">
+              <h1 className="graph-title">Data Series</h1>
+              <h2 className="graph-title-small">
+                {filters[0].selectedCategory}
+              </h2>
+            </div>
+            <div className="graph-title-diplay">
+              <h1 className="graph-title">Subsample</h1>
+              <h2 className="graph-title-small">
+                {filters[1].selectedCategory}
+              </h2>
+            </div>
+            {filters[2].selectedTableColumnName && (
+              <div className="graph-title-diplay">
+                <h3 className="graph-title">Additional Filter</h3>
+                <h3 className="graph-title-small">{makeFilterList()}</h3>
+              </div>
+            )}
+          </div>
           <LineGraph filter0={filters[0]} data={data} />
         </>
       );
@@ -74,14 +95,36 @@ const LineGraphButton = props => {
   const renderBar = () => {
     if (open === "bar") {
       return (
-        <GraphParse
-          data={data}
-          filters={filters}
-          open={open}
-          queryType={queryType}
-          filterBoxStartDate={filterBoxStartDate}
-          filterBoxEndDate={filterBoxEndDate}
-        />
+        <>
+          <div className="graph-titles-container">
+            <div className="graph-title-diplay">
+              <h1 className="graph-title">Data Series</h1>
+              <h2 className="graph-title-small">
+                {filters[0].selectedCategory}
+              </h2>
+            </div>
+            <div className="graph-title-diplay">
+              <h1 className="graph-title">Subsample</h1>
+              <h2 className="graph-title-small">
+                {filters[1].selectedCategory}
+              </h2>
+            </div>
+            {filters[2].selectedTableColumnName && (
+              <div className="graph-title-diplay">
+                <h3 className="graph-title">Additional Filter</h3>
+                <h3 className="graph-title-small">{makeFilterList()}</h3>
+              </div>
+            )}
+          </div>
+          <GraphParse
+            data={data}
+            filters={filters}
+            open={open}
+            queryType={queryType}
+            filterBoxStartDate={filterBoxStartDate}
+            filterBoxEndDate={filterBoxEndDate}
+          />
+        </>
       );
     } else if (open !== "bar") {
       return (

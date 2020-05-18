@@ -5,6 +5,7 @@ import {
   geoOrthographic,
   min,
   max,
+  scaleSqrt,
   scaleLinear,
   map
 } from "d3";
@@ -21,14 +22,13 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
   const wrapperRef = useRef();
   const dimensions = useResizeObserver(wrapperRef);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [maxColor, setMaxColor] = useState("rgb(232, 193, 160)");
+  const [maxColor, setMaxColor] = useState("#F3EED9");
 
-  //must start as empty array or will render country % many times.
+  //must start as empty array or will render text many times.
   const [allResults, setResults] = useState([]);
 
   function changeProperty(event) {
     setMaxColor("#A2181D");
-    //"#A2181D"
     setProperty(event.target.value);
     setResults(countryRank(dataTwo, event.target.value));
   }
@@ -37,13 +37,14 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
     //need to work with D3
     const svg = select(svgRef.current);
     //find min and max of filter selected
-    const minProp = min(data.features, feature => feature.properties[property]);
-    const maxProp = max(data.features, feature => feature.properties[property]);
+    let minProp = min(data.features, feature => feature.properties[property]);
+    let maxProp = max(data.features, feature => feature.properties[property]);
+
     //map country to color based on scale
-    const colorScale = scaleLinear()
+    const colorScale = scaleSqrt()
       .domain([minProp, maxProp])
-      .range(["rgb(232, 193, 160)", maxColor]);
-    //#eb5e52 , #FBEEEE, #f4af90, #FAF1CB, fill: rgb(232, 193, 160)
+      .range(["#F3EED9", maxColor]);
+    //#eb5e52 , #FBEEEE, #f4af90, #FAF1CB, fill: rgb(232, 193, 160), #Ebebeb
 
     // use resized dimensions, to zoom in
     // but fall back to getBoundingClientRect, if no dimensions yet.
@@ -74,7 +75,7 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       .attr("class", "country")
       .transition()
       //time it takes to zoom in and out
-      .duration(3000)
+      .duration(1000)
       .attr("fill", feature => colorScale(feature.properties[property]))
       .attr("d", feature => pathGenerator(feature));
 
@@ -98,6 +99,23 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       //where on the screen to place the text
       .attr("x", "50%")
       .attr("y", "50%");
+
+    //creates a rectangle for each data point
+    svg
+      .selectAll("rect")
+      .data(allResults)
+      .join(
+        //add attr to both entering and updating
+        enter => enter.append("rect"),
+        update => update.attr("class", "updated"),
+        exit => exit.remove()
+      )
+      .attr("class", "block")
+      .attr("width", "200px")
+      .attr("height", "2.9rem")
+      .attr("x", "78%")
+      .attr("y", (d, i) => i * 28 + 38)
+      .attr("fill", "white");
 
     svg
       .selectAll(".text1")
@@ -132,7 +150,6 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
         <option value="finalDestinationCountry">
           Final Destination Country
         </option>
-        {/* <option value="finalDestinationMarket">Final Destination Market</option> */}
       </select>
     </>
   );
