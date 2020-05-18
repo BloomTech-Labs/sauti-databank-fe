@@ -112,9 +112,7 @@ const REGISTER = gql`
 `;
 
 function CreateUser(props) {
-  console.log(props);
   const [addUser, setAddUser] = useState(initialState);
-  console.log(addUser);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 

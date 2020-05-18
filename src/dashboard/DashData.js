@@ -105,15 +105,6 @@ function DashHome() {
       for (var i in split1) {
         let split2 = split1[i].split("equals");
         let split3 = split2[1].split("comma");
-        // console.log(
-        //   "filter name",
-        //   split2[0],
-        //   "search",
-        //   "table name",
-        //   split3[0],
-        //   "option",
-        //   convertOptionUrl(split3[1])
-        // );
         if (split3[0] !== "undefined") {
           let optionFlags = {};
 

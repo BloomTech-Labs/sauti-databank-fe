@@ -16,15 +16,6 @@ const setCrossedItems = (
   queryType,
   crossFilterQuery
 ) => {
-  console.log(
-    "SET_CROSSED_ITEMS",
-    data,
-    dataStructure,
-    crossFilter,
-    indexBy,
-    additionalFilter,
-    queryType
-  );
   //will be used to store all possible values for the index value, which is referring to a column in the database table
   let indexByValues = [];
   //will be used to store all possible values for the cross filter value, which is referring to a column in the database table
