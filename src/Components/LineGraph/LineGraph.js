@@ -1,25 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer
-} from "recharts";
-
-import CheckBox from "../CheckBox";
-import "../../Components/scss/lineGraph.scss";
-
+import React from "react";
 import { topChecked, sumAll } from "../LineGraphHelpers/topChecked";
 import { hundredScale } from "../LineGraphHelpers/scale100";
-import { getHighestSelected } from "../LineGraphHelpers/selectedCheckboxes";
 
-import DateSlider from "./DateSlider";
-import { getRangePeriods } from "../LineGraphHelpers/Range";
+import LineTime from "./LineTime";
 
 // Data Series will need to be Sessions for chart to work
 
@@ -36,7 +19,13 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
   const selectedTableColumnName = filter0.selectedTableColumnName;
   // 1. eliminate null values
 
-  let lineNonNull = lineArray;
+  let lineNonNull = [];
+  for (let i = 0; i < lineArray.length; i++) {
+    let obj = lineArray[i];
+    if (!Object.values(obj).includes(null)) {
+      lineNonNull.push(obj);
+    }
+  }
 
   lineNonNull.map(item => {
     item["created_mo"] = item.created_date.substring(0, 7);
@@ -239,27 +228,8 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
 
   const monthAll = hundredScale(updated);
   const month100 = monthAll.array;
-  // const monthHighs = monthAll.highNumerical;
-  // const moCurrentHigh = monthAll.high;
 
-  //  Quarterly Data
-
-  // 1. eliminate null values
-  const lineNonNullQtr = lineNonNull;
-  // for (let i = 0; i < lineArray.length; i++) {
-  //   if (
-  //     data.sessionsData[i][selectedTableColumnName] !== null &&
-  //     data.sessionsData[i][selectedTableColumnName] !== ""
-  //   ) {
-  //     lineNonNullQtr.push(data.sessionsData[i]);
-  //   }
-  // }
-
-  //2. grab only year-mo
-  // lineNonNullQtr.map(item => {
-  //   item["created_date"] = item.created_date.substring(0, 7);
-  // });
-
+  //Quarterly
   const byQuarter = lineNonNull;
 
   for (let i = 0; i < byQuarter.length; i++) {
@@ -373,11 +343,8 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
     }
   }
 
-  // const qtrHighest = highestValue(updatedQtr);
   const quarterAll = hundredScale(updatedQtr);
   const quarter100 = quarterAll.array;
-  // const quarterHighs = quarterAll.highNumerical;
-  // const qtrCurrentHigh = quarterAll.high;
 
   let top7 = {};
   for (let i = 0; i < keysInOrder.length; i++) {
@@ -386,166 +353,14 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
     top7 = { ...top7, ...obj };
   }
 
-  const [time, setTime] = useState(month100);
-  const [timeInUse, setTimeInUse] = useState(month100);
-
-  const [checkedItems, setCheckedItems] = useState(top7);
-
-  //Find range for slider
-  //should run after time period is updated
-  let allPeriodsArray = [];
-  const rangeValues = getRangePeriods(time, allPeriodsArray);
-  const totalRangePeriods = rangeValues.periodsAmount;
-  allPeriodsArray = rangeValues.allPeriodsArray;
-
-  //numbers displayed above the slider
-  //displays first and last of all periods in selected range
-  const [range, setRange] = useState([
-    allPeriodsArray[0],
-    allPeriodsArray[totalRangePeriods - 1]
-  ]);
-
-  //Sets range for Slider, after time is changed
-  useEffect(() => {
-    setRange([allPeriodsArray[0], allPeriodsArray[totalRangePeriods - 1]]);
-  }, [time]);
-
-  let display = [];
-  if (Object.entries(checkedItems).length > 0) {
-    for (let i = 0; i < Object.entries(checkedItems).length; i++) {
-      let bbb = Object.entries(checkedItems)[i];
-      if (bbb.includes(true)) {
-        display.push(bbb[0]);
-      }
-    }
-  }
-
-  let highest = getHighestSelected(time, display);
-
-  //multiple functions onClick
-  function moOnClick(event) {
-    setTime(month100);
-    setTimeInUse(month100);
-  }
-
-  function qtrOnClick(event) {
-    setTime(quarter100);
-    setTimeInUse(quarter100);
-  }
-
-  function yrOnClick(event) {
-    setTime(year100);
-    setTimeInUse(year100);
-  }
-
-  //checkboxs to display individual lines
-  function handleChange(event) {
-    let selected = event.target.name;
-    setCheckedItems({
-      ...checkedItems,
-      [event.target.name]: event.target.checked
-    });
-  }
-
-  // items to display on line chart
-  const zero = display[0];
-  const one = display[1];
-  const two = display[2];
-  const three = display[3];
-  const four = display[4];
-  const five = display[5];
-  const six = display[6];
-  const seven = display[7];
-
-  //To reset all selected checkboxes
-  const handleReset = event => {
-    setCheckedItems(checkedItems);
-  };
-
   return (
     <>
-      <div className="toggleDateContainer">
-        <p
-          className={time === month100 ? "monthBtnOn" : "monthBtnOff"}
-          onClick={moOnClick}
-        >
-          {" "}
-          Monthly
-        </p>
-        <p
-          className={time === quarter100 ? "monthBtnOn" : "monthBtnOff"}
-          onClick={qtrOnClick}
-        >
-          {" "}
-          Quarterly
-        </p>
-        <p
-          className={time === year100 ? "monthBtnOn" : "monthBtnOff"}
-          onClick={yrOnClick}
-        >
-          {" "}
-          Yearly
-        </p>
-      </div>
-
-      {/* <button onClick={() => setQuarter(!isQuarter)}>By Quarter</button> */}
-      <ResponsiveContainer width="95%" height={600}>
-        <LineChart
-          data={time}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis type="number" domain={[0, highest]} />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey={zero}
-            stroke="blue"
-            dot={false}
-            // activeDot={{ r: 8 }}
-          />
-          <Line type="monotone" dataKey={one} stroke="purple" dot={false} />
-          <Line type="monotone" dataKey={two} stroke="orange" dot={false} />
-          <Line type="monotone" dataKey={three} stroke="green" dot={false} />
-          <Line type="monotone" dataKey={four} stroke="red" dot={false} />
-          <Line type="monotone" dataKey={five} stroke="tan" dot={false} />
-          <Line type="monotone" dataKey={six} stroke="yellow" dot={false} />
-          <Line type="monotone" dataKey={seven} stroke="brown" dot={false} />
-        </LineChart>
-      </ResponsiveContainer>
-      <button className="buttonReset" onClick={handleReset}>
-        Reset
-      </button>
-      <div className="boxes">
-        <React.Fragment>
-          {checkboxes.map(option => (
-            <label key={option.key}>
-              <CheckBox
-                name={option.name}
-                checked={checkedItems[option.name]}
-                handleChange={handleChange}
-              />
-
-              {option.name}
-            </label>
-          ))}
-        </React.Fragment>
-      </div>
-      <DateSlider
-        range={range}
-        setRange={setRange}
-        totalRangePeriods={totalRangePeriods}
-        allPeriodsArray={allPeriodsArray}
-        timeInUse={timeInUse}
-        time={time}
-        setTime={setTime}
+      <LineTime
+        month100={month100}
+        quarter100={quarter100}
+        year100={year100}
+        top7={top7}
+        checkboxes={checkboxes}
       />
     </>
   );
