@@ -65,7 +65,7 @@ const LineGraphButton = props => {
     } else {
       return (
         <button className="bubble-map" onClick={() => setOpen("dot")}>
-          Display Dot map
+          <img src={mapImage} />
         </button>
       );
     }
@@ -92,15 +92,22 @@ const LineGraphButton = props => {
     }
   };
 
-  if (data && data.sessionsData) {
-    return <>{/* {renderChoroplethMap()} */}</>;
+  if (data.sessionsData) {
+    return (
+      <>
+        {renderLine()}
+        {renderChoroplethMap()}
+        {renderDotMap()}
+        {renderBar()}
+      </>
+    );
+  } else {
     return (
       <>
         <p>Line Graph not Available with 'Key Demographics' Data Series</p>
         {renderBar()}
-        {renderDotMap()}
         {renderChoroplethMap()}
-        {/* {renderDotMap()} */}
+        {renderDotMap()}
       </>
     );
   }

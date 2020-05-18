@@ -69,8 +69,9 @@ const GraphContainer = props => {
             />
           </ContentContainerDiv>
           <SocialMediaContainer className="social-media-container">
+            {/* look into arrow color or svg to replace */}
             <FilterHideButton onClick={HideFilters}>
-              {hidden ? <p>◀</p> : <p>▶</p>}
+              {hidden ? <p>►</p> : <p>◄</p>}
             </FilterHideButton>
           </SocialMediaContainer>
           <div
@@ -107,19 +108,22 @@ export default withRouter(
 );
 
 const FilterHideButton = styled.button`
-  padding: 8px 5px;
-  background: slategrey;
+  padding: 3.5px 5px;
+  background: #2c2e32;
   font-weight: 400;
-  color: white;
+  color: #ffffff;
   border-radius: 5px;
   font-size: 1.4rem;
-  height: 95px;
+  height: 30px;
   opacity: 0.75;
   border: none;
   position: absolute;
   &: hover {
     cursor: pointer;
     opacity: 1;
+  }
+  p {
+    height: 24px;
   }
 `;
 const SocialMediaContainer = styled.div`
