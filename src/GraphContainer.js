@@ -13,9 +13,6 @@ import ClipboardJS from "clipboard";
 
 import { Footer } from "./Components/Footer";
 
-import { getQuery } from "../src/redux/actions/queriesAction";
-import { connect } from "react-redux";
-
 const GraphContainer = props => {
   const [url, setUrl] = useState("");
   const [filters, setFilters] = useState(props.filters);
@@ -97,14 +94,7 @@ const GraphContainer = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    ...state
-  };
-};
-export default withRouter(
-  connect(mapStateToProps, { getQuery })(GraphContainer)
-);
+export default GraphContainer;
 
 const FilterHideButton = styled.button`
   padding: 3.5px 5px;

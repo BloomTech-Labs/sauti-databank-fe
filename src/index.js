@@ -6,13 +6,8 @@ import App from "./dashboard/App";
 import { BrowserRouter as Router } from "react-router-dom";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import reducer from "./redux/reducers/index";
 dotenv.config();
 
-const store = createStore(reducer, applyMiddleware(thunk));
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_BACKEND_URL}`,
   //uri: "localhost:2500/graphql",
@@ -21,13 +16,12 @@ const client = new ApolloClient({
     console.log("networkErrors", networkError);
   }
 });
+
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <Router>
+      <App />
+    </Router>
   </ApolloProvider>,
   document.getElementById("root")
 );
