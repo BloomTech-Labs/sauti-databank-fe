@@ -148,9 +148,9 @@ const LineGraphButton = props => {
     return (
       <>
         <p>Line Graph not Available with 'Key Demographics' Data Series</p>
+        {renderDotMap()}
         {renderBar()}
         {renderChoroplethMap()}
-        {renderDotMap()}
       </>
     );
   }
