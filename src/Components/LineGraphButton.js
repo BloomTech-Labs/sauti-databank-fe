@@ -91,6 +91,7 @@ const LineGraphButton = props => {
       return (
         <button className="bubble-map" onClick={() => setOpen("dot")}>
           <img src={mapImage} />
+          <h1>Bubble Map</h1>
         </button>
       );
     }

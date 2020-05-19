@@ -3,10 +3,12 @@
 }
 
 .line-btn {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 17%;
   padding: 0%;
-  // margin-bottom: 2vw;
-  // margin-left: 2vw;
-  width: 4rem;
+  width: 11%;
   background: #ffffff;
   border: 1px solid #ffffff;
   &:hover {
@@ -14,14 +16,19 @@
     color: #eb5e52;
     background-color: #ffffff;
     cursor: pointer;
+  }
+  h1 {
+    font-size: 1.1rem;
   }
 }
 
 .bar-btn {
-  // padding: 0%;
-  // margin-bottom: 2vw;
-  // margin-left: 2vw;
-  width: 4rem;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 17%;
+  padding: 0%;
+  width: 11%;
   background: #ffffff;
   border: 1px solid #ffffff;
   &:hover {
@@ -29,14 +36,19 @@
     color: #eb5e52;
     background-color: #ffffff;
     cursor: pointer;
+  }
+  h1 {
+    font-size: 1.1rem;
   }
 }
 
 .choro-map {
-  // padding: 0%;
-  // margin-bottom: 2vw;
-  // margin-left: 2vw;
-  width: 4rem;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 17%;
+  padding: 0%;
+  width: 11%;
   background: #ffffff;
   border: 1px solid #ffffff;
   &:hover {
@@ -45,10 +57,18 @@
     background-color: #ffffff;
     cursor: pointer;
   }
+  h1 {
+    font-size: 1.1rem;
+  }
 }
 
 .bubble-map {
-  width: 4rem;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 17%;
+  padding: 0%;
+  width: 11%;
   background: #ffffff;
   border: 1px solid #ffffff;
   &:hover {
@@ -56,5 +76,8 @@
     color: #eb5e52;
     background-color: #ffffff;
     cursor: pointer;
+  }
+  h1 {
+    font-size: 1.1rem;
   }
 }
