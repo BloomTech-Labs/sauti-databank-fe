@@ -134,6 +134,7 @@ const LineGraphButton = props => {
       return (
         <button className="bar-btn" onClick={() => setOpen("bar")}>
           <img src={barImage} />
+          <h1>Bar Chart</h1>
         </button>
       );
     }
@@ -157,9 +158,7 @@ const LineGraphButton = props => {
       </>
     );
   } else {
-    {
-      renderBar();
-    }
+    return <>{renderBar()}</>;
   }
 };
 
