@@ -19,6 +19,8 @@ const LineGraphButton = props => {
     makeFilterList
   } = props;
 
+  console.log(data.tradersUsers, filters[0]["selectedCategory"]);
+
   const renderLine = () => {
     if (open === "line") {
       return (
@@ -50,6 +52,7 @@ const LineGraphButton = props => {
       return (
         <button className="line-btn" onClick={() => setOpen("line")}>
           <img src={graphImage} />
+          <h1>Line Graph</h1>
         </button>
       );
     }
@@ -71,6 +74,7 @@ const LineGraphButton = props => {
       return (
         <button className="choro-map" onClick={() => setOpen("choropleth")}>
           <img src={mapImage} />
+          <h1>Map</h1>
         </button>
       );
     }
@@ -87,6 +91,7 @@ const LineGraphButton = props => {
       return (
         <button className="bubble-map" onClick={() => setOpen("dot")}>
           <img src={mapImage} />
+          <h1>Bubble Map</h1>
         </button>
       );
     }
@@ -130,6 +135,7 @@ const LineGraphButton = props => {
       return (
         <button className="bar-btn" onClick={() => setOpen("bar")}>
           <img src={barImage} />
+          <h1>Bar Chart</h1>
         </button>
       );
     }
@@ -139,20 +145,21 @@ const LineGraphButton = props => {
     return (
       <>
         {renderLine()}
-        {renderChoroplethMap()}
-        {renderDotMap()}
         {renderBar()}
+      </>
+    );
+  } else if (
+    data.tradersUsers &&
+    filters[0]["selectedCategory"] === "Country of Residence"
+  ) {
+    return (
+      <>
+        {renderBar()}
+        {renderChoroplethMap()}
       </>
     );
   } else {
-    return (
-      <>
-        <p>Line Graph not Available with 'Key Demographics' Data Series</p>
-        {renderDotMap()}
-        {renderBar()}
-        {renderChoroplethMap()}
-      </>
-    );
+    return <>{renderBar()}</>;
   }
 };
 
