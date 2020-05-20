@@ -15,7 +15,14 @@ import "../scss/choropleth.scss";
 
 import { countryRank } from "./mapParcer";
 
-function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
+function GeoChart({
+  data,
+  updatedData,
+  handleChanges,
+  dataView,
+  property,
+  setProperty
+}) {
   //use select from d3
   //useRef to access DOM element and pass to D3
   const svgRef = useRef();
@@ -30,15 +37,15 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
   function changeProperty(event) {
     setMaxColor("#A2181D");
     setProperty(event.target.value);
-    setResults(countryRank(dataTwo, event.target.value));
+    setResults(countryRank(updatedData, event.target.value));
   }
 
   useEffect(() => {
     //need to work with D3
     const svg = select(svgRef.current);
     //find min and max of filter selected
-    let minProp = min(data.features, feature => feature.properties[property]);
-    let maxProp = max(data.features, feature => feature.properties[property]);
+    let minProp = min(updatedData, feature => feature.properties[property]);
+    let maxProp = max(updatedData, feature => feature.properties[property]);
 
     //map country to color based on scale
     const colorScale = scaleSqrt()
@@ -64,7 +71,7 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
     svg
       .selectAll(".country")
       //sync county in svg with data.features
-      .data(data.features)
+      .data(updatedData)
       .join("path")
       //click on a country, sets it to projection.fitSize
       //click a second time, will be null and zoom out
@@ -133,7 +140,14 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       //where on the screen to place the text
       .attr("x", "80%")
       .attr("y", (d, i) => i * 28 + 60);
-  }, [data, dimensions, property, selectedCountry, dataView, allResults]);
+  }, [
+    updatedData,
+    dimensions,
+    property,
+    selectedCountry,
+    dataView,
+    allResults
+  ]);
 
   return (
     <>
@@ -146,7 +160,7 @@ function GeoChart({ data, handleChanges, dataView, property, setProperty }) {
       <h2 className="choro-parent-h2">Select Country</h2>
       <select value={property} onChange={changeProperty}>
         <option value="start">Please Select a Filter</option>
-        <option value="countryOfResidence">Country of Residence</option>
+        <option value="country_of_residence">Country of Residence</option>
         <option value="finalDestinationCountry">
           Final Destination Country
         </option>

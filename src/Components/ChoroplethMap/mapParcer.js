@@ -1,6 +1,6 @@
-function countryRank(dataTwo, property) {
+function countryRank(updatedData, property) {
   let countries = [];
-  const arrayData = dataTwo.features;
+  const arrayData = updatedData;
   for (let i = 0; i < arrayData.length; i++) {
     let item = arrayData[i]["properties"];
     let name = item["name"];

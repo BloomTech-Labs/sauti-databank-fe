@@ -1,15 +1,11 @@
-function choroplethDataParse(gqlData) {
-  console.log(typeof gqlData);
-  console.log(gqlData);
-  return gqlData.reduce(function(total, obj) {
-    let key = obj["Country of Residence"];
-    console.log(key);
+const choroplethDataParse = data => {
+  return data.reduce(function(total, obj) {
+    let key = obj["country_of_residence"];
     if (!total[key]) {
       total[key] = [];
     }
     total[key].push(obj);
     return total;
-    console.log(total);
-  });
-}
+  }, {});
+};
 export { choroplethDataParse };
