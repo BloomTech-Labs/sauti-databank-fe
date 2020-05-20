@@ -36,7 +36,6 @@ function GeoChart({
   const [allResults, setResults] = useState([]);
 
   function changeProperty() {
-    console.log(`category`, category);
     setMaxColor("#A2181D");
     setProperty(category);
     setResults(countryRank(updatedData, category));
@@ -153,12 +152,7 @@ function GeoChart({
 
   return (
     <>
-      {/* <select value={property} onChange={changeProperty}>
-        <option value="start">Please Select a Filter</option>
-        <option value="country_of_residence">Country of Residence</option>
-        <option value="commoditycountry">Final Destination Country</option>
-      </select> */}
-      <button onClick={changeProperty}>View Results</button>
+      <button onClick={changeProperty}>Display Results</button>
       <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
         {/* declare className, not to interfere with other svg styling */}
         <div onMouseEnter={handleChanges} className="d3">
