@@ -65,6 +65,7 @@ const LineGraphButton = props => {
           <ChoroplethParent
             gqlData={data}
             filters={filters}
+            queryType={queryType}
             width={900}
             height={500}
           />
@@ -140,12 +141,20 @@ const LineGraphButton = props => {
       );
     }
   };
-
-  if (data.sessionsData) {
+  console.log(filters[0]["selectedCategory"]);
+  if (filters[0]["selectedCategory"] === "Final Destination Country") {
     return (
       <>
         {renderLine()}
         {renderBar()}
+        {renderChoroplethMap()}
+      </>
+    );
+  } else if (data.sessionsData) {
+    return (
+      <>
+        {renderBar()}
+        {renderLine()}
       </>
     );
   } else if (

@@ -4,9 +4,11 @@ import dataOne from "./africaData1.json";
 import dataTwo from "./africaData2.json";
 import { choroplethDataParse } from "./choroplethDataParse";
 
-function ChoroplethParent({ gqlData }) {
-  const results = choroplethDataParse(gqlData.tradersUsers);
-  const category = Object.keys(gqlData.tradersUsers[0])[0];
+function ChoroplethParent({ gqlData, queryType }) {
+  console.log(queryType);
+  gqlData = gqlData[queryType];
+  const category = Object.keys(gqlData[0])[0];
+  const results = choroplethDataParse(gqlData, category);
 
   console.log(category);
   console.log(`choroplethData`, results);

@@ -161,9 +161,7 @@ function GeoChart({
       <select value={property} onChange={changeProperty}>
         <option value="start">Please Select a Filter</option>
         <option value="country_of_residence">Country of Residence</option>
-        <option value="finalDestinationCountry">
-          Final Destination Country
-        </option>
+        <option value="commoditycountry">Final Destination Country</option>
       </select>
     </>
   );

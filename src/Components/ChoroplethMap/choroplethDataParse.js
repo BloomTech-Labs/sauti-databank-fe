@@ -1,6 +1,6 @@
-const choroplethDataParse = data => {
+const choroplethDataParse = (data, category) => {
   return data.reduce(function(total, obj) {
-    let key = obj["country_of_residence"];
+    let key = obj[category];
     if (!total[key]) {
       total[key] = [];
     }
