@@ -168,6 +168,22 @@ const LineGraphButton = props => {
         {renderChoroplethMap()}
       </>
     );
+  } else if (
+    open === "choropleth" &&
+    filters[0]["selectedCategory"] !== "Country of Residence" &&
+    filters[0]["selectedCategory"] !== "Final Destination Country"
+  ) {
+    return (
+      <>
+        {renderBar()}
+        <br></br>
+        <br></br>
+        <p>Map can only be used to display:</p>
+        <h1>"Data Series": "Country of Residence"</h1>
+        <h1>"Data Series": "Final Destination Country"</h1>
+        <p>Other searches can be displayed on the Bar Chart.</p>
+      </>
+    );
   } else if (data.sessionsData) {
     return (
       <>
@@ -183,22 +199,6 @@ const LineGraphButton = props => {
       <>
         {renderBar()}
         {renderChoroplethMap()}
-      </>
-    );
-  } else if (
-    open === "choropleth" &&
-    filters[0]["selectedCategory"] !== "Country of Residence" &&
-    filters[0]["selectedCategory"] !== "Final Destination Country"
-  ) {
-    return (
-      <>
-        {renderBar()}
-        <br></br>
-        <br></br>
-        <p>Map can only be used to display:</p>
-        <h1>"Data Series": "Country of Residence"</h1>
-        <h1>"Data Series": "Final Destination Country"</h1>
-        <p>Other searches can be displayed on the Bar Chart.</p>
       </>
     );
   } else {
