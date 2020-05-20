@@ -21,7 +21,8 @@ function GeoChart({
   handleChanges,
   dataView,
   property,
-  setProperty
+  setProperty,
+  category
 }) {
   //use select from d3
   //useRef to access DOM element and pass to D3
@@ -34,10 +35,11 @@ function GeoChart({
   //must start as empty array or will render text many times.
   const [allResults, setResults] = useState([]);
 
-  function changeProperty(event) {
+  function changeProperty() {
+    console.log(`category`, category);
     setMaxColor("#A2181D");
-    setProperty(event.target.value);
-    setResults(countryRank(updatedData, event.target.value));
+    setProperty(category);
+    setResults(countryRank(updatedData, category));
   }
 
   useEffect(() => {
@@ -151,6 +153,12 @@ function GeoChart({
 
   return (
     <>
+      {/* <select value={property} onChange={changeProperty}>
+        <option value="start">Please Select a Filter</option>
+        <option value="country_of_residence">Country of Residence</option>
+        <option value="commoditycountry">Final Destination Country</option>
+      </select> */}
+      <button onClick={changeProperty}>View Results</button>
       <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
         {/* declare className, not to interfere with other svg styling */}
         <div onMouseEnter={handleChanges} className="d3">
@@ -158,11 +166,6 @@ function GeoChart({
         </div>
       </div>
       <h2 className="choro-parent-h2">Select Country</h2>
-      <select value={property} onChange={changeProperty}>
-        <option value="start">Please Select a Filter</option>
-        <option value="country_of_residence">Country of Residence</option>
-        <option value="commoditycountry">Final Destination Country</option>
-      </select>
     </>
   );
 }

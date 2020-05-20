@@ -19,7 +19,7 @@ const LineGraphButton = props => {
     makeFilterList
   } = props;
 
-  console.log(data.tradersUsers, filters[0]["selectedCategory"]);
+  console.log(data, filters[0]["selectedCategory"]);
 
   const renderLine = () => {
     if (open === "line") {

@@ -36,7 +36,7 @@ function ChoroplethParent({ gqlData, queryType }) {
     }
   }
 
-  console.log(africaArray);
+  console.log(category);
   const [map, setMap] = useState(dataOne);
 
   const [property, setProperty] = useState("start");
@@ -56,6 +56,7 @@ function ChoroplethParent({ gqlData, queryType }) {
           updatedData={africaArray}
           property={property}
           setProperty={setProperty}
+          category={category}
         />
       </React.Fragment>
     </>
