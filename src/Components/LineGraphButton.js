@@ -169,9 +169,22 @@ const LineGraphButton = props => {
       </>
     );
   } else if (
+    filters[0]["selectedCategory"] ===
+    "Requested Procedures for Destination (Imports to:)"
+  ) {
+    return (
+      <>
+        {renderLine()}
+        {renderBar()}
+        {renderChoroplethMap()}
+      </>
+    );
+  } else if (
     open === "choropleth" &&
     filters[0]["selectedCategory"] !== "Country of Residence" &&
-    filters[0]["selectedCategory"] !== "Final Destination Country"
+    filters[0]["selectedCategory"] !== "Final Destination Country" &&
+    filters[0]["selectedCategory"] !==
+      "Requested Procedures for Destination (Imports to:)"
   ) {
     return (
       <>
