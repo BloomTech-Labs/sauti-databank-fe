@@ -178,10 +178,12 @@ const LineGraphButton = props => {
         {renderBar()}
         <br></br>
         <br></br>
-        <p>Map can only be used to display:</p>
-        <h1>"Data Series": "Country of Residence"</h1>
-        <h1>"Data Series": "Final Destination Country"</h1>
-        <p>Other searches can be displayed on the Bar Chart.</p>
+        <div className="choro-map-message">
+          <p>Map can only be used to display:</p>
+          <h1>"Data Series": "Country of Residence"</h1>
+          <h1>"Data Series": "Final Destination Country"</h1>
+          <p>Other searches can be displayed on the Bar Chart.</p>
+        </div>
       </>
     );
   } else if (data.sessionsData) {
