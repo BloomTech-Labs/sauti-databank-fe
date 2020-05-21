@@ -19,8 +19,6 @@ const LineGraphButton = props => {
     makeFilterList
   } = props;
 
-  console.log(data.tradersUsers, filters[0]["selectedCategory"]);
-
   const renderLine = () => {
     if (open === "line") {
       return (
@@ -62,9 +60,30 @@ const LineGraphButton = props => {
     if (open === "choropleth") {
       return (
         <>
+          <div className="graph-titles-container">
+            <div className="graph-title-diplay">
+              <h1 className="graph-title">Data Series</h1>
+              <h2 className="graph-title-small">
+                {filters[0].selectedCategory}
+              </h2>
+            </div>
+            <div className="graph-title-diplay">
+              <h1 className="graph-title">Subsample</h1>
+              <h2 className="graph-title-small">
+                {filters[1].selectedCategory}
+              </h2>
+            </div>
+            {filters[2].selectedTableColumnName && (
+              <div className="graph-title-diplay">
+                <h3 className="graph-title">Additional Filter</h3>
+                <h3 className="graph-title-small">{makeFilterList()}</h3>
+              </div>
+            )}
+          </div>
           <ChoroplethParent
             gqlData={data}
             filters={filters}
+            queryType={queryType}
             width={900}
             height={500}
           />
@@ -141,11 +160,37 @@ const LineGraphButton = props => {
     }
   };
 
-  if (data.sessionsData) {
+  if (filters[0]["selectedCategory"] === "Final Destination Country") {
     return (
       <>
         {renderLine()}
         {renderBar()}
+        {renderChoroplethMap()}
+      </>
+    );
+  } else if (
+    open === "choropleth" &&
+    filters[0]["selectedCategory"] !== "Country of Residence" &&
+    filters[0]["selectedCategory"] !== "Final Destination Country"
+  ) {
+    return (
+      <>
+        {renderBar()}
+        <br></br>
+        <br></br>
+        <div className="choro-map-message">
+          <p>Map can only be used to display:</p>
+          <h1>"Data Series": "Country of Residence"</h1>
+          <h1>"Data Series": "Final Destination Country"</h1>
+          <p>Other searches can be displayed on the Bar Chart.</p>
+        </div>
+      </>
+    );
+  } else if (data.sessionsData) {
+    return (
+      <>
+        {renderBar()}
+        {renderLine()}
       </>
     );
   } else if (
