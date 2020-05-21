@@ -10,13 +10,11 @@ import {
   map
 } from "d3";
 import useResizeObserver from "./useResizeObserver";
-import dataTwo from "./africaData2.json";
 import "../scss/choropleth.scss";
 
 import { countryRank } from "./mapParcer";
 
 function GeoChart({
-  data,
   updatedData,
   handleChanges,
   dataView,

@@ -5,7 +5,6 @@ import dataTwo from "./africaData2.json";
 import { choroplethDataParse } from "./choroplethDataParse";
 
 function ChoroplethParent({ gqlData, queryType }) {
-  // useEffect(() => {})
   gqlData = gqlData[queryType];
   const category = Object.keys(gqlData[0])[0];
   const results = choroplethDataParse(gqlData, category);
@@ -20,7 +19,6 @@ function ChoroplethParent({ gqlData, queryType }) {
   //when add a filter, information is not correct
   //should set all to zero, before applying resultsArray
   let africaArray = dataOne.features;
-  let newObj = { category: 0 };
   for (let i = 0; i < africaArray.length; i++) {
     africaArray[i].properties[category] = 0;
   }
@@ -37,7 +35,7 @@ function ChoroplethParent({ gqlData, queryType }) {
       }
     }
   }
-  console.log(africaArray);
+
   const [map, setMap] = useState(dataOne);
 
   const [property, setProperty] = useState("start");
