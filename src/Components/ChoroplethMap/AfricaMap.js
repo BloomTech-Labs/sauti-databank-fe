@@ -29,7 +29,20 @@ function GeoChart({
   const dimensions = useResizeObserver(wrapperRef);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [maxColor, setMaxColor] = useState("#F3EED9");
-
+  const [scaleData, setScaleData] = useState([
+    1,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ]);
+  const [scalePercent, setScalePercent] = useState([1, 100]);
   //must start as empty array or will render text many times.
   const [allResults, setResults] = useState([]);
 
@@ -48,7 +61,7 @@ function GeoChart({
 
     //map country to color based on scale
     //https://mycolor.space/gradient?ori=to+right+bottom&hex=%23F6FA1F&hex2=%23EB1B12&sub=1
-    const colorScale = scaleSqrt()
+    const colorScale = scaleLinear()
       .domain([minProp, 2, maxProp])
       .range(["#F3EED9", "#E5da66", maxColor])
       .clamp(true);
@@ -107,16 +120,34 @@ function GeoChart({
       .attr("x", "50%")
       .attr("y", "50%");
 
+    //scale percentage
+    svg
+      .selectAll(".percent")
+      .data(scalePercent)
+      .join("text")
+      .attr("class", "percent")
+      .text((d, i) => scalePercent[i] + "%")
+      .attr("x", (value, index) => index * 180 + 10)
+      .attr("y", 23)
+      .attr("stroke", "black");
+
+    //scale colors
+    svg
+      .selectAll(".scale")
+      .data(scaleData)
+      .join("rect")
+      .attr("class", "scale")
+      .attr("width", "20px")
+      .attr("height", "2.9rem")
+      .attr("x", (value, index) => index * 20 + 10)
+      .attr("y", "26")
+      .attr("fill", colorScale);
+
     //creates a rectangle for each data point
     svg
-      .selectAll("rect")
+      .selectAll(".block")
       .data(allResults)
-      .join(
-        //add attr to both entering and updating
-        enter => enter.append("rect"),
-        update => update.attr("class", "updated"),
-        exit => exit.remove()
-      )
+      .join("rect")
       .attr("class", "block")
       .attr("width", "200px")
       .attr("height", "2.9rem")
@@ -132,6 +163,7 @@ function GeoChart({
       //.join("text")
       .join("text")
       //selected country gets a class name of .label
+      //class is used for styling
       .attr("class", "text1")
       //text will be name and display, from d element take i value
       .text((d, i) => allResults[i][0] + ": " + allResults[i][1] + "%")
