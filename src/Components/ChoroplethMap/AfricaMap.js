@@ -47,10 +47,11 @@ function GeoChart({
     let maxProp = max(updatedData, feature => feature.properties[property]);
 
     //map country to color based on scale
+    //https://mycolor.space/gradient?ori=to+right+bottom&hex=%23F6FA1F&hex2=%23EB1B12&sub=1
     const colorScale = scaleSqrt()
-      .domain([minProp, maxProp])
-      .range(["#F3EED9", maxColor]);
-    //#eb5e52 , #FBEEEE, #f4af90, #FAF1CB, fill: rgb(232, 193, 160), #Ebebeb
+      .domain([minProp, 2, maxProp])
+      .range(["#F3EED9", "#E5da66", maxColor])
+      .clamp(true);
 
     // use resized dimensions, to zoom in
     // but fall back to getBoundingClientRect, if no dimensions yet.
