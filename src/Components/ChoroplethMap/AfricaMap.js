@@ -14,12 +14,13 @@ import "../scss/choropleth.scss";
 
 import { countryRank } from "./mapParcer";
 
-function GeoChart({
+function AfricaMap({
   updatedData,
   handleChanges,
   dataView,
   property,
   setProperty,
+  filters,
   category
 }) {
   //use select from d3
@@ -45,14 +46,18 @@ function GeoChart({
   const [scalePercent, setScalePercent] = useState([1, 100]);
   //must start as empty array or will render text many times.
   const [allResults, setResults] = useState([]);
+  const [button, setButton] = useState();
+  console.log(button);
 
   function changeProperty() {
     setMaxColor("#A2181D");
     setProperty(category);
     setResults(countryRank(updatedData, category));
+    setTimeout(() => setButton(""), 300);
   }
 
   useEffect(() => {
+    setButton("Display Results");
     //need to work with D3
     const svg = select(svgRef.current);
     //find min and max of filter selected
@@ -62,7 +67,7 @@ function GeoChart({
     //map country to color based on scale
     //https://mycolor.space/gradient?ori=to+right+bottom&hex=%23F6FA1F&hex2=%23EB1B12&sub=1
     const colorScale = scaleLinear()
-      .domain([minProp, 2, maxProp])
+      .domain([minProp, 1, 100])
       .range(["#F3EED9", "#E5da66", maxColor])
       .clamp(true);
 
@@ -178,12 +183,13 @@ function GeoChart({
     property,
     selectedCountry,
     dataView,
-    allResults
+    allResults,
+    filters
   ]);
 
   return (
     <>
-      <button onClick={changeProperty}>Display Results</button>
+      <button onClick={changeProperty}>{button}</button>
       <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
         {/* declare className, not to interfere with other svg styling */}
         <div onMouseEnter={handleChanges} className="d3">
@@ -195,4 +201,4 @@ function GeoChart({
   );
 }
 
-export default GeoChart;
+export default AfricaMap;

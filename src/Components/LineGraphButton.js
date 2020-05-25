@@ -84,8 +84,7 @@ const LineGraphButton = props => {
             gqlData={data}
             filters={filters}
             queryType={queryType}
-            width={900}
-            height={500}
+            filters={filters}
           />
         </>
       );
