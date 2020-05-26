@@ -14,12 +14,13 @@ import "../scss/choropleth.scss";
 
 import { countryRank } from "./mapParcer";
 
-function GeoChart({
+function AfricaMap({
   updatedData,
   handleChanges,
   dataView,
   property,
   setProperty,
+  filters,
   category
 }) {
   //use select from d3
@@ -29,17 +30,34 @@ function GeoChart({
   const dimensions = useResizeObserver(wrapperRef);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [maxColor, setMaxColor] = useState("#F3EED9");
-
+  const [scaleData, setScaleData] = useState([
+    1,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ]);
+  const [scalePercent, setScalePercent] = useState([1, 100]);
   //must start as empty array or will render text many times.
   const [allResults, setResults] = useState([]);
+  const [button, setButton] = useState();
+  console.log(button);
 
   function changeProperty() {
     setMaxColor("#A2181D");
     setProperty(category);
     setResults(countryRank(updatedData, category));
+    setTimeout(() => setButton(""), 300);
   }
 
   useEffect(() => {
+    setButton("Display Results");
     //need to work with D3
     const svg = select(svgRef.current);
     //find min and max of filter selected
@@ -47,10 +65,11 @@ function GeoChart({
     let maxProp = max(updatedData, feature => feature.properties[property]);
 
     //map country to color based on scale
-    const colorScale = scaleSqrt()
-      .domain([minProp, maxProp])
-      .range(["#F3EED9", maxColor]);
-    //#eb5e52 , #FBEEEE, #f4af90, #FAF1CB, fill: rgb(232, 193, 160), #Ebebeb
+    //https://mycolor.space/gradient?ori=to+right+bottom&hex=%23F6FA1F&hex2=%23EB1B12&sub=1
+    const colorScale = scaleLinear()
+      .domain([minProp, 1, 100])
+      .range(["#F3EED9", "#E5da66", maxColor])
+      .clamp(true);
 
     // use resized dimensions, to zoom in
     // but fall back to getBoundingClientRect, if no dimensions yet.
@@ -106,16 +125,34 @@ function GeoChart({
       .attr("x", "50%")
       .attr("y", "50%");
 
+    //scale percentage
+    svg
+      .selectAll(".percent")
+      .data(scalePercent)
+      .join("text")
+      .attr("class", "percent")
+      .text((d, i) => scalePercent[i] + "%")
+      .attr("x", (value, index) => index * 180 + 10)
+      .attr("y", 23)
+      .attr("stroke", "black");
+
+    //scale colors
+    svg
+      .selectAll(".scale")
+      .data(scaleData)
+      .join("rect")
+      .attr("class", "scale")
+      .attr("width", "20px")
+      .attr("height", "2.9rem")
+      .attr("x", (value, index) => index * 20 + 10)
+      .attr("y", "26")
+      .attr("fill", colorScale);
+
     //creates a rectangle for each data point
     svg
-      .selectAll("rect")
+      .selectAll(".block")
       .data(allResults)
-      .join(
-        //add attr to both entering and updating
-        enter => enter.append("rect"),
-        update => update.attr("class", "updated"),
-        exit => exit.remove()
-      )
+      .join("rect")
       .attr("class", "block")
       .attr("width", "200px")
       .attr("height", "2.9rem")
@@ -131,6 +168,7 @@ function GeoChart({
       //.join("text")
       .join("text")
       //selected country gets a class name of .label
+      //class is used for styling
       .attr("class", "text1")
       //text will be name and display, from d element take i value
       .text((d, i) => allResults[i][0] + ": " + allResults[i][1] + "%")
@@ -145,12 +183,13 @@ function GeoChart({
     property,
     selectedCountry,
     dataView,
-    allResults
+    allResults,
+    filters
   ]);
 
   return (
     <>
-      <button onClick={changeProperty}>Display Results</button>
+      <button onClick={changeProperty}>{button}</button>
       <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
         {/* declare className, not to interfere with other svg styling */}
         <div onMouseEnter={handleChanges} className="d3">
@@ -162,4 +201,4 @@ function GeoChart({
   );
 }
 
-export default GeoChart;
+export default AfricaMap;

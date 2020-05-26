@@ -3,10 +3,16 @@ import AfricaMap from "./AfricaMap";
 import dataOne from "./africaData1.json";
 import dataTwo from "./africaData2.json";
 import { choroplethDataParse } from "./choroplethDataParse";
+import "../scss/choropleth.scss";
 
-function ChoroplethParent({ gqlData, queryType }) {
+function ChoroplethParent({ gqlData, queryType, filters }) {
   gqlData = gqlData[queryType];
-  const category = Object.keys(gqlData[0])[0];
+  console.log(gqlData);
+  let category;
+  gqlData.length > 0
+    ? (category = Object.keys(gqlData[0])[0])
+    : console.log("No Data");
+
   const results = choroplethDataParse(gqlData, category);
 
   const resultsArray = Object.entries(results);
@@ -44,22 +50,31 @@ function ChoroplethParent({ gqlData, queryType }) {
     setMap(dataTwo);
   }
 
-  return (
-    <>
-      <React.Fragment>
-        <h2 className="choro-parent-h2">Sauti Map</h2>
-        <AfricaMap
-          handleChanges={handleChanges}
-          dataView={map}
-          data={dataOne}
-          updatedData={africaArray}
-          property={property}
-          setProperty={setProperty}
-          category={category}
-        />
-      </React.Fragment>
-    </>
-  );
+  if (gqlData.length === 0) {
+    return (
+      <div className="noData">
+        <h1>No Data To Display for this search</h1>
+      </div>
+    );
+  } else {
+    return (
+      <>
+        <React.Fragment>
+          <h2 className="choro-parent-h2">Sauti Map</h2>
+          <AfricaMap
+            handleChanges={handleChanges}
+            dataView={map}
+            data={dataOne}
+            updatedData={africaArray}
+            property={property}
+            setProperty={setProperty}
+            category={category}
+            filters={filters}
+          />
+        </React.Fragment>
+      </>
+    );
+  }
 }
 
 export default ChoroplethParent;
