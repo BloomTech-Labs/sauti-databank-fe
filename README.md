@@ -90,6 +90,8 @@ Other key features include
 - [react-dropdown library](https://www.npmjs.com/package/react-dropdown): Helped us use an existing library for making the dropdown beautiful so that we could focus instead on the business logic and data that differentiates Sauti in the nonprofit space.
 - [Nivo](https://nivo.rocks/): Built specifically for React and ontop of d3js, Nivo provides easily-used graph functionality to display accurate dipiction of the data being analyzed.
 - [Apollo](https://www.apollographql.com/): Built to interact with GraphQL backend API's well, Apollo is the platform that enables us to write queries that specify back-end requests which retreives data for smooth transitions in crossfiltration. We utilize Apollo-Boost wrapper for easy interaction between React front-end components and GraphQL back-end.
+-[Recharts.js] - Line graph, used on top of D3.js
+-[D3.js]: for Choropleth Map.  
 - [Sass](https://sass-lang.com/): A CSS compiler helped us iterate more quickly on styling with the efficient use of nesting.
 - [AG-Grid-React](https://www.ag-grid.com/react-grid/)
 - [Material-UI](https://material-ui.com/)
