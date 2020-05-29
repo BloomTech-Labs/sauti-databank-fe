@@ -2,13 +2,14 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 import GraphContainer from "../GraphContainer";
-import { getToken, decodeToken } from "./auth/Auth";
+//import { getToken, decodeToken } from "./auth/Auth";
 
-import { SignedInDiv, UserHeader } from "./styledComponents/Index";
+//import { SignedInDiv, UserHeader } from "./styledComponents/Index";
 import { FilterBoxOptions } from "../Components/FilterBoxOptions";
-import { flavourOptions } from "../Components/docs/data";
+//import { flavourOptions } from "../Components/docs/data";
 import graphLabels from "../Components/graphLabels";
 
+//set inital filters
 const filterTemplate = {
   0: {
     nameOfFilter: "Data Series",
@@ -38,13 +39,14 @@ const filterTemplate = {
 };
 
 function DashHome() {
-  const signedIn = getToken();
-  const token = getToken();
-  let userEmail;
-  if (token) {
-    userEmail = decodeToken(token);
-    userEmail = userEmail.email;
-  }
+  // const signedIn = getToken();
+  //const token = getToken();
+  // let userEmail;
+  // if (token) {
+  //   userEmail = decodeToken(token);
+  //   userEmail = userEmail.email;
+  // }
+
   const history = useHistory();
 
   // convert the english word url to option labels the user will see
@@ -58,6 +60,8 @@ function DashHome() {
       return option;
     }
   };
+
+  //if nothing in history, set inital filters to Gender
   const setupFilter = history => {
     if (history.location.search.length === 0) {
       let defaultFilter = {};
