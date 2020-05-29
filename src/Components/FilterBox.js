@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import CalendarModal from "../dashboard/CalendarModal";
 import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
+import CalendarParent from "../dashboard/CalendarParent";
 
 export default function FilterBox(props) {
   const History = useHistory();
@@ -403,8 +404,23 @@ export default function FilterBox(props) {
           </Button>
         </div>
         <form>
+          <CalendarParent
+            tier={tier}
+            newSub={newSub}
+            filterBoxStartDate={filterBoxStartDate}
+            setFilterBoxStartDate={setFilterBoxStartDate}
+            filterBoxEndDate={filterBoxEndDate}
+            setFilterBoxEndDate={setFilterBoxEndDate}
+            changeYear={changeYear}
+            changeQuarter={changeQuarter}
+            getCurrentYear={getCurrentYear}
+            changeYear={changeYear}
+            changeQuarter={changeQuarter}
+            getCurrentYear={getCurrentYear}
+            loading={loading}
+          />
           {/* That if tier is undefined(not logged in)? The reliability of this logic is in questino*/}
-          {tier === "ADMIN" ||
+          {/* {tier === "ADMIN" ||
           tier === "PAID" ||
           tier === "GOV_ROLE" ||
           newSub ? (
@@ -459,7 +475,7 @@ export default function FilterBox(props) {
             </DateContainer>
           ) : (
             <CalendarModal />
-          )}
+          )} */}
 
           <ResetButton
             // className="reset-btn"
