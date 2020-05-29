@@ -37,8 +37,8 @@ const RenderCheckContainer = ({
         ));
     }
   };
-
-  if (i !== String(1)) {
+  //remove additional filtering options for 'Data Series',
+  if (i > 1) {
     if (graphLabels[`${filters[i].selectedTableColumnName}`]) {
       return (
         <CheckboxContainer>
