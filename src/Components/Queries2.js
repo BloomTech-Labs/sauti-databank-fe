@@ -8,7 +8,7 @@ import LineGraphButton from "./LineGraphButton";
 
 const GetData = props => {
   //LineGraph button
-  const [open, setOpen] = useState("bar");
+  //const [open, setOpen] = useState("bar");
 
   let queryType = "tradersUsers";
   let QUERY;
@@ -169,8 +169,8 @@ const GetData = props => {
         queryType={queryType}
         filterBoxStartDate={filterBoxStartDate}
         filterBoxEndDate={filterBoxEndDate}
-        open={open}
-        setOpen={setOpen}
+        open={props.open}
+        setOpen={props.setOpen}
         data={data}
         makeFilterList={makeFilterList}
       />

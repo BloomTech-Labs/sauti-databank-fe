@@ -29,6 +29,8 @@ const GraphContainer = props => {
 
   const [hidden, setHidden] = useState(false);
 
+  const [open, setOpen] = useState("bar");
+
   function HideFilters() {
     setHidden(!hidden);
   }
@@ -63,6 +65,8 @@ const GraphContainer = props => {
               setFilterBoxStartDate={setFilterBoxStartDate}
               filterBoxEndDate={filterBoxEndDate}
               setFilterBoxEndDate={setFilterBoxEndDate}
+              open={open}
+              setOpen={setOpen}
             />
           </ContentContainerDiv>
           <SocialMediaContainer className="social-media-container">
@@ -85,6 +89,7 @@ const GraphContainer = props => {
               changeYear={changeYear}
               changeQuarter={changeQuarter}
               getCurrentYear={getCurrentYear}
+              open={open}
             />
           </div>
         </div>

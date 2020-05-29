@@ -418,6 +418,7 @@ export default function FilterBox(props) {
             changeQuarter={changeQuarter}
             getCurrentYear={getCurrentYear}
             loading={loading}
+            open={props.open}
           />
           {/* That if tier is undefined(not logged in)? The reliability of this logic is in questino*/}
           {/* {tier === "ADMIN" ||
