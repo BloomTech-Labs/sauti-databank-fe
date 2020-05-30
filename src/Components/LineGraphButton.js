@@ -185,17 +185,37 @@ const LineGraphButton = props => {
     filters[0]["selectedCategory"] !==
       "Requested Procedures for Destination (Imports to:)"
   ) {
+    setOpen("bar");
     return (
       <>
-        {renderBar()}
-        <br></br>
-        <br></br>
-        <div className="choro-map-message">
-          <p>Map can only be used to display:</p>
-          <h1>"Data Series": "Country of Residence"</h1>
-          <h1>"Data Series": "Final Destination Country"</h1>
-          <p>Other searches can be displayed on the Bar Chart.</p>
+        <div className="graph-titles-container">
+          <div className="graph-title-diplay">
+            <h3 className="graph-title">Data Series:</h3>
+            <h2 className="graph-title-small">
+              {filters[0].selectedCategory} |
+            </h2>
+          </div>
+          <div className="graph-title-diplay">
+            <h3 className="graph-title">Subsample:</h3>
+            <h2 className="graph-title-small">
+              {filters[1].selectedCategory} |
+            </h2>
+          </div>
+          {filters[2].selectedTableColumnName && (
+            <div className="graph-title-diplay">
+              <h3 className="graph-title">Additional Filter:</h3>
+              <h3 className="graph-title-small">{makeFilterList()}</h3>
+            </div>
+          )}
         </div>
+        <GraphParse
+          data={data}
+          filters={filters}
+          open={open}
+          queryType={queryType}
+          filterBoxStartDate={filterBoxStartDate}
+          filterBoxEndDate={filterBoxEndDate}
+        />
       </>
     );
   } else if (data.sessionsData) {
