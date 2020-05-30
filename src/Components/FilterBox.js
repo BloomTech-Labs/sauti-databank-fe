@@ -24,7 +24,8 @@ export default function FilterBox(props) {
     setFilterBoxEndDate,
     changeYear,
     changeQuarter,
-    getCurrentYear
+    getCurrentYear,
+    open
   } = props;
   const [updateUrlFlag, setUpdateUrlFlag] = useState(false);
 
@@ -190,7 +191,7 @@ export default function FilterBox(props) {
     };
 
     //all 3 filtering options
-    if (filterSelectorName !== "Data Filter") {
+    if (filterSelectorName === "Data Series") {
       return (
         <div>
           <form>
@@ -240,20 +241,65 @@ export default function FilterBox(props) {
                   .filter(selectedCategory => selectedCategory.length > 0)
               )}
             />
-            {/* additional options below 'Data Series' and 'Add Filter' */}
-            {/* <RenderCheckContainer
-            i={index}
-            filters={filters}
-            graphLabels={graphLabels}
-            props={props}
-           CategoryOptions={CategoryOptions}
-            CheckboxContainer={CheckboxContainer}
-            setFilters={setFilters}
-          /> */}
           </form>
         </div>
       );
-    } else {
+    } else if (filterSelectorName === "Compare SubSamples" && open === "bar") {
+      return (
+        <div>
+          <form>
+            {/* labels filter */}
+            <p>{filterSelectorName}</p>
+            <Select
+              defaultValue={{ label: filters[index].selectedCategory }}
+              // isClearable
+              //seems not in use
+              formatGroupLabel={formatGroupLabel}
+              components={{ Control: ControlComponent }}
+              // isSearchable
+              onChange={e => {
+                setUpdateUrlFlag(!updateUrlFlag);
+                let optionFlags = {};
+                graphLabels[
+                  `${FilterBoxOptions.default[e.label].value.type}`
+                ].labels.forEach(option => {
+                  optionFlags = {
+                    ...optionFlags,
+                    [option]: false
+                  };
+                });
+                setFilters({
+                  ...filters,
+                  [index]: {
+                    ...filters[index],
+                    selectedCategory: e.label, //option
+                    selectedTableColumnName:
+                      FilterBoxOptions.default[e.label].value.type,
+
+                    selectedTable:
+                      FilterBoxOptions.default[e.label].value.query,
+                    selectedOption: undefined,
+                    selectableOptions: { ...optionFlags }
+                  }
+                });
+              }}
+              name="color"
+              styles={colourStyles}
+              options={xVar(
+                FilterBoxOptions.superCategories,
+                Object.keys(filters)
+                  .map(filterId => {
+                    return filters[filterId].selectedCategory;
+                  })
+                  .filter(selectedCategory => selectedCategory.length > 0)
+              )}
+            />
+          </form>
+        </div>
+      );
+    } else if (filterSelectorName === "Compare SubSamples") {
+      return <></>;
+    } else if (filterSelectorName === "Data Filter") {
       return (
         <div>
           <form>
