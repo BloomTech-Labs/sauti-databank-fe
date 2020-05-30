@@ -27,13 +27,16 @@ const GraphContainer = props => {
     getCurrentYear
   } = useCalendar();
 
+  //hides control panel
   const [hidden, setHidden] = useState(false);
 
-  const [open, setOpen] = useState("bar");
-
   function HideFilters() {
+    console.log("Hide Filters");
     setHidden(!hidden);
   }
+
+  //displays graph selected
+  const [open, setOpen] = useState("bar");
 
   const clipboard = new ClipboardJS(".btn", {
     text: function() {

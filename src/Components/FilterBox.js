@@ -27,11 +27,15 @@ export default function FilterBox(props) {
     getCurrentYear
   } = props;
   const [updateUrlFlag, setUpdateUrlFlag] = useState(false);
-  const x = (theSuperCategories, categoriesCollected) => {
+
+  //theSuperCategories (Key Demographic, Information Demand, Business Behavior)
+  //categoriesCollected (categories selected ex. 'gender')
+  const xVar = (theSuperCategories, categoriesCollected) => {
     return theSuperCategories.map(superCategory => {
       return {
         label: superCategory.label,
         options: superCategory.options
+          //  filters out the already selected option
           .map(category => {
             return {
               label: !categoriesCollected.includes(category.label)
@@ -40,6 +44,16 @@ export default function FilterBox(props) {
             };
           })
           .filter(category => category.label !== undefined)
+      };
+    });
+  };
+  console.log(`x`, xVar);
+
+  const dataFilterVar = (theSuperCategories, categoriesCollected) => {
+    return theSuperCategories.map(superCategory => {
+      return {
+        label: superCategory.label,
+        options: superCategory.options
       };
     });
   };
@@ -53,6 +67,8 @@ export default function FilterBox(props) {
 
       graphLabels
     } = props;
+
+    console.log(`filterSelectorName`, filterSelectorName);
     let index = i;
     // console.log(`props`, props)
     // console.log(`filterSelectorName`, filterSelectorName, filters, setFilters, i)
@@ -121,9 +137,12 @@ export default function FilterBox(props) {
         <components.Control {...props} />
       </div>
     );
+    console.log(props.option);
 
     const CategoryOptions = props => {
       let { i, filters, graphLabels, option } = props;
+      console.log(filters);
+      console.log(`option`, option);
       // for options tag
       const changeOption = (i, filters, graphLabels, option) => {
         let optionFlags = {};
@@ -171,67 +190,133 @@ export default function FilterBox(props) {
     };
 
     //all 3 filtering options
-    return (
-      <div>
-        <form>
-          {/* labels filter */}
-          <p>{filterSelectorName}</p>
-          <Select
-            defaultValue={{ label: filters[index].selectedCategory }}
-            // isClearable
-            //seems not in use
-            formatGroupLabel={formatGroupLabel}
-            components={{ Control: ControlComponent }}
-            // isSearchable
-            onChange={e => {
-              setUpdateUrlFlag(!updateUrlFlag);
-              let optionFlags = {};
-              graphLabels[
-                `${FilterBoxOptions.default[e.label].value.type}`
-              ].labels.forEach(option => {
-                optionFlags = {
-                  ...optionFlags,
-                  [option]: false
-                };
-              });
-              setFilters({
-                ...filters,
-                [index]: {
-                  ...filters[index],
-                  selectedCategory: e.label, //option
-                  selectedTableColumnName:
-                    FilterBoxOptions.default[e.label].value.type,
+    if (filterSelectorName !== "Data Filter") {
+      return (
+        <div>
+          <form>
+            {/* labels filter */}
+            <p>{filterSelectorName}</p>
+            <Select
+              defaultValue={{ label: filters[index].selectedCategory }}
+              // isClearable
+              //seems not in use
+              formatGroupLabel={formatGroupLabel}
+              components={{ Control: ControlComponent }}
+              // isSearchable
+              onChange={e => {
+                setUpdateUrlFlag(!updateUrlFlag);
+                let optionFlags = {};
+                graphLabels[
+                  `${FilterBoxOptions.default[e.label].value.type}`
+                ].labels.forEach(option => {
+                  optionFlags = {
+                    ...optionFlags,
+                    [option]: false
+                  };
+                });
+                setFilters({
+                  ...filters,
+                  [index]: {
+                    ...filters[index],
+                    selectedCategory: e.label, //option
+                    selectedTableColumnName:
+                      FilterBoxOptions.default[e.label].value.type,
 
-                  selectedTable: FilterBoxOptions.default[e.label].value.query,
-                  selectedOption: undefined,
-                  selectableOptions: { ...optionFlags }
-                }
-              });
-            }}
-            name="color"
-            styles={colourStyles}
-            options={x(
-              FilterBoxOptions.superCategories,
-              Object.keys(filters)
-                .map(filterId => {
-                  return filters[filterId].selectedCategory;
-                })
-                .filter(selectedCategory => selectedCategory.length > 0)
-            )}
-          />
-          {/* additional options below 'Data Series' and 'Add Filter' */}
-          <RenderCheckContainer
+                    selectedTable:
+                      FilterBoxOptions.default[e.label].value.query,
+                    selectedOption: undefined,
+                    selectableOptions: { ...optionFlags }
+                  }
+                });
+              }}
+              name="color"
+              styles={colourStyles}
+              options={xVar(
+                FilterBoxOptions.superCategories,
+                Object.keys(filters)
+                  .map(filterId => {
+                    return filters[filterId].selectedCategory;
+                  })
+                  .filter(selectedCategory => selectedCategory.length > 0)
+              )}
+            />
+            {/* additional options below 'Data Series' and 'Add Filter' */}
+            {/* <RenderCheckContainer
             i={index}
             filters={filters}
             graphLabels={graphLabels}
             props={props}
-            CategoryOptions={CategoryOptions}
+           CategoryOptions={CategoryOptions}
             CheckboxContainer={CheckboxContainer}
             setFilters={setFilters}
-          />
-        </form>
-      </div>
-    );
+          /> */}
+          </form>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <form>
+            {/* labels filter */}
+            <p>{filterSelectorName}</p>
+            <Select
+              defaultValue={{ label: filters[index].selectedCategory }}
+              // isClearable
+              //seems not in use
+              formatGroupLabel={formatGroupLabel}
+              components={{ Control: ControlComponent }}
+              // isSearchable
+              onChange={e => {
+                setUpdateUrlFlag(!updateUrlFlag);
+                let optionFlags = {};
+                graphLabels[
+                  `${FilterBoxOptions.default[e.label].value.type}`
+                ].labels.forEach(option => {
+                  optionFlags = {
+                    ...optionFlags,
+                    [option]: false
+                  };
+                });
+                setFilters({
+                  ...filters,
+                  [index]: {
+                    ...filters[index],
+                    selectedCategory: e.label, //option
+                    selectedTableColumnName:
+                      FilterBoxOptions.default[e.label].value.type,
+
+                    selectedTable:
+                      FilterBoxOptions.default[e.label].value.query,
+                    selectedOption: undefined,
+                    selectableOptions: { ...optionFlags }
+                  }
+                });
+              }}
+              name="color"
+              styles={colourStyles}
+              options={dataFilterVar(
+                FilterBoxOptions.superCategories,
+                Object.keys(filters)
+                  .map(filterId => {
+                    return filters[filterId].selectedCategory;
+                  })
+                  .filter(selectedCategory => selectedCategory.length > 0)
+              )}
+            />
+            {/* additional options below 'Data Series' and 'Add Filter' */}
+            <RenderCheckContainer
+              i={index}
+              filters={filters}
+              graphLabels={graphLabels}
+              props={props}
+              CategoryOptions={CategoryOptions}
+              CheckboxContainer={CheckboxContainer}
+              setFilters={setFilters}
+            />
+          </form>
+        </div>
+      );
+    }
   };
   const token = getToken();
   let tier;

@@ -15,7 +15,7 @@ const CalendarParent = ({
   loading,
   open
 }) => {
-  console.log(`open`, open);
+  // console.log(`open`, open);
   if (open === "bar") {
     return (
       <>

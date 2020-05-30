@@ -1,4 +1,5 @@
 import React from "react";
+//import CategoryOptions from './CategoryOptions';
 
 const RenderCheckContainer = ({
   i,
