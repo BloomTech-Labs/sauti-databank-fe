@@ -58,6 +58,8 @@ export default function FilterBox(props) {
     });
   };
 
+  console.log(dataFilterVar);
+
   const FilterSelector = props => {
     const {
       filterSelectorName,

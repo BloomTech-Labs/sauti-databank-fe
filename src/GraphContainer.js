@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.scss";
 import "./index.css";
 import FilterBox from "./Components/FilterBox";
+import SelectedFilterDisplay from "./Components/SelectedFilterDisplay";
 import "react-dropdown/style.css";
 
 import Queries2 from "./Components/Queries2";
@@ -82,19 +83,21 @@ const GraphContainer = props => {
       <CssBaseline />
       <Grid container maxWidth="xl">
         <Grid container maxWidth="xl">
-          <Grid item xs={12} style={{ height: "50px" }}>
-            <Grid xs={3} style={{ background: "#2c2e32", height: "50px" }}>
+          <Grid container xs={12} style={{ height: "50px" }}>
+            <Grid item xs={3} style={{ background: "#2c2e32", height: "50px" }}>
               <h1 className={classes.h1}>Informal Cross-Border Trade Data</h1>
             </Grid>
             <Grid
-              xs={9}
+              item
+              xs={8}
               style={{
                 background: "white",
                 height: "50px",
                 alignContent: "center"
               }}
-              className="header"
-            ></Grid>
+            >
+              <SelectedFilterDisplay filters={filters} />
+            </Grid>
           </Grid>
           <Grid item xs={12} style={{ height: "50px" }}></Grid>
           <Grid container maxWidth="xl">
