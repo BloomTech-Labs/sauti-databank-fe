@@ -48,7 +48,6 @@ export default function FilterBox(props) {
       };
     });
   };
-  console.log(`x`, xVar);
 
   const dataFilterVar = (theSuperCategories, categoriesCollected) => {
     return theSuperCategories.map(superCategory => {
@@ -69,7 +68,6 @@ export default function FilterBox(props) {
       graphLabels
     } = props;
 
-    console.log(`filterSelectorName`, filterSelectorName);
     let index = i;
     // console.log(`props`, props)
     // console.log(`filterSelectorName`, filterSelectorName, filters, setFilters, i)
@@ -138,12 +136,10 @@ export default function FilterBox(props) {
         <components.Control {...props} />
       </div>
     );
-    console.log(props.option);
 
     const CategoryOptions = props => {
       let { i, filters, graphLabels, option } = props;
-      console.log(filters);
-      console.log(`option`, option);
+
       // for options tag
       const changeOption = (i, filters, graphLabels, option) => {
         let optionFlags = {};

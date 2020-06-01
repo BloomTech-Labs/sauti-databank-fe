@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import "./index.css";
 import FilterBox from "./Components/FilterBox";
 import "react-dropdown/style.css";
-import { withRouter, useParams, useHistory } from "react-router-dom";
 
 import Queries2 from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
@@ -13,9 +12,40 @@ import ClipboardJS from "clipboard";
 
 import { Footer } from "./Components/Footer";
 
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing(0),
+    textAlign: "center",
+    color: theme.palette.text.secondary
+  },
+  h1: {
+    fontFamily: "Montserrat, sans-serif",
+    fontSize: "18px",
+    fontWeight: 600,
+    color: "#ffffff",
+    marginLeft: "20px",
+    alignItems: "center"
+  },
+  filters: {
+    padding: "2rem"
+  }
+}));
+
 const GraphContainer = props => {
   const [url, setUrl] = useState("");
   const [filters, setFilters] = useState(props.filters);
+
+  const classes = useStyles();
 
   const {
     filterBoxStartDate,
@@ -48,57 +78,61 @@ const GraphContainer = props => {
   });
   // ?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalscountry_of_residencecommaKENzazfilter4equalsundefinedcommaundefined
   return (
-    <div className="App">
-      <div className="main-container">
-        <div className="main-header">
-          <div className="header">
-            <h1>Informal Cross-Border Trade Data</h1>
-          </div>
-          <div className="data-header">
-            {/* <p>Data Set | Placeholder | For Active Data Filters</p> */}
-          </div>
-        </div>
-        <div className="content-container">
-          <ContentContainerDiv
-            className={hidden ? "extend" : "chart-container"}
-          >
-            <Queries2
-              filters={filters}
-              filterBoxStartDate={filterBoxStartDate}
-              setFilterBoxStartDate={setFilterBoxStartDate}
-              filterBoxEndDate={filterBoxEndDate}
-              setFilterBoxEndDate={setFilterBoxEndDate}
-              open={open}
-              setOpen={setOpen}
-            />
-          </ContentContainerDiv>
-          <SocialMediaContainer className="social-media-container">
-            <FilterHideButton onClick={HideFilters}>
-              {hidden ? <p>►</p> : <p>◄</p>}
-            </FilterHideButton>
-          </SocialMediaContainer>
-          <div
-            className={
-              hidden ? "dropdown-container hide" : "dropdown-container"
-            }
-          >
-            <FilterBox
-              filters={filters}
-              setFilters={setFilters}
-              filterBoxStartDate={filterBoxStartDate}
-              setFilterBoxStartDate={setFilterBoxStartDate}
-              filterBoxEndDate={filterBoxEndDate}
-              setFilterBoxEndDate={setFilterBoxEndDate}
-              changeYear={changeYear}
-              changeQuarter={changeQuarter}
-              getCurrentYear={getCurrentYear}
-              open={open}
-            />
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </div>
+    <>
+      <CssBaseline />
+      <Grid container maxWidth="xl">
+        <Grid container maxWidth="xl">
+          <Grid item xs={12} style={{ height: "50px" }}>
+            <Grid xs={3} style={{ background: "#2c2e32", height: "50px" }}>
+              <h1 className={classes.h1}>Informal Cross-Border Trade Data</h1>
+            </Grid>
+            <Grid
+              xs={9}
+              style={{
+                background: "white",
+                height: "50px",
+                alignContent: "center"
+              }}
+              className="header"
+            ></Grid>
+          </Grid>
+          <Grid item xs={12} style={{ height: "50px" }}></Grid>
+          <Grid container maxWidth="xl">
+            <Grid item xs={3} className={classes.filters}>
+              <FilterBox
+                filters={filters}
+                setFilters={setFilters}
+                filterBoxStartDate={filterBoxStartDate}
+                setFilterBoxStartDate={setFilterBoxStartDate}
+                filterBoxEndDate={filterBoxEndDate}
+                setFilterBoxEndDate={setFilterBoxEndDate}
+                changeYear={changeYear}
+                changeQuarter={changeQuarter}
+                getCurrentYear={getCurrentYear}
+                open={open}
+              />
+            </Grid>
+            {/* <Grid item xs={1} className={classes.filterHideButton} onClick={HideFilters}>
+            
+                {hidden ? <p>►</p> : <p>◄</p>}
+             
+            </Grid> */}
+            <Grid item xs={9} className={hidden ? "extend" : "chart-container"}>
+              <Queries2
+                filters={filters}
+                filterBoxStartDate={filterBoxStartDate}
+                setFilterBoxStartDate={setFilterBoxStartDate}
+                filterBoxEndDate={filterBoxEndDate}
+                setFilterBoxEndDate={setFilterBoxEndDate}
+                open={open}
+                setOpen={setOpen}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Footer />
+      </Grid>
+    </>
   );
 };
 
