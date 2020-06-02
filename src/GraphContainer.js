@@ -19,6 +19,7 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import GraphButtons from "./Components/GraphButtons";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -89,7 +90,7 @@ const GraphContainer = props => {
             </Grid>
             <Grid
               item
-              xs={8}
+              xs={9}
               style={{
                 background: "white",
                 height: "50px",
@@ -99,7 +100,14 @@ const GraphContainer = props => {
               <SelectedFilterDisplay filters={filters} />
             </Grid>
           </Grid>
-          <Grid item xs={12} style={{ height: "50px" }}></Grid>
+          <Grid container xs={12} style={{ height: "50px" }}>
+            <Grid item xs={3}>
+              {" "}
+            </Grid>
+            <Grid item xs={3}>
+              <GraphButtons />
+            </Grid>
+          </Grid>
           <Grid container maxWidth="xl">
             <Grid item xs={3} className={classes.filters}>
               <FilterBox

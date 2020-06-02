@@ -9,10 +9,10 @@ const SelectedFilterDisplay = ({ filters }) => {
       .filter(filterId => filterId >= 2)
       .map(filterId => {
         return (
-          <p>
-            {filters[filterId].selectedCategory} -{" "}
-            {getSelectedOption(filters, filterId)}
-          </p>
+          <>
+            {filters[filterId].selectedCategory} :
+            {getSelectedOption(filters, filterId)} |
+          </>
         );
       });
   };
@@ -20,9 +20,11 @@ const SelectedFilterDisplay = ({ filters }) => {
   return (
     <>
       <h3>
-        <strong>Data Series:</strong> {filters[0].selectedCategory}|{" "}
-        <strong> Subsample:</strong>
-        {filters[1].selectedCategory} |<strong> Additional Filter:</strong>
+        <span className="redText">Data Series:</span>{" "}
+        {filters[0].selectedCategory}|{" "}
+        <span className="redText"> Subsample:</span>
+        {filters[1].selectedCategory} |{" "}
+        <span className="redText"> Additional Filter:</span>
         {makeFilterList()}
       </h3>
     </>
