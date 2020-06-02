@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 const GraphContainer = props => {
   const [url, setUrl] = useState("");
   const [filters, setFilters] = useState(props.filters);
+  const [queryType, setQueryType] = useState("");
 
   const classes = useStyles();
 
@@ -69,6 +70,7 @@ const GraphContainer = props => {
 
   //displays graph selected
   const [open, setOpen] = useState("bar");
+  const [displayButton, setDisplayButton] = useState([]);
 
   const clipboard = new ClipboardJS(".btn", {
     text: function() {
@@ -105,7 +107,14 @@ const GraphContainer = props => {
               {" "}
             </Grid>
             <Grid item xs={3}>
-              <GraphButtons />
+              <GraphButtons
+                open={open}
+                setOpen={setOpen}
+                filters={filters}
+                setDisplayButton={setDisplayButton}
+                displayButton={displayButton}
+                queryType={queryType}
+              />
             </Grid>
           </Grid>
           <Grid container maxWidth="xl">
@@ -137,6 +146,10 @@ const GraphContainer = props => {
                 setFilterBoxEndDate={setFilterBoxEndDate}
                 open={open}
                 setOpen={setOpen}
+                setDisplayButton={setDisplayButton}
+                displayButton={displayButton}
+                queryType={queryType}
+                setQueryType={setQueryType}
               />
             </Grid>
           </Grid>

@@ -7,7 +7,9 @@ import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
 
 const GetData = props => {
-  let queryType = "tradersUsers";
+  let queryType = props.queryType;
+  let setQueryType = props.setQueryType;
+  setQueryType("tradersUsers");
   let QUERY;
   let thisQuery;
 
@@ -60,7 +62,7 @@ const GetData = props => {
   // if (only first 3 filters are selected) and (none of them are Sessions)
 
   if (!isSessions(filters)) {
-    queryType = "tradersUsers";
+    setQueryType("tradersUsers");
     Object.keys(filters).forEach(filterId => {
       if (filterId !== 1) {
         thisQuery = {
@@ -95,7 +97,7 @@ const GetData = props => {
       };
     });
 
-    queryType = "sessionsData";
+    setQueryType("sessionsData");
     QUERY = gql`
        query getData($queryTraders: newTraderSessionInput){
            sessionsData (input: $queryTraders){
@@ -111,12 +113,7 @@ const GetData = props => {
     variables: { queryTraders: thisQuery }
   });
 
-  if (
-    // queryType === "sessionsData" &&
-    filters[1].selectedCategory === "" &&
-    data &&
-    data.sessionsData
-  ) {
+  if (filters[1].selectedCategory === "" && data && data.sessionsData) {
     const notNull = [];
     let values = data.sessionsData;
     const selectedTableColumnName = filters[0].selectedTableColumnName;
@@ -155,6 +152,8 @@ const GetData = props => {
         open={props.open}
         setOpen={props.setOpen}
         data={data}
+        setDisplayButton={props.setDisplayButton}
+        displayButton={props.displayButton}
       />
     </>
   );
