@@ -35,11 +35,15 @@ const useStyles = makeStyles(theme => ({
     fontSize: "18px",
     fontWeight: 600,
     color: "#ffffff",
-    marginLeft: "20px",
-    alignItems: "center"
+    alignItems: "center",
+    padding: "1.5%",
+    background: "#2c2e32",
+    height: "50px",
+    textAlign: "center"
   },
   filters: {
-    padding: "2rem"
+    //padding: "2rem"
+    padding: "1%"
   }
 }));
 
@@ -87,7 +91,7 @@ const GraphContainer = props => {
       <Grid container maxWidth="xl">
         <Grid container maxWidth="xl">
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid item xs={3} style={{ background: "#2c2e32", height: "50px" }}>
+            <Grid item xs={3}>
               <h1 className={classes.h1}>Informal Cross-Border Trade Data</h1>
             </Grid>
             <Grid
@@ -95,18 +99,22 @@ const GraphContainer = props => {
               xs={9}
               style={{
                 background: "white",
-                height: "50px",
-                alignContent: "center"
+                height: "50px"
               }}
             >
               <SelectedFilterDisplay filters={filters} />
             </Grid>
           </Grid>
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid item xs={3}>
+            <Grid item xs={3} style={{ height: "50px" }}>
               {" "}
             </Grid>
-            <Grid item xs={3}>
+            <Grid
+              container
+              xs={3}
+              spacing={0}
+              style={{ height: "50px", marginTop: ".5%" }}
+            >
               <GraphButtons
                 open={open}
                 setOpen={setOpen}

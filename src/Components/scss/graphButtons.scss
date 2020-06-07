@@ -1,0 +1,15 @@
+.all-btn {
+  display: flex;
+  border: 1px solid #ffffff;
+  &:hover {
+    border: 1px solid #2c2e32;
+    color: #eb5e52;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+  h1 {
+    font-size: 1.1rem;
+    margin: auto;
+    padding-left: 5%;
+  }
+}
