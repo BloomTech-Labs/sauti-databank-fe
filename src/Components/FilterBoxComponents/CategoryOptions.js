@@ -10,10 +10,6 @@ const CategoryOptions = (
   graphLabels,
   option
 ) => {
-  //  provides options for Data Filter
-  // for options tag
-  // console.log(setUpdateUrlFlag)
-  // console.log(`option`, option)
   const changeOption = (i, filters, graphLabels, option) => {
     let optionFlags = {};
     graphLabels[`${filters[i].selectedTableColumnName}`].labels.forEach(

@@ -163,7 +163,7 @@ const Graph = props => {
   const socialMediaLink = useHistory().location.search;
   return (
     <>
-      <div className="dwnld-btn">
+      {/* <div className="dwnld-btn">
         {tier === "ADMIN" ||
         tier === "PAID" ||
         tier === "GOV_ROLE" ||
@@ -242,7 +242,7 @@ const Graph = props => {
             </SocialMediaContainer>
           </>
         )}
-      </div>
+      </div> */}
       <div className="Graph-Container">
         <ResponsiveBar
           data={data}
