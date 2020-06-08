@@ -20,6 +20,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import GraphButtons from "./Components/GraphButtons";
+import SocialMedia from "./Components/SocialMedia";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,6 +67,8 @@ const GraphContainer = props => {
 
   //hides control panel
   const [hidden, setHidden] = useState(false);
+
+  let chartData = {};
 
   function HideFilters() {
     console.log("Hide Filters");
@@ -124,6 +127,22 @@ const GraphContainer = props => {
                 queryType={queryType}
               />
             </Grid>
+            <Grid container xs={4}></Grid>
+            <Grid
+              container
+              xs={2}
+              spacing={0}
+              style={{ height: "50px", marginTop: ".5%" }}
+            >
+              <SocialMedia
+                filters={filters}
+                queryType={queryType}
+                filterBoxStartDate={filterBoxStartDate}
+                filterBoxEndDate={filterBoxEndDate}
+                chartData={chartData}
+                csvData={chartData.dataStructure}
+              />
+            </Grid>
           </Grid>
           <Grid container maxWidth="xl">
             <Grid item xs={3} className={classes.filters}>
@@ -158,6 +177,7 @@ const GraphContainer = props => {
                 displayButton={displayButton}
                 queryType={queryType}
                 setQueryType={setQueryType}
+                chartData={chartData}
               />
             </Grid>
           </Grid>

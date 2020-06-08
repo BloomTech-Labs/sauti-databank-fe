@@ -33,11 +33,13 @@ const Graph = props => {
   const [csvDownload, setCsvDownload] = useState([]);
 
   let makeValues = data => {
+    console.log(`makeValues`, data);
     return data.map(obj => {
       return Object.values(obj);
     });
   };
   let makeHeaders = data => {
+    console.log(`makeHeaders`, data);
     if (!filters[1].selectedCategory) {
       return [
         {

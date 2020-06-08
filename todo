@@ -7,6 +7,7 @@ completed:
 the bar chart will render.
 5. Buttons have been placed in a new component so the will render in the correct area, no overlap
 6. Expandable graph was removed, per figma
+7. Removed filter options from first filter, instead that filter appears below.
 
 
 To Do:

@@ -6,7 +6,7 @@ import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
 
-const GetData = props => {
+const GetData = (props, { makeValues }) => {
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
   setQueryType("tradersUsers");
@@ -154,6 +154,7 @@ const GetData = props => {
         data={data}
         setDisplayButton={props.setDisplayButton}
         displayButton={props.displayButton}
+        chartData={props.chartData}
       />
     </>
   );

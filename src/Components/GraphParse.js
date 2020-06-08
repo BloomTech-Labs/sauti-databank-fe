@@ -8,13 +8,15 @@ const GraphParse = ({
   filters,
   queryType,
   filterBoxStartDate,
-  filterBoxEndDate
+  filterBoxEndDate,
+  chartData
 }) => {
   if (queryType === "sessionsData") {
     data = filterByDate(data, filterBoxStartDate, filterBoxEndDate);
   }
 
-  const chartData = dataParse(
+  //used on SocialMedia.js
+  chartData = dataParse(
     filters[0].selectedTableColumnName,
     data[`${queryType}`],
     filters[1].selectedTableColumnName,
