@@ -147,7 +147,7 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
           <Grid container maxWidth="xl">
-            <Grid item xs={2} className={classes.filters}>
+            <Grid container xs={2} className={classes.filters}>
               <FilterBox
                 filters={filters}
                 setFilters={setFilters}

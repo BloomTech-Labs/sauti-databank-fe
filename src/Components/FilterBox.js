@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "../App.scss";
 import styled from "styled-components";
+//around the filters
 import Select, { components } from "react-select";
 import { FilterBoxOptions } from "./FilterBoxOptions";
 import graphLabels from "./graphLabels";
@@ -12,6 +13,7 @@ import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
 import CalendarParent from "../dashboard/CalendarParent";
 import RenderCheckContainer from "./FilterBoxComponents/RenderCheckContainer";
+import Grid from "@material-ui/core/Grid";
 
 export default function FilterBox(props) {
   const History = useHistory();
@@ -58,8 +60,6 @@ export default function FilterBox(props) {
     });
   };
 
-  console.log(dataFilterVar);
-
   const FilterSelector = props => {
     const {
       filterSelectorName,
@@ -71,9 +71,6 @@ export default function FilterBox(props) {
     } = props;
 
     let index = i;
-    // console.log(`props`, props)
-    // console.log(`filterSelectorName`, filterSelectorName, filters, setFilters, i)
-    // console.log(`i`, index)
 
     // styles for the react select component
     const groupStyles = {
@@ -189,59 +186,58 @@ export default function FilterBox(props) {
     };
 
     //all 3 filtering options
+    //first is 'Data Series'
     if (filterSelectorName === "Data Series") {
       return (
-        <div>
-          <form>
-            {/* labels filter */}
-            <p>{filterSelectorName}</p>
-            <Select
-              defaultValue={{ label: filters[index].selectedCategory }}
-              // isClearable
-              //seems not in use
-              formatGroupLabel={formatGroupLabel}
-              components={{ Control: ControlComponent }}
-              // isSearchable
-              onChange={e => {
-                setUpdateUrlFlag(!updateUrlFlag);
-                let optionFlags = {};
-                graphLabels[
-                  `${FilterBoxOptions.default[e.label].value.type}`
-                ].labels.forEach(option => {
-                  optionFlags = {
-                    ...optionFlags,
-                    [option]: false
-                  };
-                });
-                setFilters({
-                  ...filters,
-                  [index]: {
-                    ...filters[index],
-                    selectedCategory: e.label, //option
-                    selectedTableColumnName:
-                      FilterBoxOptions.default[e.label].value.type,
+        <>
+          {/* labels filter */}
+          <p>{filterSelectorName}</p>
+          <Select
+            defaultValue={{ label: filters[index].selectedCategory }}
+            // isClearable
+            //seems not in use
+            formatGroupLabel={formatGroupLabel}
+            components={{ Control: ControlComponent }}
+            // isSearchable
+            onChange={e => {
+              setUpdateUrlFlag(!updateUrlFlag);
+              let optionFlags = {};
+              graphLabels[
+                `${FilterBoxOptions.default[e.label].value.type}`
+              ].labels.forEach(option => {
+                optionFlags = {
+                  ...optionFlags,
+                  [option]: false
+                };
+              });
+              setFilters({
+                ...filters,
+                [index]: {
+                  ...filters[index],
+                  selectedCategory: e.label, //option
+                  selectedTableColumnName:
+                    FilterBoxOptions.default[e.label].value.type,
 
-                    selectedTable:
-                      FilterBoxOptions.default[e.label].value.query,
-                    selectedOption: undefined,
-                    selectableOptions: { ...optionFlags }
-                  }
-                });
-              }}
-              name="color"
-              styles={colourStyles}
-              options={xVar(
-                FilterBoxOptions.superCategories,
-                Object.keys(filters)
-                  .map(filterId => {
-                    return filters[filterId].selectedCategory;
-                  })
-                  .filter(selectedCategory => selectedCategory.length > 0)
-              )}
-            />
-          </form>
-        </div>
+                  selectedTable: FilterBoxOptions.default[e.label].value.query,
+                  selectedOption: undefined,
+                  selectableOptions: { ...optionFlags }
+                }
+              });
+            }}
+            name="color"
+            styles={colourStyles}
+            options={xVar(
+              FilterBoxOptions.superCategories,
+              Object.keys(filters)
+                .map(filterId => {
+                  return filters[filterId].selectedCategory;
+                })
+                .filter(selectedCategory => selectedCategory.length > 0)
+            )}
+          />
+        </>
       );
+      //render Compare SubSamples if on BarChart
     } else if (filterSelectorName === "Compare SubSamples" && open === "bar") {
       return (
         <div>
@@ -295,6 +291,7 @@ export default function FilterBox(props) {
           </form>
         </div>
       );
+      //compare subsamples not to render on map or lineGraph
     } else if (filterSelectorName === "Compare SubSamples") {
       return <></>;
     } else if (filterSelectorName === "Data Filter") {

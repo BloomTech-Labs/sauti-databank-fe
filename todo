@@ -15,3 +15,6 @@ To Do:
 - make filters responsive
 - check SocialMedia.js ...keys, make sure getting proper results
 - implement redux 
+
+- dropdown menu.  Currently using react-select, 
+    Make a new dropdown.  Make responsive.
