@@ -68,17 +68,17 @@ const GraphContainer = props => {
   //hides control panel
   const [hidden, setHidden] = useState(false);
 
-  let chartData = {};
-
   function HideFilters() {
     console.log("Hide Filters");
     setHidden(!hidden);
   }
+  //keys used for socialmedia
+  const [keys, setKeys] = useState([]);
 
   //displays graph selected
   const [open, setOpen] = useState("bar");
   const [displayButton, setDisplayButton] = useState([]);
-
+  const chartData = {};
   const clipboard = new ClipboardJS(".btn", {
     text: function() {
       return document.location.href;
@@ -94,12 +94,12 @@ const GraphContainer = props => {
       <Grid container maxWidth="xl">
         <Grid container maxWidth="xl">
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <h1 className={classes.h1}>Informal Cross-Border Trade Data</h1>
             </Grid>
             <Grid
               item
-              xs={9}
+              xs={10}
               style={{
                 background: "white",
                 height: "50px"
@@ -109,7 +109,7 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid item xs={3} style={{ height: "50px" }}>
+            <Grid item xs={2} style={{ height: "50px" }}>
               {" "}
             </Grid>
             <Grid
@@ -127,7 +127,7 @@ const GraphContainer = props => {
                 queryType={queryType}
               />
             </Grid>
-            <Grid container xs={4}></Grid>
+            <Grid container xs={5}></Grid>
             <Grid
               container
               xs={2}
@@ -141,11 +141,13 @@ const GraphContainer = props => {
                 filterBoxEndDate={filterBoxEndDate}
                 chartData={chartData}
                 csvData={chartData.dataStructure}
+                keys={chartData.crossFilterValues}
+                sampleSize={chartData.totalSampleSize}
               />
             </Grid>
           </Grid>
           <Grid container maxWidth="xl">
-            <Grid item xs={3} className={classes.filters}>
+            <Grid item xs={2} className={classes.filters}>
               <FilterBox
                 filters={filters}
                 setFilters={setFilters}
@@ -164,7 +166,11 @@ const GraphContainer = props => {
                 {hidden ? <p>►</p> : <p>◄</p>}
              
             </Grid> */}
-            <Grid item xs={9} className={hidden ? "extend" : "chart-container"}>
+            <Grid
+              item
+              xs={10}
+              className={hidden ? "extend" : "chart-container"}
+            >
               <Queries2
                 filters={filters}
                 filterBoxStartDate={filterBoxStartDate}
@@ -177,7 +183,6 @@ const GraphContainer = props => {
                 displayButton={displayButton}
                 queryType={queryType}
                 setQueryType={setQueryType}
-                chartData={chartData}
               />
             </Grid>
           </Grid>

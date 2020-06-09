@@ -154,7 +154,6 @@ const GetData = (props, { makeValues }) => {
         data={data}
         setDisplayButton={props.setDisplayButton}
         displayButton={props.displayButton}
-        chartData={props.chartData}
       />
     </>
   );

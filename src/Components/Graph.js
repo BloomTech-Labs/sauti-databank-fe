@@ -17,7 +17,7 @@ const Graph = props => {
     sampleSize,
     tableName
   } = props;
-
+  console.log(`keys Graph`, keys);
   const token = getToken();
   let tier;
   if (token) {
