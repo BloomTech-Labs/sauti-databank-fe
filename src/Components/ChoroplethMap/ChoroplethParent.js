@@ -7,7 +7,7 @@ import "../scss/choropleth.scss";
 
 function ChoroplethParent({ gqlData, queryType, filters }) {
   gqlData = gqlData[queryType];
-  console.log(gqlData);
+
   let category;
   gqlData.length > 0
     ? (category = Object.keys(gqlData[0])[0])

@@ -1,0 +1,20 @@
+completed:
+1. Calendar and Compare SubSample conditionally render based on type of graph displayed
+2. UI css is responsive. Removed old css, now using Material UI
+3. Filters have been placed in new components,
+ now render in the correct area, and are now responsive.
+4. If a filter is selected on Map or Line Graph which is not supported
+the bar chart will render.
+5. Buttons Map, Line and Bar  have been placed in a new component so the will render in the correct area, no overlap
+6. Expandable graph was removed, per figma.
+7. Removed filter options from first Data Series, instead that filter option appears in "Add Filter"
+8. SocialMedia.js now contains all social media buttons
+
+
+To Do:
+- make filters responsive
+- check SocialMedia.js ...keys, make sure getting proper results
+- implement redux 
+
+- dropdown menu.  Currently using react-select, 
+    Make a new dropdown.  Make responsive.

@@ -28,14 +28,14 @@ const setCrossedItems = (
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
   if (graphLabels[`${crossFilter}`]) {
     crossFilterKeys = graphLabels[`${crossFilter}`].structure;
-    console.log(
-      "IF THERE IS A GRAPHLABEL",
-      crossFilter,
-      graphLabels[`${crossFilter}`]
-    );
+    // console.log(
+    //   "IF THERE IS A GRAPHLABEL",
+    //   crossFilter,
+    //   graphLabels[`${crossFilter}`]
+    // );
   } else {
     crossFilterKeys = getIndex(data, crossFilter);
-    console.log("NO GRAPHLABEL", crossFilter, graphLabels[`${crossFilter}`]);
+    //console.log("NO GRAPHLABEL", crossFilter, graphLabels[`${crossFilter}`]);
   }
 
   // Puts each value from key:value pair into an array
@@ -51,7 +51,7 @@ const setCrossedItems = (
   // {"gender": "Male", "10-20": 167, "20-30": 237, "30-40": 642, "40-50": 210, "50-60": 123, "60-70": 1}
   // There will be an object like this for each value of the indexByValues ex: ["Male", "Female"]
 
-  console.log("ONEEEEEE - crossfiltervalues");
+  //console.log("ONEEEEEE - crossfiltervalues");
 
   indexByValues.forEach((key, index) => {
     const crossFilteredData = [];
@@ -69,8 +69,8 @@ const setCrossedItems = (
       });
     });
   });
-  console.log("function done");
-  console.log("QUERYTYPE", queryType);
+  // console.log("function done");
+  // console.log("QUERYTYPE", queryType);
   //If graph is "Most Requested" sort from Most to Least requested and provide top 7 objects
   let keyValueArrIndex = [];
   let keyValueArrCross = [];
@@ -78,9 +78,9 @@ const setCrossedItems = (
 
   //if Index is "Most Requested" type, and CrossFilter is not:
   if (!graphLabels[`${indexBy}`] && graphLabels[`${crossFilter}`]) {
-    console.log(
-      "IF NO GRAPHLABELS FOR FIRST FILTER, CROSSFIILTER HAS GRAPHLABELS"
-    );
+    // console.log(
+    //   "IF NO GRAPHLABELS FOR FIRST FILTER, CROSSFIILTER HAS GRAPHLABELS"
+    // );
     dataStructure.map(obj => {
       return keyValueArrIndex.push([
         obj[`${indexBy}`],
@@ -106,9 +106,9 @@ const setCrossedItems = (
     queryType === "Sessions" &&
     crossFilterQuery === "Users"
   ) {
-    console.log(
-      "IF BOTH HAVE GRAPHLABELS AND FIRST FILTER IS SESSIONS AND 2ND FILTER IS USERS"
-    );
+    // console.log(
+    //   "IF BOTH HAVE GRAPHLABELS AND FIRST FILTER IS SESSIONS AND 2ND FILTER IS USERS"
+    // );
     dataStructure.map(obj => {
       return keyValueArrIndex.push([
         obj[`${indexBy}`],
@@ -134,9 +134,9 @@ const setCrossedItems = (
     queryType === "Sessions" &&
     crossFilterQuery === "Users"
   ) {
-    console.log(
-      "IF BOTH HAVE GRAPHLABELS AND FIRST FILTER IS SESSIONS AND 2ND FILTER IS USERS"
-    );
+    // console.log(
+    //   "IF BOTH HAVE GRAPHLABELS AND FIRST FILTER IS SESSIONS AND 2ND FILTER IS USERS"
+    // );
     dataStructure.map(obj => {
       return keyValueArrIndex.push([
         obj[`${indexBy}`],
@@ -158,9 +158,9 @@ const setCrossedItems = (
 
   // If CrossFilter is "Most Requested" type, and Index is not:
   if (!graphLabels[`${crossFilter}`] && graphLabels[`${indexBy}`]) {
-    console.log(
-      "IF CROSS FILTER HAS NO GRAPHLABELS, AND THE FIRST FILTER DOES"
-    );
+    // console.log(
+    //   "IF CROSS FILTER HAS NO GRAPHLABELS, AND THE FIRST FILTER DOES"
+    // );
     dataStructure.forEach(obj => {
       let crossKeys = Object.keys(obj);
       let crossValues = Object.values(obj);
@@ -181,13 +181,13 @@ const setCrossedItems = (
     });
     dataStructure = newDataStructure;
   }
-  console.log("CROSS FILTER CROSSED ITEMS", crossFilterQuery);
+  // console.log("CROSS FILTER CROSSED ITEMS", crossFilterQuery);
   if (
     graphLabels[`${crossFilter}`] &&
     graphLabels[`${indexBy}`] &&
     queryType === "Users"
   ) {
-    console.log("NEW - BOTH GRAPHLABELS - FIRST FILTER IS USERS");
+    // console.log("NEW - BOTH GRAPHLABELS - FIRST FILTER IS USERS");
     dataStructure.forEach(obj => {
       let crossKeys = Object.keys(obj);
       let crossValues = Object.values(obj);
@@ -215,7 +215,7 @@ const setCrossedItems = (
     queryType === "Sessions" &&
     crossFilterQuery === "Sessions"
   ) {
-    console.log("IF BOTH FILTERS HAVE GRAPHLABELS AND BOTH ARE SESSIONS");
+    // console.log("IF BOTH FILTERS HAVE GRAPHLABELS AND BOTH ARE SESSIONS");
     //commodityproduct: "Maize", "KEN": 123, "RWA": 200
     //commodityproduct: "Beans", "KEN": 152, "RWA": 478
     dataStructure.map(obj => {
@@ -230,7 +230,7 @@ const setCrossedItems = (
     });
     //Sort Index values and take only the top 7
     keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0, 7);
-    console.log("keyvalArr", keyValueArrIndex);
+    // console.log("keyvalArr", keyValueArrIndex);
     keyValueArrIndex.forEach(arr => {
       newDataStructure.push({ [indexBy]: arr[0] });
     });
@@ -291,7 +291,7 @@ const setCrossedItems = (
   //If both Index and CrossFilter are "Most Requested" type:
 
   if (!graphLabels[`${crossFilter}`] && !graphLabels[`${indexBy}`]) {
-    console.log("IF BOTH FILTERS HAVE NO GRAPHLABELS");
+    // console.log("IF BOTH FILTERS HAVE NO GRAPHLABELS");
     //commodityproduct: "Maize", "KEN": 123, "RWA": 200
     //commodityproduct: "Beans", "KEN": 152, "RWA": 478
     dataStructure.map(obj => {
@@ -306,7 +306,7 @@ const setCrossedItems = (
     });
     //Sort Index values and take only the top 7
     keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0, 7);
-    console.log("keyvalArr", keyValueArrIndex);
+    // console.log("keyvalArr", keyValueArrIndex);
     keyValueArrIndex.forEach(arr => {
       newDataStructure.push({ [indexBy]: arr[0] });
     });
@@ -364,7 +364,7 @@ const setCrossedItems = (
     });
   }
 
-  console.log("done with graphlabels");
+  //console.log("done with graphlabels");
 
   //Remove any nulls incase there are any
   dataStructure = dataStructure.filter(obj => obj[`${indexBy}`] !== null);
@@ -421,7 +421,7 @@ const setCrossedItems = (
     .map(obj => Object.values(obj)[0])
     .filter(str => str !== null);
 
-  console.log("TWOOOOOO - crossfiltervalues");
+  // console.log("TWOOOOOO - crossfiltervalues");
 
   return {
     dataStructure,

@@ -15,8 +15,12 @@ const Graph = props => {
     keys,
     groupMode,
     sampleSize,
-    tableName
+    tableName,
+    setChartDataSM,
+    chartData
   } = props;
+
+  console.log(keys);
 
   const token = getToken();
   let tier;
@@ -30,14 +34,20 @@ const Graph = props => {
     sub = newSub;
   }
 
-  const [csvDownload, setCsvDownload] = useState([]);
+  useEffect(() => {
+    setChartDataSM(chartData);
+  }, []);
+
+  const [csvDownad, setCsvDownload] = useState([]);
 
   let makeValues = data => {
+    console.log(`makeValues`, data);
     return data.map(obj => {
       return Object.values(obj);
     });
   };
   let makeHeaders = data => {
+    console.log(`makeValues`, data);
     if (!filters[1].selectedCategory) {
       return [
         {
@@ -163,7 +173,7 @@ const Graph = props => {
   const socialMediaLink = useHistory().location.search;
   return (
     <>
-      <div className="dwnld-btn">
+      {/* <div className="dwnld-btn">
         {tier === "ADMIN" ||
         tier === "PAID" ||
         tier === "GOV_ROLE" ||
@@ -242,7 +252,7 @@ const Graph = props => {
             </SocialMediaContainer>
           </>
         )}
-      </div>
+      </div> */}
       <div className="Graph-Container">
         <ResponsiveBar
           data={data}
