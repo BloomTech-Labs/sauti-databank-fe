@@ -52,6 +52,7 @@ const GraphContainer = props => {
   const [url, setUrl] = useState("");
   const [filters, setFilters] = useState(props.filters);
   const [queryType, setQueryType] = useState("");
+  const [chartDataSM, setChartDataSM] = useState([]);
 
   const classes = useStyles();
 
@@ -139,10 +140,9 @@ const GraphContainer = props => {
                 queryType={queryType}
                 filterBoxStartDate={filterBoxStartDate}
                 filterBoxEndDate={filterBoxEndDate}
-                chartData={chartData}
-                csvData={chartData.dataStructure}
-                keys={chartData.crossFilterValues}
-                sampleSize={chartData.totalSampleSize}
+                csvData={chartDataSM.dataStructure}
+                keys={chartDataSM.crossFilterValues}
+                sampleSize={chartDataSM.totalSampleSize}
               />
             </Grid>
           </Grid>
@@ -183,6 +183,7 @@ const GraphContainer = props => {
                 displayButton={displayButton}
                 queryType={queryType}
                 setQueryType={setQueryType}
+                setChartDataSM={setChartDataSM}
               />
             </Grid>
           </Grid>

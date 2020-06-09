@@ -2,9 +2,6 @@ import React from "react";
 import LineGraph from "./LineGraph/LineGraph";
 import GraphParse from "./GraphParse";
 import ChoroplethParent from "../Components/ChoroplethMap/ChoroplethParent";
-import graphImage from "../assets/images/linegraph.png";
-import mapImage from "../assets/images/map.png";
-import barImage from "../assets/images/barchart.png";
 import "./scss/lineGraphButton.scss";
 import { set } from "react-ga";
 
@@ -17,33 +14,17 @@ const LineGraphButton = props => {
     queryType,
     filterBoxStartDate,
     filterBoxEndDate,
-    makeFilterList,
-    setDisplayButton,
-    displayButton
+    setChartDataSM
   } = props;
-
-  const lineButtonDisplay = "lineButtonDisplay";
-  const barButtonDisplay = "barButtonDisplay";
-  const choroButtonDisplay = "choroButtonDisplay";
-
-  console.log(displayButton);
 
   const renderLine = () => {
     if (open === "line") {
-      // setDisplayButton(displayButton.filter(e => e !== lineButtonDisplay))
       return (
         <>
           <LineGraph filter0={filters[0]} data={data} />
         </>
       );
     } else {
-      // setDisplayButton([...displayButton, lineButtonDisplay])
-      // return (
-      //   // <button className="line-btn" onClick={() => setOpen("line")}>
-      //   //   <img src={graphImage} />
-      //   //   <h1>Line Graph</h1>
-      //   // </button>
-      // );
     }
   };
 
@@ -60,12 +41,6 @@ const LineGraphButton = props => {
         </>
       );
     } else {
-      // return (
-      //   <button className="choro-map" onClick={() => setOpen("choropleth")}>
-      //     <img src={mapImage} />
-      //     <h1>Map</h1>
-      //   </button>
-      // );
     }
   };
 
@@ -77,12 +52,6 @@ const LineGraphButton = props => {
         </>
       );
     } else {
-      // return (
-      //   <button className="bubble-map" onClick={() => setOpen("dot")}>
-      //     <img src={mapImage} />
-      //     <h1>Bubble Map</h1>
-      //   </button>
-      // );
     }
   };
 
@@ -97,16 +66,11 @@ const LineGraphButton = props => {
             queryType={queryType}
             filterBoxStartDate={filterBoxStartDate}
             filterBoxEndDate={filterBoxEndDate}
+            setChartDataSM={setChartDataSM}
           />
         </>
       );
     } else if (open !== "bar") {
-      // return (
-      //   <button className="bar-btn" onClick={() => setOpen("bar")}>
-      //     <img src={barImage} />
-      //     <h1>Bar Chart</h1>
-      //   </button>
-      // );
     }
   };
 

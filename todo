@@ -13,3 +13,5 @@ the bar chart will render.
 
 To Do:
 - make filters responsive
+- check SocialMedia.js ...keys, make sure getting proper results
+- implement redux 

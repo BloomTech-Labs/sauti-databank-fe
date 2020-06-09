@@ -12,16 +12,7 @@ import csv from "react-csv-downloader/dist/lib/csv";
 //import downloadBtn  from '../assets/images/downloadBtn'
 
 //need to bring in data, for 109
-const SocialMedia = ({
-  filters,
-  queryType,
-  filterBoxStartDate,
-  filterBoxEndDate,
-  chartData,
-  csvData,
-  keys,
-  sampleSize
-}) => {
+const SocialMedia = ({ filters, csvData, keys, sampleSize }) => {
   const token = getToken();
   let tier;
   if (token) {
@@ -43,46 +34,46 @@ const SocialMedia = ({
   };
 
   let makeHeaders = csvDownload => {
-    // if (!filters[1].selectedCategory) {
-    return [
-      {
-        id: `${filters[0].selectedTableColumnName}`,
-        displayName: `${filters[0].selectedTableColumnName}`
-      },
-      // instead of the subsample keys we put in the total count
-      {
-        id: `${66}`, // random value
-        displayName: `Total Count`
-      },
-      {
-        id: `${67}`, // random value
-        displayName: `% of Sample Size`
-      },
+    if (!filters[1].selectedCategory) {
+      return [
+        {
+          id: `${filters[0].selectedTableColumnName}`,
+          displayName: `${filters[0].selectedTableColumnName}`
+        },
+        // instead of the subsample keys we put in the total count
+        {
+          id: `${66}`, // random value
+          displayName: `Total Count`
+        },
+        {
+          id: `${67}`, // random value
+          displayName: `% of Sample Size`
+        },
 
-      ...Object.keys(filters)
-        .filter(filterId => filterId >= 2)
-        .map(filterId => ({ id: `${filters[filterId].selectedCategory}` })),
-      {
-        id: `${sampleSize}`,
-        displayName: `Sample Size: ${sampleSize}`
-      }
-    ];
-    // } else {
-    //   return [
-    //     {
-    //       id: `${filters[0].selectedTableColumnName}`,
-    //       displayName: `${filters[0].selectedTableColumnName}`
-    //     },
-    //     ...keys,
-    //     ...Object.keys(filters)
-    //       .filter(filterId => filterId >= 2)
-    //       .map(filterId => ({ id: `${filters[filterId].selectedCategory}` })),
-    //     {
-    //       id: `${sampleSize}`,
-    //       displayName: `Sample Size: ${sampleSize}`
-    //     }
-    //   ];
-    // }
+        ...Object.keys(filters)
+          .filter(filterId => filterId >= 2)
+          .map(filterId => ({ id: `${filters[filterId].selectedCategory}` })),
+        {
+          id: `${sampleSize}`,
+          displayName: `Sample Size: ${sampleSize}`
+        }
+      ];
+    } else {
+      return [
+        {
+          id: `${filters[0].selectedTableColumnName}`,
+          displayName: `${filters[0].selectedTableColumnName}`
+        },
+        // ...keys,
+        ...Object.keys(filters)
+          .filter(filterId => filterId >= 2)
+          .map(filterId => ({ id: `${filters[filterId].selectedCategory}` })),
+        {
+          id: `${sampleSize}`,
+          displayName: `Sample Size: ${sampleSize}`
+        }
+      ];
+    }
   };
   let csvFormater = csvData => {
     // the subsample case is messed up

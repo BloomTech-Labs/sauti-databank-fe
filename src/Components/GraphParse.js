@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import dataParse from "./dataParse";
 import Graph from "./Graph";
 import { filterByDate } from "../DataParseHelpers/filterByDate";
@@ -8,7 +8,8 @@ const GraphParse = ({
   filters,
   queryType,
   filterBoxStartDate,
-  filterBoxEndDate
+  filterBoxEndDate,
+  setChartDataSM
 }) => {
   if (queryType === "sessionsData") {
     data = filterByDate(data, filterBoxStartDate, filterBoxEndDate);
@@ -41,6 +42,8 @@ const GraphParse = ({
           groupMode={"grouped"}
           sampleSize={chartData.totalSampleSize}
           tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
+          setChartDataSM={setChartDataSM}
+          chartData={chartData}
         />
       </>
     );
@@ -55,6 +58,8 @@ const GraphParse = ({
           groupMode={"stacked"}
           sampleSize={chartData.sampleSize}
           tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
+          setChartDataSM={setChartDataSM}
+          chartData={chartData}
         />
       </>
     );

@@ -15,9 +15,13 @@ const Graph = props => {
     keys,
     groupMode,
     sampleSize,
-    tableName
+    tableName,
+    setChartDataSM,
+    chartData
   } = props;
-  console.log(`keys Graph`, keys);
+
+  console.log(keys);
+
   const token = getToken();
   let tier;
   if (token) {
@@ -30,7 +34,11 @@ const Graph = props => {
     sub = newSub;
   }
 
-  const [csvDownload, setCsvDownload] = useState([]);
+  useEffect(() => {
+    setChartDataSM(chartData);
+  }, []);
+
+  const [csvDownad, setCsvDownload] = useState([]);
 
   let makeValues = data => {
     console.log(`makeValues`, data);
@@ -39,7 +47,7 @@ const Graph = props => {
     });
   };
   let makeHeaders = data => {
-    console.log(`makeHeaders`, data);
+    console.log(`makeValues`, data);
     if (!filters[1].selectedCategory) {
       return [
         {
