@@ -9,7 +9,7 @@ import { ApolloProvider } from "react-apollo";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import rootReducer from "./reducers/rootReducer";
+import rootReducer from "./Components/reducers/rootReducer";
 dotenv.config();
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
