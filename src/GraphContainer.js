@@ -22,6 +22,8 @@ import Grid from "@material-ui/core/Grid";
 import GraphButtons from "./Components/GraphButtons";
 import SocialMedia from "./Components/SocialMedia";
 
+import CompareSubSamples from "./Components/Filters/CompareSubsamples";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -161,6 +163,11 @@ const GraphContainer = props => {
                 open={open}
               />
             </Grid>
+            <Grid item>
+              <CompareSubSamples />
+            </Grid>
+            <Grid item></Grid>
+
             {/* <Grid item xs={1} className={classes.filterHideButton} onClick={HideFilters}>
             
                 {hidden ? <p>►</p> : <p>◄</p>}

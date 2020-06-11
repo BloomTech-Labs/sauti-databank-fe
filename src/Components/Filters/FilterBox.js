@@ -23,6 +23,9 @@ import CompareSubSamples from "./CompareSubsamples";
 import DataSeriesFilter from "./DataSeriesFilter";
 import AddFilter from "./AddFilter";
 
+import { useDispatch } from "react-redux";
+import { compareSubSamples } from "../redux-actions/compareSubSamples";
+
 export default function FilterBox(props) {
   const History = useHistory();
   const {
@@ -193,6 +196,31 @@ export default function FilterBox(props) {
       );
     };
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      if (filterSelectorName === "Compare SubSamples" && open === "bar") {
+        dispatch(
+          compareSubSamples({
+            filterSelectorName: filterSelectorName,
+            filters: filters,
+            setFilters: setFilters,
+            formatGroupLabel: formatGroupLabel,
+            ControlComponent: ControlComponent,
+            index: index,
+            formatGroupLabel: formatGroupLabel,
+            setUpdateUrlFlag: setUpdateUrlFlag,
+            FilterBoxOptions: FilterBoxOptions,
+            updateUrlFlag: updateUrlFlag,
+            xVar: xVar,
+            colourStyles: colourOptions,
+            open: open,
+            filterSelectorName: filterSelectorName
+          })
+        );
+      }
+    }, [open, filters]);
+
     //all 3 filtering options
     //first is 'Data Series'
     if (filterSelectorName === "Data Series") {
@@ -212,27 +240,6 @@ export default function FilterBox(props) {
           colourStyles={colourOptions}
         />
       );
-      //render Compare SubSamples if on BarChart
-    } else if (filterSelectorName === "Compare SubSamples" && open === "bar") {
-      return (
-        <CompareSubSamples
-          filterSelectorName={filterSelectorName}
-          filters={filters}
-          setFilters={setFilters}
-          formatGroupLabel={formatGroupLabel}
-          ControlComponent={ControlComponent}
-          index={index}
-          formatGroupLabel={formatGroupLabel}
-          setUpdateUrlFlag={setUpdateUrlFlag}
-          FilterBoxOptions={FilterBoxOptions}
-          updateUrlFlag={updateUrlFlag}
-          xVar={xVar}
-          colourStyles={colourOptions}
-        />
-      );
-      //compare subsamples not to render on map or lineGraph
-    } else if (filterSelectorName === "Compare SubSamples") {
-      return <></>;
     } else if (filterSelectorName === "Data Filter") {
       return (
         <AddFilter
@@ -251,7 +258,30 @@ export default function FilterBox(props) {
           CategoryOptions={CategoryOptions}
         />
       );
+    } else {
+      return <></>;
     }
+    // else if (filterSelectorName === "Compare SubSamples" && open === "bar") {
+    // return (
+    //   <CompareSubSamples
+    //     filterSelectorName={filterSelectorName}
+    //     filters={filters}
+    //     setFilters={setFilters}
+    //     formatGroupLabel={formatGroupLabel}
+    //     ControlComponent={ControlComponent}
+    //     index={index}
+    //     formatGroupLabel={formatGroupLabel}
+    //     setUpdateUrlFlag={setUpdateUrlFlag}
+    //     FilterBoxOptions={FilterBoxOptions}
+    //     updateUrlFlag={updateUrlFlag}
+    //     xVar={xVar}
+    //     colourStyles={colourOptions}
+    //   />
+    // );
+    //compare subsamples not to render on map or lineGraph
+    //} else if (filterSelectorName === "Compare SubSamples") {
+    //  return <></>;
+    // };
   };
   const token = getToken();
   let tier;

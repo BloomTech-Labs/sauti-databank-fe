@@ -18,3 +18,4 @@ To Do:
 
 - dropdown menu.  Currently using react-select, 
     Make a new dropdown.  Make responsive.
+- break up filters and calendar to render on GraphContainer.js
