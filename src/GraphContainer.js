@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.scss";
 import "./index.css";
-import FilterBox from "./Components/FilterBox";
+import FilterBox from "./Components/Filters/FilterBox";
 import SelectedFilterDisplay from "./Components/SelectedFilterDisplay";
 import "react-dropdown/style.css";
 

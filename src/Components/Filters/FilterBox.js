@@ -1,21 +1,26 @@
 import React, { useState, useEffect, useCallback } from "react";
-import "../App.scss";
+
 import styled from "styled-components";
 //around the filters
 import Select, { components } from "react-select";
-import { FilterBoxOptions } from "./FilterBoxOptions";
-import graphLabels from "./graphLabels";
-import { colourOptions, groupedOptions } from "./docs/data";
-import useCalendar, { getTodaysDate } from "../hooks/useCalendar";
+import { FilterBoxOptions } from "../FilterBoxOptions";
+import graphLabels from "../graphLabels";
+import { colourOptions, groupedOptions } from "../docs/data";
+import useCalendar, { getTodaysDate } from "../../hooks/useCalendar";
 import { useHistory } from "react-router-dom";
 //import CalendarModal from "../dashboard/CalendarModal";
-import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
-import { getAvaliableOptions, getSelectedOption } from "../OptionFunctions";
-import CalendarParent from "../dashboard/CalendarParent";
-import RenderCheckContainer from "./FilterBoxComponents/RenderCheckContainer";
+import {
+  decodeToken,
+  getToken,
+  getSubscription
+} from "../../dashboard/auth/Auth";
+import { getAvaliableOptions, getSelectedOption } from "../../OptionFunctions";
+import CalendarParent from "../../dashboard/CalendarParent";
+import RenderCheckContainer from "../FilterBoxComponents/RenderCheckContainer";
 import Grid from "@material-ui/core/Grid";
 
 import CompareSubSamples from "./CompareSubsamples";
+import DataSeriesFilter from "./DataSeriesFilter";
 
 export default function FilterBox(props) {
   const History = useHistory();
@@ -191,54 +196,70 @@ export default function FilterBox(props) {
     //first is 'Data Series'
     if (filterSelectorName === "Data Series") {
       return (
-        <>
-          {/* labels filter */}
-          <p>{filterSelectorName}</p>
-          <Select
-            defaultValue={{ label: filters[index].selectedCategory }}
-            // isClearable
-            //seems not in use
-            formatGroupLabel={formatGroupLabel}
-            components={{ Control: ControlComponent }}
-            // isSearchable
-            onChange={e => {
-              setUpdateUrlFlag(!updateUrlFlag);
-              let optionFlags = {};
-              graphLabels[
-                `${FilterBoxOptions.default[e.label].value.type}`
-              ].labels.forEach(option => {
-                optionFlags = {
-                  ...optionFlags,
-                  [option]: false
-                };
-              });
-              setFilters({
-                ...filters,
-                [index]: {
-                  ...filters[index],
-                  selectedCategory: e.label, //option
-                  selectedTableColumnName:
-                    FilterBoxOptions.default[e.label].value.type,
-
-                  selectedTable: FilterBoxOptions.default[e.label].value.query,
-                  selectedOption: undefined,
-                  selectableOptions: { ...optionFlags }
-                }
-              });
-            }}
-            name="color"
-            styles={colourStyles}
-            options={xVar(
-              FilterBoxOptions.superCategories,
-              Object.keys(filters)
-                .map(filterId => {
-                  return filters[filterId].selectedCategory;
-                })
-                .filter(selectedCategory => selectedCategory.length > 0)
-            )}
-          />
-        </>
+        <DataSeriesFilter
+          filterSelectorName={filterSelectorName}
+          filters={filters}
+          setFilters={setFilters}
+          formatGroupLabel={formatGroupLabel}
+          ControlComponent={ControlComponent}
+          index={index}
+          formatGroupLabel={formatGroupLabel}
+          setUpdateUrlFlag={setUpdateUrlFlag}
+          FilterBoxOptions={FilterBoxOptions}
+          updateUrlFlag={updateUrlFlag}
+          xVar={xVar}
+          colourStyles={colourOptions}
+        />
       );
+      // return (
+      //   <>
+      //     {/* labels filter */}
+      //     <p>{filterSelectorName}</p>
+      //     <Select
+      //       defaultValue={{ label: filters[index].selectedCategory }}
+      //       // isClearable
+      //       //seems not in use
+      //       formatGroupLabel={formatGroupLabel}
+      //       components={{ Control: ControlComponent }}
+      //       // isSearchable
+      //       onChange={e => {
+      //         setUpdateUrlFlag(!updateUrlFlag);
+      //         let optionFlags = {};
+      //         graphLabels[
+      //           `${FilterBoxOptions.default[e.label].value.type}`
+      //         ].labels.forEach(option => {
+      //           optionFlags = {
+      //             ...optionFlags,
+      //             [option]: false
+      //           };
+      //         });
+      //         setFilters({
+      //           ...filters,
+      //           [index]: {
+      //             ...filters[index],
+      //             selectedCategory: e.label, //option
+      //             selectedTableColumnName:
+      //               FilterBoxOptions.default[e.label].value.type,
+
+      //             selectedTable: FilterBoxOptions.default[e.label].value.query,
+      //             selectedOption: undefined,
+      //             selectableOptions: { ...optionFlags }
+      //           }
+      //         });
+      //       }}
+      //       name="color"
+      //       styles={colourStyles}
+      //       options={xVar(
+      //         FilterBoxOptions.superCategories,
+      //         Object.keys(filters)
+      //           .map(filterId => {
+      //             return filters[filterId].selectedCategory;
+      //           })
+      //           .filter(selectedCategory => selectedCategory.length > 0)
+      //       )}
+      //     />
+      //   </>
+      // );
       //render Compare SubSamples if on BarChart
     } else if (filterSelectorName === "Compare SubSamples" && open === "bar") {
       return (
@@ -257,59 +278,6 @@ export default function FilterBox(props) {
           colourStyles={colourOptions}
         />
       );
-
-      // return (
-      //   <div>
-      //     <form>
-      //       {/* labels filter */}
-      //       <p>{filterSelectorName}</p>
-      //       <Select
-      //         defaultValue={{ label: filters[index].selectedCategory }}
-      //         // isClearable
-      //         //seems not in use
-      //         formatGroupLabel={formatGroupLabel}
-      //         components={{ Control: ControlComponent }}
-      //         // isSearchable
-      //         onChange={e => {
-      //           setUpdateUrlFlag(!updateUrlFlag);
-      //           let optionFlags = {};
-      //           graphLabels[
-      //             `${FilterBoxOptions.default[e.label].value.type}`
-      //           ].labels.forEach(option => {
-      //             optionFlags = {
-      //               ...optionFlags,
-      //               [option]: false
-      //             };
-      //           });
-      //           setFilters({
-      //             ...filters,
-      //             [index]: {
-      //               ...filters[index],
-      //               selectedCategory: e.label, //option
-      //               selectedTableColumnName:
-      //                 FilterBoxOptions.default[e.label].value.type,
-
-      //               selectedTable:
-      //                 FilterBoxOptions.default[e.label].value.query,
-      //               selectedOption: undefined,
-      //               selectableOptions: { ...optionFlags }
-      //             }
-      //           });
-      //         }}
-      //         name="color"
-      //         styles={colourStyles}
-      //         options={xVar(
-      //           FilterBoxOptions.superCategories,
-      //           Object.keys(filters)
-      //             .map(filterId => {
-      //               return filters[filterId].selectedCategory;
-      //             })
-      //             .filter(selectedCategory => selectedCategory.length > 0)
-      //         )}
-      //       />
-      //     </form>
-      //   </div>
-      // );
       //compare subsamples not to render on map or lineGraph
     } else if (filterSelectorName === "Compare SubSamples") {
       return <></>;

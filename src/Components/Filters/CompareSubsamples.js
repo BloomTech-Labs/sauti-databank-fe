@@ -1,5 +1,5 @@
 import React from "react";
-import graphLabels from "./graphLabels";
+import graphLabels from "../graphLabels";
 import Select, { components } from "react-select";
 
 const CompareSubSamples = ({
