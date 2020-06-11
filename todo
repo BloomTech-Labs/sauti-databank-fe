@@ -9,7 +9,7 @@ the bar chart will render.
 6. Expandable graph was removed, per figma.
 7. Removed filter options from first Data Series, instead that filter option appears in "Add Filter"
 8. SocialMedia.js now contains all social media buttons
-
+9. - implement redux
 
 To Do:
 - make filters responsive
@@ -18,4 +18,3 @@ To Do:
 
 - dropdown menu.  Currently using react-select, 
     Make a new dropdown.  Make responsive.
-- implement redux
