@@ -12,6 +12,7 @@ the bar chart will render.
 9. - implement redux
 - break up filters and calendar to render on GraphContainer.js
 - check SocialMedia.js ...keys, make sure getting proper results
+-Clear Filters to render on bottom
 
 To Do:
 - make filters responsive
@@ -19,5 +20,5 @@ To Do:
 - dropdown menu.  Currently using react-select, 
     Make a new dropdown.  Make responsive.
 
--Clear Filters to render on bottom
+
 

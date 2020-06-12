@@ -111,8 +111,10 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid item xs={2} style={{ height: "50px" }}>
-              {" "}
+            <Grid container xs={2} style={{ height: "50px" }}>
+              <Grid item className={classes.filters}>
+                <ClearFilters />
+              </Grid>
             </Grid>
             <Grid
               container
@@ -170,10 +172,6 @@ const GraphContainer = props => {
 
               <Grid item className={classes.filters}>
                 <CalendarFilter />
-              </Grid>
-
-              <Grid item className={classes.filters}>
-                <ClearFilters />
               </Grid>
             </Grid>
 
