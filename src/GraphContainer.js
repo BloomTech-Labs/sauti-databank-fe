@@ -46,7 +46,8 @@ const useStyles = makeStyles(theme => ({
   },
   filters: {
     //padding: "2rem"
-    padding: "1%"
+    padding: "1%",
+    flexDirection: "column"
   }
 }));
 
@@ -150,23 +151,25 @@ const GraphContainer = props => {
           </Grid>
           <Grid container maxWidth="xl">
             <Grid container xs={2} className={classes.filters}>
-              <FilterBox
-                filters={filters}
-                setFilters={setFilters}
-                filterBoxStartDate={filterBoxStartDate}
-                setFilterBoxStartDate={setFilterBoxStartDate}
-                filterBoxEndDate={filterBoxEndDate}
-                setFilterBoxEndDate={setFilterBoxEndDate}
-                changeYear={changeYear}
-                changeQuarter={changeQuarter}
-                getCurrentYear={getCurrentYear}
-                open={open}
-              />
+              <Grid item>
+                <FilterBox
+                  filters={filters}
+                  setFilters={setFilters}
+                  filterBoxStartDate={filterBoxStartDate}
+                  setFilterBoxStartDate={setFilterBoxStartDate}
+                  filterBoxEndDate={filterBoxEndDate}
+                  setFilterBoxEndDate={setFilterBoxEndDate}
+                  changeYear={changeYear}
+                  changeQuarter={changeQuarter}
+                  getCurrentYear={getCurrentYear}
+                  open={open}
+                />
+              </Grid>
+              <Grid item className={classes.filters}>
+                <CompareSubSamples />
+              </Grid>
+              <Grid item className={classes.filters}></Grid>
             </Grid>
-            <Grid item>
-              <CompareSubSamples />
-            </Grid>
-            <Grid item></Grid>
 
             {/* <Grid item xs={1} className={classes.filterHideButton} onClick={HideFilters}>
             

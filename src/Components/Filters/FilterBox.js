@@ -25,6 +25,7 @@ import AddFilter from "./AddFilter";
 
 import { useDispatch } from "react-redux";
 import { compareSubSamples } from "../redux-actions/compareSubSamples";
+import { calendarAction } from "../redux-actions/calendarAction";
 
 export default function FilterBox(props) {
   const History = useHistory();
@@ -261,28 +262,8 @@ export default function FilterBox(props) {
     } else {
       return <></>;
     }
-    // else if (filterSelectorName === "Compare SubSamples" && open === "bar") {
-    // return (
-    //   <CompareSubSamples
-    //     filterSelectorName={filterSelectorName}
-    //     filters={filters}
-    //     setFilters={setFilters}
-    //     formatGroupLabel={formatGroupLabel}
-    //     ControlComponent={ControlComponent}
-    //     index={index}
-    //     formatGroupLabel={formatGroupLabel}
-    //     setUpdateUrlFlag={setUpdateUrlFlag}
-    //     FilterBoxOptions={FilterBoxOptions}
-    //     updateUrlFlag={updateUrlFlag}
-    //     xVar={xVar}
-    //     colourStyles={colourOptions}
-    //   />
-    // );
-    //compare subsamples not to render on map or lineGraph
-    //} else if (filterSelectorName === "Compare SubSamples") {
-    //  return <></>;
-    // };
   };
+
   const token = getToken();
   let tier;
   if (token) {
@@ -352,7 +333,28 @@ export default function FilterBox(props) {
       setFilterBoxEndDate
     ]
   );
-  //return add Filter button
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      calendarAction({
+        tier: tier,
+        newSub: newSub,
+        filterBoxStartDate: filterBoxStartDate,
+        setFilterBoxStartDate: setFilterBoxStartDate,
+        filterBoxEndDate: filterBoxEndDate,
+        setFilterBoxEndDate: setFilterBoxEndDate,
+        changeYear: changeYear,
+        changeQuarter: changeQuarter,
+        getCurrentYear: getCurrentYear,
+        changeYear: changeYear,
+        changeQuarter: changeQuarter,
+        getCurrentYear: getCurrentYear,
+        loading: loading,
+        open: props.open
+      })
+    );
+  }, [open, filters]);
+
   return (
     <>
       <DropdownContainer>
@@ -402,7 +404,7 @@ export default function FilterBox(props) {
           </Button>
         </div>
         <form>
-          <CalendarParent
+          {/* <CalendarParent
             tier={tier}
             newSub={newSub}
             filterBoxStartDate={filterBoxStartDate}
@@ -417,7 +419,7 @@ export default function FilterBox(props) {
             getCurrentYear={getCurrentYear}
             loading={loading}
             open={props.open}
-          />
+          /> */}
           <ResetButton
             // className="reset-btn"
             onClick={e => {
