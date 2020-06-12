@@ -14,8 +14,6 @@ import ClipboardJS from "clipboard";
 import { Footer } from "./Components/Footer";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -23,7 +21,7 @@ import GraphButtons from "./Components/GraphButtons";
 import SocialMedia from "./Components/SocialMedia";
 
 import CompareSubSamples from "./Components/Filters/CompareSubsamples";
-
+import CalendarFilter from "./Components/Filters/CalendarFilter";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -169,6 +167,7 @@ const GraphContainer = props => {
                 <CompareSubSamples />
               </Grid>
               <Grid item className={classes.filters}></Grid>
+              <CalendarFilter />
             </Grid>
 
             {/* <Grid item xs={1} className={classes.filterHideButton} onClick={HideFilters}>

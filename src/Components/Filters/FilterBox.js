@@ -19,7 +19,6 @@ import CalendarParent from "../../dashboard/CalendarParent";
 import RenderCheckContainer from "../FilterBoxComponents/RenderCheckContainer";
 import Grid from "@material-ui/core/Grid";
 
-import CompareSubSamples from "./CompareSubsamples";
 import DataSeriesFilter from "./DataSeriesFilter";
 import AddFilter from "./AddFilter";
 
@@ -200,7 +199,7 @@ export default function FilterBox(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      if (filterSelectorName === "Compare SubSamples" && open === "bar") {
+      if (filterSelectorName === "Compare SubSamples") {
         dispatch(
           compareSubSamples({
             filterSelectorName: filterSelectorName,

@@ -8,41 +8,22 @@ const CompareSubSamples = () => {
     state => state.compareSubSamplesReducer.compareSub
   );
 
-  console.log(reducerSub.open);
-
-  const filterSelectorName = reducerSub.filterSelectorName;
-  const filters = reducerSub.filters;
-  const setFilters = reducerSub.setFilters;
-  const ControlComponent = reducerSub.ControlComponent;
-  const index = reducerSub.index;
-  const formatGroupLabel = reducerSub.formatGroupLabel;
-  const setUpdateUrlFlag = reducerSub.setUpdateUrlFlag;
-  const FilterBoxOptions = reducerSub.FilterBoxOptions;
-  const updateUrlFlag = reducerSub.updateUrlFlag;
-  const xVar = reducerSub.xVar;
-  const colourStyles = reducerSub.colourStyles;
-  const open = reducerSub.open;
-
-  // useEffect(()=> {
-  //   if(reducerSub !== undefined){
-  //  filterSelectorName=reducerSub.filterSelectorName
-  //  filters=reducerSub.filters
-  //  setFilters=reducerSub.setFilters
-  //   ControlComponent=reducerSub.ControlComponent
-  //   index=reducerSub.index
-  //   formatGroupLabel=reducerSub.formatGroupLabel
-  //  setUpdateUrlFlag=reducerSub.setUpdateUrlFlag
-  //  FilterBoxOptions=reducerSub.FilterBoxOptions
-  //   updateUrlFlag=reducerSub.updateUrlFlag
-  //   xVar=reducerSub.xVar
-  //  colourStyles=reducerSub.colourStyles
-  //  open = reducerSub.open }
-  // }, [reducerSub])
-
-  console.log(open);
-
+  const {
+    filterSelectorName,
+    filters,
+    setFilters,
+    ControlComponent,
+    index,
+    formatGroupLabel,
+    setUpdateUrlFlag,
+    FilterBoxOptions,
+    updateUrlFlag,
+    xVar,
+    colourStyles,
+    open
+  } = reducerSub;
+  console.log(filters);
   if (filterSelectorName === "Compare SubSamples" && open === "bar") {
-    console.log("run filter");
     return (
       <div>
         <form>
@@ -95,11 +76,7 @@ const CompareSubSamples = () => {
       </div>
     );
   } else {
-    return (
-      <>
-        <h1>Hellloooooooooooooooooooooooooo</h1>{" "}
-      </>
-    );
+    return <></>;
   }
 };
 export default CompareSubSamples;

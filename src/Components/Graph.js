@@ -23,8 +23,6 @@ const Graph = props => {
     chartData
   } = props;
 
-  console.log(keys);
-
   const dispatch = useDispatch();
 
   const token = getToken();
@@ -46,7 +44,6 @@ const Graph = props => {
   const [csvDownload, setCsvDownload] = useState([]);
 
   let makeValues = data => {
-    console.log(`makeValues`, data);
     return data.map(obj => {
       return Object.values(obj);
     });
@@ -177,8 +174,6 @@ const Graph = props => {
   }, [csvData]);
   const socialMediaLink = useHistory().location.search;
 
-  console.log(makeValues(csvDownload));
-  console.log(makeHeaders(csvDownload));
   useEffect(() => {
     dispatch(
       barDownload({
