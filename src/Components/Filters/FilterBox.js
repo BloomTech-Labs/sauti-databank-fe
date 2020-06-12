@@ -25,6 +25,7 @@ import AddFilter from "./AddFilter";
 import { useDispatch } from "react-redux";
 import { compareSubSamples } from "../redux-actions/compareSubSamples";
 import { calendarAction } from "../redux-actions/calendarAction";
+import { clearFiltersAction } from "../redux-actions/clearFiltersAction";
 
 export default function FilterBox(props) {
   const History = useHistory();
@@ -352,6 +353,17 @@ export default function FilterBox(props) {
         open: props.open
       })
     );
+    dispatch(
+      clearFiltersAction({
+        setFilters: setFilters,
+        setFilterBoxStartDate: setFilterBoxStartDate,
+        setFilterBoxEndDate: setFilterBoxEndDate,
+        setUpdateUrlFlag: setUpdateUrlFlag,
+        filters: filters,
+        getTodaysDate: getTodaysDate,
+        updateUrlFlag: updateUrlFlag
+      })
+    );
   }, [open, filters]);
 
   return (
@@ -419,7 +431,7 @@ export default function FilterBox(props) {
             loading={loading}
             open={props.open}
           /> */}
-          <ResetButton
+          {/* <ResetButton
             // className="reset-btn"
             onClick={e => {
               props.setFilters({
@@ -453,7 +465,7 @@ export default function FilterBox(props) {
             }}
           >
             Clear Filters
-          </ResetButton>
+          </ResetButton> */}
         </form>
       </DropdownContainer>
     </>
@@ -613,21 +625,5 @@ const DropdownContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-  }
-`;
-const ResetButton = styled.p`
-  text-decoration: none;
-  padding: 10px 5px;
-  color: white;
-  background-color: slategrey;
-  border: 2px solid slategrey;
-  border-radius: 5px;
-  width: 100px;
-  font-weight: bold;
-  text-align: center;
-  opacity: 0.75;
-  &:hover {
-    opacity: 1;
-    cursor: pointer;
   }
 `;

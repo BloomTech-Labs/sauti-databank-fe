@@ -10,12 +10,14 @@ the bar chart will render.
 7. Removed filter options from first Data Series, instead that filter option appears in "Add Filter"
 8. SocialMedia.js now contains all social media buttons
 9. - implement redux
+- break up filters and calendar to render on GraphContainer.js
+- check SocialMedia.js ...keys, make sure getting proper results
 
 To Do:
 - make filters responsive
-- check SocialMedia.js ...keys, make sure getting proper results
-- implement redux 
 
 - dropdown menu.  Currently using react-select, 
     Make a new dropdown.  Make responsive.
-- break up filters and calendar to render on GraphContainer.js
+
+-Clear Filters to render on bottom
+

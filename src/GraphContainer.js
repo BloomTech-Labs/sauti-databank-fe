@@ -15,13 +15,14 @@ import { Footer } from "./Components/Footer";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import GraphButtons from "./Components/GraphButtons";
 import SocialMedia from "./Components/SocialMedia";
 
 import CompareSubSamples from "./Components/Filters/CompareSubsamples";
 import CalendarFilter from "./Components/Filters/CalendarFilter";
+import ClearFilters from "./Components/Filters/ClearFilters";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -71,7 +72,6 @@ const GraphContainer = props => {
   const [hidden, setHidden] = useState(false);
 
   function HideFilters() {
-    console.log("Hide Filters");
     setHidden(!hidden);
   }
   //keys used for socialmedia
@@ -163,11 +163,18 @@ const GraphContainer = props => {
                   open={open}
                 />
               </Grid>
+
               <Grid item className={classes.filters}>
                 <CompareSubSamples />
               </Grid>
-              <Grid item className={classes.filters}></Grid>
-              <CalendarFilter />
+
+              <Grid item className={classes.filters}>
+                <CalendarFilter />
+              </Grid>
+
+              <Grid item className={classes.filters}>
+                <ClearFilters />
+              </Grid>
             </Grid>
 
             {/* <Grid item xs={1} className={classes.filterHideButton} onClick={HideFilters}>
