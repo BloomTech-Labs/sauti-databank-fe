@@ -22,7 +22,7 @@ import SocialMedia from "./Components/SocialMedia";
 import CompareSubSamples from "./Components/Filters/CompareSubsamples";
 import CalendarFilter from "./Components/Filters/CalendarFilter";
 import ClearFilters from "./Components/Filters/ClearFilters";
-
+import Apply from "./Components/Filters/Apply";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -47,6 +47,9 @@ const useStyles = makeStyles(theme => ({
     //padding: "2rem"
     padding: "1%",
     flexDirection: "column"
+  },
+  clearApply: {
+    // alignItems: "space-between"
   }
 }));
 
@@ -111,9 +114,17 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid container xs={2} style={{ height: "50px" }}>
+            <Grid
+              container
+              xs={2}
+              spacing={2}
+              style={{ height: "50px", padding: "1%" }}
+            >
               <Grid item className={classes.filters}>
                 <ClearFilters />
+              </Grid>
+              <Grid item className={classes.filters}>
+                <Apply />
               </Grid>
             </Grid>
             <Grid
@@ -151,7 +162,7 @@ const GraphContainer = props => {
           </Grid>
           <Grid container maxWidth="xl">
             <Grid container xs={2} className={classes.filters}>
-              <Grid item>
+              <Grid item xs={2}>
                 <FilterBox
                   filters={filters}
                   setFilters={setFilters}
@@ -166,7 +177,7 @@ const GraphContainer = props => {
                 />
               </Grid>
 
-              <Grid item className={classes.filters}>
+              <Grid item>
                 <CompareSubSamples />
               </Grid>
 

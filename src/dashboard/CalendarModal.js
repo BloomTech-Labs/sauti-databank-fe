@@ -11,32 +11,32 @@ import styled from "styled-components";
 import useCalendar from "../hooks/useCalendar";
 
 const DateContainer = styled.div`
-  margin: 20px 0;
-  display: flex;
-  div {
-    display: flex;
-    flex-direction: column;
-    max-width: 50%;
-    input {
-      font-family: "Helvetica", sans-serif;
-      font-size: 16px;
-      margin: 0;
-      border-radius: 2px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      ::-webkit-inner-spin-button {
-        display: none;
-      }
-      ::-webkit-clear-button {
-        display: none;
-      }
-      ::-webkit-calendar-picker-indicator {
-        opacity: 0.8;
-        cursor: pointer;
-        color: #999;
-      }
-    }
-  }
+  //   margin: 20px 0;
+  //   display: flex;
+  //   div {
+  //     display: flex;
+  //     flex-direction: column;
+  //     max-width: 50%;
+  //     input {
+  //       font-family: "Helvetica", sans-serif;
+  //       font-size: 16px;
+  //       margin: 0;
+  //       border-radius: 2px;
+  //       border: 1px solid #ccc;
+  //       padding: 10px;
+  //       ::-webkit-inner-spin-button {
+  //         display: none;
+  //       }
+  //       ::-webkit-clear-button {
+  //         display: none;
+  //       }
+  //       ::-webkit-calendar-picker-indicator {
+  //         opacity: 0.8;
+  //         cursor: pointer;
+  //         color: #999;
+  //       }
+  //     }
+  //   }
 `;
 
 const useStyles = makeStyles(theme => ({
@@ -65,19 +65,12 @@ export default function CalendarModal() {
     setOpen(false);
   };
 
-  // const handleCloseContinue = props => {
-  //   setOpen(false);
-  // };
-
   const {
     filterBoxStartDate,
     setFilterBoxStartDate,
     filterBoxEndDate,
     setFilterBoxEndDate
   } = useCalendar();
-
-  // const [filterBoxStartDate, setFilterBoxStartDate] = useState("2017-01-01");
-  // const [filterBoxEndDate, setFilterBoxEndDate] = useState("2020-01-08");
 
   const [loading, setLoading] = useState(false);
   return (
@@ -126,36 +119,3 @@ export default function CalendarModal() {
     </div>
   );
 }
-
-// export function getTodaysDate() {
-//   const [_, month, day, year] = `${new Date()}`.split(" ");
-//   return `${year}-${formatMonth(month)}-${day}`;
-//   function formatMonth(month) {
-//     switch (month) {
-//       case "Jan":
-//         return "01";
-//       case "Feb":
-//         return "02";
-//       case "Mar":
-//         return "03";
-//       case "Apr":
-//         return "04";
-//       case "May":
-//         return "05";
-//       case "Jun":
-//         return "06";
-//       case "Jul":
-//         return "07";
-//       case "Aug":
-//         return "08";
-//       case "Sep":
-//         return "09";
-//       case "Oct":
-//         return "10";
-//       case "Nov":
-//         return "11";
-//       case "Dec":
-//         return "12";
-//     }
-//   }
-// }
