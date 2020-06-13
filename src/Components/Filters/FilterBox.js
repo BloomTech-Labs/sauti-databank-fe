@@ -20,6 +20,7 @@ import RenderCheckContainer from "../FilterBoxComponents/RenderCheckContainer";
 import Grid from "@material-ui/core/Grid";
 
 import DataSeriesFilter from "./DataSeriesFilter";
+import DataSFilter from "./DataSFilter";
 import AddFilter from "./AddFilter";
 
 import { useDispatch } from "react-redux";
@@ -222,24 +223,40 @@ export default function FilterBox(props) {
       }
     }, [open, filters]);
 
-    //all 3 filtering options
     //first is 'Data Series'
     if (filterSelectorName === "Data Series") {
       return (
-        <DataSeriesFilter
-          filterSelectorName={filterSelectorName}
-          filters={filters}
-          setFilters={setFilters}
-          formatGroupLabel={formatGroupLabel}
-          ControlComponent={ControlComponent}
-          index={index}
-          formatGroupLabel={formatGroupLabel}
-          setUpdateUrlFlag={setUpdateUrlFlag}
-          FilterBoxOptions={FilterBoxOptions}
-          updateUrlFlag={updateUrlFlag}
-          xVar={xVar}
-          colourStyles={colourOptions}
-        />
+        <>
+          <DataSFilter
+            filterSelectorName={filterSelectorName}
+            filters={filters}
+            setFilters={setFilters}
+            formatGroupLabel={formatGroupLabel}
+            ControlComponent={ControlComponent}
+            index={index}
+            formatGroupLabel={formatGroupLabel}
+            setUpdateUrlFlag={setUpdateUrlFlag}
+            FilterBoxOptions={FilterBoxOptions}
+            updateUrlFlag={updateUrlFlag}
+            xVar={xVar}
+            colourStyles={colourOptions}
+          />
+
+          <DataSeriesFilter
+            filterSelectorName={filterSelectorName}
+            filters={filters}
+            setFilters={setFilters}
+            formatGroupLabel={formatGroupLabel}
+            ControlComponent={ControlComponent}
+            index={index}
+            formatGroupLabel={formatGroupLabel}
+            setUpdateUrlFlag={setUpdateUrlFlag}
+            FilterBoxOptions={FilterBoxOptions}
+            updateUrlFlag={updateUrlFlag}
+            xVar={xVar}
+            colourStyles={colourOptions}
+          />
+        </>
       );
     } else if (filterSelectorName === "Data Filter") {
       return (
