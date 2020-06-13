@@ -17,6 +17,11 @@
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
-.selectOption {
-  height: 20vh;
+
+.selectable {
+  opacity: 1;
+}
+.selectable:hover {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 1;
 }

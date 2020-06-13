@@ -242,7 +242,7 @@ export default function FilterBox(props) {
             colourStyles={colourOptions}
           />
 
-          <DataSeriesFilter
+          {/* <DataSeriesFilter
             filterSelectorName={filterSelectorName}
             filters={filters}
             setFilters={setFilters}
@@ -255,7 +255,7 @@ export default function FilterBox(props) {
             updateUrlFlag={updateUrlFlag}
             xVar={xVar}
             colourStyles={colourOptions}
-          />
+          /> */}
         </>
       );
     } else if (filterSelectorName === "Data Filter") {

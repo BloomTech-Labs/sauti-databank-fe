@@ -19,6 +19,7 @@ const DataSeriesFilter = ({
     `filters[index].selectedCategory`,
     filters[index].selectedCategory
   );
+  console.log(`indexxxxxxxxxxxxxxxxxx`, index);
 
   console.log(`ControlComponent`, ControlComponent);
   return (

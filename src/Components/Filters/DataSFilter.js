@@ -17,57 +17,71 @@ const DataSFilter = ({
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
   console.log(xVar);
+
+  // const onChange = e => {
+  //   setUpdateUrlFlag(!updateUrlFlag);
+  //   let optionFlags = {};
+  //   graphLabels[
+  //     `${FilterBoxOptions.default[e.label].value.type}`
+  //   ].labels.forEach(option => {
+  //     optionFlags = {
+  //       ...optionFlags,
+  //       [option]: false
+  //     };
+  //   });
+  //   setFilters({
+  //     ...filters,
+  //     [index]: {
+  //       ...filters[index],
+  //       selectedCategory: e.label, //option
+  //       selectedTableColumnName: FilterBoxOptions.default[e.label].value.type,
+
+  //       selectedTable: FilterBoxOptions.default[e.label].value.query,
+  //       selectedOption: undefined,
+  //       selectableOptions: { ...optionFlags }
+  //     }
+  //   });
+  // };
+
+  //nameOfFilter: "Data Series", selectedCategory: "Gender",
+
+  let allSelectableOptions = Object.keys(FilterBoxOptions.default);
+
+  allSelectableOptions.unshift("KEY DEMOGRAPHICS");
+
+  // console.log(allSelectableOptions);
+  //filters[0]['selectedCategory'][e.target.value],
+  function changeOption(e) {
+    console.log(`changeOption`, e.target.value);
+
+    setUpdateUrlFlag(!updateUrlFlag);
+    let optionFlags = {};
+    graphLabels[
+      `${FilterBoxOptions.default[e.target.value].value.type}`
+    ].labels.forEach(option => {
+      optionFlags = {
+        ...optionFlags,
+        [option]: false
+      };
+    });
+    setFilters({
+      ...filters,
+      [index]: {
+        ...filters[index],
+        selectedCategory: e.target.value, //option
+        selectedTableColumnName:
+          FilterBoxOptions.default[e.target.value].value.type,
+
+        selectedTable: FilterBoxOptions.default[e.target.value].value.query,
+        selectedOption: undefined,
+        selectableOptions: { ...optionFlags }
+      }
+    });
+    console.log(`filters`, filters[0]["selectedCategory"]);
+  }
+
   const displayDropOptions = () => {
     console.log(displayDrop);
-
-    const onChange = e => {
-      setUpdateUrlFlag(!updateUrlFlag);
-      let optionFlags = {};
-      graphLabels[
-        `${FilterBoxOptions.default[e.label].value.type}`
-      ].labels.forEach(option => {
-        optionFlags = {
-          ...optionFlags,
-          [option]: false
-        };
-      });
-      setFilters({
-        ...filters,
-        [index]: {
-          ...filters[index],
-          selectedCategory: e.label, //option
-          selectedTableColumnName: FilterBoxOptions.default[e.label].value.type,
-
-          selectedTable: FilterBoxOptions.default[e.label].value.query,
-          selectedOption: undefined,
-          selectableOptions: { ...optionFlags }
-        }
-      });
-    };
-    console.log(`xvar`, xVar);
-
-    let allSelectableOptions = Object.keys(FilterBoxOptions.default);
-    allSelectableOptions.sort();
-    allSelectableOptions.unshift("KEY DEMOGRAPHICS");
-
-    console.log(allSelectableOptions);
-    //
-    // let catSelectOption = [];
-    // for (let i = 0; i < allSelectableOptions; i++) {
-    //   console.log(i);
-    //   if (
-    //     allSelectableOptions[i] ===
-    //     "Most Requested Agency Information for Procedures"
-    //   ) {
-    //     catSelectOption.push("INFORMATION DEMAND");
-    //   } else if (allSelectableOptions[i] === "Exchange Rate Direction") {
-    //     catSelectOption.push("BUSINESS BEHAVIOR");
-    //   } else {
-    //     catSelectOption.push(allSelectableOptions[i]);
-    //   }
-    //   return catSelectOption;
-    // }
-    // console.log(catSelectOption);
 
     if (displayDrop === true) {
       return (
@@ -79,18 +93,38 @@ const DataSFilter = ({
                 return (
                   <>
                     <h1>'INFORMATION DEMAND'</h1>
-                    <option value={e}>{e}</option>
+                    <option
+                      className="selectable"
+                      value={e}
+                      onClick={changeOption}
+                    >
+                      {e}
+                    </option>
                   </>
                 );
               } else if (e === "Exchange Rate Direction") {
                 return (
                   <>
                     <h1>'BUSINESS BEHAVIOR'</h1>
-                    {/* <option value={e}>{e}</option> */}
+                    <option
+                      className="selectable"
+                      value={e}
+                      onClick={changeOption}
+                    >
+                      {e}
+                    </option>
                   </>
                 );
               } else {
-                return <option value={e}>{e}</option>;
+                return (
+                  <option
+                    className="selectable"
+                    value={e}
+                    onClick={changeOption}
+                  >
+                    {e}
+                  </option>
+                );
               }
             })}
           </div>
