@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import graphLabels from "../graphLabels";
-import Select, { components } from "react-select";
 import { useSelector } from "react-redux";
+import "../../Components/scss/dataSeries.scss";
 
 const CompareSubSamples = () => {
   const reducerSub = useSelector(
@@ -22,57 +22,161 @@ const CompareSubSamples = () => {
     colourStyles,
     open
   } = reducerSub;
-  console.log(filters);
-  if (filterSelectorName === "Compare SubSamples" && open === "bar") {
-    return (
-      <div>
-        <form>
-          {/* labels filter */}
-          <p>{filterSelectorName}</p>
-          <Select
-            defaultValue={{ label: filters[index].selectedCategory }}
-            // isClearable
-            //seems not in use
-            formatGroupLabel={formatGroupLabel}
-            components={{ Control: ControlComponent }}
-            // isSearchable
-            onChange={e => {
-              setUpdateUrlFlag(!updateUrlFlag);
-              let optionFlags = {};
-              graphLabels[
-                `${FilterBoxOptions.default[e.label].value.type}`
-              ].labels.forEach(option => {
-                optionFlags = {
-                  ...optionFlags,
-                  [option]: false
-                };
-              });
-              setFilters({
-                ...filters,
-                [index]: {
-                  ...filters[index],
-                  selectedCategory: e.label, //option
-                  selectedTableColumnName:
-                    FilterBoxOptions.default[e.label].value.type,
 
-                  selectedTable: FilterBoxOptions.default[e.label].value.query,
-                  selectedOption: undefined,
-                  selectableOptions: { ...optionFlags }
+  console.log(`reducerSub`, reducerSub);
+
+  function changeOption(e) {
+    console.log(`changeOption`, e.target.value);
+
+    setUpdateUrlFlag(!updateUrlFlag);
+    let optionFlags = {};
+    graphLabels[
+      `${FilterBoxOptions.default[e.target.value].value.type}`
+    ].labels.forEach(option => {
+      optionFlags = {
+        ...optionFlags,
+        [option]: false
+      };
+    });
+    setFilters({
+      ...filters,
+      [index]: {
+        ...filters[index],
+        selectedCategory: e.target.value, //option
+        selectedTableColumnName:
+          FilterBoxOptions.default[e.target.value].value.type,
+
+        selectedTable: FilterBoxOptions.default[e.target.value].value.query,
+        selectedOption: undefined,
+        selectableOptions: { ...optionFlags }
+      }
+    });
+    console.log(`filters`, filters[0]["selectedCategory"]);
+  }
+
+  // if (filterSelectorName === "Compare SubSamples" && open === "bar") {
+  //   return (
+  //     <div>
+  //       <form>
+  //         {/* labels filter */}
+  //         <p>{filterSelectorName}</p>
+  //         <Select
+  //           defaultValue={{ label: filters[index].selectedCategory }}
+  //           // isClearable
+  //           //seems not in use
+  //           formatGroupLabel={formatGroupLabel}
+  //           components={{ Control: ControlComponent }}
+  //           // isSearchable
+  //           onChange={e => {
+  //             setUpdateUrlFlag(!updateUrlFlag);
+  //             let optionFlags = {};
+  //             graphLabels[
+  //               `${FilterBoxOptions.default[e.label].value.type}`
+  //             ].labels.forEach(option => {
+  //               optionFlags = {
+  //                 ...optionFlags,
+  //                 [option]: false
+  //               };
+  //             });
+  //             setFilters({
+  //               ...filters,
+  //               [index]: {
+  //                 ...filters[index],
+  //                 selectedCategory: e.label, //option
+  //                 selectedTableColumnName:
+  //                   FilterBoxOptions.default[e.label].value.type,
+
+  //                 selectedTable: FilterBoxOptions.default[e.label].value.query,
+  //                 selectedOption: undefined,
+  //                 selectableOptions: { ...optionFlags }
+  //               }
+  //             });
+  //           }}
+  //           name="color"
+  //           styles={colourStyles}
+  //           options={xVar(
+  //             FilterBoxOptions.superCategories,
+  //             Object.keys(filters)
+  //               .map(filterId => {
+  //                 return filters[filterId].selectedCategory;
+  //               })
+  //               .filter(selectedCategory => selectedCategory.length > 0)
+  //           )}
+  //         />
+  //       </form>
+  //     </div>
+  //   );
+  // } else {
+  //   return <></>;
+  // }
+  const [displayDrop, setDisplayDrop] = useState(false);
+
+  if (filterSelectorName === "Compare SubSamples" && open === "bar") {
+    let allSelectableOptions = Object.keys(FilterBoxOptions.default);
+
+    const displayDropOptions = () => {
+      if (displayDrop === true) {
+        return (
+          <div className="dataSeriesBox">
+            <p>Compare +</p>
+            <div>
+              {allSelectableOptions.map(e => {
+                if (e === "Most Requested Procedure Commodities") {
+                  return (
+                    <>
+                      <h1>'INFORMATION DEMAND'</h1>
+                      <option
+                        className="selectable"
+                        value={e}
+                        onClick={changeOption}
+                      >
+                        {e}
+                      </option>
+                    </>
+                  );
+                } else if (e === "Exchange Rate Direction") {
+                  return (
+                    <>
+                      <h1>'BUSINESS BEHAVIOR'</h1>
+                      <option
+                        className="selectable"
+                        value={e}
+                        onClick={changeOption}
+                      >
+                        {e}
+                      </option>
+                    </>
+                  );
+                } else {
+                  return (
+                    <option
+                      className="selectable"
+                      value={e}
+                      onClick={changeOption}
+                    >
+                      {e}
+                    </option>
+                  );
                 }
-              });
-            }}
-            name="color"
-            styles={colourStyles}
-            options={xVar(
-              FilterBoxOptions.superCategories,
-              Object.keys(filters)
-                .map(filterId => {
-                  return filters[filterId].selectedCategory;
-                })
-                .filter(selectedCategory => selectedCategory.length > 0)
-            )}
-          />
-        </form>
+              })}
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <>
+            <div className="dataSeriesBox">
+              <p>
+                Compare <i class="arrow down"></i>
+              </p>
+            </div>
+          </>
+        );
+      }
+    };
+    return (
+      <div onClick={() => setDisplayDrop(!displayDrop)}>
+        {displayDropOptions()}
       </div>
     );
   } else {

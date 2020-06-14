@@ -18,39 +18,10 @@ const DataSFilter = ({
   const [displayDrop, setDisplayDrop] = useState(false);
   console.log(xVar);
 
-  // const onChange = e => {
-  //   setUpdateUrlFlag(!updateUrlFlag);
-  //   let optionFlags = {};
-  //   graphLabels[
-  //     `${FilterBoxOptions.default[e.label].value.type}`
-  //   ].labels.forEach(option => {
-  //     optionFlags = {
-  //       ...optionFlags,
-  //       [option]: false
-  //     };
-  //   });
-  //   setFilters({
-  //     ...filters,
-  //     [index]: {
-  //       ...filters[index],
-  //       selectedCategory: e.label, //option
-  //       selectedTableColumnName: FilterBoxOptions.default[e.label].value.type,
-
-  //       selectedTable: FilterBoxOptions.default[e.label].value.query,
-  //       selectedOption: undefined,
-  //       selectableOptions: { ...optionFlags }
-  //     }
-  //   });
-  // };
-
-  //nameOfFilter: "Data Series", selectedCategory: "Gender",
-
   let allSelectableOptions = Object.keys(FilterBoxOptions.default);
 
   allSelectableOptions.unshift("KEY DEMOGRAPHICS");
 
-  // console.log(allSelectableOptions);
-  //filters[0]['selectedCategory'][e.target.value],
   function changeOption(e) {
     console.log(`changeOption`, e.target.value);
 
