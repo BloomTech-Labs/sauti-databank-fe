@@ -23,11 +23,7 @@ const CompareSubSamples = () => {
     open
   } = reducerSub;
 
-  console.log(`reducerSub`, reducerSub);
-
   function changeOption(e) {
-    console.log(`changeOption`, e.target.value);
-
     setUpdateUrlFlag(!updateUrlFlag);
     let optionFlags = {};
     graphLabels[
@@ -51,7 +47,6 @@ const CompareSubSamples = () => {
         selectableOptions: { ...optionFlags }
       }
     });
-    console.log(`filters`, filters[0]["selectedCategory"]);
   }
 
   // if (filterSelectorName === "Compare SubSamples" && open === "bar") {

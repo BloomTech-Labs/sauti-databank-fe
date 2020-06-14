@@ -16,7 +16,7 @@ const LineGraphButton = props => {
     filterBoxEndDate,
     setChartDataSM
   } = props;
-  console.log(`data`, data);
+
   const renderLine = () => {
     if (open === "line") {
       return (

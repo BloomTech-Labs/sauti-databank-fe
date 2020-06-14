@@ -3,47 +3,56 @@ import React from "react";
 
 const RenderCheckContainer = ({
   i,
+  item,
   filters,
   graphLabels,
   CategoryOptions,
   CheckboxContainer,
-  setFilters
+  setFilters,
+  FilterBoxOptions
 }) => {
   // do all conditional renderings using if statements for now
-
-  const showOptions = (i, filters, graphLabels) => {
-    if (filters[i].showOptions) {
-      return graphLabels[
-        `${filters[i].selectedTableColumnName}`
-      ].labels.map(option => (
-        <CategoryOptions
-          i={i}
-          filters={filters}
-          graphLabels={graphLabels}
-          option={option}
-        />
-      ));
-    } else {
-      return graphLabels[`${filters[i].selectedTableColumnName}`].labels
-        .filter(option => {
-          return filters[i].selectableOptions[option];
-        })
-        .map(option => (
-          <CategoryOptions
-            i={i}
-            filters={filters}
-            graphLabels={graphLabels}
-            option={option}
-          />
-        ));
-    }
+  // for (let item in )
+  //console.log(filters[i])
+  const showOptions = (i, filters, graphLabels, item) => {
+    //  if (filters[i].showOptions) {
+    return graphLabels[
+      item
+      // `${filters[i].selectedTableColumnName}`
+    ].labels.map(option => (
+      //not updating filter
+      //does not have selected table column name
+      <CategoryOptions
+        i={i}
+        filters={filters}
+        graphLabels={graphLabels}
+        option={option}
+        item={item}
+      />
+    ));
+    // } else {
+    //   return graphLabels[`${filters[i].selectedTableColumnName}`].labels
+    //     .filter(option => {
+    //       return filters[i].selectableOptions[option];
+    //     })
+    //     .map(option => (
+    //       <CategoryOptions
+    //         i={i}
+    //         filters={filters}
+    //         graphLabels={graphLabels}
+    //         option={option}
+    //       />
+    //     ));
+    // }
   };
   //remove additional filtering options for 'Data Series',
-  if (i > 1) {
-    if (graphLabels[`${filters[i].selectedTableColumnName}`]) {
-      return (
-        <CheckboxContainer>
-          <p>Please pick an option: </p>
+  //console.log(filters)
+
+  // if (graphLabels[`${filters[i].selectedTableColumnName}`]) {
+  if (graphLabels[item]) {
+    return (
+      <CheckboxContainer>
+        {/* <p>Please pick an option: </p>
           <button
             onClick={() => {
               setFilters({
@@ -55,18 +64,16 @@ const RenderCheckContainer = ({
                 // add all the options here
               });
             }}
-          >
-            {/* maybe set this one along with the selected option flag? */}
-            {filters[i].showOptions ? "Hide" : "Show"}
-          </button>
+          > */}
+        {/* maybe set this one along with the selected option flag? */}
+        {filters[i].showOptions ? "Hide" : "Show"}
+        {/* </button> */}
 
-          {showOptions(i, filters, graphLabels)}
-        </CheckboxContainer>
-      );
-    } else {
-      return <div></div>;
-    }
+        {showOptions(i, filters, graphLabels, item)}
+      </CheckboxContainer>
+    );
   } else {
+    console.log("empty1");
     return <div></div>;
   }
 };

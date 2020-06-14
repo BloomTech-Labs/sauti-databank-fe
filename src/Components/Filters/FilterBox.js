@@ -149,20 +149,19 @@ export default function FilterBox(props) {
       </div>
     );
 
+    //only being used for AddFilter -> RenderCheckContainer
     const CategoryOptions = props => {
-      let { i, filters, graphLabels, option } = props;
+      let { i, filters, graphLabels, option, item } = props;
 
       // for options tag
       const changeOption = (i, filters, graphLabels, option) => {
         let optionFlags = {};
-        graphLabels[`${filters[i].selectedTableColumnName}`].labels.forEach(
-          option => {
-            optionFlags = {
-              ...optionFlags,
-              [option]: false
-            };
-          }
-        );
+        graphLabels[item].labels.forEach(option => {
+          optionFlags = {
+            ...optionFlags,
+            [option]: false
+          };
+        });
         setFilters({
           ...filters,
           [i]: {

@@ -1,84 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import graphLabels from "../graphLabels";
 import Select, { components } from "react-select";
 import RenderCheckContainer from "../FilterBoxComponents/RenderCheckContainer";
 import styled from "styled-components";
 const AddFilter = ({
-  filterSelectorName,
   filters,
   setFilters,
-  ControlComponent,
   index,
-  formatGroupLabel,
-  setUpdateUrlFlag,
   FilterBoxOptions,
-  updateUrlFlag,
-  dataFilterVar,
-  colourStyles,
   CategoryOptions
 }) => {
-  return (
-    <div>
-      <form>
-        {/* labels filter */}
-        <p>{filterSelectorName}</p>
-        <Select
-          defaultValue={{ label: filters[index].selectedCategory }}
-          // isClearable
-          //seems not in use
-          formatGroupLabel={formatGroupLabel}
-          components={{ Control: ControlComponent }}
-          // isSearchable
-          onChange={e => {
-            setUpdateUrlFlag(!updateUrlFlag);
-            let optionFlags = {};
-            graphLabels[
-              `${FilterBoxOptions.default[e.label].value.type}`
-            ].labels.forEach(option => {
-              optionFlags = {
-                ...optionFlags,
-                [option]: false
-              };
-            });
-            setFilters({
-              ...filters,
-              [index]: {
-                ...filters[index],
-                selectedCategory: e.label, //option
-                selectedTableColumnName:
-                  FilterBoxOptions.default[e.label].value.type,
+  const [displayDrop, setDisplayDrop] = useState(false);
 
-                selectedTable: FilterBoxOptions.default[e.label].value.query,
-                selectedOption: undefined,
-                selectableOptions: { ...optionFlags }
-              }
-            });
-          }}
-          name="color"
-          styles={colourStyles}
-          options={dataFilterVar(
-            FilterBoxOptions.superCategories,
-            Object.keys(filters)
-              .map(filterId => {
-                return filters[filterId].selectedCategory;
-              })
-              .filter(selectedCategory => selectedCategory.length > 0)
-          )}
-        />
-        {/* additional options below 'Data Series' and 'Add Filter' */}
-        <RenderCheckContainer
-          i={index}
-          filters={filters}
-          graphLabels={graphLabels}
-          //   props={props}
-          CategoryOptions={CategoryOptions}
-          CheckboxContainer={CheckboxContainer}
-          setFilters={setFilters}
-        />
-      </form>
-    </div>
-  );
+  console.log(`FilterBoxOptions`, FilterBoxOptions);
+  let allSelectableOptions = Object.keys(FilterBoxOptions.default);
+  allSelectableOptions.unshift("KEY DEMOGRAPHICS");
+
+  const allItems = [];
+  for (let key in FilterBoxOptions.default) {
+    allItems.push([key, FilterBoxOptions.default[key].value.type]);
+  }
+
+  const displayDropOptions = () => {
+    if (displayDrop === true) {
+      return (
+        <div className="dataSeriesBox">
+          <p>Data +</p>
+          <div>
+            {allItems.map(e => {
+              return (
+                <>
+                  <div>
+                    <h2>{e[0]}</h2>
+                    <RenderCheckContainer
+                      item={e[1]}
+                      i={index}
+                      filters={filters}
+                      graphLabels={graphLabels}
+                      CategoryOptions={CategoryOptions}
+                      CheckboxContainer={CheckboxContainer}
+                      setFilters={setFilters}
+                    />
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <>
+          <div className="dataSeriesBox">
+            <p>
+              Data <i class="arrow down"></i>
+            </p>
+          </div>
+        </>
+      );
+    }
+  };
+  return <div onClick={() => setDisplayDrop(true)}>{displayDropOptions()}</div>;
 };
+
 export default AddFilter;
 
 const CheckboxContainer = styled.div`

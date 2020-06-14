@@ -3,28 +3,23 @@ import graphLabels from "../graphLabels";
 import "../../Components/scss/dataSeries.scss";
 
 const DataSFilter = ({
-  filterSelectorName,
   filters,
   setFilters,
-  ControlComponent,
+
   index,
-  formatGroupLabel,
+
   setUpdateUrlFlag,
   FilterBoxOptions,
   updateUrlFlag,
-  xVar,
-  colourStyles
+  xVar
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
-  console.log(xVar);
 
   let allSelectableOptions = Object.keys(FilterBoxOptions.default);
 
   allSelectableOptions.unshift("KEY DEMOGRAPHICS");
 
   function changeOption(e) {
-    console.log(`changeOption`, e.target.value);
-
     setUpdateUrlFlag(!updateUrlFlag);
     let optionFlags = {};
     graphLabels[
@@ -48,12 +43,9 @@ const DataSFilter = ({
         selectableOptions: { ...optionFlags }
       }
     });
-    console.log(`filters`, filters[0]["selectedCategory"]);
   }
 
   const displayDropOptions = () => {
-    console.log(displayDrop);
-
     if (displayDrop === true) {
       return (
         <div className="dataSeriesBox">
