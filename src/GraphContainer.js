@@ -121,12 +121,9 @@ const GraphContainer = props => {
               spacing={2}
               style={{ height: "50px", padding: "1%" }}
             >
-              {/* <Grid item> */}
               <ClearFilters />
-              {/* </Grid> */}
-              {/* <Grid item> */}
+
               <Apply />
-              {/* </Grid> */}
             </Grid>
             <Grid
               container
@@ -163,7 +160,7 @@ const GraphContainer = props => {
           </Grid>
           <Grid container maxWidth="xl">
             <Grid container xs={2} className={classes.filters}>
-              <Grid container xs={2}>
+              <Grid container style={{ flexDirection: "column" }}>
                 <FilterBox
                   filters={filters}
                   setFilters={setFilters}
