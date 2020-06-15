@@ -395,7 +395,7 @@ export default function FilterBox(props) {
           />
         ))}
         <div className="btn-container">
-          <Button
+          <p
             onClick={e => {
               const currentDataFilter = Object.keys(filters).length - 1;
 
@@ -426,8 +426,8 @@ export default function FilterBox(props) {
             }}
             style={{ cursor: loading ? "auto" : "pointer" }}
           >
-            Add Filter
-          </Button>
+            Add +
+          </p>
         </div>
         <form>
           {/* <CalendarParent
@@ -570,24 +570,6 @@ const MonthButtons = styled.button`
     cursor: pointer;
   }
 `;
-const Button = styled.button`
-  background: #47837f;
-  width: 40%;
-  color: #fff;
-  font-weight: 400;
-  padding: 10px;
-  margin-top: 5px;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  align-self: center;
-  font-size: 1.5rem;
-  opacity: 0.8;
-  :hover {
-    cursor: pointer;
-    opacity: 1;
-  }
-`;
 
 const DropdownContainer = styled.div`
   font-family: Helvetica, sans-serif;
@@ -637,6 +619,7 @@ const DropdownContainer = styled.div`
     right: 15px;
   }
   .btn-container {
+    font-weight: 300;
     width: 100%;
     display: flex;
     justify-content: space-between;

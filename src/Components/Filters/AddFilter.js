@@ -98,7 +98,11 @@ const AddFilter = ({
       );
     }
   };
-  return <div onClick={() => setDisplayDrop(true)}>{displayDropOptions()}</div>;
+  return (
+    <div onClick={() => setDisplayDrop(!displayDrop)}>
+      {displayDropOptions()}
+    </div>
+  );
 };
 
 export default AddFilter;

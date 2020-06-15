@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import graphLabels from "../graphLabels";
 import "../../Components/scss/dataSeries.scss";
+import Grid from "@material-ui/core/Grid";
 
 const DataSFilter = ({
   filters,

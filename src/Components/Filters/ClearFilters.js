@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import Grid from "@material-ui/core/Grid";
 
 const ClearFilters = () => {
   const clearReducer = useSelector(state => state.clearReducer.clear);
@@ -16,7 +17,9 @@ const ClearFilters = () => {
   } = clearReducer;
   return (
     <>
-      <p
+      <Grid
+        item
+        xs={6}
         onClick={e => {
           setFilters({
             0: {
@@ -49,8 +52,8 @@ const ClearFilters = () => {
         }}
       >
         <svg
-          width="99"
-          height="28"
+          width="100%"
+          height="100%"
           viewBox="0 0 99 28"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +67,7 @@ const ClearFilters = () => {
             fill="#9F1C0F"
           />
         </svg>
-      </p>
+      </Grid>
     </>
   );
 };

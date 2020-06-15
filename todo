@@ -13,12 +13,16 @@ the bar chart will render.
 - break up filters and calendar to render on GraphContainer.js
 - check SocialMedia.js ...keys, make sure getting proper results
 -Clear Filters to render on bottom
+- Replaced React Select, made custom filters
+- Clear All, Apply - buttons responsive
 
 To Do:
 - make filters responsive
 
 - dropdown menu.  Currently using react-select, 
     Make a new dropdown.  Make responsive.
+
+- buttons Clear and Apply should be responsive
 
 
 
