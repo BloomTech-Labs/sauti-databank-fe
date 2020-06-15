@@ -1,16 +1,46 @@
 import React, { useState } from "react";
 import graphLabels from "../graphLabels";
 import Select, { components } from "react-select";
-import RenderCheckContainer from "../FilterBoxComponents/RenderCheckContainer";
+import RenderCheckContainer from "./RenderCheckContainer";
 import styled from "styled-components";
 const AddFilter = ({
   filters,
   setFilters,
   index,
   FilterBoxOptions,
-  CategoryOptions
+  CategoryOptions,
+  setUpdateUrlFlag,
+  updateUrlFlag
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
+
+  //onmouseOver change
+  // function changeOption(e) {
+  //   console.log(`AddFilter`, e.target.value);
+  //   setUpdateUrlFlag(!updateUrlFlag);
+  //   let optionFlags = {};
+  //   graphLabels[
+  //     `${FilterBoxOptions.default[e.target.value].value.type}`
+  //   ].labels.forEach(option => {
+  //     optionFlags = {
+  //       ...optionFlags,
+  //       [option]: false
+  //     };
+  //   });
+  //   setFilters({
+  //     ...filters,
+  //     [index]: {
+  //       ...filters[index],
+  //       selectedCategory: e.target.value, //option
+  //       selectedTableColumnName:
+  //         FilterBoxOptions.default[e.target.value].value.type,
+
+  //       selectedTable: FilterBoxOptions.default[e.target.value].value.query,
+  //       selectedOption: undefined,
+  //       selectableOptions: { ...optionFlags }
+  //     }
+  //   });
+  // }
 
   console.log(`FilterBoxOptions`, FilterBoxOptions);
   let allSelectableOptions = Object.keys(FilterBoxOptions.default);
@@ -25,23 +55,31 @@ const AddFilter = ({
     if (displayDrop === true) {
       return (
         <div className="dataSeriesBox">
-          <p>Data +</p>
+          <p>Filter +</p>
           <div>
             {allItems.map(e => {
               return (
                 <>
-                  <div>
-                    <h2>{e[0]}</h2>
-                    <RenderCheckContainer
-                      item={e[1]}
-                      i={index}
-                      filters={filters}
-                      graphLabels={graphLabels}
-                      CategoryOptions={CategoryOptions}
-                      CheckboxContainer={CheckboxContainer}
-                      setFilters={setFilters}
-                    />
-                  </div>
+                  <option
+                  // className="selectable"
+                  // value={e[0]}
+                  //  onClick={changeOption}
+                  >
+                    {e[0]}
+                  </option>
+                  <RenderCheckContainer
+                    item={e[1]}
+                    catItem={e[0]}
+                    i={index}
+                    filters={filters}
+                    graphLabels={graphLabels}
+                    CheckboxContainer={CheckboxContainer}
+                    setFilters={setFilters}
+                    index={index}
+                    setUpdateUrlFlag={setUpdateUrlFlag}
+                    updateUrlFlag={updateUrlFlag}
+                    FilterBoxOptions={FilterBoxOptions}
+                  />
                 </>
               );
             })}
@@ -53,7 +91,7 @@ const AddFilter = ({
         <>
           <div className="dataSeriesBox">
             <p>
-              Data <i class="arrow down"></i>
+              Filter <i class="arrow down"></i>
             </p>
           </div>
         </>

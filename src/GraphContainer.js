@@ -56,6 +56,7 @@ const useStyles = makeStyles(theme => ({
 const GraphContainer = props => {
   const [url, setUrl] = useState("");
   const [filters, setFilters] = useState(props.filters);
+  console.log(`filters`, filters);
   const [queryType, setQueryType] = useState("");
   const [chartDataSM, setChartDataSM] = useState([]);
 

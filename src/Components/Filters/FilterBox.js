@@ -16,7 +16,7 @@ import {
 } from "../../dashboard/auth/Auth";
 import { getAvaliableOptions, getSelectedOption } from "../../OptionFunctions";
 import CalendarParent from "../../dashboard/CalendarParent";
-import RenderCheckContainer from "../FilterBoxComponents/RenderCheckContainer";
+import RenderCheckContainer from "./RenderCheckContainer";
 import Grid from "@material-ui/core/Grid";
 
 import DataSeriesFilter from "./DataSeriesFilter";
@@ -150,52 +150,52 @@ export default function FilterBox(props) {
     );
 
     //only being used for AddFilter -> RenderCheckContainer
-    const CategoryOptions = props => {
-      let { i, filters, graphLabels, option, item } = props;
+    // const CategoryOptions = props => {
+    //   let { i, filters, graphLabels, option, item } = props;
 
-      // for options tag
-      const changeOption = (i, filters, graphLabels, option) => {
-        let optionFlags = {};
-        graphLabels[item].labels.forEach(option => {
-          optionFlags = {
-            ...optionFlags,
-            [option]: false
-          };
-        });
-        setFilters({
-          ...filters,
-          [i]: {
-            ...filters[i],
-            // selectedOption: option,
-            selectableOptions: {
-              ...optionFlags,
-              [option]: !filters[i].selectableOptions[option]
-            }
-          }
-        });
-      };
-      const isChecked = (i, filters, option) => {
-        return filters[i].selectableOptions[option] === true;
-      };
+    //   // for options tag
+    //   const changeOption = (i, filters, graphLabels, option) => {
+    //     let optionFlags = {};
+    //     graphLabels[item].labels.forEach(option => {
+    //       optionFlags = {
+    //         ...optionFlags,
+    //         [option]: false
+    //       };
+    //     });
+    //     setFilters({
+    //       ...filters,
+    //       [i]: {
+    //         ...filters[i],
+    //         // selectedOption: option,
+    //         selectableOptions: {
+    //           ...optionFlags,
+    //           [option]: !filters[i].selectableOptions[option]
+    //         }
+    //       }
+    //     });
+    //   };
+    //   const isChecked = (i, filters, option) => {
+    //     return filters[i].selectableOptions[option] === true;
+    //   };
 
-      return (
-        <Options key={option}>
-          <input
-            type="radio"
-            name="CrossFilter"
-            value={option}
-            // seems to need this when this is a component
-            checked={isChecked(i, filters, option)}
-            onChange={e => {
-              setUpdateUrlFlag(!updateUrlFlag);
+    //   return (
+    //     <Options key={option}>
+    //       <input
+    //         type="radio"
+    //         name="CrossFilter"
+    //         value={option}
+    //         // seems to need this when this is a component
+    //         checked={isChecked(i, filters, option)}
+    //         onChange={e => {
+    //           setUpdateUrlFlag(!updateUrlFlag);
 
-              changeOption(i, filters, graphLabels, option);
-            }}
-          />
-          <FilterOption>{option}</FilterOption>
-        </Options>
-      );
-    };
+    //           changeOption(i, filters, graphLabels, option);
+    //         }}
+    //       />
+    //       <FilterOption>{option}</FilterOption>
+    //     </Options>
+    //   );
+    // };
 
     const dispatch = useDispatch();
 
@@ -272,7 +272,6 @@ export default function FilterBox(props) {
           updateUrlFlag={updateUrlFlag}
           dataFilterVar={dataFilterVar}
           colourStyles={colourOptions}
-          CategoryOptions={CategoryOptions}
         />
       );
     } else {

@@ -1,20 +1,24 @@
 import React from "react";
-//import CategoryOptions from './CategoryOptions';
+import FilterCategoryOptions from "./FilterCategoryOptions";
 
 const RenderCheckContainer = ({
   i,
   item,
+  catItem,
   filters,
   graphLabels,
-  CategoryOptions,
+  // CategoryOptions,
   CheckboxContainer,
   setFilters,
-  FilterBoxOptions
+  FilterBoxOptions,
+  setUpdateUrlFlag,
+  updateUrlFlag,
+  index
 }) => {
   // do all conditional renderings using if statements for now
   // for (let item in )
   //console.log(filters[i])
-  const showOptions = (i, filters, graphLabels, item) => {
+  const showOptions = (i, filters, graphLabels, item, index) => {
     //  if (filters[i].showOptions) {
     return graphLabels[
       item
@@ -22,12 +26,18 @@ const RenderCheckContainer = ({
     ].labels.map(option => (
       //not updating filter
       //does not have selected table column name
-      <CategoryOptions
+      <FilterCategoryOptions
         i={i}
         filters={filters}
         graphLabels={graphLabels}
         option={option}
         item={item}
+        catItem={catItem}
+        index={index}
+        setFilters={setFilters}
+        setUpdateUrlFlag={setUpdateUrlFlag}
+        updateUrlFlag={updateUrlFlag}
+        FilterBoxOptions={FilterBoxOptions}
       />
     ));
     // } else {
@@ -69,7 +79,7 @@ const RenderCheckContainer = ({
         {filters[i].showOptions ? "Hide" : "Show"}
         {/* </button> */}
 
-        {showOptions(i, filters, graphLabels, item)}
+        {showOptions(i, filters, graphLabels, item, index)}
       </CheckboxContainer>
     );
   } else {
