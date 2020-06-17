@@ -12,37 +12,43 @@ const AddFilter = ({
   FilterBoxOptions,
   CategoryOptions,
   setUpdateUrlFlag,
-  updateUrlFlag
+  updateUrlFlag,
+  displayDrop,
+  setDisplayDrop
 }) => {
-  const [displayDrop, setDisplayDrop] = useState(false);
+  const [displayRenderContainer, setDisplayRenderContainer] = useState("");
+  console.log(displayRenderContainer);
 
   //onmouseOver change
-  // function changeOption(e) {
-  //   console.log(`AddFilter`, e.target.value);
-  //   setUpdateUrlFlag(!updateUrlFlag);
-  //   let optionFlags = {};
-  //   graphLabels[
-  //     `${FilterBoxOptions.default[e.target.value].value.type}`
-  //   ].labels.forEach(option => {
-  //     optionFlags = {
-  //       ...optionFlags,
-  //       [option]: false
-  //     };
-  //   });
-  //   setFilters({
-  //     ...filters,
-  //     [index]: {
-  //       ...filters[index],
-  //       selectedCategory: e.target.value, //option
-  //       selectedTableColumnName:
-  //         FilterBoxOptions.default[e.target.value].value.type,
+  function changeOption(e) {
+    console.log(`AddFilter`, e.target.value);
+    const display = e.target.value;
+    setDisplayRenderContainer(display);
+    setUpdateUrlFlag(!updateUrlFlag);
+    let optionFlags = {};
+    graphLabels[
+      `${FilterBoxOptions.default[e.target.value].value.type}`
+    ].labels.forEach(option => {
+      optionFlags = {
+        ...optionFlags,
+        [option]: false
+      };
+    });
+    setFilters({
+      ...filters,
+      [index]: {
+        ...filters[index],
+        selectedCategory: e.target.value, //option
+        selectedTableColumnName:
+          FilterBoxOptions.default[e.target.value].value.type,
 
-  //       selectedTable: FilterBoxOptions.default[e.target.value].value.query,
-  //       selectedOption: undefined,
-  //       selectableOptions: { ...optionFlags }
-  //     }
-  //   });
-  // }
+        selectedTable: FilterBoxOptions.default[e.target.value].value.query,
+        selectedOption: undefined,
+        selectableOptions: { ...optionFlags },
+        showOptions: true
+      }
+    });
+  }
 
   console.log(`FilterBoxOptions`, FilterBoxOptions);
   let allSelectableOptions = Object.keys(FilterBoxOptions.default);
@@ -52,6 +58,29 @@ const AddFilter = ({
   for (let key in FilterBoxOptions.default) {
     allItems.push([key, FilterBoxOptions.default[key].value.type]);
   }
+
+  // function renderCheckContainer(e) {
+  //   console.log(displayRenderContainer)
+  //   if (displayRenderContainer === e) {
+  //     return (
+  //       <RenderCheckContainer
+  //         //item={e[1]}
+  //         // catItem={e[0]}
+  //         i={index}
+  //         filters={filters}
+  //         graphLabels={graphLabels}
+  //         setFilters={setFilters}
+  //         //index={index}
+  //         setUpdateUrlFlag={setUpdateUrlFlag}
+  //         updateUrlFlag={updateUrlFlag}
+  //         FilterBoxOptions={FilterBoxOptions}
+  //         setDisplayDrop={setDisplayDrop}
+  //       />
+  //     );
+  //   } else {
+  //     return <></>;
+  //   }
+  // }
 
   const displayDropOptions = () => {
     if (displayDrop === true) {
@@ -110,24 +139,29 @@ const AddFilter = ({
               return (
                 <>
                   <option
-                  // className="selectable"
-                  // value={e[0]}
-                  //  onClick={changeOption}
+                    className="selectable"
+                    value={e[0]}
+                    onClick={changeOption}
+                    key={e[0]}
                   >
                     {e[0]}
+                    {/* {renderCheckContainer(e)} */}
                   </option>
+
                   <RenderCheckContainer
-                    item={e[1]}
-                    catItem={e[0]}
+                    //item={e[1]}
+                    // catItem={e[0]}
                     i={index}
+                    itemName={e[0]}
                     filters={filters}
                     graphLabels={graphLabels}
-                    CheckboxContainer={CheckboxContainer}
+                    displayRenderContainer={displayRenderContainer}
                     setFilters={setFilters}
-                    index={index}
+                    //index={index}
                     setUpdateUrlFlag={setUpdateUrlFlag}
                     updateUrlFlag={updateUrlFlag}
                     FilterBoxOptions={FilterBoxOptions}
+                    setDisplayDrop={setDisplayDrop}
                   />
                 </>
               );
@@ -180,20 +214,7 @@ const AddFilter = ({
       );
     }
   };
-  return (
-    <div onClick={() => setDisplayDrop(!displayDrop)}>
-      {displayDropOptions()}
-    </div>
-  );
+  return <div onClick={() => setDisplayDrop(true)}>{displayDropOptions()}</div>;
 };
 
 export default AddFilter;
-
-const CheckboxContainer = styled.div`
-  max-height: 40vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  margin: 10px 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
-`;

@@ -40,6 +40,7 @@ export default function FilterBox(props) {
     open
   } = props;
   const [updateUrlFlag, setUpdateUrlFlag] = useState(false);
+  const [displayDrop, setDisplayDrop] = useState(false);
 
   //theSuperCategories (Key Demographic, Information Demand, Business Behavior)
   //categoriesCollected (categories selected ex. 'gender')
@@ -133,6 +134,8 @@ export default function FilterBox(props) {
             FilterBoxOptions={FilterBoxOptions}
             updateUrlFlag={updateUrlFlag}
             dataFilterVar={dataFilterVar}
+            displayDrop={displayDrop}
+            setDisplayDrop={setDisplayDrop}
           />
         </Grid>
       );

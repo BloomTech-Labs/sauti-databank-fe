@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const CategoryOptions = (
+const CategoryOptions = ({
   setUpdateUrlFlag,
   updateUrlFlag,
   setFilters,
@@ -9,7 +9,7 @@ const CategoryOptions = (
   filters,
   graphLabels,
   option
-) => {
+}) => {
   const changeOption = (i, filters, graphLabels, option) => {
     let optionFlags = {};
     graphLabels[`${filters[i].selectedTableColumnName}`].labels.forEach(
