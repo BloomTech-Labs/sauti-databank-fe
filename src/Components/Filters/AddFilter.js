@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import graphLabels from "../graphLabels";
-import Select, { components } from "react-select";
+
 import RenderCheckContainer from "./RenderCheckContainer";
-import styled from "styled-components";
 import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
 
 const AddFilter = ({
   filters,
@@ -18,9 +20,10 @@ const AddFilter = ({
 }) => {
   const [displayRenderContainer, setDisplayRenderContainer] = useState("");
   console.log(displayRenderContainer);
-
+  const classes = useStyles();
   //onmouseOver change
-  function changeOption(e) {
+  const changeOption = e => {
+    console.log("changeOption");
     console.log(`AddFilter`, e.target.value);
     const display = e.target.value;
     setDisplayRenderContainer(display);
@@ -48,9 +51,8 @@ const AddFilter = ({
         showOptions: true
       }
     });
-  }
+  };
 
-  console.log(`FilterBoxOptions`, FilterBoxOptions);
   let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   allSelectableOptions.unshift("KEY DEMOGRAPHICS");
 
@@ -59,33 +61,14 @@ const AddFilter = ({
     allItems.push([key, FilterBoxOptions.default[key].value.type]);
   }
 
-  // function renderCheckContainer(e) {
-  //   console.log(displayRenderContainer)
-  //   if (displayRenderContainer === e) {
-  //     return (
-  //       <RenderCheckContainer
-  //         //item={e[1]}
-  //         // catItem={e[0]}
-  //         i={index}
-  //         filters={filters}
-  //         graphLabels={graphLabels}
-  //         setFilters={setFilters}
-  //         //index={index}
-  //         setUpdateUrlFlag={setUpdateUrlFlag}
-  //         updateUrlFlag={updateUrlFlag}
-  //         FilterBoxOptions={FilterBoxOptions}
-  //         setDisplayDrop={setDisplayDrop}
-  //       />
-  //     );
-  //   } else {
-  //     return <></>;
-  //   }
-  // }
+  function closeDiv() {
+    setDisplayDrop(false);
+  }
 
   const displayDropOptions = () => {
     if (displayDrop === true) {
       return (
-        <Grid item xs={12}>
+        <Grid container xs={12} onClick={() => setDisplayDrop(false)}>
           <svg
             width="100%"
             height="100%"
@@ -134,45 +117,39 @@ const AddFilter = ({
             </defs>
           </svg>
 
-          <div>
+          <Grid container xs={12} style={{ flexDirection: "column" }}>
             {allItems.map(e => {
               return (
                 <>
-                  <option
-                    className="selectable"
+                  <TextField
+                    // className={classes.supercat}
                     value={e[0]}
                     onClick={changeOption}
                     key={e[0]}
                   >
                     {e[0]}
-                    {/* {renderCheckContainer(e)} */}
-                  </option>
+                  </TextField>
 
                   <RenderCheckContainer
-                    //item={e[1]}
-                    // catItem={e[0]}
                     i={index}
                     itemName={e[0]}
                     filters={filters}
                     graphLabels={graphLabels}
-                    displayRenderContainer={displayRenderContainer}
                     setFilters={setFilters}
-                    //index={index}
                     setUpdateUrlFlag={setUpdateUrlFlag}
                     updateUrlFlag={updateUrlFlag}
                     FilterBoxOptions={FilterBoxOptions}
-                    setDisplayDrop={setDisplayDrop}
                   />
                 </>
               );
             })}
-          </div>
+          </Grid>
         </Grid>
       );
     } else {
       return (
         <>
-          <Grid item xs={12}>
+          <Grid container xs={12}>
             <svg
               width="100%"
               height="100%"
@@ -218,3 +195,21 @@ const AddFilter = ({
 };
 
 export default AddFilter;
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  supercat: {
+    padding: theme.spacing(0.2),
+    opacity: 1,
+    fontSize: "1.5rem",
+    textOverflow: "ellipsis",
+    height: "20px",
+    fontFamily: "sans-serif",
+    "&:hover, &:focus": {
+      background: "rgba(0, 0, 0, 0.5)",
+      opacity: 1
+    }
+  }
+}));

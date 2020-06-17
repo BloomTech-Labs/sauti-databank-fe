@@ -1,6 +1,7 @@
 import React from "react";
 import CategoryOptions from "./CategoryOptions";
 import styled from "styled-components";
+import Grid from "@material-ui/core/Grid";
 //component - diplays a button to see options when button is clicked
 const RenderCheckContainer = ({
   i,
@@ -8,12 +9,11 @@ const RenderCheckContainer = ({
   graphLabels,
   // CategoryOptions,
   itemName,
-  displayRenderContainer,
+
   setFilters,
   FilterBoxOptions,
   setUpdateUrlFlag,
-  updateUrlFlag,
-  setDisplayDrop
+  updateUrlFlag
 }) => {
   // do all conditional renderings using if statements for now
   // for (let item in )
@@ -54,15 +54,16 @@ const RenderCheckContainer = ({
     }
   };
   //remove additional filtering options for 'Data Series',
-  console.log(filters);
 
   // if (graphLabels[`${filters[i].selectedTableColumnName}`]) {
   if (itemName === filters[i].selectedCategory) {
     //if (graphLabels[item]) {
     return (
+      // <Grid container style={{flexDirection: "row"}}>
       <CheckboxContainer>
         {showOptions(i, filters, graphLabels)}
       </CheckboxContainer>
+      // </Grid>
     );
   } else {
     return <div></div>;
@@ -74,7 +75,9 @@ const CheckboxContainer = styled.div`
   max-height: 40vh;
   overflow-x: hidden;
   overflow-y: auto;
+  display: flex;
   margin: 10px 0;
   padding-bottom: 10px;
+  padding-left: 1%;
   border-bottom: 1px solid #ccc;
 `;
