@@ -1,43 +1,13 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import Download from "./Download";
 
-import styled from "styled-components";
-
 import useCalendar from "../hooks/useCalendar";
-
-const DateContainer = styled.div`
-  //   margin: 20px 0;
-  //   display: flex;
-  //   div {
-  //     display: flex;
-  //     flex-direction: column;
-  //     max-width: 50%;
-  //     input {
-  //       font-family: "Helvetica", sans-serif;
-  //       font-size: 16px;
-  //       margin: 0;
-  //       border-radius: 2px;
-  //       border: 1px solid #ccc;
-  //       padding: 10px;
-  //       ::-webkit-inner-spin-button {
-  //         display: none;
-  //       }
-  //       ::-webkit-clear-button {
-  //         display: none;
-  //       }
-  //       ::-webkit-calendar-picker-indicator {
-  //         opacity: 0.8;
-  //         cursor: pointer;
-  //         color: #999;
-  //       }
-  //     }
-  //   }
-`;
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -50,6 +20,11 @@ const useStyles = makeStyles(theme => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    fontSize: "20px"
   }
 }));
 
@@ -75,31 +50,47 @@ export default function CalendarModal() {
   const [loading, setLoading] = useState(false);
   return (
     <div>
-      <div>
-        <DateContainer onClick={handleOpen}>
-          <div>
-            <p>Start</p>
-            <input
-              name="startData"
-              type="date"
-              value={filterBoxStartDate}
-              disabled={loading}
-              placeholder={filterBoxStartDate}
-            />
-          </div>
-          <div>
-            <p>End</p>
-            <input
-              disabled={loading}
-              name="endData"
-              type="date"
-              value={filterBoxEndDate}
-              id="today"
-              placeholder={filterBoxEndDate}
-            />
-          </div>
-        </DateContainer>
-      </div>
+      <Grid container onClick={handleOpen}>
+        <Grid item xs={6} style={{ fontSize: "12px" }}>
+          {/* <form className={classes.container} noValidate> */}
+          <TextField
+            id="date"
+            label="Start"
+            type="date"
+            defaultValue={filterBoxStartDate}
+            value={filterBoxStartDate}
+            className={classes.textField}
+            onChange={e => setFilterBoxStartDate(e.target.value)}
+            InputLabelProps={{
+              // shrink: true
+
+              classes: {
+                root: classes.labelRoot,
+                focused: classes.labelFocused
+              }
+            }}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="End"
+            type="date"
+            name="endData"
+            value={filterBoxEndDate}
+            id="today"
+            defaultValue={filterBoxEndDate}
+            className={classes.textField}
+            onChange={e => setFilterBoxEndDate(e.target.value)}
+            InputLabelProps={{
+              shrink: true,
+              classes: {
+                root: classes.labelRoot,
+                focused: classes.labelFocused
+              }
+            }}
+          />
+        </Grid>
+      </Grid>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

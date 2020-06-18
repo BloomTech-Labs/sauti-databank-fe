@@ -29,20 +29,44 @@ const CalendarParent = ({
           <Grid container>
             <Grid container>
               <Grid item xs={6} style={{ fontSize: "12px" }}>
-                <form className={classes.container} noValidate>
-                  <TextField
-                    id="date"
-                    label="Start"
-                    type="date"
-                    defaultValue={filterBoxStartDate}
-                    value={filterBoxStartDate}
-                    className={classes.textField}
-                    onChange={e => setFilterBoxStartDate(e.target.value)}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
-                </form>
+                {/* <form className={classes.container} noValidate> */}
+                <TextField
+                  id="date"
+                  label="Start"
+                  type="date"
+                  defaultValue={filterBoxStartDate}
+                  value={filterBoxStartDate}
+                  className={classes.textField}
+                  onChange={e => setFilterBoxStartDate(e.target.value)}
+                  InputLabelProps={{
+                    // shrink: true
+
+                    classes: {
+                      root: classes.labelRoot,
+                      focused: classes.labelFocused
+                    }
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="End"
+                  type="date"
+                  name="endData"
+                  value={filterBoxEndDate}
+                  id="today"
+                  defaultValue={filterBoxEndDate}
+                  className={classes.textField}
+                  onChange={e => setFilterBoxEndDate(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                    classes: {
+                      root: classes.labelRoot,
+                      focused: classes.labelFocused
+                    }
+                  }}
+                />
+                {/* </form> */}
                 {/* <p>Start</p>
                 <input
                   name="startData"
@@ -52,7 +76,7 @@ const CalendarParent = ({
                   onChange={e => setFilterBoxStartDate(e.target.value)}
                 /> */}
               </Grid>
-              <Grid item xs={6} style={{ fontSize: "12px" }}>
+              {/* <Grid item xs={6} style={{ fontSize: "12px" }}>
                 <p>End</p>
                 <input
                   disabled={loading}
@@ -62,7 +86,7 @@ const CalendarParent = ({
                   id="today"
                   onChange={e => setFilterBoxEndDate(e.target.value)}
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
             <Grid container>
               <MonthButtons onClick={changeQuarter("Q1")}>Q1</MonthButtons>
@@ -101,6 +125,16 @@ const CalendarParent = ({
 export default CalendarParent;
 
 const useStyles = makeStyles(theme => ({
+  inputRoot: {
+    fontSize: 14
+  },
+  labelRoot: {
+    fontSize: 16,
+
+    "&$labelFocused": {
+      color: "red"
+    }
+  },
   container: {
     display: "flex",
     flexWrap: "wrap"
@@ -108,7 +142,7 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200
+    fontSize: "20px"
   }
 }));
 
