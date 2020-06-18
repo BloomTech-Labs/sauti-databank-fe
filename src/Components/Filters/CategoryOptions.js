@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const CategoryOptions = ({
   setUpdateUrlFlag,
@@ -37,21 +39,34 @@ const CategoryOptions = ({
   };
 
   return (
-    <Options key={option}>
-      <input
-        type="radio"
-        name="CrossFilter"
-        value={option}
-        // seems to need this when this is a component
-        checked={isChecked(i, filters, option)}
-        onChange={e => {
-          setUpdateUrlFlag(!updateUrlFlag);
+    <FormControlLabel
+      key={option}
+      value={option}
+      control={<Radio />}
+      checked={isChecked(i, filters, option)}
+      onChange={e => {
+        setUpdateUrlFlag(!updateUrlFlag);
 
-          changeOption(i, filters, graphLabels, option);
-        }}
-      />
-      <FilterOption>{option}</FilterOption>
-    </Options>
+        changeOption(i, filters, graphLabels, option);
+      }}
+      label={option}
+    />
+    //   <Radio
+    //   key={option}
+    //     type="radio"
+    //     name="CrossFilter"
+    //     value={option}
+    //     // seems to need this when this is a component
+    //     checked={isChecked(i, filters, option)}
+    //     onChange={e => {
+    //       setUpdateUrlFlag(!updateUrlFlag);
+
+    //       changeOption(i, filters, graphLabels, option);
+    //     }}
+    //     label="Female"
+    //   >
+    //   <FilterOption>{option}</FilterOption>
+    // </Radio>
   );
 };
 export default CategoryOptions;

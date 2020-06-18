@@ -3,7 +3,6 @@ import getIndex from "../DataParseHelpers/getIndex";
 import getMostRequested from "../DataParseHelpers/getMostRequested";
 import setCrossedItems from "../DataParseHelpers/setCrossedItems";
 import setItem from "../DataParseHelpers/setItem";
-import { filterByDate } from "../DataParseHelpers/filterByDate";
 
 const dataParse = (
   indexBy,
@@ -22,20 +21,12 @@ const dataParse = (
 
   let newArray = [];
   if (queryType === "Sessions" && crossFilter === "") {
-    //filter by date
-    //data = filterByDate(data, startDate, endDate);
-    // data = removeMultiple(data);
-
     dataStructure = getIndex(data, indexBy);
 
     return getMostRequested(data, dataStructure, indexBy);
   }
   //when cross-filtering "Most Requested" as index
   else if (queryType === "Sessions" && crossFilter !== "") {
-    // data = filterByDate(data, startDate, endDate);
-
-    // data = removeMultiple(data);
-
     dataStructure = getIndex(data, indexBy);
 
     return setCrossedItems(
