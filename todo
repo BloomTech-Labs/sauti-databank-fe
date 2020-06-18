@@ -19,20 +19,25 @@ the bar chart will render.
 - GraphParse.js, was getting an error with filter by date.  Now data.sessionData != undefined, prevents going to filterbydate.
 - Add Filter opens by index, on close removes all
 - AddFilters uses Material-ui throughout, now responsive
+- calendar material-ui responsive
+
 To Do:
-- make filters responsive
+- Filters list in Alphabetical order
+- design filter buttons
+-
 
-- dropdown menu.  Currently using react-select, 
-    Make a new dropdown.  Make responsive.
 
-- buttons Clear and Apply should be responsive
+
+
 
 - onhover for social media and graph buttons
-- make 
 
--click outside Add Filter will close it.
 
-- all Add Filters open and close onClick
+
+
+
+
+
 
 Error - think it occurs when search does not render any data.
 :/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/filterByDate.js:6

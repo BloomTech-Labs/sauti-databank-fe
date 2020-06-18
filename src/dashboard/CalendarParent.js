@@ -66,27 +66,7 @@ const CalendarParent = ({
                     }
                   }}
                 />
-                {/* </form> */}
-                {/* <p>Start</p>
-                <input
-                  name="startData"
-                  type="date"
-                  value={filterBoxStartDate}
-                  disabled={loading}
-                  onChange={e => setFilterBoxStartDate(e.target.value)}
-                /> */}
               </Grid>
-              {/* <Grid item xs={6} style={{ fontSize: "12px" }}>
-                <p>End</p>
-                <input
-                  disabled={loading}
-                  name="endData"
-                  type="date"
-                  value={filterBoxEndDate}
-                  id="today"
-                  onChange={e => setFilterBoxEndDate(e.target.value)}
-                />
-              </Grid> */}
             </Grid>
             <Grid container>
               <MonthButtons onClick={changeQuarter("Q1")}>Q1</MonthButtons>
