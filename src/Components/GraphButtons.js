@@ -5,14 +5,22 @@ import mapImage from "../assets/images/map.png";
 import barImage from "../assets/images/barchart.png";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const GraphButtons = ({ open, setOpen, filters, queryType }) => {
+  const classes = useStyles();
+
   const lineButton = () => {
     if (open !== "line" && queryType === "sessionsData") {
       return (
         <button className="all-btn" onClick={() => setOpen("line")}>
-          <img src={graphImage} />
-          <h1>Line Graph</h1>
+          <Tooltip
+            title="Line Graph"
+            arrow
+            classes={{ tooltip: classes.customWidth }}
+          >
+            <img src={graphImage} />
+          </Tooltip>
         </button>
       );
     } else {
@@ -24,8 +32,13 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
     if (open !== "bar") {
       return (
         <button className="all-btn" onClick={() => setOpen("bar")}>
-          <img src={barImage} />
-          <h1>Bar Chart</h1>
+          <Tooltip
+            title="Bar Chart"
+            arrow
+            classes={{ tooltip: classes.customWidth }}
+          >
+            <img src={barImage} />
+          </Tooltip>
         </button>
       );
     } else {
@@ -40,8 +53,9 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
     ) {
       return (
         <button className="all-btn" onClick={() => setOpen("choropleth")}>
-          <img src={mapImage} />
-          <h1>Map</h1>
+          <Tooltip title="Map" arrow classes={{ tooltip: classes.customWidth }}>
+            <img src={mapImage} />
+          </Tooltip>
         </button>
       );
     } else if (
@@ -50,8 +64,9 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
     ) {
       return (
         <button className="all-btn" onClick={() => setOpen("choropleth")}>
-          <img src={mapImage} />
-          <h1>Map</h1>
+          <Tooltip title="Map" arrow classes={{ tooltip: classes.customWidth }}>
+            <img src={mapImage} />
+          </Tooltip>
         </button>
       );
     } else if (
@@ -61,8 +76,9 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
     ) {
       return (
         <button className="all-btn" onClick={() => setOpen("choropleth")}>
-          <img src={mapImage} />
-          <h1>Map</h1>
+          <Tooltip title="Map" arrow classes={{ tooltip: classes.customWidth }}>
+            <img src={mapImage} />
+          </Tooltip>
         </button>
       );
     } else {
@@ -79,3 +95,8 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
   );
 };
 export default GraphButtons;
+const useStyles = makeStyles(theme => ({
+  customWidth: {
+    fontSize: "12px"
+  }
+}));
