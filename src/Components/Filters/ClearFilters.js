@@ -52,8 +52,8 @@ const ClearFilters = () => {
         }}
       >
         <svg
-          width="100%"
-          height="100%"
+          width="85%"
+          height="85%"
           viewBox="0 0 99 28"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

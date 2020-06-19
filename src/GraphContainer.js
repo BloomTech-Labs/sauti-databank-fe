@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   },
   filters: {
     //padding: "2rem"
-    padding: "1%",
+    paddingLeft: "1%",
     flexDirection: "column"
   },
   clearApply: {
@@ -115,16 +115,7 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid
-              container
-              xs={2}
-              spacing={2}
-              style={{ height: "50px", padding: "1%" }}
-            >
-              <ClearFilters />
-
-              <Apply />
-            </Grid>
+            <Grid xs={2}></Grid>
             <Grid
               container
               xs={3}
@@ -181,6 +172,15 @@ const GraphContainer = props => {
 
               <Grid item className={classes.filters}>
                 <CalendarFilter />
+              </Grid>
+              <Grid
+                container
+                spacing={2}
+                style={{ height: "30px", padding: "4%" }}
+              >
+                <ClearFilters />
+
+                <Apply />
               </Grid>
             </Grid>
 
