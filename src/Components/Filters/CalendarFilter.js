@@ -39,7 +39,7 @@ const CalendarFilter = () => {
           className={classes.calendar}
         >
           <h1 className={classes.h1}>Calendar</h1>
-          <i className="arrow down"></i>
+          {/* <i className="arrow down"></i> */}
         </Grid>
         <CalendarParent
           tier={tier}

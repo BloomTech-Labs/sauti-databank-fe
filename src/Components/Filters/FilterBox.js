@@ -109,18 +109,16 @@ export default function FilterBox(props) {
     //first is 'Data Series'
     if (filterSelectorName === "Data Series") {
       return (
-        <Grid container>
-          <DataSFilter
-            filterSelectorName={filterSelectorName}
-            filters={filters}
-            setFilters={setFilters}
-            index={index}
-            setUpdateUrlFlag={setUpdateUrlFlag}
-            FilterBoxOptions={FilterBoxOptions}
-            updateUrlFlag={updateUrlFlag}
-            xVar={xVar}
-          />
-        </Grid>
+        <DataSFilter
+          filterSelectorName={filterSelectorName}
+          filters={filters}
+          setFilters={setFilters}
+          index={index}
+          setUpdateUrlFlag={setUpdateUrlFlag}
+          FilterBoxOptions={FilterBoxOptions}
+          updateUrlFlag={updateUrlFlag}
+          xVar={xVar}
+        />
       );
     } else if (filterSelectorName === "Data Filter") {
       return (
