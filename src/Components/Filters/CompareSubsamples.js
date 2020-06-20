@@ -5,6 +5,7 @@ import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import ordered from "../orderedGraphLabels";
 
 const CompareSubSamples = () => {
   const reducerSub = useSelector(
@@ -65,33 +66,13 @@ const CompareSubSamples = () => {
               <h1 className={classes.h1}>Compare SubSamples</h1>
             </Grid>
             <Grid container xs={12} style={{ flexDirection: "column" }}>
-              {allSelectableOptions.map(e => {
-                if (e === "Most Requested Procedure Commodities") {
-                  return (
-                    <>
-                      <h1>'INFORMATION DEMAND'</h1>
-                      <TextField
-                        className="selectable"
-                        value={e}
-                        onClick={changeOption}
-                      >
-                        {e}
-                      </TextField>
-                    </>
-                  );
-                } else if (e === "Exchange Rate Direction") {
-                  return (
-                    <>
-                      <h1>'BUSINESS BEHAVIOR'</h1>
-                      <TextField
-                        className="selectable"
-                        value={e}
-                        onClick={changeOption}
-                      >
-                        {e}
-                      </TextField>
-                    </>
-                  );
+              {ordered.map(e => {
+                if (
+                  e === "KEY DEMOGRAPHICS" ||
+                  e === "INFORMATION DEMAND" ||
+                  e === "BUSINESS BEHAVIOUR"
+                ) {
+                  return <p className={classes.super}>{e}</p>;
                 } else {
                   return (
                     <TextField
@@ -158,5 +139,10 @@ const useStyles = makeStyles(theme => ({
     height: "50px",
     textAlign: "left",
     fontWeight: "800"
+  },
+  super: {
+    textAlign: "center",
+    background: "silver",
+    fontSize: "1.2rem"
   }
 }));

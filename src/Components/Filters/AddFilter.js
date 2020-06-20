@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
+import ordered from "../orderedGraphLabels";
 
 const AddFilter = ({
   filters,
@@ -69,31 +70,38 @@ const AddFilter = ({
           </Grid>
 
           <Grid container xs={12} style={{ flexDirection: "column" }}>
-            {allItems.map(e => {
-              return (
-                <>
-                  <TextField
-                    // classNTextFieldame={classes.supercat}
-                    value={e[0]}
-                    onClick={changeOption}
-                    key={e[0]}
-                  >
-                    {e[0]}
-                  </TextField>
+            {ordered.map(e => {
+              if (
+                e === "KEY DEMOGRAPHICS" ||
+                e === "INFORMATION DEMAND" ||
+                e === "BUSINESS BEHAVIOUR"
+              ) {
+                return <p className={classes.super}>{e}</p>;
+              } else {
+                return (
+                  <>
+                    <TextField
+                      className="selectable"
+                      value={e}
+                      onClick={changeOption}
+                    >
+                      {e}
+                    </TextField>
 
-                  <RenderCheckContainer
-                    i={index}
-                    itemName={e[0]}
-                    filters={filters}
-                    graphLabels={graphLabels}
-                    setFilters={setFilters}
-                    setUpdateUrlFlag={setUpdateUrlFlag}
-                    updateUrlFlag={updateUrlFlag}
-                    FilterBoxOptions={FilterBoxOptions}
-                    setDisplayDrop={setDisplayDrop}
-                  />
-                </>
-              );
+                    <RenderCheckContainer
+                      i={index}
+                      itemName={e}
+                      filters={filters}
+                      graphLabels={graphLabels}
+                      setFilters={setFilters}
+                      setUpdateUrlFlag={setUpdateUrlFlag}
+                      updateUrlFlag={updateUrlFlag}
+                      FilterBoxOptions={FilterBoxOptions}
+                      setDisplayDrop={setDisplayDrop}
+                    />
+                  </>
+                );
+              }
             })}
           </Grid>
         </Grid>
@@ -152,5 +160,10 @@ const useStyles = makeStyles(theme => ({
     height: "50px",
     textAlign: "left",
     fontWeight: "800"
+  },
+  super: {
+    textAlign: "center",
+    background: "silver",
+    fontSize: "1.2rem"
   }
 }));

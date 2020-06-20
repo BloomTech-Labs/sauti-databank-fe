@@ -4,6 +4,7 @@ import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import ordered from "../orderedGraphLabels";
 
 const DataSFilter = ({
   filters,
@@ -16,11 +17,11 @@ const DataSFilter = ({
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
 
-  let allSelectableOptions = Object.keys(FilterBoxOptions.default);
+  // let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   const classes = useStyles();
-  allSelectableOptions.unshift("KEY DEMOGRAPHICS");
 
   function changeOption(e) {
+    console.log("changeOption");
     setUpdateUrlFlag(!updateUrlFlag);
     let optionFlags = {};
     graphLabels[
@@ -53,12 +54,16 @@ const DataSFilter = ({
           <Grid item xs={12} className={classes.filterButton}>
             <p className={classes.h1}>Data Series</p>
           </Grid>
-
-          {allSelectableOptions.map(e => {
-            if (e === "Most Requested Procedure Commodities") {
-              return (
-                <>
-                  {/* <h1>'INFORMATION DEMAND'</h1> */}
+          <Grid container xs={12} style={{ flexDirection: "column" }}>
+            {ordered.map(e => {
+              if (
+                e === "KEY DEMOGRAPHICS" ||
+                e === "INFORMATION DEMAND" ||
+                e === "BUSINESS BEHAVIOUR"
+              ) {
+                return <p className={classes.super}>{e}</p>;
+              } else {
+                return (
                   <TextField
                     className="selectable"
                     value={e}
@@ -66,34 +71,10 @@ const DataSFilter = ({
                   >
                     {e}
                   </TextField>
-                </>
-              );
-            } else if (e === "Exchange Rate Direction") {
-              return (
-                <>
-                  {/* <h1>'BUSINESS BEHAVIOR'</h1> */}
-                  <TextField
-                    className="selectable"
-                    value={e}
-                    onClick={changeOption}
-                  >
-                    {e}
-                  </TextField>
-                </>
-              );
-            } else {
-              return (
-                <TextField
-                  style={{ minWidth: "100%" }}
-                  className="selectable"
-                  value={e}
-                  onClick={changeOption}
-                >
-                  {e}
-                </TextField>
-              );
-            }
-          })}
+                );
+              }
+            })}
+          </Grid>
         </>
       );
     } else {
@@ -134,5 +115,10 @@ const useStyles = makeStyles(theme => ({
     height: "50px",
     textAlign: "left",
     fontWeight: "800"
+  },
+  super: {
+    textAlign: "center",
+    background: "silver",
+    fontSize: "1.2rem"
   }
 }));
