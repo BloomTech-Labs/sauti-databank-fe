@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
 const CompareSubSamples = () => {
   const reducerSub = useSelector(
@@ -60,67 +61,68 @@ const CompareSubSamples = () => {
       if (displayDrop === true) {
         return (
           <>
-            <Grid item xs={12} className={classes.filterButtonF}>
+            <Grid item xs={12} className={classes.filterButton}>
               <h1 className={classes.h1}>Compare SubSamples</h1>
             </Grid>
-            <div>
+            <Grid container xs={12} style={{ flexDirection: "column" }}>
               {allSelectableOptions.map(e => {
                 if (e === "Most Requested Procedure Commodities") {
                   return (
                     <>
                       <h1>'INFORMATION DEMAND'</h1>
-                      <option
+                      <TextField
                         className="selectable"
                         value={e}
                         onClick={changeOption}
                       >
                         {e}
-                      </option>
+                      </TextField>
                     </>
                   );
                 } else if (e === "Exchange Rate Direction") {
                   return (
                     <>
                       <h1>'BUSINESS BEHAVIOR'</h1>
-                      <option
+                      <TextField
                         className="selectable"
                         value={e}
                         onClick={changeOption}
                       >
                         {e}
-                      </option>
+                      </TextField>
                     </>
                   );
                 } else {
                   return (
-                    <option
+                    <TextField
                       className="selectable"
                       value={e}
                       onClick={changeOption}
                     >
                       {e}
-                    </option>
+                    </TextField>
                   );
                 }
               })}
-            </div>
+            </Grid>
           </>
         );
       } else {
         return (
           <>
             <Grid item xs={12} className={classes.filterButton}>
-              <h1 className={classes.h1}>Compare SubSamples</h1>
-              <h1 className={classes.h1}>{filters[1].selectedCategory}</h1>
+              <h1 className={classes.h1}>
+                Compare SubSamples {filters[1].selectedCategory}
+              </h1>
             </Grid>
           </>
         );
       }
     };
     return (
-      <div onClick={() => setDisplayDrop(!displayDrop)}>
+      <Grid container onClick={() => setDisplayDrop(!displayDrop)}>
         {displayDropOptions()}
-      </div>
+      </Grid>
     );
   } else {
     return <></>;
@@ -136,7 +138,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0),
     color: theme.palette.text.secondary,
     background: "rgb(245, 245, 245)",
-    height: "4vh",
+    height: "5vh",
     padding: "1%",
     fontFamily: "Roboto",
     display: "flex"
@@ -145,7 +147,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0),
     color: theme.palette.text.secondary,
     background: "rgb(245, 245, 245)",
-    height: "4vh",
+    height: "5vh",
     padding: "1%",
     fontFamily: "Roboto"
   },

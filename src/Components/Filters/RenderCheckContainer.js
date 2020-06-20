@@ -9,34 +9,27 @@ const RenderCheckContainer = ({
   i,
   filters,
   graphLabels,
-  // CategoryOptions,
   itemName,
-
   setFilters,
   FilterBoxOptions,
   setUpdateUrlFlag,
   updateUrlFlag
 }) => {
-  // do all conditional renderings using if statements for now
-  // for (let item in )
-  //console.log(filters[i])
   const showOptions = (i, filters, graphLabels) => {
     if (filters[i].showOptions) {
-      return graphLabels[`${filters[i].selectedTableColumnName}`].labels.map(
-        option => (
-          //not updating filter
-          //does not have selected table column name
-          <CategoryOptions
-            i={i}
-            filters={filters}
-            graphLabels={graphLabels}
-            option={option}
-            setUpdateUrlFlag={setUpdateUrlFlag}
-            updateUrlFlag={updateUrlFlag}
-            setFilters={setFilters}
-          />
-        )
-      );
+      return graphLabels[
+        `${filters[i].selectedTableColumnName}`
+      ].labels.map(option => (
+        <CategoryOptions
+          i={i}
+          filters={filters}
+          graphLabels={graphLabels}
+          option={option}
+          setUpdateUrlFlag={setUpdateUrlFlag}
+          updateUrlFlag={updateUrlFlag}
+          setFilters={setFilters}
+        />
+      ));
     } else {
       return graphLabels[`${filters[i].selectedTableColumnName}`].labels
         .filter(option => {
@@ -55,19 +48,12 @@ const RenderCheckContainer = ({
         ));
     }
   };
-  //remove additional filtering options for 'Data Series',
 
-  // if (graphLabels[`${filters[i].selectedTableColumnName}`]) {
   if (itemName === filters[i].selectedCategory) {
-    //if (graphLabels[item]) {
     return (
-      // <Grid container style={{flexDirection: "row"}}>
       <RadioGroup style={{ flexDirection: "row" }}>
-        {/* <CheckboxContainer> */}
         {showOptions(i, filters, graphLabels)}
-        {/* </CheckboxContainer> */}
       </RadioGroup>
-      // </Grid>
     );
   } else {
     return <div></div>;

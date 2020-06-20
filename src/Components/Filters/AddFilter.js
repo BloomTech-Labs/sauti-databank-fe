@@ -74,7 +74,7 @@ const AddFilter = ({
               return (
                 <>
                   <TextField
-                    // className={classes.supercat}
+                    // classNTextFieldame={classes.supercat}
                     value={e[0]}
                     onClick={changeOption}
                     key={e[0]}
@@ -140,7 +140,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
     fontFamily: "Montserrat, sans-serif",
     background: "rgb(245, 245, 245)",
-    height: "4vh",
+    height: "5vh",
     padding: "1%"
   },
   h1: {

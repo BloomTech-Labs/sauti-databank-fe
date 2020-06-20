@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0),
     color: theme.palette.text.secondary,
     background: "rgb(245, 245, 245)",
-    height: "4vh",
+    height: "5vh",
     padding: "1%",
     display: "flex"
   },

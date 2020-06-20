@@ -3,13 +3,12 @@ import graphLabels from "../graphLabels";
 import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
 const DataSFilter = ({
   filters,
   setFilters,
-
   index,
-
   setUpdateUrlFlag,
   FilterBoxOptions,
   updateUrlFlag,
@@ -52,74 +51,66 @@ const DataSFilter = ({
       return (
         <>
           <Grid item xs={12} className={classes.filterButton}>
-            <h1 className={classes.h1}>Data Series</h1>
-            {/* <i className="arrow down"></i> */}
+            <p className={classes.h1}>Data Series</p>
           </Grid>
 
-          <Grid item xs={12}>
-            {allSelectableOptions.map(e => {
-              if (e === "Most Requested Procedure Commodities") {
-                return (
-                  <>
-                    <h1>'INFORMATION DEMAND'</h1>
-                    <option
-                      className="selectable"
-                      value={e}
-                      onClick={changeOption}
-                    >
-                      {e}
-                    </option>
-                  </>
-                );
-              } else if (e === "Exchange Rate Direction") {
-                return (
-                  <>
-                    <h1>'BUSINESS BEHAVIOR'</h1>
-                    <option
-                      className="selectable"
-                      value={e}
-                      onClick={changeOption}
-                    >
-                      {e}
-                    </option>
-                  </>
-                );
-              } else {
-                return (
-                  <option
+          {allSelectableOptions.map(e => {
+            if (e === "Most Requested Procedure Commodities") {
+              return (
+                <>
+                  {/* <h1>'INFORMATION DEMAND'</h1> */}
+                  <TextField
                     className="selectable"
                     value={e}
                     onClick={changeOption}
                   >
                     {e}
-                  </option>
-                );
-              }
-            })}
-          </Grid>
+                  </TextField>
+                </>
+              );
+            } else if (e === "Exchange Rate Direction") {
+              return (
+                <>
+                  {/* <h1>'BUSINESS BEHAVIOR'</h1> */}
+                  <TextField
+                    className="selectable"
+                    value={e}
+                    onClick={changeOption}
+                  >
+                    {e}
+                  </TextField>
+                </>
+              );
+            } else {
+              return (
+                <TextField
+                  style={{ minWidth: "100%" }}
+                  className="selectable"
+                  value={e}
+                  onClick={changeOption}
+                >
+                  {e}
+                </TextField>
+              );
+            }
+          })}
         </>
       );
     } else {
       return (
-        <>
-          <Grid container xs={12} className={classes.filterButtonF}>
-            <Grid item xs={4} className={classes.h1}>
-              Data Series
-            </Grid>
-            <Grid item item xs={8} className={classes.h1}>
-              : {filters[0].selectedCategory}
-            </Grid>
-            {/* <i className="arrow down"></i> */}
-          </Grid>
-        </>
+        <Grid item xs={12} className={classes.filterButton}>
+          <p className={classes.h1}>
+            Data Series : {filters[0].selectedCategory}
+          </p>
+        </Grid>
       );
     }
   };
 
   return (
-    <div onClick={() => setDisplayDrop(!displayDrop)}>
+    <Grid container onClick={() => setDisplayDrop(!displayDrop)}>
       {displayDropOptions()}
-    </div>
+    </Grid>
   );
 };
 export default DataSFilter;
@@ -132,30 +123,32 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0),
     color: theme.palette.text.secondary,
     background: "rgb(245, 245, 245)",
-    height: "4vh",
+    height: "5vh",
     marginTop: "2%",
-    padding: "1%",
+    // padding: "1%",
     fontFamily: "Roboto",
-    display: "flex"
+    display: "flex",
+
+    border: "1px solid black"
   },
   filterButton: {
     padding: theme.spacing(0),
     color: theme.palette.text.secondary,
     background: "rgb(245, 245, 245)",
-    height: "4vh",
+    height: "5vh",
     padding: "1%",
     fontFamily: "Roboto"
   },
   h1: {
     fontSize: "1.2rem",
-    fontWeight: 600,
+    fontWeight: 800,
     padding: "3%",
     height: "50px",
     textAlign: "left",
     fontWeight: "800"
   },
   field: {
-    fontSize: "1.2rem",
+    // fontSize: "1.2rem",
     fontWeight: 600,
     padding: "3%",
     height: "50px",

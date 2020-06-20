@@ -5,6 +5,7 @@ import graphLabels from "../graphLabels";
 import { colourOptions, groupedOptions } from "../docs/data";
 import useCalendar, { getTodaysDate } from "../../hooks/useCalendar";
 import { useHistory } from "react-router-dom";
+
 //import CalendarModal from "../dashboard/CalendarModal";
 import {
   decodeToken,
@@ -109,16 +110,18 @@ export default function FilterBox(props) {
     //first is 'Data Series'
     if (filterSelectorName === "Data Series") {
       return (
-        <DataSFilter
-          filterSelectorName={filterSelectorName}
-          filters={filters}
-          setFilters={setFilters}
-          index={index}
-          setUpdateUrlFlag={setUpdateUrlFlag}
-          FilterBoxOptions={FilterBoxOptions}
-          updateUrlFlag={updateUrlFlag}
-          xVar={xVar}
-        />
+        <Grid container>
+          <DataSFilter
+            filterSelectorName={filterSelectorName}
+            filters={filters}
+            setFilters={setFilters}
+            index={index}
+            setUpdateUrlFlag={setUpdateUrlFlag}
+            FilterBoxOptions={FilterBoxOptions}
+            updateUrlFlag={updateUrlFlag}
+            xVar={xVar}
+          />
+        </Grid>
       );
     } else if (filterSelectorName === "Data Filter") {
       return (
