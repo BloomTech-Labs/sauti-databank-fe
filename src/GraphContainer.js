@@ -206,7 +206,6 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
         </Grid>
-        <Footer />
       </Grid>
     </>
   );
