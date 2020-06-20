@@ -13,7 +13,7 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
   const lineButton = () => {
     if (open !== "line" && queryType === "sessionsData") {
       return (
-        <button className="all-btn" onClick={() => setOpen("line")}>
+        <div className="all-btn" onClick={() => setOpen("line")}>
           <Tooltip
             title="Line Graph"
             arrow
@@ -21,7 +21,7 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
           >
             <img src={graphImage} />
           </Tooltip>
-        </button>
+        </div>
       );
     } else {
       return <></>;
@@ -31,7 +31,7 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
   const barButton = () => {
     if (open !== "bar") {
       return (
-        <button className="all-btn" onClick={() => setOpen("bar")}>
+        <div className="all-btn" onClick={() => setOpen("bar")}>
           <Tooltip
             title="Bar Chart"
             arrow
@@ -39,7 +39,7 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
           >
             <img src={barImage} />
           </Tooltip>
-        </button>
+        </div>
       );
     } else {
       return <></>;
@@ -52,22 +52,22 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
       filters[0]["selectedCategory"] === "Country of Residence"
     ) {
       return (
-        <button className="all-btn" onClick={() => setOpen("choropleth")}>
+        <div className="all-btn" onClick={() => setOpen("choropleth")}>
           <Tooltip title="Map" arrow classes={{ tooltip: classes.customWidth }}>
             <img src={mapImage} />
           </Tooltip>
-        </button>
+        </div>
       );
     } else if (
       open !== "choropleth" &&
       filters[0]["selectedCategory"] === "Final Destination Country"
     ) {
       return (
-        <button className="all-btn" onClick={() => setOpen("choropleth")}>
+        <div className="all-btn" onClick={() => setOpen("choropleth")}>
           <Tooltip title="Map" arrow classes={{ tooltip: classes.customWidth }}>
             <img src={mapImage} />
           </Tooltip>
-        </button>
+        </div>
       );
     } else if (
       open !== "choropleth" &&
@@ -75,11 +75,11 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
         "Requested Procedures for Destination (Imports to:)"
     ) {
       return (
-        <button className="all-btn" onClick={() => setOpen("choropleth")}>
+        <div className="all-btn" onClick={() => setOpen("choropleth")}>
           <Tooltip title="Map" arrow classes={{ tooltip: classes.customWidth }}>
             <img src={mapImage} />
           </Tooltip>
-        </button>
+        </div>
       );
     } else {
       return <></>;

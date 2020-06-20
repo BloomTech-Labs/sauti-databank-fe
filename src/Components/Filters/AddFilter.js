@@ -107,8 +107,9 @@ const AddFilter = ({
             onClick={() => setDisplayDrop(...displayDrop, index)}
             className={classes.filterButton}
           >
-            <h1 className={classes.h1}>Add Filter</h1>
-            {/* <i className="arrow down"></i> */}
+            <h1 className={classes.h1}>
+              Add Filter : {filters[index].selectedCategory}
+            </h1>
           </Grid>
         </>
       );

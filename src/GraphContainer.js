@@ -116,12 +116,7 @@ const GraphContainer = props => {
           </Grid>
           <Grid container xs={12} style={{ height: "50px" }}>
             <Grid xs={2}></Grid>
-            <Grid
-              container
-              xs={3}
-              spacing={0}
-              style={{ height: "50px", marginTop: ".5%" }}
-            >
+            <Grid container xs={3} spacing={0} style={{ height: "50px" }}>
               <GraphButtons
                 open={open}
                 setOpen={setOpen}
@@ -132,12 +127,7 @@ const GraphContainer = props => {
               />
             </Grid>
             <Grid container xs={5}></Grid>
-            <Grid
-              container
-              xs={2}
-              spacing={0}
-              style={{ height: "50px", marginTop: ".5%" }}
-            >
+            <Grid container xs={2} spacing={1} style={{ height: "50px" }}>
               <SocialMedia
                 filters={filters}
                 queryType={queryType}
