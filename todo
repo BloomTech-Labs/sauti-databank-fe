@@ -1,0 +1,52 @@
+completed:
+1. Calendar and Compare SubSample conditionally render based on type of graph displayed
+2. UI css is responsive. Removed old css, now using Material UI
+3. Filters have been placed in new components,
+ now render in the correct area, and are now responsive.
+4. If a filter is selected on Map or Line Graph which is not supported
+the bar chart will render.
+5. Buttons Map, Line and Bar  have been placed in a new component so the will render in the correct area, no overlap
+6. Expandable graph was removed, per figma.
+7. Removed filter options from first Data Series, instead that filter option appears in "Add Filter"
+8. SocialMedia.js now contains all social media buttons
+9. - implement redux
+- break up filters and calendar to render on GraphContainer.js
+- check SocialMedia.js ...keys, make sure getting proper results
+-Clear Filters to render on bottom
+- Replaced React Select, made custom filters
+- Clear All, Apply - buttons responsive
+- Add Filter - category selectors - Material-ui
+- GraphParse.js, was getting an error with filter by date.  Now data.sessionData != undefined, prevents going to filterbydate.
+- Add Filter opens by index, on close removes all
+- AddFilters uses Material-ui throughout, now responsive
+- calendar material-ui responsive
+
+To Do:
+- Filters list in Alphabetical order
+- design filter buttons, text and show selected
+- some space between selected display
+- buttons on bottom
+- under chart render description
+
+
+
+
+- onhover for social media and graph buttons
+
+
+
+
+
+
+
+
+Error - think it occurs when search does not render any data.
+:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/filterByDate.js:6
+  3 | startDate = startDate.replace(/-/g, "");
+  4 | endDate = endDate.replace(/-/g, "");
+  5 | const filteredData = data.filter(obj => {
+> 6 |   let objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
+    | ^  7 |   if (objectDate > startDate && objectDate < endDate) {
+  8 |     return obj;
+  9 |   }
+

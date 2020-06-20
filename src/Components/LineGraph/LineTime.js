@@ -9,6 +9,7 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
+import { useDispatch } from "react-redux";
 
 import CheckBox from "../CheckBox";
 
@@ -16,6 +17,7 @@ import { getHighestSelected } from "../LineGraphHelpers/selectedCheckboxes";
 
 import "../../Components/scss/lineGraph.scss";
 import LineRange from "./LineRange";
+import { lineAction } from "../redux-actions/lineActions";
 
 const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
   const [time, setTime] = useState([]);
@@ -62,7 +64,7 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
       [event.target.name]: event.target.checked
     });
   }
-
+  console.log(checkedItems);
   // items to display on line chart
   const zero = display[0];
   const one = display[1];
@@ -74,6 +76,19 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
   const seven = display[7];
 
   let highest = getHighestSelected(time, display);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      lineAction({
+        checkboxes: checkboxes,
+        handleChange: handleChange,
+        handleReset: handleReset,
+        checkedItems: checkedItems,
+        setCheckedItems: setCheckedItems
+      })
+    );
+  }, [checkboxes, handleReset, handleChange, checkedItems]);
 
   //To reset all selected checkboxes
   const handleReset = event => {
@@ -135,7 +150,7 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
           <Line type="monotone" dataKey={seven} stroke="brown" dot={false} />
         </LineChart>
       </ResponsiveContainer>
-      <button className="buttonReset" onClick={handleReset}>
+      {/* <button className="buttonReset" onClick={handleReset}>
         Reset
       </button>
       <div className="boxes">
@@ -152,7 +167,7 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
             </label>
           ))}
         </React.Fragment>
-      </div>
+      </div> */}
       <LineRange timeInUse={timeInUse} time={time} setTime={setTime} />
     </>
   );

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import "./index.css";
-import FilterBox from "./Components/FilterBox";
+import FilterBox from "./Components/Filters/FilterBox";
+import SelectedFilterDisplay from "./Components/SelectedFilterDisplay";
 import "react-dropdown/style.css";
-import { withRouter, useParams, useHistory } from "react-router-dom";
 
 import Queries2 from "./Components/Queries2";
 import useCalendar from "../src/hooks/useCalendar";
@@ -13,9 +13,56 @@ import ClipboardJS from "clipboard";
 
 import { Footer } from "./Components/Footer";
 
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import GraphButtons from "./Components/GraphButtons";
+import SocialMedia from "./Components/SocialMedia";
+
+import CompareSubSamples from "./Components/Filters/CompareSubsamples";
+import CalendarFilter from "./Components/Filters/CalendarFilter";
+import ClearFilters from "./Components/Filters/ClearFilters";
+import Apply from "./Components/Filters/Apply";
+import LineFilter from "./Components/LineGraph/LineFilter";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing(0),
+    textAlign: "center",
+    color: theme.palette.text.secondary
+  },
+  h1: {
+    fontFamily: "Montserrat, sans-serif",
+    fontSize: "18px",
+    fontWeight: 600,
+    color: "#ffffff",
+    alignItems: "center",
+    padding: "1.5%",
+    background: "#2c2e32",
+    height: "50px",
+    textAlign: "center"
+  },
+  filters: {
+    //padding: "2rem"
+    paddingLeft: "1%",
+    flexDirection: "column"
+  },
+  clearApply: {
+    // alignItems: "space-between"
+  }
+}));
+
 const GraphContainer = props => {
   const [url, setUrl] = useState("");
   const [filters, setFilters] = useState(props.filters);
+  console.log(`filters`, filters);
+  const [queryType, setQueryType] = useState("");
+  const [chartDataSM, setChartDataSM] = useState([]);
+
+  const classes = useStyles();
 
   const {
     filterBoxStartDate,
@@ -27,12 +74,19 @@ const GraphContainer = props => {
     getCurrentYear
   } = useCalendar();
 
+  //hides control panel
   const [hidden, setHidden] = useState(false);
 
   function HideFilters() {
     setHidden(!hidden);
   }
+  //keys used for socialmedia
+  const [keys, setKeys] = useState([]);
 
+  //displays graph selected
+  const [open, setOpen] = useState("bar");
+  const [displayButton, setDisplayButton] = useState([]);
+  const chartData = {};
   const clipboard = new ClipboardJS(".btn", {
     text: function() {
       return document.location.href;
@@ -43,54 +97,117 @@ const GraphContainer = props => {
   });
   // ?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalscountry_of_residencecommaKENzazfilter4equalsundefinedcommaundefined
   return (
-    <div className="App">
-      <div className="main-container">
-        <div className="main-header">
-          <div className="header">
-            <h1>Informal Cross-Border Trade Data</h1>
-          </div>
-          <div className="data-header">
-            {/* <p>Data Set | Placeholder | For Active Data Filters</p> */}
-          </div>
-        </div>
-        <div className="content-container">
-          <ContentContainerDiv
-            className={hidden ? "extend" : "chart-container"}
-          >
-            <Queries2
-              filters={filters}
-              filterBoxStartDate={filterBoxStartDate}
-              setFilterBoxStartDate={setFilterBoxStartDate}
-              filterBoxEndDate={filterBoxEndDate}
-              setFilterBoxEndDate={setFilterBoxEndDate}
-            />
-          </ContentContainerDiv>
-          <SocialMediaContainer className="social-media-container">
-            <FilterHideButton onClick={HideFilters}>
-              {hidden ? <p>►</p> : <p>◄</p>}
-            </FilterHideButton>
-          </SocialMediaContainer>
-          <div
-            className={
-              hidden ? "dropdown-container hide" : "dropdown-container"
-            }
-          >
-            <FilterBox
-              filters={filters}
-              setFilters={setFilters}
-              filterBoxStartDate={filterBoxStartDate}
-              setFilterBoxStartDate={setFilterBoxStartDate}
-              filterBoxEndDate={filterBoxEndDate}
-              setFilterBoxEndDate={setFilterBoxEndDate}
-              changeYear={changeYear}
-              changeQuarter={changeQuarter}
-              getCurrentYear={getCurrentYear}
-            />
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </div>
+    <>
+      <CssBaseline />
+      <Grid container maxWidth="xl">
+        <Grid container maxWidth="xl">
+          <Grid container xs={12} style={{ height: "50px" }}>
+            <Grid item xs={2}>
+              <h1 className={classes.h1}>Informal Cross-Border Trade Data</h1>
+            </Grid>
+            <Grid
+              item
+              xs={10}
+              style={{
+                background: "white",
+                height: "50px"
+              }}
+            >
+              <SelectedFilterDisplay filters={filters} />
+            </Grid>
+          </Grid>
+          <Grid container xs={12} style={{ height: "50px" }}>
+            <Grid xs={2}></Grid>
+            <Grid container xs={3} spacing={0} style={{ height: "50px" }}>
+              <GraphButtons
+                open={open}
+                setOpen={setOpen}
+                filters={filters}
+                setDisplayButton={setDisplayButton}
+                displayButton={displayButton}
+                queryType={queryType}
+              />
+            </Grid>
+            <Grid container xs={5}></Grid>
+            <Grid container xs={2} spacing={1} style={{ height: "50px" }}>
+              <SocialMedia
+                filters={filters}
+                queryType={queryType}
+                filterBoxStartDate={filterBoxStartDate}
+                filterBoxEndDate={filterBoxEndDate}
+                csvData={chartDataSM.dataStructure}
+                keys={chartDataSM.crossFilterValues}
+                sampleSize={chartDataSM.totalSampleSize}
+              />
+            </Grid>
+          </Grid>
+          <Grid container maxWidth="xl">
+            <Grid container xs={2} className={classes.filters}>
+              <Grid container style={{ flexDirection: "column" }}>
+                <FilterBox
+                  filters={filters}
+                  setFilters={setFilters}
+                  filterBoxStartDate={filterBoxStartDate}
+                  setFilterBoxStartDate={setFilterBoxStartDate}
+                  filterBoxEndDate={filterBoxEndDate}
+                  setFilterBoxEndDate={setFilterBoxEndDate}
+                  changeYear={changeYear}
+                  changeQuarter={changeQuarter}
+                  getCurrentYear={getCurrentYear}
+                  open={open}
+                />
+              </Grid>
+
+              <Grid container>
+                <CompareSubSamples />
+              </Grid>
+
+              <Grid item className={classes.filters}>
+                <CalendarFilter />
+              </Grid>
+              <Grid item className={classes.filters}>
+                <LineFilter />
+              </Grid>
+              <Grid
+                container
+                spacing={2}
+                style={{ height: "30px", padding: "4%" }}
+              >
+                <ClearFilters />
+
+                <Apply />
+              </Grid>
+            </Grid>
+
+            {/* <Grid item xs={1} className={classes.filterHideButton} onClick={HideFilters}>
+            
+                {hidden ? <p>►</p> : <p>◄</p>}
+             
+            </Grid> */}
+            <Grid
+              item
+              xs={10}
+              className={hidden ? "extend" : "chart-container"}
+            >
+              <Queries2
+                filters={filters}
+                filterBoxStartDate={filterBoxStartDate}
+                setFilterBoxStartDate={setFilterBoxStartDate}
+                filterBoxEndDate={filterBoxEndDate}
+                setFilterBoxEndDate={setFilterBoxEndDate}
+                open={open}
+                setOpen={setOpen}
+                setDisplayButton={setDisplayButton}
+                displayButton={displayButton}
+                queryType={queryType}
+                setQueryType={setQueryType}
+                setChartDataSM={setChartDataSM}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 
