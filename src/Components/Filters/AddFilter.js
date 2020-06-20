@@ -54,7 +54,6 @@ const AddFilter = ({
   for (let key in FilterBoxOptions.default) {
     allItems.push([key, FilterBoxOptions.default[key].value.type]);
   }
-
   const displayDropOptions = () => {
     if (displayDrop.includes(index)) {
       return (
@@ -91,6 +90,7 @@ const AddFilter = ({
                     setUpdateUrlFlag={setUpdateUrlFlag}
                     updateUrlFlag={updateUrlFlag}
                     FilterBoxOptions={FilterBoxOptions}
+                    setDisplayDrop={setDisplayDrop}
                   />
                 </>
               );

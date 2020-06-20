@@ -10,10 +10,12 @@ const CategoryOptions = ({
   i,
   filters,
   graphLabels,
-  option
+  option,
+  setDisplayDrop
 }) => {
   const changeOption = (i, filters, graphLabels, option) => {
     let optionFlags = {};
+
     graphLabels[`${filters[i].selectedTableColumnName}`].labels.forEach(
       option => {
         optionFlags = {
@@ -46,27 +48,11 @@ const CategoryOptions = ({
       checked={isChecked(i, filters, option)}
       onChange={e => {
         setUpdateUrlFlag(!updateUrlFlag);
-
+        setDisplayDrop([]);
         changeOption(i, filters, graphLabels, option);
       }}
       label={option}
     />
-    //   <Radio
-    //   key={option}
-    //     type="radio"
-    //     name="CrossFilter"
-    //     value={option}
-    //     // seems to need this when this is a component
-    //     checked={isChecked(i, filters, option)}
-    //     onChange={e => {
-    //       setUpdateUrlFlag(!updateUrlFlag);
-
-    //       changeOption(i, filters, graphLabels, option);
-    //     }}
-    //     label="Female"
-    //   >
-    //   <FilterOption>{option}</FilterOption>
-    // </Radio>
   );
 };
 export default CategoryOptions;

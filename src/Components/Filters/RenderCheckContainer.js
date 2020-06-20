@@ -13,7 +13,8 @@ const RenderCheckContainer = ({
   setFilters,
   FilterBoxOptions,
   setUpdateUrlFlag,
-  updateUrlFlag
+  updateUrlFlag,
+  setDisplayDrop
 }) => {
   const showOptions = (i, filters, graphLabels) => {
     if (filters[i].showOptions) {
@@ -28,6 +29,7 @@ const RenderCheckContainer = ({
           setUpdateUrlFlag={setUpdateUrlFlag}
           updateUrlFlag={updateUrlFlag}
           setFilters={setFilters}
+          setDisplayDrop={setDisplayDrop}
         />
       ));
     } else {
@@ -44,6 +46,7 @@ const RenderCheckContainer = ({
             setUpdateUrlFlag={setUpdateUrlFlag}
             updateUrlFlag={updateUrlFlag}
             setFilters={setFilters}
+            setDisplayDrop={setDisplayDrop}
           />
         ));
     }
