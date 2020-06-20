@@ -23,6 +23,8 @@ import CompareSubSamples from "./Components/Filters/CompareSubsamples";
 import CalendarFilter from "./Components/Filters/CalendarFilter";
 import ClearFilters from "./Components/Filters/ClearFilters";
 import Apply from "./Components/Filters/Apply";
+import LineFilter from "./Components/LineGraph/LineFilter";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -162,6 +164,9 @@ const GraphContainer = props => {
 
               <Grid item className={classes.filters}>
                 <CalendarFilter />
+              </Grid>
+              <Grid item className={classes.filters}>
+                <LineFilter />
               </Grid>
               <Grid
                 container

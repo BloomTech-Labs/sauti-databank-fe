@@ -99,9 +99,9 @@ const DataSFilter = ({
     } else {
       return (
         <Grid item xs={12} className={classes.filterButton}>
-          <p className={classes.h1}>
+          <h1 className={classes.h1}>
             Data Series : {filters[0].selectedCategory}
-          </p>
+          </h1>
         </Grid>
       );
     }
@@ -119,18 +119,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
-  filterButtonF: {
-    padding: theme.spacing(0),
-    color: theme.palette.text.secondary,
-    background: "rgb(245, 245, 245)",
-    height: "5vh",
-    marginTop: "2%",
-    // padding: "1%",
-    fontFamily: "Roboto",
-    display: "flex",
-
-    border: "1px solid black"
-  },
   filterButton: {
     padding: theme.spacing(0),
     color: theme.palette.text.secondary,
@@ -145,14 +133,6 @@ const useStyles = makeStyles(theme => ({
     padding: "3%",
     height: "50px",
     textAlign: "left",
-    fontWeight: "800"
-  },
-  field: {
-    // fontSize: "1.2rem",
-    fontWeight: 600,
-    padding: "3%",
-    height: "50px",
-    textAlign: "right",
     fontWeight: "800"
   }
 }));
