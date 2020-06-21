@@ -11,8 +11,6 @@ import styled from "styled-components";
 import swal from "sweetalert";
 import ClipboardJS from "clipboard";
 
-import { Footer } from "./Components/Footer";
-
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -37,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   h1: {
     fontFamily: "Montserrat, sans-serif",
     fontSize: "18px",
-    fontWeight: 600,
+    fontWeight: 400,
     color: "#ffffff",
     alignItems: "center",
     padding: "1.5%",
@@ -103,7 +101,7 @@ const GraphContainer = props => {
         <Grid container maxWidth="xl">
           <Grid container xs={12} style={{ height: "50px" }}>
             <Grid item xs={2}>
-              <h1 className={classes.h1}>Informal Cross-Border Trade Data</h1>
+              <h1 className={classes.h1}>Cross-Border Trade DataBank</h1>
             </Grid>
             <Grid
               item
@@ -118,7 +116,7 @@ const GraphContainer = props => {
           </Grid>
           <Grid container xs={12} style={{ height: "50px" }}>
             <Grid xs={2}></Grid>
-            <Grid container xs={3} spacing={0} style={{ height: "50px" }}>
+            <Grid container xs={3} spacing={2} style={{ height: "50px" }}>
               <GraphButtons
                 open={open}
                 setOpen={setOpen}

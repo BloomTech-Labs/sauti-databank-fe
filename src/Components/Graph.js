@@ -9,6 +9,7 @@ import { getSelectedOption } from "../OptionFunctions";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { barDownload } from "../Components/redux-actions/barDownloadAction";
+import Grid from "@material-ui/core/Grid";
 
 const Graph = props => {
   let {
@@ -188,7 +189,8 @@ const Graph = props => {
 
   return (
     <>
-      <div className="Graph-Container">
+      <Grid container style={{ height: "70vh" }}>
+        {/* <div className="Graph-Container"> */}
         <ResponsiveBar
           data={data}
           keys={keys}
@@ -265,7 +267,8 @@ const Graph = props => {
           motionStiffness={90}
           motionDamping={15}
         />
-      </div>
+        {/* </div> */}
+      </Grid>
     </>
   );
 };

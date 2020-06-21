@@ -134,7 +134,6 @@ const useStyles = makeStyles(theme => ({
   },
   h1: {
     fontSize: "1.2rem",
-    fontWeight: 600,
     padding: "3%",
     height: "50px",
     textAlign: "left",

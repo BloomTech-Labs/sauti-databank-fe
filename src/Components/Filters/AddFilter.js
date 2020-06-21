@@ -147,7 +147,6 @@ const useStyles = makeStyles(theme => ({
   filterButton: {
     padding: theme.spacing(0),
     color: theme.palette.text.secondary,
-    fontFamily: "Montserrat, sans-serif",
     background: "rgb(245, 245, 245)",
     height: "5vh",
     padding: "1%"
@@ -155,7 +154,6 @@ const useStyles = makeStyles(theme => ({
   h1: {
     fontFamily: "Roboto",
     fontSize: "1.2rem",
-    fontWeight: 600,
     padding: "3%",
     height: "50px",
     textAlign: "left",
