@@ -11,8 +11,6 @@ import styled from "styled-components";
 import swal from "sweetalert";
 import ClipboardJS from "clipboard";
 
-import { Footer } from "./Components/Footer";
-
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
