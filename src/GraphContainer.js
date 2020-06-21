@@ -114,9 +114,9 @@ const GraphContainer = props => {
               <SelectedFilterDisplay filters={filters} />
             </Grid>
           </Grid>
-          <Grid container xs={12} style={{ height: "50px" }}>
+          <Grid container xs={12} style={{ height: "30px" }}>
             <Grid xs={2}></Grid>
-            <Grid container xs={3} spacing={2} style={{ height: "50px" }}>
+            <Grid container xs={3} spacing={1} style={{ height: "30px" }}>
               <GraphButtons
                 open={open}
                 setOpen={setOpen}
@@ -127,7 +127,7 @@ const GraphContainer = props => {
               />
             </Grid>
             <Grid container xs={5}></Grid>
-            <Grid container xs={2} spacing={1} style={{ height: "50px" }}>
+            <Grid container xs={2} spacing={1} style={{ height: "30px" }}>
               <SocialMedia
                 filters={filters}
                 queryType={queryType}

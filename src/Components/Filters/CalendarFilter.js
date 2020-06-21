@@ -26,8 +26,7 @@ const CalendarFilter = () => {
   if (open === "bar" && openCal === false) {
     return (
       <Grid item className={classes.calendar} onClick={() => setOpenCal(true)}>
-        <h1 className={classes.h1}>Calendar</h1>
-        {/* <i className="arrow down"></i> */}
+        <span className={classes.filterName}>Calendar</span>
       </Grid>
     );
   } else if (open === "bar" && openCal === true) {
@@ -38,8 +37,7 @@ const CalendarFilter = () => {
           onClick={() => setOpenCal(false)}
           className={classes.calendar}
         >
-          <h1 className={classes.h1}>Calendar</h1>
-          {/* <i className="arrow down"></i> */}
+          <span className={classes.filterName}>Calendar</span>
         </Grid>
         <CalendarParent
           tier={tier}
@@ -70,20 +68,15 @@ const useStyles = makeStyles(theme => ({
   },
   calendar: {
     padding: theme.spacing(0),
-    color: theme.palette.text.secondary,
     background: "rgb(245, 245, 245)",
-    height: "5vh",
-    padding: "1%",
-    display: "flex"
-  },
-  h1: {
-    fontFamily: "Roboto",
-    fontSize: "1.2rem",
-    fontWeight: 600,
-    padding: "3%",
     height: "50px",
-    textAlign: "left",
-    fontWeight: "800"
+    padding: "1%",
+    fontFamily: "Roboto",
+    borderBottom: "1px rgba(0, 0, 0, 0.1) solid",
+    fontSize: "1.5rem"
+  },
+  filterName: {
+    fontWeight: "500"
   },
   arrow: {
     border: "solid black",

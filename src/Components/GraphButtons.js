@@ -20,9 +20,9 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
             classes={{ tooltip: classes.customWidth }}
           >
             <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
+              width="2rem"
+              height="2rem"
+              viewBox="0 0 2rem 2rem"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >

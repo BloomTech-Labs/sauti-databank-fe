@@ -48,7 +48,7 @@ const SocialMedia = ({ filters, csvData, keys, sampleSize }) => {
         tier === "GOV_ROLE" ||
         newSub ? (
           <>
-            <Grid item>
+            <Grid item style={{ cursor: "pointer" }}>
               <CsvDownloader
                 track={track}
                 datas={makeValuesRedux}
@@ -62,9 +62,9 @@ const SocialMedia = ({ filters, csvData, keys, sampleSize }) => {
                   classes={{ tooltip: classes.customWidth }}
                 >
                   <svg
-                    width="30"
-                    height="24"
-                    viewBox="0 0 30 24"
+                    width="2rem"
+                    height="2rem"
+                    viewBox="0 0 30 30"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -78,7 +78,7 @@ const SocialMedia = ({ filters, csvData, keys, sampleSize }) => {
               </CsvDownloader>
             </Grid>
 
-            <Grid item className="btn">
+            <Grid item style={{ cursor: "pointer" }}>
               <Tooltip
                 title="Copy URL"
                 arrow
