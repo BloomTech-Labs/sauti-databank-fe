@@ -62,9 +62,9 @@ const SocialMedia = ({ filters, csvData, keys, sampleSize }) => {
                   classes={{ tooltip: classes.customWidth }}
                 >
                   <svg
-                    width="2rem"
-                    height="2rem"
-                    viewBox="0 0 30 30"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
