@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import "antd/dist/antd.css";
+
 import Slider2 from "./Slider2";
+import Grid from "@material-ui/core/Grid";
 
 const DateSlider = ({
   range,
@@ -17,7 +18,7 @@ const DateSlider = ({
 
   return (
     <>
-      <div id="slider">
+      <Grid container style={{ paddingLeft: "25%" }}>
         <Slider2
           totalRangePeriods={totalRangePeriods}
           range={range}
@@ -27,7 +28,7 @@ const DateSlider = ({
           setTime={setTime}
           timeInUse={timeInUse}
         />
-      </div>
+      </Grid>
     </>
   );
 };

@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   h1: {
     fontFamily: "Montserrat, sans-serif",
     fontSize: "18px",
-    fontWeight: 600,
+    fontWeight: 400,
     color: "#ffffff",
     alignItems: "center",
     padding: "1.5%",
@@ -103,7 +103,7 @@ const GraphContainer = props => {
         <Grid container maxWidth="xl">
           <Grid container xs={12} style={{ height: "50px" }}>
             <Grid item xs={2}>
-              <h1 className={classes.h1}>Informal Cross-Border Trade Data</h1>
+              <h1 className={classes.h1}>Cross-Border Trade DataBank</h1>
             </Grid>
             <Grid
               item

@@ -18,6 +18,7 @@ import { getHighestSelected } from "../LineGraphHelpers/selectedCheckboxes";
 import "../../Components/scss/lineGraph.scss";
 import LineRange from "./LineRange";
 import { lineAction } from "../redux-actions/lineActions";
+import Grid from "@material-ui/core/Grid";
 
 const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
   const [time, setTime] = useState([]);
@@ -96,79 +97,75 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
   };
   return (
     <>
-      <div className="toggleDateContainer">
-        <p
-          className={time === month100 ? "monthBtnOn" : "monthBtnOff"}
-          onClick={moOnClick}
-        >
-          {" "}
-          Monthly
-        </p>
-        <p
-          className={time === quarter100 ? "monthBtnOn" : "monthBtnOff"}
-          onClick={qtrOnClick}
-        >
-          {" "}
-          Quarterly
-        </p>
-        <p
-          className={time === year100 ? "monthBtnOn" : "monthBtnOff"}
-          onClick={yrOnClick}
-        >
-          {" "}
-          Yearly
-        </p>
-      </div>
-      <ResponsiveContainer width="95%" height={600}>
-        <LineChart
-          data={time}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis type="number" domain={[0, highest]} />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey={zero}
-            stroke="blue"
-            dot={false}
-            // activeDot={{ r: 8 }}
-          />
-          <Line type="monotone" dataKey={one} stroke="purple" dot={false} />
-          <Line type="monotone" dataKey={two} stroke="orange" dot={false} />
-          <Line type="monotone" dataKey={three} stroke="green" dot={false} />
-          <Line type="monotone" dataKey={four} stroke="red" dot={false} />
-          <Line type="monotone" dataKey={five} stroke="tan" dot={false} />
-          <Line type="monotone" dataKey={six} stroke="yellow" dot={false} />
-          <Line type="monotone" dataKey={seven} stroke="brown" dot={false} />
-        </LineChart>
-      </ResponsiveContainer>
-      {/* <button className="buttonReset" onClick={handleReset}>
-        Reset
-      </button>
-      <div className="boxes">
-        <React.Fragment>
-          {checkboxes.map(option => (
-            <label key={option.key}>
-              <CheckBox
-                name={option.name}
-                checked={checkedItems[option.name]}
-                handleChange={handleChange}
+      <Grid container style={{ height: "80vh" }}>
+        <div className="toggleDateContainer">
+          <p
+            className={time === month100 ? "monthBtnOn" : "monthBtnOff"}
+            onClick={moOnClick}
+          >
+            {" "}
+            Monthly
+          </p>
+          <p
+            className={time === quarter100 ? "monthBtnOn" : "monthBtnOff"}
+            onClick={qtrOnClick}
+          >
+            {" "}
+            Quarterly
+          </p>
+          <p
+            className={time === year100 ? "monthBtnOn" : "monthBtnOff"}
+            onClick={yrOnClick}
+          >
+            {" "}
+            Yearly
+          </p>
+        </div>
+        <Grid container style={{ width: "95%", height: "70vh" }}>
+          <ResponsiveContainer>
+            <LineChart
+              data={time}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis type="number" domain={[0, highest]} />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey={zero}
+                stroke="blue"
+                dot={false}
+                // activeDot={{ r: 8 }}
               />
-
-              {option.name}
-            </label>
-          ))}
-        </React.Fragment>
-      </div> */}
-      <LineRange timeInUse={timeInUse} time={time} setTime={setTime} />
+              <Line type="monotone" dataKey={one} stroke="purple" dot={false} />
+              <Line type="monotone" dataKey={two} stroke="orange" dot={false} />
+              <Line
+                type="monotone"
+                dataKey={three}
+                stroke="green"
+                dot={false}
+              />
+              <Line type="monotone" dataKey={four} stroke="red" dot={false} />
+              <Line type="monotone" dataKey={five} stroke="tan" dot={false} />
+              <Line type="monotone" dataKey={six} stroke="yellow" dot={false} />
+              <Line
+                type="monotone"
+                dataKey={seven}
+                stroke="brown"
+                dot={false}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+          <LineRange timeInUse={timeInUse} time={time} setTime={setTime} />
+        </Grid>
+      </Grid>
     </>
   );
 };
