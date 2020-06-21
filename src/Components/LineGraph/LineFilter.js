@@ -37,13 +37,7 @@ const LineFilter = () => {
     setState(checkedItems);
   }, [checkedItems]);
 
-  console.log(state);
-
-  console.log(`state`, state);
-
   if (open === "line" && checkedItems) {
-    console.log("open checkboxes");
-    console.log(checkedItems);
     return (
       <>
         <FormGroup row>

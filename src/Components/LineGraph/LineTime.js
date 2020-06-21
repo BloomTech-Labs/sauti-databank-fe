@@ -19,6 +19,7 @@ import "../../Components/scss/lineGraph.scss";
 import LineRange from "./LineRange";
 import { lineAction } from "../redux-actions/lineActions";
 import Grid from "@material-ui/core/Grid";
+import { barDownload } from "../redux-actions/barDownloadAction";
 
 const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
   const [time, setTime] = useState([]);
@@ -65,7 +66,7 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
       [event.target.name]: event.target.checked
     });
   }
-  console.log(checkedItems);
+
   // items to display on line chart
   const zero = display[0];
   const one = display[1];
@@ -95,6 +96,27 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
   const handleReset = event => {
     setCheckedItems(checkedItems);
   };
+
+  useEffect(() => {
+    dispatch(
+      barDownload({
+        columns: [
+          { id: "65", displayName: "TopCommodities" },
+          { id: "66", displayName: "2018-01" },
+          { id: "67", displayName: "2018-02" },
+          { id: "68", displayName: "2018-01" }
+        ],
+        makeValues: [
+          ["beans", 4, 5, 6],
+          ["coffee", 5, 4, 3]
+        ],
+        fileName: "Line Graph",
+        suffix: `${new Date().toISOString()}`,
+        track: "track"
+      })
+    );
+  }, []);
+
   return (
     <>
       <Grid container style={{ height: "80vh" }}>
