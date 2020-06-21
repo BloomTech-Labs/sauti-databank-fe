@@ -118,7 +118,7 @@ const GraphContainer = props => {
           </Grid>
           <Grid container xs={12} style={{ height: "50px" }}>
             <Grid xs={2}></Grid>
-            <Grid container xs={3} spacing={0} style={{ height: "50px" }}>
+            <Grid container xs={3} spacing={2} style={{ height: "50px" }}>
               <GraphButtons
                 open={open}
                 setOpen={setOpen}
