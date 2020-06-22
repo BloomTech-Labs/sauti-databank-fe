@@ -52,7 +52,7 @@ const DataSFilter = ({
       return (
         <>
           <Grid item xs={12} className={classes.filterButton}>
-            <p className={classes.h1}>Data Series</p>
+            <span className={classes.filterName}> Data Series</span>
           </Grid>
           <Grid container xs={12} style={{ flexDirection: "column" }}>
             {ordered.map(e => {
@@ -80,9 +80,8 @@ const DataSFilter = ({
     } else {
       return (
         <Grid item xs={12} className={classes.filterButton}>
-          <h1 className={classes.h1}>
-            Data Series : {filters[0].selectedCategory}
-          </h1>
+          <span className={classes.filterName}> Data Series</span> -{" "}
+          <span className={classes.chosen}>{filters[0].selectedCategory}</span>
         </Grid>
       );
     }
@@ -102,18 +101,18 @@ const useStyles = makeStyles(theme => ({
   },
   filterButton: {
     padding: theme.spacing(0),
-    color: theme.palette.text.secondary,
     background: "rgb(245, 245, 245)",
-    height: "5vh",
-    padding: "1%",
-    fontFamily: "Roboto"
-  },
-  h1: {
-    fontSize: "1.2rem",
-    padding: "3%",
     height: "50px",
-    textAlign: "left",
-    fontWeight: "800"
+    padding: "1%",
+    fontFamily: "Roboto",
+    borderBottom: "1px rgba(0, 0, 0, 0.1) solid",
+    fontSize: "1.5rem"
+  },
+  filterName: {
+    fontWeight: "500"
+  },
+  chosen: {
+    fontStyle: "italic"
   },
   super: {
     textAlign: "center",

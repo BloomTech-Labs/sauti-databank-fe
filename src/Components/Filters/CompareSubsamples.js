@@ -63,7 +63,7 @@ const CompareSubSamples = () => {
         return (
           <>
             <Grid item xs={12} className={classes.filterButton}>
-              <h1 className={classes.h1}>Compare SubSamples</h1>
+              <span className={classes.filterName}> Compare SubSamples</span>
             </Grid>
             <Grid container xs={12} style={{ flexDirection: "column" }}>
               {ordered.map(e => {
@@ -92,9 +92,10 @@ const CompareSubSamples = () => {
         return (
           <>
             <Grid item xs={12} className={classes.filterButton}>
-              <h1 className={classes.h1}>
-                Compare SubSamples {filters[1].selectedCategory}
-              </h1>
+              <span className={classes.filterName}> Compare SubSamples</span> -
+              <span className={classes.chosen}>
+                {filters[1].selectedCategory}
+              </span>
             </Grid>
           </>
         );
@@ -115,29 +116,21 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
-  filterButtonF: {
-    padding: theme.spacing(0),
-    color: theme.palette.text.secondary,
-    background: "rgb(245, 245, 245)",
-    height: "5vh",
-    padding: "1%",
-    fontFamily: "Roboto",
-    display: "flex"
-  },
+
   filterButton: {
     padding: theme.spacing(0),
-    color: theme.palette.text.secondary,
     background: "rgb(245, 245, 245)",
-    height: "5vh",
-    padding: "1%",
-    fontFamily: "Roboto"
-  },
-  h1: {
-    fontSize: "1.2rem",
-    padding: "3%",
     height: "50px",
-    textAlign: "left",
-    fontWeight: "800"
+    padding: "1%",
+    fontFamily: "Roboto",
+    borderBottom: "1px rgba(0, 0, 0, 0.1) solid",
+    fontSize: "1.5rem"
+  },
+  filterName: {
+    fontWeight: "500"
+  },
+  chosen: {
+    fontStyle: "italic"
   },
   super: {
     textAlign: "center",

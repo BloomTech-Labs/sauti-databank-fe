@@ -12,8 +12,12 @@ const SelectedFilterDisplay = ({ filters }) => {
         if (filters[filterId].selectedCategory) {
           return (
             <>
+              <span className="redText"> Additional Filter -</span>
               {filters[filterId].selectedCategory} :
-              {getSelectedOption(filters, filterId)} |
+              <span className="italic">
+                {" "}
+                {getSelectedOption(filters, filterId)};
+              </span>
             </>
           );
         } else {
@@ -22,15 +26,26 @@ const SelectedFilterDisplay = ({ filters }) => {
       });
   };
 
+  function showCompare() {
+    if (filters[1].selectedCategory) {
+      return (
+        <>
+          <span className="redText"> Subsample -</span>
+          <span className="italic">{filters[1].selectedCategory} </span>
+        </>
+      );
+    } else {
+      return <></>;
+    }
+  }
+
   return (
     <>
       <Grid item style={{ padding: "1%", fontSize: "1.5rem" }}>
-        <span className="redText">Data Series:</span>{" "}
-        {filters[0].selectedCategory}{" "}
-        <span className="redText"> Subsample:</span>
-        {filters[1].selectedCategory}{" "}
-        <span className="redText"> Additional Filter:</span>
+        <span className="redText">Data Series -</span>{" "}
+        <span className="italic">{filters[0].selectedCategory}</span>
         {makeFilterList()}
+        {showCompare()}
       </Grid>
     </>
   );
