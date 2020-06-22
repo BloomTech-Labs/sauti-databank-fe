@@ -100,12 +100,12 @@ const GraphContainer = props => {
       <Grid container maxWidth="xl">
         <Grid container maxWidth="xl">
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <h1 className={classes.h1}>Cross-Border Trade DataBank</h1>
             </Grid>
             <Grid
               item
-              xs={10}
+              xs={9}
               style={{
                 background: "white",
                 height: "50px"
@@ -115,7 +115,7 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
           <Grid container xs={12} style={{ height: "30px" }}>
-            <Grid xs={2}></Grid>
+            <Grid xs={3}></Grid>
             <Grid container xs={3} spacing={1} style={{ height: "30px" }}>
               <GraphButtons
                 open={open}
@@ -126,7 +126,7 @@ const GraphContainer = props => {
                 queryType={queryType}
               />
             </Grid>
-            <Grid container xs={5}></Grid>
+            <Grid container xs={4}></Grid>
             <Grid container xs={2} spacing={1} style={{ height: "30px" }}>
               <SocialMedia
                 filters={filters}
@@ -140,7 +140,7 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
           <Grid container maxWidth="xl">
-            <Grid container xs={2} className={classes.filters}>
+            <Grid container xs={3} className={classes.filters}>
               <Grid container style={{ flexDirection: "column" }}>
                 <FilterBox
                   filters={filters}
@@ -182,11 +182,7 @@ const GraphContainer = props => {
                 {hidden ? <p>►</p> : <p>◄</p>}
              
             </Grid> */}
-            <Grid
-              item
-              xs={10}
-              className={hidden ? "extend" : "chart-container"}
-            >
+            <Grid item xs={9} className={hidden ? "extend" : "chart-container"}>
               <Queries2
                 filters={filters}
                 filterBoxStartDate={filterBoxStartDate}

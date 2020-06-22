@@ -31,7 +31,7 @@ const SelectedFilterDisplay = ({ filters }) => {
       return (
         <>
           <span className="redText"> Subsample -</span>
-          <span className="italic">{filters[1].selectedCategory} </span>
+          {filters[1].selectedCategory}
         </>
       );
     } else {
@@ -43,7 +43,7 @@ const SelectedFilterDisplay = ({ filters }) => {
     <>
       <Grid item style={{ padding: "1%", fontSize: "1.5rem" }}>
         <span className="redText">Data Series -</span>{" "}
-        <span className="italic">{filters[0].selectedCategory}</span>
+        {filters[0].selectedCategory}
         {makeFilterList()}
         {showCompare()}
       </Grid>
