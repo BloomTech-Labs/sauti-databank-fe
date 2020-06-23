@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 
 const SelectedFilterDisplay = ({ filters }) => {
   const makeFilterList = () => {
-    console.log("makeFilterList WAS CALLED");
     return Object.keys(filters)
       .filter(filterId => filterId >= 2)
       .map(filterId => {

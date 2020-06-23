@@ -81,7 +81,6 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("ran lineAction");
     dispatch(
       lineAction({
         checkboxes: checkboxes,

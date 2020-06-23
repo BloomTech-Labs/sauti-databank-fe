@@ -34,7 +34,6 @@ const LineFilter = () => {
   const [state, setState] = useState(checkedItems);
 
   useEffect(() => {
-    console.log("useEffect ran");
     setState(checkedItems);
   }, [checkedItems]);
 
@@ -60,7 +59,6 @@ const LineFilter = () => {
     console.log("");
   }
 
-  console.log(checkedItems, checkboxes);
   if (open === "line" && state) {
     return (
       <>

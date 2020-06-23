@@ -47,7 +47,6 @@ function AfricaMap({
   //must start as empty array or will render text many times.
   const [allResults, setResults] = useState([]);
   const [button, setButton] = useState();
-  console.log(button);
 
   function changeProperty() {
     setMaxColor("#A2181D");

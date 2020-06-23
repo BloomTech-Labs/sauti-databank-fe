@@ -112,6 +112,8 @@ export default function FilterBox(props) {
       return (
         <Grid container>
           <DataSFilter
+            tier={tier}
+            newSub={newSub}
             filterSelectorName={filterSelectorName}
             filters={filters}
             setFilters={setFilters}

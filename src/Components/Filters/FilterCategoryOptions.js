@@ -17,10 +17,7 @@ const FilterCategoryOptions = props => {
     FilterBoxOptions
   } = props;
 
-  console.log(`filters`, filters);
-
   function setSelectedTableColumnName(catItem, index) {
-    console.log(`AddFilter`, catItem);
     setUpdateUrlFlag(!updateUrlFlag);
     let optionFlags = {};
     graphLabels[
@@ -31,7 +28,6 @@ const FilterCategoryOptions = props => {
         [option]: false
       };
     });
-    console.log("number 1 setFilters", filters);
     setFilters({
       ...filters,
       [index]: {
@@ -44,13 +40,10 @@ const FilterCategoryOptions = props => {
         selectableOptions: { ...optionFlags }
       }
     });
-    console.log("number 1 finished setFilters", filters);
   }
 
-  //console.log(catItem, index);
   // for options tag
   const changeOption = (i, filters, graphLabels, option) => {
-    console.log(option);
     let optionFlags = {};
     graphLabels[item].labels.forEach(option => {
       optionFlags = {
@@ -58,7 +51,6 @@ const FilterCategoryOptions = props => {
         [option]: false
       };
     });
-    console.log("number 2 setFilters", filters);
     setFilters({
       ...filters,
       [i]: {

@@ -28,14 +28,8 @@ const setCrossedItems = (
   // OTHERWISE IT IS GOING TO BE SORTED MOST TO LEAST REQUESTED AT A LATER TIME
   if (graphLabels[`${crossFilter}`]) {
     crossFilterKeys = graphLabels[`${crossFilter}`].structure;
-    // console.log(
-    //   "IF THERE IS A GRAPHLABEL",
-    //   crossFilter,
-    //   graphLabels[`${crossFilter}`]
-    // );
   } else {
     crossFilterKeys = getIndex(data, crossFilter);
-    //console.log("NO GRAPHLABEL", crossFilter, graphLabels[`${crossFilter}`]);
   }
 
   // Puts each value from key:value pair into an array
