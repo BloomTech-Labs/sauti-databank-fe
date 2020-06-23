@@ -31,30 +31,40 @@ const LineFilter = () => {
     setState(checkedItems);
   }
 
-  const [state, setState] = useState(false);
+  const [state, setState] = useState(checkedItems);
 
   useEffect(() => {
+    console.log("useEffect ran");
     setState(checkedItems);
   }, [checkedItems]);
 
-  if (open === "line" && checkedItems) {
+  let boxes = [];
+  if (checkboxes && state) {
+    for (let i = 0; i < checkboxes.length; i++) {
+      let check = state[checkboxes[i].name];
+      boxes.push(
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={check ? check : false}
+              key={checkboxes[i].key}
+              name={checkboxes[i].name}
+              onClick={handleChange}
+            />
+          }
+          label={checkboxes[i].name}
+        />
+      );
+    }
+  } else {
+    console.log("");
+  }
+
+  console.log(checkedItems, checkboxes);
+  if (open === "line" && state) {
     return (
       <>
-        <FormGroup row>
-          {checkboxes.map(option => (
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={checkedItems[option.name]}
-                  key={option.key}
-                  name={option.name}
-                  onClick={handleChange}
-                />
-              }
-              label={option.name}
-            />
-          ))}
-        </FormGroup>
+        <FormGroup row>{boxes}</FormGroup>
       </>
     );
   } else {
