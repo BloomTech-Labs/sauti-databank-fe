@@ -46,7 +46,7 @@ export const DownloadText = styled.p`
   color: grey;
 `;
 const BigX = styled.big`
-  margin-left: 490px;
+  margin-left: 420px;
   font-size: 2.5rem;
   font-weight: bold;
   &:hover {
@@ -80,7 +80,8 @@ function SeriesFilterModal({ handleClose }) {
         <Div>
           <BigX onClick={() => handleClose(false)}>X</BigX>
           <FormTitle>
-            Would you like to filter by Information Demand or Business Behavior?
+            Would you like to filter by "Information Demand" or "Business
+            Behavior" categories?
           </FormTitle>
           <DownloadText>
             Click <BigContinue>Continue</BigContinue> if you'd like to upgrade

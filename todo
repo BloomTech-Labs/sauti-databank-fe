@@ -20,6 +20,7 @@ the bar chart will render.
 - Add Filter opens by index, on close removes all
 - AddFilters uses Material-ui throughout, now responsive
 - calendar material-ui responsive
+- add modal on SeriesFilter if not logged in
 
 To Do:
 
@@ -27,6 +28,8 @@ To Do:
 
 - if go to data, then to login -> backbutton -> error, because no data  DataParseHelpers/setItem
 - clear filter error, cannot read split of undefined.  DataParseHelpers/filterByDate line 6
+- Download.js and SeriesFilterModal.js  need to be styled.  X is uses px instead of percentages.
+- SeriesFilterModal.js -> should get approval on text
 
 
 

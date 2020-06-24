@@ -46,7 +46,7 @@ export const DownloadText = styled.p`
   color: grey;
 `;
 const BigX = styled.big`
-  margin-left: 490px;
+  margin-left: 420px;
   font-size: 2.5rem;
   font-weight: bold;
   &:hover {
