@@ -22,16 +22,15 @@ the bar chart will render.
 - calendar material-ui responsive
 
 To Do:
-- Filters list in Alphabetical order
-- design filter buttons, text and show selected
-- some space between selected display
-- buttons on bottom
+
 - under chart render description
 
+- if go to data, then to login -> backbutton -> error, because no data  DataParseHelpers/setItem
+- clear filter error, cannot read split of undefined.  DataParseHelpers/filterByDate line 6
 
 
 
-- onhover for social media and graph buttons
+
 
 
 
