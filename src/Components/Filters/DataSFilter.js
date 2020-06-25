@@ -4,7 +4,7 @@ import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import ordered from "../orderedGraphLabels";
+import { ordered } from "../orderedGraphLabels";
 import SeriesFilterModal from "./SeriesFilterModal";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -22,6 +22,18 @@ const DataSFilter = ({
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const [access, setAccess] = useState(false);
+
+  useEffect(() => {
+    if (
+      tier !== undefined &&
+      (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
+    ) {
+      setAccess(true);
+    }
+  }, []);
+
   console.log(open);
 
   const handleClose = () => {
@@ -32,10 +44,7 @@ const DataSFilter = ({
   const classes = useStyles();
 
   function changeOption(e) {
-    if (
-      tier !== undefined &&
-      (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
-    ) {
+    if (access) {
       console.log("changeOption");
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
@@ -100,21 +109,6 @@ const DataSFilter = ({
     }
   }
 
-  //   function signUpModal(){
-  //     console.log(signUpModal)
-  //     if(signUp === true){
-  //       console.log('true CalendarModal')
-  //     return <Download/>;
-  //     } else{
-  //       return(<></>)
-  //     }
-  //   }
-
-  //   useEffect(() => {
-  // console.log('useEffect ran')
-  //     signUpModal()
-  //   },[signUp])
-
   const displayDropOptions = () => {
     if (displayDrop === true && open === false) {
       return (
@@ -133,7 +127,7 @@ const DataSFilter = ({
               } else {
                 return (
                   <TextField
-                    className="selectable"
+                    className={access ? "selectable" : "limited"}
                     value={e}
                     onClick={changeOption}
                   >
@@ -169,7 +163,7 @@ const DataSFilter = ({
               } else {
                 return (
                   <TextField
-                    className="selectable"
+                    className={access ? "selectable" : "limited"}
                     value={e}
                     onClick={changeOption}
                   >

@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-import ordered from "../orderedGraphLabels";
+import { ordered } from "../orderedGraphLabels";
 
 const AddFilter = ({
   filters,

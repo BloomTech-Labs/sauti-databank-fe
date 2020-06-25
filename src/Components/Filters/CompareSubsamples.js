@@ -5,7 +5,7 @@ import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import ordered from "../orderedGraphLabels";
+import { ordered } from "../orderedGraphLabels";
 
 const CompareSubSamples = () => {
   const reducerSub = useSelector(

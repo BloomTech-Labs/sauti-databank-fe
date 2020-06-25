@@ -21,7 +21,7 @@ the bar chart will render.
 - AddFilters uses Material-ui throughout, now responsive
 - calendar material-ui responsive
 - add modal on SeriesFilter if not logged in
-
+- add dynamictext to Bar and line graphs
 To Do:
 
 - under chart render description
@@ -35,7 +35,7 @@ To Do:
       https://stackoverflow.com/questions/54477432/rewrites-and-redirects-in-aws-amplify
 
 
-
+- if not logged in filters that cannot be used should be grey
 
 
 
