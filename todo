@@ -30,8 +30,9 @@ To Do:
 - clear filter error, cannot read split of undefined.  DataParseHelpers/filterByDate line 6
 - Download.js and SeriesFilterModal.js  need to be styled.  X is uses px instead of percentages.
 - SeriesFilterModal.js -> should get approval on text
-
-
+- useHistory redirects , or go to original page - maybe something with AWS
+      https://docs.aws.amazon.com/amplify/latest/userguide/redirects.html
+      https://stackoverflow.com/questions/54477432/rewrites-and-redirects-in-aws-amplify
 
 
 
