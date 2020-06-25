@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { barDownload } from "../Components/redux-actions/barDownloadAction";
 import Grid from "@material-ui/core/Grid";
+import dynamicText from "./dynamicText";
 
 const Graph = props => {
   let {
@@ -25,6 +26,15 @@ const Graph = props => {
   } = props;
 
   const dispatch = useDispatch();
+
+  let dyText = "";
+  for (let key in dynamicText) {
+    if (filters[0]["selectedCategory"] === key) {
+      dyText = dynamicText[key];
+    }
+  }
+
+  console.log(filters[0]["selectedCategory"]);
 
   const token = getToken();
   let tier;
@@ -190,7 +200,6 @@ const Graph = props => {
   return (
     <>
       <Grid container style={{ height: "70vh" }}>
-        {/* <div className="Graph-Container"> */}
         <ResponsiveBar
           data={data}
           keys={keys}
@@ -226,6 +235,7 @@ const Graph = props => {
               " (values as percent of total)," +
               ` sample size = ${sampleSize} ${tableName}`,
             legendPosition: "middle",
+            legendDirection: "column",
             legendOffset: 35
           }}
           axisLeft={{
@@ -234,6 +244,7 @@ const Graph = props => {
             tickRotation: 0,
             legend: "Percentage", // Possibly toggle percentage or number in future release
             legendPosition: "middle",
+
             legendOffset: -60
           }}
           labelSkipWidth={0}
@@ -267,7 +278,9 @@ const Graph = props => {
           motionStiffness={90}
           motionDamping={15}
         />
-        {/* </div> */}
+        <Grid item style={{ margin: "auto" }}>
+          {dyText}
+        </Grid>
       </Grid>
     </>
   );

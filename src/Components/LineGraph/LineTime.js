@@ -10,6 +10,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 import { useDispatch } from "react-redux";
+import dynamicText from "../../Components/dynamicText";
 
 import CheckBox from "../CheckBox";
 
@@ -21,7 +22,14 @@ import { lineAction } from "../redux-actions/lineActions";
 import Grid from "@material-ui/core/Grid";
 import { barDownload } from "../redux-actions/barDownloadAction";
 
-const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
+const GraphTime = ({
+  month100,
+  quarter100,
+  year100,
+  top7,
+  checkboxes,
+  filter0
+}) => {
   const [time, setTime] = useState([]);
   const [timeInUse, setTimeInUse] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
@@ -39,6 +47,13 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
       if (bbb.includes(true)) {
         display.push(bbb[0]);
       }
+    }
+  }
+
+  let dyText = "";
+  for (let key in dynamicText) {
+    if (filter0["selectedCategory"] === key) {
+      dyText = dynamicText[key];
     }
   }
 
@@ -186,6 +201,9 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
             </LineChart>
           </ResponsiveContainer>
           <LineRange timeInUse={timeInUse} time={time} setTime={setTime} />
+          <Grid item style={{ margin: "auto" }}>
+            {dyText}
+          </Grid>
         </Grid>
       </Grid>
     </>

@@ -32,9 +32,8 @@ const DataSFilter = ({
   const classes = useStyles();
 
   function changeOption(e) {
-    console.log(e.target.value);
     if (
-      tier === undefined &&
+      tier !== undefined &&
       (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
     ) {
       console.log("changeOption");

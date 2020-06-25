@@ -361,6 +361,7 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
         year100={year100}
         top7={top7}
         checkboxes={checkboxes}
+        filter0={filter0}
       />
     </>
   );
