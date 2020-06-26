@@ -38,6 +38,11 @@ To Do:
 
 - if not logged in filters that cannot be used should be grey
 
+- Bug - if no data and hit clear, crash 
+TypeError: Cannot read property 'split' of undefined
+(anonymous function)
+C:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/filterByDate.js:6
+
 
 
 

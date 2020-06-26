@@ -17,22 +17,10 @@ const DataSFilter = ({
   setUpdateUrlFlag,
   FilterBoxOptions,
   updateUrlFlag,
-  tier,
-  newSub
+  access
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
   const [open, setOpen] = useState(false);
-
-  const [access, setAccess] = useState(false);
-
-  useEffect(() => {
-    if (
-      tier !== undefined &&
-      (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
-    ) {
-      setAccess(true);
-    }
-  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -67,10 +55,7 @@ const DataSFilter = ({
           selectableOptions: { ...optionFlags }
         }
       });
-    } else if (
-      (tier === undefined || tier === "FREE") &&
-      demographics.includes(e.target.value)
-    ) {
+    } else if (!access && demographics.includes(e.target.value)) {
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
       graphLabels[

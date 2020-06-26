@@ -28,11 +28,6 @@ const DataSeriesFilter = ({
       <Select
         // shows selected category
         defaultValue={{ label: filters[index].selectedCategory }}
-        // isClearable
-        //seems not in use
-        // formatGroupLabel={formatGroupLabel} styling, not being used
-        // components={{ Control: ControlComponent }}  style selected component
-        // isSearchable
         onChange={e => {
           setUpdateUrlFlag(!updateUrlFlag);
           let optionFlags = {};

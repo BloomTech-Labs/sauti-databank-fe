@@ -26,6 +26,11 @@ import { compareSubSamples } from "../redux-actions/compareSubSamples";
 import { calendarAction } from "../redux-actions/calendarAction";
 import { clearFiltersAction } from "../redux-actions/clearFiltersAction";
 
+import AddFilterModal from "./AddFilterModal";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+
 export default function FilterBox(props) {
   const History = useHistory();
   const {
@@ -71,7 +76,7 @@ export default function FilterBox(props) {
       };
     });
   };
-
+  // Function for Data Series and Add Filters
   const FilterSelector = props => {
     const {
       filterSelectorName,
@@ -159,7 +164,6 @@ export default function FilterBox(props) {
     sub = newSub;
   }
 
-  const [setup, setSetup] = useState(colourOptions[0]);
   const [loading, setLoading] = useState(false);
 
   let urlSearchParams = {};
@@ -199,23 +203,24 @@ export default function FilterBox(props) {
     History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
   }, [updateUrlFlag]);
 
-  const handleSubmit = useCallback(
-    e => {
-      if (e.target.textContent === "Submit") {
-        e.preventDefault();
-      }
+  // const handleSubmit = useCallback(
+  //   e => {
+  //     if (e.target.textContent === "Submit") {
+  //       e.preventDefault();
+  //     }
 
-      setFilterBoxStartDate(filterBoxStartDate);
-      setFilterBoxEndDate(filterBoxEndDate);
-    },
-    [
-      filterBoxEndDate,
+  //     setFilterBoxStartDate(filterBoxStartDate);
+  //     setFilterBoxEndDate(filterBoxEndDate);
+  //   },
+  //   [
+  //     filterBoxEndDate,
 
-      filterBoxStartDate,
-      setFilterBoxStartDate,
-      setFilterBoxEndDate
-    ]
-  );
+  //     filterBoxStartDate,
+  //     setFilterBoxStartDate,
+  //     setFilterBoxEndDate
+  //   ]
+  // );
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
@@ -249,9 +254,70 @@ export default function FilterBox(props) {
     );
   }, [open, filters]);
 
+  const [addFilterModal, setAddFilterModal] = useState(false);
+
+  const closeAddFilterModal = () => {
+    setAddFilterModal(false);
+  };
+
+  function filterCalendar() {
+    const currentDataFilter = Object.keys(filters).length - 1;
+    if (
+      tier !== undefined &&
+      (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
+    ) {
+      setFilters({
+        ...filters,
+        // make a flag that is only true when this button is clicked on
+        // put the flag on the last additional filter known to the user
+        [currentDataFilter]: {
+          ...filters[currentDataFilter],
+          // set to true only if selectableOptions has a selected item
+          // (the only time optionHasBeenSelected will be true)
+          showOptions: false
+        },
+        [Object.keys(filters).length]: {
+          nameOfFilter: "Data Filter",
+          selectedCategory: "",
+          selectableOptions: {},
+          selectedTable: "",
+          selectedTableColumnName: "",
+          showOptions: true
+        }
+      });
+    } else {
+      //open modal
+      setAddFilterModal(true);
+    }
+  }
+  function modalAddFilter() {
+    if (addFilterModal) {
+      return (
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={addFilterModal}
+          onClose={closeAddFilterModal}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500
+          }}
+        >
+          <Fade in={open}>
+            <AddFilterModal closeAddFilterModal={closeAddFilterModal} />
+          </Fade>
+        </Modal>
+      );
+    } else {
+      return <></>;
+    }
+  }
+
   return (
     <>
       <Grid container>
+        {/* Data Series and Add Filter */}
         {Object.keys(filters).map(filterId => (
           <FilterSelector
             key={filterId}
@@ -264,34 +330,7 @@ export default function FilterBox(props) {
         ))}
 
         <svg
-          onClick={e => {
-            const currentDataFilter = Object.keys(filters).length - 1;
-
-            if (
-              tier !== undefined &&
-              (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
-            ) {
-              setFilters({
-                ...filters,
-                // make a flag that is only true when this button is clicked on
-                // put the flag on the last additional filter known to the user
-                [currentDataFilter]: {
-                  ...filters[currentDataFilter],
-                  // set to true only if selectableOptions has a selected item
-                  // (the only time optionHasBeenSelected will be true)
-                  showOptions: false
-                },
-                [Object.keys(filters).length]: {
-                  nameOfFilter: "Data Filter",
-                  selectedCategory: "",
-                  selectableOptions: {},
-                  selectedTable: "",
-                  selectedTableColumnName: "",
-                  showOptions: true
-                }
-              });
-            }
-          }}
+          onClick={filterCalendar}
           style={{ cursor: loading ? "auto" : "pointer" }}
           width="346"
           height="49"
@@ -333,6 +372,7 @@ export default function FilterBox(props) {
           </defs>
         </svg>
       </Grid>
+      {modalAddFilter()}
     </>
   );
 }
