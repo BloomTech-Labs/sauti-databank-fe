@@ -15,12 +15,6 @@ const DataSeriesFilter = ({
   xVar,
   colourStyles
 }) => {
-  console.log(
-    `filters[index].selectedCategory`,
-    filters[index].selectedCategory
-  );
-
-  console.log(`ControlComponent`, ControlComponent);
   return (
     <>
       {/* labels filter */}
