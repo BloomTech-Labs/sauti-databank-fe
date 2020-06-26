@@ -4,7 +4,7 @@ import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import { ordered } from "../orderedGraphLabels";
+import { ordered, demographics } from "../orderedGraphLabels";
 import SeriesFilterModal from "./SeriesFilterModal";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -33,8 +33,6 @@ const DataSFilter = ({
       setAccess(true);
     }
   }, []);
-
-  console.log(open);
 
   const handleClose = () => {
     setOpen(false);
@@ -71,16 +69,8 @@ const DataSFilter = ({
       });
     } else if (
       (tier === undefined || tier === "FREE") &&
-      (e.target.value === "Age" ||
-        e.target.value === "Border Crossing Frequency" ||
-        e.target.value === "Country of Residence" ||
-        e.target.value === "Education Level" ||
-        e.target.value === "Gender" ||
-        e.target.value === "Language" ||
-        e.target.value === "Primary Income" ||
-        e.target.value === "Produce")
+      demographics.includes(e.target.value)
     ) {
-      console.log("changeOption");
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
       graphLabels[
@@ -124,6 +114,16 @@ const DataSFilter = ({
                 e === "BUSINESS BEHAVIOUR"
               ) {
                 return <p className={classes.super}>{e}</p>;
+              } else if (demographics.includes(e)) {
+                return (
+                  <TextField
+                    className={"selectable"}
+                    value={e}
+                    onClick={changeOption}
+                  >
+                    {e}
+                  </TextField>
+                );
               } else {
                 return (
                   <TextField
