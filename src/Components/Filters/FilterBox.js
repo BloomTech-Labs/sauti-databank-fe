@@ -152,7 +152,7 @@ export default function FilterBox(props) {
       return <></>;
     }
   };
-
+  const [access, setAccess] = useState(false);
   const token = getToken();
   let tier;
   if (token) {
@@ -226,8 +226,7 @@ export default function FilterBox(props) {
   useEffect(() => {
     dispatch(
       calendarAction({
-        tier: tier,
-        newSub: newSub,
+        access,
         filterBoxStartDate: filterBoxStartDate,
         setFilterBoxStartDate: setFilterBoxStartDate,
         filterBoxEndDate: filterBoxEndDate,

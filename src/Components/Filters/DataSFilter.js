@@ -17,10 +17,21 @@ const DataSFilter = ({
   setUpdateUrlFlag,
   FilterBoxOptions,
   updateUrlFlag,
-  access
+  tier
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
   const [open, setOpen] = useState(false);
+  const [access, setAccess] = useState(false);
+
+  useEffect(() => {
+    console.log("useEffect", access, tier);
+    if (
+      tier !== undefined &&
+      (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
+    ) {
+      setAccess(true);
+    }
+  }, [tier]);
 
   const handleClose = () => {
     setOpen(false);

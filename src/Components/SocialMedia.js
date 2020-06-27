@@ -15,7 +15,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 //import downloadBtn  from '../assets/images/downloadBtn'
 
 //need to bring in data, for 109
-const SocialMedia = ({ filters, csvData, keys, sampleSize }) => {
+const SocialMedia = () => {
   const token = getToken();
   let tier;
   if (token) {

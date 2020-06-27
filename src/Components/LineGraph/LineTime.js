@@ -21,6 +21,7 @@ import LineRange from "./LineRange";
 import { lineAction } from "../redux-actions/lineActions";
 import Grid from "@material-ui/core/Grid";
 import { barDownload } from "../redux-actions/barDownloadAction";
+import { downloadLine } from "./downloadLine";
 
 const GraphTime = ({
   month100,
@@ -33,6 +34,8 @@ const GraphTime = ({
   const [time, setTime] = useState([]);
   const [timeInUse, setTimeInUse] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
+
+  console.log("time", time);
 
   useEffect(() => {
     setTime(month100);
@@ -49,7 +52,7 @@ const GraphTime = ({
       }
     }
   }
-
+  //dynamic Methodology Text
   let dyText = "";
   for (let key in dynamicText) {
     if (filter0["selectedCategory"] === key) {
@@ -112,25 +115,24 @@ const GraphTime = ({
     setCheckedItems(checkedItems);
   };
 
+  let arrayDownload = [];
+  time.length > 1
+    ? (arrayDownload = downloadLine(time, filter0))
+    : console.log("");
+
   useEffect(() => {
-    dispatch(
-      barDownload({
-        columns: [
-          { id: "65", displayName: "TopCommodities" },
-          { id: "66", displayName: "2018-01" },
-          { id: "67", displayName: "2018-02" },
-          { id: "68", displayName: "2018-01" }
-        ],
-        makeValues: [
-          ["beans", 4, 5, 6],
-          ["coffee", 5, 4, 3]
-        ],
-        fileName: "Line Graph",
-        suffix: `${new Date().toISOString()}`,
-        track: "track"
-      })
-    );
-  }, []);
+    if (arrayDownload.length > 1) {
+      dispatch(
+        barDownload({
+          columns: [{ id: "165", displayName: filter0.selectedCategory }],
+          makeValues: arrayDownload,
+          fileName: "Line Graph",
+          suffix: `${new Date().toISOString()}`,
+          track: "track"
+        })
+      );
+    }
+  }, [arrayDownload]);
 
   return (
     <>

@@ -23,11 +23,13 @@ the bar chart will render.
 - add modal on SeriesFilter if not logged in
 - add dynamictext to Bar and line graphs
 - for non-logged in users non-demographic filters are greyed out.
+- Add + remove svg because was not responsive.
+- added modal to Add +, if not logged in or paying user
 To Do:
 
 
 
-- if go to data, then to login -> backbutton -> error, because no data  DataParseHelpers/setItem
+
 - clear filter error, cannot read split of undefined.  DataParseHelpers/filterByDate line 6
 - Download.js and SeriesFilterModal.js  need to be styled.  X is uses px instead of percentages.
 - SeriesFilterModal.js -> should get approval on text
@@ -35,17 +37,14 @@ To Do:
       https://docs.aws.amazon.com/amplify/latest/userguide/redirects.html
       https://stackoverflow.com/questions/54477432/rewrites-and-redirects-in-aws-amplify
 
-
-- if not logged in filters that cannot be used should be grey
-
 - Bug - if no data and hit clear, crash 
 TypeError: Cannot read property 'split' of undefined
 (anonymous function)
 C:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/filterByDate.js:6
 
+- if go to data, then to login -> backbutton -> error, because no data  DataParseHelpers/setItem
 
-
-
+-graphlabels - confirm correct
 
 
 
