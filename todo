@@ -28,7 +28,7 @@ the bar chart will render.
 To Do:
 
 
-
+-redirects - maybe filters not updating fast enough
 
 - clear filter error, cannot read split of undefined.  DataParseHelpers/filterByDate line 6
 - Download.js and SeriesFilterModal.js  need to be styled.  X is uses px instead of percentages.

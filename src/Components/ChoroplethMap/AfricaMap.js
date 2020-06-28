@@ -13,6 +13,9 @@ import useResizeObserver from "./useResizeObserver";
 import "../scss/choropleth.scss";
 
 import { countryRank } from "./mapParcer";
+import { useDispatch } from "react-redux";
+import { lineAction } from "../redux-actions/lineActions";
+import { barDownload } from "../redux-actions/barDownloadAction";
 
 function AfricaMap({
   updatedData,
@@ -47,6 +50,22 @@ function AfricaMap({
   //must start as empty array or will render text many times.
   const [allResults, setResults] = useState([]);
   const [button, setButton] = useState();
+
+  console.log(allResults);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (allResults.length > 1) {
+      dispatch(
+        barDownload({
+          columns: [{ id: "165", displayName: filters[0].selectedCategory }],
+          makeValues: allResults,
+          fileName: "Line Graph",
+          suffix: `${new Date().toISOString()}`,
+          track: "track"
+        })
+      );
+    }
+  }, [allResults]);
 
   function changeProperty() {
     setMaxColor("#A2181D");
