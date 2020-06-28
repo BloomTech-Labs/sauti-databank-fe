@@ -24,7 +24,6 @@ const DataSFilter = ({
   const [access, setAccess] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect", access, tier);
     if (
       tier !== undefined &&
       (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
@@ -42,7 +41,6 @@ const DataSFilter = ({
 
   function changeOption(e) {
     if (access) {
-      console.log("changeOption");
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
       graphLabels[

@@ -25,8 +25,11 @@ the bar chart will render.
 - for non-logged in users non-demographic filters are greyed out.
 - Add + remove svg because was not responsive.
 - added modal to Add +, if not logged in or paying user
+- Add csv download line graph
+- Add csv download map
 To Do:
 
+- ?? is survey-1-border for traders table or sessions?
 
 -redirects - maybe filters not updating fast enough
 

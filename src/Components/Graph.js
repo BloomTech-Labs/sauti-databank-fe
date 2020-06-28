@@ -34,8 +34,6 @@ const Graph = props => {
     }
   }
 
-  console.log(filters[0]["selectedCategory"]);
-
   const token = getToken();
   let tier;
   if (token) {

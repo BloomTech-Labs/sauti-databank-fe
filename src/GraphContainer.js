@@ -184,6 +184,7 @@ const GraphContainer = props => {
             <Grid item xs={9} className={hidden ? "extend" : "chart-container"}>
               <Queries2
                 filters={filters}
+                setFilters={setFilters}
                 filterBoxStartDate={filterBoxStartDate}
                 setFilterBoxStartDate={setFilterBoxStartDate}
                 filterBoxEndDate={filterBoxEndDate}
