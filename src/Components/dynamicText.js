@@ -1,6 +1,7 @@
 const dynamicText = {
   Age: "Age is",
   "Border Crossing Frequency": "Border Crossing Frequency",
+  "Crossing Location": "Crossing Location",
   "Country of Residence": "Country of Residence",
   "Education Level": "Education Level",
   Gender: "Gender",

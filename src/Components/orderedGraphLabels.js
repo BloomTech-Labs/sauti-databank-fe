@@ -2,6 +2,7 @@ const ordered = [
   "KEY DEMOGRAPHICS",
   "Age",
   "Border Crossing Frequency",
+  "Crossing Location",
   "Country of Residence",
   "Education Level",
   "Gender",
@@ -25,6 +26,7 @@ const ordered = [
 const demographics = [
   "Age",
   "Border Crossing Frequency",
+  "Crossing Location",
   "Country of Residence",
   "Education Level",
   "Gender",

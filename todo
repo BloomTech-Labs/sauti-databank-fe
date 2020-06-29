@@ -21,15 +21,17 @@ the bar chart will render.
 - AddFilters uses Material-ui throughout, now responsive
 - calendar material-ui responsive
 - add modal on SeriesFilter if not logged in
-- add dynamictext to Bar and line graphs
+- add dynamic text to Bar and line graphs
 - for non-logged in users non-demographic filters are greyed out.
 - Add + remove svg because was not responsive.
 - added modal to Add +, if not logged in or paying user
 - Add csv download line graph
 - Add csv download map
+- Add survey-border-1 as crossing_location to backend and frontend
+- added found_by to database. now registration is working
 To Do:
 
-- ?? is survey-1-border for traders table or sessions?
+
 
 -redirects - maybe filters not updating fast enough
 
@@ -61,3 +63,4 @@ Error - think it occurs when search does not render any data.
   8 |     return obj;
   9 |   }
 
+Misspelling - border_crossing location : Loitokitok,  but commoditycountry: Loitoktok
