@@ -7,6 +7,11 @@ import DownloadModal from "../dashboard/DownloadModal";
 import styled from "styled-components";
 import { getSelectedOption } from "../OptionFunctions";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { barDownload } from "../Components/redux-actions/barDownloadAction";
+import Grid from "@material-ui/core/Grid";
+import dynamicText from "./dynamicText";
+
 const Graph = props => {
   let {
     data,
@@ -20,7 +25,14 @@ const Graph = props => {
     chartData
   } = props;
 
-  console.log(keys);
+  const dispatch = useDispatch();
+
+  let dyText = "";
+  for (let key in dynamicText) {
+    if (filters[0]["selectedCategory"] === key) {
+      dyText = dynamicText[key];
+    }
+  }
 
   const token = getToken();
   let tier;
@@ -38,16 +50,14 @@ const Graph = props => {
     setChartDataSM(chartData);
   }, []);
 
-  const [csvDownad, setCsvDownload] = useState([]);
+  const [csvDownload, setCsvDownload] = useState([]);
 
   let makeValues = data => {
-    console.log(`makeValues`, data);
     return data.map(obj => {
       return Object.values(obj);
     });
   };
   let makeHeaders = data => {
-    console.log(`makeValues`, data);
     if (!filters[1].selectedCategory) {
       return [
         {
@@ -89,6 +99,7 @@ const Graph = props => {
       ];
     }
   };
+
   // the download
   let csvFormater = data => {
     // the subsample case is messed up
@@ -171,89 +182,22 @@ const Graph = props => {
     setCsvDownload(csvFormater(csvData));
   }, [csvData]);
   const socialMediaLink = useHistory().location.search;
+
+  useEffect(() => {
+    dispatch(
+      barDownload({
+        makeValues: makeValues(csvDownload),
+        columns: makeHeaders(csvDownload),
+        fileName: fileName,
+        suffix: `${new Date().toISOString()}`,
+        track: track
+      })
+    );
+  }, [makeValues, makeHeaders]);
+
   return (
     <>
-      {/* <div className="dwnld-btn">
-        {tier === "ADMIN" ||
-        tier === "PAID" ||
-        tier === "GOV_ROLE" ||
-        newSub ? (
-          <>
-            <SocialMediaContainer className="social-media-container">
-              <IconContainer>
-                <ShareDiv>Share:</ShareDiv>
-                <CsvDownloader
-                  track={track}
-                  datas={makeValues(csvDownload)}
-                  columns={makeHeaders(csvDownload)}
-                  filename={fileName}
-                  suffix={`${new Date().toISOString()}`}
-                >
-                  <DownloadText className="csv-download">Download</DownloadText>
-                </CsvDownloader>
-                <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
-                <div>
-                  <SocialMediaIconsTwitter
-                    className="twitter-share-button"
-                    target="_blank"
-                    href={`https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`}
-                  >
-                    <i className="fab fa-twitter"></i>
-                  </SocialMediaIconsTwitter>
-                </div>
-                <div
-                  className="fb-share-button"
-                  data-href={`https://www.databank.sautiafrica.org/data${socialMediaLink}`}
-                  data-layout="button"
-                  data-size="small"
-                >
-                  <SocialMediaIconsFacebook
-                    target="_blank"
-                    href={`https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`}
-                    className="fb-xfbml-parse-ignore"
-                  >
-                    <i className="fab fa-facebook-square"></i>
-                  </SocialMediaIconsFacebook>
-                </div>
-              </IconContainer>
-            </SocialMediaContainer>
-          </>
-        ) : (
-          <>
-            <SocialMediaContainer className="social-media-container">
-              <IconContainer>
-                <ShareDiv>Share:</ShareDiv>
-                <DownloadModal />
-                <CopyUrlButton className="btn">Copy URL</CopyUrlButton>
-                <div>
-                  <SocialMediaIconsTwitter
-                    className="twitter-share-button"
-                    target="_blank"
-                    href="https://twitter.com/intent/tweet?text=This%20website%20is%20awesome!"
-                  >
-                    <i className="fab fa-twitter"></i>
-                  </SocialMediaIconsTwitter>
-                </div>
-                <div
-                  className="fb-share-button"
-                  data-href="https://blissful-pare-60612f.netlify.com/data"
-                  data-layout="button"
-                  data-size="small"
-                >
-                  <SocialMediaIconsFacebook
-                    target="_blank"
-                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                    className="fb-xfbml-parse-ignore"
-                  >
-                    <i className="fab fa-facebook-square"></i>
-                  </SocialMediaIconsFacebook>
-                </div>
-              </IconContainer>
-            </SocialMediaContainer>
-          </>
-        )}
-      </div> */}
-      <div className="Graph-Container">
+      <Grid container style={{ height: "70vh" }}>
         <ResponsiveBar
           data={data}
           keys={keys}
@@ -289,6 +233,7 @@ const Graph = props => {
               " (values as percent of total)," +
               ` sample size = ${sampleSize} ${tableName}`,
             legendPosition: "middle",
+            legendDirection: "column",
             legendOffset: 35
           }}
           axisLeft={{
@@ -297,6 +242,7 @@ const Graph = props => {
             tickRotation: 0,
             legend: "Percentage", // Possibly toggle percentage or number in future release
             legendPosition: "middle",
+
             legendOffset: -60
           }}
           labelSkipWidth={0}
@@ -330,7 +276,10 @@ const Graph = props => {
           motionStiffness={90}
           motionDamping={15}
         />
-      </div>
+        <Grid item style={{ margin: "auto" }}>
+          {dyText}
+        </Grid>
+      </Grid>
     </>
   );
 };

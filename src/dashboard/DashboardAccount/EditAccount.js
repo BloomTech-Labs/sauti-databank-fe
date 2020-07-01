@@ -111,6 +111,8 @@ const EditModal = props => {
   const [account, setAccount] = useState({});
   //account id added automatically, needed to .put
   account.id = props.data.id;
+  console.log(props);
+  console.log("props.data.email", props.data.email);
 
   const classes = useStyles();
 
@@ -189,10 +191,10 @@ const EditModal = props => {
                   <Inputs
                     type="email"
                     name="email"
-                    id="email"
+                    //  id="email"
                     placeholder={props.data.email}
                     value={account.email}
-                    onChange={handleChange}
+                    //  onChange={handleChange}
                   />
                   <Labels for="Organization">Organization</Labels>
                   <Inputs

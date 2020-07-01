@@ -1,17 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-const CategoryOptions = (
+const CategoryOptions = ({
   setUpdateUrlFlag,
   updateUrlFlag,
   setFilters,
   i,
   filters,
   graphLabels,
-  option
-) => {
+  option,
+  setDisplayDrop
+}) => {
   const changeOption = (i, filters, graphLabels, option) => {
     let optionFlags = {};
+
     graphLabels[`${filters[i].selectedTableColumnName}`].labels.forEach(
       option => {
         optionFlags = {
@@ -37,21 +41,18 @@ const CategoryOptions = (
   };
 
   return (
-    <Options key={option}>
-      <input
-        type="radio"
-        name="CrossFilter"
-        value={option}
-        // seems to need this when this is a component
-        checked={isChecked(i, filters, option)}
-        onChange={e => {
-          setUpdateUrlFlag(!updateUrlFlag);
-
-          changeOption(i, filters, graphLabels, option);
-        }}
-      />
-      <FilterOption>{option}</FilterOption>
-    </Options>
+    <FormControlLabel
+      key={option}
+      value={option}
+      control={<Radio />}
+      checked={isChecked(i, filters, option)}
+      onChange={e => {
+        setUpdateUrlFlag(!updateUrlFlag);
+        setDisplayDrop([]);
+        changeOption(i, filters, graphLabels, option);
+      }}
+      label={option}
+    />
   );
 };
 export default CategoryOptions;

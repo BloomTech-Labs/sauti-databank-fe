@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.scss";
 import "./index.css";
-import FilterBox from "./Components/FilterBox";
+import FilterBox from "./Components/Filters/FilterBox";
 import SelectedFilterDisplay from "./Components/SelectedFilterDisplay";
 import "react-dropdown/style.css";
 
@@ -11,16 +11,17 @@ import styled from "styled-components";
 import swal from "sweetalert";
 import ClipboardJS from "clipboard";
 
-import { Footer } from "./Components/Footer";
-
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import GraphButtons from "./Components/GraphButtons";
 import SocialMedia from "./Components/SocialMedia";
+
+import CompareSubSamples from "./Components/Filters/CompareSubsamples";
+import CalendarFilter from "./Components/Filters/CalendarFilter";
+import ClearFilters from "./Components/Filters/ClearFilters";
+import Apply from "./Components/Filters/Apply";
+import LineFilter from "./Components/LineGraph/LineFilter";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   h1: {
     fontFamily: "Montserrat, sans-serif",
     fontSize: "18px",
-    fontWeight: 600,
+    fontWeight: 400,
     color: "#ffffff",
     alignItems: "center",
     padding: "1.5%",
@@ -44,7 +45,11 @@ const useStyles = makeStyles(theme => ({
   },
   filters: {
     //padding: "2rem"
-    padding: "1%"
+    paddingLeft: "1%",
+    flexDirection: "column"
+  },
+  clearApply: {
+    // alignItems: "space-between"
   }
 }));
 
@@ -70,7 +75,6 @@ const GraphContainer = props => {
   const [hidden, setHidden] = useState(false);
 
   function HideFilters() {
-    console.log("Hide Filters");
     setHidden(!hidden);
   }
   //keys used for socialmedia
@@ -95,12 +99,12 @@ const GraphContainer = props => {
       <Grid container maxWidth="xl">
         <Grid container maxWidth="xl">
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid item xs={2}>
-              <h1 className={classes.h1}>Informal Cross-Border Trade Data</h1>
+            <Grid item xs={3}>
+              <h1 className={classes.h1}>Cross-Border Trade DataBank</h1>
             </Grid>
             <Grid
               item
-              xs={10}
+              xs={9}
               style={{
                 background: "white",
                 height: "50px"
@@ -109,16 +113,9 @@ const GraphContainer = props => {
               <SelectedFilterDisplay filters={filters} />
             </Grid>
           </Grid>
-          <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid item xs={2} style={{ height: "50px" }}>
-              {" "}
-            </Grid>
-            <Grid
-              container
-              xs={3}
-              spacing={0}
-              style={{ height: "50px", marginTop: ".5%" }}
-            >
+          <Grid container xs={12} style={{ height: "30px" }}>
+            <Grid xs={3}></Grid>
+            <Grid container xs={3} spacing={1} style={{ height: "30px" }}>
               <GraphButtons
                 open={open}
                 setOpen={setOpen}
@@ -128,13 +125,8 @@ const GraphContainer = props => {
                 queryType={queryType}
               />
             </Grid>
-            <Grid container xs={5}></Grid>
-            <Grid
-              container
-              xs={2}
-              spacing={0}
-              style={{ height: "50px", marginTop: ".5%" }}
-            >
+            <Grid container xs={4}></Grid>
+            <Grid container xs={2} spacing={1} style={{ height: "30px" }}>
               <SocialMedia
                 filters={filters}
                 queryType={queryType}
@@ -147,32 +139,52 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
           <Grid container maxWidth="xl">
-            <Grid container xs={2} className={classes.filters}>
-              <FilterBox
-                filters={filters}
-                setFilters={setFilters}
-                filterBoxStartDate={filterBoxStartDate}
-                setFilterBoxStartDate={setFilterBoxStartDate}
-                filterBoxEndDate={filterBoxEndDate}
-                setFilterBoxEndDate={setFilterBoxEndDate}
-                changeYear={changeYear}
-                changeQuarter={changeQuarter}
-                getCurrentYear={getCurrentYear}
-                open={open}
-              />
+            <Grid container xs={3} className={classes.filters}>
+              <Grid container style={{ flexDirection: "column" }}>
+                <FilterBox
+                  filters={filters}
+                  setFilters={setFilters}
+                  filterBoxStartDate={filterBoxStartDate}
+                  setFilterBoxStartDate={setFilterBoxStartDate}
+                  filterBoxEndDate={filterBoxEndDate}
+                  setFilterBoxEndDate={setFilterBoxEndDate}
+                  changeYear={changeYear}
+                  changeQuarter={changeQuarter}
+                  getCurrentYear={getCurrentYear}
+                  open={open}
+                />
+              </Grid>
+
+              <Grid container>
+                <CompareSubSamples />
+              </Grid>
+
+              <Grid item className={classes.filters}>
+                <CalendarFilter />
+              </Grid>
+              <Grid item className={classes.filters}>
+                <LineFilter />
+              </Grid>
+              <Grid
+                container
+                spacing={2}
+                style={{ height: "30px", padding: "4%" }}
+              >
+                <ClearFilters />
+
+                <Apply />
+              </Grid>
             </Grid>
+
             {/* <Grid item xs={1} className={classes.filterHideButton} onClick={HideFilters}>
             
                 {hidden ? <p>►</p> : <p>◄</p>}
              
             </Grid> */}
-            <Grid
-              item
-              xs={10}
-              className={hidden ? "extend" : "chart-container"}
-            >
+            <Grid item xs={9} className={hidden ? "extend" : "chart-container"}>
               <Queries2
                 filters={filters}
+                setFilters={setFilters}
                 filterBoxStartDate={filterBoxStartDate}
                 setFilterBoxStartDate={setFilterBoxStartDate}
                 filterBoxEndDate={filterBoxEndDate}
@@ -188,7 +200,6 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
         </Grid>
-        <Footer />
       </Grid>
     </>
   );

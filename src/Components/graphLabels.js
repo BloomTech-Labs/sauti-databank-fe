@@ -26,6 +26,36 @@ const dataOrder = {
       { crossing_freq: "Monthly" }
     ]
   },
+  crossing_location: {
+    labels: [
+      "Busia",
+      "Cyanika",
+      "Katuna",
+      "Loitokitok",
+      "Malaba",
+      "Mutukula",
+      "Namanga",
+      "Nyingine",
+      "Other",
+      "Rubavu-Goma",
+      "Sirare/Isebania",
+      "Taveta"
+    ],
+    structure: [
+      { crossing_location: "Busia" },
+      { crossing_location: "Cyanika" },
+      { crossing_location: "Katuna" },
+      { crossing_location: "Loitokitok" },
+      { crossing_location: "Malaba" },
+      { crossing_location: "Mutukula" },
+      { crossing_location: "Namanga" },
+      { crossing_location: "Nyingine" },
+      { crossing_location: "Other" },
+      { crossing_location: "Rubavu-Goma" },
+      { crossing_location: "Sirare/Isebania" },
+      { crossing_location: "Taveta" }
+    ]
+  },
   age: {
     labels: ["10-20", "20-30", "30-40", "40-50", "50-60", "60-70"],
     structure: [
@@ -404,7 +434,7 @@ const dataOrder = {
       "Arua",
       "Arusha",
       "Average",
-      "BUSIA",
+      "Busia",
       "Babati",
       "Balaka",
       "Base",

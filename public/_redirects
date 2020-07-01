@@ -1,1 +1,8 @@
-/*    /index.html   200
+[
+    {
+        "source": "</^[^.]+$|\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf)$)([^.]+$)/>",
+        "target": "/",
+        "status": "200",
+        "condition": null
+    }
+]

@@ -70,7 +70,7 @@ function DashNav() {
             {SignedIn && <Links to="/myaccount">ACCOUNT</Links>}
             <Links to="/data">DATA</Links>
             {!SignedIn && <Links to="/login">LOGIN</Links>}
-            {tier === "ADMIN" && <Links to="/tools">TOOLS</Links>}
+            {tier === "ADMIN" && <Links to="/tools">ADMIN</Links>}
             {SignedIn && <Links to="/logout">LOGOUT</Links>}
             {SignedIn && (
               <div className="loggedInAs">

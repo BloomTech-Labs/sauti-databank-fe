@@ -1,0 +1,36 @@
+.dataSeriesBox {
+  border-bottom: 1px solid black;
+}
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.selectable {
+  opacity: 1;
+  font-size: 1.2rem;
+  font-family: Consolas, "Liberation Mono", Menlo, monospace;
+}
+.selectable:hover {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+.limited {
+  opacity: 1;
+  font-size: 1.2rem;
+  font-family: Consolas, "Liberation Mono", Menlo, monospace;
+  background: rgba(0, 0, 0, 0.5);
+}

@@ -11,14 +11,16 @@ const GraphParse = ({
   filterBoxEndDate,
   setChartDataSM
 }) => {
+  //maybe will need something like this in else statement to prevent errors: data.sessionData != undefined &&
   if (queryType === "sessionsData") {
     data = filterByDate(data, filterBoxStartDate, filterBoxEndDate);
   }
 
   //used on SocialMedia.js
+
   let chartData = dataParse(
     filters[0].selectedTableColumnName,
-    data[`${queryType}`],
+    data[`${queryType}`] || data.tradersUsers,
     filters[1].selectedTableColumnName,
 
     filterBoxStartDate,

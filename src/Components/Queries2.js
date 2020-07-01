@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
 import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
+import NoDataModal from "./NoDataModal";
+
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 
 const GetData = (props, { makeValues }) => {
   let queryType = props.queryType;
@@ -13,7 +18,7 @@ const GetData = (props, { makeValues }) => {
   let QUERY;
   let thisQuery;
 
-  const { filters, filterBoxStartDate, filterBoxEndDate } = props;
+  const { filters, filterBoxStartDate, filterBoxEndDate, setFilters } = props;
 
   const filterIsSelected = (filter, i) => {
     // if the filter is the subsample or the data series
@@ -112,6 +117,60 @@ const GetData = (props, { makeValues }) => {
   let { loading, data } = useQuery(QUERY, {
     variables: { queryTraders: thisQuery }
   });
+
+  const [noDataModal, setNoDataModal] = useState(true);
+  console.log("noDataModal", noDataModal);
+
+  useEffect(() => {
+    setNoDataModal(true);
+  });
+  function noData() {
+    console.log("noDataModal", noDataModal);
+    if (noDataModal) {
+      return (
+        <>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            open={noDataModal}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500
+            }}
+          >
+            <Fade in={noDataModal}>
+              <NoDataModal
+                setNoDataModal={setNoDataModal}
+                filters={filters}
+                setFilters={setFilters}
+              />
+            </Fade>
+          </Modal>
+        </>
+      );
+    } else {
+      return <></>;
+    }
+  }
+
+  if (
+    data &&
+    data.sessionsData !== undefined &&
+    data.sessionsData.length === 0
+  ) {
+    console.log("render noData sessions");
+    return noData();
+  }
+  console.log(data);
+  if (
+    data &&
+    data.tradersUsers !== undefined &&
+    data.tradersUsers.length === 0
+  ) {
+    console.log("render noData traders");
+    return noData();
+  }
 
   if (filters[1].selectedCategory === "" && data && data.sessionsData) {
     const notNull = [];

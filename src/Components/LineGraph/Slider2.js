@@ -14,8 +14,9 @@ const useStyles = makeStyles({
     marginLeft: "5%"
   },
   rangeSlider: {
-    fontSize: "2rem",
-    paddingBottom: "2%"
+    fontSize: "1.2rem",
+    paddingBottom: "4%",
+    fontFamily: "Roboto"
   }
 });
 
@@ -52,7 +53,6 @@ export default function RangeSlider({
 
   return (
     <div className={classes.root}>
-      <div className={classes.rangeSlider}>{`${range[0]} - ${range[1]}`}</div>
       <Slider
         value={value}
         onChange={handleChange}
@@ -62,6 +62,9 @@ export default function RangeSlider({
         min={0}
         max={max}
       />
+      <div
+        className={classes.rangeSlider}
+      >{` Date Range: ${range[0]} ... ${range[1]}`}</div>
     </div>
   );
 }

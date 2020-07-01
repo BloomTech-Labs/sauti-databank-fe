@@ -9,12 +9,99 @@ the bar chart will render.
 6. Expandable graph was removed, per figma.
 7. Removed filter options from first Data Series, instead that filter option appears in "Add Filter"
 8. SocialMedia.js now contains all social media buttons
+9. - implement redux
+- break up filters and calendar to render on GraphContainer.js
+- check SocialMedia.js ...keys, make sure getting proper results
+-Clear Filters to render on bottom
+- Replaced React Select, made custom filters
+- Clear All, Apply - buttons responsive
+- Add Filter - category selectors - Material-ui
+- GraphParse.js, was getting an error with filter by date.  Now data.sessionData != undefined, prevents going to filterbydate.
+- Add Filter opens by index, on close removes all
+- AddFilters uses Material-ui throughout, now responsive
+- calendar material-ui responsive
+- add modal on SeriesFilter if not logged in
+- add dynamic text to Bar and line graphs
+- for non-logged in users non-demographic filters are greyed out.
+- Add + remove svg because was not responsive.
+- added modal to Add +, if not logged in or paying user
+- Add csv download line graph
+- Add csv download map
+- Add survey-border-1 as crossing_location to backend and frontend
+- added found_by to database. now registration is working
+- bug fix after login page.  Graphparse.js data[`${queryType}`] || data.tradersUsers,
+- bug fix - add paypal_plan as a column in database
 
 
 To Do:
-- make filters responsive
-- check SocialMedia.js ...keys, make sure getting proper results
-- implement redux 
 
-- dropdown menu.  Currently using react-select, 
-    Make a new dropdown.  Make responsive.
+Chrome Autofill overwrites values on controlled components
+- could make email unchangeable 
+- paying users already paid with paypal email, so probably not going to change
+- unpaid users, can just make a new account.
+- could send a message to Sauti admin to change email
+
+-redirects - maybe filters not updating fast enough
+
+- clear filter error, cannot read split of undefined.  DataParseHelpers/filterByDate line 6
+- Download.js and SeriesFilterModal.js  need to be styled.  X is uses px instead of percentages.
+- SeriesFilterModal.js -> should get approval on text
+- useHistory redirects , or go to original page - maybe something with AWS
+      https://docs.aws.amazon.com/amplify/latest/userguide/redirects.html
+      https://stackoverflow.com/questions/54477432/rewrites-and-redirects-in-aws-amplify
+
+- Bug - if no data and hit clear, crash 
+TypeError: Cannot read property 'split' of undefined
+(anonymous function)
+C:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/filterByDate.js:6
+
+- if go to data, then to login -> backbutton -> error, because no data  DataParseHelpers/setItem
+
+-graphlabels - confirm correct
+
+
+
+Error - think it occurs when search does not render any data.
+:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/filterByDate.js:6
+  3 | startDate = startDate.replace(/-/g, "");
+  4 | endDate = endDate.replace(/-/g, "");
+  5 | const filteredData = data.filter(obj => {
+> 6 |   let objectDate = +obj.created_date.split("T")[0].replace(/-/g, "");
+    | ^  7 |   if (objectDate > startDate && objectDate < endDate) {
+  8 |     return obj;
+  9 |   }
+
+Misspelling - border_crossing location : Loitokitok,  but commoditycountry: Loitoktok
+
+exchange rate direction -> looks like an error , displaying only one currency
+
+after sign in : TypeError: Cannot read property 'filter' of undefined
+(anonymous function)
+C:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/setItem.js:13
+
+
+after signing up for an account.  When click on account, getting issues to view info.  Possibly not a column in tradersUsers table.
+
+
+After noData modal -> 
+TypeError: Cannot read property 'split' of undefined
+(anonymous function)
+C:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/filterByDate.js:6
+
+refresh on bar graph
+TypeError: Cannot read property 'sessionsData' of undefined
+LineGraphButton
+C:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/Components/LineGraphButton.js:108
+
+linegraph options, title 'Line Graph Options'
+
+exchange rate direction should show arrow ->
+
+
+
+Lance's notes
+-More robust demographic data asssignment (right now it's checking the number of characters or it's checking the entire data string for a value - needs to look for specific keys)
+-Border locations - Some of the locations look like 0. The data is coming in on the download button, but looks like an error on the graph
+-Include the whole string for exchange rate direction & break out exchange rate direction
+-Map data needs to be titled correctly when downloading
+-Show saved data in "My Account"

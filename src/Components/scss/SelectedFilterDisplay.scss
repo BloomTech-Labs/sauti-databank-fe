@@ -3,7 +3,11 @@ h3 {
   padding: 1rem;
 }
 .redText {
-  color: #eb5e52;
-  font-family: "Montserrat", sans-serif;
+  color: rgba(0, 0, 0, 0.85);
+  font-family: Roboto;
   font-weight: 600;
+  padding: 1%;
+}
+.italic {
+  font-style: italic;
 }

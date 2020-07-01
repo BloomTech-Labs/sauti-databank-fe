@@ -1,12 +1,8 @@
 .all-btn {
   display: flex;
   border: 1px solid #ffffff;
-  &:hover {
-    border: 1px solid #2c2e32;
-    color: #eb5e52;
-    background-color: #ffffff;
-    cursor: pointer;
-  }
+  cursor: pointer;
+  padding-left: 2rem;
   h1 {
     font-size: 1.1rem;
     margin: auto;
