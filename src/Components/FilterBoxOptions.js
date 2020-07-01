@@ -13,6 +13,9 @@ export const FilterBoxOptions = {
           label: "Country of Residence"
         },
         {
+          label: "Crossing Location"
+        },
+        {
           label: "Education Level"
         },
         {
@@ -82,6 +85,9 @@ export const FilterBoxOptions = {
     "Border Crossing Frequency": {
       value: { type: "crossing_freq", query: "Users" }
     },
+    "Crossing Location": {
+      value: { type: "crossing_location", query: "Users" }
+    },
     Age: { value: { type: "age", query: "Users" } },
     "Country of Residence": {
       value: { type: "country_of_residence", query: "Users" }
@@ -132,6 +138,10 @@ export const FilterBoxOptions = {
       label: "Border Crossing Frequency",
       value: { type: "crossing_freq", query: "Users" }
     },
+    {
+      label: "Crossing Location",
+      value: { type: "crossing_location", query: "Users" }
+    },
     { label: "Age", value: { type: "age", query: "Users" } },
     {
       label: "Country of Residence",
@@ -148,6 +158,7 @@ export const FilterBoxOptions = {
     gender: "Gender",
     education: "Education Level",
     crossing_freq: "Border Crossing Frequency",
+    crossing_location: "Crossing Location",
     age: "Age",
     country_of_residence: "Country of Residence",
     primary_income: "Primary Income",

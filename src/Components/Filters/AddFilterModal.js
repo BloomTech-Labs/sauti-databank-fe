@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { ContentContainer } from "./styledComponents/Index";
+import { ContentContainer } from "../../dashboard/styledComponents/Index";
 import styled from "styled-components";
 
 const LoginButton = styled.button`
@@ -59,12 +59,12 @@ const BigContinue = styled.big`
   color: black;
 `;
 
-function Download(props) {
+function AddFilterModal({ closeAddFilterModal }) {
   const history = useHistory();
 
   const handleSubmit = async (e, input) => {
     e.preventDefault();
-    props.handleClose();
+    closeAddFilterModal();
     //if logged in push to account page
     //if not logged in push you to signup
     if (localStorage.getItem("token")) {
@@ -78,8 +78,8 @@ function Download(props) {
     <ContentContainer>
       <div>
         <Div>
-          <BigX onClick={props.handleClose}>X</BigX>
-          <FormTitle>Want to see this feature?</FormTitle>
+          <BigX onClick={closeAddFilterModal}>X</BigX>
+          <FormTitle>Would you like to add additional filters?</FormTitle>
           <DownloadText>
             Click <BigContinue>Continue</BigContinue> if you'd like to upgrade
             your account to premium.
@@ -92,5 +92,4 @@ function Download(props) {
     </ContentContainer>
   );
 }
-
-export default Download;
+export default AddFilterModal;

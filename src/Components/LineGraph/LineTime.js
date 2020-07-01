@@ -10,6 +10,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 import { useDispatch } from "react-redux";
+import dynamicText from "../../Components/dynamicText";
 
 import CheckBox from "../CheckBox";
 
@@ -20,11 +21,21 @@ import LineRange from "./LineRange";
 import { lineAction } from "../redux-actions/lineActions";
 import Grid from "@material-ui/core/Grid";
 import { barDownload } from "../redux-actions/barDownloadAction";
+import { downloadLine } from "./downloadLine";
 
-const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
+const GraphTime = ({
+  month100,
+  quarter100,
+  year100,
+  top7,
+  checkboxes,
+  filter0
+}) => {
   const [time, setTime] = useState([]);
   const [timeInUse, setTimeInUse] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
+
+  console.log("time", time);
 
   useEffect(() => {
     setTime(month100);
@@ -39,6 +50,13 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
       if (bbb.includes(true)) {
         display.push(bbb[0]);
       }
+    }
+  }
+  //dynamic Methodology Text
+  let dyText = "";
+  for (let key in dynamicText) {
+    if (filter0["selectedCategory"] === key) {
+      dyText = dynamicText[key];
     }
   }
 
@@ -97,25 +115,24 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
     setCheckedItems(checkedItems);
   };
 
+  let arrayDownload = [];
+  time.length > 1
+    ? (arrayDownload = downloadLine(time, filter0))
+    : console.log("");
+
   useEffect(() => {
-    dispatch(
-      barDownload({
-        columns: [
-          { id: "65", displayName: "TopCommodities" },
-          { id: "66", displayName: "2018-01" },
-          { id: "67", displayName: "2018-02" },
-          { id: "68", displayName: "2018-01" }
-        ],
-        makeValues: [
-          ["beans", 4, 5, 6],
-          ["coffee", 5, 4, 3]
-        ],
-        fileName: "Line Graph",
-        suffix: `${new Date().toISOString()}`,
-        track: "track"
-      })
-    );
-  }, []);
+    if (arrayDownload.length > 1) {
+      dispatch(
+        barDownload({
+          columns: [{ id: "165", displayName: filter0.selectedCategory }],
+          makeValues: arrayDownload,
+          fileName: "Line Graph",
+          suffix: `${new Date().toISOString()}`,
+          track: "track"
+        })
+      );
+    }
+  }, [arrayDownload]);
 
   return (
     <>
@@ -186,6 +203,9 @@ const GraphTime = ({ month100, quarter100, year100, top7, checkboxes }) => {
             </LineChart>
           </ResponsiveContainer>
           <LineRange timeInUse={timeInUse} time={time} setTime={setTime} />
+          <Grid item style={{ margin: "auto" }}>
+            {dyText}
+          </Grid>
         </Grid>
       </Grid>
     </>

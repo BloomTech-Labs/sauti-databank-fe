@@ -13,7 +13,7 @@ export const LandingPageStyles = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 45vh;
+      height: 100vh;
       background: linear-gradient(
           rgba(255, 255, 255, 0.1),
           rgba(255, 255, 255, 0.1)
@@ -27,8 +27,11 @@ export const LandingPageStyles = styled.div`
       background-position: 20% 20%;
       border-top: 2px solid rgba(0, 0, 0, 0.1);
     }
-
-    
+    .landing-page-row-col-top {
+      background: linear-gradient(
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.7)
+      );
 
       .top-col-top {
         display: flex;
@@ -193,7 +196,6 @@ export const LandingPageStyles = styled.div`
       border-top: 2px solid rgba(0, 0, 0, 0.1);
       border-bottom: 2px solid rgba(0, 0, 0, 0.1);
       height: 30rem;
-      
 
       .bot-col-header {
         padding: 1rem;

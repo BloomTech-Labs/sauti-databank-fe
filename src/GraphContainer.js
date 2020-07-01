@@ -56,7 +56,6 @@ const useStyles = makeStyles(theme => ({
 const GraphContainer = props => {
   const [url, setUrl] = useState("");
   const [filters, setFilters] = useState(props.filters);
-  console.log(`filters`, filters);
   const [queryType, setQueryType] = useState("");
   const [chartDataSM, setChartDataSM] = useState([]);
 
@@ -185,6 +184,7 @@ const GraphContainer = props => {
             <Grid item xs={9} className={hidden ? "extend" : "chart-container"}>
               <Queries2
                 filters={filters}
+                setFilters={setFilters}
                 filterBoxStartDate={filterBoxStartDate}
                 setFilterBoxStartDate={setFilterBoxStartDate}
                 filterBoxEndDate={filterBoxEndDate}

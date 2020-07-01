@@ -7,7 +7,7 @@ import "../scss/dataSeries.scss";
 
 const CalendarFilter = () => {
   const reducerCal = useSelector(state => state.calendarReducer.calendar);
-  console.log(reducerCal);
+
   const [openCal, setOpenCal] = useState(false);
   const classes = useStyles();
   const {
