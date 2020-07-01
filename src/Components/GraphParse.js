@@ -17,9 +17,10 @@ const GraphParse = ({
   }
 
   //used on SocialMedia.js
+
   let chartData = dataParse(
     filters[0].selectedTableColumnName,
-    data[`${queryType}`],
+    data[`${queryType}`] || data.tradersUsers,
     filters[1].selectedTableColumnName,
 
     filterBoxStartDate,

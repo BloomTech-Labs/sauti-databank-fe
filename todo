@@ -29,6 +29,7 @@ the bar chart will render.
 - Add csv download map
 - Add survey-border-1 as crossing_location to backend and frontend
 - added found_by to database. now registration is working
+- bug fix after login page.  Graphparse.js data[`${queryType}`] || data.tradersUsers,
 To Do:
 
 
@@ -64,3 +65,18 @@ Error - think it occurs when search does not render any data.
   9 |   }
 
 Misspelling - border_crossing location : Loitokitok,  but commoditycountry: Loitoktok
+
+exchange rate direction -> looks like an error , displaying only one currency
+
+after sign in : TypeError: Cannot read property 'filter' of undefined
+(anonymous function)
+C:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/setItem.js:13
+
+
+after signing up for an account.  When click on account, getting issues to view info.  Possibly not a column in tradersUsers table.
+
+
+After noData modal -> 
+TypeError: Cannot read property 'split' of undefined
+(anonymous function)
+C:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/DataParseHelpers/filterByDate.js:6

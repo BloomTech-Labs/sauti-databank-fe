@@ -111,6 +111,8 @@ const EditModal = props => {
   const [account, setAccount] = useState({});
   //account id added automatically, needed to .put
   account.id = props.data.id;
+  console.log(props);
+  console.log("props.data.email", props.data.email);
 
   const classes = useStyles();
 
