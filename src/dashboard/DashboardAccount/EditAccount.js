@@ -191,10 +191,10 @@ const EditModal = props => {
                   <Inputs
                     type="email"
                     name="email"
-                    id="email"
+                    //  id="email"
                     placeholder={props.data.email}
                     value={account.email}
-                    onChange={handleChange}
+                    //  onChange={handleChange}
                   />
                   <Labels for="Organization">Organization</Labels>
                   <Inputs

@@ -59,7 +59,7 @@ function AfricaMap({
         barDownload({
           columns: [{ id: "165", displayName: filters[0].selectedCategory }],
           makeValues: allResults,
-          fileName: "Line Graph",
+          fileName: "Map",
           suffix: `${new Date().toISOString()}`,
           track: "track"
         })
