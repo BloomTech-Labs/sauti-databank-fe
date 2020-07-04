@@ -6,6 +6,9 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { ordered } from "../orderedGraphLabels";
+import { Box } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const CompareSubSamples = () => {
   const reducerSub = useSelector(
@@ -63,7 +66,14 @@ const CompareSubSamples = () => {
         return (
           <>
             <Grid item xs={12} className={classes.filterButton}>
-              <span className={classes.filterName}> Compare SubSamples</span>
+              <Box display="flex" height="100%" alignItems="center">
+                <div className={classes.filterText}>
+                  <span className={classes.filterName}> Compare Data</span>
+                </div>
+                <ExpandLessIcon
+                  className={classes.filterArrow}
+                ></ExpandLessIcon>
+              </Box>
             </Grid>
             <Grid container xs={12} style={{ flexDirection: "column" }}>
               {ordered.map(e => {
@@ -92,10 +102,18 @@ const CompareSubSamples = () => {
         return (
           <>
             <Grid item xs={12} className={classes.filterButton}>
-              <span className={classes.filterName}> Compare SubSamples</span> -
-              <span className={classes.chosen}>
-                {filters[1].selectedCategory}
-              </span>
+              <Box display="flex" height="100%" alignItems="center">
+                <div className={classes.filterText}>
+                  <span className={classes.filterName}> Compare Data</span> -
+                  <span className={classes.chosen}>
+                    {" "}
+                    {filters[1].selectedCategory}
+                  </span>
+                </div>
+                <ExpandMoreIcon
+                  className={classes.filterArrow}
+                ></ExpandMoreIcon>
+              </Box>
             </Grid>
           </>
         );
@@ -124,10 +142,20 @@ const useStyles = makeStyles(theme => ({
     padding: "1%",
     fontFamily: "Roboto",
     borderBottom: "1px rgba(0, 0, 0, 0.1) solid",
-    fontSize: "1.5rem"
+    fontSize: "1.5rem",
+    cursor: "pointer"
   },
   filterName: {
     fontWeight: "500"
+  },
+  filterArrow: {
+    float: "right",
+    marginRight: "1rem",
+    fontSize: "2rem",
+    color: "#8c8c8c"
+  },
+  filterText: {
+    width: "100%"
   },
   chosen: {
     fontStyle: "italic"

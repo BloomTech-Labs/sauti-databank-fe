@@ -8,6 +8,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { ordered } from "../orderedGraphLabels";
 
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import { Box } from "@material-ui/core";
+
 const AddFilter = ({
   filters,
   setFilters,
@@ -65,7 +69,12 @@ const AddFilter = ({
             onClick={() => setDisplayDrop([])}
             className={classes.filterButton}
           >
-            <span className={classes.filterName}> Add Filter</span>
+            <Box display="flex" height="100%" alignItems="center">
+              <div className={classes.filterText}>
+                <span className={classes.filterName}> Filter</span>
+              </div>
+              <ExpandLessIcon className={classes.filterArrow}></ExpandLessIcon>
+            </Box>
           </Grid>
 
           <Grid container xs={12} style={{ flexDirection: "column" }}>
@@ -114,10 +123,15 @@ const AddFilter = ({
             onClick={() => setDisplayDrop(...displayDrop, index)}
             className={classes.filterButton}
           >
-            <span className={classes.filterName}> Add Filter</span> -
-            <span className={classes.chosen}>
-              {filters[index].selectedCategory}
-            </span>
+            <Box display="flex" height="100%" alignItems="center">
+              <div className={classes.filterText}>
+                <span className={classes.filterName}> Filter</span> -
+                <span className={classes.chosen}>
+                  {filters[index].selectedCategory}
+                </span>
+              </div>
+              <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
+            </Box>
           </Grid>
         </>
       );
@@ -151,7 +165,8 @@ const useStyles = makeStyles(theme => ({
     padding: "1%",
     fontFamily: "Roboto",
     borderBottom: "1px rgba(0, 0, 0, 0.1) solid",
-    fontSize: "1.5rem"
+    fontSize: "1.5rem",
+    cursor: "pointer"
   },
   filterName: {
     fontWeight: "500"
@@ -160,8 +175,18 @@ const useStyles = makeStyles(theme => ({
     fontStyle: "italic"
   },
   super: {
-    textAlign: "center",
-    background: "silver",
-    fontSize: "1.2rem"
+    background: "#f5f5f5",
+    color: "#8c8c8c",
+    fontSize: "1.4rem",
+    padding: "1rem 0.5rem"
+  },
+  filterArrow: {
+    float: "right",
+    marginRight: "1rem",
+    fontSize: "2rem",
+    color: "#8c8c8c"
+  },
+  filterText: {
+    width: "100%"
   }
 }));
