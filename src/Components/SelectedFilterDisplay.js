@@ -2,6 +2,7 @@ import React from "react";
 import { getSelectedOption } from "../OptionFunctions";
 import "./scss/SelectedFilterDisplay.scss";
 import Grid from "@material-ui/core/Grid";
+import { Box } from "@material-ui/core";
 
 const SelectedFilterDisplay = ({ filters }) => {
   const makeFilterList = () => {
@@ -11,7 +12,7 @@ const SelectedFilterDisplay = ({ filters }) => {
         if (filters[filterId].selectedCategory) {
           return (
             <>
-              <span className="redText"> Additional Filter -</span>
+              <span className="filterTitle"> Additional Filter -</span>
               {filters[filterId].selectedCategory} :
               <span className="italic">
                 {" "}
@@ -29,7 +30,7 @@ const SelectedFilterDisplay = ({ filters }) => {
     if (filters[1].selectedCategory) {
       return (
         <>
-          <span className="redText"> Subsample -</span>
+          <span className="filterTitle"> Compare By -</span>
           {filters[1].selectedCategory}
         </>
       );
@@ -40,12 +41,17 @@ const SelectedFilterDisplay = ({ filters }) => {
 
   return (
     <>
-      <Grid item style={{ padding: "1%", fontSize: "1.5rem" }}>
-        <span className="redText">Data Series -</span>{" "}
+      <Box
+        display="flex"
+        height="100%"
+        alignItems="center"
+        style={{ fontSize: "1.5rem", padding: "0% 1%" }}
+      >
+        <span className="filterTitle">Data Series -</span>{" "}
         {filters[0].selectedCategory}
         {makeFilterList()}
         {showCompare()}
-      </Grid>
+      </Box>
     </>
   );
 };

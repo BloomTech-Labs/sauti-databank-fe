@@ -32,6 +32,9 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
+import { Box } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+
 export default function FilterBox(props) {
   const History = useHistory();
   const {
@@ -335,8 +338,16 @@ export default function FilterBox(props) {
           onClick={filterAdd}
           className={classes.filterAddButton}
         >
-          <span className={classes.filterName}> Add</span>{" "}
-          <span className={classes.plus}>+</span>
+          <Box
+            display="flex"
+            height="100%"
+            width="100%"
+            alignItems="center"
+            className={classes.additionalFilterBox}
+          >
+            <span className={classes.additionalFilterText}>Add Filter</span>
+            <AddIcon className={classes.filterArrow}></AddIcon>
+          </Box>
         </Grid>
       </Grid>
       {modalAddFilter()}
@@ -351,7 +362,6 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0),
     background: "white",
     height: "50px",
-    padding: "3% 1%",
     fontFamily: "Roboto",
     borderBottom: "1px rgba(0, 0, 0, 0.1) solid",
     fontSize: "1.5rem"
@@ -359,5 +369,25 @@ const useStyles = makeStyles(theme => ({
   filterName: {
     fontWeight: "500"
   },
-  plus: {}
+  plus: {},
+  additionalFilterBox: {
+    cursor: "pointer",
+    height: "50px",
+    background: "rgb(245, 245, 245)",
+    borderBottom: "1px rgba(0, 0, 0, 0.1) solid"
+  },
+  additionalFilterText: {
+    padding: theme.spacing(0),
+    width: "100%",
+    padding: "1%",
+    color: "#8c8c8c",
+    fontFamily: "Roboto",
+    fontSize: "1.5rem"
+  },
+  filterArrow: {
+    float: "right",
+    marginRight: "1.7rem",
+    fontSize: "1.5rem",
+    color: "#8c8c8c"
+  }
 }));

@@ -3,12 +3,14 @@ import graphLabels from "../graphLabels";
 import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import { ordered, demographics } from "../orderedGraphLabels";
 import SeriesFilterModal from "./SeriesFilterModal";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import { Box } from "@material-ui/core";
 
 const DataSFilter = ({
   filters,
@@ -40,11 +42,12 @@ const DataSFilter = ({
   const classes = useStyles();
 
   function changeOption(e) {
+    const selectedName = e.target.dataset.selectvalue;
     if (access) {
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
       graphLabels[
-        `${FilterBoxOptions.default[e.target.value].value.type}`
+        `${FilterBoxOptions.default[selectedName].value.type}`
       ].labels.forEach(option => {
         optionFlags = {
           ...optionFlags,
@@ -55,20 +58,20 @@ const DataSFilter = ({
         ...filters,
         [index]: {
           ...filters[index],
-          selectedCategory: e.target.value, //option
+          selectedCategory: selectedName, //option
           selectedTableColumnName:
-            FilterBoxOptions.default[e.target.value].value.type,
+            FilterBoxOptions.default[selectedName].value.type,
 
-          selectedTable: FilterBoxOptions.default[e.target.value].value.query,
+          selectedTable: FilterBoxOptions.default[selectedName].value.query,
           selectedOption: undefined,
           selectableOptions: { ...optionFlags }
         }
       });
-    } else if (!access && demographics.includes(e.target.value)) {
+    } else if (!access && demographics.includes(selectedName)) {
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
       graphLabels[
-        `${FilterBoxOptions.default[e.target.value].value.type}`
+        `${FilterBoxOptions.default[selectedName].value.type}`
       ].labels.forEach(option => {
         optionFlags = {
           ...optionFlags,
@@ -79,11 +82,11 @@ const DataSFilter = ({
         ...filters,
         [index]: {
           ...filters[index],
-          selectedCategory: e.target.value, //option
+          selectedCategory: selectedName, //option
           selectedTableColumnName:
-            FilterBoxOptions.default[e.target.value].value.type,
+            FilterBoxOptions.default[selectedName].value.type,
 
-          selectedTable: FilterBoxOptions.default[e.target.value].value.query,
+          selectedTable: FilterBoxOptions.default[selectedName].value.query,
           selectedOption: undefined,
           selectableOptions: { ...optionFlags }
         }
@@ -98,7 +101,12 @@ const DataSFilter = ({
       return (
         <>
           <Grid item xs={12} className={classes.filterButton}>
-            <span className={classes.filterName}> Data Series</span>
+            <Box display="flex" height="100%" alignItems="center">
+              <div className={classes.filterText}>
+                <span className={classes.filterName}> Data Series</span>
+              </div>
+              <ExpandLessIcon className={classes.filterArrow}></ExpandLessIcon>
+            </Box>
           </Grid>
           <Grid container xs={12} style={{ flexDirection: "column" }}>
             {ordered.map(e => {
@@ -110,23 +118,23 @@ const DataSFilter = ({
                 return <p className={classes.super}>{e}</p>;
               } else if (demographics.includes(e)) {
                 return (
-                  <TextField
+                  <span
                     className={"selectable"}
-                    value={e}
+                    data-selectValue={e}
                     onClick={changeOption}
                   >
                     {e}
-                  </TextField>
+                  </span>
                 );
               } else {
                 return (
-                  <TextField
+                  <span
                     className={access ? "selectable" : "limited"}
-                    value={e}
+                    data-selectValue={e}
                     onClick={changeOption}
                   >
                     {e}
-                  </TextField>
+                  </span>
                 );
               }
             })}
@@ -136,15 +144,27 @@ const DataSFilter = ({
     } else if (displayDrop === false && open === false) {
       return (
         <Grid item xs={12} className={classes.filterButton}>
-          <span className={classes.filterName}> Data Series</span> -{" "}
-          <span className={classes.chosen}>{filters[0].selectedCategory}</span>
+          <Box display="flex" height="100%" alignItems="center">
+            <div className={classes.filterText}>
+              <span className={classes.filterName}> Data Series</span> -{" "}
+              <span className={classes.chosen}>
+                {filters[0].selectedCategory}
+              </span>
+            </div>
+            <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
+          </Box>
         </Grid>
       );
     } else {
       return (
         <>
           <Grid item xs={12} className={classes.filterButton}>
-            <span className={classes.filterName}> Data Series</span>
+            <Box display="flex" height="100%" alignItems="center">
+              <div className={classes.filterText}>
+                <span className={classes.filterName}> Data Series</span>
+              </div>
+              <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
+            </Box>
           </Grid>
           <Grid container xs={12} style={{ flexDirection: "column" }}>
             {ordered.map(e => {
@@ -156,13 +176,13 @@ const DataSFilter = ({
                 return <p className={classes.super}>{e}</p>;
               } else {
                 return (
-                  <TextField
+                  <span
                     className={access ? "selectable" : "limited"}
-                    value={e}
+                    data-selectValue={e}
                     onClick={changeOption}
                   >
                     {e}
-                  </TextField>
+                  </span>
                 );
               }
             })}
@@ -207,7 +227,11 @@ const useStyles = makeStyles(theme => ({
     padding: "1%",
     fontFamily: "Roboto",
     borderBottom: "1px rgba(0, 0, 0, 0.1) solid",
-    fontSize: "1.5rem"
+    fontSize: "1.5rem",
+    cursor: "pointer"
+  },
+  filterText: {
+    width: "100%"
   },
   filterName: {
     fontWeight: "500"
@@ -216,8 +240,15 @@ const useStyles = makeStyles(theme => ({
     fontStyle: "italic"
   },
   super: {
-    textAlign: "center",
-    background: "silver",
-    fontSize: "1.2rem"
+    background: "#f5f5f5",
+    color: "#8c8c8c",
+    fontSize: "1.4rem",
+    padding: "1rem 0.5rem"
+  },
+  filterArrow: {
+    float: "right",
+    marginRight: "1rem",
+    fontSize: "2rem",
+    color: "#8c8c8c"
   }
 }));
