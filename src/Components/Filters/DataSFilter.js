@@ -108,7 +108,7 @@ const DataSFilter = ({
               <ExpandLessIcon className={classes.filterArrow}></ExpandLessIcon>
             </Box>
           </Grid>
-          <Grid container xs={12} style={{ flexDirection: "column" }}>
+          <Grid container xs={12} className={classes.optionsContainer}>
             {ordered.map(e => {
               if (
                 e === "KEY DEMOGRAPHICS" ||
@@ -220,9 +220,17 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
+  optionsContainer: {
+    flexDirection: "column",
+    maxHeight: "200px",
+    overflowY: "auto",
+    overflowX: "none",
+    display: "inline-grid"
+  },
   filterButton: {
     padding: theme.spacing(0),
     background: "rgb(245, 245, 245)",
+    width: "100%",
     height: "50px",
     padding: "1%",
     fontFamily: "Roboto",
