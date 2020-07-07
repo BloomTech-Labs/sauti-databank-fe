@@ -141,11 +141,25 @@ const useStyles = makeStyles(theme => ({
     maxHeight: "200px",
     overflowY: "scroll",
     overflowX: "none",
-    display: "inline-grid"
+    display: "inline-grid",
+    "&::-webkit-scrollbar": {
+      width: "1em",
+      backgroundColor: "lightgray"
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)"
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#9F1C0F",
+      outline: "1px solid slategrey",
+      borderRadius: "5px"
+    }
   },
   filterButton: {
     padding: theme.spacing(0),
     background: "rgb(245, 245, 245)",
+    width: "100%",
     height: "50px",
     padding: "1%",
     fontFamily: "Roboto",
@@ -169,8 +183,9 @@ const useStyles = makeStyles(theme => ({
     fontStyle: "italic"
   },
   super: {
-    textAlign: "center",
-    background: "silver",
-    fontSize: "1.2rem"
+    background: "#f5f5f5",
+    color: "#8c8c8c",
+    fontSize: "1.4rem",
+    padding: "1rem 0.5rem"
   }
 }));

@@ -225,7 +225,20 @@ const useStyles = makeStyles(theme => ({
     maxHeight: "200px",
     overflowY: "scroll",
     overflowX: "none",
-    display: "inline-grid"
+    display: "inline-grid",
+    "&::-webkit-scrollbar": {
+      width: "1em",
+      backgroundColor: "lightgray"
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)"
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#9F1C0F",
+      outline: "1px solid slategrey",
+      borderRadius: "5px"
+    }
   },
   filterButton: {
     padding: theme.spacing(0),
