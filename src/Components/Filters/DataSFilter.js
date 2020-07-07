@@ -120,7 +120,7 @@ const DataSFilter = ({
                 return (
                   <span
                     className={"selectable"}
-                    data-selectValue={e}
+                    data-selectvalue={e}
                     onClick={changeOption}
                   >
                     {e}
@@ -130,7 +130,7 @@ const DataSFilter = ({
                 return (
                   <span
                     className={access ? "selectable" : "limited"}
-                    data-selectValue={e}
+                    data-selectvalue={e}
                     onClick={changeOption}
                   >
                     {e}
@@ -178,7 +178,7 @@ const DataSFilter = ({
                 return (
                   <span
                     className={access ? "selectable" : "limited"}
-                    data-selectValue={e}
+                    data-selectvalue={e}
                     onClick={changeOption}
                   >
                     {e}
@@ -223,7 +223,7 @@ const useStyles = makeStyles(theme => ({
   optionsContainer: {
     flexDirection: "column",
     maxHeight: "200px",
-    overflowY: "auto",
+    overflowY: "scroll",
     overflowX: "none",
     display: "inline-grid"
   },
