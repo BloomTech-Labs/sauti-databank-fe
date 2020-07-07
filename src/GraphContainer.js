@@ -23,6 +23,8 @@ import ClearFilters from "./Components/Filters/ClearFilters";
 import Apply from "./Components/Filters/Apply";
 import LineFilter from "./Components/LineGraph/LineFilter";
 
+import { Box } from "@material-ui/core";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -37,8 +39,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: "18px",
     fontWeight: 400,
     color: "#ffffff",
-    alignItems: "center",
-    padding: "1.5%",
+    width: "100%",
+    padding: "0.5%"
+  },
+  titleContainer: {
     background: "#2c2e32",
     height: "50px",
     textAlign: "center"
@@ -99,8 +103,10 @@ const GraphContainer = props => {
       <Grid container maxWidth="xl">
         <Grid container maxWidth="xl">
           <Grid container xs={12} style={{ height: "50px" }}>
-            <Grid item xs={3}>
-              <h1 className={classes.h1}>Cross-Border Trade DataBank</h1>
+            <Grid item xs={3} className={classes.titleContainer}>
+              <Box display="flex" height="100%" alignItems="center">
+                <h1 className={classes.h1}>Cross-Border Trade DataBank</h1>
+              </Box>
             </Grid>
             <Grid
               item

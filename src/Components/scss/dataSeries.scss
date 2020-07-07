@@ -20,8 +20,10 @@
 
 .selectable {
   opacity: 1;
-  font-size: 1.2rem;
-  font-family: Consolas, "Liberation Mono", Menlo, monospace;
+  padding: 1rem 0.5rem;
+  font-size: 1.4rem;
+  font-family: inherit;
+  cursor: pointer;
 }
 .selectable:hover {
   background: rgba(0, 0, 0, 0.5);

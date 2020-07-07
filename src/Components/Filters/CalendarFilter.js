@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, styled } from "@material-ui/core/styles";
 import "../scss/dataSeries.scss";
+import { Box } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const CalendarFilter = () => {
   const reducerCal = useSelector(state => state.calendarReducer.calendar);
@@ -26,7 +29,12 @@ const CalendarFilter = () => {
   if (open === "bar" && openCal === false) {
     return (
       <Grid item className={classes.calendar} onClick={() => setOpenCal(true)}>
-        <span className={classes.filterName}>Calendar</span>
+        <Box display="flex" height="100%" alignItems="center">
+          <div className={classes.filterText}>
+            <span className={classes.filterName}>Date Range</span>
+            <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
+          </div>
+        </Box>
       </Grid>
     );
   } else if (open === "bar" && openCal === true) {
@@ -37,7 +45,12 @@ const CalendarFilter = () => {
           onClick={() => setOpenCal(false)}
           className={classes.calendar}
         >
-          <span className={classes.filterName}>Calendar</span>
+          <Box display="flex" height="100%" alignItems="center">
+            <div className={classes.filterText}>
+              <span className={classes.filterName}>Date Range</span>
+              <ExpandLessIcon className={classes.filterArrow}></ExpandLessIcon>
+            </div>
+          </Box>
         </Grid>
         <CalendarParent
           tier={tier}
@@ -73,7 +86,8 @@ const useStyles = makeStyles(theme => ({
     padding: "1%",
     fontFamily: "Roboto",
     borderBottom: "1px rgba(0, 0, 0, 0.1) solid",
-    fontSize: "1.5rem"
+    fontSize: "1.5rem",
+    cursor: "pointer"
   },
   filterName: {
     fontWeight: "500"
@@ -83,8 +97,16 @@ const useStyles = makeStyles(theme => ({
     borderWidth: "0 3px 3px 0",
     display: "inline-block",
     padding: "3px",
-
     transform: "rotate(45deg)",
     webkitTransform: "rotate(45deg)"
+  },
+  filterArrow: {
+    float: "right",
+    marginRight: "1rem",
+    fontSize: "2rem",
+    color: "#8c8c8c"
+  },
+  filterText: {
+    width: "100%"
   }
 }));
