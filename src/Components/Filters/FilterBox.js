@@ -373,7 +373,6 @@ const useStyles = makeStyles(theme => ({
   additionalFilterBox: {
     cursor: "pointer",
     height: "50px",
-    background: "rgb(245, 245, 245)",
     borderBottom: "1px rgba(0, 0, 0, 0.1) solid"
   },
   additionalFilterText: {

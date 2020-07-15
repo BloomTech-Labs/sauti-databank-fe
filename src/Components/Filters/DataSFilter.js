@@ -225,6 +225,7 @@ const useStyles = makeStyles(theme => ({
     maxHeight: "200px",
     overflowY: "scroll",
     overflowX: "none",
+    border: "1px solid lightgray",
     display: "inline-grid",
     "&::-webkit-scrollbar": {
       width: "1em",
@@ -242,7 +243,6 @@ const useStyles = makeStyles(theme => ({
   },
   filterButton: {
     padding: theme.spacing(0),
-    background: "rgb(245, 245, 245)",
     width: "100%",
     height: "50px",
     padding: "1%",

@@ -150,6 +150,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     maxHeight: "200px",
     overflowY: "scroll",
+    border: "1px solid lightgray",
     overflowX: "none",
     display: "inline-grid",
     "&::-webkit-scrollbar": {
@@ -180,7 +181,6 @@ const useStyles = makeStyles(theme => ({
   },
   filterButton: {
     padding: theme.spacing(0),
-    background: "rgb(245, 245, 245)",
     height: "50px",
     padding: "1%",
     fontFamily: "Roboto",
