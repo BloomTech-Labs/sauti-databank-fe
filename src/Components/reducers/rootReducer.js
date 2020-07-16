@@ -6,6 +6,7 @@ import calendarReducer from "./calendarReducer";
 import clearReducer from "./clearFiltersReducer";
 import lineReducer from "./lineReducer";
 import scrollReducer from "./scrollReducer";
+import tierReducer from "./tierReducer";
 
 const rootReducer = combineReducers({
   barDownloadReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   calendarReducer,
   clearReducer,
   lineReducer,
-  scrollReducer
+  scrollReducer,
+  tierReducer
 });
 export default rootReducer;

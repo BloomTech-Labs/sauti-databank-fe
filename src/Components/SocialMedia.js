@@ -21,11 +21,8 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 //need to bring in data, for 109
 const SocialMedia = () => {
   const token = getToken();
-  let tier;
-  if (token) {
-    tier = decodeToken(token);
-    tier = tier.tier;
-  }
+  const tier = useSelector(state => state.tierReducer.tier.tier);
+
   const newSub = getSubscription();
   let sub;
   if (newSub) {
