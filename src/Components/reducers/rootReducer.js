@@ -5,12 +5,14 @@ import compareSubSamplesReducer from "./compareSubSamplesReducer";
 import calendarReducer from "./calendarReducer";
 import clearReducer from "./clearFiltersReducer";
 import lineReducer from "./lineReducer";
+import scrollReducer from "./scrollReducer";
 
 const rootReducer = combineReducers({
   barDownloadReducer,
   compareSubSamplesReducer,
   calendarReducer,
   clearReducer,
-  lineReducer
+  lineReducer,
+  scrollReducer
 });
 export default rootReducer;

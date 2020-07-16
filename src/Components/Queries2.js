@@ -119,13 +119,13 @@ const GetData = (props, { makeValues }) => {
   });
 
   const [noDataModal, setNoDataModal] = useState(true);
-  console.log("noDataModal", noDataModal);
+  //console.log("noDataModal", noDataModal);
 
   useEffect(() => {
     setNoDataModal(true);
   });
   function noData() {
-    console.log("noDataModal", noDataModal);
+    // console.log("noDataModal", noDataModal);
     if (noDataModal) {
       return (
         <>
@@ -159,16 +159,14 @@ const GetData = (props, { makeValues }) => {
     data.sessionsData !== undefined &&
     data.sessionsData.length === 0
   ) {
-    console.log("render noData sessions");
     return noData();
   }
-  console.log(data);
+
   if (
     data &&
     data.tradersUsers !== undefined &&
     data.tradersUsers.length === 0
   ) {
-    console.log("render noData traders");
     return noData();
   }
 

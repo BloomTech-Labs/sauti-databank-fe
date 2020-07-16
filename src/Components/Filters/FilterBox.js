@@ -82,14 +82,7 @@ export default function FilterBox(props) {
   };
   // Function for Data Series and Add Filters
   const FilterSelector = props => {
-    const {
-      filterSelectorName,
-      filters,
-      setFilters,
-      i,
-
-      graphLabels
-    } = props;
+    const { filterSelectorName, filters, setFilters, i, graphLabels } = props;
 
     let index = i;
 
