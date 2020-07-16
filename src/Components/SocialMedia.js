@@ -20,7 +20,6 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 
 //need to bring in data, for 109
 const SocialMedia = () => {
-  const token = getToken();
   const tier = useSelector(state => state.tierReducer.tier.tier);
 
   const newSub = getSubscription();
@@ -81,7 +80,6 @@ const SocialMedia = () => {
                 >
                   <GetAppIcon className={classes.socialMediaLink}></GetAppIcon>
                 </Tooltip>
-                {/* <DownloadText className="csv-download">Download</DownloadText> */}
               </CsvDownloader>
             </Grid>
 
@@ -146,11 +144,7 @@ const SocialMedia = () => {
               </Tooltip>
             </Grid>
             <Grid item>
-              <a
-                // className="twitter-share-button"
-                target="_blank"
-                href={`https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`}
-              >
+              <a onClick={() => openTwitter()}>
                 <Tooltip
                   title="Twitter"
                   arrow
@@ -163,11 +157,7 @@ const SocialMedia = () => {
               </a>
             </Grid>
             <Grid item>
-              <a
-                target="_blank"
-                href={`https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`}
-                className="fb-xfbml-parse-ignore"
-              >
+              <a onClick={() => openFace()}>
                 <Tooltip
                   title="Facebook"
                   arrow
