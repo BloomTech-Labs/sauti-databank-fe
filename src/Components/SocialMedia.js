@@ -16,6 +16,9 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import LinkIcon from "@material-ui/icons/Link";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
+
+import ClipboardJS from "clipboard";
+import swal from "sweetalert";
 //import downloadBtn  from '../assets/images/downloadBtn'
 
 //need to bring in data, for 109
@@ -57,6 +60,15 @@ const SocialMedia = () => {
     );
   }
 
+  const clipboard = new ClipboardJS(".urlclip", {
+    text: function() {
+      return document.location.href;
+    }
+  });
+  clipboard.on("success", function(e) {
+    swal({ title: "", text: "copied url!", icon: "success" });
+  });
+
   if (columnsRedux !== undefined) {
     return (
       <>
@@ -83,7 +95,7 @@ const SocialMedia = () => {
               </CsvDownloader>
             </Grid>
 
-            <Grid item>
+            <Grid item className="urlclip">
               <Tooltip
                 title="Copy URL"
                 arrow
@@ -134,7 +146,7 @@ const SocialMedia = () => {
                 <DownloadModal />
               </Tooltip>
             </Grid>
-            <Grid item>
+            <Grid item className="urlclip">
               <Tooltip
                 title="Copy URL"
                 arrow
