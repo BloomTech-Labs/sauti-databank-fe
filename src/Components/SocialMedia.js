@@ -31,6 +31,7 @@ const SocialMedia = () => {
   const classes = useStyles();
 
   const socialMediaLink = useHistory().location.search;
+  console.log("socialMediaLink", socialMediaLink);
 
   const barSelector = useSelector(
     state => state.barDownloadReducer.barDownload
@@ -40,6 +41,22 @@ const SocialMedia = () => {
   const fileName = barSelector.fileName;
   const suffix = barSelector.suffix;
   const track = barSelector.track;
+
+  function openTwitter() {
+    window.open(
+      `https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`,
+      "",
+      "width=200,height=100"
+    );
+  }
+
+  function openFace() {
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`,
+      "",
+      "width=200,height=100"
+    );
+  }
 
   if (columnsRedux !== undefined) {
     return (
@@ -80,8 +97,7 @@ const SocialMedia = () => {
             <Grid item>
               <a
                 // className="twitter-share-button"
-                target="_blank"
-                href={`https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`}
+                onClick={() => openTwitter()}
               >
                 <Tooltip
                   title="Twitter"
@@ -96,11 +112,7 @@ const SocialMedia = () => {
             </Grid>
 
             <Grid item>
-              <a
-                target="_blank"
-                href={`https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`}
-                className="fb-xfbml-parse-ignore"
-              >
+              <a onClick={() => openFace()}>
                 <Tooltip
                   title="Facebook"
                   arrow
