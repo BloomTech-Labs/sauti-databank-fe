@@ -70,7 +70,7 @@ function Download(props) {
     if (localStorage.getItem("token")) {
       history.push("/myaccount");
     } else {
-      history.push("/signup");
+      history.push("/noaccount");
     }
   };
 

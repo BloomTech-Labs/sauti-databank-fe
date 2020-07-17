@@ -120,7 +120,17 @@ const GraphContainer = props => {
             </Grid>
           </Grid>
           <Grid container xs={12} style={{ height: "30px" }}>
-            <Grid xs={3}></Grid>
+            <Grid xs={3}>
+              <Grid
+                container
+                spacing={2}
+                style={{ height: "30px", padding: "2%" }}
+              >
+                <ClearFilters />
+
+                <Apply />
+              </Grid>
+            </Grid>
             <Grid container xs={3} spacing={1} style={{ height: "30px" }}>
               <GraphButtons
                 open={open}
@@ -146,7 +156,10 @@ const GraphContainer = props => {
           </Grid>
           <Grid container maxWidth="xl">
             <Grid container xs={3} className={classes.filters}>
-              <Grid container style={{ flexDirection: "column" }}>
+              <Grid
+                container
+                style={{ flexDirection: "column", paddingTop: "5%" }}
+              >
                 <FilterBox
                   filters={filters}
                   setFilters={setFilters}
@@ -171,22 +184,7 @@ const GraphContainer = props => {
               <Grid item className={classes.filters}>
                 <LineFilter />
               </Grid>
-              <Grid
-                container
-                spacing={2}
-                style={{ height: "30px", padding: "4%" }}
-              >
-                <ClearFilters />
-
-                <Apply />
-              </Grid>
             </Grid>
-
-            {/* <Grid item xs={1} className={classes.filterHideButton} onClick={HideFilters}>
-            
-                {hidden ? <p>►</p> : <p>◄</p>}
-             
-            </Grid> */}
             <Grid item xs={9} className={hidden ? "extend" : "chart-container"}>
               <Queries2
                 filters={filters}
