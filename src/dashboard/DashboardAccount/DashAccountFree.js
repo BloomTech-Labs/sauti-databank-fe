@@ -193,7 +193,7 @@ const DashAccountFree = props => {
                         <div className="account-bottom">
                           <div className="account-bottom-btn-ctn">
                             <button type="submit" onClick={handleSubmit}>
-                              Continue
+                              Back to Data
                             </button>
                           </div>
                         </div>
