@@ -74,6 +74,12 @@ function Download(props) {
     }
   };
 
+  const handleSignIn = async (e, input) => {
+    e.preventDefault();
+    props.handleClose();
+    history.push("/signup");
+  };
+
   return (
     <ContentContainer>
       <div>
@@ -86,6 +92,10 @@ function Download(props) {
           </DownloadText>
           <LoginButton type="submit" onClick={handleSubmit}>
             Continue
+          </LoginButton>
+          <h1>Already have an account.</h1>
+          <LoginButton type="submit" onClick={handleSignIn}>
+            Sign in
           </LoginButton>
         </Div>
       </div>

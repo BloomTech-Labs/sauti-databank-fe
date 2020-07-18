@@ -74,6 +74,12 @@ function AddFilterModal({ closeAddFilterModal }) {
     }
   };
 
+  const handleSignIn = async (e, input) => {
+    e.preventDefault();
+    closeAddFilterModal();
+    history.push("/signup");
+  };
+
   return (
     <ContentContainer>
       <div>
@@ -86,6 +92,10 @@ function AddFilterModal({ closeAddFilterModal }) {
           </DownloadText>
           <LoginButton type="submit" onClick={handleSubmit}>
             Continue
+          </LoginButton>
+          <h1>Already have an account.</h1>
+          <LoginButton type="submit" onClick={handleSignIn}>
+            Sign in
           </LoginButton>
         </Div>
       </div>
