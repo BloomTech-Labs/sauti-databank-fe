@@ -30,7 +30,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import DoneIcon from "@material-ui/icons/Done";
 import Avatar from "@material-ui/core/Avatar";
-import checkbox from "../../assets/images/checkbox.png";
+
 import { createMuiTheme } from "@material-ui/core/styles";
 
 // This components purpose is to potentially turn free users into paid users, capture the subscription ID, and push them to /data

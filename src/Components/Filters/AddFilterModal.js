@@ -70,7 +70,7 @@ function AddFilterModal({ closeAddFilterModal }) {
     if (localStorage.getItem("token")) {
       history.push("/myaccount");
     } else {
-      history.push("/signup");
+      history.push("/noaccount");
     }
   };
 
