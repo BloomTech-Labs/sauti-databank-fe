@@ -7,6 +7,7 @@ import clearReducer from "./clearFiltersReducer";
 import lineReducer from "./lineReducer";
 import scrollReducer from "./scrollReducer";
 import tierReducer from "./tierReducer";
+import queriesReducer from "./queriesReducer";
 
 const rootReducer = combineReducers({
   barDownloadReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   clearReducer,
   lineReducer,
   scrollReducer,
-  tierReducer
+  tierReducer,
+  queriesReducer
 });
 export default rootReducer;

@@ -33,7 +33,7 @@ const SocialMedia = () => {
   const classes = useStyles();
 
   const socialMediaLink = useHistory().location.search;
-  console.log("socialMediaLink", socialMediaLink);
+  //console.log("socialMediaLink", socialMediaLink);
 
   const barSelector = useSelector(
     state => state.barDownloadReducer.barDownload

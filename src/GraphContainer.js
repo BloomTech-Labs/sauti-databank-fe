@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import "./index.css";
 import FilterBox from "./Components/Filters/FilterBox";
@@ -24,6 +24,9 @@ import Apply from "./Components/Filters/Apply";
 import LineFilter from "./Components/LineGraph/LineFilter";
 
 import { Box } from "@material-ui/core";
+
+import { dispatch, useDispatch } from "react-redux";
+import { queriesFilters } from "./Components/redux-actions/queriesAction";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -63,6 +66,11 @@ const GraphContainer = props => {
   const [queryType, setQueryType] = useState("");
   const [chartDataSM, setChartDataSM] = useState([]);
 
+  const dispatch = useDispatch();
+  // function handleApply(){
+  //   console.log('handle Apply presses')
+  // }
+
   const classes = useStyles();
 
   const {
@@ -75,12 +83,12 @@ const GraphContainer = props => {
     getCurrentYear
   } = useCalendar();
 
-  //hides control panel
-  const [hidden, setHidden] = useState(false);
+  // //hides control panel
+  // const [hidden, setHidden] = useState(false);
 
-  function HideFilters() {
-    setHidden(!hidden);
-  }
+  // function HideFilters() {
+  //   setHidden(!hidden);
+  // }
   //keys used for socialmedia
   const [keys, setKeys] = useState([]);
 
@@ -97,6 +105,24 @@ const GraphContainer = props => {
     swal({ title: "", text: "copied url!", icon: "success" });
   });
   // ?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalscountry_of_residencecommaKENzazfilter4equalsundefinedcommaundefined
+
+  function handleApply() {
+    dispatch(
+      queriesFilters({
+        filters: filters,
+        setFilters: setFilters,
+        filterBoxStartDate: filterBoxStartDate,
+        setFilterBoxStartDate: setFilterBoxStartDate,
+        filterBoxEndDate: filterBoxEndDate,
+        setFilterBoxEndDate: setFilterBoxEndDate,
+        changeYear: changeYear,
+        changeQuarter: changeQuarter,
+        getCurrentYear: getCurrentYear,
+        open: open
+      })
+    );
+  }
+
   return (
     <>
       <CssBaseline />
@@ -128,7 +154,7 @@ const GraphContainer = props => {
               >
                 <ClearFilters />
 
-                <Apply />
+                <Apply handleApply={handleApply} />
               </Grid>
             </Grid>
             <Grid container xs={3} spacing={1} style={{ height: "30px" }}>
@@ -185,7 +211,7 @@ const GraphContainer = props => {
                 <LineFilter />
               </Grid>
             </Grid>
-            <Grid item xs={9} className={hidden ? "extend" : "chart-container"}>
+            <Grid item xs={9}>
               <Queries2
                 filters={filters}
                 setFilters={setFilters}

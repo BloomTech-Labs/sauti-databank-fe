@@ -10,15 +10,36 @@ import NoDataModal from "./NoDataModal";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import { useSelector } from "react-redux";
 
 const GetData = (props, { makeValues }) => {
+  const queriesFilters = useSelector(
+    state => state.queriesReducer.queriesFilters
+  );
+  console.log(queriesFilters);
+
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
   setQueryType("tradersUsers");
   let QUERY;
   let thisQuery;
+  let filters;
+  let setFilters;
+  let filterBoxStartDate;
+  let filterBoxEndDate;
 
-  const { filters, filterBoxStartDate, filterBoxEndDate, setFilters } = props;
+  if (queriesFilters.filters) {
+    filters = queriesFilters.filters;
+    setFilters = queriesFilters.setFilters;
+    filterBoxStartDate = queriesFilters.filterBoxStartDate;
+    filterBoxEndDate = queriesFilters.filterBoxStartDate;
+  } else if (filters === undefined) {
+    filters = props.filters;
+    setFilters = props.setFilters;
+    filterBoxStartDate = props.filterBoxStartDate;
+    filterBoxEndDate = props.filterBoxStartDate;
+    queriesFilters.filters = filters;
+  }
 
   const filterIsSelected = (filter, i) => {
     // if the filter is the subsample or the data series

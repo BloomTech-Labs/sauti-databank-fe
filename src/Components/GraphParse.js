@@ -12,7 +12,7 @@ const GraphParse = ({
   setChartDataSM
 }) => {
   //maybe will need something like this in else statement to prevent errors: data.sessionData != undefined &&
-  if (queryType === "sessionsData") {
+  if (queryType === "sessionsData" && filterBoxStartDate && filterBoxEndDate) {
     data = filterByDate(data, filterBoxStartDate, filterBoxEndDate);
   }
 
