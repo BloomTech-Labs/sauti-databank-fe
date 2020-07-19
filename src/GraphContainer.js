@@ -67,9 +67,6 @@ const GraphContainer = props => {
   const [chartDataSM, setChartDataSM] = useState([]);
 
   const dispatch = useDispatch();
-  // function handleApply(){
-  //   console.log('handle Apply presses')
-  // }
 
   const classes = useStyles();
 

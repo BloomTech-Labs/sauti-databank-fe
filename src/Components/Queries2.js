@@ -16,7 +16,6 @@ const GetData = (props, { makeValues }) => {
   const queriesFilters = useSelector(
     state => state.queriesReducer.queriesFilters
   );
-  console.log(queriesFilters);
 
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
@@ -140,13 +139,11 @@ const GetData = (props, { makeValues }) => {
   });
 
   const [noDataModal, setNoDataModal] = useState(true);
-  //console.log("noDataModal", noDataModal);
 
   useEffect(() => {
     setNoDataModal(true);
   });
   function noData() {
-    // console.log("noDataModal", noDataModal);
     if (noDataModal) {
       return (
         <>

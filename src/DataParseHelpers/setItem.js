@@ -6,7 +6,6 @@ const setItem = (data, dataStructure, indexBy) => {
   let arr = [];
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
   //error when hit back button from login
-  //console.log("data", data);
   // For each object get every trader at the index where it equals the value in the arr
   // Build dataStructure for displaying on graph, it's simpler than CrossFiltering, so it's shorter
   arr.forEach((key, index) => {

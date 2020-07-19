@@ -1,6 +1,4 @@
 function filterByDate(data, startDate, endDate) {
-  console.log(data);
-  console.log("startDate", startDate);
   data = Object.values(data)[0];
   startDate = startDate.replace(/-/g, "");
   endDate = endDate.replace(/-/g, "");
