@@ -77,7 +77,7 @@ function AddFilterModal({ closeAddFilterModal }) {
   const handleSignIn = async (e, input) => {
     e.preventDefault();
     closeAddFilterModal();
-    history.push("/signup");
+    history.push("/login");
   };
 
   return (

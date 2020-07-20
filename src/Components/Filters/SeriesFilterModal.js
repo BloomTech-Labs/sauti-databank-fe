@@ -77,7 +77,7 @@ function SeriesFilterModal({ handleClose }) {
   const handleSignIn = async (e, input) => {
     e.preventDefault();
     handleClose(false);
-    history.push("/signup");
+    history.push("/login");
   };
 
   return (

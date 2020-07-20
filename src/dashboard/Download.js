@@ -77,7 +77,7 @@ function Download(props) {
   const handleSignIn = async (e, input) => {
     e.preventDefault();
     props.handleClose();
-    history.push("/signup");
+    history.push("/login");
   };
 
   return (
