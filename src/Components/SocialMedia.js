@@ -16,16 +16,15 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import LinkIcon from "@material-ui/icons/Link";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
+
+import ClipboardJS from "clipboard";
+import swal from "sweetalert";
 //import downloadBtn  from '../assets/images/downloadBtn'
 
 //need to bring in data, for 109
 const SocialMedia = () => {
-  const token = getToken();
-  let tier;
-  if (token) {
-    tier = decodeToken(token);
-    tier = tier.tier;
-  }
+  const tier = useSelector(state => state.tierReducer.tier.tier);
+
   const newSub = getSubscription();
   let sub;
   if (newSub) {
@@ -43,6 +42,31 @@ const SocialMedia = () => {
   const fileName = barSelector.fileName;
   const suffix = barSelector.suffix;
   const track = barSelector.track;
+
+  function openTwitter() {
+    window.open(
+      `https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`,
+      "",
+      "width=200,height=100"
+    );
+  }
+
+  function openFace() {
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`,
+      "",
+      "width=200,height=100"
+    );
+  }
+
+  const clipboard = new ClipboardJS(".urlclip", {
+    text: function() {
+      return document.location.href;
+    }
+  });
+  clipboard.on("success", function(e) {
+    swal({ title: "", text: "copied url!", icon: "success" });
+  });
 
   if (columnsRedux !== undefined) {
     return (
@@ -67,11 +91,10 @@ const SocialMedia = () => {
                 >
                   <GetAppIcon className={classes.socialMediaLink}></GetAppIcon>
                 </Tooltip>
-                {/* <DownloadText className="csv-download">Download</DownloadText> */}
               </CsvDownloader>
             </Grid>
 
-            <Grid item>
+            <Grid item className="urlclip">
               <Tooltip
                 title="Copy URL"
                 arrow
@@ -83,8 +106,7 @@ const SocialMedia = () => {
             <Grid item>
               <a
                 // className="twitter-share-button"
-                target="_blank"
-                href={`https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`}
+                onClick={() => openTwitter()}
               >
                 <Tooltip
                   title="Twitter"
@@ -99,11 +121,7 @@ const SocialMedia = () => {
             </Grid>
 
             <Grid item>
-              <a
-                target="_blank"
-                href={`https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`}
-                className="fb-xfbml-parse-ignore"
-              >
+              <a onClick={() => openFace()}>
                 <Tooltip
                   title="Facebook"
                   arrow
@@ -127,7 +145,7 @@ const SocialMedia = () => {
                 <DownloadModal />
               </Tooltip>
             </Grid>
-            <Grid item>
+            <Grid item className="urlclip">
               <Tooltip
                 title="Copy URL"
                 arrow
@@ -137,11 +155,7 @@ const SocialMedia = () => {
               </Tooltip>
             </Grid>
             <Grid item>
-              <a
-                // className="twitter-share-button"
-                target="_blank"
-                href={`https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`}
-              >
+              <a onClick={() => openTwitter()}>
                 <Tooltip
                   title="Twitter"
                   arrow
@@ -154,11 +168,7 @@ const SocialMedia = () => {
               </a>
             </Grid>
             <Grid item>
-              <a
-                target="_blank"
-                href={`https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`}
-                className="fb-xfbml-parse-ignore"
-              >
+              <a onClick={() => openFace()}>
                 <Tooltip
                   title="Facebook"
                   arrow

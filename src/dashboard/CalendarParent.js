@@ -4,9 +4,9 @@ import CalendarModal from "./CalendarModal";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { useSelector } from "react-redux";
 
 const CalendarParent = ({
-  tier,
   newSub,
   filterBoxStartDate,
   setFilterBoxStartDate,
@@ -19,6 +19,8 @@ const CalendarParent = ({
   open
 }) => {
   const classes = useStyles();
+  const tier = useSelector(state => state.tierReducer.tier.tier);
+
   if (open === "bar") {
     return (
       <>

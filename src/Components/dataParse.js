@@ -20,13 +20,13 @@ const dataParse = (
   //multiples should also be given a date
 
   let newArray = [];
-  if (queryType === "Sessions" && crossFilter === "") {
+  if (data && queryType === "Sessions" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
 
     return getMostRequested(data, dataStructure, indexBy);
   }
   //when cross-filtering "Most Requested" as index
-  else if (queryType === "Sessions" && crossFilter !== "") {
+  else if (data && queryType === "Sessions" && crossFilter !== "") {
     dataStructure = getIndex(data, indexBy);
 
     return setCrossedItems(

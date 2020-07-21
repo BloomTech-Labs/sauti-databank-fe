@@ -2,12 +2,23 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
-const Apply = () => {
+// import {useDispatch} from 'react-redux'
+// import {applyAction} from '../redux-actions/applyAction'
+
+const Apply = ({ handleApply }) => {
   const classes = useStyles();
+  //const dispatch = useDispatch()
+
+  // function handleApply(e){
+  // e.preventDefault()
+  // dispatch(applyAction())
+  // }
   return (
     <>
       <Grid item xs={6}>
-        <button className={classes.applyButton}>Apply</button>
+        <button className={classes.applyButton} onClick={handleApply}>
+          Apply
+        </button>
       </Grid>
     </>
   );

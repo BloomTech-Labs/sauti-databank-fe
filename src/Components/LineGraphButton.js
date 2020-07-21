@@ -16,6 +16,7 @@ const LineGraphButton = props => {
     filterBoxEndDate,
     setChartDataSM
   } = props;
+  console.log("data", data);
 
   const renderLine = () => {
     if (open === "line") {
@@ -57,6 +58,7 @@ const LineGraphButton = props => {
 
   const renderBar = () => {
     if (open === "bar") {
+      console.log("data renderBar", data);
       return (
         <>
           <GraphParse
