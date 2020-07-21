@@ -30,8 +30,8 @@ const GetData = (props, { makeValues }) => {
   if (queriesFilters.filters) {
     filters = queriesFilters.filters;
     setFilters = queriesFilters.setFilters;
-    filterBoxStartDate = queriesFilters.filterBoxStartDate;
-    filterBoxEndDate = queriesFilters.filterBoxStartDate;
+    // filterBoxStartDate = queriesFilters.filterBoxStartDate;
+    // filterBoxEndDate = queriesFilters.filterBoxStartDate;
   } else if (filters === undefined) {
     filters = props.filters;
     setFilters = props.setFilters;
@@ -216,14 +216,14 @@ const GetData = (props, { makeValues }) => {
       </div>
     );
   }
-
+  console.log("data", data, "filters", filters, "queryType", queryType);
   return (
     <>
       <LineGraphButton
         filters={filters}
         queryType={queryType}
-        filterBoxStartDate={filterBoxStartDate}
-        filterBoxEndDate={filterBoxEndDate}
+        filterBoxStartDate={props.filterBoxStartDate}
+        filterBoxEndDate={props.filterBoxEndDate}
         open={props.open}
         setOpen={props.setOpen}
         data={data}
