@@ -10,15 +10,35 @@ import NoDataModal from "./NoDataModal";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import { useSelector } from "react-redux";
 
 const GetData = (props, { makeValues }) => {
+  const queriesFilters = useSelector(
+    state => state.queriesReducer.queriesFilters
+  );
+
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
   setQueryType("tradersUsers");
   let QUERY;
   let thisQuery;
+  let filters;
+  let setFilters;
+  let filterBoxStartDate;
+  let filterBoxEndDate;
 
-  const { filters, filterBoxStartDate, filterBoxEndDate, setFilters } = props;
+  if (queriesFilters.filters) {
+    filters = queriesFilters.filters;
+    setFilters = queriesFilters.setFilters;
+    // filterBoxStartDate = queriesFilters.filterBoxStartDate;
+    // filterBoxEndDate = queriesFilters.filterBoxStartDate;
+  } else if (filters === undefined) {
+    filters = props.filters;
+    setFilters = props.setFilters;
+    filterBoxStartDate = props.filterBoxStartDate;
+    filterBoxEndDate = props.filterBoxStartDate;
+    queriesFilters.filters = filters;
+  }
 
   const filterIsSelected = (filter, i) => {
     // if the filter is the subsample or the data series
@@ -119,13 +139,11 @@ const GetData = (props, { makeValues }) => {
   });
 
   const [noDataModal, setNoDataModal] = useState(true);
-  console.log("noDataModal", noDataModal);
 
   useEffect(() => {
     setNoDataModal(true);
   });
   function noData() {
-    console.log("noDataModal", noDataModal);
     if (noDataModal) {
       return (
         <>
@@ -159,16 +177,14 @@ const GetData = (props, { makeValues }) => {
     data.sessionsData !== undefined &&
     data.sessionsData.length === 0
   ) {
-    console.log("render noData sessions");
     return noData();
   }
-  console.log(data);
+
   if (
     data &&
     data.tradersUsers !== undefined &&
     data.tradersUsers.length === 0
   ) {
-    console.log("render noData traders");
     return noData();
   }
 
@@ -200,14 +216,14 @@ const GetData = (props, { makeValues }) => {
       </div>
     );
   }
-
+  console.log("data", data, "filters", filters, "queryType", queryType);
   return (
     <>
       <LineGraphButton
         filters={filters}
         queryType={queryType}
-        filterBoxStartDate={filterBoxStartDate}
-        filterBoxEndDate={filterBoxEndDate}
+        filterBoxStartDate={props.filterBoxStartDate}
+        filterBoxEndDate={props.filterBoxEndDate}
         open={props.open}
         setOpen={props.setOpen}
         data={data}

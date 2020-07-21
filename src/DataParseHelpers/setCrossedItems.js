@@ -45,8 +45,6 @@ const setCrossedItems = (
   // {"gender": "Male", "10-20": 167, "20-30": 237, "30-40": 642, "40-50": 210, "50-60": 123, "60-70": 1}
   // There will be an object like this for each value of the indexByValues ex: ["Male", "Female"]
 
-  //console.log("ONEEEEEE - crossfiltervalues");
-
   indexByValues.forEach((key, index) => {
     const crossFilteredData = [];
     const filtered = data.filter(trader => trader[`${indexBy}`] === key);
@@ -63,8 +61,7 @@ const setCrossedItems = (
       });
     });
   });
-  // console.log("function done");
-  // console.log("QUERYTYPE", queryType);
+
   //If graph is "Most Requested" sort from Most to Least requested and provide top 7 objects
   let keyValueArrIndex = [];
   let keyValueArrCross = [];
@@ -72,9 +69,6 @@ const setCrossedItems = (
 
   //if Index is "Most Requested" type, and CrossFilter is not:
   if (!graphLabels[`${indexBy}`] && graphLabels[`${crossFilter}`]) {
-    // console.log(
-    //   "IF NO GRAPHLABELS FOR FIRST FILTER, CROSSFIILTER HAS GRAPHLABELS"
-    // );
     dataStructure.map(obj => {
       return keyValueArrIndex.push([
         obj[`${indexBy}`],

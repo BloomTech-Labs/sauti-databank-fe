@@ -4,13 +4,14 @@ import graphLabels from "../graphLabels";
 import RenderCheckContainer from "./RenderCheckContainer";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import TextField from "@material-ui/core/TextField";
 import { ordered } from "../orderedGraphLabels";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Box } from "@material-ui/core";
+
+import { useDispatch, useSelector } from "react-redux";
+import { scrollPosition } from "../redux-actions/scrollAction";
 
 const AddFilter = ({
   filters,
@@ -22,14 +23,46 @@ const AddFilter = ({
   updateUrlFlag,
   displayDrop,
   setDisplayDrop
+  // scrollTopVar,
+  // setScrollTopVar
 }) => {
   const classes = useStyles();
+  //after click on scroll, should reload to scroll position
+  //const [scrollTop, setScrollTop] = useState(document.body.scrollTop);
+  const innerRef = useRef(null);
+  const [scrollTopVar, setScrollTopVar] = useState();
+  const dispatch = useDispatch();
+  const scrollY = useSelector(state => state.scrollReducer.scrollPos);
+
+  useEffect(() => {
+    const div = innerRef.current;
+    if (div != null) {
+      div.addEventListener("scroll", handleScroll);
+      return () => {
+        div.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, []);
+
+  const handleScroll = e => {
+    //maybe better way to save this, when stop scroll
+    setScrollTopVar(e.target.scrollTop);
+  };
+
+  useEffect(() => {
+    if (document.getElementById("scroll")) {
+      let scrollBar = document.getElementById("scroll");
+      scrollBar.scrollTop = scrollY.position;
+    }
+  }, document);
 
   const changeOption = e => {
+    dispatch(scrollPosition({ position: scrollTopVar }));
+    const selectedName = e.target.dataset.selectvalue;
     setUpdateUrlFlag(!updateUrlFlag);
     let optionFlags = {};
     graphLabels[
-      `${FilterBoxOptions.default[e.target.value].value.type}`
+      `${FilterBoxOptions.default[selectedName].value.type}`
     ].labels.forEach(option => {
       optionFlags = {
         ...optionFlags,
@@ -40,11 +73,11 @@ const AddFilter = ({
       ...filters,
       [index]: {
         ...filters[index],
-        selectedCategory: e.target.value, //option
+        selectedCategory: selectedName, //option
         selectedTableColumnName:
-          FilterBoxOptions.default[e.target.value].value.type,
+          FilterBoxOptions.default[selectedName].value.type,
 
-        selectedTable: FilterBoxOptions.default[e.target.value].value.query,
+        selectedTable: FilterBoxOptions.default[selectedName].value.query,
         selectedOption: undefined,
         selectableOptions: { ...optionFlags },
         showOptions: true
@@ -77,7 +110,13 @@ const AddFilter = ({
             </Box>
           </Grid>
 
-          <Grid container xs={12} style={{ flexDirection: "column" }}>
+          <Grid
+            container
+            xs={12}
+            className={classes.optionsContainer}
+            ref={innerRef}
+            id="scroll"
+          >
             {ordered.map(e => {
               if (
                 e === "KEY DEMOGRAPHICS" ||
@@ -88,14 +127,13 @@ const AddFilter = ({
               } else {
                 return (
                   <>
-                    <TextField
+                    <span
                       className="selectable"
-                      value={e}
+                      data-selectvalue={e}
                       onClick={changeOption}
                     >
                       {e}
-                    </TextField>
-
+                    </span>
                     <RenderCheckContainer
                       i={index}
                       itemName={e}
@@ -145,6 +183,27 @@ export default AddFilter;
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
+  },
+  optionsContainer: {
+    flexDirection: "column",
+    maxHeight: "200px",
+    overflowY: "scroll",
+    overflowX: "none",
+    display: "inline-grid",
+    //style scrollbar
+    "&::-webkit-scrollbar": {
+      width: "1em",
+      backgroundColor: "lightgray"
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)"
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#9F1C0F",
+      outline: "1px solid slategrey",
+      borderRadius: "5px"
+    }
   },
   supercat: {
     padding: theme.spacing(0.2),
