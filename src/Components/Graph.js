@@ -25,6 +25,8 @@ const Graph = props => {
     chartData
   } = props;
 
+  console.log("data", data, "filters", filters, "chartData", chartData);
+
   const dispatch = useDispatch();
 
   let dyText = "";
@@ -277,7 +279,10 @@ const Graph = props => {
           motionDamping={15}
         />
         <Grid item style={{ margin: "auto" }}>
-          {dyText}
+          <div>
+            <h2>Method Notes</h2>
+            <div dangerouslySetInnerHTML={{ __html: dyText }}></div>
+          </div>
         </Grid>
       </Grid>
     </>

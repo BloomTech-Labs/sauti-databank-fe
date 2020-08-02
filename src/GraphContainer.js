@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import "./index.css";
 import FilterBox from "./Components/Filters/FilterBox";
@@ -24,6 +24,10 @@ import Apply from "./Components/Filters/Apply";
 import LineFilter from "./Components/LineGraph/LineFilter";
 
 import { Box } from "@material-ui/core";
+import splashImage from "./assets/images/sautilogo-xhires.png";
+
+import { dispatch, useDispatch } from "react-redux";
+import { queriesFilters } from "./Components/redux-actions/queriesAction";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,6 +58,15 @@ const useStyles = makeStyles(theme => ({
   },
   clearApply: {
     // alignItems: "space-between"
+  },
+  watermark: {
+    backgroundImage: `url(${splashImage})`,
+    backgroundSize: "10%",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center"
+  },
+  whitebg: {
+    backgroundColor: "white"
   }
 }));
 
@@ -62,6 +75,8 @@ const GraphContainer = props => {
   const [filters, setFilters] = useState(props.filters);
   const [queryType, setQueryType] = useState("");
   const [chartDataSM, setChartDataSM] = useState([]);
+
+  const dispatch = useDispatch();
 
   const classes = useStyles();
 
@@ -75,12 +90,12 @@ const GraphContainer = props => {
     getCurrentYear
   } = useCalendar();
 
-  //hides control panel
-  const [hidden, setHidden] = useState(false);
+  // //hides control panel
+  // const [hidden, setHidden] = useState(false);
 
-  function HideFilters() {
-    setHidden(!hidden);
-  }
+  // function HideFilters() {
+  //   setHidden(!hidden);
+  // }
   //keys used for socialmedia
   const [keys, setKeys] = useState([]);
 
@@ -97,6 +112,24 @@ const GraphContainer = props => {
     swal({ title: "", text: "copied url!", icon: "success" });
   });
   // ?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalscountry_of_residencecommaKENzazfilter4equalsundefinedcommaundefined
+
+  function handleApply() {
+    dispatch(
+      queriesFilters({
+        filters: filters,
+        setFilters: setFilters,
+        filterBoxStartDate: filterBoxStartDate,
+        setFilterBoxStartDate: setFilterBoxStartDate,
+        filterBoxEndDate: filterBoxEndDate,
+        setFilterBoxEndDate: setFilterBoxEndDate,
+        changeYear: changeYear,
+        changeQuarter: changeQuarter,
+        getCurrentYear: getCurrentYear,
+        open: open
+      })
+    );
+  }
+
   return (
     <>
       <CssBaseline />
@@ -112,15 +145,31 @@ const GraphContainer = props => {
               item
               xs={9}
               style={{
-                background: "white",
                 height: "50px"
               }}
+              className={classes.whitebg}
             >
               <SelectedFilterDisplay filters={filters} />
             </Grid>
           </Grid>
-          <Grid container xs={12} style={{ height: "30px" }}>
-            <Grid xs={3}></Grid>
+          <Grid xs={3}></Grid>
+          <Grid
+            container
+            xs={12}
+            style={{ height: "30px" }}
+            className={classes.whitebg}
+          >
+            <Grid xs={3}>
+              <Grid
+                container
+                spacing={2}
+                style={{ height: "30px", padding: "2%" }}
+              >
+                <ClearFilters />
+
+                <Apply handleApply={handleApply} />
+              </Grid>
+            </Grid>
             <Grid container xs={3} spacing={1} style={{ height: "30px" }}>
               <GraphButtons
                 open={open}
@@ -144,9 +193,12 @@ const GraphContainer = props => {
               />
             </Grid>
           </Grid>
-          <Grid container maxWidth="xl">
+          <Grid container maxWidth="xl" className={classes.whitebg}>
             <Grid container xs={3} className={classes.filters}>
-              <Grid container style={{ flexDirection: "column" }}>
+              <Grid
+                container
+                style={{ flexDirection: "column", paddingTop: "5%" }}
+              >
                 <FilterBox
                   filters={filters}
                   setFilters={setFilters}
@@ -171,23 +223,8 @@ const GraphContainer = props => {
               <Grid item className={classes.filters}>
                 <LineFilter />
               </Grid>
-              <Grid
-                container
-                spacing={2}
-                style={{ height: "30px", padding: "4%" }}
-              >
-                <ClearFilters />
-
-                <Apply />
-              </Grid>
             </Grid>
-
-            {/* <Grid item xs={1} className={classes.filterHideButton} onClick={HideFilters}>
-            
-                {hidden ? <p>►</p> : <p>◄</p>}
-             
-            </Grid> */}
-            <Grid item xs={9} className={hidden ? "extend" : "chart-container"}>
+            <Grid item xs={9} className={classes.watermark}>
               <Queries2
                 filters={filters}
                 setFilters={setFilters}

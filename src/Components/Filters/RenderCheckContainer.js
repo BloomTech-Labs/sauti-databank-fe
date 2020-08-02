@@ -54,7 +54,7 @@ const RenderCheckContainer = ({
 
   if (itemName === filters[i].selectedCategory) {
     return (
-      <RadioGroup style={{ flexDirection: "row" }}>
+      <RadioGroup style={{ flexDirection: "row", marginLeft: "1.5rem" }}>
         {showOptions(i, filters, graphLabels)}
       </RadioGroup>
     );

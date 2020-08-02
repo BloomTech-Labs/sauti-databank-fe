@@ -30,11 +30,13 @@ const CompareSubSamples = () => {
     open
   } = reducerSub;
   const classes = useStyles();
+
   function changeOption(e) {
+    const selectedName = e.target.dataset.selectvalue;
     setUpdateUrlFlag(!updateUrlFlag);
     let optionFlags = {};
     graphLabels[
-      `${FilterBoxOptions.default[e.target.value].value.type}`
+      `${FilterBoxOptions.default[selectedName].value.type}`
     ].labels.forEach(option => {
       optionFlags = {
         ...optionFlags,
@@ -45,11 +47,11 @@ const CompareSubSamples = () => {
       ...filters,
       [index]: {
         ...filters[index],
-        selectedCategory: e.target.value, //option
+        selectedCategory: selectedName, //option
         selectedTableColumnName:
-          FilterBoxOptions.default[e.target.value].value.type,
+          FilterBoxOptions.default[selectedName].value.type,
 
-        selectedTable: FilterBoxOptions.default[e.target.value].value.query,
+        selectedTable: FilterBoxOptions.default[selectedName].value.query,
         selectedOption: undefined,
         selectableOptions: { ...optionFlags }
       }
@@ -75,7 +77,7 @@ const CompareSubSamples = () => {
                 ></ExpandLessIcon>
               </Box>
             </Grid>
-            <Grid container xs={12} style={{ flexDirection: "column" }}>
+            <Grid container xs={12} className={classes.optionsContainer}>
               {ordered.map(e => {
                 if (
                   e === "KEY DEMOGRAPHICS" ||
@@ -85,13 +87,13 @@ const CompareSubSamples = () => {
                   return <p className={classes.super}>{e}</p>;
                 } else {
                   return (
-                    <TextField
+                    <span
                       className="selectable"
-                      value={e}
+                      data-selectvalue={e}
                       onClick={changeOption}
                     >
                       {e}
-                    </TextField>
+                    </span>
                   );
                 }
               })}
@@ -134,10 +136,30 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
-
+  optionsContainer: {
+    flexDirection: "column",
+    maxHeight: "200px",
+    overflowY: "scroll",
+    border: "1px solid lightgray",
+    overflowX: "none",
+    display: "inline-grid",
+    "&::-webkit-scrollbar": {
+      width: "1em",
+      backgroundColor: "lightgray"
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)"
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#9F1C0F",
+      outline: "1px solid slategrey",
+      borderRadius: "5px"
+    }
+  },
   filterButton: {
     padding: theme.spacing(0),
-    background: "rgb(245, 245, 245)",
+    width: "100%",
     height: "50px",
     padding: "1%",
     fontFamily: "Roboto",
@@ -161,8 +183,9 @@ const useStyles = makeStyles(theme => ({
     fontStyle: "italic"
   },
   super: {
-    textAlign: "center",
-    background: "silver",
-    fontSize: "1.2rem"
+    background: "#f5f5f5",
+    color: "#8c8c8c",
+    fontSize: "1.4rem",
+    padding: "1rem 0.5rem"
   }
 }));

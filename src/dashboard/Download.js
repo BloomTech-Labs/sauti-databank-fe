@@ -70,8 +70,14 @@ function Download(props) {
     if (localStorage.getItem("token")) {
       history.push("/myaccount");
     } else {
-      history.push("/signup");
+      history.push("/noaccount");
     }
+  };
+
+  const handleSignIn = async (e, input) => {
+    e.preventDefault();
+    props.handleClose();
+    history.push("/login");
   };
 
   return (
@@ -86,6 +92,10 @@ function Download(props) {
           </DownloadText>
           <LoginButton type="submit" onClick={handleSubmit}>
             Continue
+          </LoginButton>
+          <h1>Already have an account.</h1>
+          <LoginButton type="submit" onClick={handleSignIn}>
+            Sign in
           </LoginButton>
         </Div>
       </div>

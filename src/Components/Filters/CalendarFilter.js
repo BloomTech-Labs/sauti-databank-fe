@@ -81,7 +81,6 @@ const useStyles = makeStyles(theme => ({
   },
   calendar: {
     padding: theme.spacing(0),
-    background: "rgb(245, 245, 245)",
     height: "50px",
     padding: "1%",
     fontFamily: "Roboto",

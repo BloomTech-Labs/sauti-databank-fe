@@ -14,18 +14,17 @@ import {
   getSubscription
 } from "../../dashboard/auth/Auth";
 import { getAvaliableOptions, getSelectedOption } from "../../OptionFunctions";
-import CalendarParent from "../../dashboard/CalendarParent";
 
 import Grid from "@material-ui/core/Grid";
 
-import DataSeriesFilter from "./DataSeriesFilter";
 import DataSFilter from "./DataSFilter";
 import AddFilter from "./AddFilter";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { compareSubSamples } from "../redux-actions/compareSubSamples";
 import { calendarAction } from "../redux-actions/calendarAction";
 import { clearFiltersAction } from "../redux-actions/clearFiltersAction";
+import { tierDefined } from "../redux-actions/tierAction";
 
 import AddFilterModal from "./AddFilterModal";
 import Modal from "@material-ui/core/Modal";
@@ -82,18 +81,19 @@ export default function FilterBox(props) {
   };
   // Function for Data Series and Add Filters
   const FilterSelector = props => {
-    const {
-      filterSelectorName,
-      filters,
-      setFilters,
-      i,
-
-      graphLabels
-    } = props;
+    const { filterSelectorName, filters, setFilters, i, graphLabels } = props;
 
     let index = i;
 
     const dispatch = useDispatch();
+
+    const token = getToken();
+    let tier;
+    if (token) {
+      tier = decodeToken(token);
+      tier = tier.tier;
+    }
+    dispatch(tierDefined({ tier: tier }));
 
     useEffect(() => {
       if (filterSelectorName === "Compare SubSamples") {
@@ -156,12 +156,9 @@ export default function FilterBox(props) {
     }
   };
   const [access, setAccess] = useState(false);
-  const token = getToken();
-  let tier;
-  if (token) {
-    tier = decodeToken(token);
-    tier = tier.tier;
-  }
+
+  const tier = useSelector(state => state.tierReducer.tier.tier);
+
   const newSub = getSubscription();
   let sub;
   if (newSub) {
@@ -373,7 +370,6 @@ const useStyles = makeStyles(theme => ({
   additionalFilterBox: {
     cursor: "pointer",
     height: "50px",
-    background: "rgb(245, 245, 245)",
     borderBottom: "1px rgba(0, 0, 0, 0.1) solid"
   },
   additionalFilterText: {

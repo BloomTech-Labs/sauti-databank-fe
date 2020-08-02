@@ -96,3 +96,12 @@ C:/Users/reyre/Documents/lamb/databank/sauti-databank-fe/src/Components/LineGrap
 linegraph options, title 'Line Graph Options'
 
 exchange rate direction should show arrow ->
+
+
+
+Lance's notes
+-More robust demographic data asssignment (right now it's checking the number of characters or it's checking the entire data string for a value - needs to look for specific keys)
+-Border locations - Some of the locations look like 0. The data is coming in on the download button, but looks like an error on the graph
+-Include the whole string for exchange rate direction & break out exchange rate direction
+-Map data needs to be titled correctly when downloading
+-Show saved data in "My Account"

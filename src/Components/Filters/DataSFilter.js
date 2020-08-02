@@ -120,7 +120,7 @@ const DataSFilter = ({
                 return (
                   <span
                     className={"selectable"}
-                    data-selectValue={e}
+                    data-selectvalue={e}
                     onClick={changeOption}
                   >
                     {e}
@@ -130,7 +130,7 @@ const DataSFilter = ({
                 return (
                   <span
                     className={access ? "selectable" : "limited"}
-                    data-selectValue={e}
+                    data-selectvalue={e}
                     onClick={changeOption}
                   >
                     {e}
@@ -178,7 +178,7 @@ const DataSFilter = ({
                 return (
                   <span
                     className={access ? "selectable" : "limited"}
-                    data-selectValue={e}
+                    data-selectvalue={e}
                     onClick={changeOption}
                   >
                     {e}
@@ -223,13 +223,26 @@ const useStyles = makeStyles(theme => ({
   optionsContainer: {
     flexDirection: "column",
     maxHeight: "200px",
-    overflowY: "auto",
+    overflowY: "scroll",
     overflowX: "none",
-    display: "inline-grid"
+    border: "1px solid lightgray",
+    display: "inline-grid",
+    "&::-webkit-scrollbar": {
+      width: "1em",
+      backgroundColor: "lightgray"
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)"
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#9F1C0F",
+      outline: "1px solid slategrey",
+      borderRadius: "5px"
+    }
   },
   filterButton: {
     padding: theme.spacing(0),
-    background: "rgb(245, 245, 245)",
     width: "100%",
     height: "50px",
     padding: "1%",

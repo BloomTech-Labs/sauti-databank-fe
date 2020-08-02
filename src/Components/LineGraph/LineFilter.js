@@ -78,7 +78,6 @@ const useStyles = makeStyles(theme => ({
   filterButton: {
     padding: theme.spacing(0),
     color: theme.palette.text.secondary,
-    background: "rgb(245, 245, 245)",
     height: "5vh",
     padding: "1%",
     fontFamily: "Roboto"

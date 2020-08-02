@@ -5,6 +5,7 @@ import { HistoryListen, PageView } from "./GoogleAnalytics/index";
 import DashData from "./DashData";
 import UsersQuery from "./Tools/UsersQuery";
 import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
+import NoAccount from "../dashboard/DashboardAccount/NoAccount";
 import CreateAccount from "./CreateAccount";
 import LandingPage from "./LandingPage";
 import DashLogout from "./DashLogout";
@@ -67,6 +68,7 @@ function DashNav() {
           </SautiLogo>
           <Navigation>
             {(!SignedIn || SignedIn) && <Links to="/">HOME</Links>}
+            {!SignedIn && <Links to="/noaccount">ACCOUNT</Links>}
             {SignedIn && <Links to="/myaccount">ACCOUNT</Links>}
             <Links to="/data">DATA</Links>
             {!SignedIn && <Links to="/login">LOGIN</Links>}
@@ -87,6 +89,7 @@ function DashNav() {
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={CreateAccount} />
       <Route exact path="/passwordreset" component={ForgotPassword} />
+      <Route exact path="/noaccount" component={NoAccount} />
       <ProtectedRoute exact path="/myaccount" component={AccountHandler} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
       <CodeRoute
