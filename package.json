@@ -23,7 +23,7 @@
     "graphql": "^14.6.0",
     "moment": "^2.24.0",
     "nivo": "^0.31.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "paypal-checkout": "^4.0.311",
     "qs": "^6.9.2",
     "react": "^16.8.6",
